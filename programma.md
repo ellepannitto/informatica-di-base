@@ -5,11 +5,12 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 
 ## Sistema di valutazione
 
-- Tre esercitazioni con valutazione durante il corso, facoltative.
+- Tre prove intermedie facoltative, una per ciascun blocco/modulo del corso.
 - Le prove intermedie si svolgono durante le ore del corso e sono gia comprese nel monte ore totale.
-- Ogni prova intermedia superata: esonero da quegli argomenti nella prova finale
-- Ogni prova intermedia superata: +1 punto bonus sul voto finale (max +3)
-- Prova finale: esercizi su tutti gli argomenti non coperti da prove intermedie superate
+- La prova finale contiene un esercizio per ciascun modulo del corso, piu un esercizio extra conclusivo.
+- Se uno studente ha gia sostenuto una prova intermedia su un modulo, quel risultato resta disponibile anche se consegna la prova finale.
+- In sede di verbalizzazione viene considerata, per ciascun modulo, la valutazione piu favorevole per lo studente tra prova intermedia e prova finale.
+- Ogni prova intermedia superata puo quindi alleggerire la prova finale e migliorare il risultato complessivo.
 
 ## Moduli
 
@@ -38,8 +39,9 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 - [theory] Il tipo boolean, operatori di confronto e operatori logici | lez 0.5h
 - [theory] Istruzioni if, if-else, elif e condizioni annidate | lez 0.5h
 - [theory] Leggi di De Morgan e negazione di condizioni composte | lez 0.5h
-- [exercise] Tracciamento di condizioni, rami eseguiti e casi limite | 2h
-- [exercise] Esercizi: classificazioni, validazioni e riscrittura di condizioni complesse | 2.5h
+- [theory] Automi a stati finiti: stati, transizioni e decisioni condizionali | lez 0.5h
+- [exercise] Tracciamento di condizioni, rami eseguiti e casi limite | 1.5h
+- [exercise] Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi | 2.5h
 
 ### P1 | Prova intermedia 1 | prova=true
 - Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali) | 1h
@@ -49,8 +51,9 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 - [theory] Il ciclo while: condizione, stato e terminazione | lez 0.5h
 - [theory] Sentinelle e convalida dell'input | lez 1.5h
 - [theory] Errori tipici dei cicli: loop infinito, stato non aggiornato, condizione sbagliata | lez 0.5h
-- [exercise] Esercizi: conteggi, somme, input ripetuto e sequenze terminate da sentinella | 3h
-- [exercise] Esercizi: validazione input, parità/disparità, condizioni di terminazione, tracciamento del ciclo | 2.5h
+- [theory] Automi a stati finiti con while: aggiornare lo stato in risposta all'input | lez 0.5h
+- [exercise] Esercizi: conteggi, somme, input ripetuto, sequenze terminate da sentinella e piccoli automi | 2.5h
+- [exercise] Esercizi: validazione input, parità/disparità, condizioni di terminazione, tracciamento del ciclo e parser semplici | 2.5h
 
 ### 05 | Liste e lettura dei dati
 - [theory] Liste: creare una lista, aggiungere elementi, leggere elementi e stampare una lista | lez 1h
