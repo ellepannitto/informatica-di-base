@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programma - Informatica di Base</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; background: #f9f9f9; color: #111; padding: 2rem 1rem; }
+.page { max-width: 860px; margin: 0 auto; }
+h1 { font-size: 22px; font-weight: 500; color: #2D2D6B; margin-bottom: 4px; }
+.subtitle { font-size: 13px; color: #888; margin-bottom: 1.5rem; }
+.summary { display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.stat { background: #f0f0f0; border-radius: 8px; padding: 12px 16px; flex: 1; min-width: 100px; }
+.stat-label { font-size: 12px; color: #888; margin-bottom: 4px; }
+.stat-value { font-size: 20px; font-weight: 500; color: #111; }
+.valutazione { background: #f0f0f0; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; }
+.val-title { font-size: 13px; font-weight: 500; margin-bottom: 10px; }
+.val-row { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; font-size: 13px; color: #555; }
+.val-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.legend { display: flex; gap: 12px; margin-bottom: 1rem; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; }
+.legend-dot { width: 10px; height: 10px; border-radius: 2px; }
+.module { background: #fff; border: 0.5px solid #ddd; border-radius: 12px; margin-bottom: 8px; overflow: hidden; }
+.module.prova { border: 0.5px solid #9EC8F0; background: #EBF4FB; }
+.module-header { display: flex; align-items: center; gap: 10px; padding: 11px 16px; cursor: pointer; user-select: none; }
+.module-header:hover { background: #fafafa; }
+.module.prova .module-header:hover { background: #e3eff8; }
+.module-num { font-size: 11px; font-weight: 500; color: #888; min-width: 24px; }
+.module-title { flex: 1; font-size: 14px; font-weight: 500; color: #111; }
+.module.prova .module-title { color: #0C447C; }
+.badge { font-size: 11px; padding: 2px 8px; border-radius: 8px; font-weight: 500; }
+.new-badge { background: #E6F5EC; color: #0F6E56; }
+.mod-badge { background: #FFF3CD; color: #7A5000; }
+.prova-badge { background: #EBF4FB; color: #0C447C; border: 0.5px solid #9EC8F0; }
+.hours-col { text-align: right; font-size: 12px; color: #888; min-width: 100px; }
+.arrow { font-size: 12px; color: #bbb; transition: transform 0.2s; margin-left: 4px; }
+.open .arrow { transform: rotate(90deg); }
+.module-body { padding: 0 16px 12px 50px; border-top: 0.5px solid #eee; }
+.module.prova .module-body { border-top: 0.5px solid #9EC8F0; }
+.topic { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 13px; color: #666; border-bottom: 0.5px solid #eee; gap: 8px; }
+.topic:last-child { border-bottom: none; }
+.topic-name { display: flex; align-items: center; gap: 6px; }
+.topic-h { font-size: 12px; color: #bbb; white-space: nowrap; margin-left: 8px; }
+.dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.dot-theory { background: #D85A30; border: 0.5px solid #993C1D; }
+.dot-ai     { background: #7F77DD; border: 0.5px solid #534AB7; }
+.dot-iface  { background: #1D9E75; border: 0.5px solid #0F6E56; }
+.dot-duck   { background: #1D9E75; border: 0.5px solid #0F6E56; }
+.strip { border-radius: 8px; padding: 8px 12px; margin-top: 8px; font-size: 12px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+.strip-ai    { background: #EEEDFE; color: #3C3489; }
+.strip-iface { background: #E1F5EE; color: #085041; }
+.strip-duck  { background: #E1F5EE; color: #085041; }
+.strip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; display: inline-block; }
+.bar-wrap { display: flex; gap: 3px; align-items: center; margin-top: 8px; margin-bottom: 2px; }
+.bar-bg { flex: 1; height: 4px; border-radius: 2px; background: #e8e8e8; overflow: hidden; }
+.bar-lez { height: 100%; background: #7F77DD; border-radius: 2px; width: 30%; }
+.bar-ex  { height: 100%; background: #1D9E75; border-radius: 2px; width: 70%; }
+.bar-lbl { font-size: 11px; }
+@media print {
+  body { background: white; padding: 1rem; }
+  .module-body { display: block !important; }
+  .arrow { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Informatica di Base</h1>
+  <p class="subtitle">Università degli Studi di Salerno | 30% lezione / 70% esercitazione</p>
+
+  <div class="valutazione">
+    <div class="val-title">Sistema di valutazione</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Tre esercitazioni con valutazione durante il corso, facoltative.</div>
+    <div class="val-row"><span class="val-dot" style="background:#1D9E75"></span>Le prove intermedie si svolgono durante le ore del corso e sono gia comprese nel monte ore totale.</div>
+    <div class="val-row"><span class="val-dot" style="background:#1D9E75"></span>Ogni prova intermedia superata: esonero da quegli argomenti nella prova finale</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Ogni prova intermedia superata: +1 punto bonus sul voto finale (max +3)</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Prova finale: esercizi su tutti gli argomenti non coperti da prove intermedie superate</div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#7F77DD"></div>Lezione (30%)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Esercitazione (70%)</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#EBF4FB;border:0.5px solid #9EC8F0"></div>Prova intermedia</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FAECE7;border:0.5px solid #993C1D"></div>Teoria</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#E1F5EE;border:0.5px solid #0F6E56"></div>Interfaccia / duck typing</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#EEEDFE;border:0.5px solid #534AB7"></div>IA trasversale</div>
+  </div>
+
+  <div class="summary">
+    <div class="stat"><div class="stat-label">Ore totali</div><div class="stat-value">63</div></div>
+    <div class="stat"><div class="stat-label">Moduli</div><div class="stat-value">9</div></div>
+    <div class="stat"><div class="stat-label">Prove intermedie</div><div class="stat-value">3</div></div>
+  </div>
+
+  <div id="modules"></div>
+</div>
+
+<script>
+const data = [{"num": "01", "title": "Introduzione alla programmazione e Python", "hours": "7", "lez": "2", "ex": "5", "badge": null, "prova": false, "topics": [["Cos'è un programma: input/elaborazione/output, file system, sistema operativo e memoria", "lez 1h", "theory"], ["Architettura di Von Neumann: CPU, memoria, input/output e programma come istruzioni + dati", "lez 0.5h", "theory"], ["Ambiente di lavoro: Python, VS Code, terminale e differenza tra editor, shell e interprete", "lez 0.5h", "theory"], ["REPL, tipi e operazioni fondamentali: interi, float, stringhe, bool, input() e print()", "ex 1h", "exercise"], ["Esercizi guidati: tracciare dati, memoria e output in piccoli esempi", "ex 0.5h", "exercise"], ["Terminale: pwd, cd, ls, percorsi assoluti e relativi, apertura file da terminale", "ex 1h", "exercise"], ["Introduzione al TDD: casi normali, casi limite, casi di errore", "ex 1h", "exercise"], ["Esercizi guidati: eseguire un primo script, stampa", "ex 1.5h", "exercise"]], "strips": [{"kind": "iface", "text": "Cenno all'interfaccia: ogni funzione è una black box - chi la usa deve sapere solo cosa entra e cosa esce, non come funziona dentro. Questa idea tornerà in modo molto più ricco nel modulo 05 e 06."}, {"kind": "iface", "text": "interfaccia come contratto input/output"}]}, {"num": "02", "title": "Variabili, tipi di dato e memoria", "hours": "6", "lez": "1.5", "ex": "4.5", "badge": null, "prova": false, "topics": [["Valori e tipi fondamentali: interi, float, stringhe e bool", "lez 0.5h", "theory"], ["Operazioni sui tipi fondamentali: calcoli, concatenazione, len() e accesso ai caratteri", "lez 0.5h", "theory"], ["Espressione vs istruzione; assegnazione di variabile e stato del programma in memoria", "lez 0.5h", "theory"], ["type(), input(), print() e casting con int() e str()", "1h", "exercise"], ["Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema", "1.5h", "exercise"], ["Esercizi: calcoli, conversioni, stampa formattata e tracciamento dello stato", "2h", "exercise"]], "strips": []}, {"num": "03", "title": "Stato del programma e strutture decisionali", "hours": "6", "lez": "1.5", "ex": "4.5", "badge": null, "prova": false, "topics": [["Il tipo boolean, operatori di confronto e operatori logici", "lez 0.5h", "theory"], ["Istruzioni if, if-else, elif e condizioni annidate", "lez 0.5h", "theory"], ["Leggi di De Morgan e negazione di condizioni composte", "lez 0.5h", "theory"], ["Tracciamento di condizioni, rami eseguiti e casi limite", "2h", "exercise"], ["Esercizi: classificazioni, validazioni e riscrittura di condizioni complesse", "2.5h", "exercise"]], "strips": [{"kind": "ai", "text": "Verifica del codice generato dall'IA: tracciare lo stato a mano per controllare i casi limite."}]}, {"num": "P1", "title": "Prova intermedia 1", "hours": "2", "lez": "0", "ex": "2", "badge": null, "prova": true, "topics": [["Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali)", "1h", null], ["Correzione della prova", "1h", null]], "strips": []}, {"num": "04", "title": "Ciclo while, sentinelle e convalida", "hours": "8", "lez": "2.5", "ex": "5.5", "badge": null, "prova": false, "topics": [["Il ciclo while: condizione, stato e terminazione", "lez 0.5h", "theory"], ["Sentinelle e convalida dell'input", "lez 1.5h", "theory"], ["Errori tipici dei cicli: loop infinito, stato non aggiornato, condizione sbagliata", "lez 0.5h", "theory"], ["Esercizi: conteggi, somme, input ripetuto e sequenze terminate da sentinella", "3h", "exercise"], ["Esercizi: validazione input, parità/disparità, condizioni di terminazione, tracciamento del ciclo", "2.5h", "exercise"]], "strips": []}, {"num": "05", "title": "Liste e lettura dei dati", "hours": "6", "lez": "2", "ex": "4", "badge": null, "prova": false, "topics": [["Liste: creare una lista, aggiungere elementi, leggere elementi e stampare una lista", "lez 1h", "theory"], ["Leggere da standard input e accumulare dati in una lista", "lez 0.5h", "theory"], ["Redirezione dell'input: usare un file come sorgente dello standard input", "lez 0.5h", "theory"], ["Esercizi: leggere sequenze di numeri o parole terminate da sentinella e salvarle in lista", "2h", "exercise"], ["Esercizi: elaborare liste lette da input, inversione, conteggi e prime trasformazioni", "2h", "exercise"]], "strips": []}, {"num": "06", "title": "Funzioni e procedure", "hours": "7", "lez": "3", "ex": "4", "badge": null, "prova": false, "topics": [["Definire funzioni: parametri, chiamata, valori di ritorno", "lez 1h", "theory"], ["Esercizi: scomporre un programma in funzioni piccole", "1h", "exercise"], ["Firma di una funzione, black box e responsabilità singola", "lez 1h", "theory"], ["Funzioni vs procedure: quando restituire un valore e quando produrre solo un effetto", "lez 1h", "theory"], ["Esercizi: my_strip, my_join, is_palindroma e semplici utility riusabili", "3h", "exercise"]], "strips": []}, {"num": "07", "title": "Memoria e passaggio degli argomenti", "hours": "6", "lez": "3.5", "ex": "2.5", "badge": null, "prova": false, "topics": [["Variabili come nomi associati a valori e oggetti; stato della memoria durante l'esecuzione", "lez 1h", "theory"], ["Scope: variabili locali, parametri e visibilità dei nomi dentro e fuori una funzione", "lez 1h", "theory"], ["Passaggio di argomenti: tipi immutabili e mutabili, effetti osservabili e casi tipici", "lez 1h", "theory"], ["Passaggio per valore e per riferimento come modello intuitivo per leggere il comportamento dei programmi", "lez 0.5h", "theory"], ["Tracciamento della memoria: assegnazioni, chiamate di funzione, scope e aggiornamento dello stato", "1.5h", "exercise"], ["Esercizi: modifiche in-place, copie, effetti collaterali e debugging di funzioni", "1h", "exercise"]], "strips": []}, {"num": "P2", "title": "Prova intermedia 2", "hours": "2", "lez": "0", "ex": "2", "badge": null, "prova": true, "topics": [["Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni e procedure, memoria e scope)", "1h", null], ["Correzione della prova", "1h", null]], "strips": []}, {"num": "08", "title": "Ciclo for, file e formati strutturati", "hours": "6", "lez": "2.5", "ex": "3.5", "badge": null, "prova": false, "topics": [["Il ciclo for su stringhe, liste e range()", "lez 0.5h", "theory"], ["File di testo: aprire, leggere e scorrere un file riga per riga con for", "lez 0.5h", "theory"], ["Differenza tra standard input e file aperto con open()", "lez 0.5h", "theory"], ["Formati di input/output: testo semplice, CSV, JSON e HTML", "lez 0.5h", "theory"], ["Esplorazione rapida da terminale: cat, head, tail, grep, cut, sort, wc, uniq e utility simili per leggere file e cartelle", "lez 0.5h", "theory"], ["Esercizi con for: conteggi, scansioni, accumuli e trasformazioni su sequenze", "1h", "exercise"], ["Esercizi da terminale: ispezionare file e filtrare contenuti con cat, head, tail, grep, cut, sort, wc e uniq", "0.5h", "exercise"], ["Esercizi su file di testo, CSV e JSON: lettura, scrittura e semplici trasformazioni", "1h", "exercise"], ["Esercizi su HTML: estrazione di informazioni e serializzazione dei risultati", "1h", "exercise"]], "strips": []}, {"num": "09", "title": "Dizionari, set e organizzazione dell'informazione", "hours": "6", "lez": "2", "ex": "4", "badge": null, "prova": false, "topics": [["Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso", "lez 1h", "theory"], ["Set: appartenenza, eliminazione dei duplicati e operazioni di base", "lez 0.5h", "theory"], ["Scegliere tra lista, dizionario e set per memorizzare e strutturare informazione", "lez 0.5h", "theory"], ["Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari", "2h", "exercise"], ["Esercizi: uso dei set per unicità, confronti e filtraggio", "1.5h", "exercise"], ["Esercizi: modellare dati letti da JSON, CSV e HTML con liste, dizionari e set", "0.5h", "exercise"]], "strips": [{"kind": "ai", "text": "L'IA tende a scegliere strutture dati \"a intuito\". Qui vogliamo invece ragionare su quale struttura usare per rappresentare e organizzare davvero l'informazione."}]}, {"num": "P3", "title": "Prova intermedia 3", "hours": "1", "lez": "0", "ex": "1", "badge": null, "prova": true, "topics": [["Argomenti: moduli 6-9 (funzioni e procedure, memoria e scope, ciclo for e file, dizionari e set)", "1h", null]], "strips": []}, {"num": "--", "title": "Consolidamento finale, testing e prova finale", "hours": "16", "lez": "3", "ex": "13", "badge": null, "prova": false, "topics": [["Correzione della prova intermedia 3", "ex 1h", null], ["Approfondimento TDD: test sistematici, assert avanzati, casi limite", "lez 1h", null], ["Virtual environment con venv: isolamento delle dipendenze, creazione, attivazione e ruolo di pip e requirements.txt", "lez 0.5h", "theory"], ["Algoritmi fondamentali: ricerca lineare, ordinamento concettuale", "lez 1h", null], ["Sintesi duck typing: funzione che lavora su qualsiasi iterabile", "lez 0.5h", "duck"], ["Uso critico dell'IA: riepilogo dei pattern di errore visti nel corso", "ex 0.5h", "ai"], ["Esercizi: creare un virtual environment con python -m venv, usare pip e salvare le dipendenze in requirements.txt", "ex 0.5h", "exercise"], ["Esercizi: impiccato, ricerca_lineare con assert, conta_pari generico, audit IA", "ex 3h", null], ["Sessioni di problem solving su casi completi", "ex 4h", null], ["Simulazione e prova finale", "4h", null]], "strips": [{"kind": "ai", "text": "Riepilogo: pattern di errore ricorrenti dell'IA visti nel corso, esercizio di audit su funzioni generate dall'IA."}]}];
+
+const stripStyles = {
+  ai: { cls: "strip-ai", dot: "#7F77DD" },
+  iface: { cls: "strip-iface", dot: "#1D9E75" },
+  duck: { cls: "strip-duck", dot: "#1D9E75" },
+};
+
+const dotMap = {
+  theory: "dot-theory",
+  ai: "dot-ai",
+  iface: "dot-iface",
+  duck: "dot-duck",
+};
+
+const cont = document.getElementById("modules");
+
+data.forEach((m) => {
+  const div = document.createElement("div");
+  div.className = "module" + (m.prova ? " prova" : "");
+
+  const badgeHtml = m.badge === "new" ? '<span class="badge new-badge">nuovo</span>'
+    : m.badge === "mod" ? '<span class="badge mod-badge">rivisto</span>'
+    : m.badge === "prova" ? '<span class="badge prova-badge">prova intermedia</span>'
+    : "";
+
+  const hoursCol = m.prova
+    ? `<span class="hours-col" style="color:#0C447C">${m.hours}h</span>`
+    : m.num === "--"
+    ? `<span class="hours-col">${m.hours}h</span>`
+    : `<div class="hours-col">
+        <div style="display:flex;justify-content:flex-end;font-size:11px;color:#bbb">
+          <span style="width:38px;text-align:center">lez</span>
+          <span style="width:38px;text-align:center">ex</span>
+          <span style="width:38px;text-align:center">tot</span>
+        </div>
+        <div style="display:flex;gap:4px;font-size:12px;color:#888;justify-content:flex-end">
+          <span style="width:38px;text-align:center">${m.lez}h</span>
+          <span style="width:38px;text-align:center">${m.ex}h</span>
+          <span style="width:38px;text-align:center;font-weight:500;color:#111">${m.hours}h</span>
+        </div>
+      </div>`;
+
+  const barHtml = (!m.prova && m.num !== "--") ? `
+    <div class="bar-wrap">
+      <span class="bar-lbl" style="color:#7F77DD">30%</span>
+      <div class="bar-bg"><div class="bar-lez"></div></div>
+      <div class="bar-bg"><div class="bar-ex"></div></div>
+      <span class="bar-lbl" style="color:#1D9E75">70%</span>
+    </div>` : "";
+
+  const stripsHtml = (m.strips || []).map((strip) => {
+    const style = stripStyles[strip.kind];
+    return `<div class="strip ${style.cls}"><span class="strip-dot" style="background:${style.dot}"></span><span>${strip.text}</span></div>`;
+  }).join("");
+
+  div.innerHTML = `
+    <div class="module-header">
+      <span class="module-num">${m.num}</span>
+      <span class="module-title">${m.title}</span>
+      ${badgeHtml}
+      ${hoursCol}
+      <span class="arrow">›</span>
+    </div>
+    <div class="module-body" style="display:none">
+      ${barHtml}
+      ${stripsHtml}
+      <div style="margin-top:8px">
+        ${m.topics.map((topic) => {
+          const cls = topic[2] ? dotMap[topic[2]] : "";
+          const dot = cls ? `<span class="dot ${cls}"></span>` : "";
+          return `<div class="topic"><span class="topic-name">${dot}${topic[0]}</span><span class="topic-h">${topic[1]}</span></div>`;
+        }).join("")}
+      </div>
+    </div>`;
+
+  div.querySelector(".module-header").addEventListener("click", () => {
+    const body = div.querySelector(".module-body");
+    const open = body.style.display !== "none";
+    body.style.display = open ? "none" : "block";
+    div.classList.toggle("open", !open);
+  });
+
+  cont.appendChild(div);
+});
+</script>
+</body>
+</html>
