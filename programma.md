@@ -3,6 +3,26 @@ title: Informatica di Base
 subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 ---
 
+## Prima di iniziare
+
+Prima della prima lezione è consigliato preparare l'ambiente di lavoro. In particolare:
+
+- installare **Python**
+- installare **Visual Studio Code**
+- installare **Git**
+- prendere un primo contatto con il **terminale**
+- se si usa **Windows**, installare anche **WSL** (Windows Subsystem for Linux)
+
+Per una guida più dettagliata vedi [guida-lezioni/modulo-0.html](guida-lezioni/modulo-0.html).
+
+Se qualcosa non funziona non è un problema: l'installazione dell'ambiente fa parte del corso e verrà ripresa anche a lezione.
+
+## Libro consigliato
+
+Il testo consigliato è **Introduzione a Python** di **Tony Gaddis**, in italiano oppure in inglese.
+
+Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il corso. Il libro è solo un supporto aggiuntivo per chi vuole ripassare o leggere altri esempi.
+
 ## Sistema di valutazione
 
 - Tre prove intermedie facoltative, una per ciascun blocco/modulo del corso.
@@ -15,21 +35,19 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 ## Moduli
 
 ### 01 | Introduzione alla programmazione e Python
-- [exercise] REPL, tipi e operazioni fondamentali: interi, float, stringhe, bool, input() e print() | ex 1h
-- [theory] Cos'è un programma: input/elaborazione/output, file system, sistema operativo e memoria | lez 1h
-- [theory] Architettura di Von Neumann: CPU, memoria, input/output e programma come istruzioni + dati | lez 0.5h
-- [theory] Ambiente di lavoro: Python, VS Code, terminale e differenza tra editor, shell e interprete | lez 0.5h
-- [exercise] Esercizi guidati: tracciare dati, memoria e output in piccoli esempi | ex 0.5h
-- [exercise] Terminale: pwd, cd, ls, percorsi assoluti e relativi, apertura file da terminale | ex 1h
-- [exercise] Introduzione al TDD: casi normali, casi limite, casi di errore | ex 1h
-- [exercise] Esercizi guidati: eseguire un primo script, stampa | ex 1.5h
-> [iface] Cenno all'interfaccia: ogni funzione è una black box - chi la usa deve sapere solo cosa entra e cosa esce, non come funziona dentro. Questa idea tornerà in modo molto più ricco nel modulo 05 e 06.
-> [iface] interfaccia come contratto input/output
+- [exercise] [REPL, tipi e operazioni fondamentali: interi, float, stringhe, bool, input() e print()](guida-lezioni/modulo-1.html#mod1-repl) | ex 1h
+- [theory] [Valori e tipi fondamentali: interi, float, stringhe e bool](guida-lezioni/modulo-1.html#mod1-repl) | lez 0.5h
+- [theory] [Cos'è un programma: input/elaborazione/output, file system, sistema operativo e memoria](guida-lezioni/modulo-1.html#mod1-input-output) | lez 1h
+- [theory] [Architettura di Von Neumann: CPU, memoria, input/output e programma come istruzioni + dati](guida-lezioni/modulo-1.html#mod1-von-neumann) | lez 0.5h
+- [theory] [Ambiente di lavoro: Python, VS Code, terminale e differenza tra editor, shell e interprete](guida-lezioni/modulo-1.html#mod1-ambiente) | lez 0.5h
+- [exercise] [Esercizi guidati: tracciare dati, memoria e output in piccoli esempi](guida-lezioni/modulo-1.html#mod1-tracciamento) | ex 0.5h
+- [exercise] [Terminale: pwd, cd, ls, percorsi assoluti e relativi, apertura file da terminale](guida-lezioni/modulo-1.html#mod1-terminale) | ex 1h
+- [exercise] [Introduzione al TDD: casi normali, casi limite, casi di errore](guida-lezioni/modulo-1.html#mod1-tdd) | ex 1h
+- [theory] [Espressione vs istruzione; assegnazione di variabile e stato del programma in memoria](guida-lezioni/modulo-1.html#mod1-espressioni-istruzioni) | lez 0.5h
+- [exercise] [Esercizi guidati: eseguire un primo script, stampa](guida-lezioni/modulo-1.html#mod1-primo-script) | ex 1.5h
 
 ### 02 | Variabili, tipi di dato e memoria
-- [theory] Valori e tipi fondamentali: interi, float, stringhe e bool | lez 0.5h
 - [theory] Operazioni sui tipi fondamentali: calcoli, concatenazione, len() e accesso ai caratteri | lez 0.5h
-- [theory] Espressione vs istruzione; assegnazione di variabile e stato del programma in memoria | lez 0.5h
 - [exercise] type(), input(), print() e casting con int() e str() | 1h
 - [exercise] Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema | 1.5h
 - [exercise] Esercizi: calcoli, conversioni, stampa formattata e tracciamento dello stato | 2h
