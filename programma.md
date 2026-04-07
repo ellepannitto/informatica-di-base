@@ -7,7 +7,7 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 
 - Tre prove intermedie facoltative, una per ciascun blocco/modulo del corso.
 - Le prove intermedie si svolgono durante le ore del corso e sono gia comprese nel monte ore totale.
-- La prova finale contiene un esercizio per ciascun modulo del corso, piu un esercizio extra conclusivo.
+- La prova finale contiene delle domande aperte, un esercizio per ciascun modulo del corso, più un esercizio extra conclusivo.
 - Se uno studente ha gia sostenuto una prova intermedia su un modulo, quel risultato resta disponibile anche se consegna la prova finale.
 - In sede di verbalizzazione viene considerata, per ciascun modulo, la valutazione piu favorevole per lo studente tra prova intermedia e prova finale.
 - Ogni prova intermedia superata puo quindi alleggerire la prova finale e migliorare il risultato complessivo.
@@ -15,16 +15,16 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 ## Moduli
 
 ### 01 | Introduzione alla programmazione e Python
-> [iface] Cenno all'interfaccia: ogni funzione è una black box - chi la usa deve sapere solo cosa entra e cosa esce, non come funziona dentro. Questa idea tornerà in modo molto più ricco nel modulo 05 e 06.
-> [iface] interfaccia come contratto input/output
+- [exercise] REPL, tipi e operazioni fondamentali: interi, float, stringhe, bool, input() e print() | ex 1h
 - [theory] Cos'è un programma: input/elaborazione/output, file system, sistema operativo e memoria | lez 1h
 - [theory] Architettura di Von Neumann: CPU, memoria, input/output e programma come istruzioni + dati | lez 0.5h
 - [theory] Ambiente di lavoro: Python, VS Code, terminale e differenza tra editor, shell e interprete | lez 0.5h
-- [exercise] REPL, tipi e operazioni fondamentali: interi, float, stringhe, bool, input() e print() | ex 1h
 - [exercise] Esercizi guidati: tracciare dati, memoria e output in piccoli esempi | ex 0.5h
 - [exercise] Terminale: pwd, cd, ls, percorsi assoluti e relativi, apertura file da terminale | ex 1h
 - [exercise] Introduzione al TDD: casi normali, casi limite, casi di errore | ex 1h
 - [exercise] Esercizi guidati: eseguire un primo script, stampa | ex 1.5h
+> [iface] Cenno all'interfaccia: ogni funzione è una black box - chi la usa deve sapere solo cosa entra e cosa esce, non come funziona dentro. Questa idea tornerà in modo molto più ricco nel modulo 05 e 06.
+> [iface] interfaccia come contratto input/output
 
 ### 02 | Variabili, tipi di dato e memoria
 - [theory] Valori e tipi fondamentali: interi, float, stringhe e bool | lez 0.5h
