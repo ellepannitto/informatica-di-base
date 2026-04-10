@@ -44,6 +44,9 @@ img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-r
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.28rem 0; }
 blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
+summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
+details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
 pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 16px; overflow-x: auto; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
 p code, li code, td code, th code, blockquote code { background: rgba(23, 33, 43, 0.07); padding: 0.08rem 0.35rem; border-radius: 4px; }
@@ -123,6 +126,12 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-def">Il problema che porta a <code>def</code></h2><p>Quando il programma cresce, iniziamo a ripetere pezzi di ragionamento:</p><ul><li>la stessa trasformazione su input diversi;</li><li>lo stesso controllo in piu&#x27; punti;</li><li>lo stesso sottoproblema dentro programmi piu&#x27; grandi.</li></ul><p><code>def</code> serve a isolare quel comportamento in un blocco riusabile.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="sintassi-di-def">Sintassi di <code>def</code></h2><p>Una funzione si definisce con <code>def</code> e si usa tramite chiamata.</p><pre><code class="language-python">def area_rettangolo(base, altezza):
     return base * altezza
 
@@ -137,6 +146,12 @@ print(area_rettangolo(4, 6))</code></pre><p>Parti da riconoscere:</p><ul><li><co
     successore = x + 1
     triplo = 3 * successore
     return triplo</code></pre><p>Quando poi scriviamo:</p><pre><code class="language-python">triplo_del_successore(15)</code></pre><p>non stiamo piu&#x27; parlando in astratto: stiamo chiedendo alla funzione di lavorare davvero sul valore <code>15</code>.</p><h3 id="parametri-ipotetici-e-argomenti-reali">Parametri ipotetici e argomenti reali</h3><p>Questa distinzione e&#x27; importante:</p><ul><li>nella definizione usiamo nomi come <code>x</code>, <code>planimetria</code>, <code>budget</code>;</li><li>nella chiamata passiamo valori concreti;</li><li>i nomi dei parametri non devono per forza essere <code>x</code>, <code>y</code>, <code>z</code>;</li><li>conviene scegliere nomi che facciano capire il ruolo di ogni input.</li></ul><p>Ci sono anche due buone pratiche molto concrete.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-return">Il problema che porta a <code>return</code></h2><p>Definire una funzione non basta: spesso vogliamo che il suo risultato possa essere riusato fuori dal blocco della funzione.</p><p>Per esempio:</p><ul><li>calcolare un&#x27;area e poi stamparla;</li><li>controllare se una parola e&#x27; palindroma e poi usare il risultato in un <code>if</code>;</li><li>costruire una nuova stringa e poi assegnarla a una variabile.</li></ul><p>Per questo la funzione deve poter restituire un valore al chiamante.</p><hr>
   </div>
 </section>
 
@@ -205,6 +220,12 @@ print(mialib.somma1(4))</code></pre><hr>
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-import">Il problema che porta a <code>import</code></h2><p>Non tutto il codice che ci serve deve stare nello stesso file.</p><p>A volte vogliamo:</p><ul><li>riusare funzioni scritte altrove;</li><li>separare il codice in file diversi;</li><li>usare librerie gia&#x27; disponibili.</li></ul><p><code>import</code> serve a rendere accessibili nomi definiti in un altro modulo.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="sintassi-di-import">Sintassi di <code>import</code></h2><p>Forma base:</p><pre><code class="language-python">import nome_modulo</code></pre><p>Esempi:</p><pre><code class="language-python">import sys
 import mialib</code></pre><hr>
   </div>
@@ -250,7 +271,7 @@ for i in range(len(parola) // 2):
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 19</div>
+  <div class="counter" id="counter">1 / 22</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

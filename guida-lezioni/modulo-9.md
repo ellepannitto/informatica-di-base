@@ -17,6 +17,20 @@ Al termine di questo modulo saprai:
 ---
 
 <a id="mod9-file"></a>
+## Il problema che porta a `open()`
+
+Finche' i dati sono scritti direttamente nel codice o arrivano da `input()`, i programmi restano piccoli.
+
+Ma presto vogliamo lavorare su:
+
+- testi salvati su disco;
+- file di dati;
+- input riutilizzabili.
+
+Per farlo il programma deve poter aprire un file.
+
+---
+
 ## Sintassi di `open()`
 
 I file sono un nuovo tipo di sorgente dati.
@@ -64,6 +78,20 @@ Punti chiave:
 
 ---
 
+## Il problema che porta a `with`
+
+Aprire un file non basta: bisogna anche ricordarsi di chiuderlo correttamente.
+
+Se il programma cresce, scrivere sempre:
+
+- apri;
+- usa;
+- chiudi
+
+puo' diventare fragile. `with` serve a rendere questa gestione piu' sicura e leggibile.
+
+---
+
 ## Sintassi di `with`
 
 Forma tipica:
@@ -104,6 +132,20 @@ perche' rende piu' sicura la gestione del file.
 
 ---
 
+## Il problema che porta a `read()` e `readlines()`
+
+Una volta aperto un file, dobbiamo decidere come leggerlo.
+
+Possibili bisogni:
+
+- leggere tutto il contenuto in una volta;
+- ottenere una lista di righe;
+- scorrere il file riga per riga.
+
+`read()` e `readlines()` servono proprio a esprimere queste strategie.
+
+---
+
 ## Sintassi di `read()` e `readlines()`
 
 ```python
@@ -128,6 +170,20 @@ Differenza pratica:
 
 Per file piccoli possono andare bene tutte e tre.
 Per file piu' grandi, la lettura riga per riga e' spesso la soluzione piu' pulita.
+
+---
+
+## Il problema che porta a `split()`
+
+Quando leggiamo da file, otteniamo testo grezzo.
+
+Molto spesso pero' ci servono unita' piu' piccole:
+
+- righe;
+- campi;
+- parole.
+
+`split()` serve a segmentare una stringa usando un separatore.
 
 ---
 
@@ -156,6 +212,18 @@ Questo aiuta a capire che:
 - il file non contiene gia' una lista;
 - siamo noi a scegliere come segmentare;
 - newline e tab si scrivono come `\n` e `\t`.
+
+---
+
+## Il problema che porta a `strip()`
+
+Le righe lette da file contengono spesso caratteri indesiderati ai bordi:
+
+- spazi;
+- tab;
+- fine riga.
+
+Prima di convertire o confrontare i dati conviene ripulirli.
 
 ---
 
@@ -245,6 +313,16 @@ with open("output.txt", "w", encoding="utf-8") as file_output:
 
 Nel primo caso e' la shell che intercetta lo standard output.
 Nel secondo caso e' il programma Python che decide dove scrivere.
+
+---
+
+## Il problema che porta a `sys.argv`
+
+Se il nome del file di input e di output e' scritto nel codice, ogni volta che cambia dobbiamo modificare lo script.
+
+Molto meglio passare questi dati dall'esterno, da riga di comando.
+
+Per farlo il programma deve poter leggere gli argomenti con cui e' stato lanciato.
 
 ---
 

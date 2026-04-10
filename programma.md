@@ -36,16 +36,16 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 ## Moduli
 
 ### 01 | Introduzione alla programmazione e Python
-| Tipologia | Durata | Argomento |
-| --------- | ------ | --------- |
-| exercise  | 1h     | [REPL, tipi e operazioni fondamentali: interi, float, stringhe](guida-lezioni/modulo-1.slides.html#mod1-repl) |
-| theory    | 0.5h   | [Ambiente di lavoro: Python, VS Code, terminale e differenza tra editor, shell e interprete](guida-lezioni/modulo-1.slides.html#mod1-ambiente) |
-| theory    | 0.5h   | [Tipi fondamentali e operazioni: interi, float, stringhe](guida-lezioni/modulo-1.slides.html#mod1-repl) |
-| theory    | 0.5h   | [Architettura di Von Neumann: CPU, memoria, input/output e programma come istruzioni + dati](guida-lezioni/modulo-1.slides.html#mod1-von-neumann) |
-| theory    | 1h     | [Cos'è un programma: input/elaborazione/output, file system, sistema operativo e memoria](guida-lezioni/modulo-1.slides.html#mod1-input-output) |
-| exercise  | 0.5h   | [Esercizi guidati: tracciare dati, memoria e output in piccoli esempi](guida-lezioni/modulo-1.slides.html#mod1-tracciamento) |
-| exercise  | 1h     | [Terminale: pwd, cd, ls, percorsi assoluti e relativi, apertura file da terminale](guida-lezioni/modulo-1.slides.html#mod1-terminale) |
-| exercise  | 1h     | [Esercizi guidati: distinguere risultato calcolato, memoria e output](guida-lezioni/modulo-1.slides.html#mod1-tracciamento) |
+| Tipologia | Durata | Argomento                                                                                                                                           |
+| --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | Introduzione al corso: obiettivi, metodo di lavoro e perché Python — prima lezione con tempo dedicato al setup dell'ambiente                        |
+| exercise  | 1h     | [REPL, tipi e operazioni fondamentali: interi, float, stringhe](guida-lezioni/modulo-1.slides.html#mod1-repl)                                       |
+| theory    | 0.5h   | Python come linguaggio formale: vocabolario, sintassi, semantica, interprete e compilatore                                                          |
+| theory    | 0.5h   | [Architettura di Von Neumann: CPU (ALU, registri, Control Unit), RAM, disco e dispositivi I/O](guida-lezioni/modulo-1.slides.html#mod1-von-neumann) |
+| theory    | 0.5h   | [Cos'è un programma: input/elaborazione/output, file system e sistema operativo](guida-lezioni/modulo-1.slides.html#mod1-input-output)              |
+| theory    | 0.5h   | [Ambiente di lavoro: interprete, editor e terminale](guida-lezioni/modulo-1.slides.html#mod1-ambiente)                                              |
+| exercise  | 1.5h   | [Terminale: pwd, cd, ls, percorsi assoluti e relativi, lancio di script Python](guida-lezioni/modulo-1.slides.html#mod1-terminale)                  |
+| exercise  | 1h     | [Cosa stampa questo programma? Script da leggere, prevedere ed eseguire](guida-lezioni/modulo-1.slides.html#mod1-esercizi-script)                   |
 
 
 ### 02 | Variabili e strutture decisionali

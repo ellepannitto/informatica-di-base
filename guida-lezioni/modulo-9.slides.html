@@ -44,6 +44,9 @@ img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-r
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.28rem 0; }
 blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
+summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
+details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
 pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 16px; overflow-x: auto; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
 p code, li code, td code, th code, blockquote code { background: rgba(23, 33, 43, 0.07); padding: 0.08rem 0.35rem; border-radius: 4px; }
@@ -116,6 +119,12 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-open">Il problema che porta a <code>open()</code></h2><p>Finche&#x27; i dati sono scritti direttamente nel codice o arrivano da <code>input()</code>, i programmi restano piccoli.</p><p>Ma presto vogliamo lavorare su:</p><ul><li>testi salvati su disco;</li><li>file di dati;</li><li>input riutilizzabili.</li></ul><p>Per farlo il programma deve poter aprire un file.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="sintassi-di-open">Sintassi di <code>open()</code></h2><p>I file sono un nuovo tipo di sorgente dati.</p><p>Esempio base:</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
 file_in = open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;)
 print(file_in.read())
@@ -128,6 +137,12 @@ file_in.close()</code></pre><p>Forma generale:</p><pre><code class="language-pyt
     <h2 id="semantica-di-open">Semantica di <code>open()</code></h2><p>Nel corso conviene usare soprattutto la forma con <code>with</code>:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
     for line in file_in:
         print(line)</code></pre><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>Punti chiave:</p><ul><li>il nome del file e&#x27; una stringa;</li><li>il percorso puo&#x27; essere assoluto oppure relativo;</li><li><code>open(...)</code> restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-with">Il problema che porta a <code>with</code></h2><p>Aprire un file non basta: bisogna anche ricordarsi di chiuderlo correttamente.</p><p>Se il programma cresce, scrivere sempre:</p><ul><li>apri;</li><li>usa;</li><li>chiudi</li></ul><p>puo&#x27; diventare fragile. <code>with</code> serve a rendere questa gestione piu&#x27; sicura e leggibile.</p><hr>
   </div>
 </section>
 
@@ -149,6 +164,12 @@ file_in.close()</code></pre><p>perche&#x27; rende piu&#x27; sicura la gestione d
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-read-e-readlines">Il problema che porta a <code>read()</code> e <code>readlines()</code></h2><p>Una volta aperto un file, dobbiamo decidere come leggerlo.</p><p>Possibili bisogni:</p><ul><li>leggere tutto il contenuto in una volta;</li><li>ottenere una lista di righe;</li><li>scorrere il file riga per riga.</li></ul><p><code>read()</code> e <code>readlines()</code> servono proprio a esprimere queste strategie.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="sintassi-di-read-e-readlines">Sintassi di <code>read()</code> e <code>readlines()</code></h2><pre><code class="language-python">contenuto = file_handler.read()
 righe = file_handler.readlines()
 
@@ -165,6 +186,12 @@ for line in file_handler:
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-split">Il problema che porta a <code>split()</code></h2><p>Quando leggiamo da file, otteniamo testo grezzo.</p><p>Molto spesso pero&#x27; ci servono unita&#x27; piu&#x27; piccole:</p><ul><li>righe;</li><li>campi;</li><li>parole.</li></ul><p><code>split()</code> serve a segmentare una stringa usando un separatore.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="sintassi-di-split">Sintassi di <code>split()</code></h2><p>Possiamo anche leggere tutto e poi segmentare esplicitamente:</p><pre><code class="language-python">contenuto = file_handler.read()
 righe = contenuto.split(&quot;\n&quot;)
 campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Forma generale:</p><pre><code class="language-python">stringa.split(separatore)</code></pre><hr>
@@ -174,6 +201,12 @@ campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Forma generale:</p><pre><
 <section class="slide">
   <div class="slide-inner">
     <h2 id="semantica-di-split">Semantica di <code>split()</code></h2><p>Questo aiuta a capire che:</p><ul><li>il file non contiene gia&#x27; una lista;</li><li>siamo noi a scegliere come segmentare;</li><li>newline e tab si scrivono come <code>\n</code> e <code>\t</code>.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-strip">Il problema che porta a <code>strip()</code></h2><p>Le righe lette da file contengono spesso caratteri indesiderati ai bordi:</p><ul><li>spazi;</li><li>tab;</li><li>fine riga.</li></ul><p>Prima di convertire o confrontare i dati conviene ripulirli.</p><hr>
   </div>
 </section>
 
@@ -199,6 +232,12 @@ with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as fi
     print(&quot;ciao&quot;, file=file_output)</code></pre><p>Attenzione:</p><ul><li><code>w</code> sovrascrive il contenuto precedente;</li><li>il nome del file e&#x27; sempre una stringa che rappresenta un percorso.</li></ul><h3 id="standard-output-e-file">Standard output e file</h3><p><code>print(...)</code> di default scrive sullo standard output, cioe&#x27; sul canale che il terminale mostra a schermo.</p><p>Con <code>file=...</code> possiamo mandare lo stesso output in un file aperto.</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
     print(&quot;ciao&quot;, file=file_output)</code></pre><h3 id="redirezione-della-shell-vs-scrittura-in-python">Redirezione della shell vs scrittura in Python</h3><ol><li>Redirezione della shell:</li></ol><pre><code class="language-bash">python3 script.py &gt; output.txt</code></pre><ol><li>Scrittura esplicita in Python:</li></ol><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
     print(&quot;ciao&quot;, file=file_output)</code></pre><p>Nel primo caso e&#x27; la shell che intercetta lo standard output. Nel secondo caso e&#x27; il programma Python che decide dove scrivere.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-sysargv">Il problema che porta a <code>sys.argv</code></h2><p>Se il nome del file di input e di output e&#x27; scritto nel codice, ogni volta che cambia dobbiamo modificare lo script.</p><p>Molto meglio passare questi dati dall&#x27;esterno, da riga di comando.</p><p>Per farlo il programma deve poter leggere gli argomenti con cui e&#x27; stato lanciato.</p><hr>
   </div>
 </section>
 
@@ -260,7 +299,7 @@ sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 21</div>
+  <div class="counter" id="counter">1 / 27</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

@@ -59,6 +59,18 @@ In programmazione vale lo stesso principio:
 ---
 
 <a id="mod6-parametri"></a>
+## Il problema che porta a `def`
+
+Quando il programma cresce, iniziamo a ripetere pezzi di ragionamento:
+
+- la stessa trasformazione su input diversi;
+- lo stesso controllo in piu' punti;
+- lo stesso sottoproblema dentro programmi piu' grandi.
+
+`def` serve a isolare quel comportamento in un blocco riusabile.
+
+---
+
 ## Sintassi di `def`
 
 Una funzione si definisce con `def` e si usa tramite chiamata.
@@ -133,6 +145,20 @@ Questa distinzione e' importante:
 - conviene scegliere nomi che facciano capire il ruolo di ogni input.
 
 Ci sono anche due buone pratiche molto concrete.
+
+---
+
+## Il problema che porta a `return`
+
+Definire una funzione non basta: spesso vogliamo che il suo risultato possa essere riusato fuori dal blocco della funzione.
+
+Per esempio:
+
+- calcolare un'area e poi stamparla;
+- controllare se una parola e' palindroma e poi usare il risultato in un `if`;
+- costruire una nuova stringa e poi assegnarla a una variabile.
+
+Per questo la funzione deve poter restituire un valore al chiamante.
 
 ---
 
@@ -414,6 +440,20 @@ import mialib
 
 print(mialib.somma1(4))
 ```
+
+---
+
+## Il problema che porta a `import`
+
+Non tutto il codice che ci serve deve stare nello stesso file.
+
+A volte vogliamo:
+
+- riusare funzioni scritte altrove;
+- separare il codice in file diversi;
+- usare librerie gia' disponibili.
+
+`import` serve a rendere accessibili nomi definiti in un altro modulo.
 
 ---
 

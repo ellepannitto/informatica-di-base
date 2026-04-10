@@ -44,6 +44,9 @@ img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-r
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.28rem 0; }
 blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
+summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
+details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
 pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 16px; overflow-x: auto; }
 code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em; }
 p code, li code, td code, th code, blockquote code { background: rgba(23, 33, 43, 0.07); padding: 0.08rem 0.35rem; border-radius: 4px; }
@@ -121,7 +124,7 @@ parole = incipit.split()
 
 parole[0] = parole[0].lower()
 parole[1] = parole[1].lower()
-parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il codice e&#x27; lungo e fragile;</li><li>dipende dalla lunghezza della lista;</li><li>non e&#x27; riusabile;</li><li>ripete sempre la stessa operazione concettuale.</li></ul><p>Il <code>for</code> nasce proprio per esprimere una stessa azione ripetuta su una sequenza.</p><hr>
+parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il codice e&#x27; lungo e fragile;</li><li>dipende dalla lunghezza della lista;</li><li>non e&#x27; riusabile;</li><li>ripete sempre la stessa operazione concettuale.</li></ul><p>Il <code>for</code> nasce proprio per esprimere una stessa azione ripetuta su una sequenza, con una forma del linguaggio chiara e riusabile.</p><hr>
   </div>
 </section>
 
@@ -135,6 +138,12 @@ parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il co
   <div class="slide-inner">
     <h2 id="semantica-del-for">Semantica del <code>for</code></h2><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
     print(parola.lower())</code></pre><p>Il <code>for</code> e&#x27; utile quando:</p><ul><li>la stessa operazione concettuale va ripetuta molte volte;</li><li>il codice manuale diventerebbe lungo e fragile;</li><li>non vogliamo scrivere una riga separata per ogni posizione della sequenza.</li></ul><hr><a id="mod8-range"></a>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-range">Il problema che porta a <code>range()</code></h2><p>A volte non vogliamo scorrere una lista gia&#x27; pronta, ma ripetere qualcosa un numero fissato di volte oppure lavorare su un intervallo di numeri.</p><p>Per questo serve un oggetto che rappresenti una sequenza di indici o contatori.</p><hr>
   </div>
 </section>
 
@@ -174,6 +183,12 @@ for i in range(numero):
     parole[posizione] = parola.lower()</code></pre><p><code>enumerate()</code> permette di ottenere insieme:</p><ul><li>posizione;</li><li>valore corrente.</li></ul><p>Questo e&#x27; spesso piu&#x27; pulito che gestire a mano:</p><pre><code class="language-python">posizione = 0
 ...
 posizione += 1</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="il-problema-che-porta-a-enumerate">Il problema che porta a <code>enumerate()</code></h2><p>In molti esercizi il solo valore corrente non basta.</p><p>Serve anche la posizione:</p><ul><li>per riscrivere un elemento nella lista;</li><li>per stampare indice e contenuto;</li><li>per distinguere posizione e valore senza un contatore separato.</li></ul><p><code>enumerate()</code> nasce proprio per evitare quella gestione manuale.</p><hr>
   </div>
 </section>
 
@@ -261,7 +276,7 @@ print(&quot;\&quot;print\&quot;&quot;)</code></pre><hr>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 19</div>
+  <div class="counter" id="counter">1 / 21</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

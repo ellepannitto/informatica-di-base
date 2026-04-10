@@ -36,7 +36,7 @@ Problemi evidenti:
 - non e' riusabile;
 - ripete sempre la stessa operazione concettuale.
 
-Il `for` nasce proprio per esprimere una stessa azione ripetuta su una sequenza.
+Il `for` nasce proprio per esprimere una stessa azione ripetuta su una sequenza, con una forma del linguaggio chiara e riusabile.
 
 ---
 
@@ -83,6 +83,14 @@ Il `for` e' utile quando:
 ---
 
 <a id="mod8-range"></a>
+## Il problema che porta a `range()`
+
+A volte non vogliamo scorrere una lista gia' pronta, ma ripetere qualcosa un numero fissato di volte oppure lavorare su un intervallo di numeri.
+
+Per questo serve un oggetto che rappresenti una sequenza di indici o contatori.
+
+---
+
 ## Sintassi di `range()`
 
 `range(n)` serve per ripetere qualcosa un numero fissato di volte.
@@ -190,6 +198,20 @@ posizione = 0
 ...
 posizione += 1
 ```
+
+---
+
+## Il problema che porta a `enumerate()`
+
+In molti esercizi il solo valore corrente non basta.
+
+Serve anche la posizione:
+
+- per riscrivere un elemento nella lista;
+- per stampare indice e contenuto;
+- per distinguere posizione e valore senza un contatore separato.
+
+`enumerate()` nasce proprio per evitare quella gestione manuale.
 
 ---
 

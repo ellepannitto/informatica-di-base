@@ -176,6 +176,26 @@ Traccia sintetica:
 
 ---
 
+## Il problema che porta all'assegnamento
+
+Con la sola REPL possiamo calcolare un valore, ma lo perdiamo subito.
+
+Per esempio:
+
+```python
+3 + 4
+```
+
+calcola `7`, ma se vogliamo riusare quel risultato in un secondo passo abbiamo bisogno di un nome.
+
+L'assegnamento serve proprio a questo:
+
+- conservare un risultato;
+- dargli un nome;
+- riusarlo in istruzioni successive.
+
+---
+
 ## Sintassi dell'assegnamento
 
 Forma generale:
@@ -229,8 +249,78 @@ non e' una formula matematica, ma un aggiornamento di stato:
 
 ---
 
+<a id="mod2-tracciamento"></a>
+## Tracciare dati, memoria e output
+
+Tracciare un programma significa simulare a mano che cosa succede riga per riga, tenendo traccia dello stato delle variabili e di quello che viene stampato.
+
+Conviene abituarsi a distinguere tre cose:
+
+- il valore che Python calcola e conserva in memoria;
+- l'output che Python stampa (visibile solo se si usa `print()`);
+- l'ordine in cui le istruzioni vengono eseguite.
+
+Una tabella minima puo' contenere:
+
+| Passo | Istruzione | Stato della memoria | Output |
+| ----- | ---------- | ------------------- | ------ |
+| 1 | `x = 4` | `x = 4` | |
+| 2 | `y = x + 3` | `x = 4`, `y = 7` | |
+| 3 | `print(y)` | `x = 4`, `y = 7` | `7` |
+
+Questo esercizio serve a:
+
+- distinguere valore in memoria e testo stampato;
+- capire l'ordine di esecuzione;
+- trovare errori di logica prima ancora di eseguire il programma.
+
+### Esempio guidato
+
+```python
+x = 10
+y = x // 3
+print(y)
+```
+
+Traccia:
+
+| Passo | Stato della memoria | Output |
+| --- | --- | --- |
+| dopo `x = 10` | `x = 10` | |
+| dopo `y = x // 3` | `x = 10`, `y = 3` | |
+| dopo `print(y)` | `x = 10`, `y = 3` | `3` |
+
+### Esercizio
+
+Traccia a mano:
+
+```python
+a = 5
+b = a + 2
+print(a)
+print(b)
+```
+
+---
+
 <a id="mod2-input-output"></a>
 ## `input()`, `print()`, `type()` e casting
+
+## Il problema che porta a `print()` e `input()`
+
+Un programma non deve solo calcolare: deve anche comunicare con l'esterno.
+
+Due bisogni diversi:
+
+- mostrare un risultato all'utente;
+- ricevere un dato dall'utente.
+
+Qui entrano in gioco:
+
+- `print()` per l'output;
+- `input()` per l'input.
+
+---
 
 ## Sintassi di `print()`
 
@@ -380,6 +470,20 @@ nome != ""
 
 Con i booleani possiamo decidere il flusso di esecuzione.
 
+## Il problema che porta a `if`
+
+Fin qui il programma esegue istruzioni in ordine.
+
+Ma molti problemi chiedono una scelta:
+
+- se il numero e' positivo, fai una cosa;
+- se il nome viene prima alfabeticamente, stampa in un certo ordine;
+- se l'input non e' valido, reagisci in modo diverso.
+
+Per gestire queste biforcazioni serve un costrutto condizionale.
+
+---
+
 ## Sintassi di `if`
 
 ```python
@@ -450,6 +554,20 @@ Con `if-else` Python:
 3. se vale `False`, esegue il blocco `else`.
 
 Quindi tra i due rami se ne esegue sempre uno solo.
+
+---
+
+## Il problema che porta a `if-elif-else`
+
+A volte due rami non bastano.
+
+Per esempio:
+
+- classificare un voto;
+- distinguere piu' fasce numeriche;
+- descrivere piu' casi mutuamente esclusivi.
+
+In questi casi serve una catena di controlli ordinati.
 
 ---
 
