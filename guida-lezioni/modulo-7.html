@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 07 · Memoria e passaggio degli argomenti</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="modulo-07-memoria-e-passaggio-degli-argomenti">Modulo 07 · Memoria e passaggio degli argomenti</h1><hr><h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>distinguere tra variabili semplici e strutture mutabili;</li><li>capire il caso in cui due nomi puntano alla stessa lista;</li><li>riconoscere effetti collaterali e modifiche in-place;</li><li>usare copie esplicite quando serve isolare i dati.</li></ul><hr><a id="mod7-memoria-liste"></a><h2 id="liste-e-memoria-il-caso-speciale">Liste e memoria: il caso speciale</h2><p>Nel notebook 2 compariva il passaggio cruciale da:</p><pre><code class="language-python">a = 1
+b = a</code></pre><p>a:</p><pre><code class="language-python">a = [1, 2, 3]
+b = a</code></pre><p>Nel primo caso i due nomi contengono semplicemente lo stesso valore intero. Nel secondo caso i due nomi fanno riferimento alla <strong>stessa lista</strong> in memoria.</p><h3 id="modello-intuitivo">Modello intuitivo</h3><table><thead><tr><th>Nome</th><th>Valore</th></tr></thead><tbody><tr><td><code>a</code></td><td>lista in memoria</td></tr><tr><td><code>b</code></td><td>stessa lista in memoria</td></tr></tbody></table><p>Questo significa che modificare la lista tramite uno dei due nomi modifica l&#x27;oggetto condiviso.</p><hr><h2 id="alias-e-modifiche-condivise">Alias e modifiche condivise</h2><p>Esempio classico del notebook:</p><pre><code class="language-python">a = [1, 2, 3]
+b = a
+
+print(&quot;Lista a:&quot;, a)
+print(&quot;Lista b:&quot;, b)
+
+b[0] = 1000
+
+print(&quot;Lista a:&quot;, a)
+print(&quot;Lista b:&quot;, b)</code></pre><p>Output concettuale:</p><ul><li>prima: entrambe mostrano <code>[1, 2, 3]</code></li><li>dopo: entrambe mostrano <code>[1000, 2, 3]</code></li></ul><p>Perche&#x27;?</p><p>Perche&#x27; <code>a</code> e <code>b</code> non sono due liste diverse. Sono due nomi per la stessa lista.</p><p>La seconda lezione spiegava questo fenomeno in termini di memoria:</p><ul><li>nella tabella delle variabili, per una lista non viene memorizzato direttamente tutto il contenuto;</li><li>viene memorizzato un riferimento a una zona di memoria dove quella lista vive;</li><li>quindi con <code>b = a</code> non stiamo duplicando la lista, stiamo duplicando quel riferimento.</li></ul><p>La lezione del <code>18 marzo 2026</code> lo spiegava con una metafora ancora piu&#x27; concreta:</p><ul><li>per un valore semplice come un intero possiamo immaginare un cassetto che contiene direttamente il valore;</li><li>per una lista il cassetto contiene soprattutto un indirizzo;</li><li>il contenuto vero della lista vive altrove, in una zona di memoria dedicata che puo&#x27; crescere.</li></ul><p>Per questo:</p><ul><li>copiare un intero significa copiare il valore;</li><li>copiare una lista con <code>=</code> significa copiare il riferimento al suo indirizzo.</li></ul><p>Questo spiega perche&#x27; una modifica fatta tramite <code>b</code> resta visibile anche tramite <code>a</code>.</p><hr><a id="mod7-copie"></a><h2 id="copie-e-isolamento-dei-dati">Copie e isolamento dei dati</h2><p>Quando vuoi evitare aliasing, devi costruire una copia.</p><p>Nel notebook compariva anche l&#x27;uso di <code>copy</code>:</p><pre><code class="language-python">import copy
+
+a = [1, 2, 3]
+b = copy.deepcopy(a)</code></pre><p>Nel modello introduttivo del corso, il punto importante e&#x27; questo:</p><ul><li>assegnare <code>b = a</code> non copia;</li><li>copiare significa creare un nuovo oggetto indipendente.</li></ul><p>Nella trascrizione il punto veniva mostrato proprio con:</p><pre><code class="language-python">a = [1, 2, 3]
+b = a
+b[0] = 1000</code></pre><p>e poi con la versione corretta:</p><pre><code class="language-python">import copy
+
+a = [1, 2, 3]
+b = copy.deepcopy(a)
+b[0] = 1000</code></pre><p>Nel secondo caso:</p><ul><li><code>a</code> resta <code>[1, 2, 3]</code>;</li><li><code>b</code> diventa <code>[1000, 2, 3]</code>.</li></ul><p>Questo e&#x27; uno dei passaggi piu&#x27; importanti per evitare bug difficili da vedere.</p><h3 id="regola-pratica">Regola pratica</h3><p>Se devi modificare una lista senza toccare l&#x27;originale, chiediti sempre:</p><blockquote><p>sto usando un secondo nome per la stessa lista oppure una vera copia?</p></blockquote><hr><h2 id="collegamento-con-il-passaggio-degli-argomenti">Collegamento con il passaggio degli argomenti</h2><p>Quando una lista viene passata a una funzione, il comportamento osservabile assomiglia a quello dell&#x27;aliasing:</p><ul><li>la funzione riceve un accesso allo stesso oggetto;</li><li>una modifica in-place puo&#x27; essere visibile anche fuori;</li><li>per questo bisogna distinguere con cura tra lettura, modifica e copia.</li></ul><p>Questo modulo estende proprio quell&#x27;intuizione.</p><hr><h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Scrivi un programma con:</li></ol><pre><code class="language-python">a = [1, 2, 3]
+b = a
+b[1] = 99
+print(a)
+print(b)</code></pre><p>Predici l&#x27;output prima di eseguirlo.</p><ol><li>Ripeti l&#x27;esercizio usando una copia esplicita.</li><li>Scrivi una funzione che modifica il primo elemento di una lista e osserva se il cambiamento resta visibile fuori dalla funzione.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Dal notebook 2 questo modulo recupera la parte sulle liste e la memoria:</p><ul><li>differenza tra valori immutabili e liste mutabili;</li><li>aliasing;</li><li>modifiche condivise;</li><li>copie come strumento per evitare effetti collaterali inattesi.</li></ul>
+</main>
+</body>
+</html>

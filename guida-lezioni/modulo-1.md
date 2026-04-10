@@ -6,126 +6,254 @@
 
 Al termine di questo modulo saprai:
 
-- Aprire e usare la REPL di Python
-- Conoscere e usare i 4 tipi fondamentali: `int`, `float`, `str`, `bool`
-- Assegnare variabili e usarle in espressioni
-- Usare `print()` e `input()` nei tuoi script
-- Navigare il file system da terminale (`pwd`, `cd`, `ls`)
-- Scrivere ed eseguire un semplice script `.py`
-- Descrivere il modello input → elaborazione → output
-- Spiegare il ruolo di CPU, memoria e interprete
-- Usare una tabella di casi per testare un programma
+- orientarti tra interprete, editor e terminale;
+- usare la REPL di Python per fare prove rapide;
+- riconoscere i tipi fondamentali `int`, `float`, `str` e `bool`;
+- distinguere espressioni e istruzioni;
+- descrivere il modello input -> elaborazione -> output;
+- spiegare in modo intuitivo il ruolo di CPU, memoria e file system;
+- eseguire comandi base nel terminale;
+- tracciare a mano piccoli programmi;
+- progettare test semplici prima di scrivere il codice.
 
 ---
 
-<a id="mod1-perche-python"></a>
-## Perché imparare Python
+## Cornice del corso
 
-In questo corso Python ci interessa perché è uno strumento pratico per imparare a programmare e per trasformare un problema in una procedura eseguibile dal computer.
+Dalla prima lezione trascritta emerge con chiarezza una cornice molto precisa:
 
-Imparare Python serve a:
+- partiamo davvero da zero;
+- l'obiettivo non e' imparare "tutto Python" in poche ore;
+- ci interessa soprattutto capire come codificare un problema in modo computabile;
+- il fuoco del corso e' sulla ricerca umanistica e linguistica, non sulla programmazione come fine a se stessa.
 
-- **Codificare un problema** in modo preciso, così che possa essere risolto computazionalmente
-- Imparare la **sintassi** di un linguaggio di programmazione, cioè le regole con cui si scrive codice corretto
-- Capire la **semantica** delle istruzioni, cioè che cosa fanno davvero quando vengono eseguite
-- Acquisire un primo metodo di lavoro basato su **tentativi, verifiche e correzioni**
-- Familiarizzare con strumenti reali di lavoro: **interprete**, **editor** e **terminale**
+Per questo il corso insiste su tre livelli diversi:
 
-Python è una buona scelta per iniziare perché è leggibile, ha una sintassi relativamente semplice e permette di ottenere risultati rapidamente.
+1. un minimo di sintassi di Python;
+2. la semantica di base, cioe' che cosa significa davvero quello che scriviamo;
+3. un metodo di lavoro fatto di prove, errori, correzioni e lettura critica dei problemi.
 
----
+Nella lezione introduttiva veniva anche esplicitato che non e' un corso su:
 
-<a id="mod1-come-lavorare"></a>
-## Come lavorare bene
+- stile Python "avanzato" o troppo idiomatico;
+- programmazione a oggetti;
+- paradigma funzionale;
+- ottimizzazione spinta o algoritmi specialistici.
 
-Quando impari a programmare, il metodo conta quanto la teoria. Alcune abitudini utili:
+L'idea di fondo e' piu' pragmatica:
 
-- **Carta e penna prima del codice**: prova a descrivere il problema, gli input e l'output prima di scrivere
-- **Fai molti esercizi**: la programmazione si capisce soprattutto praticandola
-- **Procedi per piccoli passi**: scrivi poche righe alla volta e controlla subito se funzionano
-- **Trascrivi il codice** invece di fare copia-incolla: scriverlo aiuta a notare sintassi, dettagli ed errori
-- **Lavora in coppia quando possibile**: spiegare a qualcun altro quello che stai facendo chiarisce anche a te le idee
-- **Impara a usare REPL, editor e terminale**: sono i tre strumenti base del lavoro quotidiano
+> prima impariamo a leggere, scrivere e controllare programmi semplici; poi useremo queste basi per lavorare su dati e problemi reali.
 
 ---
 
-<a id="mod1-errori"></a>
-## Se qualcosa non funziona
+## Perche' Python
 
-È normale che il codice non funzioni al primo tentativo. Non è un segnale che “non sei portato”: è parte normale del lavoro di programmazione.
+Python ci interessa per tre motivi pratici:
 
-Quando trovi un errore:
+- e' un vero linguaggio di programmazione, non un giocattolo didattico;
+- ha una sintassi leggibile, quindi lascia vedere bene i concetti;
+- permette di passare rapidamente da un problema a un programma eseguibile.
 
-- fermati e **leggi bene il messaggio** restituito da Python;
-- controlla prima le cause più comuni: parentesi, apici, indentazione, nomi di variabili, ordine delle istruzioni;
-- prova a **isolare il problema** con un esempio più piccolo;
-- consulta la documentazione o gli esempi visti a lezione;
-- se serve, chiedi aiuto descrivendo con precisione cosa hai scritto, cosa ti aspettavi e cosa è successo davvero.
+La trascrizione della prima lezione aggiunge altri motivi concreti:
 
-> **Idea chiave:** programmare significa anche fare `trial and error`, cioè provare, osservare, correggere e riprovare.
+- Python e' un linguaggio generale, quindi quello che impari qui si trasferisce anche ad altri linguaggi;
+- e' leggibile quasi "come si dice", quindi per chi comincia il salto iniziale e' meno traumatico;
+- ha molte librerie gia' pronte per il lavoro linguistico e testuale, per esempio `nltk` e `spacy`;
+- permette sia scripting rapido sia programmi piu' strutturati.
+
+In un corso introduttivo Python serve soprattutto a:
+
+- codificare un problema in modo computabile;
+- imparare sintassi e semantica di base;
+- prendere dimestichezza con un metodo di lavoro fatto di prove, controlli e correzioni;
+- usare strumenti reali: interprete, editor, terminale.
+
+Non ci interessa invece inseguire subito:
+
+- lo stile "pythonic" piu' raffinato;
+- l'orientamento agli oggetti;
+- la teoria avanzata degli algoritmi;
+- librerie molto specialistiche.
+
+> L'obiettivo iniziale non e' scrivere codice elegante. E' scrivere codice corretto, leggibile e controllabile.
+
+---
+
+## Come lavorare
+
+Alcune abitudini utili fin dall'inizio:
+
+- carta e penna prima del codice;
+- tanti esercizi piccoli;
+- lavoro per passi brevi;
+- niente copia-incolla meccanico;
+- confronto con un'altra persona quando possibile;
+- lettura attenta dei messaggi di errore.
+
+La lezione insisteva molto anche su questi consigli pratici:
+
+- usare carta e penna prima del computer, perche' la parte difficile spesso viene prima del codice;
+- fare esercizi piccoli ma frequenti, come quando si impara una lingua;
+- se possibile lavorare in coppia, perche' spiegare un problema ad alta voce spesso lo rende piu' chiaro;
+- trascrivere il codice invece di copiarlo e incollarlo, sia per evitare errori nascosti sia per fare pratica vera;
+- non aspettarsi fluidita' immediata: all'inizio la programmazione sembra spesso un salto misterioso, poi le cose iniziano a incastrarsi.
+
+Se qualcosa non funziona:
+
+1. leggi il messaggio;
+2. isola un esempio piu' piccolo;
+3. controlla tipi, parentesi, apici, indentazione;
+4. confronta quello che volevi fare con quello che il programma fa davvero.
+
+![How to draw an owl](../vecchio-materiale/imgs/owl.png)
+
+> Programmare include sempre una quota di `trial and error`. Non e' un'anomalia: e' il lavoro.
+
+> "Don't panic" e' un buon principio didattico: le prime lezioni servono proprio a costruire familiarita' con un linguaggio che all'inizio sembra piu' difficile di quanto sia davvero.
+
+---
+
+<a id="mod1-ambiente"></a>
+## Ambiente di lavoro
+
+Per iniziare a programmare servono tre strumenti distinti:
+
+| Strumento | A cosa serve | Esempi |
+| --- | --- | --- |
+| Interprete | esegue codice Python | `python3`, REPL |
+| Editor | scrive e salva file di testo | VS Code |
+| Terminale | lancia comandi e programmi | `zsh`, PowerShell, bash |
+
+E' importante non confonderli:
+
+- l'editor serve a scrivere il codice;
+- il terminale serve a lanciare comandi;
+- l'interprete Python legge il codice e lo esegue.
+
+La trascrizione chiarisce anche due dettagli pratici importanti:
+
+- un programma Python va scritto in un **text editor** che lavora su testo semplice;
+- strumenti come Word non vanno bene, perche' aggiungono formattazione e metadati che non fanno parte del codice.
+
+Una sessione di lavoro tipica e' questa:
+
+1. scrivi un file `.py` nell'editor;
+2. apri il terminale nella cartella giusta;
+3. esegui `python3 nome_file.py`;
+4. osserva l'output e correggi se necessario.
+
+### Cosa installiamo davvero
+
+Python e' un linguaggio formale con una sintassi e una semantica. Quello che installiamo e' un **interprete**, cioe' un programma capace di:
+
+- leggere il codice Python;
+- verificarne la sintassi;
+- interpretarne il significato;
+- tradurlo in operazioni eseguibili dalla macchina.
+
+Per scrivere codice in modo comodo, usiamo anche un editor:
+
+![Visual Studio Code](../vecchio-materiale/imgs/vscode.png)
+
+> Nei materiali storici compariva anche l'uso di ambienti online o installer specifici. Oggi il punto importante non e' il prodotto preciso, ma capire il ruolo dei tre strumenti.
+
+### Perche' conviene usare anche il terminale
+
+Nella lezione introduttiva veniva suggerito di non dipendere solo da interfacce grafiche.
+
+Motivo pratico:
+
+- molti lavori reali su dati e testi si eseguono su server;
+- sui server spesso non c'e' un'interfaccia grafica completa;
+- saper lanciare uno script da riga di comando rende il lavoro piu' trasferibile.
+
+Per questo, prima o poi, conviene abituarsi anche a una forma come:
+
+```bash
+python3 nome_script.py
+```
+
+oppure:
+
+```bash
+python3 nome_script.py input.txt
+```
+
+---
+
+## Python come linguaggio formale
+
+Un linguaggio di programmazione e' un linguaggio formale costituito da:
+
+| Componente | Significato |
+| --- | --- |
+| Vocabolario | simboli disponibili: valori, identificatori, keyword |
+| Sintassi | regole con cui combiniamo i simboli |
+| Semantica | significato operativo di cio' che scriviamo |
+
+Nel vocabolario troviamo:
+
+- valori, raggruppati in tipi;
+- parole riservate come `if`, `def`, `while`, `for`.
+
+Nella sintassi distinguiamo subito:
+
+- **espressioni**, che producono valori;
+- **istruzioni**, che modificano lo stato o il flusso del programma.
+
+Della semantica si occupa l'interprete.
+
+La trascrizione propone anche un'analogia utile:
+
+- Python e' il linguaggio;
+- quello che installiamo e' l'interprete di Python;
+- cioe' il programma che sa leggere quel formalismo e tradurlo in operazioni comprensibili alla macchina.
+
+In questo senso non "installiamo il linguaggio" come idea astratta: installiamo lo strumento che lo esegue.
 
 ---
 
 <a id="mod1-repl"></a>
-## Parte 1 · La REPL come calcolatrice
+## REPL, tipi e operazioni fondamentali
 
-> La REPL (Read-Eval-Print Loop) è la modalità interattiva di Python.
-> Scrivi un'espressione, premi Invio, Python ti risponde.
-> È il modo più diretto per iniziare a sperimentare.
+La **REPL** e' la modalita' interattiva di Python: scrivi un'espressione, premi Invio, Python la valuta e mostra il risultato.
 
-Per aprirla, apri il terminale e scrivi:
+Per aprirla:
 
+```bash
+python3
 ```
-$ python3
+
+Vedrai qualcosa di simile:
+
+```python
 >>>
 ```
 
-Il cursore `>>>` significa che Python è in ascolto.
+### Tipi fondamentali
 
----
+Nel materiale storico di questa lezione comparivano questi quattro tipi di base:
 
-### 1.0 · Tipi fondamentali e operazioni
+| Tipo | Significato | Esempi |
+| --- | --- | --- |
+| `int` | numeri interi | `0`, `7`, `-12` |
+| `float` | numeri con la virgola | `3.14`, `0.5`, `-2.0` |
+| `str` | stringhe di caratteri | `"ciao"`, `'Python'` |
+| `bool` | valori booleani | `True`, `False` |
 
-Quando programmiamo, lavoriamo sempre con due idee di base:
+Il tipo di un valore determina quali operazioni hanno senso su di esso.
 
-- i **valori**, cioè gli oggetti concreti su cui vogliamo lavorare, come `7`, `"ciao"` o `True`;
-- i **tipi**, cioè le categorie a cui questi valori appartengono.
+### Interi e float
 
-Il **tipo** di un valore ci dice:
-
-- che natura ha quel valore;
-- come viene rappresentato dall'interprete;
-- quali operazioni hanno senso su di esso.
-
-In questo primo modulo useremo soprattutto quattro tipi fondamentali:
-
-| Tipo     | Significato                    | Esempi                  |
-|----------|--------------------------------|-------------------------|
-| `int`    | numeri interi                  | `0`, `7`, `-12`         |
-| `float`  | numeri decimali                | `3.14`, `0.5`, `-2.0`   |
-| `str`    | stringhe di caratteri          | `"ciao"`, `'Python'`    |
-| `bool`   | valori booleani vero/falso     | `True`, `False`         |
-
-Un'**operazione** è un'azione applicata a uno o più valori per ottenere un nuovo risultato.
-
-Esempi:
-
-- `3 + 4` applica l'operazione di somma a due numeri;
-- `"ciao".upper()` applica un'operazione a una stringa;
-- `5 < 8` confronta due valori e restituisce un booleano.
-
-> **Idea importante:** non tutte le operazioni sono valide per tutti i tipi. Per esempio `3 + 4` ha senso, `"ciao" + "mondo"` ha senso, ma `3 + "ciao"` produce un errore perché stiamo mescolando tipi incompatibili.
-
----
-
-### 1.1 · Numeri e operazioni aritmetiche
-
-Python riconosce due tipi numerici di base:
-
-- **`int`** — numeri interi: `3`, `145`, `-10`, `0`
-- **`float`** — numeri con la virgola: `2.05`, `-1234.897`, `13.8`
-
-Prova nella REPL:
+| Operazione | Sintassi | Esempio |
+| --- | --- | --- |
+| Somma | `N + N` | `3 + 15` |
+| Sottrazione | `N - N` | `10 - 4` |
+| Moltiplicazione | `N * N` | `3 * 7` |
+| Divisione | `N / N` | `7 / 2` |
+| Potenza | `N ** N` | `3 ** 2` |
+| Divisione intera | `N // N` | `17 // 5` |
+| Modulo | `N % N` | `17 % 5` |
 
 ```python
 >>> 3 + 15
@@ -140,38 +268,39 @@ Prova nella REPL:
 3.45
 ```
 
-**Operatori disponibili:**
+La trascrizione della lezione insisteva molto su due operazioni che a scuola tendiamo a trattare meno:
 
-| Operazione       | Sintassi | Esempio       | Risultato |
-|------------------|----------|---------------|-----------|
-| Somma            | `N + N`  | `3 + 15`      | `18`      |
-| Sottrazione      | `N - N`  | `10 - 4`      | `6`       |
-| Moltiplicazione  | `N * N`  | `3 * 7`       | `21`      |
-| Divisione        | `N / N`  | `7 / 2`       | `3.5`     |
-| Divisione intera | `N // N` | `7 // 2`      | `3`       |
-| Modulo (resto)   | `N % N`  | `17 % 5`      | `2`       |
-| Potenza          | `N ** N` | `3 ** 2`      | `9`       |
+- `//` per il **quoziente** della divisione intera;
+- `%` per il **resto** della divisione intera.
 
-> **Nota:** `7 / 2` restituisce `3.5` (float), mentre `7 // 2` restituisce `3` (int).
-> Sono due operazioni diverse!
+Esempio discusso a voce:
 
-Le operazioni aritmetiche prendono in input valori numerici e restituiscono un nuovo valore numerico. In altre parole, non “modificano” il numero scritto nella REPL: calcolano un risultato.
+```python
+>>> 44 // 6
+7
+>>> 44 % 6
+2
+```
 
-Per esempio:
+L'idea e' la stessa della divisione in colonna:
 
-- `3 + 15` restituisce `18`
-- `17 % 5` restituisce `2`
-- `13.8 / 4` restituisce `3.45`
+- `6 * 7 = 42`
+- da `44` avanzano `2`
 
-Questo è il primo schema fondamentale della programmazione:
+![Divisione intera e resto](../vecchio-materiale/imgs/divisione.png)
 
-`valori in input → operazione → valore in output`
+### Stringhe
 
----
+Le stringhe sono sequenze di caratteri.
 
-### 1.2 · Stringhe
-
-Le **`str`** (stringhe) sono sequenze di caratteri, racchiuse tra apici singoli o doppi.
+| Operazione | Sintassi | Esempio | Risultato |
+| --- | --- | --- | --- |
+| Concatenazione | `S1 + S2` | `'ab' + 'cd'` | `'abcd'` |
+| Selezione | `S[i]` | `'ciao'[1]` | `'i'` |
+| Maiuscolo | `S.upper()` | `'ciao'.upper()` | `'CIAO'` |
+| Minuscolo | `S.lower()` | `'CIAO'.lower()` | `'ciao'` |
+| Conteggio | `S1.count(S2)` | `'aaa'.count('a')` | `3` |
+| Lunghezza | `len(S)` | `len('ciao')` | `4` |
 
 ```python
 >>> 'Hello' + ' ' + 'world'
@@ -186,90 +315,156 @@ Le **`str`** (stringhe) sono sequenze di caratteri, racchiuse tra apici singoli 
 'CIAO'
 ```
 
-**Operazioni sulle stringhe:**
+La lezione chiariva bene anche un punto che per chi comincia non e' ovvio:
 
-| Operazione      | Sintassi         | Esempio                    | Risultato     |
-|-----------------|------------------|----------------------------|---------------|
-| Concatenazione  | `S + S`          | `'ab' + 'cd'`              | `'abcd'`      |
-| Selezione       | `S[i]`           | `'ciao'[1]`                | `'i'`         |
-| Lunghezza       | `len(S)`         | `len('ciao')`              | `4`           |
-| Maiuscolo       | `S.upper()`      | `'ciao'.upper()`           | `'CIAO'`      |
-| Minuscolo       | `S.lower()`      | `'CIAO'.lower()`           | `'ciao'`      |
+- `+` tra numeri significa somma;
+- `+` tra stringhe significa concatenazione.
 
-> ⚠️ **Attenzione:** in informatica si conta a partire da **zero**.
-> Il primo carattere di `'ciao'` è `'ciao'[0]`, non `'ciao'[1]`.
-
-Anche qui il tipo conta: sulle stringhe possiamo concatenare, selezionare caratteri, misurare la lunghezza o applicare metodi come `.upper()` e `.lower()`, ma non possiamo usare operazioni pensate per i numeri come la divisione.
-
----
-
-### 1.3 · Booleani e confronti
-
-Il tipo **`bool`** ha solo due valori: `True` e `False`.
+Esempio:
 
 ```python
->>> 3 < 8
-True
->>> 5 == 5
-True
->>> 'aceto' < 'olio'
-True
+>>> "3" + "15"
+'315'
+```
+
+Qui Python non sta facendo un calcolo aritmetico: sta mettendo insieme due sequenze di caratteri.
+
+Un altro dettaglio importante emerso a voce:
+
+- gli spazi non vengono "indovinati";
+- se vuoi uno spazio in mezzo tra `"ciao"` e `"mondo"`, devi scriverlo tu.
+
+Quindi:
+
+```python
+>>> "ciao" + "mondo"
+'ciaomondo'
+>>> "ciao" + " " + "mondo"
+'ciao mondo'
+```
+
+> In informatica si conta a partire da zero.
+
+Nella trascrizione veniva mostrato anche che le sottostringhe si leggono per intervalli:
+
+```python
+>>> "linguistica"[0:3]
+'lin'
+```
+
+Qui il carattere iniziale e' incluso, quello finale no.
+
+### Booleani
+
+I booleani servono a rappresentare vero e falso.
+
+```python
 >>> True and False
 False
+>>> True or False
+True
 >>> not True
 False
 ```
 
-**Operatori di confronto** (restituiscono sempre un `bool`):
+Tabelle di verita' essenziali:
 
-| Operazione        | Sintassi |
-|-------------------|----------|
-| Maggiore          | `>`      |
-| Minore            | `<`      |
-| Uguale            | `==`     |
-| Maggiore o uguale | `>=`     |
-| Minore o uguale   | `<=`     |
-| Diverso           | `!=`     |
+| `and` | `True` | `False` |
+| --- | --- | --- |
+| `True` | `True` | `False` |
+| `False` | `False` | `False` |
 
-**Operatori logici:**
+| `or` | `True` | `False` |
+| --- | --- | --- |
+| `True` | `True` | `True` |
+| `False` | `True` | `False` |
 
-| Operazione | Sintassi  | Significato                          |
-|------------|-----------|--------------------------------------|
-| E          | `A and B` | `True` solo se entrambi sono `True`  |
-| O          | `A or B`  | `True` se almeno uno è `True`        |
-| Non        | `not A`   | Inverte il valore                    |
+| `not` | Risultato |
+| --- | --- |
+| `not True` | `False` |
+| `not False` | `True` |
 
-I booleani sono fondamentali perché permettono al programma di decidere: più avanti useremo questi risultati per scrivere condizioni, controllare casi e scegliere tra comportamenti diversi.
+Dettaglio pratico richiamato in lezione:
+
+- in Python i valori booleani si scrivono `True` e `False`;
+- con iniziale maiuscola;
+- non esistono abbreviazioni come `T` e `F`.
+
+### Operazioni di confronto
+
+| Operazione | Sintassi |
+| --- | --- |
+| Maggiore | `T > T` |
+| Minore | `T < T` |
+| Uguale | `T == T` |
+| Maggiore o uguale | `T >= T` |
+| Minore o uguale | `T <= T` |
+
+Restituiscono sempre un booleano.
+
+```python
+>>> 3 < 8
+True
+>>> len('ciao') <= len('hello')
+True
+>>> 'hello world' == 'Hello World'
+False
+>>> 'Hello World'.lower() == 'hello world'
+True
+```
+
+Per i numeri vale l'ordinamento usuale. Per le stringhe vale un ordinamento alfanumerico.
+
+Nella trascrizione compariva anche un punto utile per orientarsi:
+
+- tutte le operazioni di confronto restituiscono un booleano;
+- quindi possono essere composte con `and`, `or` e `not`;
+- per controllare uguaglianza si usa `==`, non `=`.
+
+Esempio:
+
+```python
+>>> len("ciao") <= len("hello")
+True
+>>> 3 == 3
+True
+>>> 3 == 5
+False
+```
 
 ---
 
-### ✏️ Esercizi A — Calcoli sulla REPL
+## Esercizi sulla REPL
 
-Scrivi un'espressione che calcoli ciascuno dei seguenti valori:
+### Esercizi 1 · Espressioni numeriche
 
-1. Il successore di 15
-2. La metà del triplo di 12
-3. Il triplo della metà di 12
-4. Il doppio della differenza tra 15 e 7
-5. Il doppio della differenza tra 3 e 7 *(attenzione al segno!)*
-6. Il resto della divisione tra 44 e 7
-7. La media di 2, 5, 9
+Scrivi un'espressione che calcoli:
 
----
+1. il successore di `15`;
+2. la meta' del triplo di `12`;
+3. il triplo della meta' di `12`;
+4. il doppio della differenza tra `15` e `7`;
+5. il doppio della differenza tra `3` e `7`;
+6. la somma dei primi tre numeri pari;
+7. la media di `2`, `5`, `9`;
+8. il resto della divisione tra `44` e `7`;
+9. la somma dei quadrati dei primi tre numeri naturali.
 
-### ✏️ Esercizi B — Stringhe sulla REPL
+### Esercizi 2 · Stringhe
 
-8. La lunghezza della stringa `"Happy families are all alike"`
-9. La stessa stringa in TUTTO MAIUSCOLO
-10. La concatenazione di `"Happy families are all alike"` e `"every unhappy family is unhappy in its own way"` con uno spazio tra le due frasi
-11. Il primo carattere della stringa `"linguistica"`
-12. Il sesto carattere di `"supercalifragilistichespiralidoso"` in maiuscolo
+Scrivi un'espressione che calcoli:
 
----
+1. la lunghezza della stringa `"Happy families are all alike"`;
+2. la sua versione tutta maiuscola;
+3. la concatenazione di `"Happy families are all alike"` e `"every unhappy family is unhappy in its own way"`;
+4. la stessa concatenazione ma con uno spazio in mezzo;
+5. il primo carattere di `"linguistica"`;
+6. il sesto carattere di `"supercalifragilistichespiralidoso"` in maiuscolo;
+7. la concatenazione del sesto, nono, decimo, ventiseiesimo e ventisettesimo carattere della stessa stringa.
 
-### ✏️ Esercizi C — Cosa calcolano queste espressioni?
+### Esercizi 3 · Che cosa produce?
 
-Per ciascuna, scrivi il risultato **e** il tipo (`int`, `float`, `str`, `bool`):
+Per ciascuna espressione, scrivi il valore prodotto e il tipo del risultato:
 
 1. `5 * (2 + 4)`
 2. `152 % 9`
@@ -278,544 +473,609 @@ Per ciascuna, scrivi il risultato **e** il tipo (`int`, `float`, `str`, `bool`):
 5. `len("carote")`
 6. `"cenerentola"[8]`
 
----
-
-<a id="mod1-espressioni-istruzioni"></a>
-## Parte 2 · Espressioni e istruzioni
-
-> Fin qui abbiamo usato Python soprattutto come una calcolatrice evoluta.
-> Ora dobbiamo distinguere due idee fondamentali: le **espressioni** e le **istruzioni**.
-
-### 2.1 · Che cos'è un'espressione
-
-Un'**espressione** è qualcosa che Python può **valutare** per ottenere un valore.
-
-Esempi:
-
-- `3 + 4` produce `7`
-- `"ciao".upper()` produce `"CIAO"`
-- `5 < 8` produce `True`
-- `len("banana")` produce `6`
-
-Possiamo dire quindi che un'espressione:
-
-- prende zero o più valori in input;
-- applica operazioni o funzioni;
-- restituisce sempre un **valore finale**.
-
-### 2.2 · Che cos'è un'istruzione
-
-Un'**istruzione** è un comando che dice all'interprete di fare qualcosa.
-
-A differenza di un'espressione, un'istruzione non serve principalmente a “produrre un valore da mostrare”, ma a **modificare lo stato del programma** oppure a controllarne l'esecuzione.
-
-Esempi di istruzioni:
-
-- `x = 44` assegna un valore a una variabile;
-- `print("ciao")` produce un effetto di output sullo schermo;
-- più avanti vedremo istruzioni come `if`, `while` e `def`.
-
-### 2.3 · Differenza pratica
-
-La differenza centrale è questa:
-
-- un'**espressione** viene valutata e dà come risultato un valore;
-- un'**istruzione** viene eseguita e cambia qualcosa nello stato o nel comportamento del programma.
-
-Confronta questi esempi:
-
-```python
->>> 3 + 4
-7
-```
-
-Qui `3 + 4` è un'espressione: Python la valuta e mostra il risultato.
-
-```python
->>> x = 3 + 4
-```
-
-Qui `x = 3 + 4` è un'istruzione: Python prima valuta l'espressione `3 + 4`, poi assegna il risultato alla variabile `x`.
-
-In altre parole:
-
-- a destra dell'uguale troviamo spesso un'**espressione**;
-- l'intera riga `x = 3 + 4` è un'**istruzione di assegnamento**.
-
-> **Idea chiave:** le espressioni producono valori; le istruzioni usano quei valori per costruire il comportamento del programma.
-
----
-
-## Parte 3 · Variabili e stato del programma
-
-> Finora Python ha risposto a ogni espressione, ma non ha ricordato nulla.
-> Le **variabili** ci permettono di dare un nome ai valori e tenerli in memoria.
-
-### 3.1 · Assegnare una variabile
-
-Una **variabile** è un nome che usiamo per ricordare un valore.
-
-L'assegnamento ha questa forma generale:
-
-```python
-nome_variabile = espressione
-```
-
-Questa istruzione va letta così:
-
-1. valuta l'espressione a destra dell'uguale;
-2. associa il risultato al nome scritto a sinistra;
-3. memorizza questa associazione nello stato del programma.
-
-È importante non leggere `=` come nella matematica scolastica. In Python `=` non significa “è uguale a per sempre”, ma significa **assegna a questo nome il valore che hai appena calcolato**.
-
-```python
->>> x = 33
->>> y = 'aardvark'
->>> z = True
-```
-
-L'interprete gestisce internamente una **tabella di memoria**:
-
-| Identificatore | Tipo   | Valore      |
-|----------------|--------|-------------|
-| `x`            | `int`  | `33`        |
-| `y`            | `str`  | `'aardvark'`|
-| `z`            | `bool` | `True`      |
-
-L'assegnamento può prendere il risultato di qualsiasi espressione valida:
-
-- `x = 33` assegna direttamente un valore;
-- `y = x + 5` assegna il risultato di un calcolo;
-- `z = True` assegna un valore booleano;
-- `nome = input("Come ti chiami? ")` assegna il valore restituito da una funzione.
-
-Una volta assegnata, la variabile si può usare nelle espressioni successive:
-
-```python
->>> x = 44
->>> y = x + 5
->>> y
-49
->>> x = x // 6
->>> x
-7
-```
-
-Nota bene: una variabile può anche **cambiare valore** durante l'esecuzione.
-
-Per esempio:
-
-- prima `x` vale `44`;
-- poi con `x = x // 6` il vecchio valore di `x` viene letto, usato nel calcolo, e il nuovo risultato `7` viene associato di nuovo allo stesso nome.
-
-**Come scegliere il nome?**
-Qualsiasi sequenza di lettere e numeri, purché non sia una parola riservata di Python (`if`, `for`, `while`, ...) e non inizi con una cifra. Scegli sempre **nomi significativi**: `eta` è meglio di `x`, `nome_utente` è meglio di `n`.
-
----
-
-### ✏️ Esercizi D — Variabili e tracciamento
-
-Per ciascun programma: **prima** scrivi a mano il valore di `y` al termine dell'esecuzione, **poi** verifica sulla REPL.
-
-1. `x = 4` · `y = 2 * x`
-2. `x = 12` · `y = x + 1`
-3. `a = 1` · `b = 2` · `c = 3` · `y = a**2 + b**2 + c**2`
-4. `s1 = "CIAO MONDO"` · `s2 = s1[1] + "o"` · `y = s2.lower()`
-5. `s = "MONDO CIAO"` · `i = 2` · `y = s[i] + s[i+1]`
-
----
-
-## Parte 3 · Come funziona il computer
-
-> Ora che hai sperimentato la REPL, possiamo dare un nome a quello che è successo.
-
-### 3.1 · Python come linguaggio formale
-
-Un linguaggio di programmazione è un linguaggio **formale**, cioè ha:
-
-- **Vocabolario** — i simboli che si possono usare: valori (raggruppati in *tipi*) e *keywords* riservate (`if`, `for`, `def`, ...)
-- **Sintassi** — le regole di composizione:
-  - *Espressioni* → calcolano un valore (`3 + 15`, `len('ciao')`)
-  - *Istruzioni* → modificano lo stato del programma (`x = 44`)
-- **Semantica** — il significato di ciò che scriviamo, interpretato dall'*interprete*
-
-Nella REPL abbiamo scritto quasi solo **espressioni**. Con `x = 44` abbiamo scritto la nostra prima **istruzione**.
-
-**Cos'è l'interprete?**
-
-```
-$ python3 mio_script.py
-```
-
-L'interprete legge il codice Python, ne capisce il significato, e lo traduce in istruzioni che il processore può eseguire.
-
----
-
-### 3.2 · Che tipo di linguaggio è Python
-
-Python è un linguaggio di programmazione con alcune caratteristiche importanti:
-
-- **Interpretato** — il codice viene eseguito attraverso un interprete, cioè un programma che legge le istruzioni Python e le fa eseguire al computer. Per chi inizia significa che si può provare subito il codice, riga per riga, nella REPL o in uno script.
-- **Ad alto livello** — permette di esprimere operazioni complesse con istruzioni relativamente vicine al linguaggio umano e lontane dai dettagli elettronici della macchina. Non dobbiamo gestire direttamente registri, indirizzi di memoria o istruzioni binarie della CPU.
-- **Multiparadigma** — supporta più modi di organizzare i programmi. Per esempio possiamo scrivere codice:
-  - **imperativo**, come una sequenza di istruzioni eseguite in ordine;
-  - **procedurale**, raggruppando istruzioni in funzioni riutilizzabili;
-  - **orientato agli oggetti**, modellando dati e comportamenti tramite oggetti e classi.
-- **General purpose** — non nasce per un solo settore specifico: si usa per automazione, analisi dati, web, scripting, intelligenza artificiale, didattica e molti altri contesti.
-
-> **In pratica:** Python è spesso scelto nei corsi introduttivi perché ha una sintassi leggibile, permette di ottenere risultati rapidamente ed espone bene i concetti fondamentali della programmazione.
+### Esercizi 4 · Confronti
+
+Controlla se e' vero che:
+
+1. la seconda lettera del tuo nome e' uguale alla quarta del tuo cognome;
+2. `3 * 5 < 7 + 2`;
+3. `"aceto" < "olio"`;
+4. `"aceto".upper() == "aceto"`;
+5. `len("carote" + "cipolla" + "sedano") == len("carote") + len("cipolla") + len("sedano")`;
+6. `"barba" < "Barba"`;
+7. `"barba" < "barbabietola"`.
 
 ---
 
 <a id="mod1-von-neumann"></a>
-### 3.3 · L'architettura di Von Neumann
+## Architettura di Von Neumann
 
-Qualsiasi computer moderno è costruito secondo il modello di **Von Neumann**:
-
-```
-┌─────────────────────────────────────────┐
-│               COMPUTER                  │
-│                                         │
-│   ┌──────────┐      ┌────────────────┐  │
-│   │   CPU    │◄────►│    MEMORIA     │  │
-│   │(elabora) │      │  (RAM: dati +  │  │
-│   └──────────┘      │  istruzioni)   │  │
-│        ▲            └────────────────┘  │
-│        │                                │
-│   ┌────┴────────────────────────────┐   │
-│   │          INPUT / OUTPUT         │   │
-│   │  (tastiera, schermo, file...)   │   │
-└───┴─────────────────────────────────┴───┘
-```
+Un computer puo' essere descritto in modo intuitivo con tre blocchi principali:
 
 | Componente | Ruolo |
-|------------|-------|
-| **CPU**    | Esegue le istruzioni una alla volta |
-| **RAM**    | Conserva dati e istruzioni durante l'esecuzione |
-| **I/O**    | Riceve input dall'utente, produce output verso lo schermo o i file |
+| --- | --- |
+| CPU | esegue le istruzioni |
+| Memoria | conserva dati e istruzioni durante l'esecuzione |
+| Input/Output | riceve dati dall'esterno e produce risultati |
 
-**Collegamento con la REPL:**
-- `x = 44` → la CPU esegue l'istruzione, la **RAM** memorizza il valore
-- `x + 5` → la CPU legge `x` dalla RAM, calcola, manda il risultato all'**output** (schermo)
-- Ogni riga della REPL è un ciclo completo: **input → elaborazione → output**
+Schema essenziale:
 
-> **In sintesi:** un programma è una sequenza di istruzioni e dati, tutti in memoria, eseguiti dalla CPU uno alla volta.
+```text
+input -> CPU + memoria -> output
+```
+
+Quando esegui un programma Python:
+
+- il codice viene letto come sequenza di istruzioni;
+- i valori intermedi vengono tenuti in memoria;
+- la CPU esegue un passo alla volta;
+- il risultato puo' essere mostrato a schermo o scritto su file.
+
+Questo modello e' utile perche' ci costringe a ragionare in termini di stato, dati e trasformazioni.
 
 ---
 
 <a id="mod1-input-output"></a>
-### 3.4 · Il modello Input → Elaborazione → Output
+## Cos'e' un programma
 
-Ogni programma, dal più semplice al più complesso, segue sempre lo stesso schema:
+Un programma e' una procedura che prende dati in ingresso, li elabora e produce un risultato.
 
-```
-  INPUT  ──►  ELABORAZIONE  ──►  OUTPUT
-```
+| Fase | Domanda tipica |
+| --- | --- |
+| Input | quali dati ricevo? |
+| Elaborazione | quali regole applico? |
+| Output | che risultato restituisco? |
 
-Esempi che conosci già:
+Esempi:
 
-| Programma      | Input                        | Elaborazione              | Output                  |
-|----------------|------------------------------|---------------------------|-------------------------|
-| Google Maps    | Indirizzo di partenza/arrivo | Algoritmo di percorso     | Mappa con indicazioni   |
-| Shazam         | Audio dal microfono          | Riconoscimento musicale   | Nome della canzone      |
-| La nostra REPL | `3 + 15`                     | Addizione                 | `18`                    |
+| Programma | Input | Output |
+| --- | --- | --- |
+| somma di due numeri | `a`, `b` | `a + b` |
+| conteggio caratteri | una stringa | un numero |
+| scelta del file giusto | nome e percorso | file aperto o errore |
 
-Un programma è essenzialmente una sequenza di istruzioni. Il suo funzionamento segue un ciclo fondamentale:
+Qui entra anche il **file system**:
 
-- Input: Dati inseriti nel sistema per l'elaborazione o l'archiviazione.
-- Elaborazione: La CPU riceve istruzioni e dati dalla memoria o dall'input e li processa.
-- Output: I risultati dell'elaborazione vengono inviati a un dispositivo di uscita o trasferiti alla memoria di massa (storage secondario).
-
-* Codice Sorgente vs Codice Macchina
-  * Codice Macchina: È l'unico linguaggio compreso direttamente dalla CPU, composto interamente da numeri binari (0 e 1).
-  * Codice Sorgente: È il codice scritto dai programmatori in un linguaggio leggibile dall'uomo (come Python). Un'istruzione ad alto livello è "one-to-many", ovvero viene tradotta in molteplici istruzioni in linguaggio macchina.
-
-Poiché il computer non capisce il codice sorgente, serve un traduttore:
-
-* Interprete (es. Python): Traduce ed esegue il codice un'istruzione alla volta. Gli errori sono facili da individuare durante lo sviluppo, ma l'esecuzione è più lenta.
-* Compilatore (es. C++): Traduce l'intero programma in un file eseguibile unico. Una volta compilato, il programma è molto veloce.
-* Assembler: Traduce specificamente il linguaggio Assembly in codice macchina.
-
-Dati e istruzioni sono entrambi memorizzati come numeri binari nella memoria principale.
-Le istruzioni vengono prelevate dalla memoria una alla volta in modo seriale.
-
-Per gestire il ciclo di elaborazione, la CPU utilizza cinque registri speciali:
-
-* PC (Program Counter): Contiene l'indirizzo della prossima istruzione da prelevare.
-* MAR (Memory Address Register): Contiene l'indirizzo della cella di memoria attualmente in uso per la lettura o scrittura.
-* MBR (Memory Buffer Register): Contiene i dati o le istruzioni appena letti dalla memoria o in attesa di essere scritti.
-* CIR (Current Instruction Register): Contiene l'istruzione che viene attualmente decodificata ed eseguita.
-* ACC (Accumulatore): Memorizza i risultati temporanei delle operazioni logico-aritmetiche.
-
-La CPU ripete continuamente queste fasi: preleva l'istruzione dalla RAM (Fetch), la interpreta (Decode) e la esegue (Execute).
-
-Il ciclo **Fetch-Decode-Execute** è il processo fondamentale con cui la CPU elabora ogni singola istruzione di un programma. Poiché le istruzioni sono in memoria, la CPU le legge una alla volta e ripete sempre lo stesso schema:
-
-1. **Fetch (Prelievo)**: la CPU recupera l'istruzione dalla memoria.
-   - **Indirizzamento**: l'indirizzo contenuto nel `PC` (Program Counter), che indica la prossima istruzione da eseguire, viene copiato nel `MAR` (Memory Address Register).
-   - **Aggiornamento del PC**: il `PC` viene incrementato, così punta già all'istruzione successiva.
-   - **Accesso alla memoria**: il processore usa l'indirizzo contenuto nel `MAR` per leggere la cella di memoria corretta.
-   - **Trasferimento dati**: l'istruzione letta viene copiata nel `MBR` (Memory Buffer Register, detto anche `MDR`).
-   - **Caricamento istruzione**: il contenuto del `MBR` viene trasferito nel `CIR` (Current Instruction Register).
-
-2. **Decode (Decodifica)**: la CPU interpreta l'istruzione appena caricata.
-   - L'unità di controllo legge il contenuto del `CIR` e determina quale operazione deve essere eseguita.
-   - Per esempio può trattarsi di un'addizione, di una lettura dalla memoria o di uno spostamento di dati.
-
-3. **Execute (Esecuzione)**: la CPU esegue davvero l'operazione richiesta.
-   - Se l'istruzione richiede un calcolo matematico o logico, entra in gioco l'`ALU` (Arithmetic Logic Unit).
-   - Il risultato dell'operazione può essere conservato temporaneamente nell'`ACC` (Accumulatore).
-
-4. **Ripetizione**: dopo l'esecuzione, il ciclo ricomincia dal primo passo.
-   - La CPU passa alla prossima istruzione indicata dal `PC`.
-   - Questo processo continua finché il programma è in esecuzione.
-
-In sintesi: I registri lavorano come una catena di montaggio: il PC tiene il segno di dove siamo, il MAR e l'MBR fanno da ponte con la memoria esterna, il CIR tiene l'istruzione "sotto i ferri" per la decodifica e l'Accumulatore raccoglie il prodotto finito dell'operazione.
-
-L'interprete Python gestisce la memoria durante l'esecuzione agendo come un traduttore che processa il codice un'istruzione alla volta. La gestione della memoria avviene principalmente attraverso l'uso di tabelle di memoria che associano i nomi delle variabili (identificatori) ai loro valori o indirizzi fisici.
-
-**RAM vs. file system:**
-- La **RAM** è veloce ma volatile: le variabili spariscono quando chiudi Python
-- Il **file system** (disco) è permanente: i file `.py` che scriveremo restano salvati
-
----
-
-<a id="mod1-ambiente"></a>
-### 3.5 · I tre strumenti dell'ambiente di lavoro
-
-| Strumento             | Ruolo                          | Esempio d'uso              |
-|-----------------------|--------------------------------|----------------------------|
-| **Editor** (VS Code)  | Scrivere il codice             | Creare e salvare `script.py` |
-| **Terminale / Shell** | Parlare con il sistema operativo | `cd`, `ls`, eseguire script |
-| **Interprete Python** | Eseguire il codice             | `python3 script.py`        |
-
-> **La REPL** combina terminale e interprete: scrivi → esegui → vedi il risultato, senza creare file.
+- i file sono contenitori persistenti di dati;
+- le cartelle organizzano i file;
+- il sistema operativo gestisce accesso a file, memoria, processi e periferiche.
 
 ---
 
 <a id="mod1-terminale"></a>
-## Parte 4 · Il terminale
+## Terminale: comandi di base
 
-> Per eseguire i tuoi script devi saper navigare il file system dal terminale.
+Il terminale serve a spostarsi nelle cartelle e lanciare programmi.
 
-### 4.1 · Comandi fondamentali
+Comandi essenziali:
 
-```bash
-pwd            # dove sono? (stampa il percorso della cartella corrente)
-ls             # cosa c'è qui? (elenca file e cartelle)
-cd cartella    # entra nella cartella
-cd ..          # torna alla cartella superiore
-```
+| Comando | Significato |
+| --- | --- |
+| `pwd` | mostra la cartella corrente |
+| `ls` | elenca file e cartelle |
+| `cd nome-cartella` | entra in una cartella |
+| `cd ..` | torna alla cartella padre |
+| `python3 file.py` | esegue uno script Python |
 
-**Percorsi assoluti vs. relativi:**
+### Percorsi assoluti e relativi
 
-```bash
-# Assoluto: parte sempre dalla radice del disco
-/home/studente/corso/script.py
+- un **percorso assoluto** parte dalla radice del sistema;
+- un **percorso relativo** parte dalla cartella in cui ti trovi adesso.
 
-# Relativo: parte da dove sei adesso
-corso/script.py
-```
+La lezione dell'`11 marzo 2026` aggiungeva tre scorciatoie molto utili:
 
----
+- `.` significa "la cartella corrente";
+- `..` significa "la cartella superiore";
+- possiamo concatenare piu' salite con percorsi del tipo `../../`.
 
-<a id="mod1-primo-script"></a>
-### 4.2 · Il primo script
-
-Crea un file `saluto.py` in VS Code con questo contenuto:
-
-```python
-nome = input("Come ti chiami? ")
-print("Ciao,", nome)
-```
-
-Poi eseguilo dal terminale:
+Quindi, per esempio:
 
 ```bash
-cd /percorso/della/cartella
-python3 saluto.py
+ls .
+ls ..
+cd ..
+ls ../../
 ```
 
-**Prova anche queste varianti:**
+In pratica:
 
-```python
-# Versione 2: calcolo
-eta = input("Quanti anni hai? ")
-eta = int(eta)
-print("Fra 10 anni avrai", eta + 10, "anni.")
+- `ls` e `ls .` sono equivalenti;
+- `./file.txt` indica un file nella cartella corrente;
+- `../file.txt` indica un file nella cartella sopra;
+- ogni `..` ci fa salire di un livello nell'albero delle cartelle.
+
+La stessa lezione insisteva anche su un punto pratico:
+
+- uno stesso file puo' essere indicato in molti modi diversi;
+- con il nome assoluto completo;
+- con un percorso relativo breve;
+- oppure con forme come `./pippo.txt`.
+
+L'importante non e' usare sempre la forma piu' lunga, ma capire che il percorso deve descrivere correttamente come arrivare al file partendo dalla cartella corrente.
+
+Esempio:
+
+```bash
+pwd
+ls
+cd guida-lezioni
+ls
+cd ..
+python3 scripts/genera_programma.py
 ```
 
-```python
-# Versione 3: più input
-nome = input("Come ti chiami? ")
-cognome = input("Qual è il tuo cognome? ")
-print("Benvenuto/a,", nome, cognome + "!")
-```
-
-> **Domanda:** perché serve `int(eta)` nella versione 2? Cosa succede se lo togli?
-> *(Lo approfondiremo nel Modulo 02)*
+> Se un comando "non trova il file", il primo controllo da fare e' quasi sempre la cartella corrente.
 
 ---
 
-## Parte 5 Assegnamento di variabili
+## Espressioni e istruzioni
 
-Quando l'interprete esegue un'istruzione di assegnamento (es. x = 5), segue una semantica precisa:
+Nel notebook storico, dopo i tipi fondamentali, compariva questa distinzione:
 
-    Valutazione: Calcola il valore dell'espressione a destra dell'uguale.
-    Creazione: Se necessario, crea una cella nella tabella di memoria dedicata a quell'identificatore.
-    Associazione: Assegna il valore calcolato al nome della variabile nella tabella.
+- una **espressione** viene valutata e produce un valore;
+- una **istruzione** viene eseguita e modifica qualcosa nello stato del programma.
 
+Esempi di espressioni:
 
+- `3 + 4`
+- `len("ciao")`
+- `5 < 8`
 
----
+Esempi di istruzioni:
 
-<a id="mod1-tdd"></a>
-## Parte 6 · Testare il codice: introduzione al TDD
+- `x = 44`
+- `print("ciao")`
+- piu' avanti: `if`, `while`, `def`
 
-> Scrivere codice che funziona **in tutti i casi** è più difficile che farlo funzionare nel caso ovvio.
-> Il **Test-Driven Development** ci insegna a ragionare sui casi *prima* di scrivere una riga.
+Con le sole espressioni stiamo usando Python come una calcolatrice. Con le istruzioni cominciamo a usare memoria, stato e flusso.
 
-### 6.1 · I tre tipi di caso
-
-Prima di scrivere qualsiasi script, poniti queste domande:
-
-| Tipo di caso  | Domanda                                   |
-|---------------|-------------------------------------------|
-| **Normale**   | Cosa mi aspetto con un input tipico?      |
-| **Limite**    | Cosa succede ai bordi? (zero, negativo, stringa vuota) |
-| **Errore**    | Cosa può andare storto?                   |
-
-**Esempio guidato:** script che calcola il doppio di un numero
-
-Compila la tabella *prima* di scrivere il codice:
-
-| Tipo    | Input  | Output atteso |
-|---------|--------|---------------|
-| Normale | `5`    | `10`          |
-| Normale | `3.5`  | `7.0`         |
-| Limite  | `0`    | `0`           |
-| Limite  | `-4`   | `-8`          |
-
-Solo dopo si scrive:
+La trascrizione rende questo passaggio ancora piu' esplicito con un esempio importante:
 
 ```python
-n = input("Inserisci un numero: ")
-n = int(n)
-print("Il doppio è", n * 2)
+3 + 15
 ```
 
-E si verifica su ciascun caso della tabella.
+e
+
+```python
+print(3 + 15)
+```
+
+non sono la stessa cosa in uno script.
+
+Nel primo caso l'interprete puo' anche calcolare il valore, ma non gli abbiamo chiesto di mostrarlo in output.
+Nel secondo caso usiamo `print(...)` proprio per dire:
+
+> stampa sullo schermo il risultato di questa espressione
+
+Questo e' uno dei primi punti in cui bisogna distinguere bene:
+
+- valore calcolato;
+- valore conservato in memoria;
+- valore stampato all'esterno.
+
+### Un primo sguardo agli errori
+
+La lezione mostrava anche che cosa succede quando proviamo a combinare tipi incompatibili, per esempio:
+
+```python
+3 + "15"
+```
+
+Qui otteniamo un `TypeError`.
+
+Le informazioni minime da leggere in un errore sono:
+
+- il tipo di errore;
+- la riga in cui si manifesta;
+- l'operazione che non e' supportata.
+
+Nel caso discusso a lezione, il messaggio dice in sostanza che l'operatore `+` non funziona tra:
+
+- un intero;
+- una stringa.
+
+Questo e' un primo esempio utile per capire che gli errori non sono rumore casuale:
+
+- ci stanno dicendo che cosa Python non riesce a interpretare;
+- e dove dobbiamo guardare.
 
 ---
 
-### ✏️ Esercizi E — TDD: prima la tabella, poi il codice
+## Assegnamento e variabili
 
-Per ciascun esercizio: **prima** compila la tabella dei casi, **poi** scrivi lo script e verifica ogni caso.
+Il notebook presentava l'assegnamento cosi':
 
-**Esercizio 1 — Secondi in ore, minuti e secondi**
-
-```
-Input:  un numero intero di secondi (es. 3661)
-Output: "1 ore, 1 minuti, 1 secondi"
+```python
+identificatore = espressione
 ```
 
-**Esercizio 2 — Saluto con cognome in maiuscolo**
+Semantica intuitiva:
 
-```
-Input:  nome e cognome (due input() separati)
-Output: "Ciao COGNOME, nome!"
+1. l'interprete valuta l'espressione;
+2. se necessario crea una nuova cella di memoria;
+3. assegna il valore calcolato all'identificatore.
+
+Una variabile e' un nome che usiamo per ricordare un valore.
+
+```python
+x = 33
+y = 'aardvark'
+z = True
 ```
 
-**Esercizio 3 — Doppio e triplo**
+![Barattoli in dispensa](../vecchio-materiale/imgs/jars.jpg)
 
+### Tabella di memoria
+
+| Identificatore | Tipo | Valore |
+| --- | --- | --- |
+| `x` | `int` | `44` |
+| `y` | `str` | `'aardvark'` |
+| `z` | `bool` | `True` |
+
+Punti importanti:
+
+- il tipo va ricordato;
+- i nomi non devono essere keyword;
+- conviene usare nomi significativi;
+- le variabili possono essere riutilizzate nelle espressioni successive.
+
+La trascrizione della lezione aggiungeva alcuni dettagli molto utili:
+
+- Python deduce da solo il tipo del valore assegnato;
+- questo rende il linguaggio piu' leggero da scrivere;
+- ma chiede a noi di restare consapevoli del tipo che stiamo manipolando;
+- possiamo controllare il tipo con `type(...)`.
+
+Esempi:
+
+```python
+x = 5
+print(x)
+print(type(x))
 ```
-Input:  un numero intero
-Output: due righe — una con il doppio, una con il triplo
+
+```python
+parola = "ciao"
+print(type(parola))
 ```
+
+La lezione chiariva anche che le conversioni di tipo esistono, ma vanno fatte con criterio:
+
+- una stringa che rappresenta un numero puo' diventare intero;
+- una stringa come `"ciao"` non puo' diventare sensatamente un intero.
+
+Esempi:
+
+```python
+x = 44
+y = x + 5
+```
+
+```python
+x = 44
+x = x // 6
+```
+
+Nel secondo caso il nuovo valore di `x` dipende dal vecchio valore di `x`.
+
+Nella trascrizione l'assegnamento veniva spiegato anche con una metafora efficace: la dispensa con i barattoli etichettati.
+
+L'idea e' questa:
+
+- il valore e' il contenuto;
+- il nome della variabile e' l'etichetta;
+- la memoria e' lo scaffale dove il computer tiene traccia di questi abbinamenti.
+
+Questa immagine e' utile per non pensare alle variabili come "scatole misteriose", ma come associazioni tra:
+
+- un nome;
+- un valore calcolato.
+
+### Nomi delle variabili
+
+Nella lezione veniva insistito anche su una buona pratica molto concreta:
+
+- il nome puo' essere quasi qualunque identificatore valido;
+- ma non deve coincidere con parole riservate del linguaggio;
+- e conviene che descriva davvero il ruolo del dato.
+
+Per esempio:
+
+- `spesa_totale` e' meglio di `x`;
+- `acquisti` e' meglio di `pippo`;
+- `print` non va bene come nome di variabile, perche' e' gia' una keyword/funzione del linguaggio.
+
+### Esercizi su assegnamento
+
+Scrivi questi programmi, predici il valore finale di `y`, poi controlla:
+
+1. `x = 12`, poi `y` vale il successore di `x`;
+2. crea `a`, `b`, `c` con i primi tre numeri naturali e assegna a `y` la somma dei loro quadrati;
+3. assegna a `s1` la stringa `"CIAO MONDO"`, costruisci `s2` prendendo il secondo carattere di `s1` e concatenando `"o"`, poi assegna a `y` la versione minuscola di `s2`;
+4. assegna a `s` la stringa `"MONDO CIAO"`, assegna a `i` il valore `2`, poi assegna a `y` i due caratteri di `s` nelle posizioni `i` e `i + 1`.
 
 ---
 
 <a id="mod1-tracciamento"></a>
-## Parte 7 · Tracciare l'esecuzione a mano
+## Tracciare dati, memoria e output
 
-> La macchina non può sbagliare. Se il programma fa qualcosa di inatteso,
-> il problema è nel nostro modello mentale. Tracciare l'esecuzione su carta
-> è lo strumento più potente per capire cosa sta succedendo davvero.
+Tracciare un programma significa simulare a mano che cosa succede riga per riga.
 
-### 7.1 · Come si tracccia
+Una tabella minima puo' contenere:
 
-Per ogni istruzione, aggiorna la tabella delle variabili e annota l'eventuale output.
+| Passo | Istruzione o espressione | Stato / risultato |
+| --- | --- | --- |
+| 1 | `x = 4` | `x` vale `4` |
+| 2 | `y = x + 3` | `y` vale `7` |
+| 3 | `print(y)` | output: `7` |
 
-**Esempio:** dato il programma
+Questo esercizio serve a:
+
+- distinguere valore in memoria e testo stampato;
+- capire l'ordine di esecuzione;
+- trovare errori di logica prima di eseguire il programma.
+
+La trascrizione della lezione rendeva ancora piu' esplicita la logica del tracciamento:
+
+- quando l'interprete incontra un assegnamento, prima valuta la parte destra;
+- solo dopo aggiorna la tabella della memoria;
+- se una variabile compare sia a destra sia a sinistra, a destra vale ancora il vecchio valore.
+
+Esempio:
+
+```python
+x = 44
+x = x // 6
+```
+
+Lettura corretta:
+
+1. prendi il valore attuale di `x`, che e' `44`;
+2. calcola `44 // 6`, che vale `7`;
+3. aggiorna `x` con il nuovo valore `7`.
+
+Questo punto e' importante perche' all'inizio scritture come:
+
+```python
+x = x + 1
+```
+
+sembrano strane se lette come formule matematiche, mentre sono naturali se lette come aggiornamenti di stato.
+
+### Esempio guidato
 
 ```python
 x = 10
-y = x * 2
-x = y - 3
-z = x + y
-print(z)
+y = x // 3
+print(y)
 ```
 
-La traccia è:
+Traccia:
 
-| Istruzione    | `x`  | `y`  | `z`  | Output |
-|---------------|------|------|------|--------|
-| `x = 10`      | `10` | —    | —    |        |
-| `y = x * 2`   | `10` | `20` | —    |        |
-| `x = y - 3`   | `17` | `20` | —    |        |
-| `z = x + y`   | `17` | `20` | `37` |        |
-| `print(z)`    | `17` | `20` | `37` | `37`   |
+| Passo | Stato della memoria | Output |
+| --- | --- | --- |
+| dopo `x = 10` | `x = 10` | |
+| dopo `y = x // 3` | `x = 10`, `y = 3` | |
+| dopo `print(y)` | `x = 10`, `y = 3` | `3` |
+
+### Tracciare una funzione
+
+Nel notebook compariva anche un piccolo esempio di funzione:
+
+```python
+def TriploDelSuccessore(x):
+    successore = x + 1
+    triplo = 3 * successore
+    return triplo
+```
+
+Se esegui:
+
+```python
+n = 15
+risultato = TriploDelSuccessore(n)
+```
+
+puoi distinguere:
+
+- la memoria del flusso principale, che contiene `n` e poi `risultato`;
+- la memoria locale della funzione, che contiene `x`, `successore`, `triplo`.
+
+Questa distinzione prepara il tema dello scope, che verra' formalizzato piu' avanti.
 
 ---
 
-### ✏️ Esercizi F — Tracciamento
+## Funzioni
 
-Per ciascun programma: **prima** compila la tabella a mano, **poi** esegui sulla REPL e confronta.
+Il notebook chiudeva la lezione introducendo le funzioni come strumento per:
 
-**Programma 1**
+- riusare codice;
+- rendere il programma modulare;
+- aumentare leggibilita' e controllo.
+
+### Che cos'e' una funzione
+
+Una funzione prende input, esegue una sequenza di istruzioni e restituisce un output.
+
+Analogia utile del notebook: delegare un sotto-problema a una figura specializzata.
+
+- **definire** una funzione = registrare un contatto in rubrica;
+- **invocare** una funzione = chiamare quella persona quando serve.
+
+### Sintassi
+
+```python
+def nome_funzione(input1, input2):
+    # istruzioni
+    return output
+```
+
+### Esempio
+
+```python
+def TriploDelSuccessore(x):
+    successore = x + 1
+    triplo = 3 * successore
+    return triplo
+```
+
+### Invocazione
+
+```python
+n = 15
+risultato = TriploDelSuccessore(n)
+```
+
+Quando la funzione viene invocata:
+
+1. il controllo passa al corpo della funzione;
+2. viene costruita memoria locale temporanea;
+3. il `return` restituisce un valore al chiamante.
+
+### Esercizi sulle funzioni
+
+Definisci una funzione che:
+
+1. prende due numeri e ne calcola la somma;
+2. prende tre numeri e calcola la somma dei primi due meno il terzo;
+3. prende quattro numeri e ne calcola la media;
+4. prende una stringa `s` e un intero `i`, e restituisce una stringa di quattro caratteri composta dal primo carattere di `s` concatenato con i tre caratteri di `s` a partire da `i`.
+
+Poi, per ciascuna funzione, scrivi alcune chiamate di test.
+
+---
+
+## Struttura di uno script
+
+Il materiale storico mostrava una struttura tipica di script:
+
+```python
+#----------------------------------
+# intestazione dello script
+# autore/autrice, data, contatti...
+#----------------------------------
+
+import sys
+
+def capitalizza(stringa):
+    """
+    prende una stringa e la restituisce capitalizzata
+    """
+    nuova_stringa = stringa[0].upper() + stringa[1:].lower()
+    return nuova_stringa
+
+nome = sys.argv[1]
+cognome = sys.argv[2]
+
+nome = capitalizza(nome)
+cognome = capitalizza(cognome)
+
+print(nome + " " + cognome)
+```
+
+Tre sezioni ricorrenti:
+
+1. import di librerie;
+2. definizione di funzioni ausiliarie;
+3. flusso principale del programma.
+
+### Commenti e leggibilita'
+
+- tutto cio' che segue `#` su una riga e' un commento;
+- i commenti servono a spiegare scopo, parametri, output;
+- nelle funzioni non banali conviene aggiungere una breve descrizione.
+
+### Indentazione e blocchi
+
+In Python i blocchi si riconoscono dall'indentazione.
+
+Il corpo di una funzione e' un blocco, quindi va indentato.
+
+Se l'indentazione manca o e' incoerente, il programma non e' valido.
+
+---
+
+<a id="mod1-tdd"></a>
+## Progettare un programma: casi normali, limite, errore
+
+Prima di scrivere codice conviene descrivere i casi che il programma deve gestire.
+
+Tre categorie utili:
+
+| Tipo di caso | Descrizione | Esempio |
+| --- | --- | --- |
+| Normale | input previsto e regolare | sommare `3` e `5` |
+| Limite | input valido ma delicato | stringa vuota, numero zero |
+| Errore | input non valido o assente | testo dove serve un numero |
+
+Per esempio, se vuoi progettare un programma che stampa il doppio di un numero:
+
+| Input | Comportamento atteso |
+| --- | --- |
+| `4` | stampa `8` |
+| `0` | stampa `0` |
+| `-3` | stampa `-6` |
+| `"ciao"` | segnala che l'input non e' numerico |
+
+> Questo e' il nucleo dell'approccio TDD visto in modo introduttivo: chiarire i casi prima del codice.
+
+---
+
+## Esercizi suggeriti
+
+### REPL
+
+1. Calcola il resto della divisione tra `44` e `7`.
+2. Scrivi un'espressione che produca il triplo della meta' di `12`.
+3. Ottieni il primo carattere di `"linguistica"`.
+
+### Terminale
+
+1. Entra nella cartella del progetto e mostra il contenuto.
+2. Spostati in `guida-lezioni` e poi torna indietro.
+3. Esegui uno script Python dal terminale.
+
+### Tracciamento
+
+Traccia a mano:
+
 ```python
 a = 5
-b = a + 3
-a = b * 2
+b = a + 2
 print(a)
 print(b)
 ```
 
-**Programma 2**
-```python
-s = "ciao"
-t = s.upper()
-s = t + "!"
-print(s)
-print(len(s))
-```
+### Progettazione
 
-**Programma 3**
-```python
-x = 10
-y = 3
-x = x % y
-z = x + y
-print(z)
-print(x == y)
-```
+Per un programma che legge un numero e stampa `"pari"` oppure `"dispari"`, scrivi almeno:
+
+- due casi normali;
+- due casi limite;
+- un caso di errore.
 
 ---
 
 ## Riepilogo
 
-| Concetto               | In breve                                                   |
-|------------------------|------------------------------------------------------------|
-| **REPL**               | Modalità interattiva: scrivi → esegui → vedi il risultato  |
-| **Tipi fondamentali**  | `int`, `float`, `str`, `bool`                              |
-| **Espressione**        | Calcola un valore: `3 + 15`, `len("ciao")`                 |
-| **Istruzione**         | Modifica lo stato: `x = 44`                                |
-| **Variabile**          | Un nome associato a un valore in memoria (RAM)             |
-| **Interprete**         | Legge Python, lo traduce in istruzioni per la CPU          |
-| **Von Neumann**        | CPU + RAM + I/O — il modello di ogni computer moderno      |
-| **I/E/O**              | Ogni programma: input → elaborazione → output              |
-| **TDD (base)**         | Prima i casi attesi, poi il codice                         |
-| **Tracciamento**       | Seguire l'esecuzione riga per riga su carta                |
+In questa guida sono stati integrati sia il perimetro attuale del modulo 1 sia il materiale storico del notebook `vecchio-materiale/Lezione1-08_10.ipynb`.
 
----
+Hai quindi in un solo posto:
+
+- motivazioni e metodo di lavoro;
+- ambiente di sviluppo;
+- Python come linguaggio formale;
+- REPL e tipi fondamentali;
+- operazioni aritmetiche, stringhe, booleani e confronti;
+- modello input/elaborazione/output;
+- architettura di Von Neumann;
+- terminale e percorsi;
+- espressioni, istruzioni, assegnamento e variabili;
+- tracciamento dello stato;
+- funzioni;
+- struttura di uno script;
+- progettazione per casi.
+
+Le sezioni su assegnamento, funzioni e struttura di uno script anticipano materiale che nel programma corrente viene ripreso e approfondito nei moduli successivi.

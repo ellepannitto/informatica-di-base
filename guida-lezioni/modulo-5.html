@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 05 · Liste e lettura dei dati</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="modulo-05-liste-e-lettura-dei-dati">Modulo 05 · Liste e lettura dei dati</h1><hr><h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>rappresentare dati ordinati con una lista;</li><li>usare le operazioni fondamentali sulle liste;</li><li>trasformare una stringa in lista con <code>split()</code>;</li><li>leggere sequenze di dati e accumularle in una lista;</li><li>ragionare sulla differenza tra lista e stringa.</li></ul><hr><a id="mod5-liste"></a><h2 id="liste-collezioni-ordinate-di-elementi">Liste: collezioni ordinate di elementi</h2><p>Il notebook 2 introduceva le liste come <strong>collezioni ordinate di elementi</strong>.</p><p>Esempi:</p><pre><code class="language-python">[3, 19, 27, 43]
+[&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;ciao&quot;]
+[True, True, True, False]
+[[&quot;a&quot;, &quot;b&quot;], [&quot;a&quot;, &quot;c&quot;], [&quot;a&quot;, &quot;d&quot;]]</code></pre><p><img src="../vecchio-materiale/imgs/archivio.jpg" alt="Archivio"></p><p>Una lista:</p><ul><li>mantiene l&#x27;ordine degli elementi;</li><li>puo&#x27; contenere qualunque tipo di valore;</li><li>puo&#x27; contenere anche altre liste.</li></ul><p>La trascrizione della seconda lezione aggiungeva una metafora utile: se i valori semplici erano come barattoli sparsi in dispensa, la lista e&#x27; piu&#x27; simile a un <strong>archivio ordinato</strong>.</p><p>Questo significa che:</p><ul><li>gli elementi stanno insieme in una sola struttura;</li><li>ogni elemento ha una posizione;</li><li>possiamo distinguere il primo, il secondo, il terzo e cosi&#x27; via.</li></ul><p>Esempio intuitivo:</p><ul><li>invece di avere tante variabili separate per gli studenti di una classe;</li><li>possiamo avere una sola variabile <code>classe</code>;</li><li>che contiene, in ordine, tutti i nomi degli studenti.</li></ul><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Concatenazione</td><td><code>L1 + L2</code></td></tr><tr><td>Estensione</td><td><code>L1.extend(L2)</code></td></tr><tr><td>Selezione</td><td><code>L[i]</code></td></tr><tr><td>Lunghezza</td><td><code>len(L)</code></td></tr><tr><td>Aggiunta in coda</td><td><code>L.append(x)</code></td></tr><tr><td>Conteggio occorrenze</td><td><code>L.count(x)</code></td></tr></tbody></table><blockquote><p>Anche qui si conta a partire da zero.</p></blockquote><p>La seconda lezione insisteva anche su una buona pratica importante:</p><ul><li>Python permette liste eterogenee;</li><li>ma nella pratica conviene quasi sempre costruire liste omogenee.</li></ul><p>Quindi, di norma, meglio:</p><ul><li>lista di interi;</li><li>lista di stringhe;</li><li>lista di booleani;</li></ul><p>piuttosto che mescolare tutto senza motivo.</p><p>Il motivo e&#x27; pragmatico: piu&#x27; avanti vorremo applicare operazioni uniformi a tutti gli elementi, e questo e&#x27; molto piu&#x27; semplice se hanno lo stesso tipo.</p><p>Esempi:</p><pre><code class="language-python">[1, 2, 3] + [4, 5, 6]
+
+lista = [1, 2, 3]
+lista.append(4)
+
+[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;][0]
+[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;][1:4]
+
+len([[&quot;a&quot;, &quot;b&quot;], [&quot;a&quot;, &quot;c&quot;], [&quot;a&quot;, &quot;d&quot;]])
+len([&quot;a&quot;, &quot;b&quot;])</code></pre><hr><h2 id="split-e-prime-trasformazioni"><code>split()</code> e prime trasformazioni</h2><p>Nel notebook 2 compariva subito una nuova operazione importante sulle stringhe:</p><pre><code class="language-python">incipit = &quot;Era una notte incantevole, una di quelle notti...&quot;
+parole = incipit.split()
+print(parole)</code></pre><p><code>split()</code> prende una stringa e restituisce una lista di sottostringhe.</p><p>Questo passaggio e&#x27; fondamentale per molti problemi:</p><ul><li>tokenizzare testo;</li><li>leggere parole una per volta;</li><li>passare da un dato &quot;compatto&quot; a una struttura manipolabile.</li></ul><p>La seconda lezione chiariva molto bene perche&#x27; questo passaggio e&#x27; cosi&#x27; importante per chi lavora su testi:</p><ul><li>un file o una stringa ci arrivano inizialmente come sequenza di caratteri;</li><li>ma per molte analisi linguistiche vogliamo lavorare parola per parola;</li><li>quindi abbiamo bisogno di una struttura in cui <code>era</code>, <code>una</code>, <code>notte</code> siano elementi distinti.</li></ul><p>Per questo <code>split()</code> e&#x27; uno dei primi ponti concreti tra:</p><ul><li>testo grezzo;</li><li>lista di token;</li><li>analisi successiva con cicli e conteggi.</li></ul><h3 id="esempio">Esempio</h3><pre><code class="language-python">frase = &quot;uno due tre quattro&quot;
+pezzi = frase.split()
+print(pezzi)</code></pre><p>Risultato:</p><pre><code class="language-python">[&#x27;uno&#x27;, &#x27;due&#x27;, &#x27;tre&#x27;, &#x27;quattro&#x27;]</code></pre><h3 id="attenzione-split-taglia-dove-gli-diciamo-di-tagliare">Attenzione: <code>split()</code> taglia dove gli diciamo di tagliare</h3><p>La trascrizione mostrava anche un punto molto importante: l&#x27;unita&#x27; che otteniamo dipende dalla regola di segmentazione che stiamo usando.</p><p>Con <code>split()</code> senza argomenti:</p><ul><li>il taglio avviene sugli spazi;</li><li>quindi <code>&quot;La Spezia&quot;</code> diventa due elementi se c&#x27;e&#x27; uno spazio in mezzo;</li><li>mentre <code>&quot;andata,&quot;</code> resta un unico elemento, perche&#x27; la virgola non viene separata automaticamente.</li></ul><p>Questo e&#x27; utile da capire subito perche&#x27;:</p><ul><li><code>split()</code> e&#x27; semplice e spesso basta per iniziare;</li><li>ma non coincide ancora con una tokenizzazione linguistica raffinata.</li></ul><hr><a id="mod5-input-lista"></a><h2 id="leggere-dati-e-accumularli-in-lista">Leggere dati e accumularli in lista</h2><p>Una volta che sappiamo costruire liste, possiamo usarle per raccogliere dati in ingresso.</p><p>Schema tipico:</p><pre><code class="language-python">numeri = []
+
+for token in [&quot;3&quot;, &quot;5&quot;, &quot;8&quot;]:
+    numeri.append(int(token))</code></pre><p>Più avanti questo schema si combinera&#x27; con:</p><ul><li>lettura da standard input;</li><li>lettura da file;</li><li>cicli <code>while</code> con sentinella.</li></ul><p>Per ora il punto chiave e&#x27; questo:</p><blockquote><p>una lista e&#x27; il contenitore naturale quando non sappiamo in anticipo quanti dati dovremo raccogliere.</p></blockquote><hr><a id="mod5-redirezione"></a><h2 id="redirezione-dellinput-e-sorgenti-dei-dati">Redirezione dell&#x27;input e sorgenti dei dati</h2><p>Nel programma del corso il modulo 5 include anche la redirezione dell&#x27;input. Il notebook 2 la prepara indirettamente mostrando come trattare dati testuali gia&#x27; disponibili come sequenze.</p><p>Concettualmente:</p><ul><li>la sorgente puo&#x27; essere la tastiera;</li><li>puo&#x27; essere una stringa gia&#x27; caricata;</li><li>puo&#x27; essere un file;</li><li>il programma spesso trasforma comunque tutto in una lista di elementi da elaborare.</li></ul><hr><h2 id="esercizi-assegnati-input-da-file-e-sequenze">Esercizi assegnati: input da file e sequenze</h2><p>Nei testi degli esercizi assegnati compare un passaggio importante: usare un file come sorgente dello standard input invece dell&#x27;interazione diretta da tastiera.</p><p>Schema di riferimento:</p><pre><code class="language-python">lista_numeri = []
+
+number = int(input())
+while number != 0:
+    lista_numeri.append(number)
+    number = int(input())
+
+print(&quot;Numeri letti:&quot;, lista_numeri)</code></pre><p>eseguito anche come:</p><pre><code class="language-bash">python3 script.py &lt; input.txt</code></pre><p>Questo punto e&#x27; molto utile didatticamente perche&#x27; chiarisce che:</p><ul><li><code>input()</code> non &quot;sa&quot; se i dati arrivano da tastiera o da file;</li><li>il programma legge uno stream di righe;</li><li>possiamo testare meglio i programmi preparando input ripetibili.</li></ul><p>La trascrizione della lezione aggiungeva due osservazioni pratiche molto utili:</p><ul><li><code>input()</code> legge sempre testo, quindi se ci servono numeri dobbiamo convertire con <code>int(...)</code> o <code>float(...)</code>;</li><li>il file passato con <code>&lt;</code> non viene &quot;capito&quot; da Python come file speciale: per il programma e&#x27; semplicemente una sorgente di input riga per riga.</li></ul><h3 id="anche-loutput-si-puo-ridirigere">Anche l&#x27;output si puo&#x27; ridirigere</h3><p>Allo stesso modo possiamo salvare su file quello che normalmente vedremmo nel terminale:</p><pre><code class="language-bash">python3 script.py &lt; input.txt &gt; output.txt</code></pre><p>Qui:</p><ul><li><code>&lt; input.txt</code> fornisce l&#x27;input al programma;</li><li><code>&gt; output.txt</code> salva in un file tutto cio&#x27; che il programma stampa su standard output.</li></ul><p>Questo e&#x27; molto utile per:</p><ul><li>testare programmi senza dover digitare ogni volta gli input;</li><li>confrontare facilmente l&#x27;output prodotto con quello atteso;</li><li>conservare esempi di esecuzione ripetibili.</li></ul><p>La lezione mostrava anche che queste redirezioni si possono combinare:</p><ul><li>il programma legge da uno stream di input;</li><li>produce uno stream di output;</li><li>il terminale decide se questi stream passano da tastiera/schermo oppure da file.</li></ul><h3 id="esercizi-coerenti-con-il-modulo-5">Esercizi coerenti con il modulo 5</h3><ol><li>leggere una serie di numeri fino a <code>0</code> e memorizzarli per poi stamparli al contrario;</li><li>leggere parole fino a <code>fine</code> e contare quante iniziano per ciascuna vocale;</li><li>leggere 5 lettere iniziali e poi contare quante parole iniziano con ciascuna di esse;</li><li>leggere una serie di numeri dispari e per ciascuno stampare un rombo di asterischi.</li></ol><p>Questi esercizi stanno bene qui perche&#x27; combinano:</p><ul><li>lettura sequenziale;</li><li>sentinelle;</li><li>accumulo in lista;</li><li>trasformazione dell&#x27;input in una struttura dati.</li></ul><hr><h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Crea una lista di 5 parole e stampa il primo e l&#x27;ultimo elemento.</li><li>Data una lista di numeri, stampa la sua lunghezza.</li><li>Aggiungi un elemento in coda con <code>append</code>.</li><li>Data una frase, usa <code>split()</code> per ottenere la lista delle parole.</li><li>Scrivi un programma che costruisce una lista di numeri e ne stampa gli elementi in ordine inverso usando gli indici.</li><li>Leggi una sequenza di numeri da standard input o da file e salvala in una lista fino alla sentinella.</li><li>Leggi tre serie di numeri separate da <code>0</code> e stampa ogni serie al contrario.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Dal notebook 2 questo modulo recupera il nucleo sulle liste:</p><ul><li>definizione di lista come collezione ordinata;</li><li>operazioni elementari;</li><li>relazione tra stringhe e liste tramite <code>split()</code>;</li><li>accumulo di dati in una struttura ordinata.</li></ul><p>Il comportamento in memoria delle liste verra&#x27; approfondito nel modulo 7.</p>
+</main>
+</body>
+</html>
