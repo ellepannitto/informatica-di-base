@@ -377,17 +377,63 @@ print("\"print\"")
 
 ### Stringhe e liste
 
-4. stampa una parola lettera per lettera;
-5. stampa una parola lettera per lettera indicando anche la posizione;
+4. Scrivi un programma che chiede all'utente una parola e la stampa lettera per lettera, una per riga.
+5. Scrivi un programma che chiede all'utente una parola e la stampa lettera per lettera indicando anche la posizione.
 6. stampa solo i caratteri in posizione pari;
 7. trasforma una lista di parole in minuscolo.
 
-### Cicli annidati
+### Tabellina e sequenze
 
-8. stampa un triangolo di numeri;
-9. stampa un quadrato di `+` di lato `n`;
-10. stampa un rettangolo di base `n` e altezza `m`;
-11. costruisci pattern diversi cambiando l'indice usato nel ciclo interno.
+8. Scrivi un programma che chiede all'utente un numero `n` e stampa la tabellina di quel numero da 1 a 10.
+9. Scrivi un programma che chiede all'utente 5 parole e le memorizza in una lista. Controlla che la prima e l'ultima parola inserite siano la stessa.
+
+### Cicli annidati e pattern ASCII
+
+10. Scrivi un programma che chiede all'utente un numero `n` e stampa un triangolo di asterischi. Esempio per `n=4`:
+    ```
+    *
+    **
+    ***
+    ****
+    ```
+
+11. Scrivi un programma che legge due numeri (base, altezza) e stampa un rettangolo vuoto di quelle dimensioni. Esempio per base=4, altezza=3:
+    ```
+    ****
+    *  *
+    ****
+    ```
+
+12. Scrivi un programma che legge tre numeri (k, base, altezza) e stampa `k` rettangoli vuoti affiancati. Esempio per k=3, base=4, altezza=3:
+    ```
+    **** **** ****
+    *  * *  * *  *
+    **** **** ****
+    ```
+
+13. Scrivi un programma che legge un numero `n` e stampa una piramide come nell'esempio. Esempio per `n=5`:
+    ```
+    1
+    22
+    333
+    4444
+    55555
+    ```
+
+14. Scrivi un programma che legge un numero `n` e stampa una piramide come nell'esempio. Esempio per `n=5`:
+    ```
+    1
+    12
+    123
+    1234
+    12345
+    ```
+
+### Sequenze con `for` e accumulatori
+
+15. stampa un triangolo di numeri;
+16. stampa un quadrato di `+` di lato `n`;
+17. costruisci pattern diversi cambiando l'indice usato nel ciclo interno.
 
 ---
 

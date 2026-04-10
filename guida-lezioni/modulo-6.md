@@ -584,6 +584,68 @@ E' un ottimo esempio di scomposizione in sottoproblemi:
 
 ---
 
+## Esercizi: `my_strip` e `my_join`
+
+### `my_strip`
+
+Scrivi un programma che effettua la stessa operazione della funzione `strip` — **senza usarla**.
+
+Il programma legge dall'input:
+- una stringa da trattare;
+- una sequenza di caratteri da rimuovere, uno per riga; la sequenza termina con una riga vuota.
+
+Il programma rimuove dall'inizio e dalla fine della stringa tutti i caratteri appartenenti alla sequenza letta e stampa la stringa risultante.
+
+Esempi:
+
+Input:
+```
+..hello world!!
+.
+!
+
+```
+Output: `hello world`
+
+Input:
+```
+  pic-nic -
+ 
+.
+,
+-
+
+```
+Output: `pic-nic`
+
+> Lo spazio iniziale viene rimosso; il `-` finale viene rimosso; il `-` dentro `pic-nic` rimane.
+
+### `my_join`
+
+Scrivi un programma che effettua la stessa operazione della funzione `join` — **senza usarla**.
+
+Il programma legge dall'input:
+- una stringa separatore;
+- una sequenza di parole, una per riga; la sequenza termina con `fine`.
+
+Il programma restituisce una stringa composta da tutte le parole intervallate dal separatore.
+
+Esempio:
+
+Input:
+```
+, 
+pane
+formaggio
+salame
+fine
+```
+Output: `pane, formaggio, salame`
+
+> Attenzione al separatore in eccesso: come eviti di aggiungerne uno all'inizio o alla fine?
+
+---
+
 ## Riepilogo
 
 Questo modulo raccoglie il materiale necessario per:

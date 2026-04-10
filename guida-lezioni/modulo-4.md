@@ -444,6 +444,65 @@ Se usi `i` per costruire la stringa ottieni un risultato; se usi `j`, ne ottieni
 
 ---
 
+## Esercizi
+
+### Sequenze e contatori
+
+1. Scrivi un programma che stampa i numeri da 1 a 10.
+2. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `n` a `0`.
+3. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `-n` a `n`.
+4. Dato `pagine = 120`, stampa: `Sto leggendo la pagina 1`, `Sto leggendo la pagina 2`, ... fino all'ultima pagina.
+
+### Input con sentinella
+
+5. Scrivi un programma che chiede all'utente di inserire una parola e si ferma quando scrive `fine`.
+6. Scrivi un programma che chiede all'utente di inserire un numero, si ferma quando inserisce `0` e conta quanti numeri interi sono stati inseriti.
+7. Scrivi un programma che chiede all'utente di inserire un numero, si ferma quando inserisce `0` e, per ogni numero inserito, stampa `pari` oppure `dispari`.
+8. Scrivi un programma che chiede all'utente di inserire una parola, si ferma quando scrive `fine` e, per ogni parola inserita, stampa `parola lunga` se ha più di 5 caratteri, altrimenti `parola breve`.
+
+### Accumuli su sequenze
+
+9. Chiedi all'utente di inserire una stringa e calcola quante vocali ci sono.
+10. Dati `pagine = 3` e `righe = 5`, stampa tutte le combinazioni (Pagina 1 Riga 1, Pagina 1 Riga 2, ... Pagina 3 Riga 5).
+11. Scrivi un programma che stampa i numeri dispari compresi tra 1 e 10 (inclusi).
+12. Scrivi un programma che legge una parola dall'input e stampa solo le lettere in posizione pari.
+
+### Convalida dell'input
+
+13. Scrivi un programma che legge un numero compreso tra 1 e 10, stampa un messaggio di errore se il numero non è lecito, e stampa la tabellina di quel numero. Esempio per `3`:
+    ```
+    3 x 0 = 0
+    3 x 1 = 3
+    ...
+    3 x 10 = 30
+    ```
+
+### Stato del ciclo e proprietà della sequenza
+
+14. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Per ogni parola inserita calcola quante vocali ci sono. Alla fine stampa il numero totale di vocali.
+15. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Alla fine stampa quante delle parole inserite finiscono per vocale.
+16. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Stampa il maggiore dei numeri inseriti.
+17. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Controlla se ogni `1` è seguito da un `2`. Esempi:
+    - `9, 1, 2, 6, 1, 2, 0` → `Sequenza corretta`
+    - `9, 1, 6, 1, 2, 0` → `Sequenza errata`
+18. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Controlla se tra le parole inserite compare la parola `lingua`. Stampa `Sequenza corretta` o `Sequenza errata`.
+
+### Potenze e cicli numerici
+
+19. Scrivi un programma che chiede in input un intero e stampa le sue potenze finché il valore non supera 1000. Esempio per `2`:
+    ```
+    2^1 = 2
+    2^2 = 4
+    ...
+    2^9 = 512
+    ```
+
+### Mini-progetto: impiccato
+
+20. Scarica i file `parola_segreta.py` e `impiccato.py` dalla cartella `impiccato/`. Leggi il codice, eseguilo e poi cerca di aggiungere un numero massimo di tentativi.
+
+---
+
 ## Riepilogo
 
 Questo modulo organizza il materiale su:

@@ -282,7 +282,23 @@ sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><ol><li>leggi un file di numeri e calcolane la somma;</li><li>leggi un file testuale e stampalo su una sola riga;</li><li>stampa le parole di un testo una per riga;</li><li>leggi un file e produci un secondo file in minuscolo;</li><li>conta righe, parole e caratteri di un file;</li><li>usa <code>sys.argv</code> per scegliere il file di input;</li><li>salva l&#x27;output di uno script in un file;</li><li>ispeziona un file da terminale con <code>cat</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>wc</code>.</li></ol><hr>
+    <h2 id="esercizi">Esercizi</h2><h3 id="lettura-e-scrittura-di-base">Lettura e scrittura di base</h3><ol><li>leggi un file di numeri e calcolane la somma;</li><li>leggi un file testuale e stampalo su una sola riga;</li><li>stampa le parole di un testo una per riga;</li><li>leggi un file e produci un secondo file in minuscolo;</li><li>conta righe, parole e caratteri di un file;</li><li>usa <code>sys.argv</code> per scegliere il file di input;</li><li>salva l&#x27;output di uno script in un file;</li><li>ispeziona un file da terminale con <code>cat</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>wc</code>.</li></ol><h3 id="input-da-file-come-stdin">Input da file come stdin</h3><p>I seguenti esercizi usano la redirezione dell&#x27;input (<code>python3 script.py &lt; input.txt</code>). Prepara un file di input per ogni esercizio e prova a eseguirlo in entrambi i modi: con <code>input()</code> interattivo e con il file.</p><ol><li>Scrivi un programma che legge una serie di numeri finché non incontra <code>0</code>. Per ogni numero <code>n</code> letto, stampa tutti i numeri pari compresi tra <code>0</code> (incluso) e <code>n</code> (escluso).</li></ol><p>Input:</p><pre><code>   6
+   10
+   0</code></pre><p>Output:</p><pre><code>   0 2 4
+   0 2 4 6 8</code></pre><ol><li>Scrivi un programma che legge una stringa e controlla se è palindroma (ignora maiuscole e spazi). Esempio: <code>I topi non avevano nipoti</code> è palindroma.</li></ol><ol><li>Scrivi un programma che legge una sequenza di stringhe finché non incontra <code>fine</code> e conta il numero di parole che iniziano per ogni vocale (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>).</li></ol><ol><li>Scrivi un programma che legge 5 lettere, poi una sequenza di stringhe finché non incontra <code>fine</code>, e conta il numero di parole che iniziano per ciascuna delle lettere lette.</li></ol><ol><li>Scrivi un programma che legge tre serie di numeri separate da <code>0</code>. Per ogni serie stampa i numeri letti al contrario.</li></ol><p>Input:</p><pre><code>    4
+    12
+    0
+    9
+    7
+    6
+    0
+    4
+    1
+    -3
+    8
+    0</code></pre><p>Output:</p><pre><code>    [12, 4]
+    [6, 7, 9]
+    [8, -3, 1, 4]</code></pre><h3 id="file-di-testo-trasformazioni">File di testo: trasformazioni</h3><ol><li>Scrivi un programma che legge un file di testo e scrive su un nuovo file lo stesso testo con tutte le lettere in minuscolo e le righe vuote rimosse.</li><li>Scrivi un programma che legge un file di testo riga per riga e produce un secondo file contenente solo le righe che contengono la parola <code>palla</code> (senza distinzione maiuscole/minuscole).</li><li>Scrivi un programma che legge un file di testo riga per riga e conta quante righe ci sono, quante parole e quanti caratteri. Stampa i tre conteggi.</li></ol><hr>
   </div>
 </section>
 

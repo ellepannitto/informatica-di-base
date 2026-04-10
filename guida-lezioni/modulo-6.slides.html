@@ -260,6 +260,24 @@ for i in range(len(parola) // 2):
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="esercizi-my-strip-e-my-join">Esercizi: <code>my_strip</code> e <code>my_join</code></h2><h3 id="my-strip"><code>my_strip</code></h3><p>Scrivi un programma che effettua la stessa operazione della funzione <code>strip</code> — <strong>senza usarla</strong>.</p><p>Il programma legge dall&#x27;input:</p><ul><li>una stringa da trattare;</li><li>una sequenza di caratteri da rimuovere, uno per riga; la sequenza termina con una riga vuota.</li></ul><p>Il programma rimuove dall&#x27;inizio e dalla fine della stringa tutti i caratteri appartenenti alla sequenza letta e stampa la stringa risultante.</p><p>Esempi:</p><p>Input:</p><pre><code>..hello world!!
+.
+!
+</code></pre><p>Output: <code>hello world</code></p><p>Input:</p><pre><code>  pic-nic -
+ 
+.
+,
+-
+</code></pre><p>Output: <code>pic-nic</code></p><blockquote><p>Lo spazio iniziale viene rimosso; il <code>-</code> finale viene rimosso; il <code>-</code> dentro <code>pic-nic</code> rimane.</p></blockquote><h3 id="my-join"><code>my_join</code></h3><p>Scrivi un programma che effettua la stessa operazione della funzione <code>join</code> — <strong>senza usarla</strong>.</p><p>Il programma legge dall&#x27;input:</p><ul><li>una stringa separatore;</li><li>una sequenza di parole, una per riga; la sequenza termina con <code>fine</code>.</li></ul><p>Il programma restituisce una stringa composta da tutte le parole intervallate dal separatore.</p><p>Esempio:</p><p>Input:</p><pre><code>, 
+pane
+formaggio
+salame
+fine</code></pre><p>Output: <code>pane, formaggio, salame</code></p><blockquote><p>Attenzione al separatore in eccesso: come eviti di aggiungerne uno all&#x27;inizio o alla fine?</p></blockquote><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il materiale necessario per:</p><ul><li>definire funzioni con parametri e <code>return</code>;</li><li>distinguere funzione e procedura;</li><li>ragionare in termini di firma e black box;</li><li>progettare utility riusabili;</li><li>usare esercizi come <code>my_strip</code> e <code>my_join</code> per consolidare astrazione e testing.</li></ul>
   </div>
 </section>
@@ -271,7 +289,7 @@ for i in range(len(parola) // 2):
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 22</div>
+  <div class="counter" id="counter">1 / 23</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

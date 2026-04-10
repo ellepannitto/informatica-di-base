@@ -239,13 +239,44 @@ La scelta dipende dal problema, non dal gusto personale.
 
 ## Esercizi
 
+### Dizionari: costruzione e accesso
+
 1. costruisci un dizionario con la media dei voti per ogni studente;
 2. conta le occorrenze dei numeri in una lista casuale;
-3. costruisci la distribuzione di frequenza di un testo;
-4. ordina le coppie parola-frequenza;
-5. data una lista di parole, costruisci il vocabolario;
-6. date due liste, restituisci unione e intersezione;
-7. confronta il vocabolario di due file.
+
+3. Dato il seguente dizionario:
+   ```python
+   traduzione = {"gatto": "cat", "cane": "dog", "topo": "mouse", "uccello": "bird"}
+   ```
+   Scrivi un programma che chiede all'utente di inserire una parola italiana e stampa la traduzione in inglese. Se la parola non è nel dizionario, stampa `Parola non trovata`.
+
+4. Scrivi un programma `conta_lettere.py` che prende come parametro una parola e conta quante volte compare ciascuna lettera usando un dizionario. Esempio:
+   ```
+   python3 conta_lettere.py banana
+   {'b': 1, 'a': 3, 'n': 2}
+   ```
+
+### Frequenze e distribuzioni
+
+5. costruisci la distribuzione di frequenza di un testo;
+6. ordina le coppie parola-frequenza;
+7. data una lista di parole, costruisci il vocabolario;
+
+8. Scrivi un programma che legge un file di testo e conta la frequenza di ogni parola usando un dizionario. Stampa le parole e il loro conteggio, una per riga.
+
+9. Scrivi un programma che legge un file di testo e stampa la parola che compare più volte. Se ci sono pareggi, basta stamparne una.
+
+10. Scrivi un programma che legge una stringa letta dall'input (es. `adoro programmare in Python!`) e stampa la frequenza di ogni lettera.
+
+### Dizionari e file
+
+11. Scrivi un programma che legge un file di testo contenente una parola per riga e costruisce un dizionario dove la chiave è la parola e il valore è la sua lunghezza. Stampa il dizionario alla fine.
+
+### Set e confronto tra collezioni
+
+12. date due liste, restituisci unione e intersezione;
+
+13. Scrivi un programma che legge due file di testo e confronta il loro vocabolario: stampa quante parole distinte compaiono in entrambi i file, quante solo nel primo e quante solo nel secondo.
 
 ---
 

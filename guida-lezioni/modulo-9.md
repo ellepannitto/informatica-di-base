@@ -461,6 +461,8 @@ Nel corso, per questi formati, il punto non e' entrare subito in librerie avanza
 
 ## Esercizi
 
+### Lettura e scrittura di base
+
 1. leggi un file di numeri e calcolane la somma;
 2. leggi un file testuale e stampalo su una sola riga;
 3. stampa le parole di un testo una per riga;
@@ -469,6 +471,60 @@ Nel corso, per questi formati, il punto non e' entrare subito in librerie avanza
 6. usa `sys.argv` per scegliere il file di input;
 7. salva l'output di uno script in un file;
 8. ispeziona un file da terminale con `cat`, `head`, `tail`, `grep`, `sort`, `wc`.
+
+### Input da file come stdin
+
+I seguenti esercizi usano la redirezione dell'input (`python3 script.py < input.txt`). Prepara un file di input per ogni esercizio e prova a eseguirlo in entrambi i modi: con `input()` interattivo e con il file.
+
+9. Scrivi un programma che legge una serie di numeri finché non incontra `0`. Per ogni numero `n` letto, stampa tutti i numeri pari compresi tra `0` (incluso) e `n` (escluso).
+
+   Input:
+   ```
+   6
+   10
+   0
+   ```
+   Output:
+   ```
+   0 2 4
+   0 2 4 6 8
+   ```
+
+10. Scrivi un programma che legge una stringa e controlla se è palindroma (ignora maiuscole e spazi). Esempio: `I topi non avevano nipoti` è palindroma.
+
+11. Scrivi un programma che legge una sequenza di stringhe finché non incontra `fine` e conta il numero di parole che iniziano per ogni vocale (`a`, `e`, `i`, `o`, `u`).
+
+12. Scrivi un programma che legge 5 lettere, poi una sequenza di stringhe finché non incontra `fine`, e conta il numero di parole che iniziano per ciascuna delle lettere lette.
+
+13. Scrivi un programma che legge tre serie di numeri separate da `0`. Per ogni serie stampa i numeri letti al contrario.
+
+    Input:
+    ```
+    4
+    12
+    0
+    9
+    7
+    6
+    0
+    4
+    1
+    -3
+    8
+    0
+    ```
+    Output:
+    ```
+    [12, 4]
+    [6, 7, 9]
+    [8, -3, 1, 4]
+    ```
+
+### File di testo: trasformazioni
+
+14. Scrivi un programma che legge un file di testo e scrive su un nuovo file lo stesso testo con tutte le lettere in minuscolo e le righe vuote rimosse.
+15. Scrivi un programma che legge un file di testo riga per riga e produce un secondo file contenente solo le righe che contengono la parola `palla` (senza distinzione maiuscole/minuscole).
+16. Scrivi un programma che legge un file di testo riga per riga e conta quante righe ci sono, quante parole e quanti caratteri. Stampa i tre conteggi.
 
 ---
 
