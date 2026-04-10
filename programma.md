@@ -60,9 +60,9 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 ### 03 | Stato del programma e strutture decisionali
 | Tipologia | Durata | Argomento                                                                                     |
 | --------- | ------ | --------------------------------------------------------------------------------------------- |
-| exercise  | 1h     | [Lezione-laboratorio: testing, casi di test e casi limite](guida-lezioni/lezione-testing-casi-limite.slides.html) |
 | theory    | 0.5h   | [Lezione: leggi di De Morgan, precedenza tra `and`/`or` e effetti sugli errori](guida-lezioni/lezione-leggi-de-morgan.slides.html) |
 | exercise  | 1h     | [Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema](guida-lezioni/modulo-3.slides.html#mod3-errori) |
+| exercise  | 1h     | [Lezione-lab: testing, casi di test e casi limite](guida-lezioni/lezione-testing-casi-limite.slides.html) |
 | theory    | 1h     | [Lezione: automi a stati finiti](guida-lezioni/lezione-automi.slides.html) |
 | exercise  | 1h     | [Tracciamento di condizioni, rami eseguiti e casi limite](guida-lezioni/modulo-3.slides.html#mod3-tracciamento) |
 | exercise  | 1.5h   | [Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi](guida-lezioni/modulo-3.slides.html#mod3-casi-limite) |
@@ -113,16 +113,16 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 ### P2 | Prova intermedia 2 | prova=true
 | Tipologia | Durata | Argomento |
 | --------- | ------ | --------- |
-| exercise  | 1.5h     | Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni e procedure)|
+| exercise  | 1.5h     | Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni)|
 | exercise  | 1.5h     | Correzione della prova |
 
 ### 08 | Ciclo for e iterazione
-| Tipologia | Durata | Argomento |
-| --------- | ------ | --------- |
-| theory    | 0.5h   | [Il ciclo `for` su stringhe, liste e `range()`](guida-lezioni/modulo-8.slides.html#mod8-for) |
+| Tipologia | Durata | Argomento                                                                                                                  |
+| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | [Il ciclo `for` su stringhe, liste e `range()`](guida-lezioni/modulo-8.slides.html#mod8-for)                               |
 | theory    | 0.5h   | [Cicli annidati con `for`: righe, colonne, pattern e costruzione di stringhe](guida-lezioni/modulo-8.slides.html#mod8-for) |
-| exercise  | 1h   | Esercizi con `for`: conteggi, scansioni, accumuli e trasformazioni su sequenze |
-| exercise  | 1h     | Esercizi: pattern di stampa, triangoli, rettangoli e uso degli indici nei cicli annidati |
+| exercise  | 1h     | Esercizi con `for`: conteggi, scansioni, accumuli e trasformazioni su sequenze                                             |
+| exercise  | 1h     | Esercizi: pattern di stampa, triangoli, rettangoli e uso degli indici nei cicli annidati                                   |
 
 ### 09 | File e formati strutturati
 | Tipologia | Durata | Argomento                                                                                                                                                                               |
@@ -139,7 +139,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 ### P3 | Prova intermedia 3 | prova=true
 | Tipologia | Durata | Argomento                                                                  |
 | --------- | ------ | -------------------------------------------------------------------------- |
-| exercise  | 1h     | Argomenti: moduli 8-10 (`for`, file, input/output, terminale, formati) |
+| exercise  | 1h     | Argomenti: moduli 8-9 (`for`, file, input/output, terminale, formati) |
 | exercise  | 1h     | Correzione della prova                                                     |
 
 ### 10 | Dizionari, set e organizzazione dell'informazione
