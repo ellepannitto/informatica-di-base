@@ -102,7 +102,7 @@ Se qualcosa non funziona:
 3. controlla tipi, parentesi, apici, indentazione (vedremo tra poco);
 4. confronta quello che volevi fare con quello che il programma fa davvero.
 
-![How to draw an owl](../vecchio-materiale/imgs/owl.png)
+![How to draw an owl](imgs/owl.png)
 
 > Programmare include sempre una quota di `trial and error`. Non è un'anomalia: è il lavoro.
 
@@ -203,7 +203,7 @@ L'idea è la stessa della divisione in colonna:
 - `6 * 7 = 42`
 - da `44` avanzano `2`
 
-![Divisione intera e resto](../vecchio-materiale/imgs/divisione.png)
+![Divisione intera e resto](imgs/divisione.png)
 
 ### Stringhe
 
@@ -521,7 +521,7 @@ Una sessione di lavoro tipica è questa:
 3. esegui `python3 nome_file.py`;
 4. osserva l'output e correggi se necessario.
 
-![Visual Studio Code](../vecchio-materiale/imgs/vscode.png)
+![Visual Studio Code](imgs/vscode.png)
 
 ### Perché conviene usare anche il terminale
 
@@ -536,7 +536,7 @@ Una sessione di lavoro tipica è questa:
 
 Il terminale serve a spostarsi nelle cartelle e lanciare programmi.
 
-![Esempio di terminale](../vecchio-materiale/imgs/terminale_1.png)
+![Esempio di terminale](imgs/terminale_1.png)
 
 Comandi essenziali:
 

@@ -28,7 +28,7 @@ Esempi:
 [["a", "b"], ["a", "c"], ["a", "d"]]
 ```
 
-![Archivio](../vecchio-materiale/imgs/archivio.jpg)
+![Archivio](imgs/archivio.jpg)
 
 Una lista:
 
