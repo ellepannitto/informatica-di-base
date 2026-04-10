@@ -65,7 +65,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | exercise  | 1h     | [Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema](guida-lezioni/modulo-3.slides.html#mod3-errori) |
 | theory    | 1h     | [Automi a stati finiti: stati, transizioni e decisioni condizionali](guida-lezioni/modulo-3.slides.html#mod3-automi) |
 | exercise  | 1h     | [Tracciamento di condizioni, rami eseguiti e casi limite](guida-lezioni/modulo-3.slides.html#mod3-tracciamento) |
-| exercise  | 1.5h   | [Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi](guida-lezioni/modulo-3.slides.html#mod3-casi-limite-ai) |
+| exercise  | 1.5h   | [Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi](guida-lezioni/modulo-3.slides.html#mod3-casi-limite) |
 
 ### 04 | Ciclo while, sentinelle e convalida
 | Tipologia | Durata | Argomento                                                                                                           |

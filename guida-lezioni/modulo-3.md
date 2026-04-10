@@ -12,7 +12,7 @@ Al termine di questo modulo saprai:
 - usare condizioni composte con attenzione;
 - applicare le leggi di De Morgan;
 - modellare piccoli problemi con automi a stati finiti;
-- ragionare sui casi limite anche quando il codice e` generato da altri o dall'IA.
+- ragionare sui casi limite anche quando il codice sembra plausibile a una prima lettura.
 
 ---
 
@@ -299,7 +299,7 @@ Anche un semplice `if` puo` essere letto come un minuscolo automa:
 
 ---
 
-<a id="mod3-casi-limite-ai"></a>
+<a id="mod3-casi-limite"></a>
 ## Verifica del codice e casi limite
 
 Un frammento di codice puo` sembrare plausibile e restare comunque sbagliato.
@@ -377,8 +377,6 @@ else:
 Domanda giusta: che cosa succede con `18`?
 
 Qui il bug non e` sintattico. E` un errore di specifica o di condizione.
-
-Questo tipo di controllo e` particolarmente importante quando il codice e` scritto in fretta, copiato, oppure generato da un sistema di IA.
 
 ---
 
