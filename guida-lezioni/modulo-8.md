@@ -47,6 +47,18 @@ for identificatore in iterabile:
     # istruzioni
 ```
 
+Parti da riconoscere:
+
+- `for` introduce un'iterazione;
+- `identificatore` e' la variabile di iterazione;
+- `iterabile` e' la sequenza o struttura che stiamo attraversando;
+- i due punti `:` aprono il blocco;
+- il blocco del ciclo va indentato.
+
+---
+
+## Semantica del `for`
+
 Semantica intuitiva:
 
 1. Python prende un elemento dell'iterabile.
@@ -71,7 +83,7 @@ Il `for` e' utile quando:
 ---
 
 <a id="mod8-range"></a>
-## `range(n)` e conteggio delle iterazioni
+## Sintassi di `range()`
 
 `range(n)` serve per ripetere qualcosa un numero fissato di volte.
 
@@ -79,6 +91,17 @@ Il `for` e' utile quando:
 for numero in range(5):
     print(numero)
 ```
+
+Forme piu' comuni:
+
+```python
+range(n)
+range(a, b)
+```
+
+---
+
+## Semantica di `range()`
 
 `range(5)` produce:
 
@@ -167,6 +190,39 @@ posizione = 0
 ...
 posizione += 1
 ```
+
+---
+
+## Sintassi di `enumerate()`
+
+Forma tipica:
+
+```python
+for posizione, valore in enumerate(sequenza):
+    ...
+```
+
+Esempio:
+
+```python
+for posizione, parola in enumerate(parole):
+    parole[posizione] = parola.lower()
+```
+
+---
+
+## Semantica di `enumerate()`
+
+`enumerate(sequenza)` permette di iterare ottenendo insieme:
+
+- la posizione corrente;
+- il valore corrente.
+
+Quindi, a ogni iterazione:
+
+1. Python prende il prossimo elemento della sequenza;
+2. gli associa anche il suo indice;
+3. assegna entrambi alle variabili del `for`.
 
 ---
 

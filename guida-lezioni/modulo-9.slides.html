@@ -116,24 +116,76 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="file-di-testo-aprire-leggere-scorrere">File di testo: aprire, leggere, scorrere</h2><p>I file sono un nuovo tipo di sorgente dati.</p><p>Esempio base:</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
+    <h2 id="sintassi-di-open">Sintassi di <code>open()</code></h2><p>I file sono un nuovo tipo di sorgente dati.</p><p>Esempio base:</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
 file_in = open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;)
 print(file_in.read())
-file_in.close()</code></pre><p>Nel corso conviene usare soprattutto la forma con <code>with</code>:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
-    for line in file_in:
-        print(line)</code></pre><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>Punti chiave:</p><ul><li>il nome del file e&#x27; una stringa;</li><li>il percorso puo&#x27; essere assoluto oppure relativo;</li><li><code>open(...)</code> restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><h3 id="read-readlines-e-iterazione"><code>read()</code>, <code>readlines()</code> e iterazione</h3><pre><code class="language-python">contenuto = file_handler.read()
-righe = file_handler.readlines()
-
-for line in file_handler:
-    ...</code></pre><p>Differenza pratica:</p><ul><li><code>read()</code> prende tutto il contenuto come una stringa unica;</li><li><code>readlines()</code> costruisce una lista di righe;</li><li><code>for line in file_handler</code> legge una riga alla volta.</li></ul><p>Per file piccoli possono andare bene tutte e tre. Per file piu&#x27; grandi, la lettura riga per riga e&#x27; spesso la soluzione piu&#x27; pulita.</p><h3 id="segmentare-il-contenuto">Segmentare il contenuto</h3><p>Possiamo anche leggere tutto e poi segmentare esplicitamente:</p><pre><code class="language-python">contenuto = file_handler.read()
-righe = contenuto.split(&quot;\n&quot;)
-campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Questo aiuta a capire che:</p><ul><li>il file non contiene gia&#x27; una lista;</li><li>siamo noi a scegliere come segmentare;</li><li>newline e tab si scrivono come <code>\n</code> e <code>\t</code>.</li></ul><hr>
+file_in.close()</code></pre><p>Forma generale:</p><pre><code class="language-python">open(percorso, mode, encoding=&quot;utf-8&quot;)</code></pre><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="strip-e-conversione-dei-valori"><code>strip()</code> e conversione dei valori</h2><p>Quando leggiamo da file:</p><ul><li>ogni riga letta e&#x27; una stringa;</li><li>puo&#x27; contenere il carattere di fine riga;</li><li>se ci servono numeri dobbiamo convertire.</li></ul><p>Schema tipico:</p><pre><code class="language-python">somma = 0.0
+    <h2 id="semantica-di-open">Semantica di <code>open()</code></h2><p>Nel corso conviene usare soprattutto la forma con <code>with</code>:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        print(line)</code></pre><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>Punti chiave:</p><ul><li>il nome del file e&#x27; una stringa;</li><li>il percorso puo&#x27; essere assoluto oppure relativo;</li><li><code>open(...)</code> restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-with">Sintassi di <code>with</code></h2><p>Forma tipica:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        print(line)</code></pre><p>Parti da riconoscere:</p><ul><li><code>with</code> introduce un contesto di lavoro;</li><li><code>open(...)</code> crea la risorsa da usare;</li><li><code>as file_in</code> assegna un nome a quella risorsa;</li><li>il blocco indentato contiene le operazioni da fare.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-with">Semantica di <code>with</code></h2><p>Quando Python esegue un blocco <code>with</code>:</p><ol><li>apre la risorsa;</li><li>la rende disponibile tramite il nome dopo <code>as</code>;</li><li>esegue il blocco indentato;</li><li>alla fine chiude correttamente la risorsa.</li></ol><p>Per questo <code>with</code> e&#x27; spesso preferibile a:</p><pre><code class="language-python">file_in = open(...)
+...
+file_in.close()</code></pre><p>perche&#x27; rende piu&#x27; sicura la gestione del file.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-read-e-readlines">Sintassi di <code>read()</code> e <code>readlines()</code></h2><pre><code class="language-python">contenuto = file_handler.read()
+righe = file_handler.readlines()
+
+for line in file_handler:
+    ...</code></pre><p><code>read()</code> e <code>readlines()</code> sono metodi dell&#x27;oggetto file.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-read-e-readlines">Semantica di <code>read()</code> e <code>readlines()</code></h2><p>Differenza pratica:</p><ul><li><code>read()</code> prende tutto il contenuto come una stringa unica;</li><li><code>readlines()</code> costruisce una lista di righe;</li><li><code>for line in file_handler</code> legge una riga alla volta.</li></ul><p>Per file piccoli possono andare bene tutte e tre. Per file piu&#x27; grandi, la lettura riga per riga e&#x27; spesso la soluzione piu&#x27; pulita.</p><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-split">Sintassi di <code>split()</code></h2><p>Possiamo anche leggere tutto e poi segmentare esplicitamente:</p><pre><code class="language-python">contenuto = file_handler.read()
+righe = contenuto.split(&quot;\n&quot;)
+campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Forma generale:</p><pre><code class="language-python">stringa.split(separatore)</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-split">Semantica di <code>split()</code></h2><p>Questo aiuta a capire che:</p><ul><li>il file non contiene gia&#x27; una lista;</li><li>siamo noi a scegliere come segmentare;</li><li>newline e tab si scrivono come <code>\n</code> e <code>\t</code>.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-strip">Sintassi di <code>strip()</code></h2><p>Forma tipica:</p><pre><code class="language-python">line.strip()</code></pre><p>Possiamo usarlo anche con argomenti:</p><pre><code class="language-python">line.strip(&quot;.,;&quot;)</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-strip">Semantica di <code>strip()</code></h2><p>Quando leggiamo da file:</p><ul><li>ogni riga letta e&#x27; una stringa;</li><li>puo&#x27; contenere il carattere di fine riga;</li><li>se ci servono numeri dobbiamo convertire.</li></ul><p>Schema tipico:</p><pre><code class="language-python">somma = 0.0
 
 with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
     for line in file_in:
@@ -152,14 +204,27 @@ with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as fi
 
 <section class="slide">
   <div class="slide-inner">
+    <h2 id="sintassi-di-sysargv">Sintassi di <code>sys.argv</code></h2><p>Forma tipica:</p><pre><code class="language-python">import sys
+
+nome_input = sys.argv[1]
+nome_output = sys.argv[2]
+files = sys.argv[1:]</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-sysargv">Semantica di <code>sys.argv</code></h2><p><code>sys.argv</code> e&#x27; una lista che contiene gli argomenti passati al programma da riga di comando.</p><p>In particolare:</p><ul><li><code>sys.argv[0]</code> e&#x27; il nome dello script;</li><li><code>sys.argv[1]</code> e i successivi sono gli argomenti forniti dall&#x27;utente.</li></ul><p>Per questo:</p><pre><code class="language-python">files = sys.argv[1:]</code></pre><p>significa:</p><ul><li>ignora il nome dello script;</li><li>prendi tutti i file o parametri passati dopo.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
     <h2 id="standard-input-open-e-sysargv">Standard input, <code>open()</code> e <code>sys.argv</code></h2><p>Ci sono tre modi diversi per far arrivare dati a un programma.</p><h3 id="1-standard-input">1. Standard input</h3><pre><code class="language-python">numero = int(input())</code></pre><h3 id="2-file-aperto-con-open">2. File aperto con <code>open()</code></h3><pre><code class="language-python">with open(&quot;input.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
     ...</code></pre><h3 id="3-parametri-da-riga-di-comando">3. Parametri da riga di comando</h3><pre><code class="language-python">import sys
 
 nome_input = sys.argv[1]
-nome_output = sys.argv[2]</code></pre><p><code>sys.argv</code> e&#x27; una lista:</p><ul><li>in posizione <code>0</code> c&#x27;e&#x27; il nome dello script;</li><li>da <code>1</code> in poi ci sono i parametri passati da terminale.</li></ul><p>Quindi possiamo anche lavorare su molti file:</p><pre><code class="language-python">files = sys.argv[1:]
-
-for nome_file in files:
-    ...</code></pre><hr><a id="mod9-terminale"></a>
+nome_output = sys.argv[2]</code></pre><hr><a id="mod9-terminale"></a>
   </div>
 </section>
 
@@ -195,7 +260,7 @@ sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 11</div>
+  <div class="counter" id="counter">1 / 21</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

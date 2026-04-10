@@ -17,7 +17,7 @@ Al termine di questo modulo saprai:
 ---
 
 <a id="mod9-file"></a>
-## File di testo: aprire, leggere, scorrere
+## Sintassi di `open()`
 
 I file sono un nuovo tipo di sorgente dati.
 
@@ -29,6 +29,16 @@ file_in = open(nome_file, "r", encoding="utf-8")
 print(file_in.read())
 file_in.close()
 ```
+
+Forma generale:
+
+```python
+open(percorso, mode, encoding="utf-8")
+```
+
+---
+
+## Semantica di `open()`
 
 Nel corso conviene usare soprattutto la forma con `with`:
 
@@ -52,7 +62,49 @@ Punti chiave:
 - il percorso puo' essere assoluto oppure relativo;
 - `open(...)` restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.
 
-### `read()`, `readlines()` e iterazione
+---
+
+## Sintassi di `with`
+
+Forma tipica:
+
+```python
+with open("data/testo.txt", "r", encoding="utf-8") as file_in:
+    for line in file_in:
+        print(line)
+```
+
+Parti da riconoscere:
+
+- `with` introduce un contesto di lavoro;
+- `open(...)` crea la risorsa da usare;
+- `as file_in` assegna un nome a quella risorsa;
+- il blocco indentato contiene le operazioni da fare.
+
+---
+
+## Semantica di `with`
+
+Quando Python esegue un blocco `with`:
+
+1. apre la risorsa;
+2. la rende disponibile tramite il nome dopo `as`;
+3. esegue il blocco indentato;
+4. alla fine chiude correttamente la risorsa.
+
+Per questo `with` e' spesso preferibile a:
+
+```python
+file_in = open(...)
+...
+file_in.close()
+```
+
+perche' rende piu' sicura la gestione del file.
+
+---
+
+## Sintassi di `read()` e `readlines()`
 
 ```python
 contenuto = file_handler.read()
@@ -61,6 +113,12 @@ righe = file_handler.readlines()
 for line in file_handler:
     ...
 ```
+
+`read()` e `readlines()` sono metodi dell'oggetto file.
+
+---
+
+## Semantica di `read()` e `readlines()`
 
 Differenza pratica:
 
@@ -71,7 +129,9 @@ Differenza pratica:
 Per file piccoli possono andare bene tutte e tre.
 Per file piu' grandi, la lettura riga per riga e' spesso la soluzione piu' pulita.
 
-### Segmentare il contenuto
+---
+
+## Sintassi di `split()`
 
 Possiamo anche leggere tutto e poi segmentare esplicitamente:
 
@@ -81,6 +141,16 @@ righe = contenuto.split("\n")
 campi = contenuto.split("\t")
 ```
 
+Forma generale:
+
+```python
+stringa.split(separatore)
+```
+
+---
+
+## Semantica di `split()`
+
 Questo aiuta a capire che:
 
 - il file non contiene gia' una lista;
@@ -89,7 +159,23 @@ Questo aiuta a capire che:
 
 ---
 
-## `strip()` e conversione dei valori
+## Sintassi di `strip()`
+
+Forma tipica:
+
+```python
+line.strip()
+```
+
+Possiamo usarlo anche con argomenti:
+
+```python
+line.strip(".,;")
+```
+
+---
+
+## Semantica di `strip()`
 
 Quando leggiamo da file:
 
@@ -162,6 +248,42 @@ Nel secondo caso e' il programma Python che decide dove scrivere.
 
 ---
 
+## Sintassi di `sys.argv`
+
+Forma tipica:
+
+```python
+import sys
+
+nome_input = sys.argv[1]
+nome_output = sys.argv[2]
+files = sys.argv[1:]
+```
+
+---
+
+## Semantica di `sys.argv`
+
+`sys.argv` e' una lista che contiene gli argomenti passati al programma da riga di comando.
+
+In particolare:
+
+- `sys.argv[0]` e' il nome dello script;
+- `sys.argv[1]` e i successivi sono gli argomenti forniti dall'utente.
+
+Per questo:
+
+```python
+files = sys.argv[1:]
+```
+
+significa:
+
+- ignora il nome dello script;
+- prendi tutti i file o parametri passati dopo.
+
+---
+
 ## Standard input, `open()` e `sys.argv`
 
 Ci sono tre modi diversi per far arrivare dati a un programma.
@@ -186,20 +308,6 @@ import sys
 
 nome_input = sys.argv[1]
 nome_output = sys.argv[2]
-```
-
-`sys.argv` e' una lista:
-
-- in posizione `0` c'e' il nome dello script;
-- da `1` in poi ci sono i parametri passati da terminale.
-
-Quindi possiamo anche lavorare su molti file:
-
-```python
-files = sys.argv[1:]
-
-for nome_file in files:
-    ...
 ```
 
 ---

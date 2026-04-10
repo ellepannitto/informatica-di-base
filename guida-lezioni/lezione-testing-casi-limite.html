@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione · Testing e casi limite</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="lezione-testing-e-casi-limite">Lezione · Testing e casi limite</h1><hr><h2 id="obiettivi-della-lezione">Obiettivi della lezione</h2><p>Al termine di questa lezione saprai:</p><ul><li>distinguere tra programma che va in errore e programma che produce un risultato sbagliato;</li><li>scegliere casi di test piccoli e controllabili;</li><li>riconoscere casi normali, casi limite e casi anomali;</li><li>usare il testing per leggere meglio il comportamento del programma.</li></ul><hr><h2 id="perche-testare">Perche&#x27; testare</h2><p>Un programma non e&#x27; corretto solo perche&#x27; &quot;parte&quot;.</p><p>Due casi diversi:</p><ul><li>il programma va in errore esplicito;</li><li>il programma gira, ma il risultato non e&#x27; quello voluto.</li></ul><p>Il secondo caso e&#x27; spesso piu&#x27; insidioso.</p><p>Per questo conviene sempre chiedersi:</p><ul><li>quali input voglio provare;</li><li>quale output mi aspetto;</li><li>che cosa succede davvero quando eseguo il programma.</li></ul><hr><h2 id="tre-tipi-di-casi">Tre tipi di casi</h2><table><thead><tr><th>Tipo di caso</th><th>Significato</th><th>Esempio</th></tr></thead><tbody><tr><td>Normale</td><td>input previsto e regolare</td><td>lista con alcuni numeri</td></tr><tr><td>Limite</td><td>input valido ma delicato</td><td>lista vuota, zero, stringa di lunghezza 1</td></tr><tr><td>Anomalo</td><td>input non previsto o problematico</td><td>testo al posto di un numero</td></tr></tbody></table><p>Questa distinzione serve a non fermarsi al primo esempio che funziona.</p><hr><h2 id="metodo-minimo-di-testing">Metodo minimo di testing</h2><ol><li>scegli un input piccolo;</li><li>scrivi l&#x27;output atteso;</li><li>esegui il programma;</li><li>confronta il risultato reale con quello previsto;</li><li>se modifichi il codice, ripeti gli stessi test.</li></ol><p>L&#x27;idea importante e&#x27; che il test non arriva alla fine come formalita&#x27;: accompagna la scrittura del programma.</p><hr><h2 id="perche-iniziare-da-input-piccoli">Perche&#x27; iniziare da input piccoli</h2><p>Se un input e&#x27; troppo grande:</p><ul><li>non riesci piu&#x27; a seguirlo a mano;</li><li>diventa difficile capire in quale punto nasce l&#x27;errore;</li><li>il programma sembra opaco.</li></ul><p>Meglio partire da casi ridotti:</p><ul><li>tre numeri;</li><li>una stringa molto corta;</li><li>una lista di lunghezza <code>0</code>, <code>1</code> o <code>2</code>.</li></ul><hr><h2 id="esempio-massimo-di-una-lista">Esempio: massimo di una lista</h2><p>Se vuoi progettare una funzione che restituisce il massimo di una lista, non basta provare:</p><pre><code class="language-python">[3, 8, 2]</code></pre><p>Devi chiederti anche:</p><ul><li>che cosa succede con <code>[]</code>?</li><li>che cosa succede con <code>[4]</code>?</li><li>che cosa succede con <code>[-3, -7, -1]</code>?</li></ul><p>Qui i casi limite aiutano a decidere meglio il comportamento della funzione prima ancora di scriverla.</p><hr><h2 id="esempio-numeri-che-seguono-uno-zero">Esempio: numeri che seguono uno zero</h2><p>Problema:</p><blockquote><p>data una lista di interi, restituire tutti i numeri che seguono uno <code>0</code></p></blockquote><p>Caso normale:</p><pre><code class="language-python">[3, 5, 0, 7, 0, -3, 8]</code></pre><p>Output atteso:</p><pre><code class="language-python">[7, -3]</code></pre><p>Casi importanti:</p><ul><li><code>[]</code></li><li><code>[0]</code></li><li><code>[0, 4]</code></li><li><code>[5, 0]</code></li><li><code>[0, 0, 2]</code></li></ul><p>Questi casi mostrano subito dove un programma puo&#x27; sbagliare, soprattutto se assume che esista sempre un elemento successivo.</p><hr><h2 id="stampare-valori-intermedi">Stampare valori intermedi</h2><p>Quando il comportamento non e&#x27; chiaro, conviene osservare lo stato interno.</p><p>Per esempio:</p><pre><code class="language-python">for x in numeri:
+    print(&quot;sto leggendo:&quot;, x)</code></pre><p>Oppure:</p><pre><code class="language-python">print(lista_risultato)</code></pre><p>Stampare valori intermedi aiuta a capire:</p><ul><li>che cosa entra davvero nelle strutture dati;</li><li>in quale passo compare l&#x27;errore;</li><li>se il programma sta seguendo il percorso che immaginavamo.</li></ul><hr><h2 id="esercizi">Esercizi</h2><ol><li>Per un programma che stampa il doppio di un numero, scrivi due casi normali, due casi limite e un caso anomalo.</li><li>Per una funzione che controlla se una stringa e&#x27; vuota, elenca i casi da provare.</li><li>Per il problema dei numeri che seguono uno zero, costruisci una batteria minima di test.</li><li>Prendi un frammento di codice sbagliato e prova a prevedere dove fallira&#x27; prima di eseguirlo.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Testing significa:</p><ul><li>scegliere casi significativi;</li><li>confrontare output atteso e output reale;</li><li>usare casi normali, limite e anomali;</li><li>leggere meglio il programma attraverso esempi piccoli.</li></ul>
+</main>
+</body>
+</html>

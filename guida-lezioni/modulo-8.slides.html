@@ -127,15 +127,28 @@ parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il co
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-del-for">Sintassi del <code>for</code></h2><pre><code class="language-python">for identificatore in iterabile:</code></pre><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
+    <h2 id="sintassi-del-for">Sintassi del <code>for</code></h2><pre><code class="language-python">for identificatore in iterabile:</code></pre><p>Parti da riconoscere:</p><ul><li><code>for</code> introduce un&#x27;iterazione;</li><li><code>identificatore</code> e&#x27; la variabile di iterazione;</li><li><code>iterabile</code> e&#x27; la sequenza o struttura che stiamo attraversando;</li><li>i due punti <code>:</code> aprono il blocco;</li><li>il blocco del ciclo va indentato.</li></ul><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-del-for">Semantica del <code>for</code></h2><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
     print(parola.lower())</code></pre><p>Il <code>for</code> e&#x27; utile quando:</p><ul><li>la stessa operazione concettuale va ripetuta molte volte;</li><li>il codice manuale diventerebbe lungo e fragile;</li><li>non vogliamo scrivere una riga separata per ogni posizione della sequenza.</li></ul><hr><a id="mod8-range"></a>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="rangen-e-conteggio-delle-iterazioni"><code>range(n)</code> e conteggio delle iterazioni</h2><p><code>range(n)</code> serve per ripetere qualcosa un numero fissato di volte.</p><pre><code class="language-python">for numero in range(5):
-    print(numero)</code></pre><p><code>range(5)</code> produce:</p><pre><code class="language-python">0, 1, 2, 3, 4</code></pre><p>Due dettagli importanti:</p><ul><li><code>range(5)</code> conta da <code>0</code> a <code>4</code>;</li><li><code>range(a, b)</code> parte da <code>a</code> e arriva a <code>b - 1</code>.</li></ul><p>Esempio:</p><pre><code class="language-python">for n in range(25, 35):
+    <h2 id="sintassi-di-range">Sintassi di <code>range()</code></h2><p><code>range(n)</code> serve per ripetere qualcosa un numero fissato di volte.</p><pre><code class="language-python">for numero in range(5):
+    print(numero)</code></pre><p>Forme piu&#x27; comuni:</p><pre><code class="language-python">range(n)
+range(a, b)</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-range">Semantica di <code>range()</code></h2><p><code>range(5)</code> produce:</p><pre><code class="language-python">0, 1, 2, 3, 4</code></pre><p>Due dettagli importanti:</p><ul><li><code>range(5)</code> conta da <code>0</code> a <code>4</code>;</li><li><code>range(a, b)</code> parte da <code>a</code> e arriva a <code>b - 1</code>.</li></ul><p>Esempio:</p><pre><code class="language-python">for n in range(25, 35):
     print(n)</code></pre><p>stampa i numeri da <code>25</code> a <code>34</code>.</p><hr>
   </div>
 </section>
@@ -161,6 +174,20 @@ for i in range(numero):
     parole[posizione] = parola.lower()</code></pre><p><code>enumerate()</code> permette di ottenere insieme:</p><ul><li>posizione;</li><li>valore corrente.</li></ul><p>Questo e&#x27; spesso piu&#x27; pulito che gestire a mano:</p><pre><code class="language-python">posizione = 0
 ...
 posizione += 1</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-enumerate">Sintassi di <code>enumerate()</code></h2><p>Forma tipica:</p><pre><code class="language-python">for posizione, valore in enumerate(sequenza):
+    ...</code></pre><p>Esempio:</p><pre><code class="language-python">for posizione, parola in enumerate(parole):
+    parole[posizione] = parola.lower()</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-enumerate">Semantica di <code>enumerate()</code></h2><p><code>enumerate(sequenza)</code> permette di iterare ottenendo insieme:</p><ul><li>la posizione corrente;</li><li>il valore corrente.</li></ul><p>Quindi, a ogni iterazione:</p><ol><li>Python prende il prossimo elemento della sequenza;</li><li>gli associa anche il suo indice;</li><li>assegna entrambi alle variabili del <code>for</code>.</li></ol><hr>
   </div>
 </section>
 
@@ -234,7 +261,7 @@ print(&quot;\&quot;print\&quot;&quot;)</code></pre><hr>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 15</div>
+  <div class="counter" id="counter">1 / 19</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

@@ -60,10 +60,10 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 ### 03 | Stato del programma e strutture decisionali
 | Tipologia | Durata | Argomento                                                                                     |
 | --------- | ------ | --------------------------------------------------------------------------------------------- |
-| exercise  | 1h     | [Esercizi: calcoli, conversioni, stampa formattata e tracciamento dello stato](guida-lezioni/modulo-3.slides.html#mod3-calcoli-conversioni) |
-| theory    | 0.5h   | [Leggi di De Morgan e negazione di condizioni composte](guida-lezioni/modulo-3.slides.html#mod3-boolean-logica) |
+| exercise  | 1h     | [Lezione-laboratorio: testing, casi di test e casi limite](guida-lezioni/lezione-testing-casi-limite.slides.html) |
+| theory    | 0.5h   | [Lezione: leggi di De Morgan, precedenza tra `and`/`or` e effetti sugli errori](guida-lezioni/lezione-leggi-de-morgan.slides.html) |
 | exercise  | 1h     | [Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema](guida-lezioni/modulo-3.slides.html#mod3-errori) |
-| theory    | 1h     | [Automi a stati finiti: stati, transizioni e decisioni condizionali](guida-lezioni/modulo-3.slides.html#mod3-automi) |
+| theory    | 1h     | [Lezione: automi a stati finiti](guida-lezioni/lezione-automi.slides.html) |
 | exercise  | 1h     | [Tracciamento di condizioni, rami eseguiti e casi limite](guida-lezioni/modulo-3.slides.html#mod3-tracciamento) |
 | exercise  | 1.5h   | [Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi](guida-lezioni/modulo-3.slides.html#mod3-casi-limite) |
 

@@ -59,7 +59,7 @@ In programmazione vale lo stesso principio:
 ---
 
 <a id="mod6-parametri"></a>
-## Parametri, chiamata e ritorno
+## Sintassi di `def`
 
 Una funzione si definisce con `def` e si usa tramite chiamata.
 
@@ -69,6 +69,26 @@ def area_rettangolo(base, altezza):
 
 print(area_rettangolo(4, 6))
 ```
+
+Parti da riconoscere:
+
+- `def` introduce la definizione della funzione;
+- il nome della funzione descrive il comportamento;
+- tra parentesi compaiono i parametri;
+- i due punti `:` aprono il blocco;
+- `return` restituisce il risultato.
+
+### Struttura generale
+
+```python
+def nome_funzione(parametro1, parametro2):
+    # istruzioni
+    return risultato
+```
+
+---
+
+## Semantica di `def`
 
 Qui:
 
@@ -85,21 +105,6 @@ Va distinta con forza la differenza tra:
 
 Definire una funzione significa salvare da qualche parte un comportamento riusabile.
 Invocarla significa usarla davvero con valori concreti.
-
-### Struttura generale
-
-```python
-def nome_funzione(parametro1, parametro2):
-    # istruzioni
-    return risultato
-```
-
-Parti essenziali:
-
-- `def` introduce la definizione;
-- il nome deve essere significativo;
-- i parametri sono nomi ipotetici, non valori reali;
-- `return` restituisce un valore al chiamante.
 
 Esempio discusso a lezione:
 
@@ -128,6 +133,39 @@ Questa distinzione e' importante:
 - conviene scegliere nomi che facciano capire il ruolo di ogni input.
 
 Ci sono anche due buone pratiche molto concrete.
+
+---
+
+## Sintassi di `return`
+
+Forma tipica:
+
+```python
+return espressione
+```
+
+Esempi:
+
+```python
+return triplo
+return base * altezza
+return True
+```
+
+`return` compare dentro il blocco della funzione.
+
+---
+
+## Semantica di `return`
+
+Quando Python esegue `return`:
+
+1. valuta l'espressione dopo `return`;
+2. produce quel valore come risultato della funzione;
+3. interrompe l'esecuzione del corpo della funzione;
+4. restituisce il controllo al chiamante.
+
+Per questo tutto cio' che sta dopo un `return` nello stesso ramo non viene eseguito.
 
 ### Commentare che cosa fa una funzione
 
@@ -375,6 +413,45 @@ def somma1(x):
 import mialib
 
 print(mialib.somma1(4))
+```
+
+---
+
+## Sintassi di `import`
+
+Forma base:
+
+```python
+import nome_modulo
+```
+
+Esempi:
+
+```python
+import sys
+import mialib
+```
+
+---
+
+## Semantica di `import`
+
+Quando Python esegue `import nome_modulo`:
+
+1. cerca il modulo richiesto;
+2. lo carica;
+3. rende disponibile quel nome nell'ambiente corrente.
+
+Dopo:
+
+```python
+import mialib
+```
+
+possiamo accedere agli oggetti del modulo con il prefisso:
+
+```python
+mialib.somma1(4)
 ```
 
 Punti chiave:

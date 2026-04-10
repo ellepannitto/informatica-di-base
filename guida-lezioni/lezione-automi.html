@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lezione · Automi a stati finiti</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="lezione-automi-a-stati-finiti">Lezione · Automi a stati finiti</h1><hr><h2 id="obiettivi-della-lezione">Obiettivi della lezione</h2><p>Al termine di questa lezione saprai:</p><ul><li>descrivere un piccolo problema decisionale in termini di stati;</li><li>distinguere tra stato corrente, input e stato successivo;</li><li>leggere un <code>if</code> o un ciclo come aggiornamento dello stato;</li><li>usare tabelle di transizione molto semplici.</li></ul><hr><h2 id="idea-di-base">Idea di base</h2><p>Un automa a stati finiti e&#x27; un modello molto semplice per descrivere un programma che:</p><ul><li>si trova in uno stato;</li><li>riceve un input;</li><li>decide come cambiare stato.</li></ul><p>Gli ingredienti minimi sono:</p><ul><li>un insieme di stati possibili;</li><li>un input osservato;</li><li>una regola di transizione;</li><li>eventualmente un output.</li></ul><hr><h2 id="esempio-intuitivo">Esempio intuitivo</h2><p>Immagina un programma che deve validare una risposta <code>s</code> oppure <code>n</code>.</p><p>Possiamo descriverlo cosi&#x27;:</p><table><thead><tr><th>Stato corrente</th><th>Input</th><th>Stato successivo</th></tr></thead><tbody><tr><td><code>attesa</code></td><td><code>s</code></td><td><code>confermato</code></td></tr><tr><td><code>attesa</code></td><td><code>n</code></td><td><code>annullato</code></td></tr><tr><td><code>attesa</code></td><td>altro</td><td><code>attesa</code></td></tr></tbody></table><p>Questa tabella dice:</p><ul><li>se arriva un input valido, il programma cambia stato;</li><li>se arriva un input non valido, resta nello stato di attesa.</li></ul><hr><h2 id="collegamento-con-if">Collegamento con <code>if</code></h2><p>Anche un semplice <code>if</code> puo&#x27; essere letto come un piccolo automa.</p><pre><code class="language-python">if risposta == &quot;s&quot;:
+    stato = &quot;confermato&quot;
+else:
+    stato = &quot;attesa&quot;</code></pre><p>Qui:</p><ul><li><code>stato</code> rappresenta la situazione corrente del programma;</li><li>la condizione controlla l&#x27;input;</li><li>l&#x27;assegnamento aggiorna lo stato.</li></ul><hr><h2 id="collegamento-con-while">Collegamento con <code>while</code></h2><p>Il modello degli automi diventa ancora piu&#x27; naturale con <code>while</code>.</p><pre><code class="language-python">stato = &quot;attesa&quot;
+
+while stato == &quot;attesa&quot;:
+    risposta = input(&quot;s/n: &quot;)
+    if risposta == &quot;s&quot;:
+        stato = &quot;confermato&quot;
+    elif risposta == &quot;n&quot;:
+        stato = &quot;annullato&quot;</code></pre><p>Qui il programma:</p><ul><li>continua finche&#x27; resta nello stato <code>attesa</code>;</li><li>esce quando lo stato cambia.</li></ul><hr><h2 id="perche-sono-utili">Perche&#x27; sono utili</h2><p>Gli automi aiutano a:</p><ul><li>separare i casi possibili;</li><li>capire quando il programma deve restare nello stesso stato;</li><li>progettare meglio programmi interattivi e controlli di validazione;</li><li>leggere con piu&#x27; chiarezza il rapporto tra condizione e aggiornamento.</li></ul><hr><h2 id="esempio-controllo-di-una-parola">Esempio: controllo di una parola</h2><p>Supponi di voler controllare se un input appartiene all&#x27;insieme:</p><ul><li><code>si</code></li><li><code>no</code></li></ul><p>Una descrizione possibile e&#x27;:</p><table><thead><tr><th>Stato corrente</th><th>Input</th><th>Stato successivo</th><th>Output</th></tr></thead><tbody><tr><td><code>attesa</code></td><td><code>si</code></td><td><code>valido</code></td><td>accetta</td></tr><tr><td><code>attesa</code></td><td><code>no</code></td><td><code>valido</code></td><td>accetta</td></tr><tr><td><code>attesa</code></td><td>altro</td><td><code>attesa</code></td><td>ripeti la richiesta</td></tr></tbody></table><p>Questo rende esplicita una cosa importante:</p><ul><li>non tutti gli input fanno avanzare il programma;</li><li>alcuni fanno semplicemente ripetere lo stesso controllo.</li></ul><hr><h2 id="errori-tipici">Errori tipici</h2><p>Quando si usa questo modello, gli errori frequenti sono:</p><ul><li>dimenticare di aggiornare lo stato;</li><li>aggiornare lo stato sbagliato;</li><li>avere transizioni mancanti;</li><li>uscire dal ciclo troppo presto o troppo tardi.</li></ul><p>Per questo conviene sempre chiedersi:</p><ul><li>qual e&#x27; lo stato iniziale?</li><li>quali input sono ammessi?</li><li>quando il programma deve restare fermo?</li><li>quando il programma deve cambiare stato?</li></ul><hr><h2 id="esercizi">Esercizi</h2><ol><li>Descrivi come automa il controllo di un input <code>y/n</code>.</li><li>Costruisci una tabella di transizione per un programma che continua a chiedere un numero finche&#x27; non riceve un valore positivo.</li><li>Scrivi un piccolo <code>while</code> che implementa uno degli automi descritti.</li><li>Individua un caso in cui il programma resta bloccato perche&#x27; lo stato non viene aggiornato.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Un automa a stati finiti descrive un programma come:</p><ul><li>stato corrente;</li><li>input osservato;</li><li>regola di transizione;</li><li>stato successivo.</li></ul><p>Serve soprattutto a leggere e progettare meglio condizioni, validazioni e piccoli cicli interattivi.</p>
+</main>
+</body>
+</html>

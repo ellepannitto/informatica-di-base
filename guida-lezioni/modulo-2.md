@@ -176,10 +176,87 @@ Traccia sintetica:
 
 ---
 
+## Sintassi dell'assegnamento
+
+Forma generale:
+
+```python
+nome_variabile = espressione
+```
+
+Esempi:
+
+```python
+eta = 20
+nome = "Luca"
+totale = prezzo + iva
+```
+
+Parti da riconoscere:
+
+- a sinistra c'e' il nome che vogliamo aggiornare;
+- a destra c'e' un valore oppure un'espressione da valutare;
+- il simbolo `=` in Python introduce un'assegnazione.
+
+---
+
+## Semantica dell'assegnamento
+
+Quando Python legge:
+
+```python
+x = y + 3
+```
+
+succede questo:
+
+1. valuta l'espressione a destra;
+2. ottiene un risultato;
+3. associa quel risultato al nome a sinistra;
+4. aggiorna lo stato del programma.
+
+Quindi:
+
+```python
+x = x + 1
+```
+
+non e' una formula matematica, ma un aggiornamento di stato:
+
+- leggi il vecchio valore di `x`;
+- aggiungi `1`;
+- salva il nuovo valore in `x`.
+
+---
+
 <a id="mod2-input-output"></a>
 ## `input()`, `print()`, `type()` e casting
 
-### `print()`
+## Sintassi di `print()`
+
+Forma base:
+
+```python
+print(valore1, valore2)
+```
+
+Esempi:
+
+```python
+print("Ciao")
+print("Ciao", nome)
+print(eta + 1)
+```
+
+`print(...)` e' una chiamata di funzione:
+
+- il nome della funzione e' `print`;
+- tra parentesi passiamo gli argomenti;
+- gli argomenti vengono stampati in output.
+
+---
+
+## Semantica di `print()`
 
 Serve a produrre output verso lo schermo.
 
@@ -188,7 +265,40 @@ nome = "Anna"
 print("Ciao", nome)
 ```
 
-### `input()`
+Quando Python esegue `print(...)`:
+
+1. valuta gli argomenti;
+2. li converte in una forma stampabile;
+3. li manda sullo standard output.
+
+`print(...)` non salva valori in memoria: rende visibile all'esterno un risultato.
+
+---
+
+## Sintassi di `input()`
+
+Forma tipica:
+
+```python
+variabile = input("Messaggio: ")
+```
+
+Esempi:
+
+```python
+nome = input("Come ti chiami? ")
+eta = input("Eta': ")
+```
+
+Possiamo usare `input()` anche senza messaggio:
+
+```python
+testo = input()
+```
+
+---
+
+## Semantica di `input()`
 
 Legge sempre una stringa.
 
@@ -270,20 +380,29 @@ nome != ""
 
 Con i booleani possiamo decidere il flusso di esecuzione.
 
-### `if`
+## Sintassi di `if`
 
 ```python
-eta = int(input("Eta': "))
-
 if eta >= 18:
     print("Maggiorenne")
 ```
 
+Parti da riconoscere:
+
+- `if` introduce una condizione;
+- dopo `if` c'e' un'espressione booleana;
+- i due punti `:` aprono il blocco;
+- il blocco va indentato.
+
+---
+
+## Semantica di `if`
+
 La semantica operativa di `if` si puo' riassumere cosi':
 
-- Python valuta l'espressione booleana dopo `if`;
-- se vale `True`, esegue il primo blocco;
-- altrimenti passa al ramo successivo (`else` oppure `elif`).
+1. Python valuta la condizione;
+2. se vale `True`, esegue il blocco indentato;
+3. se vale `False`, salta quel blocco e continua dopo.
 
 Per questo, in casi come:
 
@@ -302,7 +421,9 @@ if nome < cognome == True:
 
 perche' il comando `if` sta gia' chiedendo se quell'espressione vale vero oppure no. Scriverlo esplicitamente non e' un errore concettuale grave, ma e' ridondante.
 
-### `if-else`
+---
+
+## Sintassi di `if-else`
 
 ```python
 if eta >= 18:
@@ -311,7 +432,28 @@ else:
     print("Minorenne")
 ```
 
-### `elif`
+Qui ci sono due blocchi alternativi:
+
+- il blocco dopo `if`;
+- il blocco dopo `else`.
+
+`else` non ha una condizione propria: raccoglie tutti i casi in cui la condizione dell'`if` vale `False`.
+
+---
+
+## Semantica di `if-else`
+
+Con `if-else` Python:
+
+1. valuta la condizione dell'`if`;
+2. se vale `True`, esegue il primo blocco;
+3. se vale `False`, esegue il blocco `else`.
+
+Quindi tra i due rami se ne esegue sempre uno solo.
+
+---
+
+## Sintassi di `if-elif-else`
 
 Esempio di classificazione del voto:
 
@@ -328,7 +470,28 @@ else:
     print("Ottimo")
 ```
 
-Questo e' il caso tipico in cui ci sono piu' soglie ordinate.
+Questa forma si usa quando:
+
+- i casi sono piu' di due;
+- vogliamo provarli in ordine;
+- ogni `elif` aggiunge una nuova condizione.
+
+---
+
+## Semantica di `if-elif-else`
+
+Python controlla i rami in ordine:
+
+1. prova la condizione dell'`if`;
+2. se e' falsa, prova il primo `elif`;
+3. continua finche' trova la prima condizione vera;
+4. se nessuna e' vera, esegue `else`.
+
+Quindi:
+
+- conta l'ordine dei rami;
+- viene eseguito solo il primo ramo che risulta vero;
+- `else` copre il caso residuo.
 
 ### Un esempio guidato: nome e cognome in ordine alfabetico
 

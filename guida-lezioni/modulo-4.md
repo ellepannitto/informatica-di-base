@@ -42,7 +42,7 @@ Qui non sappiamo in anticipo dove comparira' il decimo nome nel testo, quindi no
 
 ---
 
-## Sintassi e semantica del `while`
+## Sintassi del `while`
 
 Forma generale:
 
@@ -50,6 +50,17 @@ Forma generale:
 while espressione_booleana:
     # istruzioni
 ```
+
+Parti da riconoscere:
+
+- `while` introduce una ripetizione condizionata;
+- la guardia e' un'espressione booleana;
+- i due punti `:` aprono il blocco;
+- il blocco del ciclo va indentato.
+
+---
+
+## Semantica del `while`
 
 Semantica:
 
