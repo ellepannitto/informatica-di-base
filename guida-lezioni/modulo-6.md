@@ -37,7 +37,7 @@ Quando il problema cresce, conviene quasi sempre chiedersi:
 
 > quale parte del programma posso trasformare in una funzione autonoma?
 
-La trascrizione della prima lezione aggiungeva una metafora molto utile:
+Una metafora molto utile:
 
 - una funzione e' una **delega**;
 - non dobbiamo saper fare tutto da soli nel codice principale;
@@ -78,7 +78,7 @@ Qui:
 
 Questo modello e' fondamentale per poter comporre programmi piu' grandi a partire da blocchi affidabili.
 
-Nella trascrizione veniva distinta con forza la differenza tra:
+Va distinta con forza la differenza tra:
 
 - **definizione** della funzione;
 - **invocazione** della funzione.
@@ -120,14 +120,14 @@ non stiamo piu' parlando in astratto: stiamo chiedendo alla funzione di lavorare
 
 ### Parametri ipotetici e argomenti reali
 
-La lezione insisteva su questa distinzione:
+Questa distinzione e' importante:
 
 - nella definizione usiamo nomi come `x`, `planimetria`, `budget`;
 - nella chiamata passiamo valori concreti;
 - i nomi dei parametri non devono per forza essere `x`, `y`, `z`;
 - conviene scegliere nomi che facciano capire il ruolo di ogni input.
 
-La seconda lezione aggiungeva anche due buone pratiche molto concrete.
+Ci sono anche due buone pratiche molto concrete.
 
 ### Commentare che cosa fa una funzione
 
@@ -141,7 +141,7 @@ Questo e' utile perche' un nome di parametro da solo non garantisce abbastanza c
 
 ### Evitare collisioni inutili di nomi
 
-In trascrizione emergeva anche una domanda utile:
+C'e' anche una domanda utile:
 
 - che succede se usiamo per una nostra funzione un nome gia' occupato da una funzione importata?
 
@@ -164,13 +164,13 @@ e' meglio di una versione con parametri chiamati in modo oscuro, se il problema 
 
 ## Memoria locale della funzione
 
-La trascrizione introduceva anche una prima idea di **memoria locale**:
+Una prima idea di **memoria locale** e' questa:
 
 - quando una funzione viene chiamata, immaginiamo che riceva una tabella di memoria separata;
 - dentro quella tabella vivono i parametri e le variabili locali della funzione;
 - quando arriviamo a `return`, il valore torna al chiamante e quella memoria locale puo' essere considerata chiusa.
 
-Questo modello e' didatticamente molto utile, anche se poi piu' avanti vedremo casi piu' sottili.
+Questo modello e' didatticamente molto utile per leggere correttamente le chiamate di funzione nei casi elementari.
 
 Per leggere correttamente una chiamata come:
 
@@ -320,7 +320,7 @@ Questo esercizio e' molto formativo perche' fa emergere subito un problema class
 
 - come evitare un separatore in piu' all'inizio o alla fine.
 
-La lezione del `18 marzo 2026` chiariva anche meglio il contratto del problema:
+Il contratto del problema si puo' chiarire cosi':
 
 - la consegna va letta soprattutto come relazione tra input e output;
 - la prima riga letta e' il separatore;
@@ -332,7 +332,7 @@ Questo aiuta a distinguere due sottoproblemi:
 1. leggere correttamente i dati;
 2. costruire la stringa finale senza separatore in eccesso.
 
-La trascrizione piu' recente aggiungeva anche una buona osservazione di metodo:
+Una buona osservazione di metodo:
 
 - `split`, `strip` e `join` non si imparano solo "a memoria";
 - conviene leggere la documentazione e capire su quale oggetto vivono;
@@ -344,7 +344,7 @@ Questo non va preso come un fatto metafisico, ma come una convenzione concreta d
 - altre sono funzioni globali;
 - parte del lavoro del programmatore e' capire quale interfaccia espone l'oggetto che sta usando.
 
-La lezione dell'`11 marzo 2026` tornava proprio su questi esercizi per ricordare che:
+Questi esercizi servono anche a ricordare che:
 
 - ricostruire `strip` o `join` non serve solo a copiare un metodo gia' esistente;
 - serve a capire che comportamento preciso ci aspettiamo;
@@ -354,7 +354,7 @@ La lezione dell'`11 marzo 2026` tornava proprio su questi esercizi per ricordare
 
 ## Import e file di libreria
 
-La lezione del `18 marzo 2026` apriva anche un passaggio utile per i moduli successivi:
+Qui conviene introdurre anche un passaggio utile:
 
 - un file Python puo' contenere codice da eseguire subito;
 - ma puo' anche contenere funzioni, costanti o strutture dati da riusare altrove;

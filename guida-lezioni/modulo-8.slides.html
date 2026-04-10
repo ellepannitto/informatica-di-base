@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 08 · Ciclo for, file e formati strutturati - Slides</title>
+<title>Modulo 08 · Ciclo for e iterazione - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -97,7 +97,7 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 08 · Ciclo for, file e formati strutturati</h1>
+    <h1>Modulo 08 · Ciclo for e iterazione</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
@@ -110,206 +110,120 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>usare il ciclo <code>for</code> su liste, stringhe e <code>range()</code>;</li><li>capire la semantica elementare dell&#x27;iterazione;</li><li>leggere il comportamento del <code>for</code> in termini di stato;</li><li>applicare il <code>for</code> a conteggi, trasformazioni e scansioni;</li><li>leggere e scrivere file di testo in modo elementare;</li><li>costruire semplici analisi testuali a partire da un file;</li><li>riconoscere casi tipici in cui il <code>for</code> evita codice ripetitivo.</li></ul><hr><a id="mod8-for"></a>
+    <h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>usare il ciclo <code>for</code> su stringhe, liste e <code>range()</code>;</li><li>capire la semantica elementare dell&#x27;iterazione;</li><li>leggere il comportamento del <code>for</code> in termini di stato;</li><li>applicare il <code>for</code> a conteggi, trasformazioni e scansioni;</li><li>usare cicli annidati per costruire pattern e output strutturato.</li></ul><hr><a id="mod8-for"></a>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-al-for">Il problema che porta al <code>for</code></h2><p>Nel notebook 2 si partiva da un esempio come questo:</p><pre><code class="language-python">incipit = &quot;Era una notte incantevole, una di quelle notti...&quot;
+    <h2 id="il-problema-che-porta-al-for">Il problema che porta al <code>for</code></h2><p>Si puo&#x27; partire da un esempio come questo:</p><pre><code class="language-python">incipit = &quot;Era una notte incantevole, una di quelle notti...&quot;
 parole = incipit.split()
 
 parole[0] = parole[0].lower()
 parole[1] = parole[1].lower()
-parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il codice e&#x27; lungo e fragile;</li><li>dipende dalla lunghezza della lista;</li><li>non e&#x27; riusabile;</li><li>ripete sempre la stessa operazione concettuale.</li></ul><p>Il <code>for</code> nasce proprio per esprimere una stessa azione ripetuta su una sequenza.</p><hr><h3 id="sintassi-del-for">Sintassi del <code>for</code></h3><pre><code class="language-python">for identificatore in iterabile:</code></pre><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile;</li><li>lo assegna alla variabile di iterazione;</li><li>esegue il blocco;</li><li>passa all&#x27;elemento successivo;</li><li>quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
-    print(parola.lower())</code></pre><p>La seconda lezione lo spiegava anche in modo ancora piu&#x27; operativo:</p><ul><li>il <code>for</code> esegue lo stesso blocco per ogni elemento dell&#x27;iterabile;</li><li>a ogni passo aggiorna la variabile di iterazione;</li><li>quando non ci sono piu&#x27; elementi, il flusso prosegue dopo il ciclo.</li></ul><p>Questo e&#x27; il motivo per cui il <code>for</code> e&#x27; cosi&#x27; utile quando:</p><ul><li>la stessa operazione concettuale va ripetuta molte volte;</li><li>il codice manuale diventerebbe lungo, fragile e poco riusabile;</li><li>non vogliamo scrivere una riga separata per ogni posizione della lista.</li></ul><hr><a id="mod8-range"></a>
+parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il codice e&#x27; lungo e fragile;</li><li>dipende dalla lunghezza della lista;</li><li>non e&#x27; riusabile;</li><li>ripete sempre la stessa operazione concettuale.</li></ul><p>Il <code>for</code> nasce proprio per esprimere una stessa azione ripetuta su una sequenza.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="rangen-e-conteggio-delle-iterazioni"><code>range(n)</code> e conteggio delle iterazioni</h2><p>Il notebook 2 introduceva <code>range(n)</code> per ripetere qualcosa un numero fissato di volte.</p><pre><code class="language-python">for numero in range(5):
-    print(&quot;Eseguo l&#x27;istruzione print all&#x27;iterazione numero&quot;, numero)</code></pre><p><code>range(5)</code> produce i valori:</p><pre><code class="language-python">0, 1, 2, 3, 4</code></pre><p>Quindi il ciclo esegue il blocco 5 volte.</p><p>Usi tipici:</p><ul><li>contare;</li><li>scorrere posizioni;</li><li>costruire piccole tabelle o figure;</li><li>iterare su intervalli di numeri.</li></ul><p>La trascrizione aggiungeva anche due dettagli pratici:</p><ul><li><code>range(5)</code> conta da <code>0</code> a <code>4</code>;</li><li><code>range(a, b)</code> permette di lavorare direttamente su un intervallo che parte da <code>a</code> e arriva a <code>b - 1</code>.</li></ul><p>Quindi:</p><pre><code class="language-python">for n in range(25, 35):
+    <h2 id="sintassi-del-for">Sintassi del <code>for</code></h2><pre><code class="language-python">for identificatore in iterabile:</code></pre><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
+    print(parola.lower())</code></pre><p>Il <code>for</code> e&#x27; utile quando:</p><ul><li>la stessa operazione concettuale va ripetuta molte volte;</li><li>il codice manuale diventerebbe lungo e fragile;</li><li>non vogliamo scrivere una riga separata per ogni posizione della sequenza.</li></ul><hr><a id="mod8-range"></a>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="rangen-e-conteggio-delle-iterazioni"><code>range(n)</code> e conteggio delle iterazioni</h2><p><code>range(n)</code> serve per ripetere qualcosa un numero fissato di volte.</p><pre><code class="language-python">for numero in range(5):
+    print(numero)</code></pre><p><code>range(5)</code> produce:</p><pre><code class="language-python">0, 1, 2, 3, 4</code></pre><p>Due dettagli importanti:</p><ul><li><code>range(5)</code> conta da <code>0</code> a <code>4</code>;</li><li><code>range(a, b)</code> parte da <code>a</code> e arriva a <code>b - 1</code>.</li></ul><p>Esempio:</p><pre><code class="language-python">for n in range(25, 35):
     print(n)</code></pre><p>stampa i numeri da <code>25</code> a <code>34</code>.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="for-e-memoria"><code>for</code> e memoria</h2><p>Il notebook mostrava anche il tracciamento di:</p><pre><code class="language-python">for x in [24, -13, 8]:
+    <h2 id="for-e-stato-del-programma"><code>for</code> e stato del programma</h2><p>Conviene anche tracciare:</p><pre><code class="language-python">for x in [24, -13, 8]:
     y = x + 1
 
-print(x, y)</code></pre><p>Alla fine del ciclo:</p><ul><li><code>x</code> contiene l&#x27;ultimo elemento iterato;</li><li><code>y</code> contiene l&#x27;ultimo valore calcolato.</li></ul><p>Questo esempio serve a ricordare che:</p><ul><li>il <code>for</code> aggiorna la variabile di iterazione a ogni passo;</li><li>lo stato continua a cambiare durante il ciclo;</li><li>il valore finale osservabile dipende dall&#x27;ultima iterazione.</li></ul><p>La trascrizione piu&#x27; recente mostrava proprio un bug nato da qui:</p><ul><li>si legge un numero in <code>number</code>;</li><li>poi si scrive <code>for number in range(...)</code>;</li><li>dentro il ciclo <code>for</code> il nome <code>number</code> viene riutilizzato e sovrascrive il valore letto prima.</li></ul><p>Questo e&#x27; uno dei motivi per cui conviene scegliere con attenzione i nomi delle variabili di iterazione.</p><p>Per esempio, meglio:</p><pre><code class="language-python">numero = int(input())
-
-for i in range(numero):
-    ...</code></pre><p>che:</p><pre><code class="language-python">number = int(input())
+print(x, y)</code></pre><p>Alla fine del ciclo:</p><ul><li><code>x</code> contiene l&#x27;ultimo elemento iterato;</li><li><code>y</code> contiene l&#x27;ultimo valore calcolato.</li></ul><p>Questo aiuta a capire che:</p><ul><li>il <code>for</code> aggiorna la variabile di iterazione a ogni passo;</li><li>lo stato continua a cambiare durante il ciclo;</li><li>il valore finale osservabile dipende dall&#x27;ultima iterazione.</li></ul><p>Un errore tipico e&#x27; riusare male i nomi:</p><pre><code class="language-python">number = int(input())
 
 for number in range(number):
-    ...</code></pre><p>Nel secondo caso il programma puo&#x27; anche &quot;sembrare&quot; funzionare in alcuni test, ma la logica diventa fragile e difficile da tracciare.</p><p>Se vogliamo vedere anche i valori intermedi, la lezione suggeriva semplicemente di stampare dentro il ciclo:</p><pre><code class="language-python">for x in [24, -13, 8]:
-    y = x + 1
-    print(x, y)</code></pre><p>In questo modo osserviamo l&#x27;evoluzione passo passo, non solo lo stato finale.</p><hr>
+    ...</code></pre><p>Qui la variabile del <code>for</code> sovrascrive il valore letto prima. Meglio:</p><pre><code class="language-python">numero = int(input())
+
+for i in range(numero):
+    ...</code></pre><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="for-testo-e-trasformazioni-in-place"><code>for</code>, testo e trasformazioni in-place</h2><p>Nella seconda lezione il <code>for</code> veniva motivato soprattutto con un problema concreto:</p><ul><li>prendere un testo;</li><li>trasformarlo in lista con <code>split()</code>;</li><li>rendere minuscole tutte le parole.</li></ul><p>Il punto didattico era che fare:</p><pre><code class="language-python">parole[0] = parole[0].lower()
-parole[1] = parole[1].lower()
-parole[2] = parole[2].lower()</code></pre><p>non scala:</p><ul><li>il codice diventa lungo;</li><li>non sappiamo sempre quante parole ci saranno;</li><li>aumentano gli errori di battitura;</li><li>il programma non e&#x27; riusabile su testi diversi.</li></ul><p>Il <code>for</code> nasce proprio per evitare questa ripetizione manuale.</p><h3 id="quando-serve-anche-la-posizione">Quando serve anche la posizione</h3><p>La trascrizione mostrava anche un caso un po&#x27; piu&#x27; sottile:</p><ul><li>a volte non basta avere il valore corrente;</li><li>vogliamo anche sapere in quale posizione della lista stiamo lavorando;</li><li>per esempio se vogliamo sovrascrivere l&#x27;elemento trasformato nella lista originale.</li></ul><p>Una prima soluzione e&#x27;:</p><ul><li>tenere una variabile <code>posizione</code>;</li><li>inizializzarla a <code>0</code>;</li><li>aggiornarla a ogni iterazione.</li></ul><p>Poi si vede una forma piu&#x27; compatta con <code>enumerate()</code>.</p><hr>
+    <h2 id="valore-corrente-e-posizione">Valore corrente e posizione</h2><p>A volte non basta avere il valore corrente: serve anche sapere in quale posizione della lista stiamo lavorando.</p><p>Per esempio:</p><pre><code class="language-python">for posizione, parola in enumerate(parole):
+    parole[posizione] = parola.lower()</code></pre><p><code>enumerate()</code> permette di ottenere insieme:</p><ul><li>posizione;</li><li>valore corrente.</li></ul><p>Questo e&#x27; spesso piu&#x27; pulito che gestire a mano:</p><pre><code class="language-python">posizione = 0
+...
+posizione += 1</code></pre><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-assegnati-sul-for">Esercizi assegnati sul <code>for</code></h2><p>Nei materiali assegnati compaiono diversi esercizi che si appoggiano direttamente a <code>for</code> e <code>range()</code>.</p><h3 id="scansione-di-stringhe">Scansione di stringhe</h3><p>Esempi:</p><ul><li>stampare una parola lettera per lettera;</li><li>stampare una parola lettera per lettera indicando anche la posizione;</li><li>leggere una parola e stampare solo le lettere in posizione pari.</li></ul><p>Questi esercizi servono a far vedere che una stringa puo&#x27; essere trattata come una sequenza da attraversare.</p><h3 id="conteggi-e-tabelle">Conteggi e tabelle</h3><p>Esempi:</p><ul><li>stampare la tabellina di un numero da <code>1</code> a <code>10</code>;</li><li>stampare la tabellina con formatted strings;</li><li>stampare triangoli e piramidi numeriche;</li><li>stampare rettangoli pieni o vuoti, singoli o ripetuti.</li></ul><p>Qui il nodo didattico e&#x27; distinguere bene:</p><ul><li>ciclo esterno;</li><li>ciclo interno;</li><li>contenuto di ogni riga;</li><li>quando andare a capo e quando no.</li></ul><h3 id="pattern-con-cicli-annidati">Pattern con cicli annidati</h3><p>Gli esercizi sui rettangoli vuoti e sulle combinazioni:</p><pre><code class="language-text">Pagina 1 Riga 1
-Pagina 1 Riga 2
-...</code></pre><p>sono particolarmente utili per far capire che i cicli annidati non sono un trucco sintattico, ma un modello per combinare due dimensioni:</p><ul><li>righe e colonne;</li><li>pagina e riga;</li><li>figura e posizione.</li></ul><hr>
+    <h2 id="scansioni-trasformazioni-e-accumuli">Scansioni, trasformazioni e accumuli</h2><p>Con <code>for</code> ricorrono tre schemi molto frequenti:</p><h3 id="scansione">Scansione</h3><pre><code class="language-python">for carattere in parola:
+    print(carattere)</code></pre><h3 id="trasformazione">Trasformazione</h3><pre><code class="language-python">parole_minuscole = []
+
+for parola in parole:
+    parole_minuscole.append(parola.lower())</code></pre><h3 id="accumulo">Accumulo</h3><pre><code class="language-python">somma = 0
+
+for numero in numeri:
+    somma += numero</code></pre><p>Questi tre schemi ricorrono continuamente negli esercizi del modulo.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="soluzioni-commentate-emerse-dagli-esercizi">Soluzioni commentate emerse dagli esercizi</h2><p>Le soluzioni svolte mostrano alcune idee che vale la pena fissare esplicitamente.</p><h3 id="enumerate-invece-di-index"><code>enumerate()</code> invece di <code>index()</code></h3><p>Per stampare lettere e posizioni, nei materiali compare prima una soluzione con contatore esplicito e poi una con:</p><pre><code class="language-python">for posizione, carattere in enumerate(parola):
-    print(carattere, posizione)</code></pre><p>Questo e&#x27; utile anche per far vedere perche&#x27; usare <code>index()</code> dentro il ciclo e&#x27; una cattiva idea:</p><ul><li>restituisce la prima posizione trovata;</li><li>quindi sbaglia quando ci sono lettere ripetute;</li><li>inoltre rende il codice meno lineare.</li></ul><p>La seconda lezione presentava <code>enumerate()</code> proprio come scorciatoia per ottenere insieme:</p><ul><li>posizione;</li><li>valore corrente.</li></ul><p>Esempio:</p><pre><code class="language-python">for posizione, parola in enumerate(parole):
-    parole[posizione] = parola.lower()</code></pre><p>Cosi&#x27; non dobbiamo gestire a mano <code>posizione = posizione + 1</code>.</p><p>La forma compatta equivalente e&#x27;:</p><pre><code class="language-python">posizione += 1</code></pre><p>che la trascrizione richiamava come abbreviazione comune di:</p><pre><code class="language-python">posizione = posizione + 1</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="caratteri-di-escape-e-stampa">Caratteri di escape e stampa</h2><p>La seconda lezione si fermava anche su alcuni dettagli pratici delle stringhe che tornano utili quando si stampa o si prepara output.</p><h3 id="virgolette-dentro-una-stringa">Virgolette dentro una stringa</h3><p>Per stampare virgolette come caratteri interni, senza confonderle con quelle che delimitano la stringa, si usa il backslash:</p><pre><code class="language-python">print(&quot;\&quot;print\&quot;&quot;)</code></pre><h3 id="a-capo-e-tabulazioni">A capo e tabulazioni</h3><p>Alcuni caratteri speciali richiamati in lezione:</p><table><thead><tr><th>Sequenza</th><th>Effetto</th></tr></thead><tbody><tr><td><code>\\n</code></td><td>nuova riga</td></tr><tr><td><code>\\r\\n</code></td><td>fine riga tipica di alcuni sistemi</td></tr><tr><td><code>\\t</code></td><td>tabulazione</td></tr></tbody></table><p>Esempio:</p><pre><code class="language-python">print(&quot;hello\nworld&quot;)</code></pre><p>produce:</p><pre><code class="language-text">hello
-world</code></pre><p>Questo torna utile quando:</p><ul><li>vogliamo formattare output leggibili;</li><li>leggiamo file e ci troviamo caratteri di fine riga dentro le stringhe;</li><li>prepariamo testo tabellare da copiare o salvare.</li></ul><h3 id="costruire-figure-riga-per-riga">Costruire figure riga per riga</h3><p>Negli esercizi su triangoli e rettangoli ricorre una strategia molto chiara:</p><ul><li>costruire una stringa di riga;</li><li>stamparla;</li><li>passare alla riga successiva.</li></ul><p>Per esempio:</p><pre><code class="language-python">stringa = &quot;*&quot;
-for i in range(1, int(numero) + 1):
-    print(stringa)
-    stringa = stringa + &quot;*&quot;</code></pre><p>Questo aiuta a capire che il <code>for</code> non serve solo a &quot;ripetere&quot;, ma anche a costruire progressivamente uno stato osservabile.</p><h3 id="for-e-while-nello-stesso-esercizio"><code>for</code> e <code>while</code> nello stesso esercizio</h3><p>Nella lezione e&#x27; emersa anche una situazione tipica di debugging:</p><ul><li>un <code>for</code> controlla quante volte eseguire una certa parte;</li><li>un <code>while</code> interno aggiorna un&#x27;altra variabile di stato;</li><li>il programma gira, ma non e&#x27; subito chiaro quale variabile stia governando che cosa.</li></ul><p>Regola pratica:</p><ul><li>se usi sia <code>for</code> sia <code>while</code>, chiediti sempre quale dei due controlla la struttura principale del problema;</li><li>evita di far dipendere due cicli diversi dalla stessa variabile se non e&#x27; strettamente necessario;</li><li>quando il comportamento e&#x27; confuso, traccia a mano i valori a ogni iterazione.</li></ul><p>La lezione dell&#x27;<code>11 marzo 2026</code> aggiungeva un esempio molto utile sui cicli annidati:</p><ul><li>il ciclo esterno controlla la riga;</li><li>il ciclo interno costruisce il contenuto della riga;</li><li>cambiare la variabile usata nella costruzione cambia il pattern stampato.</li></ul><p>Per esempio, se per costruire la stringa usi <code>i</code>, la riga dipende dall&#x27;indice esterno; se usi <code>j</code>, dipende dall&#x27;indice interno.</p><p>Schema:</p><pre><code class="language-python">for i in range(1, n + 1):
+    <h2 id="cicli-annidati">Cicli annidati</h2><p>Quando il problema ha due dimensioni, servono spesso due cicli:</p><ul><li>riga e colonna;</li><li>pagina e riga;</li><li>riga e contenuto della riga.</li></ul><p>Schema:</p><pre><code class="language-python">for i in range(1, n + 1):
     stringa = &quot;&quot;
     for j in range(1, i + 1):
         stringa += str(i)
-    print(stringa)</code></pre><p>Variante:</p><pre><code class="language-python">for i in range(1, n + 1):
+    print(stringa)</code></pre><p>Se dentro usi <code>i</code>, il pattern dipende dall&#x27;indice esterno. Se usi <code>j</code>, il pattern cambia:</p><pre><code class="language-python">for i in range(1, n + 1):
     stringa = &quot;&quot;
     for j in range(1, i + 1):
         stringa += str(j)
-    print(stringa)</code></pre><p>La struttura dei cicli e&#x27; la stessa, ma il significato del pattern cambia.</p><p>Questo e&#x27; un ottimo esercizio per capire che:</p><ul><li>il controllo del flusso e la costruzione dell&#x27;output sono collegati;</li><li>gli indici dei cicli annidati hanno ruoli diversi;</li><li>un piccolo cambio nel corpo del ciclo puo&#x27; cambiare il problema che stiamo risolvendo.</li></ul><h3 id="liste-temporanee-e-controllo-finale">Liste temporanee e controllo finale</h3><p>Un&#x27;altra soluzione svolta legge 5 parole, le salva in lista e poi confronta primo e ultimo elemento.</p><p>Anche se l&#x27;esercizio e&#x27; semplice, e&#x27; didatticamente utile perche&#x27; mette insieme:</p><ul><li>input ripetuto;</li><li>accumulo in lista;</li><li>accesso con indice positivo e negativo.</li></ul><hr><a id="mod8-file"></a>
+    print(stringa)</code></pre><p>Questo e&#x27; un ottimo esercizio per capire che gli indici dei cicli annidati hanno ruoli diversi.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="file-di-testo-aprire-leggere-scorrere">File di testo: aprire, leggere, scorrere</h2><p>Il terzo notebook storico introduceva i file come nuovo tipo di sorgente dati.</p><p>Esempio base:</p><pre><code class="language-python">nome_file = &quot;data/le_notti_bianche.txt&quot;
-file_incipit = open(nome_file, &quot;r&quot;)
-print(file_incipit.read())
-file_incipit.close()</code></pre><p>Nel corso conviene usare soprattutto la forma con <code>with</code>:</p><pre><code class="language-python">nome_file = &quot;data/le_notti_bianche.txt&quot;
+    <h2 id="pattern-di-stampa">Pattern di stampa</h2><p>Gli esercizi su triangoli, piramidi e rettangoli servono a consolidare:</p><ul><li>uso di <code>range()</code>;</li><li>distinzione tra ciclo esterno e ciclo interno;</li><li>costruzione progressiva di una stringa;</li><li>controllo di quando andare a capo.</li></ul><p>Per esempio:</p><pre><code class="language-python">stringa = &quot;*&quot;
 
-with open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_incipit:
-    for line in file_incipit:
-        print(line)</code></pre><p>La terza lezione trascritta insisteva molto sul fatto che leggere file non vuol dire imparare a memoria una formula magica, ma saper leggere la documentazione di <code>open()</code> e capire che cosa stiamo chiedendo al programma.</p><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>La spiegazione a voce aggiungeva tre osservazioni pratiche:</p><ul><li><code>file</code> e&#x27; una stringa che rappresenta un percorso;</li><li>il percorso puo&#x27; essere assoluto oppure relativo alla cartella da cui stiamo eseguendo lo script;</li><li><code>mode</code> decide se stiamo aprendo il file per leggere oppure per scrivere.</li></ul><p>La trascrizione <code>08.srt</code> chiariva anche un punto concettuale importante:</p><ul><li>il nome del file e&#x27; solo una stringa;</li><li><code>open(...)</code> non ci restituisce &quot;gia&#x27; il testo&quot;;</li><li>ci restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><p>Per esempio:</p><pre><code class="language-python">nome_file = &quot;nuovofile.txt&quot;
-file_handler = open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;)
-print(file_handler)
-file_handler.close()</code></pre><p>L&#x27;oggetto stampato puo&#x27; sembrare tecnico, ma il punto didattico e&#x27; semplice:</p><ul><li>identifica un file aperto in una certa modalita&#x27;;</li><li>permette di leggerne il contenuto;</li><li>va chiuso quando non serve piu&#x27;.</li></ul><p>Esempio di percorso relativo:</p><pre><code class="language-python">with open(&quot;data/le_notti_bianche.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
-    ...</code></pre><p>funziona se il file si trova davvero in una cartella <code>data</code> sotto la cartella corrente.</p><h3 id="idea-chiave">Idea chiave</h3><p>Quando leggiamo da un file di testo, quello che otteniamo e&#x27; comunque testo:</p><ul><li>una stringa intera;</li><li>una riga;</li><li>una lista di righe.</li></ul><p>Se ci servono numeri o booleani, dobbiamo convertirli.</p><p>Questo vale anche quando il file contiene solo numeri:</p><ul><li>Python li legge come testo;</li><li>quindi poi va fatto il casting, per esempio con <code>int(...)</code> o <code>float(...)</code>.</li></ul><h3 id="documentazione-e-casi-di-errore">Documentazione e casi di errore</h3><p>Nella trascrizione veniva mostrato anche un uso molto importante della documentazione ufficiale:</p><ul><li>guardare quali parametri prende <code>open()</code>;</li><li>vedere quali sono i valori di default;</li><li>controllare quali errori aspettarsi se il file non esiste o non puo&#x27; essere aperto.</li></ul><p>Questo punto e&#x27; importante perche&#x27; sui file i problemi piu&#x27; comuni non sono &quot;di Python in astratto&quot;, ma di:</p><ul><li>percorso sbagliato;</li><li>permessi mancanti;</li><li>nome file errato;</li><li>codifica non compatibile.</li></ul><hr><a id="mod8-terminale"></a>
+for i in range(1, n + 1):
+    print(stringa)
+    stringa = stringa + &quot;*&quot;</code></pre><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esplorazione-rapida-da-terminale-su-file-di-testo">Esplorazione rapida da terminale su file di testo</h2><p>La trascrizione <code>03.srt</code> introduceva una pratica molto utile anche se poi il lavoro finale verra&#x27; spesso fatto in Python:</p><ul><li>usare il terminale per ispezionare rapidamente un file;</li><li>fare piccole trasformazioni;</li><li>capire passo passo quale pipeline logica ci serve;</li><li>salvare risultati intermedi quando il problema inizia a complicarsi.</li></ul><p>L&#x27;esempio di partenza era un file di testo gia&#x27; leggermente preprocessato, in cui la punteggiatura era separata dalle parole da spazi. Questo rendeva piu&#x27; facile costruire una pipeline per trovare, per esempio, le parole piu&#x27; frequenti.</p><h3 id="comandi-utili">Comandi utili</h3><table><thead><tr><th>Comando</th><th>Uso tipico</th></tr></thead><tbody><tr><td><code>cat file.txt</code></td><td>mostra tutto il file</td></tr><tr><td><code>less file.txt</code></td><td>scorre il file una schermata alla volta</td></tr><tr><td><code>head file.txt</code></td><td>mostra l&#x27;inizio del file</td></tr><tr><td><code>tail file.txt</code></td><td>mostra la fine del file</td></tr><tr><td><code>grep pattern file.txt</code></td><td>filtra solo le righe che contengono un pattern</td></tr><tr><td><code>cut ...</code></td><td>seleziona campi o colonne</td></tr><tr><td><code>sort</code></td><td>ordina le righe</td></tr><tr><td><code>uniq</code> / <code>uniq -c</code></td><td>elimina duplicati consecutivi o li conta</td></tr><tr><td><code>wc</code></td><td>conta righe, parole o caratteri</td></tr></tbody></table><h3 id="pipe-loutput-di-un-comando-diventa-linput-del-successivo">Pipe: l&#x27;output di un comando diventa l&#x27;input del successivo</h3><p>Il punto chiave della lezione e&#x27; la pipe <code>|</code>:</p><pre><code class="language-bash">cat alice.txt | tr &#x27; &#x27; &#x27;\n&#x27;</code></pre><p>Qui stiamo dicendo:</p><ol><li>leggi il contenuto del file;</li><li>passa il risultato al comando successivo;</li><li>sostituisci gli spazi con un carattere di nuova riga.</li></ol><p>Il risultato non e&#x27; ancora &quot;l&#x27;analisi finale&quot;, ma una rappresentazione del testo che puo&#x27; essere piu&#x27; comoda da elaborare con gli strumenti successivi.</p><h3 id="salvare-risultati-intermedi">Salvare risultati intermedi</h3><p>Una buona pratica emersa molto chiaramente nella lezione e&#x27; questa:</p><ul><li>quando una pipeline cresce, conviene spesso salvare un risultato intermedio;</li><li>cosi&#x27; non devi ripartire ogni volta da zero;</li><li>puoi controllare meglio dove si introduce un errore.</li></ul><p>Per esempio:</p><pre><code class="language-bash">cat alice.txt | tr &#x27; &#x27; &#x27;\n&#x27; &gt; parole.txt
-sort parole.txt &gt; parole-ordinate.txt</code></pre><p>Dal punto di vista concettuale e&#x27; la stessa logica che poi ritroviamo in Python:</p><ul><li>trasformare l&#x27;input a piccoli passi;</li><li>osservare lo stato intermedio;</li><li>non trattare il programma come una scatola nera.</li></ul><h3 id="cat-non-basta-sempre"><code>cat</code> non basta sempre</h3><p>La lezione insisteva anche su un dettaglio pratico:</p><ul><li><code>cat</code> va bene per file piccoli;</li><li>su file lunghi e&#x27; spesso piu&#x27; utile <code>less</code>, <code>head</code> o <code>tail</code>.</li></ul><p>Questo perche&#x27; il problema non e&#x27; solo &quot;eseguire il comando&quot;, ma riuscire davvero a leggere il risultato.</p><h3 id="perche-fare-questo-se-poi-useremo-python">Perche&#x27; fare questo se poi useremo Python?</h3><p>La risposta data a lezione era molto pragmatica:</p><ul><li>nella pratica reale, molte elaborazioni strutturate conviene poi farle in Python;</li><li>ma la shell aiuta a capire il procedimento logico;</li><li>permette di sperimentare rapidamente su file reali;</li><li>costringe a ragionare in termini di input, output e trasformazioni successive.</li></ul><p>Per questo le utility da terminale sono utili nel corso non come fine a se stesse, ma come ponte tra:</p><ul><li>file reali;</li><li>trasformazioni testuali;</li><li>progettazione di programmi piu&#x27; completi.</li></ul><hr><a id="mod8-formati"></a>
+    <h2 id="for-e-while-nello-stesso-esercizio"><code>for</code> e <code>while</code> nello stesso esercizio</h2><p>Se usi sia <code>for</code> sia <code>while</code>, chiediti sempre:</p><ul><li>quale dei due controlla la struttura principale del problema;</li><li>quale variabile governa davvero la terminazione;</li><li>se stai riusando male la stessa variabile in due ruoli diversi.</li></ul><p>Quando il comportamento e&#x27; confuso, conviene tracciare a mano i valori a ogni iterazione.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="dal-file-al-testo-tokenizzato">Dal file al testo tokenizzato</h2><p>Il notebook 3 mostrava diversi esercizi sul passaggio:</p><ol><li>aprire un file;</li><li>leggere il contenuto;</li><li>separare righe, frasi o parole;</li><li>costruire strutture dati utili.</li></ol><p>Esempio con <code>split()</code>:</p><pre><code class="language-python">parole = []
-
-with open(&quot;data/le_notti_bianche.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_incipit:
-    for line in file_incipit:
-        line_split = line.strip().split()
-        parole.extend(line_split)</code></pre><p>Questo schema permette gia&#x27; di calcolare:</p><ul><li>numero di parole;</li><li>parola piu&#x27; lunga;</li><li>lunghezza media;</li><li>vocabolario.</li></ul><p>La terza lezione aggiungeva un&#x27;osservazione importante:</p><ul><li><code>read()</code> e <code>readlines()</code> caricano molto contenuto in memoria;</li><li>per file piccoli va bene;</li><li>per corpus o testi grandi conviene spesso leggere riga per riga con <code>for line in file_handler</code>.</li></ul><p>Questa scelta riduce il consumo di memoria e rende il codice piu&#x27; robusto su dati reali.</p><h3 id="read-readlines-e-iterazione"><code>read()</code>, <code>readlines()</code> e iterazione</h3><p>La lezione confrontava tre modi tipici di lavorare sul contenuto:</p><pre><code class="language-python">contenuto = file_handler.read()
-righe = file_handler.readlines()
-
-for line in file_handler:
-    ...</code></pre><p>Differenza pratica:</p><ul><li><code>read()</code> prende tutto il contenuto come una stringa unica;</li><li><code>readlines()</code> costruisce una lista di righe;</li><li><code>for line in file_handler</code> legge progressivamente una riga alla volta.</li></ul><p>Per file piccoli possono andare bene tutte e tre. Per testi piu&#x27; grandi, la lettura riga per riga e&#x27; spesso la soluzione piu&#x27; pulita.</p><p>La lezione dell&#x27;<code>11 marzo 2026</code> mostrava anche un quarto modo di ragionare sul problema:</p><ul><li>leggere tutto come una stringa;</li><li>poi trasformare esplicitamente quella stringa con <code>split(...)</code>.</li></ul><p>Per esempio:</p><pre><code class="language-python">contenuto = file_handler.read()
-righe = contenuto.split(&quot;\n&quot;)</code></pre><p>oppure, se il file e&#x27; separato da tabulazioni:</p><pre><code class="language-python">campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Questo e&#x27; utile per capire che:</p><ul><li>il file non &quot;contiene gia&#x27; una lista&quot;;</li><li>siamo noi a scegliere quale segmentazione applicare;</li><li>newline e tab sono caratteri speciali che nel codice si scrivono come <code>\n</code> e <code>\t</code>.</li></ul><h3 id="esempi-di-esercizi-del-notebook-3">Esempi di esercizi del notebook 3</h3><ul><li>stampare il file tutto su una riga;</li><li>stampare una frase per riga;</li><li>stampare una parola per riga;</li><li>costruire il vocabolario del testo;</li><li>confrontare due testi parola per parola.</li></ul><h3 id="testo-non-strutturato-e-pattern">Testo non strutturato e pattern</h3><p>La trascrizione <code>10.srt</code> aggiungeva un punto molto utile per chi lavora con testi reali:</p><ul><li>spesso il testo non e&#x27; gia&#x27; strutturato;</li><li>non vogliamo cercare una parola sola;</li><li>vogliamo cercare una <strong>classe di stringhe</strong>: date, numeri, parole con un prefisso, sequenze fatte in un certo modo.</li></ul><p>Qui entrano in gioco le <strong>espressioni regolari</strong>.</p><p>In modo intuitivo, una regex e&#x27; una scrittura che descrive un pattern. Per esempio:</p><ul><li>trovare tutte le parole che iniziano con <code>contro</code>;</li><li>trovare tutte le sequenze di cifre;</li><li>eliminare spazi ripetuti o altri caratteri indesiderati.</li></ul><p>Il punto didattico della lezione non era memorizzare subito tutta la sintassi, ma capire l&#x27;idea:</p><blockquote><p>una regex non descrive una singola stringa, ma un insieme di stringhe con una certa forma.</p></blockquote><h3 id="quantificatori-e-classi-di-caratteri">Quantificatori e classi di caratteri</h3><p>Le prime due famiglie di strumenti introdotte a lezione erano:</p><ul><li>i <strong>quantificatori</strong>, che dicono quante volte puo&#x27; comparire qualcosa;</li><li>le <strong>classi di caratteri</strong>, che dicono quali caratteri sono ammessi in uno slot.</li></ul><p>Esempi tipici:</p><table><thead><tr><th>Pattern</th><th>Intuizione</th></tr></thead><tbody><tr><td><code>a+</code></td><td>una o piu&#x27; <code>a</code> consecutive</td></tr><tr><td><code>a*</code></td><td>zero o piu&#x27; <code>a</code></td></tr><tr><td><code>\\d+</code></td><td>una o piu&#x27; cifre</td></tr><tr><td><code>\\s+</code></td><td>uno o piu&#x27; spazi bianchi</td></tr><tr><td><code>contro.*</code></td><td>una stringa che comincia con <code>contro</code></td></tr></tbody></table><p>La lezione insisteva anche su un dettaglio pratico importante:</p><ul><li>molti strumenti ragionano riga per riga;</li><li>il ritorno a capo e&#x27; spesso una barriera forte;</li><li>su file diversi possono comparire fine-riga diversi, come <code>\\n</code> oppure <code>\\r\\n</code>.</li></ul><p>Questo spiega perche&#x27; a volte una regex &quot;giusta in teoria&quot; non trova quello che ci aspettiamo su un file reale.</p><h3 id="regex-e-python">Regex e Python</h3><p>Nel corso basta arrivare a una lettura elementare di questo tipo:</p><pre><code class="language-python">import re
-
-testo = &quot;Angela e&#x27; nata nel 1961 e vive a Bologna.&quot;
-anni = re.findall(r&quot;\\d+&quot;, testo)
-print(anni)</code></pre><p>Qui <code>findall</code> restituisce tutte le sottostringhe che rispettano il pattern.</p><p>Altri esempi vicini agli usi discussi a lezione:</p><pre><code class="language-python">re.findall(r&quot;contro\\w*&quot;, testo)
-re.findall(r&quot;\\d+&quot;, testo)
-re.sub(r&quot;\\s+&quot;, &quot; &quot;, testo)</code></pre><p>Questi esempi bastano per fissare tre usi di base:</p><ul><li>estrarre;</li><li>contare;</li><li>sostituire.</li></ul><h3 id="quando-conviene-usare-una-regex">Quando conviene usare una regex</h3><p>Regola pratica:</p><ul><li>se ti basta dividere sulle spaziature, <code>split()</code> resta spesso piu&#x27; semplice;</li><li>se devi riconoscere forme piu&#x27; flessibili, la regex diventa utile;</li><li>se il pattern richiede memoria strutturale piu&#x27; complessa, una regex potrebbe non bastare o diventare poco leggibile.</li></ul><p>Questo si collega bene a un&#x27;idea gia&#x27; vista nel corso:</p><ul><li>scegliere lo strumento giusto dipende dalla forma del dato e dalla domanda che stiamo facendo;</li><li>non ogni problema testuale va risolto con la stessa tecnica.</li></ul><hr><a id="mod8-vocabolario"></a>
+    <h2 id="caratteri-di-escape-e-stampa">Caratteri di escape e stampa</h2><p>Alcuni caratteri speciali utili quando si prepara output:</p><table><thead><tr><th>Sequenza</th><th>Effetto</th></tr></thead><tbody><tr><td><code>\\n</code></td><td>nuova riga</td></tr><tr><td><code>\\t</code></td><td>tabulazione</td></tr><tr><td><code>\&quot;</code> o <code>\&#x27;</code></td><td>virgolette dentro una stringa</td></tr></tbody></table><p>Esempi:</p><pre><code class="language-python">print(&quot;hello\nworld&quot;)
+print(&quot;a\tb&quot;)
+print(&quot;\&quot;print\&quot;&quot;)</code></pre><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="dal-testo-al-vocabolario">Dal testo al vocabolario</h2><p>Il notebook 3 conteneva una piccola sequenza di analisi testuale sul file delle <em>Notti bianche</em>:</p><ol><li>lunghezza del testo;</li><li>parola piu&#x27; lunga;</li><li>lunghezza media delle parole;</li><li>vocabolario e sua dimensione.</li></ol><p>Esempio di conteggio:</p><pre><code class="language-python">numero_parole = 0
-
-with open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_incipit:
-    for line in file_incipit:
-        parole = line.strip().split()
-        numero_parole += len(parole)</code></pre><p>Esempio di parola piu&#x27; lunga:</p><pre><code class="language-python">parola_lunga = &quot;&quot;
-
-with open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_incipit:
-    for line in file_incipit:
-        for parola in line.strip().split():
-            if len(parola) &gt; len(parola_lunga):
-                parola_lunga = parola</code></pre><p>Questi esempi sono importanti perche&#x27; mostrano come combinare:</p><ul><li>file;</li><li>stringhe;</li><li>liste;</li><li><code>for</code>;</li><li>confronti e accumuli.</li></ul><hr>
+    <h2 id="esercizi">Esercizi</h2><h3 id="base">Base</h3><ol><li>stampa i numeri da 0 a 9;</li><li>stampa i numeri da 25 a 34;</li><li>stampa 10 volte una stessa stringa.</li></ol><h3 id="stringhe-e-liste">Stringhe e liste</h3><ol><li>stampa una parola lettera per lettera;</li><li>stampa una parola lettera per lettera indicando anche la posizione;</li><li>stampa solo i caratteri in posizione pari;</li><li>trasforma una lista di parole in minuscolo.</li></ol><h3 id="cicli-annidati">Cicli annidati</h3><ol><li>stampa un triangolo di numeri;</li><li>stampa un quadrato di <code>+</code> di lato <code>n</code>;</li><li>stampa un rettangolo di base <code>n</code> e altezza <code>m</code>;</li><li>costruisci pattern diversi cambiando l&#x27;indice usato nel ciclo interno.</li></ol><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="scrivere-su-un-file">Scrivere su un file</h2><p>Il notebook 3 mostrava anche la forma base di scrittura:</p><pre><code class="language-python">nome_file = &quot;data/file_in_output.txt&quot;
-
-with open(nome_file, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;hello world&quot;, file=file_output)</code></pre><p>Attenzione pratica:</p><ul><li>se apri in modalita&#x27; <code>w</code>, il contenuto precedente viene sovrascritto;</li><li>il nome del file e&#x27; sempre una stringa che rappresenta un percorso.</li></ul><p>La terza lezione metteva un avviso molto netto su questo punto:</p><blockquote><p>se il file esiste gia&#x27;, aprirlo in <code>w</code> lo sostituisce senza chiedere conferma</p></blockquote><p>Quindi scrivere su file richiede attenzione doppia rispetto alla lettura.</p><p>La trascrizione mostrava anche un&#x27;idea molto utile:</p><ul><li><code>print(...)</code> di default scrive sullo <strong>standard output</strong>;</li><li>cioe&#x27; sul canale che il terminale ci mostra a schermo;</li><li>ma con <code>file=...</code> possiamo mandare lo stesso output in un file aperto.</li></ul><p>Esempio:</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;ciao&quot;, file=file_output)</code></pre><p>Questo e&#x27; interessante perche&#x27; unifica due casi che sembrano diversi:</p><ul><li>stampare nel terminale;</li><li>scrivere su file.</li></ul><p>In entrambi i casi stiamo producendo output testuale; cambia solo la destinazione.</p><p>La lezione metteva anche a confronto due strategie diverse:</p><ol><li>usare il sistema operativo per ridirigere l&#x27;output:</li></ol><pre><code class="language-bash">python3 script.py &gt; output.txt</code></pre><ol><li>aprire esplicitamente un file di output in Python:</li></ol><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;ciao&quot;, file=file_output)</code></pre><p>Le due strade servono a scopi simili, ma non sono la stessa cosa:</p><ul><li>nel primo caso e&#x27; la shell che intercetta lo standard output;</li><li>nel secondo caso e&#x27; il programma Python che decide dove scrivere.</li></ul><p>Quando il programma cresce, la seconda soluzione e&#x27; spesso piu&#x27; controllabile.</p><h3 id="perche-usare-with">Perche&#x27; usare <code>with</code></h3><p>Un altro punto esplicitato nella trascrizione:</p><ul><li>senza <code>with</code> dobbiamo ricordarci di chiudere il file a mano;</li><li>se ci dimentichiamo, soprattutto in scrittura, possiamo creare comportamenti confusi o perdere controllo sul flusso;</li><li><code>with</code> automatizza apertura e chiusura del file nel blocco giusto.</li></ul><p>Per questo nel corso conviene trattare:</p><pre><code class="language-python">with open(...):
-    ...</code></pre><p>come forma standard.</p><h3 id="un-file-letto-una-volta-non-si-riavvolge-da-solo">Un file letto una volta non si &quot;riavvolge&quot; da solo</h3><p>La trascrizione mostrava anche che, se scorriamo un file fino in fondo, poi non basta rieseguire lo stesso ciclo sullo stesso oggetto aperto per leggerlo di nuovo dall&#x27;inizio.</p><p>In pratica:</p><ul><li>il puntatore di lettura avanza;</li><li>quando arriva in fondo, il file risulta esaurito;</li><li>per rileggere da capo conviene riaprirlo.</li></ul><p>Anche questo e&#x27; un buon motivo per preferire blocchi <code>with</code> separati per operazioni distinte.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="file-strip-e-conversione-dei-valori">File, <code>strip()</code> e conversione dei valori</h2><p>La terza lezione lavorava anche su un esercizio semplice ma molto istruttivo:</p><ul><li>leggere un file con un numero per riga;</li><li>sommare tutti i numeri presenti.</li></ul><p>Il punto didattico non era la somma in se&#x27;, ma gli ostacoli reali:</p><ul><li>ogni riga letta e&#x27; una stringa;</li><li>puo&#x27; contenere il carattere di fine riga;</li><li>il numero puo&#x27; essere intero o decimale.</li></ul><p>Per questo diventano utili insieme:</p><ul><li><code>line.strip()</code> per togliere spazi e fine riga ai bordi;</li><li><code>int(...)</code> oppure <code>float(...)</code> per convertire il testo nel tipo numerico giusto.</li></ul><p>Schema tipico:</p><pre><code class="language-python">somma = 0.0
-
-with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
-    for line in file_in:
-        somma = somma + float(line.strip())</code></pre><p>Questo esercizio e&#x27; importante perche&#x27; mette insieme:</p><ul><li>file;</li><li>stringhe;</li><li>caratteri invisibili come il ritorno a capo;</li><li>casting;</li><li>accumulo in una variabile.</li></ul><h3 id="formatted-strings-per-output-leggibile">Formatted strings per output leggibile</h3><p>Nella stessa lezione comparivano anche le formatted strings come strumento pratico per rendere leggibili risultati e colonne.</p><p>Esempio semplice:</p><pre><code class="language-python">parola = &quot;alice&quot;
-frequenza = 145
-
-print(f&quot;{parola}\t{frequenza}&quot;)</code></pre><p>oppure, se vogliamo colonne piu&#x27; regolari:</p><pre><code class="language-python">print(f&quot;{parola:20}{frequenza}&quot;)</code></pre><p>Il dettaglio sintattico non e&#x27; la cosa piu&#x27; importante all&#x27;inizio. Il punto didattico e&#x27; questo:</p><ul><li>quando produciamo output strutturato, la leggibilita&#x27; conta;</li><li>formattare bene l&#x27;output rende piu&#x27; facile controllare se il programma sta facendo la cosa giusta.</li></ul><h3 id="input-e-output-da-riga-di-comando">Input e output da riga di comando</h3><p>La trascrizione chiudeva con un altro passaggio molto utile: non fissare dentro il codice un solo file di input e un solo file di output.</p><p>Invece di scrivere sempre:</p><pre><code class="language-python">nome_file = &quot;alice.txt&quot;</code></pre><p>si puo&#x27; far arrivare il nome del file dall&#x27;esterno, per esempio tramite <code>sys.argv</code>.</p><p>Schema minimo:</p><pre><code class="language-python">import sys
-
-nome_input = sys.argv[1]
-nome_output = sys.argv[2]</code></pre><p>Questo permette di riusare lo stesso programma su file diversi senza modificarne il sorgente ogni volta.</p><p>Dal terminale:</p><pre><code class="language-bash">python3 frequenze.py alice.txt output.txt</code></pre><p>La lezione insisteva giustamente sul fatto che:</p><ul><li><code>input()</code> legge una stringa interattiva;</li><li><code>sys.argv</code> legge i parametri con cui il programma e&#x27; stato lanciato;</li><li>sono due meccanismi diversi e vanno scelti in base al tipo di interazione che vogliamo.</li></ul><p>La stessa trascrizione aggiungeva un passaggio importante:</p><ul><li><code>sys.argv</code> e&#x27; una lista;</li><li>in posizione <code>0</code> c&#x27;e&#x27; il nome dello script Python;</li><li>da <code>1</code> in poi ci sono i parametri passati da terminale.</li></ul><p>Quindi, se vogliamo lavorare su molti file, possiamo prendere una sottolista:</p><pre><code class="language-python">files = sys.argv[1:]
-
-for nome_file in files:
-    ...</code></pre><p>Questo permette di scrivere programmi che funzionano su uno o piu&#x27; file senza modificare il sorgente.</p><h3 id="nota-sulla-codifica">Nota sulla codifica</h3><p>Qui teniamo solo il punto generale che emergeva dalla lezione:</p><ul><li>se un file mostra caratteri strani o illeggibili, uno dei possibili colpevoli e&#x27; l&#x27;encoding;</li><li>oggi <code>utf-8</code> e&#x27; spesso la scelta giusta;</li><li>ma quando qualcosa non torna, la codifica e&#x27; una delle prime cose da controllare.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-assegnati-su-file-e-trasformazioni">Esercizi assegnati su file e trasformazioni</h2><p>Dagli esercizi assegnati emergono anche alcune trasformazioni molto utili per questo modulo:</p><ol><li>leggere un file e produrre un secondo file con tutte le righe in minuscolo e senza righe vuote;</li><li>leggere un file riga per riga e copiare solo le righe che contengono una certa parola;</li><li>contare righe, parole e caratteri di un file;</li><li>confrontare il vocabolario di due file.</li></ol><p>Questi esercizi mostrano bene come combinare:</p><ul><li>lettura sequenziale;</li><li>stringhe;</li><li>liste e set;</li><li>scrittura di file in output.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="escape-nelle-stringhe-stampate">Escape nelle stringhe stampate</h2><p>Nel notebook 2 compariva anche un piccolo approfondimento pratico sulle stringhe usate nel <code>print</code>:</p><table><thead><tr><th>Sequenza</th><th>Significato</th></tr></thead><tbody><tr><td><code>\&quot;</code> o <code>\&#x27;</code></td><td>virgolette dentro una stringa</td></tr><tr><td><code>\n</code></td><td>nuova riga</td></tr><tr><td><code>\t</code></td><td>tabulazione</td></tr></tbody></table><p>Esempi:</p><pre><code class="language-python">print(&quot;\&quot;&quot;)
-print(&quot;hello\nworld&quot;)
-print(&quot;hello\tworld&quot;)</code></pre><p>Questo non e&#x27; il cuore del modulo, ma e&#x27; molto utile quando i cicli producono output strutturato.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-recuperati-dal-notebook">Esercizi recuperati dal notebook</h2><h3 id="base">Base</h3><ol><li>stampa i numeri da 0 a 9;</li><li>stampa i numeri da 25 a 34;</li><li>stampa 10 volte la stringa <code>&quot;Adoro programmare in Python!&quot;</code>.</li></ol><h3 id="filtri-e-condizioni">Filtri e condizioni</h3><ol><li>stampa da 1 a 100 saltando i multipli di 5;</li><li>stampa da 1 a 100 saltando i multipli di 3 e 5;</li><li>stampa da 1 a 100 saltando i multipli di 3 e 5, ma includendo quelli multipli di entrambi.</li></ol><h3 id="stringhe-e-liste">Stringhe e liste</h3><ol><li>stampa i caratteri in posizione dispari di una stringa;</li><li>scrivi una funzione che restituisce la lista dei numeri da <code>n</code> a <code>m - 1</code>;</li><li>scrivi una funzione che restituisce i numeri pari da <code>N</code> a <code>0</code>;</li><li>data una stringa, restituisci solo le consonanti.</li></ol><h3 id="output-strutturato">Output strutturato</h3><ol><li>stampa un quadrato di <code>+</code> di lato <code>n</code>;</li><li>stampa triangoli e triangoli invertiti;</li><li>generalizza a rettangoli e trapezi con base <code>n</code> e altezza <code>m</code>.</li></ol><h3 id="liste">Liste</h3><ol><li>controlla se una lista contiene la parola <code>&quot;linguistica&quot;</code>;</li><li>restituisci la posizione di <code>&quot;linguistica&quot;</code> oppure <code>-1</code>;</li><li>inserisci <code>&quot;linguistica&quot;</code> in posizione <code>p</code>;</li><li>unione senza ripetizioni di due liste;</li><li>intersezione di due liste;</li><li>date una lista e una parola, stampa tutte le occorrenze insieme al contesto vicino.</li></ol><h3 id="file-e-testi">File e testi</h3><ol><li>leggi un file di numeri e calcolane la somma;</li><li>leggi un file testuale e stampalo su una sola riga;</li><li>stampa le parole di un testo una per riga;</li><li>costruisci il vocabolario di un testo;</li><li>confronta le parole presenti in due testi diversi.</li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Dal notebook 2 questo modulo recupera il nucleo dell&#x27;iterazione con <code>for</code>:</p><ul><li>motivazione del costrutto;</li><li>sintassi e semantica;</li><li>uso di <code>range()</code>;</li><li>tracciamento della variabile di iterazione;</li><li>lettura e scrittura di file di testo;</li><li>prime analisi sul vocabolario di un testo;</li><li>esercizi graduali su numeri, stringhe, pattern testuali, liste e file.</li></ul>
+    <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il nucleo dell&#x27;iterazione con <code>for</code>:</p><ul><li>sintassi e semantica;</li><li>uso di <code>range()</code>;</li><li>tracciamento della variabile di iterazione;</li><li>scansioni, trasformazioni e accumuli;</li><li>cicli annidati e pattern di stampa.</li></ul>
   </div>
 </section>
 
@@ -320,7 +234,7 @@ print(&quot;hello\tworld&quot;)</code></pre><p>Questo non e&#x27; il cuore del m
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 20</div>
+  <div class="counter" id="counter">1 / 15</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

@@ -17,7 +17,7 @@ Al termine di questo modulo saprai:
 <a id="mod5-liste"></a>
 ## Liste: collezioni ordinate di elementi
 
-Il notebook 2 introduceva le liste come **collezioni ordinate di elementi**.
+Le liste sono **collezioni ordinate di elementi**.
 
 Esempi:
 
@@ -36,7 +36,7 @@ Una lista:
 - puo' contenere qualunque tipo di valore;
 - puo' contenere anche altre liste.
 
-La trascrizione della seconda lezione aggiungeva una metafora utile: se i valori semplici erano come barattoli sparsi in dispensa, la lista e' piu' simile a un **archivio ordinato**.
+Una metafora utile e' questa: se i valori semplici erano come barattoli sparsi in dispensa, la lista e' piu' simile a un **archivio ordinato**.
 
 Questo significa che:
 
@@ -63,7 +63,7 @@ Esempio intuitivo:
 
 > Anche qui si conta a partire da zero.
 
-La seconda lezione insisteva anche su una buona pratica importante:
+Conviene anche seguire una buona pratica importante:
 
 - Python permette liste eterogenee;
 - ma nella pratica conviene quasi sempre costruire liste omogenee.
@@ -76,7 +76,7 @@ Quindi, di norma, meglio:
 
 piuttosto che mescolare tutto senza motivo.
 
-Il motivo e' pragmatico: piu' avanti vorremo applicare operazioni uniformi a tutti gli elementi, e questo e' molto piu' semplice se hanno lo stesso tipo.
+Il motivo e' pragmatico: e' piu' semplice applicare operazioni uniformi a tutti gli elementi se hanno lo stesso tipo.
 
 Esempi:
 
@@ -97,7 +97,7 @@ len(["a", "b"])
 
 ## `split()` e prime trasformazioni
 
-Nel notebook 2 compariva subito una nuova operazione importante sulle stringhe:
+Una nuova operazione importante sulle stringhe e' questa:
 
 ```python
 incipit = "Era una notte incantevole, una di quelle notti..."
@@ -113,7 +113,7 @@ Questo passaggio e' fondamentale per molti problemi:
 - leggere parole una per volta;
 - passare da un dato "compatto" a una struttura manipolabile.
 
-La seconda lezione chiariva molto bene perche' questo passaggio e' cosi' importante per chi lavora su testi:
+Questo passaggio e' cosi' importante per chi lavora su testi perche':
 
 - un file o una stringa ci arrivano inizialmente come sequenza di caratteri;
 - ma per molte analisi linguistiche vogliamo lavorare parola per parola;
@@ -141,7 +141,7 @@ Risultato:
 
 ### Attenzione: `split()` taglia dove gli diciamo di tagliare
 
-La trascrizione mostrava anche un punto molto importante: l'unita' che otteniamo dipende dalla regola di segmentazione che stiamo usando.
+Un punto molto importante e' questo: l'unita' che otteniamo dipende dalla regola di segmentazione che stiamo usando.
 
 Con `split()` senza argomenti:
 
@@ -185,7 +185,7 @@ Per ora il punto chiave e' questo:
 <a id="mod5-redirezione"></a>
 ## Redirezione dell'input e sorgenti dei dati
 
-Nel programma del corso il modulo 5 include anche la redirezione dell'input. Il notebook 2 la prepara indirettamente mostrando come trattare dati testuali gia' disponibili come sequenze.
+Nel programma del corso il modulo 5 include anche la redirezione dell'input. Qui la prepariamo trattando dati testuali gia' disponibili come sequenze.
 
 Concettualmente:
 
@@ -225,7 +225,7 @@ Questo punto e' molto utile didatticamente perche' chiarisce che:
 - il programma legge uno stream di righe;
 - possiamo testare meglio i programmi preparando input ripetibili.
 
-La trascrizione della lezione aggiungeva due osservazioni pratiche molto utili:
+Due osservazioni pratiche molto utili:
 
 - `input()` legge sempre testo, quindi se ci servono numeri dobbiamo convertire con `int(...)` o `float(...)`;
 - il file passato con `<` non viene "capito" da Python come file speciale: per il programma e' semplicemente una sorgente di input riga per riga.
@@ -249,7 +249,7 @@ Questo e' molto utile per:
 - confrontare facilmente l'output prodotto con quello atteso;
 - conservare esempi di esecuzione ripetibili.
 
-La lezione mostrava anche che queste redirezioni si possono combinare:
+Queste redirezioni si possono anche combinare:
 
 - il programma legge da uno stream di input;
 - produce uno stream di output;
@@ -285,11 +285,9 @@ Questi esercizi stanno bene qui perche' combinano:
 
 ## Riepilogo
 
-Dal notebook 2 questo modulo recupera il nucleo sulle liste:
+Questo modulo raccoglie il nucleo sulle liste:
 
 - definizione di lista come collezione ordinata;
 - operazioni elementari;
 - relazione tra stringhe e liste tramite `split()`;
 - accumulo di dati in una struttura ordinata.
-
-Il comportamento in memoria delle liste verra' approfondito nel modulo 7.

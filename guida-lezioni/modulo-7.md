@@ -16,7 +16,7 @@ Al termine di questo modulo saprai:
 <a id="mod7-memoria-liste"></a>
 ## Liste e memoria: il caso speciale
 
-Nel notebook 2 compariva il passaggio cruciale da:
+Il passaggio cruciale e' da:
 
 ```python
 a = 1
@@ -46,7 +46,7 @@ Questo significa che modificare la lista tramite uno dei due nomi modifica l'ogg
 
 ## Alias e modifiche condivise
 
-Esempio classico del notebook:
+Esempio classico:
 
 ```python
 a = [1, 2, 3]
@@ -76,7 +76,7 @@ La seconda lezione spiegava questo fenomeno in termini di memoria:
 - viene memorizzato un riferimento a una zona di memoria dove quella lista vive;
 - quindi con `b = a` non stiamo duplicando la lista, stiamo duplicando quel riferimento.
 
-La lezione del `18 marzo 2026` lo spiegava con una metafora ancora piu' concreta:
+Una metafora ancora piu' concreta:
 
 - per un valore semplice come un intero possiamo immaginare un cassetto che contiene direttamente il valore;
 - per una lista il cassetto contiene soprattutto un indirizzo;
@@ -96,7 +96,7 @@ Questo spiega perche' una modifica fatta tramite `b` resta visibile anche tramit
 
 Quando vuoi evitare aliasing, devi costruire una copia.
 
-Nel notebook compariva anche l'uso di `copy`:
+Serve anche l'uso di `copy`:
 
 ```python
 import copy
@@ -110,7 +110,7 @@ Nel modello introduttivo del corso, il punto importante e' questo:
 - assegnare `b = a` non copia;
 - copiare significa creare un nuovo oggetto indipendente.
 
-Nella trascrizione il punto veniva mostrato proprio con:
+Il punto si vede bene con:
 
 ```python
 a = [1, 2, 3]
@@ -176,7 +176,7 @@ Predici l'output prima di eseguirlo.
 
 ## Riepilogo
 
-Dal notebook 2 questo modulo recupera la parte sulle liste e la memoria:
+Questo modulo raccoglie la parte sulle liste e la memoria:
 
 - differenza tra valori immutabili e liste mutabili;
 - aliasing;

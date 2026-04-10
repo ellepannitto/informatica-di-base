@@ -18,7 +18,7 @@ Al termine di questo modulo saprai:
 <a id="mod4-while"></a>
 ## Il problema che porta al `while`
 
-Il quarto notebook storico partiva da una domanda semplice:
+Il modulo parte da una domanda semplice:
 
 > come si itera quando non sappiamo prima quante volte dovremo ripetere il blocco?
 
@@ -26,7 +26,7 @@ Con `for` sappiamo gia' quante iterazioni vogliamo o quale sequenza stiamo scorr
 
 Con `while`, invece, la ripetizione continua finche' una condizione resta vera.
 
-Esempio del notebook:
+Esempio:
 
 ```python
 lista_nomi = []
@@ -70,7 +70,7 @@ Per questo ogni `while` va letto sempre in termini di:
 - aggiornamento dello stato;
 - condizione di uscita.
 
-La quarta lezione insisteva su un punto pratico:
+Un punto pratico importante:
 
 - con `for` di solito sappiamo gia' quante volte iterare oppure quale sequenza stiamo scorrendo;
 - con `while` la domanda tipica e' invece: "continuo finche' non succede qualcosa che mi fa fermare".
@@ -178,7 +178,7 @@ Qui il ciclo non accumula dati: controlla che lo stato rientri nei vincoli del p
 <a id="mod4-errori"></a>
 ## Errori tipici dei cicli `while`
 
-Il notebook 4 rendeva molto chiaro che i problemi tipici sono quasi sempre tre.
+I problemi tipici sono quasi sempre tre.
 
 | Errore | Che cosa succede |
 | --- | --- |
@@ -211,7 +211,7 @@ Domanda da farsi sempre:
 
 > quale variabile sta portando il ciclo verso la terminazione?
 
-La trascrizione dell'`11 marzo 2026` mostrava bene due errori tipici nei `while` di stampa:
+Due errori tipici nei `while` di stampa sono questi:
 
 - dimenticare l'aggiornamento della variabile interna, per esempio `j += 1`;
 - scrivere una guardia troppo debole, come `while 1 < n`, che non dipende davvero dallo stato del ciclo.
@@ -260,9 +260,9 @@ Questa lettura collega bene:
 
 ---
 
-## Esercizi recuperati dal notebook 4
+## Esercizi utili
 
-Dal notebook 4 conviene recuperare soprattutto questi esercizi:
+Conviene lavorare soprattutto su questi esercizi:
 
 1. leggere parole da un file e fermarsi alla prima parola piu' lunga di 6 caratteri;
 2. leggere frasi e fermarsi dopo 100 parole;
@@ -412,7 +412,7 @@ In pratica, e' un automa a stati finiti travestito da gioco.
 
 ## Esercizi di stampa con `while`
 
-Nella lezione dell'`11 marzo 2026` sono comparsi anche esercizi molto utili per capire davvero come evolve lo stato in un ciclo:
+Ci sono anche esercizi molto utili per capire davvero come evolve lo stato in un ciclo:
 
 - stampare `1`, poi `22`, poi `333`, fino a `n`;
 - stampare triangoli o pattern numerici usando due cicli annidati;
@@ -435,7 +435,7 @@ Se usi `i` per costruire la stringa ottieni un risultato; se usi `j`, ne ottieni
 
 ## Riepilogo
 
-Dal notebook 4 questo modulo recupera e organizza il materiale su:
+Questo modulo organizza il materiale su:
 
 - significato del ciclo `while`;
 - iterazione a terminazione non nota in anticipo;

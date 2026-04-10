@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 10 · Dizionari, set e organizzazione dell&#x27;informazione</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="modulo-10-dizionari-set-e-organizzazione-dellinformazione">Modulo 10 · Dizionari, set e organizzazione dell&#x27;informazione</h1><hr><h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>usare i <code>dict</code> per associare chiavi e valori;</li><li>contare frequenze e raggruppare dati con i dizionari;</li><li>iterare su chiavi, valori e coppie chiave-valore;</li><li>usare i <code>set</code> come insiemi di elementi unici;</li><li>distinguere bene lista, dizionario e set;</li><li>applicare dizionari e set a problemi di lookup, frequenza, confronto e filtraggio.</li></ul><hr><a id="mod10-dizionari"></a><h2 id="dizionari-associare-chiavi-e-valori">Dizionari: associare chiavi e valori</h2><p>Un dizionario permette di associare:</p><ul><li>una <strong>chiave</strong>;</li><li>un <strong>valore</strong>.</li></ul><p>Nel caso delle frequenze:</p><ul><li>chiave -&gt; parola</li><li>valore -&gt; numero di occorrenze</li></ul><p>Esempi:</p><pre><code class="language-python">{}
+{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}
+{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;}
+{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}</code></pre><p>Idea chiave:</p><ul><li>la chiave deve essere immutabile;</li><li>il valore puo&#x27; essere di qualunque tipo;</li><li>il dizionario e&#x27; utile quando vuoi recuperare rapidamente un&#x27;informazione associata a una chiave.</li></ul><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista puo&#x27; contenere le stesse informazioni di un dizionario, ma nella lista il significato dei campi resta implicito nelle posizioni.</p><p>Per esempio:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 30]</code></pre><p>Con un dizionario:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 30}</code></pre><p>la struttura diventa piu&#x27; leggibile e meno fragile.</p><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>chiavi</td><td><code>D.keys()</code></td></tr><tr><td>valori</td><td><code>D.values()</code></td></tr><tr><td>coppie</td><td><code>D.items()</code></td></tr><tr><td>appartenenza di una chiave</td><td><code>k in D</code></td></tr><tr><td>accesso</td><td><code>D[k]</code></td></tr><tr><td>aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>cancellazione</td><td><code>del D[k]</code></td></tr><tr><td>numero di chiavi</td><td><code>len(D)</code></td></tr></tbody></table><hr><h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi:</p><pre><code class="language-python">for chiave in dizionario:
+    print(chiave, dizionario[chiave])</code></pre><p>Iterare direttamente su coppie chiave-valore:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
+    print(chiave, valore)</code></pre><p><code>items()</code> produce coppie del tipo <code>(chiave, valore)</code> che Python puo&#x27; spacchettare direttamente.</p><h3 id="valori-complessi">Valori complessi</h3><p>Il valore di un dizionario puo&#x27; essere anche una lista.</p><pre><code class="language-python">persona = {
+    &quot;nome&quot;: &quot;Ludovica&quot;,
+    &quot;cibi_preferiti&quot;: [&quot;pane&quot;, &quot;fiori di zucca&quot;],
+}</code></pre><p>In quel caso:</p><ul><li><code>persona[&quot;cibi_preferiti&quot;]</code> restituisce una lista;</li><li>quindi possiamo usare su quel valore i metodi delle liste, per esempio <code>append(...)</code>.</li></ul><hr><a id="mod10-frequenze"></a><h2 id="frequenze-e-distribuzioni">Frequenze e distribuzioni</h2><p>Schema base:</p><pre><code class="language-python">frequenze = {}
+
+for parola in testo_tokenizzato:
+    if parola in frequenze:
+        frequenze[parola] = frequenze[parola] + 1
+    else:
+        frequenze[parola] = 1</code></pre><p>Questo schema compare continuamente quando vogliamo:</p><ul><li>contare parole;</li><li>contare caratteri;</li><li>contare valori numerici;</li><li>costruire raggruppamenti e statistiche discrete.</li></ul><p>Versione che parte da un file:</p><pre><code class="language-python">frequenze = {}
+
+with open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_input:
+    for line in file_input:
+        for parola in line.strip().split():
+            if parola not in frequenze:
+                frequenze[parola] = 0
+            frequenze[parola] += 1</code></pre><h3 id="ordinare-le-frequenze">Ordinare le frequenze</h3><pre><code class="language-python">dizionario = {&quot;a&quot;: 5, &quot;b&quot;: 1, &quot;c&quot;: 3, &quot;d&quot;: 7}
+
+lista_ordinata = sorted(dizionario.items(), key=lambda x: x[1], reverse=True)</code></pre><p>Varianti utili:</p><pre><code class="language-python">sorted(dizionario.items(), key=lambda x: x[0])
+sorted(dizionario.items(), key=lambda x: x[1], reverse=True)</code></pre><hr><a id="mod10-set"></a><h2 id="set-insiemi-non-ordinati-di-elementi">Set: insiemi non ordinati di elementi</h2><p>I <code>set</code> sono insiemi non ordinati:</p><ul><li>non mantengono l&#x27;ordine;</li><li>non ammettono duplicati;</li><li>sono modificabili;</li><li>gli elementi al loro interno devono essere immutabili.</li></ul><p>Esempi:</p><pre><code class="language-python">{3, 4, 5, 6}
+{&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;}
+
+set(&quot;linguistica&quot;)
+set([&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;elefante&quot;])</code></pre><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Lunghezza</td><td><code>len(S)</code></td></tr><tr><td>Aggiunta</td><td><code>S.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>S.remove(x)</code></td></tr><tr><td>Unione</td><td>`S1</td><td>S2`</td></tr><tr><td>Intersezione</td><td><code>S1 &amp; S2</code></td></tr><tr><td>Differenza</td><td><code>S1 - S2</code></td></tr></tbody></table><p><code>set(lista_di_parole)</code> e&#x27; spesso il modo piu&#x27; rapido per passare da una sequenza di token al vocabolario.</p><hr><h2 id="appartenenza-e-operatore-in">Appartenenza e operatore <code>in</code></h2><p><code>in</code> e&#x27; l&#x27;operazione naturale quando la domanda e&#x27;:</p><blockquote><p>questo elemento c&#x27;e&#x27; oppure no?</p></blockquote><p>Esempio:</p><pre><code class="language-python">lista = [4, 2, 0, 2, 3, 5]
+insieme = {0, 2, 3, 4, 5}
+
+print(0 in lista)
+print(0 in insieme)</code></pre><p>Il significato logico e&#x27; lo stesso, ma il costo operativo non e&#x27; identico.</p><hr><a id="mod10-uso-strutture"></a><h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><ul><li>la <code>lista</code> conserva ordine e ripetizioni;</li><li>il <code>dict</code> associa chiavi e valori;</li><li>il <code>set</code> e&#x27; molto efficiente nei controlli di appartenenza.</li></ul><p>Per esempio:</p><ul><li>vocabolario senza ripetizioni -&gt; <code>set</code></li><li>sequenza da mantenere in ordine -&gt; <code>list</code></li><li>rubrica parola -&gt; frequenza -&gt; <code>dict</code></li><li>confronto tra parole presenti in due testi -&gt; <code>set</code></li></ul><p>La scelta dipende dal problema, non dal gusto personale.</p><hr><h2 id="esercizi">Esercizi</h2><ol><li>costruisci un dizionario con la media dei voti per ogni studente;</li><li>conta le occorrenze dei numeri in una lista casuale;</li><li>costruisci la distribuzione di frequenza di un testo;</li><li>ordina le coppie parola-frequenza;</li><li>data una lista di parole, costruisci il vocabolario;</li><li>date due liste, restituisci unione e intersezione;</li><li>confronta il vocabolario di due file.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Questo modulo organizza il materiale su:</p><ul><li>dizionari, chiavi, valori e iterazione;</li><li>frequenze, conteggi e ordinamento di distribuzioni;</li><li>set e loro proprieta&#x27;;</li><li>appartenenza con <code>in</code>;</li><li>confronto tra lista, dizionario e set;</li><li>uso su vocabolari, lookup e confronto tra collezioni.</li></ul>
+</main>
+</body>
+</html>

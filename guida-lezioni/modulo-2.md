@@ -18,18 +18,17 @@ Al termine di questo modulo saprai:
 
 ## Recap operativo
 
-Prima di affrontare questo modulo, il notebook storico richiamava questi prerequisiti:
+Prima di affrontare questo modulo, conviene richiamare questi prerequisiti:
 
 - saper usare un interprete Python 3;
 - saper scrivere un file `.py` in un editor;
-- conoscere tipi fondamentali, confronti e assegnamento;
-- saper definire e invocare una funzione semplice.
+- conoscere tipi fondamentali e confronti.
 
 Tre esercizi tipici di ripasso:
 
 1. convertire un numero di secondi in giorni, ore, minuti, secondi;
 2. scambiare i valori di due variabili;
-3. scrivere una funzione che, data una stringa `s` e un intero `n`, restituisca il carattere in posizione `n` insieme al precedente e al successivo.
+3. data una stringa `s` e un intero `n`, stampare il carattere in posizione `n` insieme al precedente e al successivo.
 
 La seconda lezione trascritta ripartiva proprio da qui:
 
@@ -70,7 +69,7 @@ Differenza pratica:
 
 ### Struttura minima di uno script
 
-La seconda lezione introduceva anche una convenzione pratica su come organizzare file un po' meno banali.
+Una convenzione pratica utile per organizzare file un po' meno banali e' questa.
 
 In generale uno script tende ad avere tre blocchi:
 
@@ -97,7 +96,7 @@ L'idea non e' burocratica: e' rendere il codice piu' leggibile per noi e per chi
 
 ### Commenti
 
-La lezione chiariva anche che:
+Vale anche questa osservazione:
 
 - le righe che iniziano con `#` sono commenti;
 - i commenti non vengono eseguiti dall'interprete;
@@ -198,7 +197,7 @@ nome = input("Come ti chiami? ")
 print("Ciao", nome)
 ```
 
-La trascrizione insisteva su un punto molto pratico: `input()` non e' una magia complicata, ma un modo per creare una piccola interazione col programma.
+`input()` non e' una magia complicata, ma un modo per creare una piccola interazione col programma.
 
 Esempio:
 
@@ -280,7 +279,7 @@ if eta >= 18:
     print("Maggiorenne")
 ```
 
-La seconda lezione chiariva molto bene anche la semantica operativa di `if`:
+La semantica operativa di `if` si puo' riassumere cosi':
 
 - Python valuta l'espressione booleana dopo `if`;
 - se vale `True`, esegue il primo blocco;
@@ -314,7 +313,7 @@ else:
 
 ### `elif`
 
-Nel notebook storico compariva questo esempio di classificazione del voto:
+Esempio di classificazione del voto:
 
 ```python
 voto = int(input("Voto: "))
@@ -333,7 +332,7 @@ Questo e' il caso tipico in cui ci sono piu' soglie ordinate.
 
 ### Un esempio guidato: nome e cognome in ordine alfabetico
 
-La trascrizione lavorava anche su un esercizio semplice ma utile:
+Un esercizio semplice ma utile e' questo:
 
 - leggere nome e cognome;
 - confrontarli come stringhe;
@@ -368,13 +367,13 @@ else:
 
 Questo stile va usato solo quando il secondo controllo ha senso solo dopo il primo.
 
-Nel notebook 2 veniva mostrata anche la versione annidata della classificazione dei voti, poi riscritta con `elif` per renderla piu' leggibile.
+La versione annidata della classificazione dei voti si puo' anche riscrivere con `elif` per renderla piu' leggibile.
 
 ---
 
 ## Esercizi sulle condizioni
 
-Dal notebook storico:
+Per esempio:
 
 1. dato nome e cognome, stampa il nome completo in ordine alfabetico;
 2. scrivi una funzione che restituisce il maggiore tra due interi;
@@ -390,7 +389,7 @@ Dal notebook storico:
 
 ## Struttura di uno script
 
-Il notebook 2 riprendeva e consolidava la struttura standard di uno script:
+Una struttura standard di script e' questa:
 
 ```python
 #----------------------------------
@@ -473,5 +472,3 @@ In questo modulo hai introdotto il modello base del programma imperativo:
 - input e output espliciti;
 - condizioni che fanno scegliere un ramo di esecuzione;
 - una prima struttura leggibile dello script.
-
-Il materiale del notebook 2 su liste, aliasing e `for` viene ripreso nei moduli successivi dedicati.

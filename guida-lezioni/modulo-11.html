@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modulo 11 · Git e controllo di versione</title>
+<style>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Georgia, "Times New Roman", serif; background: #f6f3ee; color: #1f1f1f; line-height: 1.65; }
+.page { max-width: 900px; margin: 0 auto; padding: 40px 20px 72px; }
+h1, h2, h3, h4 { font-family: "Avenir Next", "Segoe UI", Arial, sans-serif; line-height: 1.2; color: #1c2a39; }
+h1 { font-size: 2.1rem; margin: 0 0 1.5rem; }
+h2 { font-size: 1.5rem; margin: 2.5rem 0 1rem; padding-top: 0.25rem; border-top: 1px solid #d8d1c7; }
+h3 { font-size: 1.2rem; margin: 2rem 0 0.8rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
+img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: 0.3rem 0; }
+blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+pre { background: #1f2430; color: #f3f4f6; padding: 1rem; border-radius: 10px; overflow-x: auto; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.95em; }
+p code, li code, td code, th code, blockquote code { background: rgba(28, 42, 57, 0.08); padding: 0.08rem 0.35rem; border-radius: 4px; color: #18212d; }
+table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; }
+th, td { border: 1px solid #ddd5ca; padding: 0.55rem 0.7rem; vertical-align: top; text-align: left; }
+th { background: #efe7db; }
+hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
+a { color: #8b3f1d; }
+[id] { scroll-margin-top: 20px; }
+@media (max-width: 700px) {
+  .page { padding: 24px 14px 56px; }
+  table { display: block; overflow-x: auto; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+<h1 id="modulo-11-git-e-controllo-di-versione">Modulo 11 · Git e controllo di versione</h1><hr><h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>distinguere tra Git e GitHub;</li><li>inizializzare un repository locale;</li><li>leggere <code>git status</code>;</li><li>aggiungere file allo staging area e creare commit;</li><li>consultare la storia del progetto con <code>git log</code>;</li><li>riconoscere file non tracciati, modificati e gia&#x27; staged;</li><li>clonare un repository e sincronizzarlo con un remoto.</li></ul><hr><a id="mod11-git"></a><h2 id="che-cose-git">Che cos&#x27;e&#x27; Git</h2><p>Git e&#x27; uno strumento per tenere traccia delle modifiche nei file.</p><p>Serve soprattutto per:</p><ul><li>evitare di moltiplicare file come <code>tesi_finale_def_vera2.txt</code>;</li><li>conservare la storia delle modifiche;</li><li>tornare indietro quando serve;</li><li>collaborare su uno stesso progetto.</li></ul><h3 id="git-non-e-github">Git non e&#x27; GitHub</h3><ul><li><strong>Git</strong> e&#x27; il programma di controllo versione che usiamo sul nostro computer;</li><li><strong>GitHub</strong> e&#x27; una piattaforma web che ospita progetti Git e facilita la collaborazione.</li></ul><p>Puoi usare Git anche senza GitHub. GitHub diventa utile quando vuoi condividere un progetto o collaborare con altre persone.</p><hr><h2 id="primo-flusso-minimo-da-terminale">Primo flusso minimo da terminale</h2><pre><code class="language-bash">cd nome-cartella-progetto
+git init
+git status
+git add nome-file
+git commit -m &quot;prima versione&quot;</code></pre><p>Significato dei comandi:</p><ul><li><code>git init</code> trasforma la cartella corrente in un progetto Git;</li><li><code>git status</code> mostra lo stato dei file;</li><li><code>git add ...</code> prepara i cambiamenti per il prossimo commit;</li><li><code>git commit -m &quot;...&quot;</code> salva una nuova versione con un messaggio.</li></ul><p>Un flusso tipico:</p><pre><code class="language-bash">cd git-esempio
+ls
+git init
+git add alice.txt
+git commit -m &quot;Aggiungo il testo di input&quot;</code></pre><p>Poi, se aggiungi o modifichi altri file:</p><pre><code class="language-bash">git status
+git add .
+git commit -m &quot;Aggiungo il primo script Python&quot;</code></pre><p>Qui <code>.</code> significa &quot;la cartella corrente&quot;.</p><hr><h2 id="come-leggere-git-status">Come leggere <code>git status</code></h2><p><code>git status</code> e&#x27; il comando da controllare continuamente.</p><p>Ti dice:</p><ul><li>se ci sono file nuovi non ancora tracciati;</li><li>se ci sono file gia&#x27; tracciati ma modificati;</li><li>se ci sono cambiamenti gia&#x27; aggiunti e pronti per il commit;</li><li>se non c&#x27;e&#x27; nulla da salvare.</li></ul><p>Regola pratica:</p><ul><li>se non sei sicura dello stato del progetto, fai <code>git status</code>;</li><li>se qualcosa non torna, prima leggi bene l&#x27;output e poi decidi il comando successivo.</li></ul><hr><h2 id="la-cartella-git">La cartella <code>.git</code></h2><p>Quando esegui <code>git init</code>, Git crea una cartella nascosta chiamata <code>.git</code>.</p><p>Quella cartella contiene:</p><ul><li>la storia dei commit;</li><li>i riferimenti ai rami;</li><li>i dati interni che permettono a Git di ricostruire gli stati del progetto.</li></ul><p>Non va modificata a mano.</p><hr><h2 id="file-nuovi-modificati-staged">File nuovi, modificati, staged</h2><p>Un file puo&#x27; essere:</p><ul><li><strong>nuovo</strong> e non ancora tracciato;</li><li><strong>modificato</strong> dopo un commit precedente;</li><li><strong>staged</strong>, cioe&#x27; gia&#x27; aggiunto per il prossimo commit.</li></ul><p>Per questo Git lavora sempre su due piani:</p><ul><li>lo stato attuale della cartella;</li><li>lo stato salvato nell&#x27;ultimo commit.</li></ul><hr><h2 id="messaggi-di-commit-e-cronologia">Messaggi di commit e cronologia</h2><p>Il commit si puo&#x27; leggere come una fotografia commentata dello stato del progetto.</p><p>Per questo il messaggio dovrebbe descrivere il cambiamento in modo breve ma concreto, per esempio:</p><ul><li><code>Aggiungo il testo di input</code></li><li><code>Aggiungo il primo script Python</code></li><li><code>Correggo il conteggio delle frequenze</code></li></ul><p>Per vedere la storia dei commit:</p><pre><code class="language-bash">git log</code></pre><hr><a id="mod11-github"></a><h2 id="github-e-repository-remoti">GitHub e repository remoti</h2><p>GitHub e&#x27; utile per:</p><ul><li>ospitare un repository remoto;</li><li>condividere il codice;</li><li>collaborare con altre persone.</li></ul><p>Comandi base:</p><pre><code class="language-bash">git clone URL_DEL_REPOSITORY
+git push
+git pull</code></pre><ul><li><code>clone</code> scarica un repository remoto in locale;</li><li><code>push</code> pubblica i commit locali sul remoto;</li><li><code>pull</code> aggiorna il repository locale con i cambiamenti remoti.</li></ul><hr><h2 id="perche-farlo-da-terminale">Perche&#x27; farlo da terminale</h2><p>L&#x27;editor puo&#x27; aiutare con colori, icone e pannelli, ma il terminale ha alcuni vantaggi didattici:</p><ul><li>rende espliciti i passaggi;</li><li>funziona in modo simile su molti ambienti;</li><li>aiuta a capire che cosa fa davvero Git;</li><li>non nasconde troppo presto la logica dietro un&#x27;interfaccia grafica.</li></ul><hr><h2 id="esercizi">Esercizi</h2><ol><li>crea una cartella e inizializza un repository Git;</li><li>aggiungi uno script Python e fai un primo commit;</li><li>modifica lo script e fai un secondo commit;</li><li>usa <code>git status</code> per distinguere file non tracciati, modificati e staged;</li><li>usa <code>git log</code> per leggere la storia dei commit;</li><li>clona un repository remoto e osservane la struttura.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il materiale su:</p><ul><li>Git come strumento di controllo di versione;</li><li>differenza tra Git e GitHub;</li><li>flusso minimo <code>init</code> -&gt; <code>status</code> -&gt; <code>add</code> -&gt; <code>commit</code> -&gt; <code>log</code>;</li><li>lettura dello stato dei file;</li><li>primo uso di repository remoti con <code>clone</code>, <code>push</code> e <code>pull</code>.</li></ul>
+</main>
+</body>
+</html>

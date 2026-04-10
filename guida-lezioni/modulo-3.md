@@ -16,9 +16,10 @@ Al termine di questo modulo saprai:
 
 ---
 
+<a id="mod3-testing"></a>
 ## Testing e casi limite
 
-Il terzo notebook storico apriva con un richiamo esplicito all'importanza del **testing**.
+Il modulo si apre con un richiamo esplicito all'importanza del **testing**.
 
 L'idea chiave e' semplice:
 
@@ -43,9 +44,9 @@ Se scrivi una funzione che restituisce l'elemento massimo di una lista, il caso:
 
 non e' un dettaglio secondario. E' un caso che il programma deve decidere come trattare.
 
-### Esercizi del notebook 3: trova l'errore
+### Esercizi: trova l'errore
 
-Il notebook proponeva anche esercizi specifici di debugging:
+Ci sono anche esercizi specifici di debugging:
 
 - leggere il codice;
 - prevedere dove fallisce;
@@ -81,7 +82,7 @@ Questa pratica vale soprattutto quando iniziamo a lavorare su:
 
 ### Perche' iniziare da input piccoli
 
-La trascrizione insisteva anche su un principio molto pragmatico:
+Conviene insistere anche su un principio molto pragmatico:
 
 - non si testa subito su un corpus enorme;
 - si parte da una versione ridotta che possiamo seguire a mano;
@@ -189,7 +190,7 @@ Metodo minimo:
 3. controlla i tipi e i valori coinvolti;
 4. riduci il caso a un esempio piu` piccolo.
 
-La terza lezione aggiungeva una distinzione importante:
+Una distinzione importante e' questa:
 
 - un errore esplicito dell'interprete e' spesso il caso piu' semplice da affrontare;
 - il caso piu' insidioso e' quando il programma gira ma il comportamento non coincide con cio' che volevamo.
@@ -310,7 +311,7 @@ Per questo va controllato con:
 - casi limite;
 - casi anomali.
 
-La trascrizione del 5 novembre portava un esempio molto utile:
+Esempio molto utile:
 
 > data una lista di interi, restituire tutti i numeri che seguono uno `0`
 
@@ -355,7 +356,7 @@ Questo allena due competenze che tornano continuamente:
 
 ### Anche un solo elemento puo' essere un caso limite
 
-La trascrizione chiariva esplicitamente che sì:
+Vale esplicitamente anche questo:
 
 - una lista con un solo elemento puo' essere un caso limite;
 - se il programma assume implicitamente che esista sempre un "successivo", puo' rompersi proprio li'.
@@ -425,5 +426,3 @@ In questo modulo hai consolidato il ragionamento sullo stato del programma:
 - gli errori si leggono, non si ignorano;
 - le condizioni composte si possono trasformare;
 - un problema decisionale puo` essere descritto come automa.
-
-Questa base prepara il passaggio ai cicli e alla validazione ripetuta dell'input.
