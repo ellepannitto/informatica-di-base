@@ -2,17 +2,15 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- distinguere tra Git e GitHub;
-- inizializzare un repository locale;
-- leggere `git status`;
-- aggiungere file allo staging area e creare commit;
-- consultare la storia del progetto con `git log`;
-- riconoscere file non tracciati, modificati e gia' staged;
-- clonare un repository e sincronizzarlo con un remoto.
+- Sai distinguere tra Git e GitHub?
+- Sai inizializzare un repository locale?
+- Sai leggere `git status`?
+- Sai aggiungere file allo staging area e creare commit?
+- Sai consultare la storia del progetto con `git log`?
+- Sai riconoscere file non tracciati, modificati e già staged?
+- Sai clonare un repository e sincronizzarlo con un remoto?
 
 ---
 

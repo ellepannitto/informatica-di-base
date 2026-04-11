@@ -2,14 +2,12 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- distinguere tra variabili semplici e strutture mutabili;
-- capire il caso in cui due nomi puntano alla stessa lista;
-- riconoscere effetti collaterali e modifiche in-place;
-- usare copie esplicite quando serve isolare i dati.
+- Sai distinguere tra variabili semplici e strutture mutabili?
+- Sai spiegare cosa succede quando due nomi puntano alla stessa lista?
+- Sai riconoscere effetti collaterali e modifiche in-place?
+- Sai usare copie esplicite quando serve isolare i dati?
 
 ---
 

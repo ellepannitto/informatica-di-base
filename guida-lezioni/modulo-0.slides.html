@@ -35,14 +35,14 @@ color: #17212b; }
 }
 .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.82rem; color: #8b3f1d; margin: 0 0 1rem; }
 .instructions { color: #5d6770; margin-top: 1.5rem; font-size: 1rem; }
-h1, h2, h3, h4 { line-height: 1.08; color: #1a2834; margin: 0 0 0.7rem; }
+h1, h2, h3, h4 { line-height: 1.08; color: #1a2834; margin: 0 0 0.8rem; }
 h1 { font-size: clamp(2.4rem, 4.6vw, 4.8rem); max-width: 12ch; }
-h2 { font-size: clamp(1.8rem, 3vw, 3rem); border-bottom: 2px solid rgba(139,63,29,0.14); padding-bottom: 0.35rem; margin-bottom: 1rem; }
-h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); margin-top: 1.3rem; }
-p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; font-size: clamp(1rem, 1.35vw, 1.22rem); line-height: 1.45; }
+h2 { font-size: clamp(2rem, 3.4vw, 3.4rem); border-bottom: 2px solid rgba(139,63,29,0.2); padding-bottom: 0.5rem; margin-bottom: 1.4rem; }
+h3 { font-size: clamp(1.4rem, 2.2vw, 2.1rem); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem, 1.6vw, 1.32rem); line-height: 1.55; }
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
-li { margin: 0.28rem 0; }
+li { margin: 0.38rem 0; }
 blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
@@ -107,13 +107,13 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <p>Benvenuti al corso <strong>Informatica di Base</strong>.</p><p>Prima di iniziare non servono conoscenze pregresse, ma è utile arrivare alla prima lezione con l&#x27;ambiente già pronto. Se qualcosa non funziona non bloccatevi: l&#x27;installazione fa parte del corso e la sistemeremo insieme.</p><hr>
+    <p>Benvenuti al corso <strong>Informatica di Base</strong>.</p><p>Prima di iniziare non servono conoscenze pregresse. È sufficiente arrivare alla prima lezione con l&#x27;ambiente già pronto.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="obiettivo-del-modulo-0">Obiettivo del modulo 0</h2><p>Prima della prima lezione vi chiedo di:</p><ul><li>installare <a href="https://www.python.org/downloads/">**l&#x27;interprete Python**</a></li><li>installare <a href="https://code.visualstudio.com/download">**Visual Studio Code**</a></li><li>installare <a href="https://git-scm.com/install/">**Git**</a></li><li>fare una piccola prova con il <strong>terminale</strong></li><li>se usate Windows, installare anche <a href="https://learn.microsoft.com/en-us/windows/wsl/install">**WSL**</a></li></ul><p>Non è necessario fare tutto in autonomia in modo perfetto. È sufficiente provarci e annotare eventuali problemi.</p><hr>
+    <h2 id="obiettivo-del-modulo-0">Obiettivo del modulo 0</h2><p>Prima della prima lezione vi chiedo di:</p><ul><li>portare il <strong>proprio laptop</strong> a lezione</li><li>installare <a href="https://www.python.org/downloads/">**l&#x27;interprete Python**</a></li><li>installare <a href="https://vscodium.com/">**VSCodium**</a> oppure <a href="https://code.visualstudio.com/download">**Visual Studio Code**</a></li><li>installare <a href="https://git-scm.com/install/">**Git**</a></li><li>fare una piccola prova con il <strong>terminale</strong></li></ul><p>Non è necessario fare tutto in autonomia in modo perfetto. È sufficiente provarci e annotare eventuali problemi.</p><hr>
   </div>
 </section>
 
@@ -125,7 +125,7 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="2-installare-visual-studio-code">2. Installare Visual Studio Code</h2><p>Scaricate <strong>VS Code</strong> da <a href="https://code.visualstudio.com/download">code.visualstudio.com</a>. È l&#x27;editor che useremo per scrivere e leggere il codice.</p><p>Dopo l&#x27;installazione:</p><ul><li>aprite VS Code</li><li>installate l&#x27;estensione <strong>Python</strong> di Microsoft</li></ul><p>Per installare un&#x27;estensione:</p><ul><li>aprite il pannello estensioni (<code>Ctrl+Shift+X</code> su Windows/Linux, <code>Cmd+Shift+X</code> su macOS)</li><li>cercate il nome dell&#x27;estensione</li><li>cliccate <strong>Installa</strong></li></ul><hr>
+    <h2 id="2-installare-vscodium-o-visual-studio-code">2. Installare VSCodium o Visual Studio Code</h2><p>Scaricate <a href="https://vscodium.com/">**VSCodium**</a> oppure <a href="https://code.visualstudio.com/download">**Visual Studio Code**</a>. È l&#x27;editor che useremo per scrivere e leggere il codice.</p><p>Dopo l&#x27;installazione:</p><ul><li>aprite l&#x27;editor</li><li>installate l&#x27;estensione <strong>Python</strong> di Microsoft</li></ul><p>Per installare un&#x27;estensione:</p><ul><li>aprite il pannello estensioni (<code>Ctrl+Shift+X</code> su Windows/Linux, <code>Cmd+Shift+X</code> su macOS)</li><li>cercate il nome dell&#x27;estensione</li><li>cliccate <strong>Installa</strong></li></ul><hr>
   </div>
 </section>
 
@@ -137,17 +137,21 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="4-se-usate-windows-installare-wsl">4. Se usate Windows: installare WSL</h2><p>Se lavorate su Windows, consiglio di installare anche <strong>WSL</strong> (<strong>Windows Subsystem for Linux</strong>), o quantomeno di provarci!</p><p>WSL permette di usare un ambiente Linux direttamente dentro Windows. È utile perché molti strumenti di programmazione, comandi di terminale ed esempi del corso funzionano in modo più lineare in un ambiente Unix-like.</p><p>Per installarlo:</p><ol><li>aprite <strong>PowerShell come amministratore</strong></li><li>eseguite:</li></ol><pre><code class="language-powershell">wsl --install</code></pre><ol><li>riavviate il computer se richiesto</li><li>al primo avvio scegliete una distribuzione Linux (di solito Ubuntu va benissimo)</li></ol><p>Per verificare che WSL sia disponibile:</p><pre><code class="language-powershell">wsl --status</code></pre><p>Se l&#x27;installazione non funziona subito, non è un problema: ne parliamo a lezione.</p><hr>
+    <h2 id="4-familiarizzare-con-il-terminale">4. Familiarizzare con il terminale</h2><p>Il terminale è uno strumento di lavoro importante. Per chi parte da zero, la prima cosa utile è sapere dove si trova e come si apre.</p><h3 id="dove-si-trova-il-terminale">Dove si trova il terminale</h3><p>Su <strong>macOS</strong>:</p><ul><li>aprite <strong>Spotlight</strong> con <code>Cmd + Spazio</code></li><li>scrivete <code>Terminale</code></li><li>aprite l&#x27;app <strong>Terminale</strong></li></ul><p>Su <strong>Windows</strong>:</p><ul><li>aprite il menu <strong>Start</strong></li><li>scrivete <code>PowerShell</code> oppure <code>Terminale</code></li><li>aprite <strong>Windows PowerShell</strong> o <strong>Terminal</strong></li><li>se avete installato Git, potete usare anche <strong>Git Bash</strong> (vedi sotto)</li></ul><p>Su <strong>Linux</strong>:</p><ul><li>cercate <code>Terminale</code> nelle applicazioni</li><li>in molte distribuzioni funziona anche la scorciatoia <code>Ctrl + Alt + T</code></li></ul><h3 id="che-cosa-vedrete-quando-si-apre">Che cosa vedrete quando si apre</h3><p>Quando il terminale si apre, compare una finestra con:</p><ul><li>un cursore lampeggiante;</li><li>una riga in cui potete scrivere comandi;</li><li>eventualmente un simbolo come <code>$</code>, <code>&gt;</code> oppure <code>%</code>.</li></ul><p>Quello è il punto in cui scrivete il comando e poi premete <code>Invio</code>.</p><h3 id="come-fare-i-controlli-di-installazione">Come fare i controlli di installazione</h3><p>Per controllare un programma installato:</p><ol><li>aprite il terminale;</li><li>scrivete il comando esattamente come indicato;</li><li>premete <code>Invio</code>;</li><li>leggete la risposta.</li></ol><p>Esempi:</p><pre><code class="language-bash">python --version
+git --version</code></pre><p>Su alcuni computer Python risponde invece a:</p><pre><code class="language-bash">python3 --version</code></pre><p>Se il controllo va bene, vedrete una riga con il numero di versione.</p><p>Se il controllo non va bene, potete vedere:</p><ul><li>un messaggio del tipo &quot;comando non trovato&quot;;</li><li>una finestra che propone di installare il programma;</li><li>un messaggio che indica che il comando non è riconosciuto.</li></ul><p>Anche questi risultati sono utili: non vanno &quot;sistemati a caso&quot;, ma annotati.</p><h3 id="git-bash-su-windows">Git Bash su Windows</h3><p>Se avete installato Git, avete già a disposizione <strong>Git Bash</strong>: un terminale che usa gli stessi comandi Unix che useremo a lezione (<code>ls</code>, <code>cd</code>, <code>pwd</code>, ...), senza bisogno di WSL.</p><p>Per aprirlo:</p><ul><li>cliccate con il tasto destro su una cartella in Esplora file</li><li>scegliete <strong>Open Git Bash here</strong></li></ul><p>oppure:</p><ul><li>aprite il menu <strong>Start</strong></li><li>cercate <strong>Git Bash</strong></li><li>si apre una finestra con un prompt simile a <code>$</code></li></ul><p>Git Bash è una buona alternativa a PowerShell per chi usa Windows e non ha ancora configurato WSL. I comandi che troverete nel corso funzionano tutti in Git Bash.</p><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="5-familiarizzare-con-il-terminale">5. Familiarizzare con il terminale</h2><p>Il terminale è uno strumento di lavoro importante. Per chi parte da zero, la prima cosa utile è sapere dove si trova e come si apre.</p><h3 id="dove-si-trova-il-terminale">Dove si trova il terminale</h3><p>Su <strong>macOS</strong>:</p><ul><li>aprite <strong>Spotlight</strong> con <code>Cmd + Spazio</code></li><li>scrivete <code>Terminale</code></li><li>aprite l&#x27;app <strong>Terminale</strong></li></ul><p>Su <strong>Windows</strong>:</p><ul><li>aprite il menu <strong>Start</strong></li><li>scrivete <code>PowerShell</code> oppure <code>Terminale</code></li><li>aprite <strong>Windows PowerShell</strong> o <strong>Terminal</strong></li><li>se usate WSL, potete anche cercare <strong>Ubuntu</strong></li></ul><p>Su <strong>Linux</strong>:</p><ul><li>cercate <code>Terminale</code> nelle applicazioni</li><li>in molte distribuzioni funziona anche la scorciatoia <code>Ctrl + Alt + T</code></li></ul><h3 id="che-cosa-vedrete-quando-si-apre">Che cosa vedrete quando si apre</h3><p>Quando il terminale si apre, compare una finestra con:</p><ul><li>un cursore lampeggiante;</li><li>una riga in cui potete scrivere comandi;</li><li>eventualmente un simbolo come <code>$</code>, <code>&gt;</code> oppure <code>%</code>.</li></ul><p>Quello è il punto in cui scrivete il comando e poi premete <code>Invio</code>.</p><h3 id="come-fare-i-controlli-di-installazione">Come fare i controlli di installazione</h3><p>Per controllare un programma installato:</p><ol><li>aprite il terminale;</li><li>scrivete il comando esattamente come indicato;</li><li>premete <code>Invio</code>;</li><li>leggete la risposta.</li></ol><p>Esempi:</p><pre><code class="language-bash">python --version
-git --version</code></pre><p>Su alcuni computer Python risponde invece a:</p><pre><code class="language-bash">python3 --version</code></pre><p>Su Windows, per WSL:</p><pre><code class="language-powershell">wsl --status</code></pre><p>Se il controllo va bene, vedrete una riga con il numero di versione.</p><p>Se il controllo non va bene, potete vedere:</p><ul><li>un messaggio del tipo &quot;comando non trovato&quot;;</li><li>una finestra che propone di installare il programma;</li><li>un messaggio che indica che il comando non è riconosciuto.</li></ul><p>Anche questi risultati sono utili: non vanno &quot;sistemati a caso&quot;, ma annotati.</p><h3 id="prime-operazioni-di-orientamento">Prime operazioni di orientamento</h3><p>Non serve diventare esperti subito: basta imparare alcune operazioni di base.</p><p>Provate ad eseguire varie volte questi comandi e prendete nota del risultato che ottenete:</p><pre><code class="language-bash">pwd
+    <h2 id="5-esplorate-il-vostro-filesystem">5. Esplorate il vostro filesystem</h2><p>Prima della prima lezione provate a esplorare il vostro computer dal terminale. Non c&#x27;è nessun rischio: i comandi qui sotto leggono soltanto, non modificano nulla.</p><p>I comandi di base funzionano allo stesso modo in bash, zsh e PowerShell. Su Windows potete usare indifferentemente <strong>PowerShell</strong> o <strong>Git Bash</strong>.</p><h3 id="comandi-di-base">Comandi di base</h3><p>Provate uno alla volta:</p><pre><code class="language-bash">pwd</code></pre><p>Dove siete adesso? Qual è la cartella di partenza?</p><pre><code class="language-bash">ls</code></pre><p>Cosa c&#x27;è in questa cartella?</p><p>Poi entrate in una cartella che conoscete. La cartella principale dei documenti si chiama:</p><ul><li><code>Documenti</code> o <code>Documents</code> su macOS e Linux (dipende dalla lingua)</li><li><code>Documents</code> su Windows (sia in PowerShell che in Git Bash)</li></ul><pre><code class="language-bash">cd Documents
+ls</code></pre><p>Continuate a scendere dove tenete i file universitari, poi tornate su:</p><pre><code class="language-bash">cd NomeDellaCartella
 ls
-cd Documenti
-cd ..</code></pre><p>Su Windows fuori da WSL, al posto di <code>ls</code> potete trovare anche:</p><pre><code class="language-powershell">dir</code></pre><hr>
+pwd
+cd ..
+pwd
+cd ../..
+ls</code></pre><h3 id="nota-per-chi-usa-powershell-su-windows">Nota per chi usa PowerShell su Windows</h3><p>I comandi sopra funzionano anche in PowerShell. Alcune differenze da tenere a mente:</p><ul><li>i percorsi usano <code>\</code> come separatore (<code>C:\Users\nome\Documents</code>), anche se PowerShell accetta anche <code>/</code>;</li><li><code>python3</code> potrebbe non essere riconosciuto: provate con <code>python</code> (senza il <code>3</code>).</li></ul><h3 id="domande-su-cui-riflettere">Domande su cui riflettere</h3><ul><li>Qual è la cartella in cui si apre il terminale per default?</li><li>Quanti livelli di cartelle ci vogliono per arrivare ai vostri appunti?</li><li>Riuscite a trovare dove il vostro computer tiene i file scaricati?</li></ul><p>Non serve sapere le risposte: serve aver provato a cercarle. Portate a lezione quello che avete osservato.</p><hr>
   </div>
 </section>
 
@@ -165,7 +169,7 @@ cd ..</code></pre><p>Su Windows fuori da WSL, al posto di <code>ls</code> potete
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Prima della prima lezione l&#x27;obiettivo non è &quot;sapere già programmare&quot;, ma arrivare con una base operativa minima:</p><ul><li>Python installato e verificato;</li><li>VS Code pronto;</li><li>Git disponibile;</li><li>primo orientamento nel terminale;</li><li>eventuali problemi tecnici annotati in modo chiaro.</li></ul><p>Se qualcosa non è ancora a posto, va bene: la prima parte del corso serve anche a costruire insieme questo ambiente di lavoro.</p>
+    <h2 id="riepilogo">Riepilogo</h2><p>L&#x27;obiettivo non è arrivare con tutto perfetto, ma con una base operativa minima: Python, VSCodium o VS Code e Git installati, e una prima esperienza con il terminale. Gli eventuali problemi tecnici li sistemiamo insieme a lezione.</p>
   </div>
 </section>
 

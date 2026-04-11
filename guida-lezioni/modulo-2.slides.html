@@ -35,14 +35,14 @@ color: #17212b; }
 }
 .eyebrow { text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.82rem; color: #8b3f1d; margin: 0 0 1rem; }
 .instructions { color: #5d6770; margin-top: 1.5rem; font-size: 1rem; }
-h1, h2, h3, h4 { line-height: 1.08; color: #1a2834; margin: 0 0 0.7rem; }
+h1, h2, h3, h4 { line-height: 1.08; color: #1a2834; margin: 0 0 0.8rem; }
 h1 { font-size: clamp(2.4rem, 4.6vw, 4.8rem); max-width: 12ch; }
-h2 { font-size: clamp(1.8rem, 3vw, 3rem); border-bottom: 2px solid rgba(139,63,29,0.14); padding-bottom: 0.35rem; margin-bottom: 1rem; }
-h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); margin-top: 1.3rem; }
-p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; font-size: clamp(1rem, 1.35vw, 1.22rem); line-height: 1.45; }
+h2 { font-size: clamp(2rem, 3.4vw, 3.4rem); border-bottom: 2px solid rgba(139,63,29,0.2); padding-bottom: 0.5rem; margin-bottom: 1.4rem; }
+h3 { font-size: clamp(1.4rem, 2.2vw, 2.1rem); margin-top: 1.8rem; margin-bottom: 0.6rem; }
+p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem, 1.6vw, 1.32rem); line-height: 1.55; }
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
-li { margin: 0.28rem 0; }
+li { margin: 0.38rem 0; }
 blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
@@ -113,7 +113,7 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="obiettivi-del-modulo">Obiettivi del modulo</h2><p>Al termine di questo modulo saprai:</p><ul><li>eseguire un primo script Python da file;</li><li>distinguere espressioni e istruzioni;</li><li>usare variabili e assegnamento;</li><li>leggere input con <code>input()</code> e convertire tipi con <code>int()</code> e <code>str()</code>;</li><li>usare <code>print()</code> per costruire output espliciti;</li><li>scrivere semplici decisioni con <code>if</code>, <code>if-else</code>, <code>elif</code>;</li><li>organizzare uno script in sezioni leggibili.</li></ul><hr>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere espressioni e istruzioni?</li><li>Sai usare variabili e assegnamento?</li><li>Sai leggere input con <code>input()</code> e convertire tipi con <code>int()</code> e <code>str()</code>?</li><li>Sai scrivere semplici decisioni con <code>if</code>, <code>if-else</code>, <code>elif</code>?</li><li>Sai organizzare uno script in sezioni leggibili?</li></ul><hr>
   </div>
 </section>
 
@@ -125,8 +125,7 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="primo-script-scrivere-ed-eseguire-un-file-py">Primo script: scrivere ed eseguire un file <code>.py</code></h2><p>La REPL e&#x27; utile per prove rapide, ma i programmi veri si scrivono in file.</p><p>Esempio:</p><pre><code class="language-python">print(&quot;Ciao&quot;)
-print(&quot;Benvenuto nel corso&quot;)</code></pre><p>Salva questo contenuto in <code>saluto.py</code> ed esegui:</p><pre><code class="language-bash">python3 saluto.py</code></pre><p>Differenza pratica:</p><ul><li>nella REPL provi una riga alla volta;</li><li>in uno script scrivi una sequenza di istruzioni che puo&#x27; essere salvata, corretta e rieseguita.</li></ul><h3 id="struttura-minima-di-uno-script">Struttura minima di uno script</h3><p>Una convenzione pratica utile per organizzare file un po&#x27; meno banali e&#x27; questa.</p><p>In generale uno script tende ad avere tre blocchi:</p><ol><li>intestazione e commenti generali;</li><li>eventuali <code>import</code> di librerie esterne;</li><li>definizione di funzioni e poi corpo principale del programma.</li></ol><p>Esempio schematico:</p><pre><code class="language-python">
+    <h2 id="struttura-di-uno-script">Struttura di uno script</h2><p>Nel modulo 1 abbiamo scritto i primi file <code>.py</code> e introdotto <code>print()</code>. Qui vediamo come organizzare uno script un po&#x27; più articolato.</p><h3 id="struttura-minima-di-uno-script">Struttura minima di uno script</h3><p>Una convenzione pratica utile per organizzare file un po&#x27; meno banali e&#x27; questa.</p><p>In generale uno script tende ad avere tre blocchi:</p><ol><li>intestazione e commenti generali;</li><li>eventuali <code>import</code> di librerie esterne;</li><li>definizione di funzioni e poi corpo principale del programma.</li></ol><p>Esempio schematico:</p><pre><code class="language-python">
 import sys
 
 def capitalizza(s):
@@ -185,28 +184,7 @@ print(b)</code></pre><hr><a id="mod2-input-output"></a>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="input-print-type-e-casting"><code>input()</code>, <code>print()</code>, <code>type()</code> e casting</h2>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-print-e-input">Il problema che porta a <code>print()</code> e <code>input()</code></h2><p>Un programma non deve solo calcolare: deve anche comunicare con l&#x27;esterno.</p><p>Due bisogni diversi:</p><ul><li>mostrare un risultato all&#x27;utente;</li><li>ricevere un dato dall&#x27;utente.</li></ul><p>Qui entrano in gioco:</p><ul><li><code>print()</code> per l&#x27;output;</li><li><code>input()</code> per l&#x27;input.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-print">Sintassi di <code>print()</code></h2><p>Forma base:</p><pre><code class="language-python">print(valore1, valore2)</code></pre><p>Esempi:</p><pre><code class="language-python">print(&quot;Ciao&quot;)
-print(&quot;Ciao&quot;, nome)
-print(eta + 1)</code></pre><p><code>print(...)</code> e&#x27; una chiamata di funzione:</p><ul><li>il nome della funzione e&#x27; <code>print</code>;</li><li>tra parentesi passiamo gli argomenti;</li><li>gli argomenti vengono stampati in output.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-print">Semantica di <code>print()</code></h2><p>Serve a produrre output verso lo schermo.</p><pre><code class="language-python">nome = &quot;Anna&quot;
-print(&quot;Ciao&quot;, nome)</code></pre><p>Quando Python esegue <code>print(...)</code>:</p><ol><li>valuta gli argomenti;</li><li>li converte in una forma stampabile;</li><li>li manda sullo standard output.</li></ol><p><code>print(...)</code> non salva valori in memoria: rende visibile all&#x27;esterno un risultato.</p><hr>
+    <h2 id="input-type-e-casting"><code>input()</code>, <code>type()</code> e casting</h2><p>Abbiamo già visto <code>print()</code> nel modulo 1. Qui introduciamo il suo complemento: <code>input()</code>, che legge dati dall&#x27;utente.</p><hr>
   </div>
 </section>
 
@@ -371,7 +349,7 @@ x = y * 2</code></pre><hr>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 32</div>
+  <div class="counter" id="counter">1 / 29</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

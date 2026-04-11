@@ -1,19 +1,59 @@
 # Modulo 01 · Introduzione alla programmazione e Python
 
-## Obiettivi del modulo
+## Chi sono
 
-Al termine di questo modulo saprai:
+**Ludovica Pannitto**
 
-- orientarti tra interprete, editor e terminale;
-- usare la REPL di Python per fare prove rapide;
-- riconoscere i tipi fondamentali `int`, `float`, `str` ed eseguire operazioni;
-- descrivere il modello input -> elaborazione -> output;
-- spiegare in modo intuitivo il ruolo di CPU, memoria e file system;
-- eseguire comandi base nel terminale.
+NLP Lab Manager · Laboratorio Sperimentale LILEC · Università di Bologna
 
----
+Ricerca: risorse linguistiche, linguistica cognitiva e Natural Language Processing
 
-## Cornice del corso
+- PhD in Cognitive and Brain Sciences — CIMeC, Università di Trento
+- Laurea triennale e magistrale in Informatica Umanistica (Language Technologies) — Università di Pisa
+
+GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](https://scholar.google.it/citations?user=8oLH83IAAAAJ&hl=en) · Telegram: @ellepannitto
+
+## Piano del corso
+
+**Informatica di Base · Università degli Studi di Salerno**
+
+Struttura: 30% lezione · 70% esercitazione
+
+| Modulo | Argomento                                                          | Blocco |
+| ------ | ------------------------------------------------------------------ | ------ |
+| 01     | Introduzione, REPL, tipi fondamentali, Von Neumann, terminale      | 1      |
+| 02     | Variabili, assegnamento, `if`/`elif`/`else`, `input()` e `print()` | 1      |
+| 03     | Istruzioni condizionali, stato del programma, errori               | 1      |
+| **P1** | **Prova intermedia — moduli 1–3**                                  |        |
+| 04     | Ciclo `while`, sentinelle, convalida dell'input                    | 2      |
+| 05     | Liste: creare, leggere, accumulare, redirezione dell'input         | 2      |
+| 06     | Funzioni: parametri, `return`, black box, scope                    | 2      |
+| 07     | Memoria, passaggio degli argomenti, side effects                   | 2      |
+| **P2** | **Prova intermedia — moduli 4–7**                                  |        |
+| 08     | Ciclo `for`, `range()`, cicli annidati, pattern di stampa          | 3      |
+| 09     | File di testo, CSV, JSON, terminale avanzato, `sys.argv`           | 3      |
+| **P3** | **Prova intermedia — moduli 8–9**                                  |        |
+| 10     | Dizionari, set, frequenze, lookup                                  | 4      |
+| 11     | Git: repository, commit, GitHub, collaborazione                    | 4      |
+
+I moduli 10 e 11 non sono coperti dalle prove intermedie ma sono inclusi nello scritto finale e nell'orale.
+
+## Modalità d'esame
+
+- **3 prove intermedie facoltative** (durante le ore di corso, già nel monte ore totale)
+  - Prova 1: moduli 1–3
+  - Prova 2: moduli 4–7
+  - Prova 3: moduli 8–9
+- **Scritto finale** equivalente alle 3 prove intermedie — almeno un esercizio per blocco
+- **Orale** con live coding (principalmente moduli 10 e 11, ma dipende da com'è andato lo scritto!) e domande di teoria
+
+Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale. Le prove intermedie superare alleggeriscono lo scritto e migliorano il risultato complessivo.
+
+
+### Bibliografia consigliata
+
+
+## Cosa facciamo
 
 - partiamo davvero da zero;
 - l'obiettivo non è imparare "tutto Python" in poche ore: ci interessa soprattutto capire come codificare un problema in modo chiaro e testabile;
@@ -25,7 +65,6 @@ Per questo il corso insiste su tre livelli diversi:
 2. la **semantica** di base, cioè che cosa significa davvero quello che scriviamo: la vediamo in Python ma è valida per tutti i linguaggi;
 3. un **metodo** di lavoro fatto di prove, errori, correzioni e lettura critica dei problemi.
 
-
 Non ci interessa:
 
 - stile *pythonic* "avanzato" o troppo idiomatico;
@@ -35,7 +74,15 @@ Non ci interessa:
 
 > L'obiettivo del corso è più pragmatico: prima impariamo a leggere, scrivere e controllare programmi semplici; poi useremo queste basi per lavorare su dati e problemi reali.
 
----
+## Autovalutazione
+
+- Sai orientarti tra interprete, editor e terminale?
+- Sai usare la REPL di Python per fare prove rapide?
+- Sai riconoscere i tipi fondamentali `int`, `float`, `str` ed eseguire operazioni su di essi?
+- Sai descrivere il modello input → elaborazione → output?
+- Sai spiegare in modo intuitivo il ruolo di CPU, memoria e file system?
+- Sai eseguire comandi base nel terminale?
+
 
 ## Perché Python
 
@@ -74,43 +121,24 @@ TOTALE:  10
 - ha moltissime librerie e ottima documentazione;
 - permette sia scripting rapido sia programmi più strutturati.
 
-> Ricordiamo i nostri obiettivi principali:
->
-> - codificare un problema
-> - imparare sintassi e semantica di base
-> - usare strumenti reali: interprete, editor, terminale
->
+## Python in tre aggettivi
+
+Python è un linguaggio **multiparadigma**, **interpretato** e **ad alto livello**.
+
+Queste tre parole per ora possono sembrare etichette astratte. Nel resto di questa lezione diventeranno concrete:
+
+| Aggettivo                   | Significato                                                                                                      | Dove lo vediamo                                       |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| **ad alto livello**         | il codice è vicino al modo in cui ragioniamo noi, lontano dalle istruzioni della macchina                        | Von Neumann — oggi                                    |
+| **interpretato**            | il programma viene eseguito riga per riga da un interprete, non tradotto tutto in anticipo                       | interprete e compilatore — oggi                       |
+| **dinamicamente tipizzato** | i tipi non si dichiarano: vengono determinati a runtime, e operazioni tra tipi incompatibili producono un errore | REPL — oggi; casting con `int()` e `str()` — modulo 2 |
+| **multiparadigma**          | supporta stili diversi di programmazione (imperativo, funzionale, a oggetti)                                     | nel corso usiamo principalmente lo stile imperativo   |
+
+> Per ora basta sapere che esistono. Alla fine della lezione queste parole avranno un significato preciso.
+
 > non vogliamo scrivere codice elegante, ma codice **corretto**, **leggibile** e **controllabile**.
 
----
 
-## Come lavorare
-
-Alcune abitudini utili fin dall'inizio:
-
-- carta e penna prima del codice: la parte difficile spesso viene prima della sintassi;
-- fare esercizi piccoli ma frequenti, come quando si impara una lingua;
-- non aspettarsi fluidità immediata: all'inizio la programmazione sembra spesso un salto misterioso, poi le cose iniziano a incastrarsi.
-- trascrivere il codice invece di copiarlo e incollarlo, sia per evitare errori nascosti sia per fare pratica vera;
-- se possibile lavorare in coppia, perché spiegare un problema ad alta voce spesso lo rende più chiaro;
-- lettura attenta dei messaggi di errore.
-
-Se qualcosa non funziona:
-
-1. leggi il messaggio;
-2. isola un esempio più piccolo;
-3. controlla tipi, parentesi, apici, indentazione (vedremo tra poco);
-4. confronta quello che volevi fare con quello che il programma fa davvero.
-
-![How to draw an owl](imgs/owl.png)
-
-> Programmare include sempre una quota di `trial and error`. Non è un'anomalia: è il lavoro.
-
-> "Don't panic" è un buon principio didattico: le prime lezioni servono proprio a costruire familiarità con un linguaggio che all'inizio sembra più difficile di quanto sia davvero.
-
----
-
-<a id="mod1-repl"></a>
 ## Iniziamo dalla pratica: REPL, tipi e operazioni fondamentali
 
 La **REPL** è la modalità interattiva di Python: scrivi un'espressione, premi Invio, Python la valuta e mostra il risultato.
@@ -141,7 +169,7 @@ Vedrai qualcosa di simile:
 >>>
 ```
 
-### Tipi fondamentali
+## Tipi fondamentali
 
 Iniziamo a vedere alcuni dei tipi fondamentali di Python:
 
@@ -322,6 +350,33 @@ Scrivi un'espressione che calcoli:
 
 ---
 
+## Espressioni che cambiano tipo
+
+Dalle operazioni viste finora emergono due categorie:
+
+- alcune espressioni **conservano il tipo**: il risultato ha lo stesso tipo degli operandi;
+- altre espressioni **cambiano tipo**: il risultato ha un tipo diverso da quello di partenza.
+
+| Espressione       | Tipo in ingresso      | Tipo in uscita | Cambia tipo? |
+| ----------------- | --------------------- | -------------- | ------------ |
+| `3 + 5`           | `int` + `int`         | `int`          | no           |
+| `"ab" + "cd"`     | `str` + `str`         | `str`          | no           |
+| `"ciao".upper()`  | `str`                 | `str`          | no           |
+| `"ciao"[0]`       | `str`                 | `str`          | no           |
+| `7 / 2`           | `int` / `int`         | `float`        | **sì**       |
+| `len("ciao")`     | `str`                 | `int`          | **sì**       |
+| `"ciao" * 3`      | `str` × `int`         | `str`          | tipi misti   |
+
+Punti da ricordare:
+
+- la divisione `/` tra interi restituisce **sempre** un `float`, anche quando il risultato è intero (`4 / 2` dà `2.0`);
+- `len()` prende una stringa e restituisce un intero;
+- l'operatore `*` tra stringa e intero produce una stringa.
+
+Nel modulo 2 vedremo anche `int()` e `str()`, funzioni che cambiano tipo in modo esplicito — si chiamano **cast**.
+
+---
+
 ## Torniamo indietro: Python come linguaggio formale
 
 Un linguaggio di programmazione è un linguaggio **formale**: a differenza dell'italiano o dell'inglese, non ammette ambiguità. Ogni simbolo ha un significato preciso e le regole di combinazione sono rigide.
@@ -339,7 +394,7 @@ La distinzione sintassi/semantica è utile già per leggere i messaggi di errore
 - un **errore di sintassi** (`SyntaxError`) significa che hai scritto qualcosa che l'interprete non riesce nemmeno a leggere — come una frase con le parole nell'ordine sbagliato;
 - un **errore di tipo** o di **runtime** significa che la sintassi era corretta, ma l'operazione non ha senso per quei valori.
 
-### Che cosa installiamo davvero
+## Che cosa installiamo davvero
 
 Python è il linguaggio: una specifica formale di vocabolario, sintassi e semantica.
 
@@ -371,19 +426,24 @@ Due famiglie importanti di traduttori:
 | **Interprete**  | legge ed esegue il programma riga per riga                    | Python         |
 | **Compilatore** | traduce tutto il programma in anticipo, poi produce un eseguibile | C, C++     |
 
-Un'analogia: il compilatore è come tradurre un libro prima di pubblicarlo — una volta pronto, chiunque lo legge direttamente. L'interprete è come un traduttore simultaneo: traduce mentre parla, riga per riga.
+Immaginate un libro scritto in caratteri thai che volete leggere.
 
-Con un interprete:
-- gli errori emergono nel punto esatto in cui il codice viene raggiunto;
-- è naturale lavorare in modo interattivo, come nella REPL.
+```
+กล้วยไม้เป็นพืชที่มนุษย์รู้จักกันดีมานาน
+ในโลกมีกล้วยไม้หลากหลายสกุลและชนิดพันธุ์ในธรรมชาติพบมาแล้วไม่น้อยกว่า ๒๕,๐๐๐ ชนิด
+โดยเฉพาะในเขตอบอุ่นและเขตร้อน บริเวณทวีปเอเซีย อเมริกาใต้ และแอฟริกา เป็นแหล่งกล้วยไม้ที่มีความหลากหลายมากที่สุด
+กล้วยไม้เป็นต้นไม้ที่มีระบบรากสำหรับหาอาหารเช่นเดียวกับต้นไม้ชนิดอื่น
+```
 
-Con un compilatore:
-- il programma viene controllato tutto prima dell'esecuzione;
-- l'eseguibile prodotto gira senza dover rifare la traduzione ogni volta.
+- Con un **compilatore**: qualcuno traduce l'intero libro, ve lo consegna in italiano e voi lo leggete direttamente. Se c'è un errore a pagina 325, il traduttore se ne accorge durante la traduzione, prima che voi apriate il libro.
+- Con un **interprete**: avete accanto una persona che vi traduce riga per riga mentre leggete insieme. Se c'è un errore a pagina 325, non ve ne accorgete finché non ci arrivate.
 
----
+| | Interprete | Compilatore |
+| --- | --- | --- |
+| **Quando si scoprono gli errori** | durante l'esecuzione, alla riga sbagliata | prima dell'esecuzione, in fase di traduzione |
+| **Modalità di lavoro** | interattiva (REPL) | compile → esegui |
+| **Eseguibile prodotto** | no — il codice viene riletto ogni volta | sì — gira senza rifare la traduzione |
 
-<a id="mod1-von-neumann"></a>
 ## Architettura di Von Neumann
 
 Tutti i computer moderni seguono un'architettura descritta da Von Neumann negli anni '40, che rimane valida ancora oggi.
@@ -426,9 +486,11 @@ La **memoria (RAM)** e il **disco** non sono la stessa cosa:
 
 I **dispositivi di input/output** collegano il computer al mondo esterno: tastiera, schermo, mouse, ma anche i file che leggiamo e scriviamo.
 
-### Cosa succede quando esegui `python3 script.py`
+### Cosa succede quando un programma viene eseguito
 
-1. il sistema operativo legge il file `.py` dal **disco** e lo carica in **RAM**;
+Tra poco lanceremo i nostri primi script dal terminale. Ogni volta che lo facciamo, sotto il cofano succede questo:
+
+1. il sistema operativo legge il codice python dal **disco** e lo carica in **RAM**;
 2. la **Control Unit** legge la prima istruzione dalla RAM;
 3. l'**ALU** esegue il calcolo richiesto, usando i **registri** come appoggio temporaneo;
 4. il risultato torna in RAM (per esempio, viene assegnato a una variabile);
@@ -437,12 +499,13 @@ I **dispositivi di input/output** collegano il computer al mondo esterno: tastie
 
 > Le variabili "spariscono" quando il programma finisce perché vivono in RAM, non su disco. Per conservare un risultato bisogna scriverlo esplicitamente su file.
 
----
 
-<a id="mod1-input-output"></a>
 ## Cos'è un programma
 
-Un programma è una procedura che prende dati in ingresso, li elabora e produce un risultato.
+Quando diciamo "apro il programma Word" o "uso Excel", usiamo la parola *programma* nel senso di *applicazione*: un software completo con interfaccia grafica, menu, impostazioni, cronologia.
+Word ed Excel contengono al loro interno migliaia di procedure distinte.
+
+In questo corso useremo *programma* in un senso più specifico: **una sequenza di azioni che prende dati in ingresso, li elabora e produce un risultato**.
 
 | Fase         | Domanda tipica             |
 | ------------ | -------------------------- |
@@ -450,7 +513,7 @@ Un programma è una procedura che prende dati in ingresso, li elabora e produce 
 | Elaborazione | quali regole applico?      |
 | Output       | che risultato restituisco? |
 
-Esempi:
+I programmi che scriveremo fanno una cosa sola, in modo chiaro e verificabile. Esempi:
 
 | Programma              | Input           | Output               |
 | ---------------------- | --------------- | -------------------- |
@@ -470,11 +533,7 @@ In pratica, il sistema operativo:
 - gestisce la memoria e il tempo di esecuzione dei processi;
 - coordina anche l'accesso a periferiche come tastiera, schermo e disco.
 
----
 
-
-
-<a id="mod1-ambiente"></a>
 ## Ambiente di lavoro
 
 Per iniziare a programmare servono tre strumenti distinti:
@@ -482,7 +541,7 @@ Per iniziare a programmare servono tre strumenti distinti:
 | Strumento  | A cosa serve                 | Esempi                  |
 | ---------- | ---------------------------- | ----------------------- |
 | Interprete | esegue codice Python         | `python3`, REPL         |
-| Editor     | scrive e salva file di testo | VS Code                 |
+| Editor     | scrive e salva file di testo | VSCodium, VS Code       |
 | Terminale  | lancia comandi e programmi   | `zsh`, PowerShell, bash |
 
 è importante non confonderli:
@@ -508,7 +567,6 @@ La REPL è quindi utile per:
 - osservare subito il risultato;
 - leggere i messaggi di errore senza dover creare ogni volta un file.
 
-
 Normalmente però noi vogliamo scrivere un programma che possiamo salvare e eseguire nuovamente.
 Un programma Python di questo genere va scritto in un **text editor** che lavora su testo semplice.
 
@@ -521,7 +579,7 @@ Una sessione di lavoro tipica è questa:
 3. esegui `python3 nome_file.py`;
 4. osserva l'output e correggi se necessario.
 
-![Visual Studio Code](imgs/vscode.png)
+![VSCodium / Visual Studio Code](imgs/vscode.png)
 
 ### Perché conviene usare anche il terminale
 
@@ -530,8 +588,74 @@ Una sessione di lavoro tipica è questa:
 - spesso vi troverete a lavorare su un server, dove tipicamente non c'è un'interfaccia grafica completa;
 - saper lanciare uno script da riga di comando rende il lavoro più trasferibile.
 
+## Come lavorare
+
+Alcune abitudini utili fin dall'inizio:
+
+- carta e penna prima del codice: la parte difficile spesso viene prima della sintassi;
+- fare esercizi piccoli ma frequenti, come quando si impara una lingua;
+- non aspettarsi fluidità immediata: all'inizio la programmazione sembra spesso un salto misterioso, poi le cose iniziano a incastrarsi;
+- trascrivere il codice invece di copiarlo e incollarlo, sia per evitare errori nascosti sia per fare pratica vera;
+- se possibile lavorare in coppia, perché spiegare un problema ad alta voce spesso lo rende più chiaro;
+- lettura attenta dei messaggi di errore.
+
+Se qualcosa non funziona:
+
+1. leggi il messaggio;
+2. isola un esempio più piccolo;
+3. controlla tipi, parentesi, apici, indentazione (vedremo tra poco);
+4. confronta quello che volevi fare con quello che il programma fa davvero.
+
+![How to draw an owl](imgs/owl.png)
+
+> Programmare include sempre una quota di `trial and error`. Non è un'anomalia: è il lavoro.
+
+> In ogni caso: "Don't Panic!"
 
 <a id="mod1-terminale"></a>
+
+## Shell e sistemi operativi
+
+Il **terminale** è l'interfaccia a testo del sistema operativo.
+Il programma che interpreta i comandi che scriviamo si chiama **shell**.
+
+I sistemi operativi usano shell diverse:
+
+| Sistema operativo | Shell predefinita | Prompt tipico |
+| ----------------- | ----------------- | ------------- |
+| **macOS**         | `zsh`             | `%`           |
+| **Linux**         | `bash`            | `$`           |
+| **Windows**       | PowerShell        | `>`           |
+
+**bash** (Bourne Again SHell) è la shell più diffusa nei sistemi Unix. **zsh** è compatibile con bash e aggiunge funzionalità extra.
+I comandi che usiamo a lezione funzionano allo stesso modo in entrambe.
+
+### Windows: due opzioni
+
+Su Windows il terminale nativo è **PowerShell**, che ha una sintassi parzialmente diversa.
+I comandi di base (`pwd`, `ls`, `cd`) funzionano anche lì, ma le differenze emergono non appena si va oltre le operazioni elementari.
+
+Per seguire il corso con gli stessi comandi bash:
+
+- usate **Git Bash**, installato insieme a Git: emula bash su Windows
+- oppure usate PowerShell sapendo che qualche adattamento sarà necessario
+
+> A lezione useremo sintassi bash. Se siete su Windows con PowerShell, segnalate le differenze quando le incontrate.
+
+### Differenze pratiche tra bash e PowerShell
+
+I comandi visti a lezione funzionano in entrambi i terminali:
+
+| Operazione | bash / Git Bash | PowerShell |
+| --- | --- | --- |
+| cartella corrente | `pwd` | `pwd` |
+| contenuto cartella | `ls` | `ls` |
+| entra in cartella | `cd nome` | `cd nome` |
+| torna su | `cd ..` | `cd ..` |
+| esegui script Python | `python3 file.py` | `python file.py` |
+
+La differenza più comune: il separatore nei percorsi è `\` anziché `/` (anche se PowerShell accetta entrambi).
+
 ## Terminale: comandi di base
 
 Il terminale serve a spostarsi nelle cartelle e lanciare programmi.
@@ -540,49 +664,51 @@ Il terminale serve a spostarsi nelle cartelle e lanciare programmi.
 
 Comandi essenziali:
 
-| Comando | Significato |
-| --- | --- |
-| `pwd` | mostra la cartella corrente |
-| `ls` | elenca file e cartelle |
-| `cd nome-cartella` | entra in una cartella |
-| `cd ..` | torna alla cartella padre |
-| `python3 file.py` | esegue uno script Python |
+| Comando            | Significato                 |
+| ------------------ | --------------------------- |
+| `pwd`              | mostra la cartella corrente |
+| `ls`               | elenca file e cartelle      |
+| `cd nome-cartella` | entra in una cartella       |
+| `cd ..`            | torna alla cartella padre   |
+| `mkdir nome`       | crea una nuova cartella     |
+| `python3 file.py`  | esegue uno script Python    |
 
 ### Percorsi assoluti e relativi
 
-- un **percorso assoluto** parte dalla radice del sistema;
+- un **percorso assoluto** parte dalla radice del sistema (`/` su Unix, `C:\` su Windows);
 - un **percorso relativo** parte dalla cartella in cui ti trovi adesso.
 
-Tre scorciatoie molto utili:
+Immagina questa struttura di cartelle:
 
-- `.` significa "la cartella corrente";
-- `..` significa "la cartella superiore";
-- possiamo concatenare più salite con percorsi del tipo `../../`.
-
-Quindi, per esempio:
-
-```bash
-ls .
-ls ..
-cd ..
-ls ../../
+```text
+/
+└── home/
+    └── studente/
+        ├── corso/
+        │   ├── script.py
+        │   └── dati/
+        │       └── input.txt
+        └── documenti/
+            └── appunti.txt
 ```
 
-In pratica:
+Se sei dentro `corso/`, questi percorsi sono equivalenti:
 
-- `ls` e `ls .` sono equivalenti;
-- `./file.txt` indica un file nella cartella corrente;
-- `../file.txt` indica un file nella cartella sopra;
-- ogni `..` ci fa salire di un livello nell'albero delle cartelle.
+| Percorso | Tipo | Raggiunge |
+| --- | --- | --- |
+| `/home/studente/corso/script.py` | assoluto | `script.py` |
+| `script.py` oppure `./script.py` | relativo | `script.py` |
+| `dati/input.txt` | relativo | `input.txt` |
+| `../documenti/appunti.txt` | relativo (salendo di uno) | `appunti.txt` |
+| `/home/studente/documenti/appunti.txt` | assoluto | `appunti.txt` |
 
-Punto pratico importante:
+Le scorciatoie fondamentali:
 
-- uno stesso file puo' essere indicato in molti modi diversi;
-- con il nome assoluto completo;
-- con un percorso relativo breve;
-- oppure con forme come `./pippo.txt`.
+- `.` — la cartella corrente
+- `..` — la cartella superiore
+- `../../` — due livelli su
 
-L'importante non è usare sempre la forma più lunga, ma capire che il percorso deve descrivere correttamente come arrivare al file partendo dalla cartella corrente.
+L'importante non è usare sempre la forma più lunga, ma capire che il percorso deve descrivere correttamente come arrivare al file partendo dalla posizione attuale.
 
 Esempio:
 
@@ -597,36 +723,140 @@ python3 scripts/genera_programma.py
 
 > Se un comando "non trova il file", il primo controllo da fare è quasi sempre la cartella corrente.
 
+
+## Esercizio: prepara la tua cartella di lavoro
+
+Creiamo insieme la struttura di cartelle che useremo per tutto il corso.
+
+**Passo 1** — parti dalla tua cartella home e crea una cartella per il corso:
+
+```bash
+cd ~
+mkdir informatica-di-base
+ls
+```
+
+Il simbolo `~` (tilde) è una scorciatoia per la tua cartella home — quella che il terminale apre per default all'avvio.
+Su macOS corrisponde a `/Users/tuonome`, su Linux a `/home/tuonome`, su Windows (Git Bash) a `C:\Users\tuonome`.
+
+Per digitare `~`:
+
+| Sistema                     | Combinazione                                              |
+| --------------------------- | --------------------------------------------------------- |
+| macOS                       | `Alt + 5`                                                 |
+| Windows (tastiera italiana) | `Alt Gr + ì`                                              |
+| Linux                       | `Alt Gr + ì` oppure `Alt Gr + ~` a seconda della tastiera |
+
+Verifica che `informatica-di-base` compaia nell'elenco.
+
+**Passo 2** — entra nella cartella e crea una sottocartella per questa lezione:
+
+```bash
+cd informatica-di-base
+mkdir modulo-01
+ls
+```
+
+**Passo 3** — entra nella sottocartella e controlla dove sei:
+
+```bash
+cd modulo-01
+pwd
+```
+
+Dovresti vedere qualcosa come `/home/studente/informatica-di-base/modulo-01`.
+
+**Passo 4** — torna su di un livello e poi ancora su, verificando ogni volta:
+
+```bash
+cd ..
+pwd
+cd ..
+pwd
+```
+
+**Passo 5** — apri la cartella `informatica-di-base` nell'editor:
+
+```bash
+cd informatica-di-base
+code .
+```
+
+Su alcune installazioni il comando è `codium .` (VSCodium) oppure `code .` (VS Code). Il `.` indica "apri la cartella corrente".
+
+> Questa cartella diventerà il vostro spazio di lavoro per tutto il corso. Ogni modulo avrà la sua sottocartella.
+
 ---
 
-## Esercizi suggeriti
+## Dal REPL a uno script
 
-### REPL
+Nella REPL ogni espressione produce subito un risultato visibile. In un file le cose funzionano diversamente.
 
-1.
-2. Scrivi un'espressione che produca il triplo della metà di `12`.
-3. Ottieni il primo carattere di `"linguistica"`.
+Crea un file `prova.py` nella cartella `modulo-01` e scrivici dentro:
 
-### Terminale
+```python
+3 + 5
+```
 
-1. Entra nella cartella del progetto e mostra il contenuto.
-2. Spostati in `guida-lezioni` e poi torna indietro.
-3. Esegui uno script Python dal terminale.
+Poi eseguilo dal terminale:
 
-### Progettazione
+```bash
+python3 prova.py
+```
 
-Per un programma che legge un numero e stampa `"pari"` oppure `"dispari"`, scrivi almeno:
+Non succede niente. Il calcolo viene eseguito, ma il risultato non viene mostrato da nessuna parte.
+Per produrre output bisogna usare esplicitamente `print()`:
 
-- due casi normali;
-- due casi limite;
-- un caso di errore.
+```python
+print(3 + 5)
+```
+
+Ora eseguilo di nuovo: vedrai `8`.
+
+### `print()` è esplicita, la REPL no
+
+| | REPL | Script |
+| --- | --- | --- |
+| `3 + 5` | mostra `8` automaticamente | nessun output |
+| `print(3 + 5)` | mostra `8` | mostra `8` |
+
+Nella REPL il valore dell'espressione viene mostrato per comodità interattiva.
+In uno script il programma non sa dove vuoi mandare l'output — sullo schermo, su un file, da qualche altra parte — a meno che tu non glielo dica.
+
+### L'estensione non è obbligatoria
+
+Prova a rinominare il file togliendo l'estensione:
+
+```bash
+python3 prova
+```
+
+Funziona ugualmente. Prova anche con `.txt`:
+
+```bash
+python3 prova.txt
+```
+
+Anche questo funziona. L'interprete Python non guarda l'estensione: legge il contenuto e lo esegue.
+L'estensione `.py` è una convenzione per gli esseri umani — aiuta l'editor a colorare il codice e te a capire cosa c'è dentro — ma non cambia nulla per l'interprete.
+
+### Esercizio
+
+Riprendi gli esercizi della REPL e salvali in un file `esercizi-repl.py`, uno per riga, ciascuno dentro una `print()`. Per esempio:
+
+```python
+print(3 + 5)
+print(len("Happy families are all alike"))
+print("informatica"[0])
+```
+
+Esegui il file e verifica che l'output corrisponda a quello che avevi ottenuto nella REPL.
 
 ---
 
-<a id="mod1-esercizi-script"></a>
 ## Cosa fa questo programma?
 
-Nella cartella `esercizi/modulo-1/` ci sono i file `es1.py` … `es6.py`. **Non aprirli.**
+Nella cartella `esercizi/modulo-1/` ci sono i file `es1.py` … `es7.py`. **Non aprirli.**
 
 Per ciascuno:
 
@@ -765,5 +995,58 @@ Stampa il quadrato e il cubo del numero passato come argomento (`n * n` e `n ** 
 25  125
 100 1000
 ```
+
+</details>
+
+### Esercizio 7
+
+Questo esercizio usa operazioni che probabilmente non avete ancora incontrato. Provate più combinazioni — alcune produrranno output inaspettato, altre genereranno un errore.
+
+```bash
+python3 es7.py ciao 2
+python3 es7.py ciao 0
+python3 es7.py ciao 3
+python3 es7.py ciao 10
+python3 es7.py x 1
+python3 es7.py informatica 4
+```
+
+Prima di aprire il file: riuscite a capire cosa fa? Riuscite a spiegare *perché* alcune chiamate generano un errore?
+
+<details>
+<summary>Cosa fa</summary>
+
+Il programma prende una stringa `s` e un numero `n` e fa tre cose:
+
+1. stampa `s * n` — l'operatore `*` tra stringa e intero ripete la stringa `n` volte;
+2. stampa `s[n]` — il carattere in posizione `n`;
+3. stampa `s[:n].upper() + s[n:]` — i primi `n` caratteri in maiuscolo concatenati al resto.
+
+```text
+# es7.py ciao 2
+ciaociao
+a
+CIao
+
+# es7.py ciao 0
+           ← stringa vuota (s * 0)
+c          ← s[0]
+ciao       ← "" + "ciao"
+
+# es7.py ciao 3
+ciaociaociao
+o
+CIAo
+```
+
+Con `n = 10` le righe 2 e 3 generano un errore:
+
+```text
+IndexError: string index out of range
+```
+
+perché `"ciao"` ha solo 4 caratteri (indici 0–3) e `s[10]` non esiste. La prima riga invece funziona: `s * 10` non ha limiti.
+
+Con `n = 0`: `s * 0` produce una stringa vuota — non un errore. Perché?
 
 </details>

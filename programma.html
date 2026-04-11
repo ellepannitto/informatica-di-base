@@ -36,8 +36,8 @@ h1 { font-size: 22px; font-weight: 500; color: #2D2D6B; margin-bottom: 4px; }
 .module-num { font-size: 11px; font-weight: 500; color: #888; min-width: 24px; }
 .module-title { flex: 1; font-size: 14px; font-weight: 500; color: #111; }
 .module.prova .module-title { color: #0C447C; }
-.module-title a { color: inherit; text-decoration: none; }
-.module-title a:hover { text-decoration: underline; text-underline-offset: 2px; }
+.slides-btn { font-size: 11px; padding: 2px 9px; border-radius: 8px; background: #EEF2FF; color: #3D52A0; text-decoration: none; font-weight: 500; white-space: nowrap; border: 0.5px solid #C7D2F0; }
+.slides-btn:hover { background: #E0E7FF; }
 .badge { font-size: 11px; padding: 2px 8px; border-radius: 8px; font-weight: 500; }
 .new-badge { background: #E6F5EC; color: #0F6E56; }
 .mod-badge { background: #FFF3CD; color: #7A5000; }
@@ -56,14 +56,13 @@ h1 { font-size: 22px; font-weight: 500; color: #2D2D6B; margin-bottom: 4px; }
 .topic-date { font-size: 11px; color: #888; white-space: nowrap; }
 .topic-h { font-size: 12px; color: #bbb; white-space: nowrap; }
 .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.dot-theory { background: #D85A30; border: 0.5px solid #993C1D; }
+.dot-theory { background: #E07A30; }
+.dot-exercise { background: #2BAF78; }
 .strip { border-radius: 8px; padding: 8px 12px; margin-top: 8px; font-size: 12px; display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
 .strip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; display: inline-block; }
-.bar-wrap { display: flex; gap: 3px; align-items: center; margin-top: 8px; margin-bottom: 2px; }
-.bar-bg { flex: 1; height: 4px; border-radius: 2px; background: #e8e8e8; overflow: hidden; }
-.bar-lez { height: 100%; background: #7F77DD; border-radius: 2px; }
-.bar-ex  { height: 100%; background: #1D9E75; border-radius: 2px; }
-.bar-lbl { font-size: 11px; }
+.module-bar { display: flex; height: 6px; }
+.seg-lez { background: #E07A30; }
+.seg-ex  { background: #2BAF78; }
 @media print {
   body { background: white; padding: 1rem; }
   .module-body { display: block !important; }
@@ -76,24 +75,19 @@ h1 { font-size: 22px; font-weight: 500; color: #2D2D6B; margin-bottom: 4px; }
   <h1>Informatica di Base</h1>
   <p class="subtitle">Università degli Studi di Salerno | 38.1% lezione / 61.9% esercitazione</p>
 
-  <section class="prelude"><h2>Prima di iniziare</h2><p>Prima della prima lezione è consigliato preparare l&#x27;ambiente di lavoro. In particolare:</p><ul><li>installare <strong>Python</strong></li><li>installare <strong>Visual Studio Code</strong></li><li>installare <strong>Git</strong></li><li>prendere un primo contatto con il <strong>terminale</strong></li><li>se si usa <strong>Windows</strong>, installare anche <strong>WSL</strong> (Windows Subsystem for Linux)</li></ul><p>Per una guida più dettagliata vedi <a href="guida-lezioni/modulo-0.slides.html">guida-lezioni/modulo-0.slides.html</a>. Se qualcosa non funziona non è un problema: l&#x27;installazione dell&#x27;ambiente fa parte del corso e verrà ripresa anche a lezione.</p><h2>Libro consigliato</h2><p>Il testo consigliato è <strong>Introduzione a Python</strong> di <strong>Tony Gaddis</strong>, in italiano oppure in inglese. Non è obbligatorio: <strong>seguire le lezioni è sufficiente</strong> per affrontare il corso. Il libro è solo un supporto aggiuntivo per chi vuole ripassare o leggere altri esempi.</p></section>
+  <section class="prelude"><h2>Prima di iniziare</h2><p>Prima della prima lezione è consigliato preparare l&#x27;ambiente di lavoro. In particolare:</p><ul><li>installare <strong>Python</strong></li><li>installare <strong>VSCodium</strong> oppure <strong>Visual Studio Code</strong></li><li>installare <strong>Git</strong></li><li>prendere un primo contatto con il <strong>terminale</strong></li></ul><p>Per una guida più dettagliata vedi <a href="guida-lezioni/modulo-0.slides.html">guida-lezioni/modulo-0.slides.html</a>. Se qualcosa non funziona non è un problema: l&#x27;installazione dell&#x27;ambiente fa parte del corso e verrà ripresa anche a lezione.</p><h2>Libro consigliato</h2><p>Il testo consigliato è <strong>Introduzione a Python</strong> di <strong>Tony Gaddis</strong>, in italiano oppure in inglese. Non è obbligatorio: <strong>seguire le lezioni è sufficiente</strong> per affrontare il corso. Il libro è solo un supporto aggiuntivo per chi vuole ripassare o leggere altri esempi.</p></section>
 
   <div class="valutazione">
     <div class="val-title">Sistema di valutazione</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>il corso è organizzato in 4 macroblocchi. Ai primi 3 blocchi corrisponde una prova intermedia</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>tutte le prove intermedie sono facoltative, si svolgono durante le ore del corso e sono gia comprese nel monte ore totale.</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Le prove intermedie sono allineate ai blocchi `1-3`, `4-7` e `8-9`.</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>La prova finale sarà strutturata seguendo la stessa logica: sarà presente almeno un esercizio per blocco e una sezione sui moduli `10` e `11`, non coperti dalle prove intermedie.</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Se uno studente ha gia sostenuto una prova intermedia su un blocco, quel risultato resta disponibile anche se consegna la prova finale.</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>In sede di verbalizzazione viene considerata, per ciascun blocco, la valutazione piu favorevole per lo studente tra prova intermedia e prova finale.</div>
-    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Ogni prova intermedia superata puo quindi alleggerire la prova finale e migliorare il risultato complessivo.</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Ci sono **3 prove intermedie facoltative**, una per blocco (moduli 1–3, 4–7, 8–9). Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>Lo **scritto finale** copre i tre blocchi (moduli 1–9). Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale: le prove già superate alleggeriscono lo scritto e possono migliorare il voto complessivo.</div>
+    <div class="val-row"><span class="val-dot" style="background:#9EC8F0"></span>L&#x27;esame si conclude con un **orale** che include live coding e domande di teoria. I moduli 10 e 11 sono testati solo in questa sede.</div>
   </div>
 
   <div class="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#7F77DD"></div>Lezione (38.1%)</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#1D9E75"></div>Esercitazione (61.9%)</div>
     <div class="legend-item"><div class="legend-dot" style="background:#EBF4FB;border:0.5px solid #9EC8F0"></div>Prova intermedia</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#FAECE7;border:0.5px solid #993C1D"></div>Teoria</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FDF0E7;border:0.5px solid #E07A30"></div>Teoria / lezione</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#E8F5F0;border:0.5px solid #2BAF78"></div>Esercitazione</div>
   </div>
 
   <div class="summary">
@@ -112,6 +106,7 @@ const stripStyles = {};
 
 const dotMap = {
   theory: "dot-theory",
+  exercise: "dot-exercise",
 };
 
 const cont = document.getElementById("modules");
@@ -143,11 +138,9 @@ data.forEach((m) => {
       </div>`;
 
   const barHtml = (!m.prova && m.num !== "--") ? `
-    <div class="bar-wrap">
-      <span class="bar-lbl" style="color:#7F77DD">${m.lez_pct}%</span>
-      <div class="bar-bg"><div class="bar-lez" style="width:${m.lez_pct}%"></div></div>
-      <div class="bar-bg"><div class="bar-ex" style="width:${m.ex_pct}%"></div></div>
-      <span class="bar-lbl" style="color:#1D9E75">${m.ex_pct}%</span>
+    <div class="module-bar">
+      <div class="seg-lez" style="flex:${m.lez_pct}"></div>
+      <div class="seg-ex" style="flex:${m.ex_pct}"></div>
     </div>` : "";
 
   const stripsHtml = (m.strips || []).map((strip) => {
@@ -155,20 +148,21 @@ data.forEach((m) => {
     return `<div class="strip ${style.cls}"><span class="strip-dot" style="background:${style.dot}"></span><span>${strip.text}</span></div>`;
   }).join("");
 
-  const titleInner = m.slides_url
-    ? `<a href="${m.slides_url}" onclick="event.stopPropagation()">${m.title}</a>`
-    : m.title;
+  const slidesBtnHtml = m.slides_url
+    ? `<a class="slides-btn" href="${m.slides_url}" onclick="event.stopPropagation()">slides ›</a>`
+    : "";
 
   div.innerHTML = `
     <div class="module-header">
       <span class="module-num">${m.num}</span>
-      <span class="module-title">${titleInner}</span>
+      <span class="module-title">${m.title}</span>
+      ${slidesBtnHtml}
       ${badgeHtml}
       ${hoursCol}
       <span class="arrow">›</span>
     </div>
+    ${barHtml}
     <div class="module-body" style="display:none">
-      ${barHtml}
       ${stripsHtml}
       <div style="margin-top:8px">
         ${m.topics.map((topic) => {

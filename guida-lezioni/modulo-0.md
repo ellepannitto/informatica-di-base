@@ -2,7 +2,7 @@
 
 Benvenuti al corso **Informatica di Base**.
 
-Prima di iniziare non servono conoscenze pregresse, ma è utile arrivare alla prima lezione con l'ambiente già pronto. Se qualcosa non funziona non bloccatevi: l'installazione fa parte del corso e la sistemeremo insieme.
+Prima di iniziare non servono conoscenze pregresse. È sufficiente arrivare alla prima lezione con l'ambiente già pronto.
 
 ---
 
@@ -10,11 +10,11 @@ Prima di iniziare non servono conoscenze pregresse, ma è utile arrivare alla pr
 
 Prima della prima lezione vi chiedo di:
 
+- portare il **proprio laptop** a lezione
 - installare [**l'interprete Python**](https://www.python.org/downloads/)
-- installare [**Visual Studio Code**](https://code.visualstudio.com/download)
+- installare [**VSCodium**](https://vscodium.com/) oppure [**Visual Studio Code**](https://code.visualstudio.com/download)
 - installare [**Git**](https://git-scm.com/install/)
 - fare una piccola prova con il **terminale**
-- se usate Windows, installare anche [**WSL**](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 Non è necessario fare tutto in autonomia in modo perfetto. È sufficiente provarci e annotare eventuali problemi.
 
@@ -51,13 +51,13 @@ Se il comando non funziona:
 
 ---
 
-## 2. Installare Visual Studio Code
+## 2. Installare VSCodium o Visual Studio Code
 
-Scaricate **VS Code** da [code.visualstudio.com](https://code.visualstudio.com/download). È l'editor che useremo per scrivere e leggere il codice.
+Scaricate [**VSCodium**](https://vscodium.com/) oppure [**Visual Studio Code**](https://code.visualstudio.com/download). È l'editor che useremo per scrivere e leggere il codice.
 
 Dopo l'installazione:
 
-- aprite VS Code
+- aprite l'editor
 - installate l'estensione **Python** di Microsoft
 
 Per installare un'estensione:
@@ -88,35 +88,7 @@ Dovreste vedere qualcosa come `git version 2.x.x`.
 
 ---
 
-## 4. Se usate Windows: installare WSL
-
-Se lavorate su Windows, consiglio di installare anche **WSL** (**Windows Subsystem for Linux**), o quantomeno di provarci!
-
-WSL permette di usare un ambiente Linux direttamente dentro Windows. È utile perché molti strumenti di programmazione, comandi di terminale ed esempi del corso funzionano in modo più lineare in un ambiente Unix-like.
-
-Per installarlo:
-
-1. aprite **PowerShell come amministratore**
-2. eseguite:
-
-```powershell
-wsl --install
-```
-
-3. riavviate il computer se richiesto
-4. al primo avvio scegliete una distribuzione Linux (di solito Ubuntu va benissimo)
-
-Per verificare che WSL sia disponibile:
-
-```powershell
-wsl --status
-```
-
-Se l'installazione non funziona subito, non è un problema: ne parliamo a lezione.
-
----
-
-## 5. Familiarizzare con il terminale
+## 4. Familiarizzare con il terminale
 
 Il terminale è uno strumento di lavoro importante. Per chi parte da zero, la prima cosa utile è sapere dove si trova e come si apre.
 
@@ -133,7 +105,7 @@ Su **Windows**:
 - aprite il menu **Start**
 - scrivete `PowerShell` oppure `Terminale`
 - aprite **Windows PowerShell** o **Terminal**
-- se usate WSL, potete anche cercare **Ubuntu**
+- se avete installato Git, potete usare anche **Git Bash** (vedi sotto)
 
 Su **Linux**:
 
@@ -172,12 +144,6 @@ Su alcuni computer Python risponde invece a:
 python3 --version
 ```
 
-Su Windows, per WSL:
-
-```powershell
-wsl --status
-```
-
 Se il controllo va bene, vedrete una riga con il numero di versione.
 
 Se il controllo non va bene, potete vedere:
@@ -188,24 +154,82 @@ Se il controllo non va bene, potete vedere:
 
 Anche questi risultati sono utili: non vanno "sistemati a caso", ma annotati.
 
-### Prime operazioni di orientamento
+### Git Bash su Windows
 
-Non serve diventare esperti subito: basta imparare alcune operazioni di base.
+Se avete installato Git, avete già a disposizione **Git Bash**: un terminale che usa gli stessi comandi Unix che useremo a lezione (`ls`, `cd`, `pwd`, ...), senza bisogno di WSL.
 
-Provate ad eseguire varie volte questi comandi e prendete nota del risultato che ottenete:
+Per aprirlo:
+
+- cliccate con il tasto destro su una cartella in Esplora file
+- scegliete **Open Git Bash here**
+
+oppure:
+
+- aprite il menu **Start**
+- cercate **Git Bash**
+- si apre una finestra con un prompt simile a `$`
+
+Git Bash è una buona alternativa a PowerShell per chi usa Windows e non ha ancora configurato WSL. I comandi che troverete nel corso funzionano tutti in Git Bash.
+
+---
+
+## 5. Esplorate il vostro filesystem
+
+Prima della prima lezione provate a esplorare il vostro computer dal terminale. Non c'è nessun rischio: i comandi qui sotto leggono soltanto, non modificano nulla.
+
+I comandi di base funzionano allo stesso modo in bash, zsh e PowerShell. Su Windows potete usare indifferentemente **PowerShell** o **Git Bash**.
+
+### Comandi di base
+
+Provate uno alla volta:
 
 ```bash
 pwd
+```
+Dove siete adesso? Qual è la cartella di partenza?
+
+```bash
 ls
-cd Documenti
+```
+Cosa c'è in questa cartella?
+
+Poi entrate in una cartella che conoscete. La cartella principale dei documenti si chiama:
+
+- `Documenti` o `Documents` su macOS e Linux (dipende dalla lingua)
+- `Documents` su Windows (sia in PowerShell che in Git Bash)
+
+```bash
+cd Documents
+ls
+```
+
+Continuate a scendere dove tenete i file universitari, poi tornate su:
+
+```bash
+cd NomeDellaCartella
+ls
+pwd
 cd ..
+pwd
+cd ../..
+ls
 ```
 
-Su Windows fuori da WSL, al posto di `ls` potete trovare anche:
+### Nota per chi usa PowerShell su Windows
 
-```powershell
-dir
-```
+I comandi sopra funzionano anche in PowerShell. Alcune differenze da tenere a mente:
+
+- i percorsi usano `\` come separatore (`C:\Users\nome\Documents`), anche se PowerShell accetta anche `/`;
+- `python3` potrebbe non essere riconosciuto: provate con `python` (senza il `3`).
+
+### Domande su cui riflettere
+
+- Qual è la cartella in cui si apre il terminale per default?
+- Quanti livelli di cartelle ci vogliono per arrivare ai vostri appunti?
+- Riuscite a trovare dove il vostro computer tiene i file scaricati?
+
+Non serve sapere le risposte: serve aver provato a cercarle. Portate a lezione quello che avete osservato.
+
 ---
 
 ## 6. Libro consigliato
@@ -237,12 +261,4 @@ L'ambiente di lavoro si costruisce insieme, passo dopo passo.
 
 ## Riepilogo
 
-Prima della prima lezione l'obiettivo non è "sapere già programmare", ma arrivare con una base operativa minima:
-
-- Python installato e verificato;
-- VS Code pronto;
-- Git disponibile;
-- primo orientamento nel terminale;
-- eventuali problemi tecnici annotati in modo chiaro.
-
-Se qualcosa non è ancora a posto, va bene: la prima parte del corso serve anche a costruire insieme questo ambiente di lavoro.
+L'obiettivo non è arrivare con tutto perfetto, ma con una base operativa minima: Python, VSCodium o VS Code e Git installati, e una prima esperienza con il terminale. Gli eventuali problemi tecnici li sistemiamo insieme a lezione.

@@ -2,16 +2,14 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- usare `while` quando non conosci in anticipo il numero di iterazioni;
-- distinguere bene guardia del ciclo, stato e condizione di terminazione;
-- progettare cicli con sentinelle e input ripetuto;
-- riconoscere errori tipici come loop infinito e stato non aggiornato;
-- leggere un `while` come evoluzione dello stato del programma;
-- applicare `while` a conteggi, validazione e piccoli automi.
+- Sai usare `while` quando non conosci in anticipo il numero di iterazioni?
+- Sai distinguere guardia del ciclo, stato e condizione di terminazione?
+- Sai progettare cicli con sentinelle e input ripetuto?
+- Sai riconoscere errori tipici come loop infinito e stato non aggiornato?
+- Sai leggere un `while` come evoluzione dello stato del programma?
+- Sai applicare `while` a conteggi, validazione e piccoli automi?
 
 ---
 

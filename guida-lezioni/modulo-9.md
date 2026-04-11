@@ -2,17 +2,15 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- aprire file di testo in lettura e in scrittura;
-- leggere un file come stringa, come lista di righe o riga per riga;
-- distinguere tra standard input, file aperto con `open()` e parametri da riga di comando;
-- usare `split()`, `strip()` e conversioni di tipo sui dati letti da file;
-- scrivere output su file;
-- riconoscere i formati di base: testo semplice, CSV, JSON e HTML;
-- usare alcune utility da terminale per ispezionare file e cartelle.
+- Sai aprire file di testo in lettura e in scrittura?
+- Sai leggere un file come stringa, come lista di righe o riga per riga?
+- Sai distinguere tra standard input, file aperto con `open()` e parametri da riga di comando?
+- Sai usare `split()`, `strip()` e conversioni di tipo sui dati letti da file?
+- Sai scrivere output su file?
+- Sai riconoscere i formati di base: testo semplice, CSV, JSON e HTML?
+- Sai usare alcune utility da terminale per ispezionare file e cartelle?
 
 ---
 

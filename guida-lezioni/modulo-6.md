@@ -2,16 +2,14 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- definire funzioni con parametri e valore di ritorno;
-- distinguere bene funzione e procedura;
-- scomporre un problema in sottoproblemi piu' piccoli;
-- progettare interfacce semplici e responsabilita' singole;
-- leggere una funzione come black box;
-- costruire piccole utility testabili e riusabili.
+- Sai definire funzioni con parametri e valore di ritorno?
+- Sai distinguere funzione e procedura?
+- Sai scomporre un problema in sottoproblemi più piccoli?
+- Sai progettare interfacce semplici e responsabilità singole?
+- Sai leggere una funzione come black box?
+- Sai costruire piccole utility testabili e riusabili?
 
 ---
 

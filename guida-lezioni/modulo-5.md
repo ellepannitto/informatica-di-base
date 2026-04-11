@@ -2,15 +2,13 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- rappresentare dati ordinati con una lista;
-- usare le operazioni fondamentali sulle liste;
-- trasformare una stringa in lista con `split()`;
-- leggere sequenze di dati e accumularle in una lista;
-- ragionare sulla differenza tra lista e stringa.
+- Sai rappresentare dati ordinati con una lista?
+- Sai usare le operazioni fondamentali sulle liste?
+- Sai trasformare una stringa in lista con `split()`?
+- Sai leggere sequenze di dati e accumularle in una lista?
+- Sai ragionare sulla differenza tra lista e stringa?
 
 ---
 

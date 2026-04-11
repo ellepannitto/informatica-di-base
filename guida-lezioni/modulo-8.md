@@ -2,15 +2,13 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- usare il ciclo `for` su stringhe, liste e `range()`;
-- capire la semantica elementare dell'iterazione;
-- leggere il comportamento del `for` in termini di stato;
-- applicare il `for` a conteggi, trasformazioni e scansioni;
-- usare cicli annidati per costruire pattern e output strutturato.
+- Sai usare il ciclo `for` su stringhe, liste e `range()`?
+- Sai spiegare la semantica elementare dell'iterazione?
+- Sai leggere il comportamento del `for` in termini di stato?
+- Sai applicare il `for` a conteggi, trasformazioni e scansioni?
+- Sai usare cicli annidati per costruire pattern e output strutturato?
 
 ---
 

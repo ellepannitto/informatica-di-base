@@ -8,10 +8,9 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 Prima della prima lezione è consigliato preparare l'ambiente di lavoro. In particolare:
 
 - installare **Python**
-- installare **Visual Studio Code**
+- installare **VSCodium** oppure **Visual Studio Code**
 - installare **Git**
 - prendere un primo contatto con il **terminale**
-- se si usa **Windows**, installare anche **WSL** (Windows Subsystem for Linux)
 
 Per una guida più dettagliata vedi [guida-lezioni/modulo-0.slides.html](guida-lezioni/modulo-0.slides.html).
 
@@ -25,13 +24,9 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 
 ## Sistema di valutazione
 
-- il corso è organizzato in 4 macroblocchi. Ai primi 3 blocchi corrisponde una prova intermedia
-- tutte le prove intermedie sono facoltative, si svolgono durante le ore del corso e sono gia comprese nel monte ore totale.
-- Le prove intermedie sono allineate ai blocchi `1-3`, `4-7` e `8-9`.
-- La prova finale sarà strutturata seguendo la stessa logica: sarà presente almeno un esercizio per blocco e una sezione sui moduli `10` e `11`, non coperti dalle prove intermedie.
-- Se uno studente ha gia sostenuto una prova intermedia su un blocco, quel risultato resta disponibile anche se consegna la prova finale.
-- In sede di verbalizzazione viene considerata, per ciascun blocco, la valutazione piu favorevole per lo studente tra prova intermedia e prova finale.
-- Ogni prova intermedia superata puo quindi alleggerire la prova finale e migliorare il risultato complessivo.
+- Ci sono **3 prove intermedie facoltative**, una per blocco (moduli 1–3, 4–7, 8–9). Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.
+- Lo **scritto finale** copre i tre blocchi (moduli 1–9). Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale: le prove già superate alleggeriscono lo scritto e possono migliorare il voto complessivo.
+- L'esame si conclude con un **orale** che include live coding e domande di teoria. I moduli 10 e 11 sono testati solo in questa sede.
 
 ## Moduli
 

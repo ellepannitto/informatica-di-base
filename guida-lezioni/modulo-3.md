@@ -2,17 +2,15 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- tracciare meglio lo stato del programma durante l'esecuzione;
-- riconoscere errori frequenti e localizzarli;
-- usare casi di test per smascherare errori logici;
-- usare condizioni composte con attenzione;
-- applicare le leggi di De Morgan;
-- modellare piccoli problemi con automi a stati finiti;
-- ragionare sui casi limite anche quando il codice sembra plausibile a una prima lettura.
+- Sai tracciare lo stato del programma durante l'esecuzione?
+- Sai riconoscere errori frequenti e localizzarli?
+- Sai usare casi di test per smascherare errori logici?
+- Sai usare condizioni composte con attenzione?
+- Sai applicare le leggi di De Morgan?
+- Sai modellare piccoli problemi con automi a stati finiti?
+- Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?
 
 ---
 

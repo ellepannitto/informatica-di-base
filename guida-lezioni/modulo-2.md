@@ -2,17 +2,13 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- eseguire un primo script Python da file;
-- distinguere espressioni e istruzioni;
-- usare variabili e assegnamento;
-- leggere input con `input()` e convertire tipi con `int()` e `str()`;
-- usare `print()` per costruire output espliciti;
-- scrivere semplici decisioni con `if`, `if-else`, `elif`;
-- organizzare uno script in sezioni leggibili.
+- Sai distinguere espressioni e istruzioni?
+- Sai usare variabili e assegnamento?
+- Sai leggere input con `input()` e convertire tipi con `int()` e `str()`?
+- Sai scrivere semplici decisioni con `if`, `if-else`, `elif`?
+- Sai organizzare uno script in sezioni leggibili?
 
 ---
 
@@ -45,27 +41,9 @@ Un richiamo utile emerso a voce: negli esercizi sulle stringhe molte persone ten
 ---
 
 <a id="mod2-primo-script"></a>
-## Primo script: scrivere ed eseguire un file `.py`
+## Struttura di uno script
 
-La REPL e' utile per prove rapide, ma i programmi veri si scrivono in file.
-
-Esempio:
-
-```python
-print("Ciao")
-print("Benvenuto nel corso")
-```
-
-Salva questo contenuto in `saluto.py` ed esegui:
-
-```bash
-python3 saluto.py
-```
-
-Differenza pratica:
-
-- nella REPL provi una riga alla volta;
-- in uno script scrivi una sequenza di istruzioni che puo' essere salvata, corretta e rieseguita.
+Nel modulo 1 abbiamo scritto i primi file `.py` e introdotto `print()`. Qui vediamo come organizzare uno script un po' più articolato.
 
 ### Struttura minima di uno script
 
@@ -304,64 +282,9 @@ print(b)
 ---
 
 <a id="mod2-input-output"></a>
-## `input()`, `print()`, `type()` e casting
+## `input()`, `type()` e casting
 
-## Il problema che porta a `print()` e `input()`
-
-Un programma non deve solo calcolare: deve anche comunicare con l'esterno.
-
-Due bisogni diversi:
-
-- mostrare un risultato all'utente;
-- ricevere un dato dall'utente.
-
-Qui entrano in gioco:
-
-- `print()` per l'output;
-- `input()` per l'input.
-
----
-
-## Sintassi di `print()`
-
-Forma base:
-
-```python
-print(valore1, valore2)
-```
-
-Esempi:
-
-```python
-print("Ciao")
-print("Ciao", nome)
-print(eta + 1)
-```
-
-`print(...)` e' una chiamata di funzione:
-
-- il nome della funzione e' `print`;
-- tra parentesi passiamo gli argomenti;
-- gli argomenti vengono stampati in output.
-
----
-
-## Semantica di `print()`
-
-Serve a produrre output verso lo schermo.
-
-```python
-nome = "Anna"
-print("Ciao", nome)
-```
-
-Quando Python esegue `print(...)`:
-
-1. valuta gli argomenti;
-2. li converte in una forma stampabile;
-3. li manda sullo standard output.
-
-`print(...)` non salva valori in memoria: rende visibile all'esterno un risultato.
+Abbiamo già visto `print()` nel modulo 1. Qui introduciamo il suo complemento: `input()`, che legge dati dall'utente.
 
 ---
 

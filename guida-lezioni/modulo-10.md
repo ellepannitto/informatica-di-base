@@ -2,16 +2,14 @@
 
 ---
 
-## Obiettivi del modulo
+## Autovalutazione
 
-Al termine di questo modulo saprai:
-
-- usare i `dict` per associare chiavi e valori;
-- contare frequenze e raggruppare dati con i dizionari;
-- iterare su chiavi, valori e coppie chiave-valore;
-- usare i `set` come insiemi di elementi unici;
-- distinguere bene lista, dizionario e set;
-- applicare dizionari e set a problemi di lookup, frequenza, confronto e filtraggio.
+- Sai usare i `dict` per associare chiavi e valori?
+- Sai contare frequenze e raggruppare dati con i dizionari?
+- Sai iterare su chiavi, valori e coppie chiave-valore?
+- Sai usare i `set` come insiemi di elementi unici?
+- Sai distinguere lista, dizionario e set?
+- Sai applicare dizionari e set a problemi di lookup, frequenza, confronto e filtraggio?
 
 ---
 
