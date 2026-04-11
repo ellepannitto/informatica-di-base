@@ -49,9 +49,7 @@ I moduli 10 e 11 non sono coperti dalle prove intermedie ma sono inclusi nello s
 
 Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale. Le prove intermedie superare alleggeriscono lo scritto e migliorano il risultato complessivo.
 
-
 ### Bibliografia consigliata
-
 
 ## Cosa facciamo
 
@@ -74,14 +72,14 @@ Non ci interessa:
 
 > L'obiettivo del corso è più pragmatico: prima impariamo a leggere, scrivere e controllare programmi semplici; poi useremo queste basi per lavorare su dati e problemi reali.
 
-## Autovalutazione
+## A fine lezione:
 
-- Sai orientarti tra interprete, editor e terminale?
-- Sai usare la REPL di Python per fare prove rapide?
+- Sai distinguere interprete, editor e terminale?
+- Sai lanciare ed utilizzare la REPL di Python?
 - Sai riconoscere i tipi fondamentali `int`, `float`, `str` ed eseguire operazioni su di essi?
 - Sai descrivere il modello input → elaborazione → output?
 - Sai spiegare in modo intuitivo il ruolo di CPU, memoria e file system?
-- Sai eseguire comandi base nel terminale?
+- Sai eseguire comandi base nel terminale? Creare una cartella, cambiare cartella, leggerne il contenuto
 
 
 ## Perché Python
@@ -231,7 +229,7 @@ L'idea è la stessa della divisione in colonna:
 - `6 * 7 = 42`
 - da `44` avanzano `2`
 
-![Divisione intera e resto](imgs/divisione.png)
+![Divisione intera e resto](/divisione.png)
 
 ### Stringhe
 
@@ -815,10 +813,10 @@ Ora eseguilo di nuovo: vedrai `8`.
 
 ### `print()` è esplicita, la REPL no
 
-| | REPL | Script |
-| --- | --- | --- |
-| `3 + 5` | mostra `8` automaticamente | nessun output |
-| `print(3 + 5)` | mostra `8` | mostra `8` |
+|                | REPL                       | Script        |
+| -------------- | -------------------------- | ------------- |
+| `3 + 5`        | mostra `8` automaticamente | nessun output |
+| `print(3 + 5)` | mostra `8`                 | mostra `8`    |
 
 Nella REPL il valore dell'espressione viene mostrato per comodità interattiva.
 In uno script il programma non sa dove vuoi mandare l'output — sullo schermo, su un file, da qualche altra parte — a meno che tu non glielo dica.

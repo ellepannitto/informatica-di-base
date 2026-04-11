@@ -1,53 +1,43 @@
 # Modulo 02 · Variabili e strutture decisionali
 
----
-
-## Autovalutazione
+## A fine lezione:
 
 - Sai distinguere espressioni e istruzioni?
-- Sai usare variabili e assegnamento?
+- Sai usare variabili?
+- Sai definire la sintassi dell'assegnamento?
+- Sai definire la semantica dell'assegnamento?
 - Sai leggere input con `input()` e convertire tipi con `int()` e `str()`?
+- Sai definire la sintassi dei costrutti `if`, `if-else`, `elif`?
+- Sai definire la semantica dei costrutti `if`, `if-else`, `elif`?
 - Sai scrivere semplici decisioni con `if`, `if-else`, `elif`?
 - Sai organizzare uno script in sezioni leggibili?
 
----
-
 ## Recap operativo
 
-Prima di affrontare questo modulo, conviene richiamare questi prerequisiti:
+La scorsa lezione:
 
 - saper usare un interprete Python 3;
 - saper scrivere un file `.py` in un editor;
 - conoscere tipi fondamentali e confronti.
 
-Tre esercizi tipici di ripasso:
+Per ripassare:
 
-1. convertire un numero di secondi in giorni, ore, minuti, secondi;
-2. scambiare i valori di due variabili;
-3. data una stringa `s` e un intero `n`, stampare il carattere in posizione `n` insieme al precedente e al successivo.
+1. dato un numero di secondi `s` convertire in ore, minuti, secondi;
+2. data una stringa `s` e un intero `n`, stampare il carattere in posizione `n` insieme al precedente e al successivo.
 
-La seconda lezione trascritta ripartiva proprio da qui:
+<details>
+- attenzione alle parentesi superflue: una stringa resta una stringa anche senza "impacchettarla" ulteriormente. Aggiungerle può cambiare il modo in cui un interprete o un ambiente legge l'espressione;
+- conviene scrivere l'operazione nel modo più semplice che conserva il tipo giusto. -- `type()`
+</details>
 
-- controllare che interprete e IDE fossero installati correttamente;
-- verificare gli esercizi assegnati;
-- chiarire piccoli errori ricorrenti prima di introdurre nuovi costrutti.
-
-Un richiamo utile emerso a voce: negli esercizi sulle stringhe molte persone tendevano ad aggiungere parentesi non necessarie. Il punto didattico era questo:
-
-- una stringa resta una stringa anche senza "impacchettarla" ulteriormente;
-- aggiungere parentesi superflue puo' cambiare il modo in cui un interprete o un ambiente legge l'espressione;
-- conviene scrivere l'operazione nel modo piu' semplice che conserva il tipo giusto.
-
----
-
-<a id="mod2-primo-script"></a>
 ## Struttura di uno script
 
-Nel modulo 1 abbiamo scritto i primi file `.py` e introdotto `print()`. Qui vediamo come organizzare uno script un po' più articolato.
+Nel modulo 1 abbiamo scritto i primi file `.py` e introdotto `print()`.
+Qui vediamo come organizzare uno script un po' più articolato.
 
 ### Struttura minima di uno script
 
-Una convenzione pratica utile per organizzare file un po' meno banali e' questa.
+Una convenzione pratica utile per organizzare file un po' meno banali è questa.
 
 In generale uno script tende ad avere tre blocchi:
 
@@ -63,6 +53,10 @@ Esempio schematico:
 import sys
 
 def capitalizza(s):
+    '''
+    funzione che data una stringa `s` restituisce la stessa stringa con l'iniziale maiuscola e
+    il resto dei caratteri minuscoli
+    '''
     return s[0].upper() + s[1:].lower()
 
 # corpo principale
@@ -70,7 +64,7 @@ nome = input("Nome: ")
 print(capitalizza(nome))
 ```
 
-L'idea non e' burocratica: e' rendere il codice piu' leggibile per noi e per chi lo rileggera' dopo.
+> rendiamo il codice più leggibile per noi e per chi lo rileggerà dopo.
 
 ### Commenti
 
@@ -81,80 +75,19 @@ Vale anche questa osservazione:
 - servono a spiegare struttura, scopo e scelte del codice;
 - blocchi di testo descrittivo possono comparire anche come stringhe multilinea usate come documentazione.
 
----
-
-<a id="mod2-espressioni-istruzioni"></a>
 ## Espressioni e istruzioni
 
-Un'**espressione** e' qualcosa che Python valuta per ottenere un valore.
+Tutte le operazioni che abbiamo visto fino adesso (lasciamo stare `print()` per un attimo) sono **espressioni**: l'interprete Python valuta, la CPU esegue dei calcoli e otteniamo un valore (**NB: con un suo un tipo**).
 
 Esempi:
 
-- `3 + 4`
+- `3 // 4`
 - `"ciao".upper()`
-- `5 < 8`
+- `"ciao"+" "+"mondo!"`
 
-Un'**istruzione** e' un comando che dice al programma di fare qualcosa.
+Un linguaggio formale è fatto anche di **istruzioni**: un comando che provoda un effetto sulla memoria gestita dal programma.
 
-Esempi:
-
-- `x = 7`
-- `print("ciao")`
-- `if x > 0:`
-
-Confronta:
-
-```python
-3 + 4
-```
-
-produce un valore.
-
-```python
-x = 3 + 4
-```
-
-prima valuta `3 + 4`, poi salva il risultato in una variabile.
-
----
-
-<a id="mod2-assegnazione"></a>
 ## Variabili, assegnamento e stato
-
-Una variabile e' un nome associato a un valore.
-
-```python
-eta = 20
-nome = "Luca"
-```
-
-L'assegnamento:
-
-1. valuta l'espressione a destra;
-2. associa il risultato al nome a sinistra;
-3. aggiorna lo stato del programma.
-
-Esempio:
-
-```python
-x = 10
-y = x + 5
-x = x - 2
-```
-
-Traccia sintetica:
-
-| Passo | Stato |
-| --- | --- |
-| `x = 10` | `x = 10` |
-| `y = x + 5` | `x = 10`, `y = 15` |
-| `x = x - 2` | `x = 8`, `y = 15` |
-
-> `=` in Python non significa uguaglianza matematica permanente: significa "assegna".
-
----
-
-## Il problema che porta all'assegnamento
 
 Con la sola REPL possiamo calcolare un valore, ma lo perdiamo subito.
 
@@ -164,15 +97,42 @@ Per esempio:
 3 + 4
 ```
 
-calcola `7`, ma se vogliamo riusare quel risultato in un secondo passo abbiamo bisogno di un nome.
+calcola `7`, ma cosa succede se vogliamo riutilizzare quel risultato più avanti?
 
-L'assegnamento serve proprio a questo:
+Per esempio vogliamo:
 
-- conservare un risultato;
-- dargli un nome;
-- riusarlo in istruzioni successive.
+- considerare la temperatura di oggi in gradi centigradi (23 gradi)
+- stampare il suo equivalente in gradi Kelvin
+- stampare il suo equivalente in gradi Farenheit
 
----
+```python
+print(23 + 273.15)           # Kelvin
+print(23 * 9/5 + 32)         # Fahrenheit
+```
+
+Nei programmi reali i valori cambiano, devono essere memorizzati e riutilizzati.
+Senza un modo per conservare i risultati, il programma sarebbe limitato a calcoli “usa e getta”.
+
+Problemi del codice precedente:
+
+- Se la temperatura cambia (es. 25 gradi), devi ricordarti di cambiare tutti i 23
+- Chi legge il codice non sa subito cosa rappresenta 23
+- Non puoi usare facilmente quel valore in altre parti del programma
+
+Per risolvere questo problema, usiamo le variabili.
+
+```python
+temperatura = 23
+
+print(temperatura + 273.15)
+print(temperatura * 9/5 + 32)
+```
+
+Una variabile è un “contenitore” che permette di:
+
+- salvare un valore
+- dargli un nome
+- riutilizzarlo in seguito
 
 ## Sintassi dell'assegnamento
 
@@ -182,6 +142,54 @@ Forma generale:
 nome_variabile = espressione
 ```
 
+Parti da riconoscere:
+
+- a sinistra c'è il **nome** che vogliamo aggiornare;
+- a destra c'è un valore oppure un'**espressione** da valutare;
+- il simbolo `=` in Python introduce un'assegnazione.
+
+Regole pratiche per il nome di una variabile:
+
+- deve iniziare con una lettera oppure con `_`;
+- dal secondo carattere in poi può contenere lettere, cifre e `_`;
+- non può contenere spazi;
+- non può iniziare con una cifra;
+- non può essere una parola riservata di Python come `if`, `for`, `while`.
+
+Esempi di nomi validi:
+
+```python
+eta
+nome_studente
+_contatore
+voto2
+```
+
+Esempi di nomi non validi:
+
+```python
+2voto
+nome studente
+if
+```
+
+> **Attenzione:** in programmazione `=` non significa "e' uguale a" nel senso della matematica.
+> Significa invece "assegna alla variabile di sinistra il valore calcolato a destra".
+
+Per questo:
+
+```python
+x = 3
+```
+
+è corretto, mentre:
+
+```python
+3 = x
+```
+
+non ha senso, perchè a sinistra dell'assegnamento deve esserci un nome di variabile, non un numero.
+
 Esempi:
 
 ```python
@@ -190,20 +198,12 @@ nome = "Luca"
 totale = prezzo + iva
 ```
 
-Parti da riconoscere:
-
-- a sinistra c'e' il nome che vogliamo aggiornare;
-- a destra c'e' un valore oppure un'espressione da valutare;
-- il simbolo `=` in Python introduce un'assegnazione.
-
----
-
 ## Semantica dell'assegnamento
 
 Quando Python legge:
 
 ```python
-x = y + 3
+somma = 4 + 3
 ```
 
 succede questo:
@@ -213,44 +213,69 @@ succede questo:
 3. associa quel risultato al nome a sinistra;
 4. aggiorna lo stato del programma.
 
-Quindi:
+![variabili](imgs/jars.jpg)
+
+Da questo momento quei valori non sono più "persi": sono disponibili attraverso i nomi delle variabili.
+Quindi una variabile può comparire a destra dentro una nuova espressione.
+
+Per esempio:
+
+```python
+y = 3 + 1
+x = y + 2
+```
+
+Qui Python:
+
+- valuta `3 + 1` e assegna il risultato a `y`;
+- legge il valore attualmente associato a `y`;
+- calcola `y + 2`;
+- assegna il risultato a `x`.
+
+### Conseguenze importanti!
 
 ```python
 x = x + 1
 ```
 
-non e' una formula matematica, ma un aggiornamento di stato:
+non è una formula matematica, ma un aggiornamento di stato:
 
-- leggi il vecchio valore di `x`;
+- leggi il valore attuale di `x`;
 - aggiungi `1`;
-- salva il nuovo valore in `x`.
+- salva il nuovo valore nella variabile `x`.
 
----
-
-<a id="mod2-tracciamento"></a>
 ## Tracciare dati, memoria e output
+
+Lo **stato** di un programma non riguarda il testo che scriviamo nel file, ma il programma mentre viene eseguito.
+È l'insieme dei valori che, in un certo momento dell'esecuzione, sono conservati in memoria e disponibili.
+In questo modulo, in pratica, lo stato coincide soprattutto con i valori associati alle variabili.
 
 Tracciare un programma significa simulare a mano che cosa succede riga per riga, tenendo traccia dello stato delle variabili e di quello che viene stampato.
 
-Conviene abituarsi a distinguere tre cose:
+Dobbiamo abituarci a distinguere tre cose:
 
 - il valore che Python calcola e conserva in memoria;
 - l'output che Python stampa (visibile solo se si usa `print()`);
 - l'ordine in cui le istruzioni vengono eseguite.
 
-Una tabella minima puo' contenere:
+per esempio:
 
-| Passo | Istruzione | Stato della memoria | Output |
-| ----- | ---------- | ------------------- | ------ |
-| 1 | `x = 4` | `x = 4` | |
-| 2 | `y = x + 3` | `x = 4`, `y = 7` | |
-| 3 | `print(y)` | `x = 4`, `y = 7` | `7` |
+```python
+x = 4
+print("ciao" + " " + "mondo")
+print(x)
+y = x + 3
+```
 
-Questo esercizio serve a:
+Una tabella minima può contenere:
 
-- distinguere valore in memoria e testo stampato;
-- capire l'ordine di esecuzione;
-- trovare errori di logica prima ancora di eseguire il programma.
+| Passo | Istruzione                      | Stato della memoria | Output       |
+| ----- | ------------------------------- | ------------------- | ------------ |
+| 1     | `x = 4`                         | `x → 4`             |              |
+| 2     | `print("ciao" + " " + "mondo")` | `x → 4`             | `ciao mondo` |
+| 3     | `print(x)`                      | `x → 4`             | `4`          |
+| 4     | `y = x + 3`                     | `x → 4, y → 7`      |              |
+
 
 ### Esempio guidato
 
@@ -262,33 +287,33 @@ print(y)
 
 Traccia:
 
-| Passo | Stato della memoria | Output |
-| --- | --- | --- |
-| dopo `x = 10` | `x = 10` | |
-| dopo `y = x // 3` | `x = 10`, `y = 3` | |
-| dopo `print(y)` | `x = 10`, `y = 3` | `3` |
+| Passo             | Stato della memoria | Output |
+| ----------------- | ------------------- | ------ |
+| dopo `x = 10`     | `x = 10`            |        |
+| dopo `y = x // 3` | `x = 10`, `y = 3`   |        |
+| dopo `print(y)`   | `x = 10`, `y = 3`   | `3`    |
 
-### Esercizio
+## `input()`, e casting
 
-Traccia a mano:
+Torniamo all'esempio della temperatura:
 
 ```python
-a = 5
-b = a + 2
-print(a)
-print(b)
+temperatura = 23
+
+print(temperatura + 273.15)
+print(temperatura * 9/5 + 32)
 ```
 
----
+Abbiamo un altro problema: se vogliamo eseguire questo script ogni giorno, dobbiamo aprire l'**editor** e modificare manualmente il valore 23.
+Vorremmo fare sì che questo valore diventi un **parametro** del nostro programma in modo da poter eseguire ogni giorno lo script e vedere la temperatura in gradi Kelvin e Farenheit sul nostro schermo.
 
-<a id="mod2-input-output"></a>
-## `input()`, `type()` e casting
+Abbiamo gia' visto `print()` nel modulo 1.
+Qui introduciamo il suo complemento: `input()`.
 
-Abbiamo già visto `print()` nel modulo 1. Qui introduciamo il suo complemento: `input()`, che legge dati dall'utente.
+`input()` è un comando utile per leggere un valore scritto dall'utente mentre il programma è in esecuzione.
+Il testo che mettiamo tra parentesi è il **parametro** della funzione: serve a mostrare un messaggio sullo schermo, per esempio una domanda o un'istruzione.
 
----
-
-## Sintassi di `input()`
+## Sintassi di assegnamento con `input()`
 
 Forma tipica:
 
@@ -296,11 +321,19 @@ Forma tipica:
 variabile = input("Messaggio: ")
 ```
 
+Qui:
+
+- `input(...)` legge qualcosa scritto dall'utente;
+- `"Messaggio: "` è il parametro passato a `input()`;
+- il valore letto viene assegnato alla variabile a sinistra.
+
 Esempi:
 
 ```python
 nome = input("Come ti chiami? ")
+print(nome)
 eta = input("Eta': ")
+print(eta)
 ```
 
 Possiamo usare `input()` anche senza messaggio:
@@ -309,154 +342,264 @@ Possiamo usare `input()` anche senza messaggio:
 testo = input()
 ```
 
----
-
 ## Semantica di `input()`
 
-Legge sempre una stringa.
+`input()` mostra il messaggio, aspetta che l'utente scriva qualcosa e si ferma quando l'utente preme Invio, cioè inserisce un ritorno a capo.
+Solo a quel punto restituisce il testo letto.
+Il risultato di `input()` è sempre una **stringa**.
 
 ```python
 nome = input("Come ti chiami? ")
 print("Ciao", nome)
 ```
 
-`input()` non e' una magia complicata, ma un modo per creare una piccola interazione col programma.
+| Passo | Istruzione                         | Stato della memoria | Output             |
+| ----- | ---------------------------------- | ------------------- | ------------------ |
+| 1     | `nome = input("Come ti chiami? ")` | `nome → "Ludovica"`   | `Come ti chiami? ` |
+| 2     | `print("Ciao", nome)`              | `nome → "Ludovica"`   | `Ciao Ludovica`    |
 
-Esempio:
-
-```python
-nome = input("Inserisci il tuo nome: ")
-print(nome)
-```
-
-Qui succede questo:
+Succede questo:
 
 1. Python mostra il prompt;
 2. l'utente scrive qualcosa;
-3. quel testo viene salvato nella variabile;
-4. il programma puo' continuare a usarlo.
-
-Questo e' molto utile quando vogliamo riusare lo stesso script con dati diversi senza riscrivere ogni volta il codice.
-
-### `type()`
-
-Ti aiuta a vedere il tipo di un valore.
-
-```python
-print(type(3))
-print(type("3"))
-```
+3. `input()` restituisce quel testo;
+4. quel testo viene salvato nella variabile;
+5. il programma può continuare a usarlo.
 
 ### Casting
 
-Per convertire tipi:
+Problema:
 
 ```python
-eta = int(input("Eta': "))
+eta = input("Età: ")
 print(eta + 1)
+```
+
+<details>
+<summary>Cosa succede?</summary>
+```
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+    print(eta + 1)
+          ~~~~^~~
+TypeError: can only concatenate str (not "int") to str
+```
+
+| Passo | Istruzione             | Stato della memoria | Output     |
+| ----- | ---------------------- | ------------------- | ---------- |
+| 1     | `eta = input("Età: ")` | `eta → "33"`        | `Età: `    |
+| 2     | `print(eta + 1)`       | `eta → "33"`        | !!! ERRORE |
+
+</details>
+
+Versione corretta:
+
+```python
+eta = input("Eta': ")
+print(int(eta) + 1)
 ```
 
 Alcune conversioni comuni:
 
-| Funzione | Effetto |
-| --- | --- |
-| `int("12")` | converte in intero |
-| `str(12)` | converte in stringa |
+| Funzione       | Effetto                     |
+| -------------- | --------------------------- |
+| `int("12")`    | converte in intero          |
+| `str(12)`      | converte in stringa         |
 | `float("3.5")` | converte in numero decimale |
 
-Errore tipico:
+Questa operazione di conversione di chiama **casting**.
+
+
+## Esercizi
+
+1. Scrivi un programma che legge nome e cognome e stampa un saluto, per esempio `Ciao, Mario Rossi!`.
+
+2. Scrivi un programma che legge l'età e stampa: `Tra un anno avrai X anni` e `Un anno fa avevi Y anni`.
+
+3. Scrivi un programma che legge due numeri interi e stampa la loro somma, il loro prodotto e il resto della divisione del primo per il secondo.
+
+4. Scrivi un programma che legge tre numeri e ne stampa la media.
+
+5. Scrivi un programma che legge una stringa e stampa:
+   - la lunghezza della stringa;
+   - il primo carattere;
+   - l'ultimo carattere;
+   - i primi tre caratteri.
+
+6. Scrivi un programma che legge due numeri e stampa prima i valori inseriti e poi gli stessi valori scambiati.
+
+7. Scrivi un programma che legge un nome e un anno di nascita e stampa una frase del tipo: `Ciao Anna, potresti avere 20 o 21 anni`.
+
+8. Scrivi un programma che legge un numero intero di secondi (es. `3723`) e stampa la conversione nel formato: `1 ore, 2 minuti, 3 secondi`.
+
+9. Scrivi un programma che legge nome e cognome e stampa:
+    - il cognome tutto in maiuscolo;
+    - il nome con solo la prima lettera maiuscola e il resto minuscolo;
+    - le iniziali nel formato `M.R.`
+
+10. Scrivi un programma che legge una stringa e stampa:
+    - la stringa senza il primo e l'ultimo carattere;
+
+11. Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. `20`), e stampa il prezzo scontato e il risparmio.
+
+## Tipo `bool` e nuove operazioni
+
+Fin qui abbiamo lavorato con interi, stringhe e `float`.
+Ora introduciamo nuove operazioni che non producono un numero o una stringa, ma un valore booleano.
+
+Per esempio possiamo controllare:
+
+- se due valori sono uguali;
+- se un numero è maggiore di un altro;
+
+Esempi:
 
 ```python
-eta = input("Eta': ")
-print(eta + 1)
+3 > 1
+2.5 <= 7.0
+"anna" == "anna"
+"ciao" != "buongiorno"
 ```
 
-Qui `eta` e' una stringa, quindi `+ 1` non funziona.
+Queste operazioni non restituiscono un intero, un `float` o una stringa.
+Restituiscono invece un **valore booleano**, cioè un valore che rappresenta il risultato di un confronto.
 
----
-
-<a id="mod2-boolean-if"></a>
-## Booleani e decisioni con `if`
-
-Il tipo `bool` ha due soli valori:
+Il tipo `bool` ha due soli valori possibili:
 
 - `True`
 - `False`
 
-Gli operatori di confronto producono booleani:
+Operatori di confronto che restituiscono un valore booleano:
 
-```python
-x > 0
-x == 10
-nome != ""
-```
+| Operazione | Significato         | Esempio  |
+| ---------- | ------------------- | -------- |
+| `==`       | uguale a            | `x == 3` |
+| `!=`       | diverso da          | `x != 3` |
+| `<`        | minore di           | `x < 3`  |
+| `<=`       | minore o uguale a   | `x <= 3` |
+| `>`        | maggiore di         | `x > 3`  |
+| `>=`       | maggiore o uguale a | `x >= 3` |
+
+### Altre operazioni che restituiscono booleani
+
+Anche alcune operazioni sulle stringhe restituiscono `True` oppure `False`.
+
+Per esempio:
+
+| Operazione            | Significato                                                  | Esempio                   |
+| --------------------- | ------------------------------------------------------------ | ------------------------- |
+| `in`                  | controlla se una sottostringa compare dentro una stringa     | `"cia" in "ciao"`         |
+| `not in`              | controlla se una sottostringa non compare dentro una stringa | `"x" not in "ciao"`       |
+| `s.startswith("...")` | controlla se la stringa inizia con un certo prefisso         | `"ciao".startswith("ci")` |
+| `s.endswith("...")`   | controlla se la stringa finisce con un certo suffisso        | `"ciao".endswith("ao")`   |
+| `s.isdigit()`         | controlla se tutti i caratteri sono cifre                    | `"123".isdigit()`         |
+| `s.isalpha()`         | controlla se tutti i caratteri sono lettere                  | `"ciao".isalpha()`        |
+
+Anche queste operazioni possono essere usate dentro una condizione `if`.
+
+Quando tracciamo o eseguiamo il programma, anche questi valori vanno rappresentati nello stato, proprio come interi, stringhe e `float`.
+
+## Condizionare il flusso del programma
 
 Con i booleani possiamo decidere il flusso di esecuzione.
 
-## Il problema che porta a `if`
-
-Fin qui il programma esegue istruzioni in ordine.
+Fin qui tutti in tutti i programmi che abbiamo visto le istruzioni vengono eseguite tutte e nell'ordine in cui le abbiamo scritte.
 
 Ma molti problemi chiedono una scelta:
 
-- se il numero e' positivo, fai una cosa;
+- se il numero è positivo, fai una cosa;
 - se il nome viene prima alfabeticamente, stampa in un certo ordine;
-- se l'input non e' valido, reagisci in modo diverso.
+- se l'input non è valido, reagisci in modo diverso.
 
 Per gestire queste biforcazioni serve un costrutto condizionale.
-
----
 
 ## Sintassi di `if`
 
 ```python
-if eta >= 18:
-    print("Maggiorenne")
+if [espressione_booleana]:
+    istruzione-1
+    istruzione-2
+    ...
+    istruzione-k
 ```
 
-Parti da riconoscere:
-
-- `if` introduce una condizione;
-- dopo `if` c'e' un'espressione booleana;
-- i due punti `:` aprono il blocco;
-- il blocco va indentato.
-
----
+- La parola chiave `if` introduce una condizione;
+- dopo `if` c'è un'espressione booleana;
+- la prima riga è conclusa da due punti `:` che aprono un blocco;
+- il blocco di istruzioni da `1` a `k` va indentato.
 
 ## Semantica di `if`
 
-La semantica operativa di `if` si puo' riassumere cosi':
+```python
+if [espressione_booleana]:
+    istruzione-1
+    istruzione-2
+    ...
+    istruzione-k
+```
 
-1. Python valuta la condizione;
+1. L'interprete valuta l'**espressione** booleana;
 2. se vale `True`, esegue il blocco indentato;
 3. se vale `False`, salta quel blocco e continua dopo.
 
-Per questo, in casi come:
+## Esempi
 
 ```python
-if nome < cognome:
-    print(nome, cognome)
-else:
-    print(cognome, nome)
+x = input("Inserisci la tua età: ")
+x = int(x)
+
+if x > 18:
+    print("Sei maggiorenne")
+
+print("Hai "+str(x)+" anni")
 ```
 
-non serve scrivere:
+<details>
+<summary>Esecuzione n.1</summary>
 
-```python
-if nome < cognome == True:
-```
+| Passo | Istruzione                            | Stato della memoria | Output                   |
+| ----- | ------------------------------------- | ------------------- | ------------------------ |
+| 1     | `x = input("Inserisci la tua età: ")` | `x → "33"`          | `Inserisci la tua età: ` |
+| 2     | `x = int(x)`                          | `x → 33`            |                          |
+| 3     | `if x > 18:`                          | `x → 33` →→→ TRUE   |                          |
+| 4     | `print("Sei maggiorenne")`            | `x → 33`            | `Sei maggiorenne!`       |
+| 5     | `print("Hai "+str(x)+" anni")`        | `x → 33`            | `Hai 33 anni`            |
 
-perche' il comando `if` sta gia' chiedendo se quell'espressione vale vero oppure no. Scriverlo esplicitamente non e' un errore concettuale grave, ma e' ridondante.
+</details>
 
----
+<details>
+<summary>Esecuzione n.2</summary>
+
+| Passo | Istruzione                            | Stato della memoria | Output                   |
+| ----- | ------------------------------------- | ------------------- | ------------------------ |
+| 1     | `x = input("Inserisci la tua età: ")` | `x → "15"`          | `Inserisci la tua età: ` |
+| 2     | `x = int(x)`                          | `x → 15`            |                          |
+| 3     | `if x > 18:`                          | `x → 15` →→→ FALSE  |                          |
+| 4     | `print("Hai "+str(x)+" anni")`        | `x → 15`            | `Hai 15 anni`            |
+
+</details>
+
+## `if-else` e `if` annidati
+
+Con `if` semplice possiamo eseguire un blocco solo quando una condizione e vera.
+Pero' spesso vogliamo descrivere anche che cosa succede quando quella stessa condizione e' falsa.
+
+Per questo usiamo `if-else`, che separa esplicitamente due rami alternativi.
+Quando invece una decisione deve essere presa all'interno di un altro ramo, useremo `if` annidati.
+
+Se i casi possibili sono piu' di due ma restano sullo stesso livello, useremo `elif`.
 
 ## Sintassi di `if-else`
 
 ```python
-if eta >= 18:
-    print("Maggiorenne")
+if [espressione_booleana]:
+    istruzione-1
+    ...
+    istruzione-j
 else:
-    print("Minorenne")
+    istruzione-1
+    ...
+    istruzione-k
 ```
 
 Qui ci sono due blocchi alternativi:
@@ -466,9 +609,19 @@ Qui ci sono due blocchi alternativi:
 
 `else` non ha una condizione propria: raccoglie tutti i casi in cui la condizione dell'`if` vale `False`.
 
----
 
 ## Semantica di `if-else`
+
+```python
+if [espressione_booleana]:
+    istruzione-1
+    ...
+    istruzione-j
+else:
+    istruzione-1
+    ...
+    istruzione-k
+```
 
 Con `if-else` Python:
 
@@ -478,55 +631,92 @@ Con `if-else` Python:
 
 Quindi tra i due rami se ne esegue sempre uno solo.
 
----
-
-## Il problema che porta a `if-elif-else`
-
-A volte due rami non bastano.
-
-Per esempio:
-
-- classificare un voto;
-- distinguere piu' fasce numeriche;
-- descrivere piu' casi mutuamente esclusivi.
-
-In questi casi serve una catena di controlli ordinati.
-
----
-
-## Sintassi di `if-elif-else`
-
-Esempio di classificazione del voto:
+## Esempi:
 
 ```python
-voto = int(input("Voto: "))
+x = input("Inserisci la tua età: ")
+x = int(x)
 
-if voto < 18:
-    print("L'esame non e' stato superato")
-elif voto < 23:
-    print("Sufficiente")
-elif voto < 27:
-    print("Buono")
+if x > 18:
+    print("Sei maggiorenne")
 else:
-    print("Ottimo")
+    print("Sei minorenne")
+
+print("Hai "+str(x)+" anni")
 ```
 
-Questa forma si usa quando:
+<details>
+<summary>Esecuzione n.1</summary>
 
-- i casi sono piu' di due;
-- vogliamo provarli in ordine;
-- ogni `elif` aggiunge una nuova condizione.
+| Passo | Istruzione                            | Stato della memoria | Output                   |
+| ----- | ------------------------------------- | ------------------- | ------------------------ |
+| 1     | `x = input("Inserisci la tua età: ")` | `x → "33"`          | `Inserisci la tua età: ` |
+| 2     | `x = int(x)`                          | `x → 33`            |                          |
+| 3     | `if x > 18:`                          | `x → 33` →→→ TRUE   |                          |
+| 4     | `print("Sei maggiorenne")`            | `x → 33`            | `Sei maggiorenne!`       |
+| 5     | `print("Hai "+str(x)+" anni")`        | `x → 33`            | `Hai 33 anni`            |
 
----
+</details>
 
-## Semantica di `if-elif-else`
+<details>
+<summary>Esecuzione n.2</summary>
 
-Python controlla i rami in ordine:
+| Passo | Istruzione                            | Stato della memoria | Output                   |
+| ----- | ------------------------------------- | ------------------- | ------------------------ |
+| 1     | `x = input("Inserisci la tua età: ")` | `x → "15"`          | `Inserisci la tua età: ` |
+| 2     | `x = int(x)`                          | `x → 15`            |                          |
+| 3     | `if x > 18:`                          | `x → 15` →→→ FALSE  |                          |
+| 4     | `print("Sei minorenne")`              | `x → 15`            | `Sei minorenne`          |
+| 5     | `print("Hai "+str(x)+" anni")`        | `x → 15`            | `Hai 15 anni`            |
+
+</details>
+
+## A volte due rami non bastano
+
+Non si diventa maggiorenni in tutto il mondo alla stessa età!
+
+- se hai più di 21 anni, sei maggiorenne in USA
+- se hai meno di 21 anni, ma più di 18, sei maggiorenne in Italia
+- se hai meno di 18 anni, non sei maggiorenne nè in Italia nè in USA.
+
+In questi casi vorremmo una catena di controlli ordinati.
+
+```python
+x = input("Inserisci la tua età: ")
+x = int(x)
+
+if x > 21:
+    print("Sei maggiorenne in USA")
+else:
+    if x > 18:
+        print("Sei maggiorenne in Italia ma non in USA")
+    else:
+        print("Sei minorenne")
+```
+
+Questa cascata di `if` inclusi negli `else` può diventare poco leggibile...
+
+## `if-elif-else`
+
+```python
+if [espressione_booleana]:
+    istruzione
+elif [espressione_booleana]:
+    istruzione
+elif [espressione_booleana]:
+    istruzione
+else:
+    istruzione
+```
+
+Ogni `elif` aggiunge una nuova condizione.
+
+L'interprete controlla i rami in ordine:
 
 1. prova la condizione dell'`if`;
-2. se e' falsa, prova il primo `elif`;
-3. continua finche' trova la prima condizione vera;
-4. se nessuna e' vera, esegue `else`.
+2. se è falsa, prova il primo `elif`;
+3. continua finché trova la prima condizione vera;
+4. se nessuna è vera, esegue `else`.
 
 Quindi:
 
@@ -534,145 +724,142 @@ Quindi:
 - viene eseguito solo il primo ramo che risulta vero;
 - `else` copre il caso residuo.
 
-### Un esempio guidato: nome e cognome in ordine alfabetico
+## Esercizi
 
-Un esercizio semplice ma utile e' questo:
+1. Leggi un numero intero e stampa `Positivo` solo se è maggiore di zero.
+2. Leggi una parola e stampa `La parola è lunga` solo se ha più di 5 caratteri.
+3. Leggi un numero intero e stampa `Pari` solo se è divisibile per 2.
+4. Leggi un numero intero e stampa `Pari` oppure `Dispari` a seconda se è divisibile per due o meno.
+5. Leggi due numeri interi e stampa il maggiore o un messaggio se sono uguali.
+6. Leggi due nomi e stampali nell'ordine alfabetico corretto.
+7. Leggi una parola e controlla se inizia con una vocale; stampa un messaggio diverso nei due casi.
+8. Leggi un numero intero e stampa `Negativo`, `Zero` o `Positivo`.
+9. Leggi un voto da 0 a 30 e stampa:
+   - `Insufficiente` se il voto è minore di 18;
+   - `Sufficiente` se è tra 18 e 23;
+   - `Buono` se è tra 24 e 27;
+   - `Ottimo` se è 28 o più.
+10. Leggi una parola e stampa se è corta (meno di 4 lettere), media (da 4 a 7 lettere) o lunga (più di 7 lettere).
 
-- leggere nome e cognome;
-- confrontarli come stringhe;
-- stampare i due valori nell'ordine alfabetico giusto.
+11. Leggi una coppia di numeri che rappresentano un mese (1–12) e un anno e stampa il mese successivo con l'anno corretto.
+    Per esempio: mese 12, anno 2024 → `Gennaio 2025`.
 
-Questo esempio serviva a consolidare insieme:
+12. Leggi nome, cognome e anno di nascita. Stampa sempre il nome completo e l'anno di nascita. Se l'anno di nascita è precedente al 2000, stampa anche `Nato/a nel secolo scorso`.
 
-- uso di variabili con nomi significativi;
-- confronto tra stringhe;
-- `if/else`;
-- `print()`;
-- eventuale uso di `input()` per rendere lo script interattivo.
+13. Leggi due numeri interi. Stampa sempre entrambi i numeri.
+    Se il primo è maggiore del secondo, stampa anche `Il primo è maggiore`.
+    Stampa sempre anche la loro somma.
 
----
+14. Leggi una parola. Se ha più di 3 caratteri, stampa il secondo carattere; altrimenti stampa `Parola troppo corta`. In entrambi i casi stampa alla fine la lunghezza della parola.
 
-<a id="mod2-condizioni-annidate"></a>
-## Condizioni annidate
+15. Leggi una parola. Costruisci una variabile `risultato`:
+    - se la parola inizia con una lettera maiuscola, `risultato` vale `"maiuscola"`;
+    - altrimenti vale `"minuscola"`.
+    Stampa `La parola è: ` seguito da `risultato`.
 
-Una condizione e' detta annidata quando compare dentro un'altra condizione.
+16. Leggi un numero intero. Costruisci una variabile `messaggio`:
+    - se il numero è pari, `messaggio` vale `"pari"`;
+    - altrimenti vale `"dispari"`.
+    Stampa `Il numero X è` seguito da `messaggio`.
+
+17. Leggi due numeri interi `a` e `b`. Se `a` è maggiore di `b`, scambia i valori delle due variabili.
+Stampa sempre `a` e `b` alla fine: i valori usciti devono essere in ordine crescente.
+
+### Esercizi di traccia
+
+Per ciascun programma e input indicato, cerca di predire l'output del programma con gli input proposti e compila la tabella con lo stato della memoria.
+
+**T1.**
 
 ```python
-x = int(input("Numero: "))
-
-if x >= 0:
-    if x == 0:
-        print("Zero")
-    else:
-        print("Positivo")
+x = int(input("x: "))
+y = int(input("y: "))
+z = x + y
+if z > 10:
+    x = x * 2
+    etichetta = "grande"
+elif z > 0:
+    x = x + 1
+    etichetta = "medio"
 else:
+    etichetta = "piccolo"
+print(etichetta + ": " + str(x))
+```
+
+- Traccia con input `3`, `4`
+- Traccia con input `6`, `7`
+
+**T2.**
+
+```python
+s = input("Parola: ")
+n = len(s)
+if n > 4:
+    s = s[0].upper() + s[1:]
+    risultato = s + " (" + str(n) + ")"
+else:
+    risultato = s.upper()
+print(risultato)
+```
+
+- Traccia con input `"python"`
+- Traccia con input `"ciao"`
+
+**T3.**
+
+```python
+a = int(input("a: "))
+b = int(input("b: "))
+if a > b:
+    tmp = a
+    a = b
+    b = tmp
+diff = b - a
+if diff > 5:
+    messaggio = "distanti"
+else:
+    messaggio = "vicini"
+print(str(a) + " " + str(b) + " - " + messaggio)
+```
+
+- Traccia con input `9`, `2`
+
+
+**T4.**
+
+```python
+n = int(input("n: "))
+print("Inizio")
+if n < 0:
     print("Negativo")
+    n = -n
+    print("Valore assoluto: " + str(n))
+elif n == 0:
+    print("Zero")
+else:
+    print("Positivo")
+    n = n * n
+print("Fine: " + str(n))
 ```
 
-Questo stile va usato solo quando il secondo controllo ha senso solo dopo il primo.
+- Traccia con input `-3`
+- Traccia con input `4`
 
-La versione annidata della classificazione dei voti si puo' anche riscrivere con `elif` per renderla piu' leggibile.
-
----
-
-## Esercizi sulle condizioni
-
-Per esempio:
-
-1. dato nome e cognome, stampa il nome completo in ordine alfabetico;
-2. scrivi una funzione che restituisce il maggiore tra due interi;
-3. usa la funzione precedente per stampare una frase esplicita;
-4. date due parole, stampa quella piu' lunga;
-5. dati tre interi, stampali dal maggiore al minore;
-6. date tre parole, mettile in ordine alfabetico;
-7. dato anno e mese, stampa che anno sara' fra un mese e che anno era un mese fa;
-8. scrivi una funzione che stabilisce se un anno e' bisestile;
-9. data una parola, controlla se inizia con `p` e finisce con `o`, gestendo il caso di stringa troppo corta.
-
----
-
-## Struttura di uno script
-
-Una struttura standard di script e' questa:
+**T5.**
 
 ```python
-#----------------------------------
-# intestazione dello script
-# autore/autrice, data, contatti...
-#----------------------------------
-
-import sys
-
-def capitalizza(stringa):
-    """
-    prende una stringa e la restituisce capitalizzata
-    """
-    nuova_stringa = stringa[0].upper() + stringa[1:].lower()
-    return nuova_stringa
-
-nome = sys.argv[1]
-cognome = sys.argv[2]
-
-nome = capitalizza(nome)
-cognome = capitalizza(cognome)
-
-print(nome + " " + cognome)
+a = int(input("a: "))
+b = int(input("b: "))
+print("a=" + str(a) + " b=" + str(b))
+if a > b:
+    print("a è maggiore")
+    diff = a - b
+    print("Differenza: " + str(diff))
+else:
+    print("b è maggiore o uguale")
+    diff = b - a
+print("Distanza: " + str(diff))
 ```
 
-Struttura tipica:
-
-1. import di librerie;
-2. definizione di funzioni ausiliarie;
-3. flusso principale del programma.
-
-### Commenti e leggibilita'
-
-- tutto cio' che segue `#` sulla riga e' un commento;
-- i commenti servono a spiegare il codice;
-- una funzione non banale dovrebbe avere almeno una breve descrizione.
-
-### Indentazione e blocchi
-
-In Python i blocchi si riconoscono dall'indentazione.
-
-- il corpo di una funzione e' un blocco;
-- il corpo di un `if` o di un `for` e' un blocco;
-- se l'indentazione e' sbagliata, il programma non e' valido.
-
----
-
-## Errori tipici del modulo
-
-1. Dimenticare i due punti dopo `if`.
-2. Mescolare stringhe e numeri senza conversione.
-3. Usare `=` invece di `==` in una condizione.
-4. Aspettarsi che `input()` restituisca un intero.
-5. Perdere l'indentazione corretta.
-
----
-
-## Esercizi suggeriti
-
-1. Scrivi uno script che legge un nome e stampa un saluto.
-2. Scrivi uno script che legge un numero e stampa il suo doppio.
-3. Scrivi uno script che legge un numero e stampa `positivo`, `negativo` oppure `zero`.
-4. Scrivi uno script che legge due numeri e stampa il maggiore.
-5. Per ciascun frammento, traccia lo stato finale delle variabili:
-
-```python
-x = 3
-y = x + 2
-x = y * 2
-```
-
----
-
-## Riepilogo
-
-In questo modulo hai introdotto il modello base del programma imperativo:
-
-- istruzioni eseguite in ordine;
-- variabili che tengono memoria;
-- input e output espliciti;
-- condizioni che fanno scegliere un ramo di esecuzione;
-- una prima struttura leggibile dello script.
+- Traccia con input `a = 7`, `b = 2`
+- Traccia con input `a = 3`, `b = 3`

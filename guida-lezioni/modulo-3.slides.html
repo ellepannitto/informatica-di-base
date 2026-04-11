@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 03 · Stato del programma e strutture decisionali - Slides</title>
+<title>Modulo 03 · Testare il programma e operazioni su booleani - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -100,105 +100,210 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 03 · Stato del programma e strutture decisionali</h1>
+    <h1>Modulo 03 · Testare il programma e operazioni su booleani</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai tracciare lo stato del programma durante l&#x27;esecuzione?</li><li>Sai riconoscere errori frequenti e localizzarli?</li><li>Sai usare casi di test per smascherare errori logici?</li><li>Sai usare condizioni composte con attenzione?</li><li>Sai applicare le leggi di De Morgan?</li><li>Sai modellare piccoli problemi con automi a stati finiti?</li><li>Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai tracciare lo stato del programma durante l&#x27;esecuzione?</li><li>Sai riconoscere errori frequenti e localizzarli?</li><li>Sai usare casi di test per smascherare errori logici?</li><li>Sai usare condizioni composte con attenzione?</li><li>Sai applicare le leggi di De Morgan?</li><li>Sai modellare piccoli problemi con automi a stati finiti?</li><li>Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?</li></ul><hr><a id="mod3-testing"></a>
+    <h2 id="errori-nel-codice">Errori nel codice</h2><p>Abbiamo scritto dei programmi! Ma saranno corretti?</p><p><strong>Caso 1:</strong> il programma genera un errore</p><p><strong>Caso 2:</strong> il programma termina l&#x27;esecuzione senza generale alcun errore</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="testing-e-casi-limite">Testing e casi limite</h2><p>Il modulo si apre con un richiamo esplicito all&#x27;importanza del <strong>testing</strong>.</p><p>L&#x27;idea chiave e&#x27; semplice:</p><ul><li>non basta che un programma funzioni su un caso &quot;normale&quot;;</li><li>bisogna controllare casi piccoli, casi strani e casi limite;</li><li>proprio i casi limite fanno emergere gli errori che altrimenti restano nascosti.</li></ul><p>Domande tipiche:</p><ul><li>che cosa succede se la lista e&#x27; vuota?</li><li>che cosa succede se la stringa ha lunghezza 1?</li><li>che cosa succede se il valore e&#x27; zero?</li><li>che cosa succede se due casi diversi finiscono sullo stesso ramo?</li></ul><h3 id="esempio">Esempio</h3><p>Se scrivi una funzione che restituisce l&#x27;elemento massimo di una lista, il caso:</p><pre><code class="language-python">[]</code></pre><p>non e&#x27; un dettaglio secondario. E&#x27; un caso che il programma deve decidere come trattare.</p><h3 id="esercizi-trova-lerrore">Esercizi: trova l&#x27;errore</h3><p>Ci sono anche esercizi specifici di debugging:</p><ul><li>leggere il codice;</li><li>prevedere dove fallisce;</li><li>costruire input che mostrino il problema;</li><li>correggere il comportamento.</li></ul><p>Questo approccio e&#x27; perfettamente coerente con il lavoro del modulo: tracciamento, condizioni e controllo dei casi limite.</p><p>La terza lezione trascritta rendeva questo punto ancora piu&#x27; operativo.</p><h3 id="che-cosa-vuol-dire-testare-davvero">Che cosa vuol dire testare davvero</h3><p>L&#x27;idea proposta a lezione era molto concreta:</p><ul><li>anche se il programma non va in errore, potrebbe comunque fare la cosa sbagliata;</li><li>quindi non basta &quot;farlo partire&quot;;</li><li>bisogna confrontare input e output attesi su casi scelti apposta.</li></ul><p>Metodo minimo suggerito:</p><ol><li>scegli input piccoli e controllabili a mano;</li><li>scrivi quale output ti aspetti;</li><li>esegui il programma;</li><li>confronta il risultato reale con quello previsto;</li><li>se modifichi il codice, rifai gli stessi test.</li></ol><p>Questa pratica vale soprattutto quando iniziamo a lavorare su:</p><ul><li>liste;</li><li>file;</li><li>corpus o dataset lunghi;</li><li>funzioni che sembrano plausibili ma nascondono errori logici.</li></ul><h3 id="perche-iniziare-da-input-piccoli">Perche&#x27; iniziare da input piccoli</h3><p>Conviene insistere anche su un principio molto pragmatico:</p><ul><li>non si testa subito su un corpus enorme;</li><li>si parte da una versione ridotta che possiamo seguire a mano;</li><li>solo dopo si scala a input piu&#x27; grandi.</li></ul><p>Questo serve perche&#x27; su migliaia di righe non possiamo piu&#x27; controllare facilmente se l&#x27;output e&#x27; corretto, mentre su tre o quattro casi scelti bene possiamo ancora capire davvero che cosa sta succedendo.</p><h3 id="stampare-variabili-intermedie">Stampare variabili intermedie</h3><p>Un altro consiglio esplicito emerso in lezione:</p><ul><li>se stiamo costruendo una lista o una struttura dati;</li><li>conviene stampare valori intermedi per vedere se ci stanno finendo dentro proprio gli elementi giusti.</li></ul><p>Questo e&#x27; un modo semplice ma molto efficace per diagnosticare errori prima che diventino invisibili.</p><hr><a id="mod3-tracciamento"></a>
+    <h2 id="primi-messaggi-di-errore">Primi messaggi di errore</h2><p>Un messaggio di errore contiene almeno tre informazioni utili:</p><table><thead><tr><th>Informazione</th><th>Domanda</th></tr></thead><tbody><tr><td>tipo di errore</td><td>che genere di problema e`?</td></tr><tr><td>riga segnalata</td><td>dove si manifesta?</td></tr><tr><td>contesto</td><td>quale operazione stava tentando Python?</td></tr></tbody></table><p>Esempi frequenti:</p><table><thead><tr><th>Errore</th><th>Causa tipica</th></tr></thead><tbody><tr><td><code>SyntaxError</code></td><td>sintassi non valida</td></tr><tr><td><code>NameError</code></td><td>nome di variabile non definito</td></tr><tr><td><code>TypeError</code></td><td>operazione tra tipi incompatibili</td></tr><tr><td><code>ValueError</code></td><td>conversione non possibile</td></tr></tbody></table><h3 id="esercizi">Esercizi</h3><p>Per ciascun programma: esegui il codice, individua il tipo di errore che produce e la riga in cui compare, poi spiega perché si verifica e correggi il codice di conseguenza.</p><p><strong>E1.</strong></p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+cognome = input(&quot;Cognome: &quot;)
+eta = input(&quot;Età: &quot;)
+print(&quot;Ciao &quot; + nome + &quot; &quot; + cognome + &quot;!&quot;)
+print(&quot;Tra dieci anni avrai &quot; + eta + 10 + &quot; anni.&quot;)</code></pre><p><strong>E2.</strong></p><pre><code class="language-python">anno_nascita = input(&quot;Anno di nascita: &quot;)
+anno_corrente = 2025
+eta = anno_corrente - anno_nascita
+print(&quot;Hai circa &quot; + str(eta) + &quot; anni.&quot;)</code></pre><p><strong>E3.</strong></p><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+lunghezza = len(parola)
+print(&quot;La parola ha &quot; + lunghezza + &quot; lettere.&quot;)</code></pre><p><strong>E4.</strong></p><pre><code class="language-python">x = int(input(&quot;Numero: &quot;))
+if x &gt; 0:
+    segno = &quot;positivo&quot;
+elif x &lt; 0:
+    segno = &quot;negativo&quot;
+print(&quot;Il numero è &quot; + segno)</code></pre>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="tracciamento-dello-stato">Tracciamento dello stato</h2><p>Quando un programma usa variabili e condizioni, la domanda chiave diventa:</p><blockquote><p>qual e` lo stato del programma in questo punto?</p></blockquote><p>Lo stato e` l&#x27;insieme dei valori che le variabili hanno in un certo momento.</p><p>Esempio:</p><pre><code class="language-python">x = 8
-y = x - 3
-if y &gt; 4:
-    z = y * 2
+    <h2 id="testing-e-casi-limite">Testing e casi limite</h2><p>Anche se il programma non genera un errore, potrebbe comunque fare la cosa sbagliata: non basta che l&#x27;esecuzione si concluda per dire che &quot;funziona&quot;. Bisogna confrontare input e output attesi su casi scelti apposta.</p><p>Consideriamo questo programma, scritto per stampare un numero con il suo segno esplicito (<code>+7</code>, <code>-3</code>, <code>0</code>):</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n &gt; 0:
+    segno = &quot;+&quot;
 else:
-    z = 0
-print(z)</code></pre><p>Traccia:</p><table><thead><tr><th>Passo</th><th>Stato</th><th>Nota</th></tr></thead><tbody><tr><td><code>x = 8</code></td><td><code>x = 8</code></td><td></td></tr><tr><td><code>y = x - 3</code></td><td><code>x = 8</code>, <code>y = 5</code></td><td></td></tr><tr><td><code>y &gt; 4</code></td><td><code>x = 8</code>, <code>y = 5</code></td><td>condizione vera</td></tr><tr><td><code>z = y * 2</code></td><td><code>x = 8</code>, <code>y = 5</code>, <code>z = 10</code></td><td>ramo <code>if</code></td></tr><tr><td><code>print(z)</code></td><td><code>x = 8</code>, <code>y = 5</code>, <code>z = 10</code></td><td>output <code>10</code></td></tr></tbody></table><hr><a id="mod3-calcoli-conversioni"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="calcoli-conversioni-e-stato">Calcoli, conversioni e stato</h2><p>Molti errori iniziali non sono di sintassi ma di stato: il programma gira, ma usa valori diversi da quelli immaginati.</p><p>Esempio:</p><pre><code class="language-python">prezzo = input(&quot;Prezzo: &quot;)
-sconto = 5
-totale = prezzo - sconto</code></pre><p>Questo non funziona perche<code> </code>prezzo<code> e</code> una stringa. La versione corretta e`:</p><pre><code class="language-python">prezzo = int(input(&quot;Prezzo: &quot;))
-sconto = 5
-totale = prezzo - sconto</code></pre><p>La sequenza giusta da controllare e`:</p><ol><li>che tipo ha ogni input;</li><li>come cambia lo stato dopo ogni assegnamento;</li><li>che tipo richiede ogni operazione.</li></ol><hr><a id="mod3-errori"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="primi-messaggi-di-errore">Primi messaggi di errore</h2><p>Un messaggio di errore contiene almeno tre informazioni utili:</p><table><thead><tr><th>Informazione</th><th>Domanda</th></tr></thead><tbody><tr><td>tipo di errore</td><td>che genere di problema e`?</td></tr><tr><td>riga segnalata</td><td>dove si manifesta?</td></tr><tr><td>contesto</td><td>quale operazione stava tentando Python?</td></tr></tbody></table><p>Esempi frequenti:</p><table><thead><tr><th>Errore</th><th>Causa tipica</th></tr></thead><tbody><tr><td><code>SyntaxError</code></td><td>sintassi non valida</td></tr><tr><td><code>NameError</code></td><td>nome di variabile non definito</td></tr><tr><td><code>TypeError</code></td><td>operazione tra tipi incompatibili</td></tr><tr><td><code>ValueError</code></td><td>conversione non possibile</td></tr></tbody></table><p>Metodo minimo:</p><ol><li>leggi il tipo di errore;</li><li>trova la riga;</li><li>controlla i tipi e i valori coinvolti;</li><li>riduci il caso a un esempio piu` piccolo.</li></ol><p>Una distinzione importante e&#x27; questa:</p><ul><li>un errore esplicito dell&#x27;interprete e&#x27; spesso il caso piu&#x27; semplice da affrontare;</li><li>il caso piu&#x27; insidioso e&#x27; quando il programma gira ma il comportamento non coincide con cio&#x27; che volevamo.</li></ul><p>Per questo leggere un messaggio di errore resta necessario, ma non esaurisce il lavoro di verifica del programma.</p><hr><a id="mod3-boolean-logica"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="condizioni-composte-e-leggi-di-de-morgan">Condizioni composte e leggi di De Morgan</h2><p>Le condizioni possono essere combinate con:</p><ul><li><code>and</code></li><li><code>or</code></li><li><code>not</code></li></ul><p>Esempio:</p><pre><code class="language-python">eta = 20
-ha_documento = True
-
-if eta &gt;= 18 and ha_documento:
-    print(&quot;Accesso consentito&quot;)</code></pre><p>Le <strong>leggi di De Morgan</strong> servono a riscrivere negazioni di condizioni composte:</p><table><thead><tr><th>Forma</th><th>Equivalente</th></tr></thead><tbody><tr><td><code>not (A and B)</code></td><td><code>not A or not B</code></td></tr><tr><td><code>not (A or B)</code></td><td><code>not A and not B</code></td></tr></tbody></table><p>Esempio:</p><pre><code class="language-python">not (x &gt; 0 and y &gt; 0)</code></pre><p>equivale a:</p><pre><code class="language-python">x &lt;= 0 or y &lt;= 0</code></pre><p>Questa riscrittura e` utile per controllare meglio casi limite e semplificare il ragionamento.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="casi-e-tabelle-di-verita">Casi e tabelle di verita&#x27;</h2><p>Tra i materiali svolti compare anche un modo molto utile di preparare un esercizio prima ancora di scrivere il codice: costruire i <strong>casi</strong>.</p><p>Esempio:</p><table><thead><tr><th>Eta&#x27; attuale</th><th>Eta&#x27; da raggiungere</th><th>Comportamento</th></tr></thead><tbody><tr><td><code>&lt; 0</code></td><td><code>&lt;= 0</code></td><td>impossibile</td></tr><tr><td><code>&lt; 0</code></td><td><code>&gt; 0</code></td><td>eta&#x27; negativa non valida</td></tr><tr><td><code>&gt;= 0</code></td><td><code>&lt;= 0</code></td><td>caso assurdo nel modello</td></tr><tr><td><code>&gt;= 0</code></td><td><code>&gt; 0</code></td><td>procedi con il messaggio corretto</td></tr></tbody></table><p>Questo approccio e&#x27; prezioso perche&#x27; costringe a separare:</p><ul><li>casi impossibili;</li><li>casi di errore;</li><li>casi normali;</li><li>casi limite.</li></ul><p>Nei materiali di supporto ricompaiono anche le tavole di verita&#x27; di:</p><ul><li><code>and</code></li><li><code>or</code></li><li><code>not</code></li></ul><p>Non come teoria astratta, ma come strumento per capire davvero quando una condizione composta vale <code>True</code> oppure <code>False</code>.</p><hr><a id="mod3-automi"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="automi-a-stati-finiti">Automi a stati finiti</h2><p>Un automa a stati finiti e` un modello semplice per descrivere un programma che cambia comportamento in base allo stato corrente e a un input.</p><p>Componenti:</p><ul><li>un insieme di stati;</li><li>un input osservato;</li><li>regole di transizione;</li><li>eventualmente un output.</li></ul><p>Esempio intuitivo: validare una risposta <code>s</code> o <code>n</code>.</p><table><thead><tr><th>Stato corrente</th><th>Input</th><th>Stato successivo</th></tr></thead><tbody><tr><td>attesa</td><td><code>s</code></td><td>confermato</td></tr><tr><td>attesa</td><td><code>n</code></td><td>annullato</td></tr><tr><td>attesa</td><td>altro</td><td>attesa</td></tr></tbody></table><p>Anche un semplice <code>if</code> puo` essere letto come un minuscolo automa:</p><ul><li>osserva una condizione;</li><li>sceglie un ramo;</li><li>aggiorna lo stato del programma.</li></ul><hr><a id="mod3-casi-limite"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="verifica-del-codice-e-casi-limite">Verifica del codice e casi limite</h2><p>Un frammento di codice puo` sembrare plausibile e restare comunque sbagliato.</p><p>Per questo va controllato con:</p><ul><li>tracciamento a mano;</li><li>casi normali;</li><li>casi limite;</li><li>casi anomali.</li></ul><p>Esempio molto utile:</p><blockquote><p>data una lista di interi, restituire tutti i numeri che seguono uno <code>0</code></p></blockquote><p>Su un caso normale come:</p><pre><code class="language-python">[3, 5, 0, 7, 0, -3, 8]</code></pre><p>potremmo aspettarci:</p><pre><code class="language-python">[7, -3]</code></pre><p>Ma i casi davvero interessanti sono altri:</p><ul><li>che cosa succede se la lista e&#x27; vuota?</li><li>che cosa succede se <code>0</code> e&#x27; l&#x27;ultimo elemento?</li><li>che cosa succede se ci sono due zeri consecutivi?</li><li>che cosa succede se la lista ha un solo elemento?</li></ul><p>Questo esempio e&#x27; ottimo perche&#x27; mostra che:</p><ul><li>il caso vuoto puo&#x27; anche andare bene senza errore;</li><li>un accesso alla posizione successiva puo&#x27; invece fallire se <code>0</code> e&#x27; in ultima posizione;</li><li>alcuni casi non sono &quot;errori&quot; ma scelte progettuali da esplicitare.</li></ul><h3 id="leggere-il-codice-prima-ancora-di-eseguirlo">Leggere il codice prima ancora di eseguirlo</h3><p>Nella lezione veniva proposto anche un esercizio molto utile:</p><ul><li>prendere codice intenzionalmente sbagliato;</li><li>leggerlo a occhio;</li><li>provare a prevedere dove fallira&#x27;;</li><li>solo dopo copiarlo nell&#x27;editor per verificare.</li></ul><p>Questo allena due competenze che tornano continuamente:</p><ul><li>debugging;</li><li>previsione del comportamento del programma.</li></ul><h3 id="anche-un-solo-elemento-puo-essere-un-caso-limite">Anche un solo elemento puo&#x27; essere un caso limite</h3><p>Vale esplicitamente anche questo:</p><ul><li>una lista con un solo elemento puo&#x27; essere un caso limite;</li><li>se il programma assume implicitamente che esista sempre un &quot;successivo&quot;, puo&#x27; rompersi proprio li&#x27;.</li></ul><p>Questa e&#x27; una buona regola generale:</p><blockquote><p>quando un programma usa posizioni vicine, chiediti sempre che cosa accade su liste vuote, liste di lunghezza 1 e ultimo elemento.</p></blockquote><p>Esempio:</p><pre><code class="language-python">if voto &gt; 18:
-    print(&quot;superato&quot;)
+    segno = &quot;-&quot;
+print(segno + str(n))</code></pre><p>Proviamolo su diversi input:</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>7</code></td><td><code>+7</code></td><td>?</td></tr><tr><td><code>-3</code></td><td><code>-3</code></td><td>?</td></tr><tr><td><code>0</code></td><td><code>0</code></td><td>?</td></tr></tbody></table><p>Sembra ragionevole: il ramo <code>if</code> (se maggiore di 0) aggiunge <code>+</code>, il ramo <code>else</code> aggiunge <code>-</code>.</p><p>Ma <code>str(-3)</code> restituisce già <code>&quot;-3&quot;</code>: concatenarci davanti un altro <code>&quot;-&quot;</code> produce <code>&quot;--3&quot;</code>. E per <code>0</code>, il ramo <code>else</code> produce <code>&quot;-0&quot;</code> invece di <code>&quot;0&quot;</code>.</p><p>Il programma non genera nessun errore, ma l&#x27;output è sbagliato per tutti i numeri non positivi.</p><p><strong>Perché succede:</strong> <code>str(n)</code> su un numero negativo include già il segno meno. Aggiungere <code>&quot;-&quot;</code> davanti raddoppia il segno.</p><p><strong>Correzione:</strong></p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n &gt; 0:
+    print(&quot;+&quot; + str(n))
+elif n &lt; 0:
+    print(str(n))  # str(n) contiene già il segno
 else:
-    print(&quot;non superato&quot;)</code></pre><p>Domanda giusta: che cosa succede con <code>18</code>?</p><p>Qui il bug non e<code> sintattico. E</code> un errore di specifica o di condizione.</p><hr>
+    print(&quot;0&quot;)</code></pre>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Traccia a mano questo codice:</li></ol><pre><code class="language-python">x = 4
-y = 9
-if x * 2 &lt; y:
-    y = y - 1
+    <h2 id="metodo">Metodo</h2><ol><li>scegli un input piccolo;</li><li>scrivi l&#x27;output atteso;</li><li>esegui il programma;</li><li>confronta il risultato reale con quello previsto;</li><li>se modifichi il codice, ripeti gli stessi test.</li></ol>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="comporre-condizioni">Comporre condizioni</h2><p>Fino adesso abbiamo visto operazioni che confrontano ad esempio numeri interi e restituiscono un valore booleano. Ma esistono anche operazioni che agiscono direttamente su valori booleani.</p><p>In particolare consideriamo tre operazioni:</p><ul><li><code>and</code></li><li><code>or</code></li><li><code>not</code></li></ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-and-or-not">Sintassi di <code>and</code>, <code>or</code>, <code>not</code></h2><p>Forme generali:</p><pre><code class="language-python">espressione_booleana and espressione_booleana
+
+espressione_booleana or espressione_booleana
+
+not espressione_booleana</code></pre><p>Queste operazioni si usano per costruire condizioni più complesse a partire da condizioni più semplici.</p><p>Esempi:</p><pre><code class="language-python">x &gt; 0 and x &lt; 10
+eta &gt;= 18 or ha_permesso
+not nome == &quot;&quot;</code></pre>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-and-or-not">Semantica di <code>and</code>, <code>or</code>, <code>not</code></h2><p>Queste operazioni prendono in ingresso valori booleani e restituiscono a loro volta un valore booleano.</p><h3 id="semantica-di-and">Semantica di <code>and</code></h3><pre><code class="language-python">A and B</code></pre><p>vale <code>True</code> solo quando <strong>entrambe</strong> le condizioni sono vere. Se almeno una delle due è falsa, il risultato è <code>False</code>.</p><p>Per esempio:</p><pre><code class="language-python">x &gt; 0 and x &lt; 10</code></pre><p>significa: &quot;x è maggiore di 0 e contemporaneamente minore di 10&quot;.</p><h3 id="semantica-di-or">Semantica di <code>or</code></h3><pre><code class="language-python">A or B</code></pre><p>vale <code>True</code> quando <strong>almeno una</strong> delle due condizioni è vera. Vale <code>False</code> solo quando sono false entrambe.</p><p>Per esempio:</p><pre><code class="language-python">voto &lt; 18 or voto &gt; 30</code></pre><p>significa: &quot;il voto è fuori dall&#x27;intervallo valido&quot;, potrebbe esserlo perché minore di 18 o perché maggiore di 30.</p><h3 id="semantica-di-not">Semantica di <code>not</code></h3><pre><code class="language-python">not A</code></pre><p>inverte il valore booleano della condizione:</p><ul><li>se <code>A</code> vale <code>True</code>, allora <code>not A</code> vale <code>False</code>;</li><li>se <code>A</code> vale <code>False</code>, allora <code>not A</code> vale <code>True</code>.</li></ul><p>Per esempio:</p><pre><code class="language-python">not x &gt; 0</code></pre><p>significa: &quot;non è vero che x è maggiore di 0&quot;, equivale a <code>x&lt;=0</code>.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="tabelle-di-verità">Tabelle di verità</h2><h3 id="tavola-di-verita-di-and">Tavola di verita&#x27; di <code>and</code></h3><table><thead><tr><th>x</th><th>y</th><th>x and y</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>False</code></td><td><code>True</code></td><td><code>False</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><h3 id="tavola-di-verita-di-or">Tavola di verita&#x27; di <code>or</code></h3><table><thead><tr><th>x</th><th>y</th><th>x or y</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>False</code></td><td><code>True</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><h3 id="tavola-di-verita-di-not">Tavola di verita&#x27; di <code>not</code></h3><table><thead><tr><th>x</th><th>not x</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td></tr></tbody></table>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi">Esercizi</h2><h3 id="valutare-espressioni-booleane">Valutare espressioni booleane</h3><p>Per ciascuna espressione e valori di variabili indicati, calcola il risultato (<code>True</code> o <code>False</code>) senza eseguire il codice.</p><ol><li><code>x = 5</code>, <code>y = 3</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>x = -2</code>, <code>y = -1</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>n = 7</code> → <code>not n &gt; 10</code></li><li><code>n = 15</code> → <code>not n &gt; 10</code></li><li><code>eta = 20</code>, <code>ha_documento = False</code> → <code>eta &gt;= 18 and ha_documento</code></li><li><code>eta = 16</code>, <code>ha_documento = True</code> → <code>eta &gt;= 18 or ha_documento</code></li></ol><h3 id="condizioni-composte-nei-programmi">Condizioni composte nei programmi</h3><ol><li>Scrivi un programma che legge un numero intero e stampa <code>Nel range</code> se è compreso tra 1 e 100 (estremi inclusi), <code>Fuori range</code> altrimenti.</li><li>Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione</li><li>Scrivi un programma che legge due stringhe e stampa <code>Almeno una è vuota</code> se almeno una delle due ha lunghezza zero, altrimenti stampa <code>Entrambe non vuote</code>.</li><li>Scrivi un programma che legge un numero intero e stampa <code>Fuori range</code> se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando <code>not</code> e <code>and</code>.</li><li>Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l&#x27;età desiderata.<ul><li>Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:</li></ul></li></ol><p><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="ordine-di-precedenza-degli-operatori">Ordine di precedenza degli operatori</h2><p>Quando una condizione contiene più operatori, Python non legge tutto &quot;da sinistra a destra&quot; in modo piatto. Usa invece un <strong>ordine di precedenza</strong>, cioè alcune operazioni vengono valutate prima di altre.</p><p>Nelle espressioni che useremo più spesso vale questa regola pratica:</p><ol><li>parentesi;</li><li>confronti come <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&gt;=</code>;</li><li><code>not</code>;</li><li><code>and</code>;</li><li><code>or</code>.</li></ol><p>Quindi <code>not</code> ha precedenza su <code>and</code>, e <code>and</code> ha precedenza su <code>or</code>.</p><p>Esempio:</p><pre><code class="language-python">True or False and False</code></pre><p>non si legge come:</p><pre><code class="language-python">(True or False) and False</code></pre><p>ma come:</p><pre><code class="language-python">True or (False and False)</code></pre><p>perche&#x27; <code>and</code> viene valutato prima di <code>or</code>.</p><p>Un altro esempio:</p><pre><code class="language-python">not x &gt; 0 and y &gt; 0</code></pre><p>si legge come:</p><pre><code class="language-python">(not (x &gt; 0)) and (y &gt; 0)</code></pre><p>Come in matematica, con le parentesi possiamo influenzare l&#x27;ordine delle operazioni.</p><p>Confronta:</p><pre><code class="language-python">A or B and C</code></pre><p>con:</p><pre><code class="language-python">(A or B) and C</code></pre><p>Non sono in generale equivalenti.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="valutazione-lazy">Valutazione lazy</h2><p>Gli operatori <code>and</code> e <code>or</code> non valutano sempre entrambe le parti dell&#x27;espressione. Python si ferma appena il risultato finale e&#x27; gia&#x27; determinato.</p><p>Questo comportamento si chiama <strong>valutazione lazy</strong> oppure <strong>short-circuit</strong>.</p><p>Partiamo da questo esempio:</p><pre><code class="language-python">x = 5
+
+if x &gt; 0 and y &gt; 0:
+    print(&quot;Entrambi i numeri positivi!&quot;)</code></pre><details><summary>Dettagli</summary><p>Questo codice genera errore, perché <code>y</code> non è definita.</p></details><p>Ora consideriamo questo caso:</p><pre><code class="language-python">x = 5
+
+if x &gt; 0 or y &gt; 0:
+    print(&quot;Almeno un numero positivo!&quot;)</code></pre><p>Perchè non genera errore?</p><table><thead><tr><th><code>x &gt; 0</code></th><th><code>y &gt; 0</code></th><th><code>x &gt; 0 or y &gt; 0</code></th></tr></thead><tbody><tr><td><code>True</code></td><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><p><code>x &gt; 0</code> vale già <code>True</code>, e questo basta a rendere vera tutta l&#x27;espressione con <code>or</code>. Di conseguenza Python non valuta <code>y &gt; 0</code>.</p><p>In generale:</p><ul><li>in <code>A or B</code>, se <code>A</code> vale <code>True</code>, Python non valuta <code>B</code>;</li><li>in <code>A and B</code>, se <code>A</code> vale <code>False</code>, Python non valuta <code>B</code>.</li></ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="leggi-di-de-morgan">Leggi di De Morgan</h2><p>Le condizioni composte compaiono molto presto nei programmi.</p><p>Per esempio, se automatizzassimo il controllo degli accessi in discoteca il programma potrebbe somigliare a qualcosa come:</p><pre><code class="language-python">if eta &gt;= 18 and ha_documento:
+    print(&quot;Accesso consentito&quot;)</code></pre><p>Qui stiamo combinando due condizioni semplici:</p><ul><li><code>eta &gt;= 18</code></li><li><code>ha_documento</code></li></ul><p>con l&#x27;operatore <code>and</code>.</p><p>Quando entra in gioco <code>not</code>, la lettura diventa meno immediata.</p><p>Supponiamo che il programma, invece che lasciare entrare, voglia stampare &quot;Accesso non consentito&quot; se:</p><ul><li>l&#x27;età è minore di 18, oppure</li><li>non si ha il documento</li></ul><pre><code class="language-python">if eta &lt; 18 or not ha_documento:
+    print(&quot;Accesso non consentito&quot;)</code></pre><p>Ma questo deve essere equivalente anche alla negazione della condizione precedente!</p><pre><code class="language-python">if not (eta &gt;= 18 and ha_documento):
+    print(&quot;Accesso non consentito&quot;)</code></pre><p>Le <strong>leggi di De Morgan</strong> servono a riscrivere negazioni di condizioni composte:</p><table><thead><tr><th>Forma</th><th>Equivalente</th></tr></thead><tbody><tr><td><code>not (A and B)</code></td><td><code>not A or not B</code></td></tr><tr><td><code>not (A or B)</code></td><td><code>not A and not B</code></td></tr></tbody></table><p>Esempio:</p><pre><code class="language-python">not (x &gt; 0 and y &gt; 0)</code></pre><p>equivale a:</p><pre><code class="language-python">not x &gt; 0 or not y &gt; 0</code></pre><p>ovvero:</p><pre><code class="language-python">x &lt;= 0 or y &lt;= 0</code></pre>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi">Esercizi</h2><p>Riscrivi ciascuna condizione in forma equivalente usando le leggi di De Morgan, poi verifica con un esempio numerico.</p><ol><li><code>not (x &gt; 0 and y &gt; 0)</code></li><li><code>not (a == b or c == d)</code></li><li><code>not (eta &gt;= 18 and ha_documento)</code></li></ol>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="casi-e-tabelle-di-verità">Casi e tabelle di verità</h2><p>Prima di scrivere il codice conviene costruire una tabella dei casi: elencare esplicitamente tutte le combinazioni di input rilevanti e il comportamento atteso per ciascuna.</p><p>Questo serve a non dimenticare casi limite e a capire di quanti rami ha bisogno il programma.</p><p><strong>Esempio:</strong> esercizio 13 — nome, età attuale, età da raggiungere.</p><p>Quali combinazioni di input esistono?</p><p>Prima versione della tabella — solo i casi &quot;normali&quot;:</p><table><thead><tr><th>Confronto</th><th>Esempio</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>eta_desiderata &gt; eta_attuale</code></td><td>attuale=10, target=18</td><td><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></td></tr><tr><td><code>eta_desiderata == eta_attuale</code></td><td>attuale=18, target=18</td><td><code>Ciao Maria, hai già 18 anni come desideri</code></td></tr><tr><td><code>eta_desiderata &lt; eta_attuale</code></td><td>attuale=25, target=18</td><td><code>Ciao Maria, hai già superato i 18 anni</code></td></tr></tbody></table><p>La tabella mostra che servono tre rami: <code>if</code>, <code>elif</code>, <code>else</code>. Costruirla prima evita di accorgersi del caso <code>==</code> solo dopo aver scritto il codice.</p><p>Ma cosa succede se l&#x27;utente inserisce un&#x27;età negativa?</p><table><thead><tr><th>Input</th><th>Esempio</th><th>Comportamento del programma</th><th>Corretto?</th></tr></thead><tbody><tr><td><code>eta_attuale &lt; 0</code></td><td>attuale=-5, target=18</td><td>entra nel ramo <code>&gt;</code></td><td>no</td></tr><tr><td><code>eta_desiderata &lt; 0</code></td><td>attuale=10, target=-3</td><td>entra nel ramo <code>&lt;</code></td><td>no</td></tr><tr><td>entrambe negative, uguali</td><td>attuale=-5, target=-5</td><td>entra nel ramo <code>==</code></td><td>no</td></tr></tbody></table><p>Il programma non genera errori ma produce output privi di senso. Per gestirlo correttamente bisogna aggiungere una validazione degli input <strong>prima</strong> di tutto il resto:</p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+eta_attuale = int(input(&quot;Età attuale: &quot;))
+eta_desiderata = int(input(&quot;Età desiderata: &quot;))
+
+if eta_attuale &lt; 0 or eta_desiderata &lt; 0:
+    print(&quot;Errore: le età non possono essere negative.&quot;)
+elif eta_desiderata &gt; eta_attuale:
+    anni_mancanti = eta_desiderata - eta_attuale
+    print(&quot;Ciao &quot; + nome + &quot;, oggi hai &quot; + str(eta_attuale) + &quot; anni, tra &quot; + str(anni_mancanti) + &quot; anni ne avrai &quot; + str(eta_desiderata) + &quot; come desideri&quot;)
+elif eta_desiderata == eta_attuale:
+    print(&quot;Ciao &quot; + nome + &quot;, hai già &quot; + str(eta_desiderata) + &quot; anni come desideri&quot;)
 else:
-    y = y + 1
-print(y)</code></pre><ol><li>Riscrivi usando De Morgan:</li></ol><ul><li><code>not (a &gt; 0 and b &gt; 0)</code></li><li><code>not (nome == &quot;&quot; or eta &lt; 18)</code></li></ul><ol><li>Spiega che cosa non va in ciascun frammento:</li></ol><pre><code class="language-python">numero = input(&quot;Numero: &quot;)
-print(numero + 1)</code></pre><pre><code class="language-python">if x = 3:
-    print(&quot;ok&quot;)</code></pre><ol><li>Modella come piccolo automa un programma che legge un voto e lo classifica in <code>insufficiente</code>, <code>sufficiente</code>, <code>buono</code>.</li></ol><hr>
+    print(&quot;Ciao &quot; + nome + &quot;, hai già superato i &quot; + str(eta_desiderata) + &quot; anni&quot;)</code></pre><blockquote><p>La validazione dell&#x27;input è sempre il primo controllo da fare.<br>Gli altri rami assumono che i dati siano validi — ma solo perché lo abbiamo già verificato.</p></blockquote>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>In questo modulo hai consolidato il ragionamento sullo stato del programma:</p><ul><li>valori e tipi devono restare coerenti;</li><li>le condizioni vanno tracciate e verificate;</li><li>gli errori si leggono, non si ignorano;</li><li>le condizioni composte si possono trasformare;</li><li>un problema decisionale puo` essere descritto come automa.</li></ul>
+    <h2 id="automi-a-stati-finiti">Automi a stati finiti</h2><p>Quello che fa un programma con <code>if/elif/else</code> è, in fondo, sempre la stessa cosa: <strong>partizionare</strong> gli input in classi, e associare a ciascuna classe un comportamento diverso.</p><p>Un <strong>automa a stati finiti</strong> è il modello astratto di questa idea.</p><p>Invece di pensare al codice riga per riga, un automa descrive:</p><ul><li>quali <strong>classi di input</strong> esistono;</li><li>a quale <strong>output</strong> (o stato) ciascuna classe conduce;</li><li>se ci sono input che non sono stati considerati.</li></ul><p>Questo è esattamente quello che facciamo quando costruiamo una tabella dei casi prima di scrivere il codice.</p><h3 id="struttura-di-un-automa">Struttura di un automa</h3><p>Un automa è definito da:</p><ul><li>un insieme di <strong>stati</strong> (le situazioni possibili del programma);</li><li>un insieme di <strong>input</strong> possibili;</li><li>una <strong>funzione di transizione</strong>: dato uno stato e un input, restituisce lo stato successivo;</li><li>uno <strong>stato iniziale</strong>;</li><li>un insieme di <strong>stati finali</strong> (gli output validi).</li></ul><h3 id="esempio-classificare-un-numero">Esempio: classificare un numero</h3><p>Consideriamo il programma che classifica un numero come <code>negativo</code>, <code>zero</code> o <code>positivo</code>.</p><p>Gli input sono tutti gli interi. Le classi di output sono tre:</p><table><thead><tr><th>Classe di input</th><th>Condizione</th><th>Output</th></tr></thead><tbody><tr><td>negativi</td><td><code>n &lt; 0</code></td><td><code>&quot;negativo&quot;</code></td></tr><tr><td>zero</td><td><code>n == 0</code></td><td><code>&quot;zero&quot;</code></td></tr><tr><td>positivi</td><td><code>n &gt; 0</code></td><td><code>&quot;positivo&quot;</code></td></tr></tbody></table><p>L&#x27;automa ha tre stati finali corrispondenti alle tre classi. Ogni intero appartiene esattamente a una classe: la partizione è <strong>completa</strong> (nessun input mancante) e <strong>disgiunta</strong> (nessun input in due classi contemporaneamente).</p><pre><code>              ┌─── n &lt; 0 ────► ╔═══════════╗
+              │                ║ negativo  ║
+   ┌───────┐  │                ╚═══════════╝
+──►│ start │──┼─── n == 0 ───► ╔═══════════╗
+   └───────┘  │                ║   zero    ║
+              │                ╚═══════════╝
+              └─── n &gt; 0 ────► ╔═══════════╗
+                               ║ positivo  ║
+                               ╚═══════════╝</code></pre><p>Quando scriviamo <code>if/elif/else</code> stiamo implementando questa partizione nel codice.</p><h3 id="usare-lautoma-per-ragionare-sui-casi">Usare l&#x27;automa per ragionare sui casi</h3><p>Il vantaggio del modello è che forza a chiedersi:</p><ul><li><strong>la partizione è completa?</strong> Ogni input possibile finisce in qualche classe?</li><li><strong>la partizione è disgiunta?</strong> Nessun input soddisfa due condizioni contemporaneamente?</li><li><strong>ho considerato i casi limite?</strong> Cosa succede con <code>0</code>, con valori negativi, con stringhe vuote?</li></ul><p>Riprendiamo l&#x27;esercizio 13 (nome, età attuale, età desiderata).</p><p>Prima di aggiungere la validazione degli input, la partizione era:</p><table><thead><tr><th>Classe</th><th>Condizione</th></tr></thead><tbody><tr><td>A</td><td><code>eta_desiderata &gt; eta_attuale</code></td></tr><tr><td>B</td><td><code>eta_desiderata == eta_attuale</code></td></tr><tr><td>C</td><td><code>eta_desiderata &lt; eta_attuale</code></td></tr></tbody></table><p>Questa partizione è <strong>completa</strong> per gli interi, ma non distingue gli input validi da quelli non validi. L&#x27;automa non &quot;sa&quot; che un&#x27;età negativa è priva di senso — non è nella sua definizione.</p><p>Aggiungendo la validazione, la partizione diventa:</p><table><thead><tr><th>Classe</th><th>Condizione</th></tr></thead><tbody><tr><td>ERR</td><td><code>eta_attuale &lt; 0 or eta_desiderata &lt; 0</code></td></tr><tr><td>A</td><td>input validi con <code>eta_desiderata &gt; eta_attuale</code></td></tr><tr><td>B</td><td>input validi con <code>eta_desiderata == eta_attuale</code></td></tr><tr><td>C</td><td>input validi con <code>eta_desiderata &lt; eta_attuale</code></td></tr></tbody></table><p>Ora la partizione è completa <strong>e</strong> semanticamente corretta.</p><pre><code>                    ┌── età &lt; 0 ────────────────────────-──────► ╔═════════╗
+                    │                                            ║ ERRORE  ║
+   ┌───────┐        │                                            ╚═════════╝
+──►│ start │────────┤
+   └───────┘        │
+                    └── età &gt;= 0 ──► ┌──────────────┐
+                                     │ input valido │
+                                     └──────┬───────┘
+                               ┌────────────┼────────────┐
+                               │            │            │
+                          des &gt; att    des == att    des &lt; att
+                               │            │            │
+                               ▼            ▼            ▼
+                        ╔════════════╗ ╔══════════╗ ╔═══════════════╗
+                        ║ tra Y anni ║ ║ già ora  ║ ║ già superato  ║
+                        ╚════════════╝ ╚══════════╝ ╚═══════════════╝</code></pre><blockquote><p>Disegnare l&#x27;automa — anche solo come tabella — è un modo per verificare che il codice copra davvero tutti i casi prima ancora di scrivere un <code>if</code>.</p></blockquote><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-finali">Esercizi finali</h2><h3 id="automi-disegnare-la-partizione">Automi: disegnare la partizione</h3><p>Per ciascun problema, prima di scrivere codice:</p><ol><li>elenca le classi di input;</li><li>costruisci la tabella delle condizioni;</li><li>disegna lo schema con stati finali a doppio bordo.</li></ol><p><strong>A1.</strong> Un programma legge un numero intero e stabilisce se è divisibile per 2, per 3, per entrambi, o per nessuno dei due.</p><p>Quante classi di input esistono? La partizione è completa?</p><details><summary>Schema</summary><pre><code>                    ┌── n%2==0 and n%3==0 ──► ╔═══════════════════╗
+                    │                         ║ divisibile per 6  ║
+   ┌───────┐        │                         ╚═══════════════════╝
+──►│ start │────────┼── n%2==0 and n%3!=0 ──► ╔═══════════════════╗
+   └───────┘        │                         ║ solo per 2        ║
+                    │                         ╚═══════════════════╝
+                    ├── n%2!=0 and n%3==0 ──► ╔═══════════════════╗
+                    │                         ║ solo per 3        ║
+                    │                         ╚═══════════════════╝
+                    └── n%2!=0 and n%3!=0 ──► ╔═══════════════════╗
+                                              ║ nessuno dei due   ║
+                                              ╚═══════════════════╝</code></pre><p>Quattro classi, partizione completa e disgiunta.</p></details><p><strong>A2.</strong> Un programma legge una stringa e la classifica come:</p><ul><li><code>&quot;vuota&quot;</code> se ha lunghezza 0;</li><li><code>&quot;corta&quot;</code> se ha lunghezza tra 1 e 3;</li><li><code>&quot;normale&quot;</code> se ha lunghezza tra 4 e 10;</li><li><code>&quot;lunga&quot;</code> se ha lunghezza maggiore di 10.</li></ul><p>Costruisci la tabella delle condizioni e lo schema dell&#x27;automa. Poi scrivi il programma.</p><p><strong>A3.</strong> Un programma legge un carattere singolo e lo classifica come vocale, consonante o altro (cifra, spazio, simbolo). Costruisci prima la tabella, poi scrivi il programma.</p><h3 id="condizioni-e-flusso">Condizioni e flusso</h3><p><strong>C1.</strong> Leggi tre numeri interi <code>a</code>, <code>b</code>, <code>c</code>. Stampa <code>True</code> se formano un triangolo valido (la somma di due lati qualsiasi deve essere maggiore del terzo), <code>False</code> altrimenti.</p><p><strong>C2.</strong> Leggi due stringhe <code>s1</code> e <code>s2</code>. Stampa sempre la più lunga. Se hanno la stessa lunghezza, stampa quella che viene prima in ordine alfabetico.</p><p><strong>C3.</strong> Leggi un numero intero. Senza usare <code>abs()</code>, calcola e stampa il suo valore assoluto usando un <code>if</code>. Poi riscrivi il programma sostituendo il blocco <code>if</code> con una singola espressione che assegna il risultato a una variabile <code>risultato</code>, e stampa <code>risultato</code> fuori dall&#x27;<code>if</code>.</p><h3 id="trovare-lerrore">Trovare l&#x27;errore</h3><p><strong>D1.</strong> Individua tutti i casi in cui questo programma produce output sbagliato o non produce output:</p><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+if voto &gt;= 18:
+    if voto &gt;= 24:
+        if voto &gt;= 28:
+            print(&quot;Ottimo&quot;)
+        print(&quot;Buono&quot;)
+    print(&quot;Sufficiente&quot;)</code></pre><p><strong>D2.</strong> Il programma seguente dovrebbe stampare il minore tra tre numeri. Trova l&#x27;errore:</p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+b = int(input(&quot;b: &quot;))
+c = int(input(&quot;c: &quot;))
+if a &lt; b and a &lt; c:
+    print(&quot;Il minore è &quot; + str(a))
+if b &lt; a and b &lt; c:
+    print(&quot;Il minore è &quot; + str(b))
+if c &lt; a and c &lt; b:
+    print(&quot;Il minore è &quot; + str(c))</code></pre>
   </div>
 </section>
 
@@ -209,7 +314,7 @@ print(numero + 1)</code></pre><pre><code class="language-python">if x = 3:
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 13</div>
+  <div class="counter" id="counter">1 / 18</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

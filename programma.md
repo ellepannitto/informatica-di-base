@@ -30,39 +30,43 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 
 ## Moduli
 
-### 01 | Introduzione alla programmazione e Python
-| Tipologia | Durata | Argomento                                                                                                                                           |
-| --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 0.5h   | Introduzione al corso: obiettivi, metodo di lavoro e perché Python — prima lezione con tempo dedicato al setup dell'ambiente                        |
-| exercise  | 1h     | [REPL, tipi e operazioni fondamentali: interi, float, stringhe](guida-lezioni/modulo-1.slides.html#mod1-repl)                                       |
-| theory    | 0.5h   | Python come linguaggio formale: vocabolario, sintassi, semantica, interprete e compilatore                                                          |
-| theory    | 0.5h   | [Architettura di Von Neumann: CPU (ALU, registri, Control Unit), RAM, disco e dispositivi I/O](guida-lezioni/modulo-1.slides.html#mod1-von-neumann) |
-| theory    | 0.5h   | [Cos'è un programma: input/elaborazione/output, file system e sistema operativo](guida-lezioni/modulo-1.slides.html#mod1-input-output)              |
-| theory    | 0.5h   | [Ambiente di lavoro: interprete, editor e terminale](guida-lezioni/modulo-1.slides.html#mod1-ambiente)                                              |
-| exercise  | 1.5h   | [Terminale: pwd, cd, ls, percorsi assoluti e relativi, lancio di script Python](guida-lezioni/modulo-1.slides.html#mod1-terminale)                  |
-| exercise  | 1h     | [Cosa stampa questo programma? Script da leggere, prevedere ed eseguire](guida-lezioni/modulo-1.slides.html#mod1-esercizi-script)                   |
+### 01 | Introduzione alla programmazione e Python | slides=guida-lezioni/modulo-1.slides.html
 
+| Tipologia | Durata | Argomento                                                                                                                    |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | Introduzione al corso: obiettivi, metodo di lavoro e perché Python — prima lezione con tempo dedicato al setup dell'ambiente |
+| exercise  | 1h     | REPL, tipi e operazioni fondamentali: interi, float, stringhe                                                                |
+| theory    | 0.5h   | Python come linguaggio formale: vocabolario, sintassi, semantica, interprete e compilatore                                   |
+| theory    | 0.5h   | Architettura di Von Neumann: CPU (ALU, registri, Control Unit), RAM, disco e dispositivi I/O                                 |
+| theory    | 0.5h   | Cos'è un programma: input/elaborazione/output, file system e sistema operativo                                               |
+| theory    | 0.5h   | Ambiente di lavoro: interprete, editor e terminale                                                                           |
+| exercise  | 1.5h   | Terminale: pwd, cd, ls, percorsi assoluti e relativi, lancio di script Python                                                |
+| exercise  | 1h     | Cosa stampa questo programma? Script da leggere, prevedere ed eseguire                                                       |
 
-### 02 | Variabili e strutture decisionali
-| Tipologia | Durata | Argomento                                                                                                                                        |
-| --------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| theory    | 0.5h   | [Espressione vs istruzione; assegnazione di variabile e stato del programma in memoria](guida-lezioni/modulo-2.slides.html#mod2-espressioni-istruzioni) |
-| theory    | 0.5h   | [Il tipo boolean, istruzioni `if`, `if-else`, `elif` e condizioni annidate](guida-lezioni/modulo-2.slides.html#mod2-boolean-if) |
-| exercise  | 1h     | [Primo script, `input()`, `print()` e casting con `int()` e `str()`](guida-lezioni/modulo-2.slides.html#mod2-primo-script) |
-| exercise  | 1h     | [Variabili, stato del programma e primi esercizi con input/output](guida-lezioni/modulo-2.slides.html#mod2-input-output) |
+### 02 | Variabili e strutture decisionali | slides=guida-lezioni/modulo-2.slides.html
 
+| Tipologia | Durata | Argomento                                                                               |
+| --------- | ------ | --------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | Espressioni e istruzioni                                                                |
+| theory    | 0.5h   | Variabili, assegnamento e stato: sintassi, semantica e tracciamento                     |
+| theory    | 0.5h   | `input()` e casting con `int()`, `float()`, `str()`                                     |
+| exercise  | 0.5h   | Esercizi: variabili, input/output, operazioni su stringhe e numeri                      |
+| theory    | 0.5h   | Tipo `bool`, operatori di confronto e operazioni su stringhe che restituiscono booleani |
+| theory    | 0.5h   | Sintassi e semantica di `if`, `if-else`, `elif` e condizioni annidate                   |
 
-### 03 | Stato del programma e strutture decisionali
-| Tipologia | Durata | Argomento                                                                                     |
-| --------- | ------ | --------------------------------------------------------------------------------------------- |
-| theory    | 0.5h   | [Lezione: leggi di De Morgan, precedenza tra `and`/`or` e effetti sugli errori](guida-lezioni/lezione-leggi-de-morgan.slides.html) |
-| exercise  | 1h     | [Primi messaggi di errore: leggerli, localizzare la riga e capire il tipo di problema](guida-lezioni/modulo-3.slides.html#mod3-errori) |
-| exercise  | 1h     | [Lezione-lab: testing, casi di test e casi limite](guida-lezioni/lezione-testing-casi-limite.slides.html) |
-| theory    | 1h     | [Lezione: automi a stati finiti](guida-lezioni/lezione-automi.slides.html) |
-| exercise  | 1h     | [Tracciamento di condizioni, rami eseguiti e casi limite](guida-lezioni/modulo-3.slides.html#mod3-tracciamento) |
-| exercise  | 1.5h   | [Esercizi: classificazioni, validazioni, riscrittura di condizioni complesse e semplici automi](guida-lezioni/modulo-3.slides.html#mod3-casi-limite) |
+### 03 | Testare il programma e operazioni su booleani | slides=guida-lezioni/modulo-3.slides.html
 
-### 04 | Ciclo while, sentinelle e convalida
+| Tipologia | Durata | Argomento                                                                                 |
+| --------- | ------ | ----------------------------------------------------------------------------------------- |
+| theory    | 1h     | Errori nel codice: leggerli e correggerli                                                 |
+| exercise  | 0.5h   | Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti |
+| theory    | 1h     | Condizioni composte: `and`, `or`, `not`, tabelle di verità e precedenza degli operatori   |
+| theory    | 0.5h   | Valutazione lazy e leggi di De Morgan                                                     |
+| exercise  | 1h     | Esercizi: valutare booleani, condizioni composte, De Morgan                               |
+| theory    | 1h     | Automi a stati finiti come modello di partizione degli input: stati finali e intermedi    |
+| exercise  | 1h     | Esercizi: disegnare automi, trovare errori                                               |
+
+### 04 | Ciclo while, sentinelle e convalida | slides=guida-lezioni/modulo-4.slides.html
 | Tipologia | Durata | Argomento                                                                                                           |
 | --------- | ------ | ------------------------------------------------------------------------------------------------------------------- |
 | theory    | 0.5h   | [Il ciclo `while`: condizione, stato e terminazione](guida-lezioni/modulo-4.slides.html#mod4-while) |
@@ -78,7 +82,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | exercise  | 1h     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali) |
 | exercise  | 1h     | Correzione della prova                                                    |
 
-### 05 | Strutture dati: liste
+### 05 | Strutture dati: liste | slides=guida-lezioni/modulo-5.slides.html
 | Tipologia | Durata | Argomento                                                                                                                     |
 | --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | [Liste: creare una lista, aggiungere elementi, leggere elementi e stampare una lista](guida-lezioni/modulo-5.slides.html#mod5-liste) |
@@ -86,7 +90,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | theory    | 0.5h   | [Redirezione dell'input: usare un file come sorgente dello standard input](guida-lezioni/modulo-5.slides.html#mod5-redirezione)      |
 | exercise  | 2h     | Esercizi: leggere sequenze di numeri o parole terminate da sentinella e salvarle in lista                                     |
 
-### 06 | Funzioni e procedure
+### 06 | Funzioni e procedure | slides=guida-lezioni/modulo-6.slides.html
 | Tipologia | Durata | Argomento                                                                                                                           |
 | --------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | [Definire funzioni: parametri, chiamata, valori di ritorno](guida-lezioni/modulo-6.slides.html#mod6-parametri)                             |
@@ -96,7 +100,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | exercise  | 3h     | [Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili](guida-lezioni/modulo-6.slides.html#mod6-esercizi-funzioni) |
 
 
-### 07 | Memoria e passaggio degli argomenti
+### 07 | Memoria e passaggio degli argomenti | slides=guida-lezioni/modulo-7.slides.html
 | Tipologia | Durata | Argomento                                                                                                                                    |
 | --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | [Funzioni vs procedure: quando restituire un valore e quando produrre solo un effetto](guida-lezioni/modulo-6.slides.html#mod6-procedure)           |
@@ -111,7 +115,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | exercise  | 1.5h     | Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni)|
 | exercise  | 1.5h     | Correzione della prova |
 
-### 08 | Ciclo for e iterazione
+### 08 | Ciclo for e iterazione | slides=guida-lezioni/modulo-8.slides.html
 | Tipologia | Durata | Argomento                                                                                                                  |
 | --------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 0.5h   | [Il ciclo `for` su stringhe, liste e `range()`](guida-lezioni/modulo-8.slides.html#mod8-for)                               |
@@ -119,7 +123,7 @@ Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il cor
 | exercise  | 1h     | Esercizi con `for`: conteggi, scansioni, accumuli e trasformazioni su sequenze                                             |
 | exercise  | 1h     | Esercizi: pattern di stampa, triangoli, rettangoli e uso degli indici nei cicli annidati                                   |
 
-### 09 | File e formati strutturati
+### 09 | File e formati strutturati | slides=guida-lezioni/modulo-9.slides.html
 | Tipologia | Durata | Argomento                                                                                                                                                                               |
 | --------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | [File di testo: aprire, leggere e scorrere un file riga per riga con `for`](guida-lezioni/modulo-9.slides.html#mod9-file)                                                                      |

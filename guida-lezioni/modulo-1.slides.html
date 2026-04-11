@@ -131,7 +131,7 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai orientarti tra interprete, editor e terminale?</li><li>Sai usare la REPL di Python per fare prove rapide?</li><li>Sai riconoscere i tipi fondamentali <code>int</code>, <code>float</code>, <code>str</code> ed eseguire operazioni su di essi?</li><li>Sai descrivere il modello input → elaborazione → output?</li><li>Sai spiegare in modo intuitivo il ruolo di CPU, memoria e file system?</li><li>Sai eseguire comandi base nel terminale?</li></ul>
+    <h2 id="a-fine-lezione">A fine lezione:</h2><ul><li>Sai distinguere interprete, editor e terminale?</li><li>Sai lanciare ed utilizzare la REPL di Python?</li><li>Sai riconoscere i tipi fondamentali <code>int</code>, <code>float</code>, <code>str</code> ed eseguire operazioni su di essi?</li><li>Sai descrivere il modello input → elaborazione → output?</li><li>Sai spiegare in modo intuitivo il ruolo di CPU, memoria e file system?</li><li>Sai eseguire comandi base nel terminale? Creare una cartella, cambiare cartella, leggerne il contenuto</li></ul>
   </div>
 </section>
 
@@ -182,7 +182,7 @@ TOTALE:  10</code></pre></details><ul><li>Python è un linguaggio generale;</li>
 3.45</code></pre></details><blockquote><p>Occhio a due operazioni con cui potremmo avere meno familiarità:<br>- <code>//</code> per il <strong>quoziente</strong> della divisione intera;<br>- <code>%</code> per il <strong>resto</strong> della divisione intera.</p></blockquote><details><summary>Esempi</summary><pre><code class="language-python">&gt;&gt;&gt; 44 // 6
 7
 &gt;&gt;&gt; 44 % 6
-2</code></pre></details><p>L&#x27;idea è la stessa della divisione in colonna:</p><ul><li><code>6 * 7 = 42</code></li><li>da <code>44</code> avanzano <code>2</code></li></ul><p><img src="imgs/divisione.png" alt="Divisione intera e resto"></p><h3 id="stringhe">Stringhe</h3><p>Le stringhe sono sequenze di caratteri.</p><table><thead><tr><th>Operazione</th><th>Sintassi</th><th>Esempio</th><th>Risultato</th></tr></thead><tbody><tr><td>Concatenazione</td><td><code>S1 + S2</code></td><td><code>&#x27;ab&#x27; + &#x27;cd&#x27;</code></td><td><code>&#x27;abcd&#x27;</code></td></tr><tr><td>Selezione</td><td><code>S[i]</code></td><td><code>&#x27;ciao&#x27;[1]</code></td><td><code>&#x27;i&#x27;</code></td></tr><tr><td>Maiuscolo</td><td><code>S.upper()</code></td><td><code>&#x27;ciao&#x27;.upper()</code></td><td><code>&#x27;CIAO&#x27;</code></td></tr><tr><td>Minuscolo</td><td><code>S.lower()</code></td><td><code>&#x27;CIAO&#x27;.lower()</code></td><td><code>&#x27;ciao&#x27;</code></td></tr><tr><td>Conteggio</td><td><code>S1.count(S2)</code></td><td><code>&#x27;aaa&#x27;.count(&#x27;a&#x27;)</code></td><td><code>3</code></td></tr><tr><td>Lunghezza</td><td><code>len(S)</code></td><td><code>len(&#x27;ciao&#x27;)</code></td><td><code>4</code></td></tr></tbody></table><details><summary>Esempi</summary><pre><code class="language-python">&gt;&gt;&gt; &#x27;Hello&#x27; + &#x27; &#x27; + &#x27;world&#x27;
+2</code></pre></details><p>L&#x27;idea è la stessa della divisione in colonna:</p><ul><li><code>6 * 7 = 42</code></li><li>da <code>44</code> avanzano <code>2</code></li></ul><p><img src="/divisione.png" alt="Divisione intera e resto"></p><h3 id="stringhe">Stringhe</h3><p>Le stringhe sono sequenze di caratteri.</p><table><thead><tr><th>Operazione</th><th>Sintassi</th><th>Esempio</th><th>Risultato</th></tr></thead><tbody><tr><td>Concatenazione</td><td><code>S1 + S2</code></td><td><code>&#x27;ab&#x27; + &#x27;cd&#x27;</code></td><td><code>&#x27;abcd&#x27;</code></td></tr><tr><td>Selezione</td><td><code>S[i]</code></td><td><code>&#x27;ciao&#x27;[1]</code></td><td><code>&#x27;i&#x27;</code></td></tr><tr><td>Maiuscolo</td><td><code>S.upper()</code></td><td><code>&#x27;ciao&#x27;.upper()</code></td><td><code>&#x27;CIAO&#x27;</code></td></tr><tr><td>Minuscolo</td><td><code>S.lower()</code></td><td><code>&#x27;CIAO&#x27;.lower()</code></td><td><code>&#x27;ciao&#x27;</code></td></tr><tr><td>Conteggio</td><td><code>S1.count(S2)</code></td><td><code>&#x27;aaa&#x27;.count(&#x27;a&#x27;)</code></td><td><code>3</code></td></tr><tr><td>Lunghezza</td><td><code>len(S)</code></td><td><code>len(&#x27;ciao&#x27;)</code></td><td><code>4</code></td></tr></tbody></table><details><summary>Esempi</summary><pre><code class="language-python">&gt;&gt;&gt; &#x27;Hello&#x27; + &#x27; &#x27; + &#x27;world&#x27;
 &#x27;Hello world&#x27;
 &gt;&gt;&gt; &#x27;informatica&#x27;[0]
 &#x27;i&#x27;
@@ -351,14 +351,17 @@ python3 es7.py ciao 0
 python3 es7.py ciao 3
 python3 es7.py ciao 10
 python3 es7.py x 1
-python3 es7.py informatica 4</code></pre><p>Prima di aprire il file: riuscite a capire cosa fa? Riuscite a spiegare <em>perché</em> alcune chiamate generano un errore?</p><details><summary>Cosa fa</summary><p>Il programma prende una stringa <code>s</code> e un numero <code>n</code> e fa tre cose:</p><ol><li>stampa <code>s * n</code> — l&#x27;operatore <code>*</code> tra stringa e intero ripete la stringa <code>n</code> volte;</li><li>stampa <code>s[n]</code> — il carattere in posizione <code>n</code>;</li><li>stampa <code>s[:n].upper() + s[n:]</code> — i primi <code>n</code> caratteri in maiuscolo concatenati al resto.</li></ol><pre><code class="language-text">ciaociao
+python3 es7.py informatica 4</code></pre><p>Prima di aprire il file: riuscite a capire cosa fa? Riuscite a spiegare <em>perché</em> alcune chiamate generano un errore?</p><details><summary>Cosa fa</summary><p>Il programma prende una stringa <code>s</code> e un numero <code>n</code> e fa tre cose:</p><ol><li>stampa <code>s * n</code> — l&#x27;operatore <code>*</code> tra stringa e intero ripete la stringa <code>n</code> volte;</li><li>stampa <code>s[n]</code> — il carattere in posizione <code>n</code>;</li><li>stampa <code>s[:n].upper() + s[n:]</code> — i primi <code>n</code> caratteri in maiuscolo concatenati al resto.</li></ol><pre><code class="language-text"># es7.py ciao 2
+ciaociao
 a
 CIao
 
+# es7.py ciao 0
            ← stringa vuota (s * 0)
 c          ← s[0]
 ciao       ← &quot;&quot; + &quot;ciao&quot;
 
+# es7.py ciao 3
 ciaociaociao
 o
 CIAo</code></pre><p>Con <code>n = 10</code> le righe 2 e 3 generano un errore:</p><pre><code class="language-text">IndexError: string index out of range</code></pre><p>perché <code>&quot;ciao&quot;</code> ha solo 4 caratteri (indici 0–3) e <code>s[10]</code> non esiste. La prima riga invece funziona: <code>s * 10</code> non ha limiti.</p><p>Con <code>n = 0</code>: <code>s * 0</code> produce una stringa vuota — non un errore. Perché?</p></details>

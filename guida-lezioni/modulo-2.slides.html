@@ -107,238 +107,293 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="a-fine-lezione">A fine lezione:</h2><ul><li>Sai distinguere espressioni e istruzioni?</li><li>Sai usare variabili?</li><li>Sai definire la sintassi dell&#x27;assegnamento?</li><li>Sai definire la semantica dell&#x27;assegnamento?</li><li>Sai leggere input con <code>input()</code> e convertire tipi con <code>int()</code> e <code>str()</code>?</li><li>Sai definire la sintassi dei costrutti <code>if</code>, <code>if-else</code>, <code>elif</code>?</li><li>Sai definire la semantica dei costrutti <code>if</code>, <code>if-else</code>, <code>elif</code>?</li><li>Sai scrivere semplici decisioni con <code>if</code>, <code>if-else</code>, <code>elif</code>?</li><li>Sai organizzare uno script in sezioni leggibili?</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere espressioni e istruzioni?</li><li>Sai usare variabili e assegnamento?</li><li>Sai leggere input con <code>input()</code> e convertire tipi con <code>int()</code> e <code>str()</code>?</li><li>Sai scrivere semplici decisioni con <code>if</code>, <code>if-else</code>, <code>elif</code>?</li><li>Sai organizzare uno script in sezioni leggibili?</li></ul><hr>
+    <h2 id="recap-operativo">Recap operativo</h2><p>La scorsa lezione:</p><ul><li>saper usare un interprete Python 3;</li><li>saper scrivere un file <code>.py</code> in un editor;</li><li>conoscere tipi fondamentali e confronti.</li></ul><p>Per ripassare:</p><ol><li>dato un numero di secondi <code>s</code> convertire in ore, minuti, secondi;</li><li>data una stringa <code>s</code> e un intero <code>n</code>, stampare il carattere in posizione <code>n</code> insieme al precedente e al successivo.</li></ol><details><summary>Dettagli</summary><ul><li>attenzione alle parentesi superflue: una stringa resta una stringa anche senza &quot;impacchettarla&quot; ulteriormente. Aggiungerle può cambiare il modo in cui un interprete o un ambiente legge l&#x27;espressione;</li><li>conviene scrivere l&#x27;operazione nel modo più semplice che conserva il tipo giusto. -- <code>type()</code></li></ul></details>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="recap-operativo">Recap operativo</h2><p>Prima di affrontare questo modulo, conviene richiamare questi prerequisiti:</p><ul><li>saper usare un interprete Python 3;</li><li>saper scrivere un file <code>.py</code> in un editor;</li><li>conoscere tipi fondamentali e confronti.</li></ul><p>Tre esercizi tipici di ripasso:</p><ol><li>convertire un numero di secondi in giorni, ore, minuti, secondi;</li><li>scambiare i valori di due variabili;</li><li>data una stringa <code>s</code> e un intero <code>n</code>, stampare il carattere in posizione <code>n</code> insieme al precedente e al successivo.</li></ol><p>La seconda lezione trascritta ripartiva proprio da qui:</p><ul><li>controllare che interprete e IDE fossero installati correttamente;</li><li>verificare gli esercizi assegnati;</li><li>chiarire piccoli errori ricorrenti prima di introdurre nuovi costrutti.</li></ul><p>Un richiamo utile emerso a voce: negli esercizi sulle stringhe molte persone tendevano ad aggiungere parentesi non necessarie. Il punto didattico era questo:</p><ul><li>una stringa resta una stringa anche senza &quot;impacchettarla&quot; ulteriormente;</li><li>aggiungere parentesi superflue puo&#x27; cambiare il modo in cui un interprete o un ambiente legge l&#x27;espressione;</li><li>conviene scrivere l&#x27;operazione nel modo piu&#x27; semplice che conserva il tipo giusto.</li></ul><hr><a id="mod2-primo-script"></a>
-  </div>
-</section>
+    <h2 id="struttura-di-uno-script">Struttura di uno script</h2><p>Nel modulo 1 abbiamo scritto i primi file <code>.py</code> e introdotto <code>print()</code>. Qui vediamo come organizzare uno script un po&#x27; più articolato.</p><h3 id="struttura-minima-di-uno-script">Struttura minima di uno script</h3><p>Una convenzione pratica utile per organizzare file un po&#x27; meno banali è questa.</p><p>In generale uno script tende ad avere tre blocchi:</p><ol><li>intestazione e commenti generali;</li><li>eventuali <code>import</code> di librerie esterne;</li><li>definizione di funzioni e poi corpo principale del programma.</li></ol><p>Esempio schematico:</p><pre><code class="language-python"># autore, data, scopo dello script
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="struttura-di-uno-script">Struttura di uno script</h2><p>Nel modulo 1 abbiamo scritto i primi file <code>.py</code> e introdotto <code>print()</code>. Qui vediamo come organizzare uno script un po&#x27; più articolato.</p><h3 id="struttura-minima-di-uno-script">Struttura minima di uno script</h3><p>Una convenzione pratica utile per organizzare file un po&#x27; meno banali e&#x27; questa.</p><p>In generale uno script tende ad avere tre blocchi:</p><ol><li>intestazione e commenti generali;</li><li>eventuali <code>import</code> di librerie esterne;</li><li>definizione di funzioni e poi corpo principale del programma.</li></ol><p>Esempio schematico:</p><pre><code class="language-python">
 import sys
 
 def capitalizza(s):
+    &#x27;&#x27;&#x27;
+    funzione che data una stringa `s` restituisce la stessa stringa con l&#x27;iniziale maiuscola e
+    il resto dei caratteri minuscoli
+    &#x27;&#x27;&#x27;
     return s[0].upper() + s[1:].lower()
 
+# corpo principale
 nome = input(&quot;Nome: &quot;)
-print(capitalizza(nome))</code></pre><p>L&#x27;idea non e&#x27; burocratica: e&#x27; rendere il codice piu&#x27; leggibile per noi e per chi lo rileggera&#x27; dopo.</p><h3 id="commenti">Commenti</h3><p>Vale anche questa osservazione:</p><ul><li>le righe che iniziano con <code>#</code> sono commenti;</li><li>i commenti non vengono eseguiti dall&#x27;interprete;</li><li>servono a spiegare struttura, scopo e scelte del codice;</li><li>blocchi di testo descrittivo possono comparire anche come stringhe multilinea usate come documentazione.</li></ul><hr><a id="mod2-espressioni-istruzioni"></a>
+print(capitalizza(nome))</code></pre><blockquote><p>rendiamo il codice più leggibile per noi e per chi lo rileggerà dopo.</p></blockquote><h3 id="commenti">Commenti</h3><p>Vale anche questa osservazione:</p><ul><li>le righe che iniziano con <code>#</code> sono commenti;</li><li>i commenti non vengono eseguiti dall&#x27;interprete;</li><li>servono a spiegare struttura, scopo e scelte del codice;</li><li>blocchi di testo descrittivo possono comparire anche come stringhe multilinea usate come documentazione.</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="espressioni-e-istruzioni">Espressioni e istruzioni</h2><p>Un&#x27;<strong>espressione</strong> e&#x27; qualcosa che Python valuta per ottenere un valore.</p><p>Esempi:</p><ul><li><code>3 + 4</code></li><li><code>&quot;ciao&quot;.upper()</code></li><li><code>5 &lt; 8</code></li></ul><p>Un&#x27;<strong>istruzione</strong> e&#x27; un comando che dice al programma di fare qualcosa.</p><p>Esempi:</p><ul><li><code>x = 7</code></li><li><code>print(&quot;ciao&quot;)</code></li><li><code>if x &gt; 0:</code></li></ul><p>Confronta:</p><pre><code class="language-python">3 + 4</code></pre><p>produce un valore.</p><pre><code class="language-python">x = 3 + 4</code></pre><p>prima valuta <code>3 + 4</code>, poi salva il risultato in una variabile.</p><hr><a id="mod2-assegnazione"></a>
+    <h2 id="espressioni-e-istruzioni">Espressioni e istruzioni</h2><p>Tutte le operazioni che abbiamo visto fino adesso (lasciamo stare <code>print()</code> per un attimo) sono <strong>espressioni</strong>: l&#x27;interprete Python valuta, la CPU esegue dei calcoli e otteniamo un valore (<strong>NB: con un suo un tipo</strong>).</p><p>Esempi:</p><ul><li><code>3 // 4</code></li><li><code>&quot;ciao&quot;.upper()</code></li><li><code>&quot;ciao&quot;+&quot; &quot;+&quot;mondo!&quot;</code></li></ul><p>Un linguaggio formale è fatto anche di <strong>istruzioni</strong>: un comando che provoda un effetto sulla memoria gestita dal programma.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="variabili-assegnamento-e-stato">Variabili, assegnamento e stato</h2><p>Una variabile e&#x27; un nome associato a un valore.</p><pre><code class="language-python">eta = 20
-nome = &quot;Luca&quot;</code></pre><p>L&#x27;assegnamento:</p><ol><li>valuta l&#x27;espressione a destra;</li><li>associa il risultato al nome a sinistra;</li><li>aggiorna lo stato del programma.</li></ol><p>Esempio:</p><pre><code class="language-python">x = 10
-y = x + 5
-x = x - 2</code></pre><p>Traccia sintetica:</p><table><thead><tr><th>Passo</th><th>Stato</th></tr></thead><tbody><tr><td><code>x = 10</code></td><td><code>x = 10</code></td></tr><tr><td><code>y = x + 5</code></td><td><code>x = 10</code>, <code>y = 15</code></td></tr><tr><td><code>x = x - 2</code></td><td><code>x = 8</code>, <code>y = 15</code></td></tr></tbody></table><blockquote><p><code>=</code> in Python non significa uguaglianza matematica permanente: significa &quot;assegna&quot;.</p></blockquote><hr>
+    <h2 id="variabili-assegnamento-e-stato">Variabili, assegnamento e stato</h2><p>Con la sola REPL possiamo calcolare un valore, ma lo perdiamo subito.</p><p>Per esempio:</p><pre><code class="language-python">3 + 4</code></pre><p>calcola <code>7</code>, ma cosa succede se vogliamo riutilizzare quel risultato più avanti?</p><p>Per esempio vogliamo:</p><ul><li>considerare la temperatura di oggi in gradi centigradi (23 gradi)</li><li>stampare il suo equivalente in gradi Kelvin</li><li>stampare il suo equivalente in gradi Farenheit</li></ul><pre><code class="language-python">print(23 + 273.15)           # Kelvin
+print(23 * 9/5 + 32)         # Fahrenheit</code></pre><p>Nei programmi reali i valori cambiano, devono essere memorizzati e riutilizzati. Senza un modo per conservare i risultati, il programma sarebbe limitato a calcoli “usa e getta”.</p><p>Problemi del codice precedente:</p><ul><li>Se la temperatura cambia (es. 25 gradi), devi ricordarti di cambiare tutti i 23</li><li>Chi legge il codice non sa subito cosa rappresenta 23</li><li>Non puoi usare facilmente quel valore in altre parti del programma</li></ul><p>Per risolvere questo problema, usiamo le variabili.</p><pre><code class="language-python">temperatura = 23
+
+print(temperatura + 273.15)
+print(temperatura * 9/5 + 32)</code></pre><p>Una variabile è un “contenitore” che permette di:</p><ul><li>salvare un valore</li><li>dargli un nome</li><li>riutilizzarlo in seguito</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-allassegnamento">Il problema che porta all&#x27;assegnamento</h2><p>Con la sola REPL possiamo calcolare un valore, ma lo perdiamo subito.</p><p>Per esempio:</p><pre><code class="language-python">3 + 4</code></pre><p>calcola <code>7</code>, ma se vogliamo riusare quel risultato in un secondo passo abbiamo bisogno di un nome.</p><p>L&#x27;assegnamento serve proprio a questo:</p><ul><li>conservare un risultato;</li><li>dargli un nome;</li><li>riusarlo in istruzioni successive.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-dellassegnamento">Sintassi dell&#x27;assegnamento</h2><p>Forma generale:</p><pre><code class="language-python">nome_variabile = espressione</code></pre><p>Esempi:</p><pre><code class="language-python">eta = 20
+    <h2 id="sintassi-dellassegnamento">Sintassi dell&#x27;assegnamento</h2><p>Forma generale:</p><pre><code class="language-python">nome_variabile = espressione</code></pre><p>Parti da riconoscere:</p><ul><li>a sinistra c&#x27;è il <strong>nome</strong> che vogliamo aggiornare;</li><li>a destra c&#x27;è un valore oppure un&#x27;<strong>espressione</strong> da valutare;</li><li>il simbolo <code>=</code> in Python introduce un&#x27;assegnazione.</li></ul><p>Regole pratiche per il nome di una variabile:</p><ul><li>deve iniziare con una lettera oppure con <code>_</code>;</li><li>dal secondo carattere in poi può contenere lettere, cifre e <code>_</code>;</li><li>non può contenere spazi;</li><li>non può iniziare con una cifra;</li><li>non può essere una parola riservata di Python come <code>if</code>, <code>for</code>, <code>while</code>.</li></ul><p>Esempi di nomi validi:</p><pre><code class="language-python">eta
+nome_studente
+_contatore
+voto2</code></pre><p>Esempi di nomi non validi:</p><pre><code class="language-python">2voto
+nome studente
+if</code></pre><blockquote><p><strong>Attenzione:</strong> in programmazione <code>=</code> non significa &quot;e&#x27; uguale a&quot; nel senso della matematica.<br>Significa invece &quot;assegna alla variabile di sinistra il valore calcolato a destra&quot;.</p></blockquote><p>Per questo:</p><pre><code class="language-python">x = 3</code></pre><p>è corretto, mentre:</p><pre><code class="language-python">3 = x</code></pre><p>non ha senso, perchè a sinistra dell&#x27;assegnamento deve esserci un nome di variabile, non un numero.</p><p>Esempi:</p><pre><code class="language-python">eta = 20
 nome = &quot;Luca&quot;
-totale = prezzo + iva</code></pre><p>Parti da riconoscere:</p><ul><li>a sinistra c&#x27;e&#x27; il nome che vogliamo aggiornare;</li><li>a destra c&#x27;e&#x27; un valore oppure un&#x27;espressione da valutare;</li><li>il simbolo <code>=</code> in Python introduce un&#x27;assegnazione.</li></ul><hr>
+totale = prezzo + iva</code></pre>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-dellassegnamento">Semantica dell&#x27;assegnamento</h2><p>Quando Python legge:</p><pre><code class="language-python">x = y + 3</code></pre><p>succede questo:</p><ol><li>valuta l&#x27;espressione a destra;</li><li>ottiene un risultato;</li><li>associa quel risultato al nome a sinistra;</li><li>aggiorna lo stato del programma.</li></ol><p>Quindi:</p><pre><code class="language-python">x = x + 1</code></pre><p>non e&#x27; una formula matematica, ma un aggiornamento di stato:</p><ul><li>leggi il vecchio valore di <code>x</code>;</li><li>aggiungi <code>1</code>;</li><li>salva il nuovo valore in <code>x</code>.</li></ul><hr><a id="mod2-tracciamento"></a>
+    <h2 id="semantica-dellassegnamento">Semantica dell&#x27;assegnamento</h2><p>Quando Python legge:</p><pre><code class="language-python">somma = 4 + 3</code></pre><p>succede questo:</p><ol><li>valuta l&#x27;espressione a destra;</li><li>ottiene un risultato;</li><li>associa quel risultato al nome a sinistra;</li><li>aggiorna lo stato del programma.</li></ol><p><img src="imgs/jars.jpg" alt="variabili"></p><p>Da questo momento quei valori non sono più &quot;persi&quot;: sono disponibili attraverso i nomi delle variabili. Quindi una variabile può comparire a destra dentro una nuova espressione.</p><p>Per esempio:</p><pre><code class="language-python">y = 3 + 1
+x = y + 2</code></pre><p>Qui Python:</p><ul><li>valuta <code>3 + 1</code> e assegna il risultato a <code>y</code>;</li><li>legge il valore attualmente associato a <code>y</code>;</li><li>calcola <code>y + 2</code>;</li><li>assegna il risultato a <code>x</code>.</li></ul><h3 id="conseguenze-importanti">Conseguenze importanti!</h3><pre><code class="language-python">x = x + 1</code></pre><p>non è una formula matematica, ma un aggiornamento di stato:</p><ul><li>leggi il valore attuale di <code>x</code>;</li><li>aggiungi <code>1</code>;</li><li>salva il nuovo valore nella variabile <code>x</code>.</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="tracciare-dati-memoria-e-output">Tracciare dati, memoria e output</h2><p>Tracciare un programma significa simulare a mano che cosa succede riga per riga, tenendo traccia dello stato delle variabili e di quello che viene stampato.</p><p>Conviene abituarsi a distinguere tre cose:</p><ul><li>il valore che Python calcola e conserva in memoria;</li><li>l&#x27;output che Python stampa (visibile solo se si usa <code>print()</code>);</li><li>l&#x27;ordine in cui le istruzioni vengono eseguite.</li></ul><p>Una tabella minima puo&#x27; contenere:</p><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = 4</code></td><td><code>x = 4</code></td><td></td></tr><tr><td>2</td><td><code>y = x + 3</code></td><td><code>x = 4</code>, <code>y = 7</code></td><td></td></tr><tr><td>3</td><td><code>print(y)</code></td><td><code>x = 4</code>, <code>y = 7</code></td><td><code>7</code></td></tr></tbody></table><p>Questo esercizio serve a:</p><ul><li>distinguere valore in memoria e testo stampato;</li><li>capire l&#x27;ordine di esecuzione;</li><li>trovare errori di logica prima ancora di eseguire il programma.</li></ul><h3 id="esempio-guidato">Esempio guidato</h3><pre><code class="language-python">x = 10
+    <h2 id="tracciare-dati-memoria-e-output">Tracciare dati, memoria e output</h2><p>Lo <strong>stato</strong> di un programma non riguarda il testo che scriviamo nel file, ma il programma mentre viene eseguito. È l&#x27;insieme dei valori che, in un certo momento dell&#x27;esecuzione, sono conservati in memoria e disponibili. In questo modulo, in pratica, lo stato coincide soprattutto con i valori associati alle variabili.</p><p>Tracciare un programma significa simulare a mano che cosa succede riga per riga, tenendo traccia dello stato delle variabili e di quello che viene stampato.</p><p>Dobbiamo abituarci a distinguere tre cose:</p><ul><li>il valore che Python calcola e conserva in memoria;</li><li>l&#x27;output che Python stampa (visibile solo se si usa <code>print()</code>);</li><li>l&#x27;ordine in cui le istruzioni vengono eseguite.</li></ul><p>per esempio:</p><pre><code class="language-python">x = 4
+print(&quot;ciao&quot; + &quot; &quot; + &quot;mondo&quot;)
+print(x)
+y = x + 3</code></pre><p>Una tabella minima può contenere:</p><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = 4</code></td><td><code>x → 4</code></td><td></td></tr><tr><td>2</td><td><code>print(&quot;ciao&quot; + &quot; &quot; + &quot;mondo&quot;)</code></td><td><code>x → 4</code></td><td><code>ciao mondo</code></td></tr><tr><td>3</td><td><code>print(x)</code></td><td><code>x → 4</code></td><td><code>4</code></td></tr><tr><td>4</td><td><code>y = x + 3</code></td><td><code>x → 4, y → 7</code></td><td></td></tr></tbody></table><h3 id="esempio-guidato">Esempio guidato</h3><pre><code class="language-python">x = 10
 y = x // 3
-print(y)</code></pre><p>Traccia:</p><table><thead><tr><th>Passo</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>dopo <code>x = 10</code></td><td><code>x = 10</code></td><td></td></tr><tr><td>dopo <code>y = x // 3</code></td><td><code>x = 10</code>, <code>y = 3</code></td><td></td></tr><tr><td>dopo <code>print(y)</code></td><td><code>x = 10</code>, <code>y = 3</code></td><td><code>3</code></td></tr></tbody></table><h3 id="esercizio">Esercizio</h3><p>Traccia a mano:</p><pre><code class="language-python">a = 5
-b = a + 2
-print(a)
-print(b)</code></pre><hr><a id="mod2-input-output"></a>
+print(y)</code></pre><p>Traccia:</p><table><thead><tr><th>Passo</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>dopo <code>x = 10</code></td><td><code>x = 10</code></td><td></td></tr><tr><td>dopo <code>y = x // 3</code></td><td><code>x = 10</code>, <code>y = 3</code></td><td></td></tr><tr><td>dopo <code>print(y)</code></td><td><code>x = 10</code>, <code>y = 3</code></td><td><code>3</code></td></tr></tbody></table>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="input-type-e-casting"><code>input()</code>, <code>type()</code> e casting</h2><p>Abbiamo già visto <code>print()</code> nel modulo 1. Qui introduciamo il suo complemento: <code>input()</code>, che legge dati dall&#x27;utente.</p><hr>
+    <h2 id="input-e-casting"><code>input()</code>, e casting</h2><p>Torniamo all&#x27;esempio della temperatura:</p><pre><code class="language-python">temperatura = 23
+
+print(temperatura + 273.15)
+print(temperatura * 9/5 + 32)</code></pre><p>Abbiamo un altro problema: se vogliamo eseguire questo script ogni giorno, dobbiamo aprire l&#x27;<strong>editor</strong> e modificare manualmente il valore 23. Vorremmo fare sì che questo valore diventi un <strong>parametro</strong> del nostro programma in modo da poter eseguire ogni giorno lo script e vedere la temperatura in gradi Kelvin e Farenheit sul nostro schermo.</p><p>Abbiamo gia&#x27; visto <code>print()</code> nel modulo 1. Qui introduciamo il suo complemento: <code>input()</code>.</p><p><code>input()</code> è un comando utile per leggere un valore scritto dall&#x27;utente mentre il programma è in esecuzione. Il testo che mettiamo tra parentesi è il <strong>parametro</strong> della funzione: serve a mostrare un messaggio sullo schermo, per esempio una domanda o un&#x27;istruzione.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-input">Sintassi di <code>input()</code></h2><p>Forma tipica:</p><pre><code class="language-python">variabile = input(&quot;Messaggio: &quot;)</code></pre><p>Esempi:</p><pre><code class="language-python">nome = input(&quot;Come ti chiami? &quot;)
-eta = input(&quot;Eta&#x27;: &quot;)</code></pre><p>Possiamo usare <code>input()</code> anche senza messaggio:</p><pre><code class="language-python">testo = input()</code></pre><hr>
+    <h2 id="sintassi-di-assegnamento-con-input">Sintassi di assegnamento con <code>input()</code></h2><p>Forma tipica:</p><pre><code class="language-python">variabile = input(&quot;Messaggio: &quot;)</code></pre><p>Qui:</p><ul><li><code>input(...)</code> legge qualcosa scritto dall&#x27;utente;</li><li><code>&quot;Messaggio: &quot;</code> è il parametro passato a <code>input()</code>;</li><li>il valore letto viene assegnato alla variabile a sinistra.</li></ul><p>Esempi:</p><pre><code class="language-python">nome = input(&quot;Come ti chiami? &quot;)
+print(nome)
+eta = input(&quot;Eta&#x27;: &quot;)
+print(eta)</code></pre><p>Possiamo usare <code>input()</code> anche senza messaggio:</p><pre><code class="language-python">testo = input()</code></pre>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-input">Semantica di <code>input()</code></h2><p>Legge sempre una stringa.</p><pre><code class="language-python">nome = input(&quot;Come ti chiami? &quot;)
-print(&quot;Ciao&quot;, nome)</code></pre><p><code>input()</code> non e&#x27; una magia complicata, ma un modo per creare una piccola interazione col programma.</p><p>Esempio:</p><pre><code class="language-python">nome = input(&quot;Inserisci il tuo nome: &quot;)
-print(nome)</code></pre><p>Qui succede questo:</p><ol><li>Python mostra il prompt;</li><li>l&#x27;utente scrive qualcosa;</li><li>quel testo viene salvato nella variabile;</li><li>il programma puo&#x27; continuare a usarlo.</li></ol><p>Questo e&#x27; molto utile quando vogliamo riusare lo stesso script con dati diversi senza riscrivere ogni volta il codice.</p><h3 id="type"><code>type()</code></h3><p>Ti aiuta a vedere il tipo di un valore.</p><pre><code class="language-python">print(type(3))
-print(type(&quot;3&quot;))</code></pre><h3 id="casting">Casting</h3><p>Per convertire tipi:</p><pre><code class="language-python">eta = int(input(&quot;Eta&#x27;: &quot;))
-print(eta + 1)</code></pre><p>Alcune conversioni comuni:</p><table><thead><tr><th>Funzione</th><th>Effetto</th></tr></thead><tbody><tr><td><code>int(&quot;12&quot;)</code></td><td>converte in intero</td></tr><tr><td><code>str(12)</code></td><td>converte in stringa</td></tr><tr><td><code>float(&quot;3.5&quot;)</code></td><td>converte in numero decimale</td></tr></tbody></table><p>Errore tipico:</p><pre><code class="language-python">eta = input(&quot;Eta&#x27;: &quot;)
-print(eta + 1)</code></pre><p>Qui <code>eta</code> e&#x27; una stringa, quindi <code>+ 1</code> non funziona.</p><hr><a id="mod2-boolean-if"></a>
+    <h2 id="semantica-di-input">Semantica di <code>input()</code></h2><p><code>input()</code> mostra il messaggio, aspetta che l&#x27;utente scriva qualcosa e si ferma quando l&#x27;utente preme Invio, cioè inserisce un ritorno a capo. Solo a quel punto restituisce il testo letto. Il risultato di <code>input()</code> è sempre una <strong>stringa</strong>.</p><pre><code class="language-python">nome = input(&quot;Come ti chiami? &quot;)
+print(&quot;Ciao&quot;, nome)</code></pre><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>nome = input(&quot;Come ti chiami? &quot;)</code></td><td><code>nome → &quot;Ludovica&quot;</code></td><td><code>Come ti chiami? </code></td></tr><tr><td>2</td><td><code>print(&quot;Ciao&quot;, nome)</code></td><td><code>nome → &quot;Ludovica&quot;</code></td><td><code>Ciao Ludovica</code></td></tr></tbody></table><p>Succede questo:</p><ol><li>Python mostra il prompt;</li><li>l&#x27;utente scrive qualcosa;</li><li><code>input()</code> restituisce quel testo;</li><li>quel testo viene salvato nella variabile;</li><li>il programma può continuare a usarlo.</li></ol><h3 id="casting">Casting</h3><p>Problema:</p><pre><code class="language-python">eta = input(&quot;Età: &quot;)
+print(eta + 1)</code></pre><details><summary>Cosa succede?</summary><pre><code>Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+    print(eta + 1)
+          ~~~~^~~
+TypeError: can only concatenate str (not &quot;int&quot;) to str</code></pre><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>eta = input(&quot;Età: &quot;)</code></td><td><code>eta → &quot;33&quot;</code></td><td><code>Età: </code></td></tr><tr><td>2</td><td><code>print(eta + 1)</code></td><td><code>eta → &quot;33&quot;</code></td><td>!!! ERRORE</td></tr></tbody></table></details><p>Versione corretta:</p><pre><code class="language-python">eta = input(&quot;Eta&#x27;: &quot;)
+print(int(eta) + 1)</code></pre><p>Alcune conversioni comuni:</p><table><thead><tr><th>Funzione</th><th>Effetto</th></tr></thead><tbody><tr><td><code>int(&quot;12&quot;)</code></td><td>converte in intero</td></tr><tr><td><code>str(12)</code></td><td>converte in stringa</td></tr><tr><td><code>float(&quot;3.5&quot;)</code></td><td>converte in numero decimale</td></tr></tbody></table><p>Questa operazione di conversione di chiama <strong>casting</strong>.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="booleani-e-decisioni-con-if">Booleani e decisioni con <code>if</code></h2><p>Il tipo <code>bool</code> ha due soli valori:</p><ul><li><code>True</code></li><li><code>False</code></li></ul><p>Gli operatori di confronto producono booleani:</p><pre><code class="language-python">x &gt; 0
-x == 10
-nome != &quot;&quot;</code></pre><p>Con i booleani possiamo decidere il flusso di esecuzione.</p>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che legge nome e cognome e stampa un saluto, per esempio <code>Ciao, Mario Rossi!</code>.</li></ol><ol><li>Scrivi un programma che legge l&#x27;età e stampa: <code>Tra un anno avrai X anni</code> e <code>Un anno fa avevi Y anni</code>.</li></ol><ol><li>Scrivi un programma che legge due numeri interi e stampa la loro somma, il loro prodotto e il resto della divisione del primo per il secondo.</li></ol><ol><li>Scrivi un programma che legge tre numeri e ne stampa la media.</li></ol><ol><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la lunghezza della stringa;</li><li>il primo carattere;</li><li>l&#x27;ultimo carattere;</li><li>i primi tre caratteri.</li></ul></li></ol><ol><li>Scrivi un programma che legge due numeri e stampa prima i valori inseriti e poi gli stessi valori scambiati.</li></ol><ol><li>Scrivi un programma che legge un nome e un anno di nascita e stampa una frase del tipo: <code>Ciao Anna, potresti avere 20 o 21 anni</code>.</li></ol><ol><li>Scrivi un programma che legge un numero intero di secondi (es. <code>3723</code>) e stampa la conversione nel formato: <code>1 ore, 2 minuti, 3 secondi</code>.</li></ol><ol><li>Scrivi un programma che legge nome e cognome e stampa:<ul><li>il cognome tutto in maiuscolo;</li><li>il nome con solo la prima lettera maiuscola e il resto minuscolo;</li><li>le iniziali nel formato <code>M.R.</code></li></ul></li></ol><ol><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la stringa senza il primo e l&#x27;ultimo carattere;</li></ul></li></ol><ol><li>Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. <code>20</code>), e stampa il prezzo scontato e il risparmio.</li></ol>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-if">Il problema che porta a <code>if</code></h2><p>Fin qui il programma esegue istruzioni in ordine.</p><p>Ma molti problemi chiedono una scelta:</p><ul><li>se il numero e&#x27; positivo, fai una cosa;</li><li>se il nome viene prima alfabeticamente, stampa in un certo ordine;</li><li>se l&#x27;input non e&#x27; valido, reagisci in modo diverso.</li></ul><p>Per gestire queste biforcazioni serve un costrutto condizionale.</p><hr>
+    <h2 id="tipo-bool-e-nuove-operazioni">Tipo <code>bool</code> e nuove operazioni</h2><p>Fin qui abbiamo lavorato con interi, stringhe e <code>float</code>. Ora introduciamo nuove operazioni che non producono un numero o una stringa, ma un valore booleano.</p><p>Per esempio possiamo controllare:</p><ul><li>se due valori sono uguali;</li><li>se un numero è maggiore di un altro;</li></ul><p>Esempi:</p><pre><code class="language-python">3 &gt; 1
+2.5 &lt;= 7.0
+&quot;anna&quot; == &quot;anna&quot;
+&quot;ciao&quot; != &quot;buongiorno&quot;</code></pre><p>Queste operazioni non restituiscono un intero, un <code>float</code> o una stringa. Restituiscono invece un <strong>valore booleano</strong>, cioè un valore che rappresenta il risultato di un confronto.</p><p>Il tipo <code>bool</code> ha due soli valori possibili:</p><ul><li><code>True</code></li><li><code>False</code></li></ul><p>Operatori di confronto che restituiscono un valore booleano:</p><table><thead><tr><th>Operazione</th><th>Significato</th><th>Esempio</th></tr></thead><tbody><tr><td><code>==</code></td><td>uguale a</td><td><code>x == 3</code></td></tr><tr><td><code>!=</code></td><td>diverso da</td><td><code>x != 3</code></td></tr><tr><td><code>&lt;</code></td><td>minore di</td><td><code>x &lt; 3</code></td></tr><tr><td><code>&lt;=</code></td><td>minore o uguale a</td><td><code>x &lt;= 3</code></td></tr><tr><td><code>&gt;</code></td><td>maggiore di</td><td><code>x &gt; 3</code></td></tr><tr><td><code>&gt;=</code></td><td>maggiore o uguale a</td><td><code>x &gt;= 3</code></td></tr></tbody></table><h3 id="altre-operazioni-che-restituiscono-booleani">Altre operazioni che restituiscono booleani</h3><p>Anche alcune operazioni sulle stringhe restituiscono <code>True</code> oppure <code>False</code>.</p><p>Per esempio:</p><table><thead><tr><th>Operazione</th><th>Significato</th><th>Esempio</th></tr></thead><tbody><tr><td><code>in</code></td><td>controlla se una sottostringa compare dentro una stringa</td><td><code>&quot;cia&quot; in &quot;ciao&quot;</code></td></tr><tr><td><code>not in</code></td><td>controlla se una sottostringa non compare dentro una stringa</td><td><code>&quot;x&quot; not in &quot;ciao&quot;</code></td></tr><tr><td><code>s.startswith(&quot;...&quot;)</code></td><td>controlla se la stringa inizia con un certo prefisso</td><td><code>&quot;ciao&quot;.startswith(&quot;ci&quot;)</code></td></tr><tr><td><code>s.endswith(&quot;...&quot;)</code></td><td>controlla se la stringa finisce con un certo suffisso</td><td><code>&quot;ciao&quot;.endswith(&quot;ao&quot;)</code></td></tr><tr><td><code>s.isdigit()</code></td><td>controlla se tutti i caratteri sono cifre</td><td><code>&quot;123&quot;.isdigit()</code></td></tr><tr><td><code>s.isalpha()</code></td><td>controlla se tutti i caratteri sono lettere</td><td><code>&quot;ciao&quot;.isalpha()</code></td></tr></tbody></table><p>Anche queste operazioni possono essere usate dentro una condizione <code>if</code>.</p><p>Quando tracciamo o eseguiamo il programma, anche questi valori vanno rappresentati nello stato, proprio come interi, stringhe e <code>float</code>.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-if">Sintassi di <code>if</code></h2><pre><code class="language-python">if eta &gt;= 18:
-    print(&quot;Maggiorenne&quot;)</code></pre><p>Parti da riconoscere:</p><ul><li><code>if</code> introduce una condizione;</li><li>dopo <code>if</code> c&#x27;e&#x27; un&#x27;espressione booleana;</li><li>i due punti <code>:</code> aprono il blocco;</li><li>il blocco va indentato.</li></ul><hr>
+    <h2 id="condizionare-il-flusso-del-programma">Condizionare il flusso del programma</h2><p>Con i booleani possiamo decidere il flusso di esecuzione.</p><p>Fin qui tutti in tutti i programmi che abbiamo visto le istruzioni vengono eseguite tutte e nell&#x27;ordine in cui le abbiamo scritte.</p><p>Ma molti problemi chiedono una scelta:</p><ul><li>se il numero è positivo, fai una cosa;</li><li>se il nome viene prima alfabeticamente, stampa in un certo ordine;</li><li>se l&#x27;input non è valido, reagisci in modo diverso.</li></ul><p>Per gestire queste biforcazioni serve un costrutto condizionale.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-if">Semantica di <code>if</code></h2><p>La semantica operativa di <code>if</code> si puo&#x27; riassumere cosi&#x27;:</p><ol><li>Python valuta la condizione;</li><li>se vale <code>True</code>, esegue il blocco indentato;</li><li>se vale <code>False</code>, salta quel blocco e continua dopo.</li></ol><p>Per questo, in casi come:</p><pre><code class="language-python">if nome &lt; cognome:
-    print(nome, cognome)
+    <h2 id="sintassi-di-if">Sintassi di <code>if</code></h2><pre><code class="language-python">if [espressione_booleana]:
+    istruzione-1
+    istruzione-2
+    ...
+    istruzione-k</code></pre><ul><li>La parola chiave <code>if</code> introduce una condizione;</li><li>dopo <code>if</code> c&#x27;è un&#x27;espressione booleana;</li><li>la prima riga è conclusa da due punti <code>:</code> che aprono un blocco;</li><li>il blocco di istruzioni da <code>1</code> a <code>k</code> va indentato.</li></ul>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-di-if">Semantica di <code>if</code></h2><pre><code class="language-python">if [espressione_booleana]:
+    istruzione-1
+    istruzione-2
+    ...
+    istruzione-k</code></pre><ol><li>L&#x27;interprete valuta l&#x27;<strong>espressione</strong> booleana;</li><li>se vale <code>True</code>, esegue il blocco indentato;</li><li>se vale <code>False</code>, salta quel blocco e continua dopo.</li></ol>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esempi">Esempi</h2><pre><code class="language-python">x = input(&quot;Inserisci la tua età: &quot;)
+x = int(x)
+
+if x &gt; 18:
+    print(&quot;Sei maggiorenne&quot;)
+
+print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></pre><details><summary>Esecuzione n.1</summary><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = input(&quot;Inserisci la tua età: &quot;)</code></td><td><code>x → &quot;33&quot;</code></td><td><code>Inserisci la tua età: </code></td></tr><tr><td>2</td><td><code>x = int(x)</code></td><td><code>x → 33</code></td><td></td></tr><tr><td>3</td><td><code>if x &gt; 18:</code></td><td><code>x → 33</code> →→→ TRUE</td><td></td></tr><tr><td>4</td><td><code>print(&quot;Sei maggiorenne&quot;)</code></td><td><code>x → 33</code></td><td><code>Sei maggiorenne!</code></td></tr><tr><td>5</td><td><code>print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></td><td><code>x → 33</code></td><td><code>Hai 33 anni</code></td></tr></tbody></table></details><details><summary>Esecuzione n.2</summary><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = input(&quot;Inserisci la tua età: &quot;)</code></td><td><code>x → &quot;15&quot;</code></td><td><code>Inserisci la tua età: </code></td></tr><tr><td>2</td><td><code>x = int(x)</code></td><td><code>x → 15</code></td><td></td></tr><tr><td>3</td><td><code>if x &gt; 18:</code></td><td><code>x → 15</code> →→→ FALSE</td><td></td></tr><tr><td>4</td><td><code>print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></td><td><code>x → 15</code></td><td><code>Hai 15 anni</code></td></tr></tbody></table></details>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="if-else-e-if-annidati"><code>if-else</code> e <code>if</code> annidati</h2><p>Con <code>if</code> semplice possiamo eseguire un blocco solo quando una condizione e vera. Pero&#x27; spesso vogliamo descrivere anche che cosa succede quando quella stessa condizione e&#x27; falsa.</p><p>Per questo usiamo <code>if-else</code>, che separa esplicitamente due rami alternativi. Quando invece una decisione deve essere presa all&#x27;interno di un altro ramo, useremo <code>if</code> annidati.</p><p>Se i casi possibili sono piu&#x27; di due ma restano sullo stesso livello, useremo <code>elif</code>.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-di-if-else">Sintassi di <code>if-else</code></h2><pre><code class="language-python">if [espressione_booleana]:
+    istruzione-1
+    ...
+    istruzione-j
 else:
-    print(cognome, nome)</code></pre><p>non serve scrivere:</p><pre><code class="language-python">if nome &lt; cognome == True:</code></pre><p>perche&#x27; il comando <code>if</code> sta gia&#x27; chiedendo se quell&#x27;espressione vale vero oppure no. Scriverlo esplicitamente non e&#x27; un errore concettuale grave, ma e&#x27; ridondante.</p><hr>
+    istruzione-1
+    ...
+    istruzione-k</code></pre><p>Qui ci sono due blocchi alternativi:</p><ul><li>il blocco dopo <code>if</code>;</li><li>il blocco dopo <code>else</code>.</li></ul><p><code>else</code> non ha una condizione propria: raccoglie tutti i casi in cui la condizione dell&#x27;<code>if</code> vale <code>False</code>.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-if-else">Sintassi di <code>if-else</code></h2><pre><code class="language-python">if eta &gt;= 18:
-    print(&quot;Maggiorenne&quot;)
+    <h2 id="semantica-di-if-else">Semantica di <code>if-else</code></h2><pre><code class="language-python">if [espressione_booleana]:
+    istruzione-1
+    ...
+    istruzione-j
 else:
-    print(&quot;Minorenne&quot;)</code></pre><p>Qui ci sono due blocchi alternativi:</p><ul><li>il blocco dopo <code>if</code>;</li><li>il blocco dopo <code>else</code>.</li></ul><p><code>else</code> non ha una condizione propria: raccoglie tutti i casi in cui la condizione dell&#x27;<code>if</code> vale <code>False</code>.</p><hr>
+    istruzione-1
+    ...
+    istruzione-k</code></pre><p>Con <code>if-else</code> Python:</p><ol><li>valuta la condizione dell&#x27;<code>if</code>;</li><li>se vale <code>True</code>, esegue il primo blocco;</li><li>se vale <code>False</code>, esegue il blocco <code>else</code>.</li></ol><p>Quindi tra i due rami se ne esegue sempre uno solo.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-if-else">Semantica di <code>if-else</code></h2><p>Con <code>if-else</code> Python:</p><ol><li>valuta la condizione dell&#x27;<code>if</code>;</li><li>se vale <code>True</code>, esegue il primo blocco;</li><li>se vale <code>False</code>, esegue il blocco <code>else</code>.</li></ol><p>Quindi tra i due rami se ne esegue sempre uno solo.</p><hr>
-  </div>
-</section>
+    <h2 id="esempi">Esempi:</h2><pre><code class="language-python">x = input(&quot;Inserisci la tua età: &quot;)
+x = int(x)
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-if-elif-else">Il problema che porta a <code>if-elif-else</code></h2><p>A volte due rami non bastano.</p><p>Per esempio:</p><ul><li>classificare un voto;</li><li>distinguere piu&#x27; fasce numeriche;</li><li>descrivere piu&#x27; casi mutuamente esclusivi.</li></ul><p>In questi casi serve una catena di controlli ordinati.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-if-elif-else">Sintassi di <code>if-elif-else</code></h2><p>Esempio di classificazione del voto:</p><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
-
-if voto &lt; 18:
-    print(&quot;L&#x27;esame non e&#x27; stato superato&quot;)
-elif voto &lt; 23:
-    print(&quot;Sufficiente&quot;)
-elif voto &lt; 27:
-    print(&quot;Buono&quot;)
+if x &gt; 18:
+    print(&quot;Sei maggiorenne&quot;)
 else:
-    print(&quot;Ottimo&quot;)</code></pre><p>Questa forma si usa quando:</p><ul><li>i casi sono piu&#x27; di due;</li><li>vogliamo provarli in ordine;</li><li>ogni <code>elif</code> aggiunge una nuova condizione.</li></ul><hr>
+    print(&quot;Sei minorenne&quot;)
+
+print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></pre><details><summary>Esecuzione n.1</summary><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = input(&quot;Inserisci la tua età: &quot;)</code></td><td><code>x → &quot;33&quot;</code></td><td><code>Inserisci la tua età: </code></td></tr><tr><td>2</td><td><code>x = int(x)</code></td><td><code>x → 33</code></td><td></td></tr><tr><td>3</td><td><code>if x &gt; 18:</code></td><td><code>x → 33</code> →→→ TRUE</td><td></td></tr><tr><td>4</td><td><code>print(&quot;Sei maggiorenne&quot;)</code></td><td><code>x → 33</code></td><td><code>Sei maggiorenne!</code></td></tr><tr><td>5</td><td><code>print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></td><td><code>x → 33</code></td><td><code>Hai 33 anni</code></td></tr></tbody></table></details><details><summary>Esecuzione n.2</summary><table><thead><tr><th>Passo</th><th>Istruzione</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = input(&quot;Inserisci la tua età: &quot;)</code></td><td><code>x → &quot;15&quot;</code></td><td><code>Inserisci la tua età: </code></td></tr><tr><td>2</td><td><code>x = int(x)</code></td><td><code>x → 15</code></td><td></td></tr><tr><td>3</td><td><code>if x &gt; 18:</code></td><td><code>x → 15</code> →→→ FALSE</td><td></td></tr><tr><td>4</td><td><code>print(&quot;Sei minorenne&quot;)</code></td><td><code>x → 15</code></td><td><code>Sei minorenne</code></td></tr><tr><td>5</td><td><code>print(&quot;Hai &quot;+str(x)+&quot; anni&quot;)</code></td><td><code>x → 15</code></td><td><code>Hai 15 anni</code></td></tr></tbody></table></details>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-if-elif-else">Semantica di <code>if-elif-else</code></h2><p>Python controlla i rami in ordine:</p><ol><li>prova la condizione dell&#x27;<code>if</code>;</li><li>se e&#x27; falsa, prova il primo <code>elif</code>;</li><li>continua finche&#x27; trova la prima condizione vera;</li><li>se nessuna e&#x27; vera, esegue <code>else</code>.</li></ol><p>Quindi:</p><ul><li>conta l&#x27;ordine dei rami;</li><li>viene eseguito solo il primo ramo che risulta vero;</li><li><code>else</code> copre il caso residuo.</li></ul><h3 id="un-esempio-guidato-nome-e-cognome-in-ordine-alfabetico">Un esempio guidato: nome e cognome in ordine alfabetico</h3><p>Un esercizio semplice ma utile e&#x27; questo:</p><ul><li>leggere nome e cognome;</li><li>confrontarli come stringhe;</li><li>stampare i due valori nell&#x27;ordine alfabetico giusto.</li></ul><p>Questo esempio serviva a consolidare insieme:</p><ul><li>uso di variabili con nomi significativi;</li><li>confronto tra stringhe;</li><li><code>if/else</code>;</li><li><code>print()</code>;</li><li>eventuale uso di <code>input()</code> per rendere lo script interattivo.</li></ul><hr><a id="mod2-condizioni-annidate"></a>
-  </div>
-</section>
+    <h2 id="a-volte-due-rami-non-bastano">A volte due rami non bastano</h2><p>Non si diventa maggiorenni in tutto il mondo alla stessa età!</p><ul><li>se hai più di 21 anni, sei maggiorenne in USA</li><li>se hai meno di 21 anni, ma più di 18, sei maggiorenne in Italia</li><li>se hai meno di 18 anni, non sei maggiorenne nè in Italia nè in USA.</li></ul><p>In questi casi vorremmo una catena di controlli ordinati.</p><pre><code class="language-python">x = input(&quot;Inserisci la tua età: &quot;)
+x = int(x)
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="condizioni-annidate">Condizioni annidate</h2><p>Una condizione e&#x27; detta annidata quando compare dentro un&#x27;altra condizione.</p><pre><code class="language-python">x = int(input(&quot;Numero: &quot;))
-
-if x &gt;= 0:
-    if x == 0:
-        print(&quot;Zero&quot;)
+if x &gt; 21:
+    print(&quot;Sei maggiorenne in USA&quot;)
+else:
+    if x &gt; 18:
+        print(&quot;Sei maggiorenne in Italia ma non in USA&quot;)
     else:
-        print(&quot;Positivo&quot;)
+        print(&quot;Sei minorenne&quot;)</code></pre><p>Questa cascata di <code>if</code> inclusi negli <code>else</code> può diventare poco leggibile...</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="if-elif-else"><code>if-elif-else</code></h2><pre><code class="language-python">if [espressione_booleana]:
+    istruzione
+elif [espressione_booleana]:
+    istruzione
+elif [espressione_booleana]:
+    istruzione
 else:
-    print(&quot;Negativo&quot;)</code></pre><p>Questo stile va usato solo quando il secondo controllo ha senso solo dopo il primo.</p><p>La versione annidata della classificazione dei voti si puo&#x27; anche riscrivere con <code>elif</code> per renderla piu&#x27; leggibile.</p><hr>
+    istruzione</code></pre><p>Ogni <code>elif</code> aggiunge una nuova condizione.</p><p>L&#x27;interprete controlla i rami in ordine:</p><ol><li>prova la condizione dell&#x27;<code>if</code>;</li><li>se è falsa, prova il primo <code>elif</code>;</li><li>continua finché trova la prima condizione vera;</li><li>se nessuna è vera, esegue <code>else</code>.</li></ol><p>Quindi:</p><ul><li>conta l&#x27;ordine dei rami;</li><li>viene eseguito solo il primo ramo che risulta vero;</li><li><code>else</code> copre il caso residuo.</li></ul>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-sulle-condizioni">Esercizi sulle condizioni</h2><p>Per esempio:</p><ol><li>dato nome e cognome, stampa il nome completo in ordine alfabetico;</li><li>scrivi una funzione che restituisce il maggiore tra due interi;</li><li>usa la funzione precedente per stampare una frase esplicita;</li><li>date due parole, stampa quella piu&#x27; lunga;</li><li>dati tre interi, stampali dal maggiore al minore;</li><li>date tre parole, mettile in ordine alfabetico;</li><li>dato anno e mese, stampa che anno sara&#x27; fra un mese e che anno era un mese fa;</li><li>scrivi una funzione che stabilisce se un anno e&#x27; bisestile;</li><li>data una parola, controlla se inizia con <code>p</code> e finisce con <code>o</code>, gestendo il caso di stringa troppo corta.</li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="struttura-di-uno-script">Struttura di uno script</h2><p>Una struttura standard di script e&#x27; questa:</p><pre><code class="language-python">#----------------------------------
-#----------------------------------
-
-import sys
-
-def capitalizza(stringa):
-    &quot;&quot;&quot;
-    prende una stringa e la restituisce capitalizzata
-    &quot;&quot;&quot;
-    nuova_stringa = stringa[0].upper() + stringa[1:].lower()
-    return nuova_stringa
-
-nome = sys.argv[1]
-cognome = sys.argv[2]
-
-nome = capitalizza(nome)
-cognome = capitalizza(cognome)
-
-print(nome + &quot; &quot; + cognome)</code></pre><p>Struttura tipica:</p><ol><li>import di librerie;</li><li>definizione di funzioni ausiliarie;</li><li>flusso principale del programma.</li></ol><h3 id="commenti-e-leggibilita">Commenti e leggibilita&#x27;</h3><ul><li>tutto cio&#x27; che segue <code>#</code> sulla riga e&#x27; un commento;</li><li>i commenti servono a spiegare il codice;</li><li>una funzione non banale dovrebbe avere almeno una breve descrizione.</li></ul><h3 id="indentazione-e-blocchi">Indentazione e blocchi</h3><p>In Python i blocchi si riconoscono dall&#x27;indentazione.</p><ul><li>il corpo di una funzione e&#x27; un blocco;</li><li>il corpo di un <code>if</code> o di un <code>for</code> e&#x27; un blocco;</li><li>se l&#x27;indentazione e&#x27; sbagliata, il programma non e&#x27; valido.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="errori-tipici-del-modulo">Errori tipici del modulo</h2><ol><li>Dimenticare i due punti dopo <code>if</code>.</li><li>Mescolare stringhe e numeri senza conversione.</li><li>Usare <code>=</code> invece di <code>==</code> in una condizione.</li><li>Aspettarsi che <code>input()</code> restituisca un intero.</li><li>Perdere l&#x27;indentazione corretta.</li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Scrivi uno script che legge un nome e stampa un saluto.</li><li>Scrivi uno script che legge un numero e stampa il suo doppio.</li><li>Scrivi uno script che legge un numero e stampa <code>positivo</code>, <code>negativo</code> oppure <code>zero</code>.</li><li>Scrivi uno script che legge due numeri e stampa il maggiore.</li><li>Per ciascun frammento, traccia lo stato finale delle variabili:</li></ol><pre><code class="language-python">x = 3
-y = x + 2
-x = y * 2</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>In questo modulo hai introdotto il modello base del programma imperativo:</p><ul><li>istruzioni eseguite in ordine;</li><li>variabili che tengono memoria;</li><li>input e output espliciti;</li><li>condizioni che fanno scegliere un ramo di esecuzione;</li><li>una prima struttura leggibile dello script.</li></ul>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Leggi un numero intero e stampa <code>Positivo</code> solo se è maggiore di zero.</li><li>Leggi una parola e stampa <code>La parola è lunga</code> solo se ha più di 5 caratteri.</li><li>Leggi un numero intero e stampa <code>Pari</code> solo se è divisibile per 2.</li><li>Leggi un numero intero e stampa <code>Pari</code> oppure <code>Dispari</code> a seconda se è divisibile per due o meno.</li><li>Leggi due numeri interi e stampa il maggiore o un messaggio se sono uguali.</li><li>Leggi due nomi e stampali nell&#x27;ordine alfabetico corretto.</li><li>Leggi una parola e controlla se inizia con una vocale; stampa un messaggio diverso nei due casi.</li><li>Leggi un numero intero e stampa <code>Negativo</code>, <code>Zero</code> o <code>Positivo</code>.</li><li>Leggi un voto da 0 a 30 e stampa:<ul><li><code>Insufficiente</code> se il voto è minore di 18;</li><li><code>Sufficiente</code> se è tra 18 e 23;</li><li><code>Buono</code> se è tra 24 e 27;</li><li><code>Ottimo</code> se è 28 o più.</li></ul></li><li>Leggi una parola e stampa se è corta (meno di 4 lettere), media (da 4 a 7 lettere) o lunga (più di 7 lettere).</li></ol><ol><li>Leggi una coppia di numeri che rappresentano un mese (1–12) e un anno e stampa il mese successivo con l&#x27;anno corretto.</li></ol><p>Per esempio: mese 12, anno 2024 → <code>Gennaio 2025</code>.</p><ol><li>Leggi nome, cognome e anno di nascita. Stampa sempre il nome completo e l&#x27;anno di nascita. Se l&#x27;anno di nascita è precedente al 2000, stampa anche <code>Nato/a nel secolo scorso</code>.</li></ol><ol><li>Leggi due numeri interi. Stampa sempre entrambi i numeri.</li></ol><p>Se il primo è maggiore del secondo, stampa anche <code>Il primo è maggiore</code>. Stampa sempre anche la loro somma.</p><ol><li>Leggi una parola. Se ha più di 3 caratteri, stampa il secondo carattere; altrimenti stampa <code>Parola troppo corta</code>. In entrambi i casi stampa alla fine la lunghezza della parola.</li></ol><ol><li>Leggi una parola. Costruisci una variabile <code>risultato</code>:<ul><li>se la parola inizia con una lettera maiuscola, <code>risultato</code> vale <code>&quot;maiuscola&quot;</code>;</li><li>altrimenti vale <code>&quot;minuscola&quot;</code>.</li></ul></li></ol><p>Stampa <code>La parola è: </code> seguito da <code>risultato</code>.</p><ol><li>Leggi un numero intero. Costruisci una variabile <code>messaggio</code>:<ul><li>se il numero è pari, <code>messaggio</code> vale <code>&quot;pari&quot;</code>;</li><li>altrimenti vale <code>&quot;dispari&quot;</code>.</li></ul></li></ol><p>Stampa <code>Il numero X è</code> seguito da <code>messaggio</code>.</p><ol><li>Leggi due numeri interi <code>a</code> e <code>b</code>. Se <code>a</code> è maggiore di <code>b</code>, scambia i valori delle due variabili.</li></ol><p>Stampa sempre <code>a</code> e <code>b</code> alla fine: i valori usciti devono essere in ordine crescente.</p><h3 id="esercizi-di-traccia">Esercizi di traccia</h3><p>Per ciascun programma e input indicato, cerca di predire l&#x27;output del programma con gli input proposti e compila la tabella con lo stato della memoria.</p><p><strong>T1.</strong></p><pre><code class="language-python">x = int(input(&quot;x: &quot;))
+y = int(input(&quot;y: &quot;))
+z = x + y
+if z &gt; 10:
+    x = x * 2
+    etichetta = &quot;grande&quot;
+elif z &gt; 0:
+    x = x + 1
+    etichetta = &quot;medio&quot;
+else:
+    etichetta = &quot;piccolo&quot;
+print(etichetta + &quot;: &quot; + str(x))</code></pre><ul><li>Traccia con input <code>3</code>, <code>4</code></li><li>Traccia con input <code>6</code>, <code>7</code></li></ul><p><strong>T2.</strong></p><pre><code class="language-python">s = input(&quot;Parola: &quot;)
+n = len(s)
+if n &gt; 4:
+    s = s[0].upper() + s[1:]
+    risultato = s + &quot; (&quot; + str(n) + &quot;)&quot;
+else:
+    risultato = s.upper()
+print(risultato)</code></pre><ul><li>Traccia con input <code>&quot;python&quot;</code></li><li>Traccia con input <code>&quot;ciao&quot;</code></li></ul><p><strong>T3.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+b = int(input(&quot;b: &quot;))
+if a &gt; b:
+    tmp = a
+    a = b
+    b = tmp
+diff = b - a
+if diff &gt; 5:
+    messaggio = &quot;distanti&quot;
+else:
+    messaggio = &quot;vicini&quot;
+print(str(a) + &quot; &quot; + str(b) + &quot; - &quot; + messaggio)</code></pre><ul><li>Traccia con input <code>9</code>, <code>2</code></li></ul><p><strong>T4.</strong></p><pre><code class="language-python">n = int(input(&quot;n: &quot;))
+print(&quot;Inizio&quot;)
+if n &lt; 0:
+    print(&quot;Negativo&quot;)
+    n = -n
+    print(&quot;Valore assoluto: &quot; + str(n))
+elif n == 0:
+    print(&quot;Zero&quot;)
+else:
+    print(&quot;Positivo&quot;)
+    n = n * n
+print(&quot;Fine: &quot; + str(n))</code></pre><ul><li>Traccia con input <code>-3</code></li><li>Traccia con input <code>4</code></li></ul><p><strong>T5.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+b = int(input(&quot;b: &quot;))
+print(&quot;a=&quot; + str(a) + &quot; b=&quot; + str(b))
+if a &gt; b:
+    print(&quot;a è maggiore&quot;)
+    diff = a - b
+    print(&quot;Differenza: &quot; + str(diff))
+else:
+    print(&quot;b è maggiore o uguale&quot;)
+    diff = b - a
+print(&quot;Distanza: &quot; + str(diff))</code></pre><ul><li>Traccia con input <code>a = 7</code>, <code>b = 2</code></li><li>Traccia con input <code>a = 3</code>, <code>b = 3</code></li></ul>
   </div>
 </section>
 
@@ -349,7 +404,7 @@ x = y * 2</code></pre><hr>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 29</div>
+  <div class="counter" id="counter">1 / 25</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));
