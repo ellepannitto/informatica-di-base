@@ -497,6 +497,69 @@ Tra poco lanceremo i nostri primi script dal terminale. Ogni volta che lo faccia
 
 > Le variabili "spariscono" quando il programma finisce perché vivono in RAM, non su disco. Per conservare un risultato bisogna scriverlo esplicitamente su file.
 
+### Attività: simulare Von Neumann
+
+**Setup.** Si scelgono 3 volontari. Ciascuno riceve un foglio e interpreta un componente:
+
+| Ruolo           | Componente Von Neumann        | Cosa fa durante la simulazione |
+| --------------- | ----------------------------- | ------------------------------ |
+| **CPU**         | Control Unit                  | legge le istruzioni una alla volta e le distribuisce agli altri due |
+| **Memoria**     | RAM + ALU                     | tiene traccia dei valori `x` e `y`; esegue le operazioni aritmetiche che la CPU le chiede |
+| **Schermo**     | Dispositivo di output         | riceve dalla CPU le coordinate `(x, y)` e colora la casella corrispondente su una griglia — **tenendo il foglio nascosto agli altri** |
+
+**Il programma.** La CPU riceve queste istruzioni e le esegue in ordine:
+
+```
+Aggiungi 3 a x
+Aggiungi 2 a y
+Disegna (x, y)
+Aggiungi 2 a x
+Aggiungi 1 a y
+Disegna (x, y)
+Sottrai 4 da x
+Aggiungi 2 a y
+Disegna (x, y)
+Aggiungi 2 a x
+Disegna (x, y)
+FINE
+```
+
+**Come funziona.**
+- Quando la CPU incontra `Aggiungi N a x`, lo dice ad alta voce alla Memoria. La Memoria aggiorna `x` sul suo foglio.
+- Quando la CPU incontra `Disegna (x, y)`, chiede alla Memoria i valori correnti di `x` e `y`, poi li passa allo Schermo. Lo Schermo colora quella casella.
+- Alla fine la CPU dice `FINE`. Lo Schermo mostra il risultato agli altri.
+
+**Griglia per lo Schermo** (origine in alto a sinistra, come i display reali):
+
+```
+     0   1   2   3   4   5   6   7
+   +---+---+---+---+---+---+---+---+
+0  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+1  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+2  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+3  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+4  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+5  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+6  |   |   |   |   |   |   |   |   |
+   +---+---+---+---+---+---+---+---+
+```
+
+**Domande di discussione.**
+
+- La CPU sapeva cosa stava disegnando? Perché no?
+- Cosa avrebbe prodotto un errore di un'istruzione (es. `Aggiungi 4 a x` invece di `Aggiungi 3 a x`)?
+- Dove "viveva" il programma? Dove vivevano `x` e `y`?
+- Se la Memoria dimenticasse il valore di `x` a metà esecuzione, cosa succederebbe?
+- Quali componenti di Von Neumann abbiamo simulato? Quale mancava?
+
+> Il punto più importante: **la CPU non capisce cosa sta disegnando**. Esegue le istruzioni una alla volta, meccanicamente. Il significato è nel programma, non nella macchina.
+
 
 ## Cos'è un programma
 
@@ -518,6 +581,33 @@ I programmi che scriveremo fanno una cosa sola, in modo chiaro e verificabile. E
 | somma di due numeri    | `a`, `b`        | `a + b`              |
 | conteggio caratteri    | una stringa     | un numero            |
 | scelta del file giusto | nome e percorso | file aperto o errore |
+
+### Esercizio: scrivi le istruzioni per il computer
+
+Scrivi su un foglio le istruzioni per disegnare questa figura alla lavagna:
+
+```
+        /\
+       /  \
+      /    \
+     /      \
+    /________\
+    | []  [] |
+    |        |
+    |  ____  |
+    |_|    |_|
+```
+
+Il docente eseguirà le istruzioni **alla lettera**, come farebbe un computer: non farà domande, non userà il buon senso, non supporrà nulla che non sia scritto esplicitamente.
+
+Domande da discutere dopo:
+
+- Dove hai iniziato a disegnare? Era specificato nelle istruzioni?
+- Quanto era grande la figura? L'avevi scritto?
+- Hai disegnato prima il tetto o le pareti? Importa?
+- Cosa succede se due studenti scrivono istruzioni diverse con le stesse intenzioni?
+
+> Un programma è esattamente questo: una sequenza di istruzioni che una macchina segue alla lettera. La macchina non interpreta, non suppone, non corregge. Se le istruzioni sono ambigue o incomplete, il risultato è imprevedibile — o sbagliato.
 
 Qui entra in gioco il **sistema operativo**.
 

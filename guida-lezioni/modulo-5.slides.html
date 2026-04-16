@@ -113,25 +113,140 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai rappresentare dati ordinati con una lista?</li><li>Sai usare le operazioni fondamentali sulle liste?</li><li>Sai trasformare una stringa in lista con <code>split()</code>?</li><li>Sai leggere sequenze di dati e accumularle in una lista?</li><li>Sai ragionare sulla differenza tra lista e stringa?</li></ul><hr><a id="mod5-liste"></a>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai rappresentare dati ordinati con una lista?</li><li>Sai usare le operazioni fondamentali sulle liste?</li><li>Sai trasformare una stringa in lista con <code>split()</code>?</li><li>Sai leggere sequenze di dati e accumularle in una lista?</li><li>Sai ragionare sulla differenza tra lista e stringa?</li></ul><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="liste-collezioni-ordinate-di-elementi">Liste: collezioni ordinate di elementi</h2><p>Le liste sono <strong>collezioni ordinate di elementi</strong>.</p><p>Esempi:</p><pre><code class="language-python">[3, 19, 27, 43]
-[&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;ciao&quot;]
-[True, True, True, False]
-[[&quot;a&quot;, &quot;b&quot;], [&quot;a&quot;, &quot;c&quot;], [&quot;a&quot;, &quot;d&quot;]]</code></pre><p><img src="imgs/archivio.jpg" alt="Archivio"></p><p>Una lista:</p><ul><li>mantiene l&#x27;ordine degli elementi;</li><li>puo&#x27; contenere qualunque tipo di valore;</li><li>puo&#x27; contenere anche altre liste.</li></ul><p>Una metafora utile e&#x27; questa: se i valori semplici erano come barattoli sparsi in dispensa, la lista e&#x27; piu&#x27; simile a un <strong>archivio ordinato</strong>.</p><p>Questo significa che:</p><ul><li>gli elementi stanno insieme in una sola struttura;</li><li>ogni elemento ha una posizione;</li><li>possiamo distinguere il primo, il secondo, il terzo e cosi&#x27; via.</li></ul><p>Esempio intuitivo:</p><ul><li>invece di avere tante variabili separate per gli studenti di una classe;</li><li>possiamo avere una sola variabile <code>classe</code>;</li><li>che contiene, in ordine, tutti i nomi degli studenti.</li></ul><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Concatenazione</td><td><code>L1 + L2</code></td></tr><tr><td>Estensione</td><td><code>L1.extend(L2)</code></td></tr><tr><td>Selezione</td><td><code>L[i]</code></td></tr><tr><td>Lunghezza</td><td><code>len(L)</code></td></tr><tr><td>Aggiunta in coda</td><td><code>L.append(x)</code></td></tr><tr><td>Conteggio occorrenze</td><td><code>L.count(x)</code></td></tr></tbody></table><blockquote><p>Anche qui si conta a partire da zero.</p></blockquote><p>Conviene anche seguire una buona pratica importante:</p><ul><li>Python permette liste eterogenee;</li><li>ma nella pratica conviene quasi sempre costruire liste omogenee.</li></ul><p>Quindi, di norma, meglio:</p><ul><li>lista di interi;</li><li>lista di stringhe;</li><li>lista di booleani;</li></ul><p>piuttosto che mescolare tutto senza motivo.</p><p>Il motivo e&#x27; pragmatico: e&#x27; piu&#x27; semplice applicare operazioni uniformi a tutti gli elementi se hanno lo stesso tipo.</p><p>Esempi:</p><pre><code class="language-python">[1, 2, 3] + [4, 5, 6]
+    <h2 id="due-problemi-che-il-while-da-solo-non-riesce-a-risolvere">Due problemi che il <code>while</code> da solo non riesce a risolvere</h2><h3 id="problema-1-stampa-i-numeri-al-contrario">Problema 1: stampa i numeri al contrario</h3><p>Scrivi un programma che legge numeri interi uno alla volta (terminati da <code>0</code>) e li stampa in ordine inverso rispetto a quello in cui sono stati inseriti.</p><p>Esempio:</p><pre><code>Input:  3  7  2  5  0
+Output: 5  2  7  3</code></pre><p>Prova a risolverlo usando solo le variabili che conosci. Cosa manca?</p><p>Il problema è che quando arriva lo <code>0</code>, i numeri precedenti non esistono più: ogni nuova lettura sovrascrive la variabile. Per stampare al contrario bisogna prima raccogliere tutti i valori, poi scorrere la raccolta in senso inverso.</p><p>Con le sole variabili del modulo 4:</p><pre><code class="language-python">numero = int(input())
+while numero != 0:
+    # qui vorremmo &quot;ricordare&quot; numero, ma dove?
+    numero = int(input())
+# a questo punto non sappiamo più cosa è stato inserito</code></pre><p>Il <code>while</code> sa iterare, ma non sa ricordare una sequenza di valori.</p><hr><h3 id="problema-2-chi-è-sopra-la-media">Problema 2: chi è sopra la media?</h3><p>Scrivi un programma che legge numeri interi uno alla volta (terminati da <code>0</code>) e stampa quelli che superano la media di tutti i numeri inseriti.</p><p>Esempio:</p><pre><code>Input:  4  8  2  6  0
+Media:  5.0
+Output: 8  6</code></pre><p>Anche volendo, questo problema è impossibile da risolvere con una sola passata: per sapere se <code>4</code> è sopra la media, devi già conoscere anche <code>8</code>, <code>2</code> e <code>6</code>. La media si può calcolare solo dopo aver letto l&#x27;ultimo numero.</p><p>Servono due passate sugli stessi dati:</p><ol><li>leggi tutti i numeri, calcola la media;</li><li>scorri di nuovo gli stessi numeri e stampa quelli sopra la media.</li></ol><p>Per fare la seconda passata i numeri devono essere ancora disponibili — e con variabili singole non lo sono.</p><hr><p>Entrambi i problemi hanno la stessa radice: il programma ha bisogno di <strong>ricordare una sequenza di valori</strong> per poterla usare dopo. Questa è esattamente la funzione di una lista.</p><a id="mod5-liste"></a>
+  </div>
+</section>
 
-lista = [1, 2, 3]
-lista.append(4)
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="liste-creare-e-popolare">Liste: creare e popolare</h2><p>Una lista è una sequenza ordinata di valori tenuti insieme sotto un unico nome.</p><h3 id="creare-una-lista">Creare una lista</h3><p>Lista con elementi già noti:</p><pre><code class="language-python">voti = [28, 30, 24, 27]
+nomi = [&quot;Alice&quot;, &quot;Bruno&quot;, &quot;Carla&quot;]</code></pre><p>Lista vuota, da riempire dopo:</p><pre><code class="language-python">numeri = []</code></pre><p>La lista vuota è il punto di partenza quando non si conosce in anticipo quanti elementi ci saranno — esattamente la situazione dei problemi di apertura.</p><h3 id="aggiungere-elementi-append">Aggiungere elementi: <code>append</code></h3><pre><code class="language-python">numeri = []
+numeri.append(4)
+numeri.append(8)
+numeri.append(2)
+print(numeri)   # [4, 8, 2]</code></pre><p>Ogni chiamata ad <code>append</code> aggiunge un elemento <strong>in coda</strong>. L&#x27;ordine di inserimento viene conservato.</p><h3 id="leggere-la-lunghezza-len">Leggere la lunghezza: <code>len</code></h3><pre><code class="language-python">voti = [28, 30, 24, 27]
+print(len(voti))   # 4</code></pre><h3 id="accedere-a-un-elemento-listai">Accedere a un elemento: <code>lista[i]</code></h3><p>Gli indici partono da <code>0</code>.</p><pre><code class="language-python">voti = [28, 30, 24, 27]
+#        0   1   2   3
 
-[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;][0]
-[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;][1:4]
+print(voti[0])   # 28  (primo)
+print(voti[3])   # 27  (quarto)
+print(voti[-1])  # 27  (ultimo, contando da destra)</code></pre><pre><code>indice:   0    1    2    3
+        +----+----+----+----+
+voti:   | 28 | 30 | 24 | 27 |
+        +----+----+----+----+</code></pre><h3 id="modificare-un-elemento">Modificare un elemento</h3><pre><code class="language-python">voti[0] = 29
+print(voti)   # [29, 30, 24, 27]</code></pre><h3 id="concatenare-due-liste">Concatenare due liste</h3><pre><code class="language-python">a = [1, 2, 3]
+b = [4, 5, 6]
+print(a + b)   # [1, 2, 3, 4, 5, 6]</code></pre><p><code>+</code> non modifica <code>a</code> né <code>b</code>: produce una nuova lista.</p><h3 id="riepilogo-operazioni">Riepilogo operazioni</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th><th>Nota</th></tr></thead><tbody><tr><td>Lista vuota</td><td><code>L = []</code></td><td></td></tr><tr><td>Aggiunta in coda</td><td><code>L.append(x)</code></td><td>modifica <code>L</code> sul posto</td></tr><tr><td>Lunghezza</td><td><code>len(L)</code></td><td></td></tr><tr><td>Accesso per indice</td><td><code>L[i]</code></td><td>da <code>0</code> a <code>len(L)-1</code></td></tr><tr><td>Ultimo elemento</td><td><code>L[-1]</code></td><td></td></tr><tr><td>Modifica elemento</td><td><code>L[i] = x</code></td><td>modifica <code>L</code> sul posto</td></tr><tr><td>Concatenazione</td><td><code>L1 + L2</code></td><td>produce una nuova lista</td></tr><tr><td>Conteggio occorr.</td><td><code>L.count(x)</code></td><td></td></tr></tbody></table><blockquote><p>Python permette liste con elementi di tipo diverso, ma nella pratica conviene costruire liste omogenee (tutti interi, tutte stringhe, …): è più semplice applicare le stesse operazioni a tutti gli elementi.</p></blockquote><h3 id="tornare-al-problema-1-numeri-al-contrario">Tornare al Problema 1: numeri al contrario</h3><p>Con <code>append</code> possiamo raccogliere i numeri mentre li leggiamo, e usarli dopo:</p><pre><code class="language-python">numeri = []
+numero = int(input())
+while numero != 0:
+    numeri.append(numero)
+    numero = int(input())
 
-len([[&quot;a&quot;, &quot;b&quot;], [&quot;a&quot;, &quot;c&quot;], [&quot;a&quot;, &quot;d&quot;]])
-len([&quot;a&quot;, &quot;b&quot;])</code></pre><hr>
+# ora numeri contiene tutta la sequenza
+i = len(numeri) - 1
+while i &gt;= 0:
+    print(numeri[i])
+    i = i - 1</code></pre><p>Il <code>while</code> di lettura accumula; il secondo <code>while</code> scorre la lista al contrario.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-while-e-liste">Esercizi: while e liste</h2><h3 id="costruire-una-lista">Costruire una lista</h3><ol><li>Crea una lista con i numeri da 1 a 5 usando <code>append</code> in un ciclo <code>while</code>. Stampa la lista.</li></ol><ol><li>Leggi numeri interi dall&#x27;input fino a <code>0</code> e salvali in una lista. Stampa la lista alla fine.</li></ol><ol><li>Leggi parole dall&#x27;input fino a <code>fine</code> e salvale in una lista. Stampa quante parole sono state inserite.</li></ol><ol><li>Leggi numeri fino a <code>0</code>. Costruisci due liste separate: una con i numeri pari e una con i numeri dispari. Stampa entrambe.</li></ol><h3 id="accedere-agli-elementi">Accedere agli elementi</h3><ol><li>Data la lista <code>voti = [24, 28, 30, 18, 27]</code>, stampa il primo e l&#x27;ultimo voto.</li></ol><ol><li>Data la lista <code>nomi = [&quot;Alice&quot;, &quot;Bruno&quot;, &quot;Carla&quot;, &quot;Dario&quot;]</code>, stampa il secondo e il penultimo nome.</li></ol><ol><li>Data la lista <code>prezzi = [3.5, 1.2, 7.8, 4.0]</code>, stampa il prezzo più alto (senza usare <code>max()</code>): scorri la lista con un <code>while</code> e tieni traccia del massimo.</li></ol><h3 id="scorrere-una-lista-con-while">Scorrere una lista con <code>while</code></h3><ol><li>Data una lista di numeri, stampa solo quelli maggiori di 10.</li></ol><ol><li>Data una lista di parole, stampa solo quelle che iniziano per vocale.</li></ol><ol><li>Data una lista di numeri, calcola e stampa la somma di tutti gli elementi (senza usare <code>sum()</code>).</li></ol><ol><li>Leggi numeri fino a <code>0</code>, salvali in una lista, poi stampa la lista al contrario (come nel Problema 1).</li></ol><h3 id="collegamento-al-problema-2">Collegamento al Problema 2</h3><ol><li>Leggi numeri fino a <code>0</code>, salvali in una lista, calcola la media e stampa quelli che superano la media.</li></ol><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-paradigmi-di-soluzione">Esercizi: paradigmi di soluzione</h2><h3 id="paradigma-1-verifica-di-proprietà-sulla-sequenza">Paradigma 1 — verifica di proprietà sulla sequenza</h3><p>Questi esercizi richiedono di raccogliere tutta la sequenza e poi rispondere a una domanda su di essa.</p><ol><li>Scrivi un programma che chiede parole fino a <code>fine</code>. Alla fine stampa <code>Sequenza corretta</code> se la parola <code>lingua</code> è comparsa almeno una volta, <code>Sequenza errata</code> altrimenti.</li></ol><p>Esempi:</p><ul><li><code>ciao lingua quaderno fine</code> → <code>Sequenza corretta</code></li><li><code>ciao penna quaderno fine</code> → <code>Sequenza errata</code></li></ul><ol><li>Scrivi un programma che legge 5 parole e le salva in una lista. Stampa <code>uguale</code> se la prima e l&#x27;ultima parola sono identiche, <code>diversa</code> altrimenti.</li></ol><ol><li>Scrivi un programma che legge una stringa e controlla se è palindroma (ignora spazi e maiuscole/minuscole). Esempi di stringhe palindrome: <code>anna</code>, <code>i topi non avevano nipoti</code>.</li></ol><ol><li>Scrivi un programma che chiede numeri interi fino a <code>0</code>. Controlla se ogni <code>1</code> nella sequenza è immediatamente seguito da un <code>2</code>. Stampa <code>Sequenza corretta</code> o <code>Sequenza errata</code>.</li></ol><p>Esempi:</p><ul><li><code>9 1 2 6 1 2 0</code> → corretta</li><li><code>9 1 6 1 2 0</code> → errata (il primo <code>1</code> non è seguito da <code>2</code>)</li><li><code>9 1 2 6 2 0</code> → corretta (il <code>2</code> extra non viola la regola)</li></ul><h3 id="paradigma-2-serie-multiple">Paradigma 2 — serie multiple</h3><p>Questi esercizi richiedono di ripetere lo stesso schema di lettura più volte, trattando ogni serie come un&#x27;unità.</p><ol><li>Scrivi un programma che legge tre serie di numeri, ognuna terminata da <code>0</code>. Per ogni serie, stampa i numeri letti al contrario.</li></ol><p>Input:</p><pre><code>    4
+    12
+    0
+    9
+    7
+    6
+    0
+    4
+    1
+    -3
+    8
+    0</code></pre><p>Output:</p><pre><code>    [12, 4]
+    [6, 7, 9]
+    [8, -3, 1, 4]</code></pre><ol><li>Scrivi un programma che legge una serie di numeri terminata da <code>0</code>. Per ogni numero <code>n</code> della serie stampa tutti i numeri pari compresi tra <code>0</code> (incluso) e <code>n</code> (escluso).</li></ol><p>Input: <code>6 10 0</code> Output: <code>0 2 4</code> poi <code>0 2 4 6 8</code></p><h3 id="paradigma-3-conteggio-e-classificazione">Paradigma 3 — conteggio e classificazione</h3><p>Questi esercizi richiedono di leggere una sequenza e tenere traccia di conteggi per categoria.</p><ol><li>Scrivi un programma che legge parole fino a <code>fine</code> e conta quante iniziano per ciascuna vocale (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>). Stampa il conteggio per ogni vocale.</li></ol><ol><li>Scrivi un programma che legge 5 lettere, poi legge parole fino a <code>fine</code>. Per ogni lettera letta all&#x27;inizio, stampa quante parole iniziano con quella lettera.</li></ol><h3 id="paradigma-4-operazioni-su-due-liste">Paradigma 4 — operazioni su due liste</h3><p>Questi esercizi lavorano su due liste e richiedono di confrontarle elemento per elemento. Non usare <code>set</code> né operatori insiemistici: l&#x27;obiettivo è costruire l&#x27;algoritmo con <code>while</code> e liste.</p><p><strong>Versione semplice: liste senza duplicati</strong></p><ol><li>Date due liste di interi, costruisci una lista con gli elementi <strong>in comune</strong> (intersezione).</li></ol><pre><code class="language-python">    a = [3, 7, 1, 9, 4]
+    b = [7, 2, 9, 5, 1]
+    # risultato atteso: [7, 1, 9]  (ordine di apparizione in a)</code></pre><ol><li>Date due liste, costruisci una lista con tutti gli elementi che compaiono in almeno una delle due, <strong>senza duplicati</strong> (unione).</li></ol><pre><code class="language-python">    a = [3, 7, 1]
+    b = [7, 2, 9]
+    # risultato atteso: [3, 7, 1, 2, 9]</code></pre><ol><li>Date due liste <code>a</code> e <code>b</code>, costruisci una lista con gli elementi di <code>a</code> che <strong>non</strong> compaiono in <code>b</code> (differenza <code>a - b</code>).</li></ol><pre><code class="language-python">    a = [3, 7, 1, 9, 4]
+    b = [7, 2, 9, 5]
+    # risultato atteso: [3, 1, 4]</code></pre><ol><li>Date due liste, controlla se sono <strong>disgiunte</strong> (nessun elemento in comune). Stampa <code>True</code> o <code>False</code>.</li></ol><p><strong>Versione con duplicati</strong></p><ol><li>Stessi esercizi 21–23, ma le liste possono contenere duplicati. Decidi come gestirli: un elemento che compare due volte in <code>a</code> e una volta in <code>b</code> quante volte deve comparire nel risultato?</li></ol><pre><code class="language-python">    a = [1, 2, 2, 3]
+    b = [2, 2, 4]
+    # intersezione &quot;con molteplicità&quot;: [2, 2]
+    # differenza a - b: [1, 3]</code></pre><p><strong>Versione con liste ordinate</strong></p><ol><li>Date due liste <strong>già ordinate in modo crescente</strong>, costruisci la lista unione ordinata <strong>senza usare <code>sort()</code></strong>: scorri entrambe in parallelo con due indici e aggiungi l&#x27;elemento minore alla volta (algoritmo di merge).</li></ol><pre><code class="language-python">    a = [1, 3, 5, 7]
+    b = [2, 3, 6, 8]
+    # risultato atteso: [1, 2, 3, 3, 5, 6, 7, 8]</code></pre><ol><li>Come l&#x27;esercizio 26, ma costruisci solo l&#x27;intersezione ordinata (elementi presenti in entrambe, senza duplicati).</li></ol><pre><code class="language-python">    a = [1, 3, 5, 7]
+    b = [2, 3, 6, 7]
+    # risultato atteso: [3, 7]</code></pre><hr>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="liste-di-liste">Liste di liste</h2><p>Una lista può contenere qualsiasi tipo di valore — incluse altre liste. Questo permette di rappresentare strutture a due dimensioni come <strong>matrici</strong>, tabelle e griglie.</p><pre><code class="language-python">matrice = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]</code></pre><p><code>matrice</code> è una lista di 3 elementi, ognuno dei quali è una lista di 3 interi.</p><h3 id="accesso-agli-elementi">Accesso agli elementi</h3><p>Per accedere a un elemento servono due indici: prima la riga, poi la colonna.</p><pre><code class="language-python">matrice[0]      # [1, 2, 3]  — prima riga intera
+matrice[0][0]   # 1          — riga 0, colonna 0
+matrice[1][2]   # 6          — riga 1, colonna 2
+matrice[2][-1]  # 9          — ultima colonna della terza riga</code></pre><pre><code>         col 0  col 1  col 2
+        +------+------+------+
+riga 0  |  1   |  2   |  3   |
+        +------+------+------+
+riga 1  |  4   |  5   |  6   |
+        +------+------+------+
+riga 2  |  7   |  8   |  9   |
+        +------+------+------+</code></pre><h3 id="stampare-una-matrice-riga-per-riga">Stampare una matrice riga per riga</h3><pre><code class="language-python">i = 0
+while i &lt; len(matrice):
+    print(matrice[i])
+    i = i + 1</code></pre><p>Output:</p><pre><code>[1, 2, 3]
+[4, 5, 6]
+[7, 8, 9]</code></pre><p>Per stampare elemento per elemento con due cicli annidati:</p><pre><code class="language-python">i = 0
+while i &lt; len(matrice):
+    j = 0
+    while j &lt; len(matrice[i]):
+        print(matrice[i][j], end=&quot; &quot;)
+        j = j + 1
+    print()   # a capo alla fine di ogni riga
+    i = i + 1</code></pre><p>Output:</p><pre><code>1 2 3
+4 5 6
+7 8 9</code></pre><h3 id="costruire-una-matrice-con-input">Costruire una matrice con input</h3><pre><code class="language-python">righe = int(input(&quot;Righe: &quot;))
+colonne = int(input(&quot;Colonne: &quot;))
+
+matrice = []
+i = 0
+while i &lt; righe:
+    riga = []
+    j = 0
+    while j &lt; colonne:
+        val = int(input())
+        riga.append(val)
+        j = j + 1
+    matrice.append(riga)
+    i = i + 1</code></pre><h3 id="esercizi-liste-di-liste">Esercizi: liste di liste</h3><ol><li>Crea a mano (senza input) una matrice 3×3 con i numeri da 1 a 9 e stampala riga per riga nel formato sopra.</li></ol><ol><li>Data una matrice quadrata <code>n×n</code>, stampa solo la diagonale principale (gli elementi dove <code>riga == colonna</code>).</li></ol><pre><code class="language-python">    matrice = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    # output: 1  5  9</code></pre><ol><li>Data una matrice, calcola la somma di tutti gli elementi.</li></ol><ol><li>Data una matrice, costruisci la sua <strong>trasposta</strong>: una nuova matrice dove righe e colonne sono scambiate.</li></ol><pre><code class="language-python">    originale = [[1, 2, 3], [4, 5, 6]]
+    # trasposta: [[1, 4], [2, 5], [3, 6]]</code></pre><ol><li>Leggi dall&#x27;input una matrice <code>n×m</code> (prima <code>n</code>, poi <code>m</code>, poi i valori riga per riga). Stampa per ogni riga la somma degli elementi di quella riga.</li></ol><hr>
   </div>
 </section>
 
@@ -150,32 +265,14 @@ print(pezzi)</code></pre><p>Risultato:</p><pre><code class="language-python">[&#
     <h2 id="leggere-dati-e-accumularli-in-lista">Leggere dati e accumularli in lista</h2><p>Una volta che sappiamo costruire liste, possiamo usarle per raccogliere dati in ingresso.</p><p>Schema tipico:</p><pre><code class="language-python">numeri = []
 
 for token in [&quot;3&quot;, &quot;5&quot;, &quot;8&quot;]:
-    numeri.append(int(token))</code></pre><p>Più avanti questo schema si combinera&#x27; con:</p><ul><li>lettura da standard input;</li><li>lettura da file;</li><li>cicli <code>while</code> con sentinella.</li></ul><p>Per ora il punto chiave e&#x27; questo:</p><blockquote><p>una lista e&#x27; il contenitore naturale quando non sappiamo in anticipo quanti dati dovremo raccogliere.</p></blockquote><hr><a id="mod5-redirezione"></a>
+    numeri.append(int(token))</code></pre><p>Più avanti questo schema si combinera&#x27; con:</p><ul><li>lettura da standard input;</li><li>lettura da file;</li><li>cicli <code>while</code> con sentinella.</li></ul><p>Per ora il punto chiave e&#x27; questo:</p><blockquote><p>una lista e&#x27; il contenitore naturale quando non sappiamo in anticipo quanti dati dovremo raccogliere.</p></blockquote><hr>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="redirezione-dellinput-e-sorgenti-dei-dati">Redirezione dell&#x27;input e sorgenti dei dati</h2><p>Nel programma del corso il modulo 5 include anche la redirezione dell&#x27;input. Qui la prepariamo trattando dati testuali gia&#x27; disponibili come sequenze.</p><p>Concettualmente:</p><ul><li>la sorgente puo&#x27; essere la tastiera;</li><li>puo&#x27; essere una stringa gia&#x27; caricata;</li><li>puo&#x27; essere un file;</li><li>il programma spesso trasforma comunque tutto in una lista di elementi da elaborare.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-assegnati-input-da-file-e-sequenze">Esercizi assegnati: input da file e sequenze</h2><p>Nei testi degli esercizi assegnati compare un passaggio importante: usare un file come sorgente dello standard input invece dell&#x27;interazione diretta da tastiera.</p><p>Schema di riferimento:</p><pre><code class="language-python">lista_numeri = []
-
-number = int(input())
-while number != 0:
-    lista_numeri.append(number)
-    number = int(input())
-
-print(&quot;Numeri letti:&quot;, lista_numeri)</code></pre><p>eseguito anche come:</p><pre><code class="language-bash">python3 script.py &lt; input.txt</code></pre><p>Questo punto e&#x27; molto utile didatticamente perche&#x27; chiarisce che:</p><ul><li><code>input()</code> non &quot;sa&quot; se i dati arrivano da tastiera o da file;</li><li>il programma legge uno stream di righe;</li><li>possiamo testare meglio i programmi preparando input ripetibili.</li></ul><p>Due osservazioni pratiche molto utili:</p><ul><li><code>input()</code> legge sempre testo, quindi se ci servono numeri dobbiamo convertire con <code>int(...)</code> o <code>float(...)</code>;</li><li>il file passato con <code>&lt;</code> non viene &quot;capito&quot; da Python come file speciale: per il programma e&#x27; semplicemente una sorgente di input riga per riga.</li></ul><h3 id="anche-loutput-si-puo-ridirigere">Anche l&#x27;output si puo&#x27; ridirigere</h3><p>Allo stesso modo possiamo salvare su file quello che normalmente vedremmo nel terminale:</p><pre><code class="language-bash">python3 script.py &lt; input.txt &gt; output.txt</code></pre><p>Qui:</p><ul><li><code>&lt; input.txt</code> fornisce l&#x27;input al programma;</li><li><code>&gt; output.txt</code> salva in un file tutto cio&#x27; che il programma stampa su standard output.</li></ul><p>Questo e&#x27; molto utile per:</p><ul><li>testare programmi senza dover digitare ogni volta gli input;</li><li>confrontare facilmente l&#x27;output prodotto con quello atteso;</li><li>conservare esempi di esecuzione ripetibili.</li></ul><p>Queste redirezioni si possono anche combinare:</p><ul><li>il programma legge da uno stream di input;</li><li>produce uno stream di output;</li><li>il terminale decide se questi stream passano da tastiera/schermo oppure da file.</li></ul><h3 id="esercizi-coerenti-con-il-modulo-5">Esercizi coerenti con il modulo 5</h3><ol><li>leggere una serie di numeri fino a <code>0</code> e memorizzarli per poi stamparli al contrario;</li><li>leggere parole fino a <code>fine</code> e contare quante iniziano per ciascuna vocale;</li><li>leggere 5 lettere iniziali e poi contare quante parole iniziano con ciascuna di esse;</li><li>leggere una serie di numeri dispari e per ciascuno stampare un rombo di asterischi.</li></ol><p>Questi esercizi stanno bene qui perche&#x27; combinano:</p><ul><li>lettura sequenziale;</li><li>sentinelle;</li><li>accumulo in lista;</li><li>trasformazione dell&#x27;input in una struttura dati.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Crea una lista di 5 parole e stampa il primo e l&#x27;ultimo elemento.</li><li>Data una lista di numeri, stampa la sua lunghezza.</li><li>Aggiungi un elemento in coda con <code>append</code>.</li><li>Data una frase, usa <code>split()</code> per ottenere la lista delle parole.</li><li>Scrivi un programma che costruisce una lista di numeri e ne stampa gli elementi in ordine inverso usando gli indici.</li><li>Leggi una sequenza di numeri da standard input o da file e salvala in una lista fino alla sentinella.</li><li>Leggi tre serie di numeri separate da <code>0</code> e stampa ogni serie al contrario.</li></ol><hr>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Crea una lista di 5 parole e stampa il primo e l&#x27;ultimo elemento.</li><li>Data una lista di numeri, stampa la sua lunghezza.</li><li>Aggiungi un elemento in coda con <code>append</code>.</li><li>Data una frase, usa <code>split()</code> per ottenere la lista delle parole.</li><li>Scrivi un programma che costruisce una lista di numeri e ne stampa gli elementi in ordine inverso usando gli indici.</li><li>Leggi una sequenza di numeri da standard input o da file e salvala in una lista fino alla sentinella.</li><li>Leggi tre serie di numeri separate da <code>0</code> e stampa ogni serie al contrario.</li><li>Chiedi all&#x27;utente di inserire una stringa e calcola quante vocali ci sono nella stringa.</li><li>Leggi una parola dall&#x27;input e stampa solo le lettere in posizione pari (0, 2, 4, …).</li><li>Data una stringa letta dall&#x27;input (es. <code>adoro programmare in Python!</code>), scrivi un programma che stampa la frequenza di ogni lettera all&#x27;interno della stringa.</li><li>Scrivi un programma che fa giocare l&#x27;utente al gioco dell&#x27;impiccato.<ul><li>Nel gioco, un giocatore (A) pensa a una parola segreta. L&#x27;altro giocatore (B) propone una lettera alla volta. Se la lettera è presente, tutte le sue posizioni vengono svelate.</li><li>Nella cartella <code>impiccato/</code> trovi i file <code>parola_segreta.py</code> e <code>impiccato.py</code> con la struttura di partenza. Salva entrambi nella stessa cartella.</li><li><code>parola_segreta.py</code> contiene la variabile <code>PAROLA_SEGRETA</code> che puoi modificare. <code>impiccato.py</code> contiene la funzione <code>update(guess, parola, lettera)</code> che aggiorna la stringa di underscore:</li></ul></li></ol><pre><code class="language-python">      update(&quot;____&quot;, &quot;casa&quot;, &quot;a&quot;)  # → &quot;_a_a&quot;
+      update(&quot;_a_a&quot;, &quot;casa&quot;, &quot;c&quot;)  # → &quot;ca_a&quot;</code></pre><ol><li>Estendi l&#x27;impiccato aggiungendo un numero massimo di tentativi (6 nella versione classica, oppure dipendente dalla lunghezza della parola), e la possibilità di indovinare l&#x27;intera parola in un turno.</li></ol><hr>
   </div>
 </section>
 
@@ -192,7 +289,7 @@ print(&quot;Numeri letti:&quot;, lista_numeri)</code></pre><p>eseguito anche com
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 10</div>
+  <div class="counter" id="counter">1 / 12</div>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

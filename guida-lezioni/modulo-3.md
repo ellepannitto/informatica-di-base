@@ -615,6 +615,59 @@ Ora la partizione è completa **e** semanticamente corretta.
 
 > Disegnare l'automa — anche solo come tabella — è un modo per verificare che il codice copra davvero tutti i casi prima ancora di scrivere un `if`.
 
+### Automi su sequenze: leggere una stringa lettera per lettera
+
+Fino a qui abbiamo usato gli automi per **classificare un singolo valore**: l'automa legge l'input una volta, segue una transizione e arriva a uno stato finale.
+
+Ma gli automi possono fare di più: possono leggere una **sequenza di caratteri** — una lettera alla volta — e aggiornare il proprio stato a ogni passo.
+
+**Modello di esecuzione:**
+
+1. si parte dallo **stato iniziale**;
+2. si legge un carattere;
+3. si segue la transizione corrispondente → nuovo stato;
+4. si ripete dal passo 2 finché la stringa è finita;
+5. al termine: se si è in uno **stato finale** (doppio bordo ╔══╗), la stringa è accettata; altrimenti è rifiutata.
+
+**Esempio:** automa che accetta le stringhe che contengono almeno una vocale.
+
+Due stati: `non_trovata` (nessuna vocale vista finora) e `trovata` (almeno una vocale già letta — stato finale).
+
+```
+         ┌─── carattere non è vocale ───┐
+         ▼                              │
+──►  ┌──────────────────┐               │
+     │   non_trovata    │───────────────┘
+     └──────────────────┘
+           │  carattere è vocale
+           ▼
+        ╔══════════╗
+        ║  trovata ║
+        ╚══════════╝
+```
+
+**Esecuzione su `"bac"`** — accettata:
+
+| Passo | Carattere | Stato corrente | Transizione    | Stato successivo |
+| ----- | --------- | -------------- | -------------- | ---------------- |
+| 1     | `b`       | `non_trovata`  | b non è vocale | `non_trovata`    |
+| 2     | `a`       | `non_trovata`  | a è vocale     | `trovata`        |
+| 3     | `c`       | `trovata`      | già in stato finale | `trovata`   |
+| fine  |           | `trovata` → ╔══╗ | | **sì** |
+
+**Esecuzione su `"bcd"`** — rifiutata:
+
+| Passo | Carattere | Stato corrente | Transizione    | Stato successivo |
+| ----- | --------- | -------------- | -------------- | ---------------- |
+| 1     | `b`       | `non_trovata`  | b non è vocale | `non_trovata`    |
+| 2     | `c`       | `non_trovata`  | c non è vocale | `non_trovata`    |
+| 3     | `d`       | `non_trovata`  | d non è vocale | `non_trovata`    |
+| fine  |           | `non_trovata` → non è stato finale | | **no** |
+
+> L'accettazione dipende dallo stato in cui ci si trova **quando la stringa finisce**, non da cosa è successo durante il percorso.
+
+Nel modulo 4 vedremo come tradurre questo schema direttamente in un ciclo `while` che scorre la stringa carattere per carattere.
+
 ---
 
 ## Esercizi finali
