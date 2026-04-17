@@ -1,6 +1,6 @@
 # Modulo 03 · Testare il programma e operazioni su booleani
 
-## Autovalutazione
+## A fine lezione
 
 - Sai tracciare lo stato del programma durante l'esecuzione?
 - Sai riconoscere errori frequenti e localizzarli?
@@ -9,7 +9,6 @@
 - Sai applicare le leggi di De Morgan?
 - Sai modellare piccoli problemi con automi a stati finiti?
 - Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?
-
 
 ## Errori nel codice
 
@@ -39,11 +38,9 @@ Esempi frequenti:
 | `TypeError`   | operazione tra tipi incompatibili |
 | `ValueError`  | conversione non possibile         |
 
-
 ### Esercizi
 
 Per ciascun programma: esegui il codice, individua il tipo di errore che produce e la riga in cui compare, poi spiega perché si verifica e correggi il codice di conseguenza.
-
 
 **E1.**
 
@@ -54,7 +51,6 @@ eta = input("Età: ")
 print("Ciao " + nome + " " + cognome + "!")
 print("Tra dieci anni avrai " + eta + 10 + " anni.")
 ```
-
 
 **E2.**
 
@@ -138,6 +134,98 @@ else:
 4. confronta il risultato reale con quello previsto;
 5. se modifichi il codice, ripeti gli stessi test.
 
+## Esercizi: if/elif/else e testing
+
+Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:
+
+1. **scrivi i desiderata** — prima di eseguire il codice, compila la tabella con l'output che ti aspetti per ogni input;
+2. **esegui e controlla** — lancia il programma con quegli input e annota l'output reale;
+3. **confronta** — dove differiscono, spiega perché.
+
+### Esercizio 1
+
+Il programma riceve un numero intero e stampa `"pari"` se è pari, `"dispari"` se è dispari.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `0`   |               |              |
+| `3`   |               |              |
+| `-4`  |               |              |
+| `7`   |               |              |
+
+<details>
+```python
+n = int(input("Numero: "))
+if n > 0 and n % 2 == 0:
+    print("pari")
+else:
+    print("dispari")
+```
+</details>
+
+### Esercizio 2
+
+Il programma riceve un voto e stampa `"promosso"` se è almeno 18, `"non promosso"` altrimenti.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `15`  |               |              |
+| `30`  |               |              |
+| `18`  |               |              |
+
+<details>
+
+```python
+voto = int(input("Voto: "))
+if voto >= 18:
+    print("promosso")
+
+if voto <= 18:
+    print("non promosso")
+```
+
+</details>
+
+
+### Esercizio 3
+
+Il programma riceve un numero intero e stampa `"positivo"` se è maggiore di zero, `"grande"` se è maggiore di 10, `"non positivo"` negli altri casi.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `5`   |               |              |
+| `15`  |               |              |
+| `-2`  |               |              |
+
+
+<details>
+
+```python
+x = int(input("x: "))
+if x > 0:
+    print("positivo")
+elif x > 10:
+    print("grande")
+else:
+    print("non positivo")
+```
+
+</details>
+
+### Esercizio 4
+
+Il programma riceve un intero e stampa `"fizz"` se è divisibile per 3, `"buzz"` se è divisibile per 5, `"fizzbuzz"` se è divisibile per entrambi, il numero stesso negli altri casi.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `1`   |               |              |
+| `3`   |               |              |
+| `5`   |               |              |
+| `15`  |               |              |
+| `9`   |               |              |
+
+Scrivi il programma e testane il funzionamento.
+
 ## Comporre condizioni
 
 Fino adesso abbiamo visto operazioni che confrontano ad esempio numeri interi e restituiscono un valore booleano. Ma esistono anche operazioni che agiscono direttamente su valori booleani.
@@ -154,9 +242,13 @@ Forme generali:
 
 ```python
 espressione_booleana and espressione_booleana
+```
 
+```python
 espressione_booleana or espressione_booleana
+```
 
+```python
 not espressione_booleana
 ```
 
@@ -167,7 +259,7 @@ Esempi:
 ```python
 x > 0 and x < 10
 eta >= 18 or ha_permesso
-not nome == ""
+not nome == "Ludovica"
 ```
 
 ## Semantica di `and`, `or`, `not`
@@ -191,6 +283,15 @@ x > 0 and x < 10
 
 significa: "x è maggiore di 0 e contemporaneamente minore di 10".
 
+### Tavola di verità di `and`
+
+| x | y | x and y |
+| --- | --- | --- |
+| `False` | `False` | `False` |
+| `False` | `True` | `False` |
+| `True` | `False` | `False` |
+| `True` | `True` | `True` |
+
 ### Semantica di `or`
 
 ```python
@@ -207,6 +308,15 @@ voto < 18 or voto > 30
 ```
 
 significa: "il voto è fuori dall'intervallo valido", potrebbe esserlo perché minore di 18 o perché maggiore di 30.
+
+### Tavola di verità di `or`
+
+| x | y | x or y |
+| --- | --- | --- |
+| `False` | `False` | `False` |
+| `False` | `True` | `True` |
+| `True` | `False` | `True` |
+| `True` | `True` | `True` |
 
 ### Semantica di `not`
 
@@ -227,27 +337,7 @@ not x > 0
 
 significa: "non è vero che x è maggiore di 0", equivale a `x<=0`.
 
-## Tabelle di verità
-
-### Tavola di verita' di `and`
-
-| x | y | x and y |
-| --- | --- | --- |
-| `False` | `False` | `False` |
-| `False` | `True` | `False` |
-| `True` | `False` | `False` |
-| `True` | `True` | `True` |
-
-### Tavola di verita' di `or`
-
-| x | y | x or y |
-| --- | --- | --- |
-| `False` | `False` | `False` |
-| `False` | `True` | `True` |
-| `True` | `False` | `True` |
-| `True` | `True` | `True` |
-
-### Tavola di verita' di `not`
+### Tavola di verità di `not`
 
 | x | not x |
 | --- | --- |
@@ -269,14 +359,13 @@ Per ciascuna espressione e valori di variabili indicati, calcola il risultato (`
 7. `eta = 20`, `ha_documento = False` → `eta >= 18 and ha_documento`
 8. `eta = 16`, `ha_documento = True` → `eta >= 18 or ha_documento`
 
-
 ### Condizioni composte nei programmi
 
-9. Scrivi un programma che legge un numero intero e stampa `Nel range` se è compreso tra 1 e 100 (estremi inclusi), `Fuori range` altrimenti.
-10. Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione
-11. Scrivi un programma che legge due stringhe e stampa `Almeno una è vuota` se almeno una delle due ha lunghezza zero, altrimenti stampa `Entrambe non vuote`.
-12. Scrivi un programma che legge un numero intero e stampa `Fuori range` se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando `not` e `and`.
-13. Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l'età desiderata.
+1. Scrivi un programma che legge un numero intero e stampa `Nel range` se è compreso tra 1 e 100 (estremi inclusi), `Fuori range` altrimenti.
+2. Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione
+3. Scrivi un programma che legge due stringhe e stampa `Almeno una è vuota` se almeno una delle due ha lunghezza zero, altrimenti stampa `Entrambe non vuote`.
+4. Scrivi un programma che legge un numero intero e stampa `Fuori range` se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando `not` e `and`.
+5. Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l'età desiderata.
     - Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:
       `Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri`
 
@@ -313,7 +402,7 @@ ma come:
 True or (False and False)
 ```
 
-perche' `and` viene valutato prima di `or`.
+perché `and` viene valutato prima di `or`.
 
 Un altro esempio:
 
@@ -346,7 +435,7 @@ Non sono in generale equivalenti.
 ## Valutazione lazy
 
 Gli operatori `and` e `or` non valutano sempre entrambe le parti dell'espressione.
-Python si ferma appena il risultato finale e' gia' determinato.
+Python si ferma appena il risultato finale è già determinato.
 
 Questo comportamento si chiama **valutazione lazy** oppure **short-circuit**.
 
@@ -457,10 +546,10 @@ Riscrivi ciascuna condizione in forma equivalente usando le leggi di De Morgan, 
 2. `not (a == b or c == d)`
 3. `not (eta >= 18 and ha_documento)`
 
-
 ## Casi e tabelle di verità
 
-Prima di scrivere il codice conviene costruire una tabella dei casi: elencare esplicitamente tutte le combinazioni di input rilevanti e il comportamento atteso per ciascuna.
+Prima di scrivere il codice conviene costruire una tabella dei casi:
+elencare esplicitamente tutte le combinazioni di input rilevanti e il comportamento atteso per ciascuna.
 
 Questo serve a non dimenticare casi limite e a capire di quanti rami ha bisogno il programma.
 
@@ -509,9 +598,19 @@ else:
 > La validazione dell'input è sempre il primo controllo da fare.
 > Gli altri rami assumono che i dati siano validi — ma solo perché lo abbiamo già verificato.
 
+| Età attuale        | Età desiderata                  | Output atteso                                                        |
+| ------------------ | ------------------------------- | -------------------------------------------------------------------- |
+| `eta_attuale <= 0` | `eta_desiderata <= 0`           | `INPUT NON VALIDO`                                                   |
+|                    | `eta_desiderata > 0`            | `INPUT NON VALIDO`                                                   |
+| `eta_attuale > 0`  | `eta_desiderata <= 0`           | `INPUT NON VALIDO`                                                   |
+|                    | `eta_desiderata < eta_attuale`  | `Ciao Maria, hai già superato i 18 anni`                             |
+|                    | `eta_desiderata == eta_attuale` | `Ciao Maria, hai già 18 anni come desideri`                          |
+|                    | `eta_desiderata > eta_attuale`  | `Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri` |
+
 ## Automi a stati finiti
 
-Quello che fa un programma con `if/elif/else` è, in fondo, sempre la stessa cosa: **partizionare** gli input in classi, e associare a ciascuna classe un comportamento diverso.
+Quello che fa un programma con `if/elif/else` è, in fondo, sempre la stessa cosa:
+**partizionare** gli input in classi, e associare a ciascuna classe un comportamento diverso.
 
 Un **automa a stati finiti** è il modello astratto di questa idea.
 
@@ -520,8 +619,6 @@ Invece di pensare al codice riga per riga, un automa descrive:
 - quali **classi di input** esistono;
 - a quale **output** (o stato) ciascuna classe conduce;
 - se ci sono input che non sono stati considerati.
-
-Questo è esattamente quello che facciamo quando costruiamo una tabella dei casi prima di scrivere il codice.
 
 ### Struttura di un automa
 
@@ -539,14 +636,15 @@ Consideriamo il programma che classifica un numero come `negativo`, `zero` o `po
 
 Gli input sono tutti gli interi. Le classi di output sono tre:
 
-| Classe di input | Condizione | Output |
-| --------------- | ---------- | ------ |
-| negativi        | `n < 0`    | `"negativo"` |
-| zero            | `n == 0`   | `"zero"` |
-| positivi        | `n > 0`    | `"positivo"` |
+| Input                          | Output       |
+| ------------------------------ | ------------ |
+| `...-200, ...-13, ...-2, -1`   | `"negativo"` |
+| `0`                            | `"zero"`     |
+| `1, 2, ..., 17, ... 3456, ...` | `"positivo"` |
 
-L'automa ha tre stati finali corrispondenti alle tre classi.
-Ogni intero appartiene esattamente a una classe: la partizione è **completa** (nessun input mancante) e **disgiunta** (nessun input in due classi contemporaneamente).
+L'automa ha tre possibili stati finali corrispondenti alle tre classi.
+Ogni intero appartiene esattamente a una classe:
+la partizione è **completa** (nessun input mancante) e **disgiunta** (nessun input in due classi contemporaneamente).
 
 ```
               ┌─── n < 0 ────► ╔═══════════╗
@@ -574,166 +672,105 @@ Riprendiamo l'esercizio 13 (nome, età attuale, età desiderata).
 
 Prima di aggiungere la validazione degli input, la partizione era:
 
-| Classe | Condizione                        |
-| ------ | --------------------------------- |
-| A      | `eta_desiderata > eta_attuale`    |
-| B      | `eta_desiderata == eta_attuale`   |
-| C      | `eta_desiderata < eta_attuale`    |
+![Prima versione età desiderata e attuale](imgs/eta-retta.png)
 
 Questa partizione è **completa** per gli interi, ma non distingue gli input validi da quelli non validi.
-L'automa non "sa" che un'età negativa è priva di senso — non è nella sua definizione.
 
 Aggiungendo la validazione, la partizione diventa:
 
-| Classe | Condizione                                          |
-| ------ | --------------------------------------------------- |
-| ERR    | `eta_attuale < 0 or eta_desiderata < 0`             |
-| A      | input validi con `eta_desiderata > eta_attuale`     |
-| B      | input validi con `eta_desiderata == eta_attuale`    |
-| C      | input validi con `eta_desiderata < eta_attuale`     |
-
-Ora la partizione è completa **e** semanticamente corretta.
+![alt text](imgs/eta-retta-valida.png)
 
 ```
-                    ┌── età < 0 ────────────────────────-──────► ╔═════════╗
-                    │                                            ║ ERRORE  ║
-   ┌───────┐        │                                            ╚═════════╝
-──►│ start │────────┤
-   └───────┘        │
-                    └── età >= 0 ──► ┌──────────────┐
-                                     │ input valido │
-                                     └──────┬───────┘
-                               ┌────────────┼────────────┐
-                               │            │            │
-                          des > att    des == att    des < att
-                               │            │            │
-                               ▼            ▼            ▼
-                        ╔════════════╗ ╔══════════╗ ╔═══════════════╗
-                        ║ tra Y anni ║ ║ già ora  ║ ║ già superato  ║
-                        ╚════════════╝ ╚══════════╝ ╚═══════════════╝
+                                                       ┌─ desiderata <= 0 ─┐
+                                                       ▼                   |
+                    ┌── attuale <= 0 ───────► ╔═════════╗ ─────────────────┘
+                    │                         ║ ERRORE  ║
+   ┌───────┐        │                         ╚═════════╝◄────────────────────┐
+──►│ start │────────┤                                                         |
+   └───────┘        │                                                         |
+                    └── attuale > 0 ──────► ┌──────────────┐                  |
+                                            │ input valido │─ desiderata <= 0 ┘
+                                            └──────┬───────┘
+                                      ┌────────────┼────────────┐
+                                      │            │            │
+                                 des > att    des == att    des < att
+                                      │            │            │
+                                      ▼            ▼            ▼
+                               ╔════════════╗ ╔══════════╗ ╔═══════════════╗
+                               ║ tra Y anni ║ ║ già ora  ║ ║ già superato  ║
+                               ╚════════════╝ ╚══════════╝ ╚═══════════════╝
 ```
 
 > Disegnare l'automa — anche solo come tabella — è un modo per verificare che il codice copra davvero tutti i casi prima ancora di scrivere un `if`.
 
-### Automi su sequenze: leggere una stringa lettera per lettera
+### Automi su sequenze: input che arriva in più passi
 
-Fino a qui abbiamo usato gli automi per **classificare un singolo valore**: l'automa legge l'input una volta, segue una transizione e arriva a uno stato finale.
+Fino a qui l'automa riceveva un solo valore e si spostava in uno stato finale.
+Ma il problema dell'età desiderata mostra qualcosa di diverso:
+l'input **arriva in due passi** — prima `eta_attuale`, poi `eta_desiderata` — e lo stato del programma cambia a ogni passo.
 
-Ma gli automi possono fare di più: possono leggere una **sequenza di caratteri** — una lettera alla volta — e aggiornare il proprio stato a ogni passo.
-
-**Modello di esecuzione:**
+Possiamo pensarlo così:
 
 1. si parte dallo **stato iniziale**;
-2. si legge un carattere;
-3. si segue la transizione corrispondente → nuovo stato;
-4. si ripete dal passo 2 finché la stringa è finita;
-5. al termine: se si è in uno **stato finale** (doppio bordo ╔══╗), la stringa è accettata; altrimenti è rifiutata.
+2. arriva il primo valore (`eta_attuale`): a seconda del valore, si segue una transizione;
+3. arriva il secondo valore (`eta_desiderata`): a seconda del valore, si segue un'altra transizione;
+4. si arriva a uno stato finale che descrive il caso.
 
-**Esempio:** automa che accetta le stringhe che contengono almeno una vocale.
+L'automa dell'età desiderata che abbiamo visto sopra funziona esattamente così:
+le frecce non sono tutte uscenti dallo stesso punto, ma il percorso dipende da quello che leggiamo in sequenza.
 
-Due stati: `non_trovata` (nessuna vocale vista finora) e `trovata` (almeno una vocale già letta — stato finale).
-
-```
-         ┌─── carattere non è vocale ───┐
-         ▼                              │
-──►  ┌──────────────────┐               │
-     │   non_trovata    │───────────────┘
-     └──────────────────┘
-           │  carattere è vocale
-           ▼
-        ╔══════════╗
-        ║  trovata ║
-        ╚══════════╝
-```
-
-**Esecuzione su `"bac"`** — accettata:
-
-| Passo | Carattere | Stato corrente | Transizione    | Stato successivo |
-| ----- | --------- | -------------- | -------------- | ---------------- |
-| 1     | `b`       | `non_trovata`  | b non è vocale | `non_trovata`    |
-| 2     | `a`       | `non_trovata`  | a è vocale     | `trovata`        |
-| 3     | `c`       | `trovata`      | già in stato finale | `trovata`   |
-| fine  |           | `trovata` → ╔══╗ | | **sì** |
-
-**Esecuzione su `"bcd"`** — rifiutata:
-
-| Passo | Carattere | Stato corrente | Transizione    | Stato successivo |
-| ----- | --------- | -------------- | -------------- | ---------------- |
-| 1     | `b`       | `non_trovata`  | b non è vocale | `non_trovata`    |
-| 2     | `c`       | `non_trovata`  | c non è vocale | `non_trovata`    |
-| 3     | `d`       | `non_trovata`  | d non è vocale | `non_trovata`    |
-| fine  |           | `non_trovata` → non è stato finale | | **no** |
-
-> L'accettazione dipende dallo stato in cui ci si trova **quando la stringa finisce**, non da cosa è successo durante il percorso.
-
-Nel modulo 4 vedremo come tradurre questo schema direttamente in un ciclo `while` che scorre la stringa carattere per carattere.
-
----
+> Questo è il primo passo verso i programmi che leggono sequenze di dati: ogni nuovo valore letto è un passo nell'automa.
 
 ## Esercizi finali
 
-### Automi: disegnare la partizione
+### Scrivere il programma
 
-Per ciascun problema, prima di scrivere codice:
+Per questi esercizi, prima di scrivere il codice:
 
-1. elenca le classi di input;
-2. costruisci la tabella delle condizioni;
-3. disegna lo schema con stati finali a doppio bordo.
+1. identifica le classi di input (quanti casi distinti esistono?);
+2. compila la tabella dei desiderata;
+3. scrivi il programma e verifica.
 
+**F1.** Il programma legge un numero intero e stampa `"divisibile per 2"`, `"divisibile per 3"`, `"divisibile per entrambi"` o `"nessuno dei due"`.
 
-**A1.** Un programma legge un numero intero e stabilisce se è divisibile per 2, per 3, per entrambi, o per nessuno dei due.
+| Input | Output atteso |
+| ----- | ------------- |
+| `6`   |               |
+| `4`   |               |
+| `9`   |               |
+| `7`   |               |
 
-Quante classi di input esistono? La partizione è completa?
+**F2.** Il programma legge una stringa e stampa `"vuota"`, `"corta"` (1–3 caratteri), `"normale"` (4–10) o `"lunga"` (più di 10).
 
-<details>
-<summary>Schema</summary>
+| Input          | Output atteso |
+| -------------- | ------------- |
+| `""`           |               |
+| `"ciao"`       |               |
+| `"hi"`         |               |
+| `"informatica"`|               |
 
-```
-                    ┌── n%2==0 and n%3==0 ──► ╔═══════════════════╗
-                    │                         ║ divisibile per 6  ║
-   ┌───────┐        │                         ╚═══════════════════╝
-──►│ start │────────┼── n%2==0 and n%3!=0 ──► ╔═══════════════════╗
-   └───────┘        │                         ║ solo per 2        ║
-                    │                         ╚═══════════════════╝
-                    ├── n%2!=0 and n%3==0 ──► ╔═══════════════════╗
-                    │                         ║ solo per 3        ║
-                    │                         ╚═══════════════════╝
-                    └── n%2!=0 and n%3!=0 ──► ╔═══════════════════╗
-                                              ║ nessuno dei due   ║
-                                              ╚═══════════════════╝
-```
+**F3.** Il programma legge tre interi `a`, `b`, `c` e stampa `"triangolo"` se formano un triangolo valido (la somma di due lati qualsiasi è maggiore del terzo), `"no"` altrimenti.
 
-Quattro classi, partizione completa e disgiunta.
+| `a` | `b` | `c` | Output atteso |
+| --- | --- | --- | ------------- |
+| `3` | `4` | `5` |               |
+| `1` | `2` | `5` |               |
+| `5` | `5` | `5` |               |
+| `0` | `3` | `3` |               |
 
-</details>
+**F4.** Il programma legge due stringhe `s1` e `s2` e stampa la più lunga. Se hanno la stessa lunghezza, stampa quella che viene prima in ordine alfabetico.
 
-
-**A2.** Un programma legge una stringa e la classifica come:
-
-- `"vuota"` se ha lunghezza 0;
-- `"corta"` se ha lunghezza tra 1 e 3;
-- `"normale"` se ha lunghezza tra 4 e 10;
-- `"lunga"` se ha lunghezza maggiore di 10.
-
-Costruisci la tabella delle condizioni e lo schema dell'automa. Poi scrivi il programma.
-
-
-**A3.** Un programma legge un carattere singolo e lo classifica come vocale, consonante o altro (cifra, spazio, simbolo). Costruisci prima la tabella, poi scrivi il programma.
-
-
-
-### Condizioni e flusso
-
-**C1.** Leggi tre numeri interi `a`, `b`, `c`. Stampa `True` se formano un triangolo valido (la somma di due lati qualsiasi deve essere maggiore del terzo), `False` altrimenti.
-
-**C2.** Leggi due stringhe `s1` e `s2`. Stampa sempre la più lunga. Se hanno la stessa lunghezza, stampa quella che viene prima in ordine alfabetico.
-
-**C3.** Leggi un numero intero. Senza usare `abs()`, calcola e stampa il suo valore assoluto usando un `if`.
-Poi riscrivi il programma sostituendo il blocco `if` con una singola espressione che assegna il risultato a una variabile `risultato`, e stampa `risultato` fuori dall'`if`.
+| `s1`    | `s2`   | Output atteso |
+| ------- | ------ | ------------- |
+| `"abc"` | `"de"` |               |
+| `"hi"`  | `"ab"` |               |
+| `"mela"`| `"pero"`|              |
 
 ### Trovare l'errore
 
-**D1.** Individua tutti i casi in cui questo programma produce output sbagliato o non produce output:
+Per questi esercizi compila prima i desiderata, poi esegui il codice e confronta.
+
+**D1.** Il programma legge un voto e stampa la valutazione corrispondente.
 
 ```python
 voto = int(input("Voto: "))
@@ -745,7 +782,14 @@ if voto >= 18:
     print("Sufficiente")
 ```
 
-**D2.** Il programma seguente dovrebbe stampare il minore tra tre numeri. Trova l'errore:
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `15`  |               |              |
+| `20`  |               |              |
+| `26`  |               |              |
+| `30`  |               |              |
+
+**D2.** Il programma legge tre interi e stampa il minore.
 
 ```python
 a = int(input("a: "))
@@ -758,3 +802,10 @@ if b < a and b < c:
 if c < a and c < b:
     print("Il minore è " + str(c))
 ```
+
+| `a` | `b` | `c` | Output atteso | Output reale |
+| --- | --- | --- | ------------- | ------------ |
+| `1` | `2` | `3` |               |              |
+| `3` | `1` | `2` |               |              |
+| `2` | `2` | `3` |               |              |
+| `2` | `2` | `2` |               |              |
