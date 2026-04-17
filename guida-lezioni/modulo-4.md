@@ -1,6 +1,6 @@
 # Modulo 04 · Ciclo while, sentinelle e convalida
 
-## Autovalutazione
+## A fine lezione
 
 - Sai usare `while` quando non conosci in anticipo il numero di iterazioni?
 - Sai distinguere guardia del ciclo, stato e condizione di terminazione?
@@ -44,14 +44,13 @@ while x < 5:
 
 La struttura è identica all'`if`. La differenza è una sola: dopo aver eseguito il blocco, `while` **torna a valutare la condizione**. Se è ancora vera, ripete. Se è falsa, si ferma.
 
-| | `if` | `while` |
-| --- | --- | --- |
-| valuta la condizione | una volta | a ogni iterazione |
-| esegue il blocco | al massimo una volta | finché la condizione è vera |
-| va verso la terminazione | sempre | solo se lo stato cambia |
+|                          | `if`                 | `while`                     |
+| ------------------------ | -------------------- | --------------------------- |
+| valuta la condizione     | una volta            | a ogni iterazione           |
+| esegue il blocco         | al massimo una volta | finché la condizione è vera |
+| va verso la terminazione | sempre               | solo se lo stato cambia     |
 
 Questa è la differenza fondamentale: con `while`, il blocco deve **modificare lo stato** in modo da portare prima o poi la condizione a diventare falsa. Se non lo fa, il ciclo non si ferma mai.
-
 
 ## Sintassi del `while`
 
@@ -76,12 +75,14 @@ Parti da riconoscere:
 
 1. Python valuta la guardia;
 2. se vale `True`, esegue il blocco;
-3. poi torna a valutare la guardia;
+3. poi torna a valutare la guardia (punto 1);
 4. se vale `False`, esce dal ciclo.
 
 > le istruzioni da 1 a k vengono ripetute in ordine finchè lo stato del programma continua a soddisfare l'`espressione booleana`
 
-### Esempio 1: contatore
+## Esempi
+
+### contatore
 
 ```python
 i = 0
@@ -90,7 +91,6 @@ while i < 5:
     i = i + 1
 ```
 
-
 - `i = 0` è l'inizializzazione dello stato;
 - `i < 5` è la guardia: il ciclo continua finché vale `True`;
 - `print(i)` è l'istruzione;
@@ -98,7 +98,7 @@ while i < 5:
 
 > Cosa succede se si dimentica `i += 1`? La guardia non cambia mai e il ciclo non finisce mai: **ciclo infinito**.
 
-### Esempio 2: input ripetuto
+### input ripetuto
 
 ```python
 risposta = input("Continuo? (s/n): ")
@@ -112,33 +112,18 @@ Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce 
 ## Esercizi
 
 1. Scrivi un programma che stampi i numeri da 1 a 10.
-
 2. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `n` a `0`.
-
 3. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `-n` a `n`.
-
 4. Dato un certo numero (es. `pagine = 120`), stampa:
-
    ```
    Sto leggendo la pagina 1
    Sto leggendo la pagina 2
    ...
    ```
-
    fino all'ultima pagina.
-
-5. Scrivi un programma che chiede all'utente di inserire una parola. Il programma continua finché l'utente non scrive `fine`.
-
-   ```
-   Inserisci una parola: storia
-   Inserisci una parola: geografia
-   Inserisci una parola: fine
-   ```
-
-6. Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).
-
+5. Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).
+6. Scrivi un programma che legge una parola dall'input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).
 7. Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito `2`:
-
    ```
    2^1 = 2
    2^2 = 4
@@ -150,12 +135,21 @@ Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce 
    2^8 = 256
    2^9 = 512
    ```
+8. Scrivi un programma che chiede all'utente di inserire una parola. Il programma continua finché l'utente non scrive `fine`.
+   ```
+   Inserisci una parola: storia
+   Inserisci una parola: geografia
+   Inserisci una parola: fine
+   ```
 
 ## Quando l'utente decide quando fermarsi
 
-Negli esercizi del primo blocco il numero di iterazioni dipende da un valore noto in anticipo (es. `pagine = 120`). Ma a volte il programma non sa quante volte dovrà ripetere: lo decide l'utente durante l'esecuzione.
+In alcuni esercizi il numero di iterazioni dipende da un valore noto in anticipo (es. `pagine = 120`).
+Ma a volte il programma non sa quante volte dovrà ripetere: dipende dall'apparire di un valore in modo non determinabile a priori.
 
 Esempio: sommare numeri finché l'utente non inserisce `-1`.
+
+<details>
 
 ```python
 numero = int(input("Numero (-1 per terminare): "))
@@ -165,6 +159,8 @@ while numero != -1:
     somma = somma + numero
     numero = int(input("Numero (-1 per terminare): "))
 ```
+
+</details>
 
 Lo schema è lo stesso dei due esempi visti prima:
 
@@ -176,14 +172,10 @@ La differenza rispetto al contatore è che qui lo stato non cambia in modo preve
 
 ## Esercizi
 
-8. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e conta quanti numeri interi sono stati inseriti.
-
-9. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e, per ogni numero inserito, se il numero è pari stampa `Hai inserito un numero pari!` altrimenti stampa `Hai inserito un numero dispari!`.
-
-10. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce la parola `fine`. Per ogni parola inserita, se la parola è più lunga di 5 caratteri stampa `parola lunga` altrimenti stampa `parola breve`.
-
-11. Scrivi un programma che legge un numero compreso tra 1 e 10 (controlla che il numero inserito sia lecito, altrimenti stampa un messaggio di errore) e stampa la tabellina di quel numero. Ad esempio, se viene inserito `3`:
-
+1. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e conta quanti numeri interi sono stati inseriti.
+2. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e, per ogni numero inserito, se il numero è pari stampa `Hai inserito un numero pari!` altrimenti stampa `Hai inserito un numero dispari!`.
+3. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce la parola `fine`. Per ogni parola inserita, se la parola è più lunga di 5 caratteri stampa `parola lunga` altrimenti stampa `parola breve`.
+4. Scrivi un programma che legge un numero compreso tra 1 e 10 (controlla che il numero inserito sia lecito, altrimenti stampa un messaggio di errore) e stampa la tabellina di quel numero. Ad esempio, se viene inserito `3`:
     ```
     3 x 0 = 0
     3 x 1 = 3
@@ -191,15 +183,25 @@ La differenza rispetto al contatore è che qui lo stato non cambia in modo preve
     ...
     3 x 10 = 30
     ```
+5. Chiedi all'utente di inserire una stringa e calcola quante vocali contiene.
+6. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Per ogni parola inserita calcola quante vocali contiene. Alla fine, stampa il numero totale di vocali incontrate.
+7. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Alla fine, stampa quante delle parole inserite finiscono per vocale.
+8. Scrivi un programma che legge parole dall'input finché l'utente non scrive `fine`. Conta quante parole iniziano con una lettera maiuscola.
+9. Scrivi un programma che legge parole dall'input e si ferma alla prima parola più lunga di 6 caratteri, stampandola. Se non compare nessuna parola così lunga prima di `fine`, stampa `nessuna`.
+10. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`, e al termine stampa il massimo tra quelli inseriti. (Se non viene inserito nessun numero prima dello zero, stampa un messaggio apposito.)
+11. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Al termine stampa quanti erano pari e quanti dispari, e quale delle due categorie era più numerosa.
+12. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0` e calcola la media dei valori inseriti. Se non viene inserito nessun valore prima dello zero, stampa `nessun dato`.
+13. Scrivi un programma che legge una sequenza di numeri positivi terminata da `-1` e stampa ogni numero insieme al suo scarto rispetto al numero precedente. Per il primo numero lo scarto non esiste; per gli altri stampa `differenza: +3` o `differenza: -5` ecc.
+14. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Stampa `sì` se la sequenza è non-decrescente (ogni numero è ≥ al precedente), `no` altrimenti.
+15. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Controlla se ogni `1` è seguito da un `2`. Esempi:
+    - `9, 1, 2, 6, 1, 2, 0` → `Sequenza corretta`
+    - `9, 1, 6, 1, 2, 0` → `Sequenza errata`
+16. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Controlla se tra le parole inserite compare la parola `lingua`. Stampa `sì` o `no`.
 
-12. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Per ogni parola inserita calcola quante vocali contiene. Alla fine, stampa il numero totale di vocali incontrate.
+## Cicli annidati
 
-13. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Alla fine, stampa quante delle parole inserite finiscono per vocale.
-
-
-## Cicli nidificati
-
-Un ciclo può contenere un altro ciclo nel suo corpo. Il ciclo interno viene eseguito per intero a ogni iterazione del ciclo esterno.
+Un ciclo può contenere un altro ciclo nel suo corpo.
+Il ciclo interno viene eseguito per intero a ogni iterazione del ciclo esterno.
 
 Esempio: stampare tutte le combinazioni di pagina e riga.
 
@@ -232,22 +234,30 @@ Punti da osservare:
 
 ## Esercizi
 
-14. Dati due numeri (es. `pagine = 3` e `righe = 5`), stampa tutte le combinazioni di pagine e righe come nell'esempio sopra.
+Gli esercizi con pattern di stampa costringono a distinguere il ciclo esterno (righe) dal ciclo interno (simboli per riga), e mostrano subito gli errori di guardia, inizializzazione e incremento.
 
-15. Stampa la tavola pitagorica da 1 a 10:
+1. Dati due numeri (es. `pagine = 3` e `righe = 5`), stampa tutte le combinazioni di pagine e righe come nell'esempio sopra.
+2. Stampa la tavola pitagorica da 1 a 10:
     ```
     1 x 1 = 1
     1 x 2 = 2
     ...
     10 x 10 = 100
     ```
-
-16. Chiedi all'utente `n` dall'input. Stampa un quadrato di asterischi `n x n`:
+3. Chiedi all'utente `n` dall'input. Stampa un quadrato di asterischi `n x n`:
     ```
     ***
     ***
     ***
     ```
+4. Scrivi un programma che legge un intero positivo `n` e stampa tutte le sue cifre, una per riga, partendo da quella meno significativa. (Es.: `n = 374` → `4`, `7`, `3`.) Non usare stringhe: estrai le cifre con divisione e modulo.
+5. Scrivi un programma che legge un intero positivo `n` e stabilisce se è primo. Un numero è primo se è divisibile solo per 1 e per se stesso.
+6. Scrivi un programma che legge un intero positivo `n` e stampa la sequenza di Collatz: se `n` è pari calcola `n // 2`, se è dispari calcola `3 * n + 1`; ripeti finché `n` non diventa `1`. Stampa ogni valore e, alla fine, quanti passi sono stati necessari.
+7. Scrivi un programma che simula un gioco: il computer sceglie un numero tra 1 e 100 (es. `segreto = 42`), l'utente prova a indovinarlo inserendo tentativi. Dopo ogni tentativo il programma dice `troppo basso`, `troppo alto` oppure `esatto!`. Conta i tentativi.
+8. Scrivi un programma che legge un intero positivo `n` e stampa il suo fattoriale (`n! = 1 × 2 × … × n`).
+9. Scrivi un programma che verifica se una stringa letta dall'input è un palindromo usando un ciclo `while` e confrontando caratteri dalla testa e dalla coda, senza usare lo slicing `[::-1]`.
+10. Scrivi un programma che legge parole finché l'utente non scrive `fine` e le stampa in ordine inverso rispetto all'ordine di inserimento. (Usa una lista per memorizzarle, poi scorri al contrario.)
+11. Scrivi un programma che legge un intero positivo `n` e stampa i primi `n` numeri della sequenza di Fibonacci: `0, 1, 1, 2, 3, 5, 8, …`
 
 ## Lo stato del programma durante un `while`
 
@@ -262,7 +272,7 @@ while i < 5:
     i = i + 1
 ```
 
-| Passo | Istruzione                | Stato della memoria | Output |
+| Passo | Codice sorgente           | Stato della memoria | Output |
 | ----- | ------------------------- | ------------------- | ------ |
 | 1     | `i = 0`                   | `i → 0`             |        |
 | 2     | `while i < 5` → True      | `i → 0`             |        |
@@ -286,7 +296,7 @@ while numero != -1:
 
 (ipotesi: l'utente inserisce `4`, poi `7`, poi `-1`)
 
-| Passo | Istruzione                                | Stato della memoria         | Output |
+| Passo | Codice sorgente                           | Stato della memoria         | Output |
 | ----- | ----------------------------------------- | --------------------------- | ------ |
 | 1     | `numero = int(input(...))` ← utente: `4`  | `numero → 4`                |        |
 | 2     | `somma = 0`                               | `numero → 4`, `somma → 0`   |        |
@@ -310,7 +320,7 @@ while p <= 2:
     p = p + 1
 ```
 
-| Passo | Istruzione                       | Stato della memoria | Output |
+| Passo | Codice sorgente                  | Stato della memoria | Output |
 | ----- | -------------------------------- | ------------------- | ------ |
 | 1     | `p = 1`                          | `p → 1`             |        |
 | 2     | `while p <= 2` → True            | `p → 1`             |        |
@@ -330,60 +340,10 @@ while p <= 2:
 
 ## Automi a stati finiti e il `while`
 
-In modulo 3 abbiamo usato gli automi per descrivere come un `if/elif/else` **partiziona** gli input: dato un input, l'automa sceglie un ramo e raggiunge uno stato finale e si ferma lì.
+In modulo 3 abbiamo usato gli automi per descrivere come un `if/elif/else` **partiziona** gli input:
+dato un input, l'automa sceglie un ramo e raggiunge uno stato finale e si ferma lì.
 
-Con il `while` il modello cambia in un punto essenziale: l'automa può **tornare indietro**. Invece di scegliere un ramo e fermarsi, riesegue lo stesso blocco più volte, aggiornando lo stato a ogni passaggio.
-
-|                    | `if`             | `while`                                   |
-| ------------------ | ---------------- | ----------------------------------------- |
-| legge l'input      | una volta        | a ogni iterazione                         |
-| transita tra stati | una sola volta   | può ciclare                               |
-| stato finale       | raggiunto subito | raggiunto quando la guardia diventa falsa |
-
-### Struttura generale
-
-```
-                 ┌──────────────────────────────────────┐
-                 │                                      │
-  ──────────────►│         valuta la guardia            │◄──┐
-                 └──────────────────────────────────────┘   │
-                              │             │               │
-                           False          True              │
-                              │             │               │
-                              ▼             ▼               │
-                       ╔══════════╗   ┌──────────┐          │
-                       ║  fine    ║   │  corpo   │──────────┘
-                       ╚══════════╝   └──────────┘
-```
-
-La freccia che dal corpo torna alla guardia è la novità rispetto all'`if`: l'automa **cicla** finché la condizione rimane vera.
-
-### Esempio: contatore
-
-```python
-i = 0
-while i < 5:
-    print(i)
-    i = i + 1
-```
-
-Lo stato è il valore di `i`. Ad ogni iterazione aumenta di uno, finché la guardia diventa falsa.
-
-```
-         ┌──────────────────────┐
-         │   i < 5, i = i+1    │
-         ▼                      │
-──►  ┌──────────────┐           │
-     │    resta     │───────────┘
-     └──────────────┘
-           │  i ≥ 5
-           ▼
-        ╔══════╗
-        ║ fine ║
-        ╚══════╝
-```
-
-Lo stato `resta` rappresenta "siamo dentro il ciclo". La transizione che torna su `resta` porta con sé l'aggiornamento (`i = i + 1`). Quando `i ≥ 5` non si rientra nel ciclo: si va in `fine`.
+Con il `while` cambia la natura dell'input: non un singolo valore o una sequenza determinata, ma una **sequenza** di cui non conosciamo necessariamente la lunghezza in anticipo. Il ciclo legge un elemento alla volta e aggiorna lo stato; si ferma quando la sequenza è esaurita o quando una condizione segnala la fine.
 
 ### Esempio: valore speciale di stop
 
@@ -398,11 +358,11 @@ while numero != -1:
 La struttura dell'automa è identica: uno stato `resta` con un cappio su sé stesso finché la guardia è vera, e una transizione verso `fine` quando arriva il valore speciale.
 
 ```
-         ┌──────────────────────────────────┐
-         │   numero ≠ -1, leggi prossimo   │
-         ▼                                  │
-──►  ┌──────────────┐                       │
-     │    resta     │───────────────────────┘
+         ┌───────────────────┐
+         │   numero ≠ -1,    │
+         ▼                   │
+──►  ┌──────────────┐        │
+     │    resta     │────────┘
      └──────────────┘
            │  numero = -1
            ▼
@@ -411,43 +371,65 @@ La struttura dell'automa è identica: uno stato `resta` con un cappio su sé ste
         ╚══════╝
 ```
 
-La differenza rispetto al contatore è che qui non sappiamo quante volte il cappio verrà percorso: dipende dall'input dell'utente.
-
-> La domanda da farsi sempre è: **quale valore dello stato porta la guardia a diventare falsa?** Se non esiste, il ciclo non termina mai.
+> La domanda da farsi sempre è: **quale valore dello stato porta la guardia a diventare falsa?**
+> Se non esiste, il ciclo non termina mai.
 
 ## Esercizi: riconoscimento di stringhe
 
-Un automa a stati finiti legge una stringa **una lettera alla volta**. A ogni passo:
+Un automa a stati finiti legge una sequenza **una lettera alla volta**.
+A ogni passo:
 
 1. guarda il carattere corrente;
 2. segue la transizione corrispondente allo stato in cui si trova;
 3. aggiorna lo stato.
 
-Quando la stringa è finita, l'automa si ferma. Se si trova in uno **stato finale** (doppio bordo ╔══╗), la stringa è accettata; altrimenti è rifiutata.
+Quando la sequenza è finita:
+- se ci si trova in uno **stato finale** (╔══╗), la sequenza è accettata;
+- se lo stato non è finale, la sequenza non è accettata.
 
 ### Come seguire un automa su una stringa concreta
 
-Esempio: automa "almeno una vocale", stringa `"bac"`.
+Esempio: costruiamo un automa che controlla se nella sequenza è stata inserita almeno una vocale.
 
-| Passo | Carattere | Stato corrente | Transizione     | Stato successivo |
-| ----- | --------- | -------------- | --------------- | ---------------- |
-| 1     | `b`       | `non_trovata`  | b non è vocale  | `non_trovata`    |
-| 2     | `a`       | `non_trovata`  | a è vocale      | `trovata`        |
-| 3     | `c`       | `trovata`      | già accettata, ciclo interrotto | `trovata` |
-| fine  |           | `trovata` → ╔══╗ stato finale | | **sì** |
+Due stati: `non_trovata` (nessuna vocale vista finora) e `trovata` (almeno una vocale letta — stato finale).
+
+```
+         ┌──── non_vocale ──────────────────┐
+         ▼                                  │
+     ┌──────────────────┐                   │
+──►  │   non_trovata    │───────────────────┘
+     └──────────────────┘
+          │
+          │ vocale
+          ▼
+        ╔══════════╗
+        ║  trovata ║◄─── qualsiasi ───┐
+        ╚══════════╝──────────────────┘
+```
+
+Se la sequenza finisce in `trovata` (╔══╗): accettata.
+Se finisce in `non_trovata`: non accettata.
+
+Tracciamento su `"bac"`:
+
+| Passo | Carattere | Stato corrente | Transizione         | Stato successivo |
+| ----- | --------- | -------------- | ------------------- | ---------------- |
+| 1     | `b`       | `non_trovata`  | b non è vocale      | `non_trovata`    |
+| 2     | `a`       | `non_trovata`  | a è vocale          | `trovata`        |
+| 3     | `c`       | `trovata`      | già in stato finale | `trovata`        |
+| fine  |           | `trovata` → ╔══╗ |                   | **sì**           |
 
 Stessa stringa, risultato opposto: `"bcd"`.
 
-| Passo | Carattere | Stato corrente | Transizione     | Stato successivo |
-| ----- | --------- | -------------- | --------------- | ---------------- |
-| 1     | `b`       | `non_trovata`  | b non è vocale  | `non_trovata`    |
-| 2     | `c`       | `non_trovata`  | c non è vocale  | `non_trovata`    |
-| 3     | `d`       | `non_trovata`  | d non è vocale  | `non_trovata`    |
-| fine  |           | `non_trovata` → non è stato finale | | **no** |
+| Passo | Carattere    | Stato corrente | Transizione    | Stato successivo        |
+| ----- | ------------ | -------------- | -------------- | ----------------------- |
+| 1     | `b`          | `non_trovata`  | b non è vocale | `non_trovata`           |
+| 2     | `c`          | `non_trovata`  | c non è vocale | `non_trovata`           |
+| 3     | `d`          | `non_trovata`  | d non è vocale | `non_trovata`           |
+| fine  | fine stringa | `non_trovata`  | fine stringa   | `fine stringa` → **no** |
 
-La regola è sempre la stessa: **l'accettazione dipende dallo stato in cui ci si trova quando la stringa finisce**, non da cosa è successo durante il percorso.
-
----
+La regola è sempre la stessa: **l'accettazione dipende da dove porta la transizione fine stringa**,
+non da cosa è successo durante il percorso.
 
 Per ogni esercizio:
 
@@ -455,26 +437,12 @@ Per ogni esercizio:
 2. disegna l'automa con stati, transizioni e **stati finali** (doppio bordo);
 3. scrivi il programma con un `while`.
 
----
-
-### Esempio svolto: almeno una vocale
 
 **Problema:** data una stringa, stampare `sì` se contiene almeno una vocale, `no` altrimenti.
 
-**Stati:** due — `non_trovata` (nessuna vocale vista finora) e `trovata`. Una volta in `trovata` non si torna indietro.
-
-```
-         ┌─── carattere non è vocale ───┐
-         ▼                              │
-──►  ┌──────────────────┐               │
-     │   non_trovata    │───────────────┘
-     └──────────────────┘
-           │  carattere è vocale
-           ▼
-        ╔══════════╗
-        ║  trovata ║
-        ╚══════════╝
-```
+**Stati:** due
+— `non_trovata` (nessuna vocale vista finora) e
+- `trovata` (stato finale ╔══╗).
 
 **Programma:**
 
@@ -495,57 +463,70 @@ else:
 
 La guardia del `while` ha due condizioni: non aver finito la stringa **e** non aver già trovato la vocale. Appena una vocale viene trovata, il ciclo si interrompe senza leggere il resto.
 
----
+</details>
 
 ### Esempio svolto: ogni `a` seguita da `b`
 
-**Problema:** data una stringa, stampare `sì` se ogni `a` è immediatamente seguita da `b`, `no` altrimenti (es. `"abxab"` → sì, `"axb"` → no, `"a"` → no).
+**Problema:** data una stringa, stampare `sì` se ogni `a` è immediatamente seguita da `b`, `no` altrimenti
 
-**Stati:** tre — `ok` (finora tutto corretto), `dopo_a` (l'ultimo carattere letto era `a`, aspettiamo `b`), `errore` (trovata una `a` non seguita da `b`). Da `errore` non si esce.
+**Cosa mi aspetto:**
+
+- `"abxab"` → sì
+- `"axb"` → no
+- `"a"` → no
+- `""` → sì
+
+**Stati:** tre
+— `ok` (finora tutto corretto),
+- `dopo_a` (l'ultimo carattere letto era `a`, aspettiamo `b`),
+- `errore` (trovata una `a` non seguita da `b`). Da `errore` non si esce.
 
 ```
-         ┌─── car ≠ 'a' ───┐          ┌─── qualsiasi ───┐
-         ▼                 │          ▼                  │
-──►  ╔═══════╗             │      ┌─────────┐            │
-     ║  ok   ║─────────────┘      │ errore  │────────────┘
-     ╚═══════╝
-         │  car = 'a'
-         ▼
-     ┌─────────┐
-     │ dopo_a  │── car = 'b' ──► ok
-     └─────────┘── car ≠ 'b' ──► errore
+     ┌ ≠ a ─┐                               ┌───── 'a' ──┐
+     ▼      |                               ▼            │
+──►  ╔═══════╗              'a'        ┌──────────┐      │
+     ║  ok   ║ ──────────────────────► │  dopo_a  │──────┘
+     ╚═══════╝                         └──────────┘
+       ▲                                  │ |
+       └──────────── b ───────────────────┘ |
+                                            │ ≠ a, b
+                                            ▼
+                                       ┌─────────┐◄── qualsiasi ──┐
+                                       │ errore  │                |
+                                       └─────────┘────────────────┘
 ```
 
-Il diagramma diventa denso: è normale per automi con tre stati e transizioni incrociate. La tabella delle transizioni è spesso più chiara:
+Il diagramma diventa denso: è normale per automi con tre stati e transizioni incrociate.
+Guardiamo la tabella delle transizioni:
 
-| Stato corrente | Carattere letto | Stato successivo |
-| -------------- | --------------- | ---------------- |
-| `ok`           | `a`             | `dopo_a`         |
-| `ok`           | altro           | `ok`             |
-| `dopo_a`       | `b`             | `ok`             |
-| `dopo_a`       | `a`             | `errore`         |
-| `dopo_a`       | altro           | `errore`         |
-| `errore`       | qualsiasi       | `errore`         |
+| Stato corrente | Carattere letto        | Stato successivo |
+| -------------- | ---------------------- | ---------------- |
+| `ok`           | `a`                    | `dopo_a`         |
+| `ok`           | tutto tranne `a`       | `ok`             |
+| `dopo_a`       | `b`                    | `ok`             |
+| `dopo_a`       | `a`                    | `dopo_a`         |
+| `dopo_a`       | tutto tranne `a` e `b` | `errore`         |
+| `errore`       | qualsiasi carattere    | `errore`         |
 
 **Traccia su `"abxab"`:**
 
-| Passo | Carattere | Stato corrente | Transizione         | Stato successivo |
-| ----- | --------- | -------------- | ------------------- | ---------------- |
-| 1     | `a`       | `ok`           | car = 'a'           | `dopo_a`         |
-| 2     | `b`       | `dopo_a`       | car = 'b'           | `ok`             |
-| 3     | `x`       | `ok`           | car ≠ 'a'           | `ok`             |
-| 4     | `a`       | `ok`           | car = 'a'           | `dopo_a`         |
-| 5     | `b`       | `dopo_a`       | car = 'b'           | `ok`             |
-| fine  |           | `ok` → ╔══╗ stato finale | | **sì** |
+| Passo | Carattere | Stato corrente | Stato successivo |
+| ----- | --------- | -------------- | ---------------- |
+| 1     | `a`       | `ok`           | `dopo_a`         |
+| 2     | `b`       | `dopo_a`       | `ok`             |
+| 3     | `x`       | `ok`           | `ok`             |
+| 4     | `a`       | `ok`           | `dopo_a`         |
+| 5     | `b`       | `dopo_a`       | `ok`             |
+| fine  |           | `ok` → ╔══╗    |                  |
 
 **Traccia su `"axb"`:**
 
-| Passo | Carattere | Stato corrente | Transizione         | Stato successivo |
-| ----- | --------- | -------------- | ------------------- | ---------------- |
-| 1     | `a`       | `ok`           | car = 'a'           | `dopo_a`         |
-| 2     | `x`       | `dopo_a`       | car ≠ 'b'           | `errore`         |
-| 3     | `b`       | `errore`       | ciclo interrotto    | `errore`         |
-| fine  |           | `errore` → non è stato finale | | **no** |
+| Passo | Carattere | Stato corrente        | Stato successivo |
+| ----- | --------- | --------------------- | ---------------- |
+| 1     | `a`       | `ok`                  | `dopo_a`         |
+| 2     | `x`       | `dopo_a`              | `errore`         |
+| 3     | `b`       | `errore`              | `errore`         |
+| fine  |           | `errore` → non finale |                  |
 
 **Programma:**
 
@@ -575,375 +556,24 @@ else:
     print("no")
 ```
 
-Il controllo dopo il ciclo è necessario: una stringa come `"xxa"` non fa scattare `errore` durante il ciclo, ma finisce in `dopo_a` senza aver mai trovato la `b`.
-
----
-
-### Livello base — due stati
-
-13. **Almeno una vocale.** *(vedi esempio svolto sopra)*
-
-14. **Tutte maiuscole.** Data una stringa, stampa `sì` se tutti i caratteri sono lettere maiuscole, `no` appena trovi un carattere che non lo è.
-
-15. **Contiene cifra.** Data una stringa, stampa `sì` se contiene almeno un carattere numerico (`"0"` … `"9"`).
-
----
-
-### Livello medio — tre stati o più
-
-16. **Due vocali consecutive.** Data una stringa, stampa `sì` se contiene almeno due vocali consecutive (es. `"piaue"` → sì, `"cane"` → no).
-
-    Suggerimento: gli stati sono `nessuna`, `una_vocale` (ultima letta era vocale), `trovata`.
-
-17. **Ogni `a` seguita da `b`.** *(vedi esempio svolto sopra)*
-
-18. **Numero pari di vocali.** Data una stringa, stampa `sì` se il numero totale di vocali è pari.
-
-    Suggerimento: bastano due stati — `pari` e `dispari`. Si passa da uno all'altro a ogni vocale incontrata.
-
----
-
-### Livello avanzato
-
-19. **Parentesi bilanciate (solo tonde).** Data una stringa, stampa `sì` se ogni `(` è chiusa da una `)` e non compaiono `)` senza una `(` precedente.
-
-    Suggerimento: lo stato è un contatore intero (non solo due valori); il ciclo termina prima se il contatore scende sotto zero.
-
-<!-- <a id="mod4-errori"></a>
-## Errori tipici dei cicli `while`
-
-I problemi tipici sono quasi sempre tre.
-
-| Errore | Che cosa succede |
-| --- | --- |
-| guardia sbagliata | il ciclo termina troppo presto o non termina |
-| stato non aggiornato | la guardia non cambia mai |
-| aggiornamento nel punto sbagliato | salti casi, duplichi passi o perdi il controllo del flusso |
-
-Esempio di loop infinito:
-
-```python
-x = 0
-
-while x < 5:
-    print(x)
-```
-
-Qui `x` non cambia mai, quindi la guardia resta sempre vera.
-
-Versione corretta:
-
-```python
-x = 0
-
-while x < 5:
-    print(x)
-    x = x + 1
-```
-
-Domanda da farsi sempre:
-
-> quale variabile sta portando il ciclo verso la terminazione?
-
-Due errori tipici nei `while` di stampa sono questi:
-
-- dimenticare l'aggiornamento della variabile interna, per esempio `j += 1`;
-- scrivere una guardia troppo debole, come `while 1 < n`, che non dipende davvero dallo stato del ciclo.
-
-In entrambi i casi il sintomo è lo stesso:
-
-- il programma non si ferma;
-- oppure continua a stampare righe sbagliate;
-- oppure produce un pattern quasi giusto ma con uno shift di una unita'.
-
-Regola pratica:
-
-- la guardia deve dipendere da una variabile che cambia davvero;
-- e quella variabile deve essere aggiornata nel punto giusto del ciclo. -->
-
-## Esercizi utili
-
-Conviene lavorare soprattutto su questi esercizi:
-
-1. leggere parole da un file e fermarsi alla prima parola piu' lunga di 6 caratteri;
-2. leggere frasi e fermarsi dopo 100 parole;
-3. leggere 10 numeri e decidere se sono di piu' i pari o i dispari;
-4. leggere numeri finché non compare una sentinella;
-5. dire se un numero positivo è primo;
-6. contare quante cifre ha un numero;
-7. fermarsi quando la media di un gruppo di numeri diventa zero.
-
-Sono esercizi utili perche' costringono a progettare con attenzione:
-
-- la guardia;
-- le variabili di stato;
-- l'aggiornamento a ogni iterazione;
-- la condizione di uscita.
-
----
-
-## Esercizi assegnati su `while`
-
-Nei testi degli esercizi assegnati ricorrono alcuni pattern molto coerenti con questo modulo.
-
-### Sequenze terminate da sentinella
-
-Esempi assegnati:
-
-- leggere parole finché non compare `fine` e controllare se compare `"lingua"`;
-- leggere numeri finché non compare `0` e stampare il massimo;
-- leggere parole finché non compare `fine` e classificare ogni parola come lunga o breve;
-- leggere numeri finché non compare `0` e dire per ciascuno se è pari o dispari.
-
-Questi esercizi servono a consolidare tre idee:
-
-- la sentinella non va trattata come dato normale;
-- il controllo di terminazione va ripetuto a ogni passo;
-- bisogna mantenere uno stato cumulativo corretto.
-
-### Stato del ciclo e proprieta' della sequenza
-
-Un secondo gruppo di esercizi chiede di riconoscere proprieta' piu' strutturate:
-
-- verificare che ogni `1` sia seguito da `2`;
-- contare quante parole finiscono per vocale;
-- accumulare il numero totale di vocali lette;
-- leggere un intero e stampare le sue potenze finché non si supera `1000`.
-
-Qui il punto non è solo iterare, ma scegliere con precisione:
-
-- quali variabili aggiornare;
-- quando aggiornare;
-- quale informazione deve sopravvivere da un'iterazione alla successiva.
-
-### Convalida e vincoli
-
-Tra gli esercizi assegnati compare anche la validazione esplicita:
-
-```python
-# leggere un numero tra 1 e 10, altrimenti segnalare errore
-```
-
-Questo è un caso tipico di `while` usato non per accumulare una sequenza, ma per imporre un vincolo sull'input.
-
-### Mini-progetto: impiccato
-
-L'esercizio sull'impiccato è particolarmente adatto a questo modulo perche' combina:
-
-- stato corrente del gioco;
-- ripetizione finché la parola non è completata;
-- aggiornamento dopo ogni lettera proposta;
-- possibilita' di introdurre tentativi massimi.
-
-E' un buon ponte tra:
-
-- `while`;
-- stringhe;
-- funzioni di aggiornamento dello stato;
-- debugging di programmi un po' piu' lunghi.
-
----
-
-## Soluzioni commentate emerse in lezione
-
-Le soluzioni svolte mostrano bene che spesso conviene arrivare al programma finale per raffinamenti successivi.
-
-### Verificare la regola "ogni 1 è seguito da 2"
-
-Nei file svolti compaiono piu' versioni della stessa idea:
-
-1. una soluzione che salva tutta la sequenza in lista;
-2. una soluzione che controlla posizioni adiacenti;
-3. una soluzione piu' pulita che tiene memoria del numero precedente.
-
-Questa progressione è didatticamente molto utile perche' mostra che:
-
-- una prima soluzione puo' funzionare ma essere fragile;
-- rileggere il problema puo' suggerire uno stato piu' semplice;
-- spesso basta una variabile `numero_pred` per evitare strutture superflue.
-
-### Trovare il massimo con sentinella
-
-Una delle soluzioni svolte usa lo schema:
-
-```python
-numero = int(input("Inserisci un numero: "))
-massimo = -1
-
-while numero != 0:
-    if numero > massimo:
-        massimo = numero
-    numero = int(input("Inserisci un numero: "))
-
-print(massimo)
-```
-
-Questo è un ottimo esempio di `while` con:
-
-- sentinella;
-- variabile accumulatrice;
-- aggiornamento dello stato a ogni iterazione.
-
-### Impiccato come automa
-
-La soluzione svolta dell'impiccato introduce una funzione:
-
-```python
-def update(guess, parola_segreta, lettera):
-    ...
-```
-
-e poi usa un ciclo:
-
-```python
-while GUESS != PAROLA_SEGRETA:
-    ...
-```
-
-Questo rende esplicita una struttura molto importante:
-
-- stato corrente del gioco -> `GUESS`
-- input del giocatore -> nuova lettera
-- funzione di transizione -> `update`
-- condizione di arresto -> parola completata
-
-In pratica, è un automa a stati finiti travestito da gioco.
-
----
-
-## Esercizi di stampa con `while`
-
-Ci sono anche esercizi molto utili per capire davvero come evolve lo stato in un ciclo:
-
-- stampare `1`, poi `22`, poi `333`, fino a `n`;
-- stampare triangoli o pattern numerici usando due cicli annidati;
-- riscrivere la stessa soluzione passando da `while` a `for`.
-
-Il valore di questi esercizi non è estetico, ma strutturale:
-
-- costringono a distinguere il ciclo che controlla le righe dal ciclo che controlla i simboli dentro ogni riga;
-- fanno vedere subito gli errori di guardia, di inizializzazione e di incremento;
-- mostrano che un piccolo cambio di indice puo' produrre un pattern diverso.
-
-Per esempio, in una soluzione con due cicli:
-
-- l'indice esterno `i` puo' dire quale riga stiamo costruendo;
-- l'indice interno `j` puo' dire quante volte ripetere un simbolo o quale simbolo mettere.
-
-Se usi `i` per costruire la stringa ottieni un risultato; se usi `j`, ne ottieni un altro. Questo è uno dei modi piu' chiari per vedere che gli indici non sono "nomi intercambiabili", ma rappresentano ruoli diversi nello stato del programma.
-
----
-
 ## Esercizi
 
-### Sequenze e contatori
+Per ciascun esercizio:
 
-1. Scrivi un programma che stampa i numeri da 1 a 10.
-2. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `n` a `0`.
-3. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `-n` a `n`.
-4. Dato `pagine = 120`, stampa: `Sto leggendo la pagina 1`, `Sto leggendo la pagina 2`, ... fino all'ultima pagina.
+1. Definisci gli stati dell'automa e indica quale è quello iniziale e quali sono quelli finali (accettanti).
+2. Elenca le transizioni: per ogni stato, cosa succede leggendo ciascun tipo di carattere.
+3. Scegli due stringhe di test — una che produce `sì` e una che produce `no` — e mostra il percorso di riconoscimento in una tabella (come nelle tracce viste sopra).
 
-### Input con sentinella
+1. **Almeno una vocale.** Data una stringa, stampa `sì` se contiene almeno una vocale (`a`, `e`, `i`, `o`, `u`), `no` altrimenti.
+2. **Tutte maiuscole.** Data una stringa, stampa `sì` se tutti i caratteri sono lettere maiuscole, `no` altrimenti.
+3. **Termina con vocale.** Data una stringa, stampa `sì` se l'ultimo carattere è una vocale, `no` altrimenti. (Lo stato finale dell'automa, non il primo carattere trovato, determina il risultato.)
+4. **Numero pari di vocali.** Data una stringa, stampa `sì` se il numero totale di vocali è pari (zero è pari), `no` altrimenti.
+5. **Nessuno spazio doppio.** Data una stringa, stampa `sì` se non contiene due spazi consecutivi, `no` altrimenti.
+6. **Due vocali consecutive.** Data una stringa, stampa `sì` se contiene almeno due vocali consecutive (es. `"piaue"` → sì, `"cane"` → no), `no` altrimenti.
+7. **Ogni `a` seguita da `b`.**
+8. **Il numero di `a` è uguale al numero di `b`.** Data una stringa, stampa `sì` se il numero di occorrenze di `a` è uguale al numero di occorrenze di `b`, `no` altrimenti.
+9. **Contiene sia una `a` che una `b`.** Data una stringa, stampa `sì` se contiene almeno una `a` e almeno una `b` (in qualsiasi ordine), `no` altrimenti. (Servono quattro stati: `nessuna`, `solo_a`, `solo_b`, `entrambe`.)
+10. **`ab` mai seguita da `c`.** Data una stringa, stampa `sì` se ogni volta che compare la sottostringa `ab`, il carattere immediatamente successivo non è `c` (es. `"xabx"` → sì, `"abc"` → no).
+11. **Alternanza obbligata.** Data una stringa composta solo da lettere, stampa `sì` se vocali e consonanti si alternano rigorosamente (es. `"banana"` → sì, `"cane"` → no, `"aei"` → no).
+12. **Numero intero ben formato.** Data una stringa, stampa `sì` se rappresenta un intero valido: un segno opzionale (`+` o `-`) seguito da almeno una cifra (es. `"-42"` → sì, `"3"` → sì, `"+"` → no, `"1a2"` → no).
 
-5. Scrivi un programma che chiede all'utente di inserire una parola e si ferma quando scrive `fine`.
-6. Scrivi un programma che chiede all'utente di inserire un numero, si ferma quando inserisce `0` e conta quanti numeri interi sono stati inseriti.
-7. Scrivi un programma che chiede all'utente di inserire un numero, si ferma quando inserisce `0` e, per ogni numero inserito, stampa `pari` oppure `dispari`.
-8. Scrivi un programma che chiede all'utente di inserire una parola, si ferma quando scrive `fine` e, per ogni parola inserita, stampa `parola lunga` se ha più di 5 caratteri, altrimenti `parola breve`.
-
-### Accumuli su sequenze
-
-9. Chiedi all'utente di inserire una stringa e calcola quante vocali ci sono.
-10. Dati `pagine = 3` e `righe = 5`, stampa tutte le combinazioni (Pagina 1 Riga 1, Pagina 1 Riga 2, ... Pagina 3 Riga 5).
-11. Scrivi un programma che stampa i numeri dispari compresi tra 1 e 10 (inclusi).
-12. Scrivi un programma che legge una parola dall'input e stampa solo le lettere in posizione pari.
-
-### Convalida dell'input
-
-13. Scrivi un programma che legge un numero compreso tra 1 e 10, stampa un messaggio di errore se il numero non è lecito, e stampa la tabellina di quel numero. Esempio per `3`:
-    ```
-    3 x 0 = 0
-    3 x 1 = 3
-    ...
-    3 x 10 = 30
-    ```
-
-### Stato del ciclo e proprietà della sequenza
-
-14. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Per ogni parola inserita calcola quante vocali ci sono. Alla fine stampa il numero totale di vocali.
-15. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Alla fine stampa quante delle parole inserite finiscono per vocale.
-16. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Stampa il maggiore dei numeri inseriti.
-17. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Controlla se ogni `1` è seguito da un `2`. Esempi:
-    - `9, 1, 2, 6, 1, 2, 0` → `Sequenza corretta`
-    - `9, 1, 6, 1, 2, 0` → `Sequenza errata`
-18. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Controlla se tra le parole inserite compare la parola `lingua`. Stampa `Sequenza corretta` o `Sequenza errata`.
-
-### Potenze e cicli numerici
-
-19. Scrivi un programma che chiede in input un intero e stampa le sue potenze finché il valore non supera 1000. Esempio per `2`:
-    ```
-    2^1 = 2
-    2^2 = 4
-    ...
-    2^9 = 512
-    ```
-
-### Mini-progetto: impiccato
-
-20. Scarica i file `parola_segreta.py` e `impiccato.py` dalla cartella `impiccato/`. Leggi il codice, eseguilo e poi cerca di aggiungere un numero massimo di tentativi.
-
----
-
-## Riepilogo
-
-Questo modulo organizza il materiale su:
-
-- significato del ciclo `while`;
-- iterazione a terminazione non nota in anticipo;
-- sentinelle e input ripetuto;
-- convalida dell'input;
-- errori tipici dei cicli;
-- uso del `while` per piccoli automi e problemi di scansione.
-
-
-
-<!-- Per questo ogni `while` va letto sempre in termini di:
-
-- stato iniziale;
-- guardia;
-- aggiornamento dello stato;
-- condizione di uscita.
-
-Un punto pratico importante:
-
-- con `for` di solito sappiamo gia' quante volte iterare oppure quale sequenza stiamo scorrendo;
-- con `while` la domanda tipica è invece: "continuo finché non succede qualcosa che mi fa fermare".
-
-Per questo il `while` compare spesso in problemi del tipo:
-
-- continua a leggere input finché non arriva una sentinella;
-- continua a scorrere dati finché non trovi il primo caso interessante;
-- continua a chiedere un valore finché non rispetta il vincolo richiesto.
-
-Python non ha una forma `do ... while`: se il corpo del ciclo deve essere eseguito almeno una volta, bisogna progettare con attenzione stato iniziale e prima lettura dei dati.
-
-
-## Il problema che porta al `while`
-
-Il modulo parte da una domanda semplice:
-
-> come si itera quando non sappiamo prima quante volte dovremo ripetere il blocco?
-
-
-Esempio:
-
-```python
-lista_nomi = []
-i = 0
-
-while len(lista_nomi) < 10:
-    if nome(testo[i]):
-        lista_nomi.append(testo[i])
-    i = i + 1
-```
-
-Qui non sappiamo in anticipo dove comparira' il decimo nome nel testo, quindi non possiamo fissare subito il numero corretto di passi.  -->

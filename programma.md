@@ -78,18 +78,17 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1h     | -        | Esercizi: disegnare automi, trovare errori                                                |
 
 ### 04 | Ciclo while, sentinelle e convalida | slides=guida-lezioni/modulo-4.slides.html
-| Tipologia | Durata | Libro        | Argomento                                                                        |
-| --------- | ------ | ------------ | -------------------------------------------------------------------------------- |
-| theory    | 0.5h   | cap. 4.1/4.2 | Dal `if` al `while`: motivazione, struttura e tabella comparativa                |
-| theory    | 0.5h   | cap. 4.1/4.2 | Sintassi e semantica del `while`: guardia, blocco, aggiornamento dello stato     |
-| exercise  | 1h     | -            | Esercizi 1–7: contatori, dispari, potenze, sequenze e stop-word                  |
-| theory    | 0.5h   | cap. 4.5/4.6 | Quando l'utente decide quando fermarsi: schema con valore speciale di stop       |
-| exercise  | 1h     | -            | Esercizi 8–13: input ripetuto, conteggi, classificazione, tabellina con validazione, vocali |
-| theory    | 0.5h   | cap. 4.7     | Cicli nidificati                                                                 |
-| exercise  | 1h     | -            | Esercizi 14–16: cicli nidificati, tavola pitagorica e pattern di stampa          |
-| theory    | 0.5h   | -            | Lo stato del programma durante un `while`: tracce di esecuzione                  |
-| theory    | 0.5h   | -            | Automi a stati finiti e il `while`: stato `resta`, stato `fine`, self-loop       |
-| exercise  | 1h     | -            | Esercizi: riconoscimento di stringhe con automi (almeno una vocale, `a` prima di `b`) |
+| Tipologia | Durata | Libro        | Argomento                                                                              |
+| --------- | ------ | ------------ | -------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | cap. 4.1/4.2 | Dal `if` al `while`: motivazione, struttura e tabella comparativa                      |
+| exercise  | 0.5h   | -            | Esercizi: contatori, dispari, potenze, sequenze e stop-word                            |
+| theory    | 0.5h   | cap. 4.5/4.6 | Sentinelle                                                                             |
+| exercise  | 1h     | -            | Esercizi: input ripetuto, conteggi, classificazione, tabellina con validazione, vocali |
+| theory    | 0.5h   | cap. 4.7     | Cicli annidati                                                                         |
+| exercise  | 1h     | -            | Esercizi                                                                               |
+| theory    | 0.5h   | -            | Lo stato del programma durante un `while`: tracce di esecuzione                        |
+| theory    | 0.5h   | -            | Automi a stati finiti e il `while`: stato `resta`, stato `fine`, self-loop             |
+| exercise  | 1h     | -            | Esercizi: riconoscimento di stringhe con automi                                        |
 
 ### P1 | Prova intermedia 1 | prova=true
 | Tipologia | Durata | Libro | Argomento                                                                 |
