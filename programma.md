@@ -93,16 +93,15 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 ### P1 | Prova intermedia 1 | prova=true
 | Tipologia | Durata | Libro | Argomento                                                                 |
 | --------- | ------ | ----- | ------------------------------------------------------------------------- |
-| exercise  | 1h     | — | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali) |
-| exercise  | 1h     | — | Correzione della prova                                                    |
+| exercise  | 1h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali) |
+| exercise  | 1h     | —     | Correzione della prova                                                    |
 
 ### 05 | Strutture dati: liste | slides=guida-lezioni/modulo-5.slides.html
-| Tipologia | Durata | Libro                | Argomento                                                                         |
-| --------- | ------ | -------------------- | --------------------------------------------------------------------------------- |
-| theory    | 0.5h   | -                    | Due problemi che il `while` da solo non risolve                                   |
-| theory    | 0.5h   | cap. 7.1/7.2/7.3/7.4 | Liste                                                                             |
-| exercise  | 1h     | -                    | Esercizi base: costruire liste, accedere agli elementi, scorrere con `while`      |
-| exercise  | 2h     | -                    | Esercizi avanzati: verifica di proprietà, serie multiple, conteggio per categoria |
+| Tipologia | Durata | Libro                | Argomento                                                                                        |
+| --------- | ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
+| theory    | 1h     | cap. 7.1/7.2/7.3/7.4 | Liste                                                                                            |
+| exercise  | 1h     | -                    | Esercizi: costruire liste, accedere agli elementi, scorrere con `while`                          |
+| exercise  | 2h     | -                    | Esercizi: verifica di proprietà anche su liste annidate, serie multiple, conteggio per categoria |
 
 ### 06 | Funzioni e procedure | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                           |
