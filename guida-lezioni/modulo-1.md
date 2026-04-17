@@ -11,7 +11,7 @@ Ricerca: risorse linguistiche, linguistica cognitiva e Natural Language Processi
 - PhD in Cognitive and Brain Sciences — CIMeC, Università di Trento
 - Laurea triennale e magistrale in Informatica Umanistica (Language Technologies) — Università di Pisa
 
-GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](https://scholar.google.it/citations?user=8oLH83IAAAAJ&hl=en) · Telegram: @ellepannitto
+GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](https://scholar.google.it/citations?user=8oLH83IAAAAJ&hl=en)
 
 ## Piano del corso
 
@@ -51,6 +51,10 @@ Per ogni blocco viene considerata la valutazione più favorevole tra prova inter
 
 ### Bibliografia consigliata
 
+1. Venire a lezione ;)
+2. No davvero, venire a lezione
+3. **Introduzione a Python** di **Tony Gaddis**
+
 ## Cosa facciamo
 
 - partiamo davvero da zero;
@@ -70,9 +74,11 @@ Non ci interessa:
 - paradigma funzionale;
 - ottimizzazione spinta o algoritmi specialistici.
 
-> L'obiettivo del corso è più pragmatico: prima impariamo a leggere, scrivere e controllare programmi semplici; poi useremo queste basi per lavorare su dati e problemi reali.
+> L'obiettivo del corso è più pragmatico:
+> **prima** impariamo a leggere, scrivere e controllare programmi semplici;
+> **poi** useremo queste basi per lavorare su dati e problemi reali.
 
-## A fine lezione:
+## A fine lezione
 
 - Sai distinguere interprete, editor e terminale?
 - Sai lanciare ed utilizzare la REPL di Python?
@@ -81,7 +87,6 @@ Non ci interessa:
 - Sai spiegare in modo intuitivo il ruolo di CPU, memoria e file system?
 - Sai eseguire comandi base nel terminale? Creare una cartella, cambiare cartella, leggerne il contenuto
 
-
 ## Perché Python
 
 - è un vero linguaggio di programmazione;
@@ -89,7 +94,9 @@ Non ci interessa:
 - permette di passare rapidamente da un problema a un programma eseguibile.
 
 ```python
-acquisti = {"detersivo": 5, "prosciutto": 3, "mortadella": 2}
+acquisti = {"detersivo": 5,
+            "prosciutto": 3,
+            "mortadella": 2}
 
 spesa_totale = 0
 
@@ -117,28 +124,27 @@ TOTALE:  10
 
 - Python è un linguaggio generale;
 - ha moltissime librerie e ottima documentazione;
-- permette sia scripting rapido sia programmi più strutturati.
+- permette sia scripting rapido sia progetti più strutturati.
 
 ## Python in tre aggettivi
 
 Python è un linguaggio **multiparadigma**, **interpretato** e **ad alto livello**.
 
-Queste tre parole per ora possono sembrare etichette astratte. Nel resto di questa lezione diventeranno concrete:
 
-| Aggettivo                   | Significato                                                                                                      | Dove lo vediamo                                       |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| **ad alto livello**         | il codice è vicino al modo in cui ragioniamo noi, lontano dalle istruzioni della macchina                        | Von Neumann — oggi                                    |
-| **interpretato**            | il programma viene eseguito riga per riga da un interprete, non tradotto tutto in anticipo                       | interprete e compilatore — oggi                       |
-| **dinamicamente tipizzato** | i tipi non si dichiarano: vengono determinati a runtime, e operazioni tra tipi incompatibili producono un errore | REPL — oggi; casting con `int()` e `str()` — modulo 2 |
-| **multiparadigma**          | supporta stili diversi di programmazione (imperativo, funzionale, a oggetti)                                     | nel corso usiamo principalmente lo stile imperativo   |
+| Aggettivo                   | Significato                                                                                                      |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| **ad alto livello**         | il codice è vicino al modo in cui ragioniamo noi, lontano dalle istruzioni della macchina                        |
+| **interpretato**            | il programma viene eseguito riga per riga da un interprete, non tradotto tutto in anticipo                       |
+| **dinamicamente tipizzato** | i tipi non si dichiarano: vengono determinati a runtime, e operazioni tra tipi incompatibili producono un errore |
+| **multiparadigma**          | supporta stili diversi di programmazione (imperativo, funzionale, a oggetti)                                     |
 
 > Per ora basta sapere che esistono. Alla fine della lezione queste parole avranno un significato preciso.
 
 > non vogliamo scrivere codice elegante, ma codice **corretto**, **leggibile** e **controllabile**.
 
+## REPL, tipi e operazioni fondamentali
 
-## Iniziamo dalla pratica: REPL, tipi e operazioni fondamentali
-
+Iniziamo dalla pratica!
 La **REPL** è la modalità interattiva di Python: scrivi un'espressione, premi Invio, Python la valuta e mostra il risultato.
 
 Per esempio:
@@ -208,13 +214,17 @@ Il tipo di un valore determina quali operazioni hanno senso su di esso.
 ```
 </details>
 
-
 > Occhio a due operazioni con cui potremmo avere meno familiarità:
 > - `//` per il **quoziente** della divisione intera;
 > - `%` per il **resto** della divisione intera.
 
 <details>
-<summary>Esempi</summary>
+<summary>Divisione in colonna</summary>
+
+- `6 * 7 = 42`
+- da `44` avanzano `2`
+
+![Divisione intera e resto](/divisione.png)
 
 ```python
 >>> 44 // 6
@@ -223,13 +233,6 @@ Il tipo di un valore determina quali operazioni hanno senso su di esso.
 2
 ```
 </details>
-
-L'idea è la stessa della divisione in colonna:
-
-- `6 * 7 = 42`
-- da `44` avanzano `2`
-
-![Divisione intera e resto](/divisione.png)
 
 ### Stringhe
 
@@ -260,8 +263,7 @@ Le stringhe sono sequenze di caratteri.
 ```
 </details>
 
-> NOTA:
-> l'operatore `+` svolge due operazioni diverse a seconda del tipo di oggetto a cui lo stiamo applicando.
+> L'operatore `+` svolge due operazioni diverse a seconda del tipo di oggetto a cui lo stiamo applicando.
 >
 > - `+` tra numeri significa somma;
 > - `+` tra stringhe significa concatenazione.
@@ -313,8 +315,6 @@ Le sottostringhe si leggono anche per intervalli:
 
 Qui il carattere iniziale è incluso, quello finale no. Omettere il secondo indice significa "fino alla fine".
 
----
-
 ## Esercizi sulla REPL
 
 Scrivi un'espressione che calcoli:
@@ -335,7 +335,9 @@ Scrivi un'espressione che calcoli:
 14. la stessa concatenazione ma con uno spazio in mezzo;
 15. il primo carattere di `"informatica"`;
 16. il sesto carattere di `"supercalifragilistichespiralidoso"` in maiuscolo;
-17. la concatenazione del sesto, nono, decimo, ventiseiesimo e ventisettesimo carattere della stessa stringa.
+17. la concatenazione del sesto, nono, decimo, ventiseiesimo e ventisettesimo carattere della stessa stringa;
+18. il quintultimo carattere di `"supercalifragilistichespiralidoso"`;
+19. il carattere centrale di `"informatica"`.
 
 ### Che cosa produce?
 
@@ -355,29 +357,29 @@ Dalle operazioni viste finora emergono due categorie:
 - alcune espressioni **conservano il tipo**: il risultato ha lo stesso tipo degli operandi;
 - altre espressioni **cambiano tipo**: il risultato ha un tipo diverso da quello di partenza.
 
-| Espressione       | Tipo in ingresso      | Tipo in uscita | Cambia tipo? |
-| ----------------- | --------------------- | -------------- | ------------ |
-| `3 + 5`           | `int` + `int`         | `int`          | no           |
-| `"ab" + "cd"`     | `str` + `str`         | `str`          | no           |
-| `"ciao".upper()`  | `str`                 | `str`          | no           |
-| `"ciao"[0]`       | `str`                 | `str`          | no           |
-| `7 / 2`           | `int` / `int`         | `float`        | **sì**       |
-| `len("ciao")`     | `str`                 | `int`          | **sì**       |
-| `"ciao" * 3`      | `str` × `int`         | `str`          | tipi misti   |
-
-Punti da ricordare:
+Per esempio:
 
 - la divisione `/` tra interi restituisce **sempre** un `float`, anche quando il risultato è intero (`4 / 2` dà `2.0`);
 - `len()` prende una stringa e restituisce un intero;
 - l'operatore `*` tra stringa e intero produce una stringa.
 
-Nel modulo 2 vedremo anche `int()` e `str()`, funzioni che cambiano tipo in modo esplicito — si chiamano **cast**.
+| Espressione      | Tipo in ingresso | Tipo in uscita | Cambia tipo? |
+| ---------------- | ---------------- | -------------- | ------------ |
+| `3 + 5`          | `int` + `int`    | `int`          | no           |
+| `"ab" + "cd"`    | `str` + `str`    | `str`          | no           |
+| `"ciao".upper()` | `str`            | `str`          | no           |
+| `"ciao"[0]`      | `str`            | `str`          | no           |
+| `7 / 2`          | `int` / `int`    | `float`        | **sì**       |
+| `len("ciao")`    | `str`            | `int`          | **sì**       |
+| `"ciao" * 3`     | `str` × `int`    | `str`          | -            |
 
----
+Nel modulo 2 vedremo anche `int()` e `str()`, funzioni che cambiano tipo in modo esplicito — si chiamano **cast**.
 
 ## Torniamo indietro: Python come linguaggio formale
 
-Un linguaggio di programmazione è un linguaggio **formale**: a differenza dell'italiano o dell'inglese, non ammette ambiguità. Ogni simbolo ha un significato preciso e le regole di combinazione sono rigide.
+Un linguaggio di programmazione è un linguaggio **formale**: a differenza dell'italiano o dell'inglese,
+non ammette ambiguità.
+Ogni simbolo ha un significato preciso e le regole di combinazione sono rigide.
 
 Possiamo distinguere tre livelli:
 
@@ -395,6 +397,7 @@ La distinzione sintassi/semantica è utile già per leggere i messaggi di errore
 ## Che cosa installiamo davvero
 
 Python è il linguaggio: una specifica formale di vocabolario, sintassi e semantica.
+In quanto tale non può essere *installato*, è solo un insieme di regole!
 
 Quello che installiamo è l'**interprete**, cioè un programma capace di:
 
@@ -402,7 +405,8 @@ Quello che installiamo è l'**interprete**, cioè un programma capace di:
 - verificarne la sintassi;
 - eseguire le istruzioni una alla volta.
 
-In questo senso non "installiamo il linguaggio" come idea astratta: installiamo uno strumento che sa dargli significato.
+In questo senso non "installiamo il linguaggio" come idea astratta:
+installiamo uno strumento che sa dargli significato.
 
 ### Linguaggi ad alto e basso livello
 
@@ -413,18 +417,20 @@ I linguaggi di programmazione non stanno tutti alla stessa distanza dalla macchi
 | **Alto livello**  | più vicino al modo in cui ragioniamo noi             | Python, Java      |
 | **Basso livello** | più vicino alle istruzioni effettive della macchina  | C, Assembly       |
 
-In Python, `len("ciao")` è una singola istruzione leggibile. La CPU, invece, capisce solo operazioni elementari su sequenze di bit: la distanza tra le due cose è enorme, e l'interprete la colma.
+In Python, `len("ciao")` è una singola istruzione leggibile.
+La CPU, invece, capisce solo operazioni elementari su sequenze di bit:
+la distanza tra le due cose è enorme, e l'interprete la colma.
 
 ### Interprete e compilatore
 
-Due famiglie importanti di traduttori:
+Due famiglie importanti di *traduttori*:
 
 | Strumento       | Che cosa fa                                                   | Esempio tipico |
 | --------------- | ------------------------------------------------------------- | -------------- |
 | **Interprete**  | legge ed esegue il programma riga per riga                    | Python         |
 | **Compilatore** | traduce tutto il programma in anticipo, poi produce un eseguibile | C, C++     |
 
-Immaginate un libro scritto in caratteri thai che volete leggere.
+Per capire la differenza tra i due approcci, immaginate un libro scritto in caratteri *thai* che volete leggere.
 
 ```
 กล้วยไม้เป็นพืชที่มนุษย์รู้จักกันดีมานาน
@@ -436,17 +442,18 @@ Immaginate un libro scritto in caratteri thai che volete leggere.
 - Con un **compilatore**: qualcuno traduce l'intero libro, ve lo consegna in italiano e voi lo leggete direttamente. Se c'è un errore a pagina 325, il traduttore se ne accorge durante la traduzione, prima che voi apriate il libro.
 - Con un **interprete**: avete accanto una persona che vi traduce riga per riga mentre leggete insieme. Se c'è un errore a pagina 325, non ve ne accorgete finché non ci arrivate.
 
-| | Interprete | Compilatore |
-| --- | --- | --- |
+|                                   | Interprete                                | Compilatore                                  |
+| --------------------------------- | ----------------------------------------- | -------------------------------------------- |
 | **Quando si scoprono gli errori** | durante l'esecuzione, alla riga sbagliata | prima dell'esecuzione, in fase di traduzione |
-| **Modalità di lavoro** | interattiva (REPL) | compile → esegui |
-| **Eseguibile prodotto** | no — il codice viene riletto ogni volta | sì — gira senza rifare la traduzione |
+| **Modalità di lavoro**            | interattiva (REPL)                        | compile → esegui                             |
+| **Eseguibile prodotto**           | no — il codice viene riletto ogni volta   | sì — gira senza rifare la traduzione         |
 
 ## Architettura di Von Neumann
 
 Tutti i computer moderni seguono un'architettura descritta da Von Neumann negli anni '40, che rimane valida ancora oggi.
 
-L'idea centrale è questa: **un programma è una sequenza di istruzioni memorizzate insieme ai dati**. La CPU le legge una alla volta, le esegue, e produce un risultato.
+L'idea centrale è questa: **un programma è una sequenza di istruzioni memorizzate insieme ai dati**.
+La CPU le legge una alla volta, le esegue, e produce un risultato.
 
 ### I componenti
 
@@ -469,11 +476,11 @@ L'idea centrale è questa: **un programma è una sequenza di istruzioni memorizz
 
 La **CPU** è il motore del computer. Al suo interno troviamo:
 
-| Componente        | Ruolo                                                          | Esempio concreto                        |
-| ----------------- | -------------------------------------------------------------- | --------------------------------------- |
-| **ALU**           | esegue operazioni aritmetiche e logiche                        | calcola `3 + 2`, confronta `x > 0`      |
-| **Registri**      | memoria interna alla CPU, piccolissima e velocissima           | tiene il valore corrente mentre la CPU ci lavora |
-| **Control Unit**  | coordina il flusso: legge l'istruzione, decodifica, attiva ALU | decide quale passo eseguire dopo        |
+| Componente       | Ruolo                                                          | Esempio concreto                                 |
+| ---------------- | -------------------------------------------------------------- | ------------------------------------------------ |
+| **ALU**          | esegue operazioni aritmetiche e logiche                        | calcola `3 + 2`, confronta `x > 0`               |
+| **Registri**     | memoria interna alla CPU, piccolissima e velocissima           | tiene il valore corrente mentre la CPU ci lavora |
+| **Control Unit** | coordina il flusso: legge l'istruzione, decodifica, attiva ALU | decide quale passo eseguire dopo                 |
 
 La **memoria (RAM)** e il **disco** non sono la stessa cosa:
 
@@ -482,11 +489,13 @@ La **memoria (RAM)** e il **disco** non sono la stessa cosa:
 | **RAM**          | veloce   | volatile (si svuota a spegnimento)   | variabili, istruzioni del programma in esecuzione |
 | **Disco**        | lento    | persistente (resta senza corrente)   | file `.py`, documenti, immagini      |
 
-I **dispositivi di input/output** collegano il computer al mondo esterno: tastiera, schermo, mouse, ma anche i file che leggiamo e scriviamo.
+I **dispositivi di input/output** collegano il computer al mondo esterno:
+tastiera, schermo, mouse, ma anche i file che leggiamo e scriviamo.
 
 ### Cosa succede quando un programma viene eseguito
 
-Tra poco lanceremo i nostri primi script dal terminale. Ogni volta che lo facciamo, sotto il cofano succede questo:
+Tra poco lanceremo i nostri primi script dal terminale.
+Ogni volta che lo facciamo, sotto il cofano succede questo:
 
 1. il sistema operativo legge il codice python dal **disco** e lo carica in **RAM**;
 2. la **Control Unit** legge la prima istruzione dalla RAM;
@@ -495,17 +504,20 @@ Tra poco lanceremo i nostri primi script dal terminale. Ogni volta che lo faccia
 5. i passi 2–4 si ripetono per ogni istruzione;
 6. l'output finale va verso un dispositivo di output: lo schermo, o un file su disco.
 
-> Le variabili "spariscono" quando il programma finisce perché vivono in RAM, non su disco. Per conservare un risultato bisogna scriverlo esplicitamente su file.
+> I dati che il programma sta usando "spariscono" quando il programma finisce perché vivono in RAM, non su disco.
+> Per conservare un risultato bisogna **scriverlo** esplicitamente su file (i.e., **in output**).
 
 ### Attività: simulare Von Neumann
 
-**Setup.** Si scelgono 3 volontari. Ciascuno riceve un foglio e interpreta un componente:
+**Setup.** Ci servono 3 volontari! Ciascuno riceve un foglio e interpreta un componente:
 
-| Ruolo           | Componente Von Neumann        | Cosa fa durante la simulazione |
-| --------------- | ----------------------------- | ------------------------------ |
-| **CPU**         | Control Unit                  | legge le istruzioni una alla volta e le distribuisce agli altri due |
-| **Memoria**     | RAM + ALU                     | tiene traccia dei valori `x` e `y`; esegue le operazioni aritmetiche che la CPU le chiede |
-| **Schermo**     | Dispositivo di output         | riceve dalla CPU le coordinate `(x, y)` e colora la casella corrispondente su una griglia — **tenendo il foglio nascosto agli altri** |
+| Ruolo       | Componente Von Neumann | Cosa fa durante la simulazione                                                                                                        |
+| ----------- | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| **CPU**     | Control Unit           | legge le istruzioni una alla volta e le distribuisce agli altri due                                                                   |
+| **Memoria** | RAM + ALU              | tiene traccia dei valori `x` e `y`; esegue le operazioni aritmetiche che la CPU le chiede                                             |
+| **Schermo** | Dispositivo di output  | riceve dalla CPU le coordinate `(x, y)` e colora la casella corrispondente su una griglia — **tenendo il foglio nascosto agli altri** |
+
+<details>
 
 **Il programma.** La CPU riceve queste istruzioni e le esegue in ordine:
 
@@ -550,6 +562,8 @@ FINE
    +---+---+---+---+---+---+---+---+
 ```
 
+</details>
+
 **Domande di discussione.**
 
 - La CPU sapeva cosa stava disegnando? Perché no?
@@ -558,15 +572,18 @@ FINE
 - Se la Memoria dimenticasse il valore di `x` a metà esecuzione, cosa succederebbe?
 - Quali componenti di Von Neumann abbiamo simulato? Quale mancava?
 
-> Il punto più importante: **la CPU non capisce cosa sta disegnando**. Esegue le istruzioni una alla volta, meccanicamente. Il significato è nel programma, non nella macchina.
-
+> Il punto più importante: **la CPU non capisce cosa sta disegnando**.
+> Esegue le istruzioni una alla volta, meccanicamente.
+> Il significato è nel programma, non nella macchina.
 
 ## Cos'è un programma
 
-Quando diciamo "apro il programma Word" o "uso Excel", usiamo la parola *programma* nel senso di *applicazione*: un software completo con interfaccia grafica, menu, impostazioni, cronologia.
+Quando diciamo "apro il programma Word" o "uso Excel", usiamo la parola *programma* nel senso di *applicazione*:
+un software completo con interfaccia grafica, menu, impostazioni, cronologia.
 Word ed Excel contengono al loro interno migliaia di procedure distinte.
 
-In questo corso useremo *programma* in un senso più specifico: **una sequenza di azioni che prende dati in ingresso, li elabora e produce un risultato**.
+In questo corso useremo *programma* in un senso più specifico:
+**una sequenza di azioni che prende dati in ingresso, li elabora e produce un risultato**.
 
 | Fase         | Domanda tipica             |
 | ------------ | -------------------------- |
@@ -582,45 +599,35 @@ I programmi che scriveremo fanno una cosa sola, in modo chiaro e verificabile. E
 | conteggio caratteri    | una stringa     | un numero            |
 | scelta del file giusto | nome e percorso | file aperto o errore |
 
-### Esercizio: scrivi le istruzioni per il computer
+### Esercizio
 
 Scrivi su un foglio le istruzioni per disegnare questa figura alla lavagna:
 
 ```
-        /\
-       /  \
-      /    \
-     /      \
-    /________\
-    | []  [] |
-    |        |
-    |  ____  |
-    |_|    |_|
+         ) (
+         | |
+        /|_|\
+       /     \
+      /       \
+     /         \
+    /___________\
+    |  []   []  |
+    |           |
+    |   _____   |
+    |  |     |  |
+    |__|_____|__|
 ```
 
-Il docente eseguirà le istruzioni **alla lettera**, come farebbe un computer: non farà domande, non userà il buon senso, non supporrà nulla che non sia scritto esplicitamente.
-
-Domande da discutere dopo:
-
-- Dove hai iniziato a disegnare? Era specificato nelle istruzioni?
-- Quanto era grande la figura? L'avevi scritto?
+<details>
+- Dove bisognava iniziare a disegnare? Era specificato nelle istruzioni?
+- Quanto doveva essere grande la figura?
 - Hai disegnato prima il tetto o le pareti? Importa?
 - Cosa succede se due studenti scrivono istruzioni diverse con le stesse intenzioni?
+</details>
 
-> Un programma è esattamente questo: una sequenza di istruzioni che una macchina segue alla lettera. La macchina non interpreta, non suppone, non corregge. Se le istruzioni sono ambigue o incomplete, il risultato è imprevedibile — o sbagliato.
-
-Qui entra in gioco il **sistema operativo**.
-
-Quando un programma lavora con file, cartelle e dati presenti sul computer, non accede da solo all'hardware: passa attraverso il sistema operativo.
-
-In pratica, il sistema operativo:
-
-- mantiene l'organizzazione di file e cartelle nel file system;
-- permette ai programmi di aprire, leggere, scrivere e chiudere file;
-- tiene traccia di dove si trovano i dati sul disco;
-- gestisce la memoria e il tempo di esecuzione dei processi;
-- coordina anche l'accesso a periferiche come tastiera, schermo e disco.
-
+> Un programma è esattamente questo: una sequenza di istruzioni che una macchina segue alla lettera.
+> La macchina non interpreta, non suppone, non corregge.
+> Se le istruzioni sono ambigue o incomplete, il risultato è imprevedibile — o sbagliato.
 
 ## Ambiente di lavoro
 
@@ -635,8 +642,8 @@ Per iniziare a programmare servono tre strumenti distinti:
 è importante non confonderli:
 
 - l'editor serve a scrivere il codice;
-- il terminale serve a lanciare comandi;
-- l'interprete Python legge il codice e lo esegue.
+- il terminale serve a lanciare comandi, tra cui chiamare l'interprete di python;
+- l'interprete legge il codice e lo esegue, interfacciandosi con la CPU.
 
 ```python
 >>> 3 * (2 + 4)
@@ -658,7 +665,7 @@ La REPL è quindi utile per:
 Normalmente però noi vogliamo scrivere un programma che possiamo salvare e eseguire nuovamente.
 Un programma Python di questo genere va scritto in un **text editor** che lavora su testo semplice.
 
-> strumenti come Word non vanno bene, perché aggiungono formattazione e metadati che non fanno parte del codice.
+> Word non è un text editor! Aggiunge formattazione e metadati che non fanno parte del testo.
 
 Una sessione di lavoro tipica è questa:
 
@@ -698,11 +705,20 @@ Se qualcosa non funziona:
 
 > Programmare include sempre una quota di `trial and error`. Non è un'anomalia: è il lavoro.
 
-> In ogni caso: "Don't Panic!"
-
-<a id="mod1-terminale"></a>
+> In ogni caso: **"Don't Panic!"**
 
 ## Shell e sistemi operativi
+
+Quando un programma lavora con file, cartelle e dati presenti sul computer,
+non accede da solo all'hardware: passa attraverso il sistema operativo.
+
+Il sistema operativo:
+
+- mantiene l'organizzazione di file e cartelle nel file system;
+- permette ai programmi di aprire, leggere, scrivere e chiudere file;
+- tiene traccia di dove si trovano i dati sul disco;
+- gestisce la memoria e il tempo di esecuzione dei processi;
+- coordina anche l'accesso a periferiche come tastiera, schermo e disco.
 
 Il **terminale** è l'interfaccia a testo del sistema operativo.
 Il programma che interpreta i comandi che scriviamo si chiama **shell**.
@@ -715,7 +731,8 @@ I sistemi operativi usano shell diverse:
 | **Linux**         | `bash`            | `$`           |
 | **Windows**       | PowerShell        | `>`           |
 
-**bash** (Bourne Again SHell) è la shell più diffusa nei sistemi Unix. **zsh** è compatibile con bash e aggiunge funzionalità extra.
+**bash** (Bourne Again SHell) è la shell più diffusa nei sistemi Unix.
+**zsh** è compatibile con bash e aggiunge funzionalità extra.
 I comandi che usiamo a lezione funzionano allo stesso modo in entrambe.
 
 ### Windows: due opzioni
@@ -734,12 +751,12 @@ Per seguire il corso con gli stessi comandi bash:
 
 I comandi visti a lezione funzionano in entrambi i terminali:
 
-| Operazione | bash / Git Bash | PowerShell |
-| --- | --- | --- |
-| cartella corrente | `pwd` | `pwd` |
-| contenuto cartella | `ls` | `ls` |
-| entra in cartella | `cd nome` | `cd nome` |
-| torna su | `cd ..` | `cd ..` |
+| Operazione           | bash / Git Bash   | PowerShell       |
+| -------------------- | ----------------- | ---------------- |
+| cartella corrente    | `pwd`             | `pwd`            |
+| contenuto cartella   | `ls`              | `ls`             |
+| entra in cartella    | `cd nome`         | `cd nome`        |
+| torna su             | `cd ..`           | `cd ..`          |
 | esegui script Python | `python3 file.py` | `python file.py` |
 
 La differenza più comune: il separatore nei percorsi è `\` anziché `/` (anche se PowerShell accetta entrambi).
@@ -782,13 +799,13 @@ Immagina questa struttura di cartelle:
 
 Se sei dentro `corso/`, questi percorsi sono equivalenti:
 
-| Percorso | Tipo | Raggiunge |
-| --- | --- | --- |
-| `/home/studente/corso/script.py` | assoluto | `script.py` |
-| `script.py` oppure `./script.py` | relativo | `script.py` |
-| `dati/input.txt` | relativo | `input.txt` |
-| `../documenti/appunti.txt` | relativo (salendo di uno) | `appunti.txt` |
-| `/home/studente/documenti/appunti.txt` | assoluto | `appunti.txt` |
+| Percorso                               | Tipo                      | Raggiunge     |
+| -------------------------------------- | ------------------------- | ------------- |
+| `/home/studente/corso/script.py`       | assoluto                  | `script.py`   |
+| `script.py` oppure `./script.py`       | relativo                  | `script.py`   |
+| `dati/input.txt`                       | relativo                  | `input.txt`   |
+| `../documenti/appunti.txt`             | relativo (salendo di uno) | `appunti.txt` |
+| `/home/studente/documenti/appunti.txt` | assoluto                  | `appunti.txt` |
 
 Le scorciatoie fondamentali:
 
@@ -803,14 +820,13 @@ Esempio:
 ```bash
 pwd
 ls
-cd guida-lezioni
+cd esercizi
 ls
 cd ..
-python3 scripts/genera_programma.py
+python3 esercizi/esercizio_1.py
 ```
 
 > Se un comando "non trova il file", il primo controllo da fare è quasi sempre la cartella corrente.
-
 
 ## Esercizio: prepara la tua cartella di lavoro
 
@@ -870,11 +886,9 @@ cd informatica-di-base
 code .
 ```
 
-Su alcune installazioni il comando è `codium .` (VSCodium) oppure `code .` (VS Code). Il `.` indica "apri la cartella corrente".
+Oppure `File > apri cartella` dall'interfaccia di VSCode
 
-> Questa cartella diventerà il vostro spazio di lavoro per tutto il corso. Ogni modulo avrà la sua sottocartella.
-
----
+> Questa cartella può diventare il vostro spazio di lavoro per tutto il corso.
 
 ## Dal REPL a uno script
 
@@ -902,6 +916,8 @@ print(3 + 5)
 Ora eseguilo di nuovo: vedrai `8`.
 
 ### `print()` è esplicita, la REPL no
+
+**REPL** sta per **Read–Eval–Print Loop**: legge l'espressione, la valuta, stampa il risultato, e ricomincia.
 
 |                | REPL                       | Script        |
 | -------------- | -------------------------- | ------------- |
@@ -940,8 +956,6 @@ print("informatica"[0])
 
 Esegui il file e verifica che l'output corrisponda a quello che avevi ottenuto nella REPL.
 
----
-
 ## Cosa fa questo programma?
 
 Nella cartella `esercizi/modulo-1/` ci sono i file `es1.py` … `es7.py`. **Non aprirli.**
@@ -972,7 +986,6 @@ Stampa il numero di caratteri della parola passata come argomento (`len`).
 4
 11
 ```
-
 </details>
 
 ### Esercizio 2
@@ -1002,6 +1015,7 @@ u  a
 python3 es3.py basilico 0
 python3 es3.py basilico 3
 python3 es3.py informatica 5
+python3 es3.py ciao 5
 ```
 
 <details>
@@ -1014,9 +1028,6 @@ b
 i
 r
 ```
-
-Prova a passare un indice troppo grande: cosa succede?
-
 </details>
 
 ### Esercizio 4
@@ -1060,9 +1071,6 @@ asilic
 ia
 ytho
 ```
-
-Cosa succede con una parola di due caratteri? E con una di uno solo?
-
 </details>
 
 ### Esercizio 6
@@ -1088,8 +1096,6 @@ Stampa il quadrato e il cubo del numero passato come argomento (`n * n` e `n ** 
 
 ### Esercizio 7
 
-Questo esercizio usa operazioni che probabilmente non avete ancora incontrato. Provate più combinazioni — alcune produrranno output inaspettato, altre genereranno un errore.
-
 ```bash
 python3 es7.py ciao 2
 python3 es7.py ciao 0
@@ -1099,8 +1105,6 @@ python3 es7.py x 1
 python3 es7.py informatica 4
 ```
 
-Prima di aprire il file: riuscite a capire cosa fa? Riuscite a spiegare *perché* alcune chiamate generano un errore?
-
 <details>
 <summary>Cosa fa</summary>
 
@@ -1109,32 +1113,4 @@ Il programma prende una stringa `s` e un numero `n` e fa tre cose:
 1. stampa `s * n` — l'operatore `*` tra stringa e intero ripete la stringa `n` volte;
 2. stampa `s[n]` — il carattere in posizione `n`;
 3. stampa `s[:n].upper() + s[n:]` — i primi `n` caratteri in maiuscolo concatenati al resto.
-
-```text
-# es7.py ciao 2
-ciaociao
-a
-CIao
-
-# es7.py ciao 0
-           ← stringa vuota (s * 0)
-c          ← s[0]
-ciao       ← "" + "ciao"
-
-# es7.py ciao 3
-ciaociaociao
-o
-CIAo
-```
-
-Con `n = 10` le righe 2 e 3 generano un errore:
-
-```text
-IndexError: string index out of range
-```
-
-perché `"ciao"` ha solo 4 caratteri (indici 0–3) e `s[10]` non esiste. La prima riga invece funziona: `s * 10` non ha limiti.
-
-Con `n = 0`: `s * 0` produce una stringa vuota — non un errore. Perché?
-
 </details>

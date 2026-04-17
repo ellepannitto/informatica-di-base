@@ -8,7 +8,7 @@ subtitle: Università degli Studi di Salerno | 30% lezione / 70% esercitazione
 Prima della prima lezione è consigliato preparare l'ambiente di lavoro. In particolare:
 
 - installare **Python**
-- installare **VSCodium** oppure **Visual Studio Code**
+- installare **Visual Studio Code** oppure **VSCodium**
 - installare **Git**
 - prendere un primo contatto con il **terminale**
 
@@ -156,7 +156,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1h     | — | Argomenti: moduli 8-9 (`for`, file, input/output, terminale, formati) |
 | exercise  | 1h     | — | Correzione della prova                                                     |
 
-### 10 | Dizionari, set e organizzazione dell'informazione
+### 10 | Dizionari, set e organizzazione dell'informazione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                          |
 | --------- | ------ | ----- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | cap. ___ | [Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso](guida-lezioni/modulo-10.slides.html#mod10-dizionari)                       |
@@ -164,7 +164,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 2h     | cap. ___ | [Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari](guida-lezioni/modulo-10.slides.html#mod10-frequenze)                 |
 
 
-### 11 | Git e controllo di versione
+### 11 | Git e controllo di versione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                             |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | — | [Git: repository, working tree, staging area, commit e storia del progetto](guida-lezioni/modulo-11.slides.html#mod11-git)                             |

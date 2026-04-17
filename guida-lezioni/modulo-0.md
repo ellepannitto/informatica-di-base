@@ -4,7 +4,6 @@ Benvenuti al corso **Informatica di Base**.
 
 Prima di iniziare non servono conoscenze pregresse. È sufficiente arrivare alla prima lezione con l'ambiente già pronto.
 
----
 
 ## Obiettivo del modulo 0
 
@@ -18,7 +17,6 @@ Prima della prima lezione vi chiedo di:
 
 Non è necessario fare tutto in autonomia in modo perfetto. È sufficiente provarci e annotare eventuali problemi.
 
----
 
 ## 1. Installare Python
 
@@ -49,11 +47,10 @@ Se il comando non funziona:
 - su Windows controllate di aver selezionato **Add Python to PATH**;
 - se compare un messaggio di errore, annotatelo e portatelo a lezione.
 
----
 
 ## 2. Installare VSCodium o Visual Studio Code
 
-Scaricate [**VSCodium**](https://vscodium.com/) oppure [**Visual Studio Code**](https://code.visualstudio.com/download). È l'editor che useremo per scrivere e leggere il codice.
+Scaricate [**Visual Studio Code**](https://code.visualstudio.com/download) oppure [**VSCodium**](https://vscodium.com/). È l'editor che useremo per scrivere e leggere il codice.
 
 Dopo l'installazione:
 
@@ -66,7 +63,6 @@ Per installare un'estensione:
 - cercate il nome dell'estensione
 - cliccate **Installa**
 
----
 
 ## 3. Installare Git
 
@@ -86,7 +82,6 @@ git --version
 
 Dovreste vedere qualcosa come `git version 2.x.x`.
 
----
 
 ## 4. Familiarizzare con il terminale
 
@@ -171,7 +166,6 @@ oppure:
 
 Git Bash è una buona alternativa a PowerShell per chi usa Windows e non ha ancora configurato WSL. I comandi che troverete nel corso funzionano tutti in Git Bash.
 
----
 
 ## 5. Esplorate il vostro filesystem
 
@@ -230,7 +224,6 @@ I comandi sopra funzionano anche in PowerShell. Alcune differenze da tenere a me
 
 Non serve sapere le risposte: serve aver provato a cercarle. Portate a lezione quello che avete osservato.
 
----
 
 ## 6. Libro consigliato
 
@@ -242,7 +235,6 @@ Va bene sia in **italiano** sia in **inglese**.
 
 Non è un testo obbligatorio. **Seguire le lezioni è sufficiente** per affrontare il corso. Il libro può essere utile come supporto aggiuntivo per ripassare o vedere altri esempi.
 
----
 
 ## Se qualcosa non funziona
 
@@ -257,7 +249,6 @@ Se incontrate un errore:
 
 L'ambiente di lavoro si costruisce insieme, passo dopo passo.
 
----
 
 ## Riepilogo
 
