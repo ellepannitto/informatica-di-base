@@ -26,8 +26,8 @@ Per ripassare:
 2. data una stringa `s` e un intero `n`, stampare il carattere in posizione `n` insieme al precedente e al successivo.
 
 <details>
-- attenzione alle parentesi superflue: una stringa resta una stringa anche senza "impacchettarla" ulteriormente. Aggiungerle può cambiare il modo in cui un interprete o un ambiente legge l'espressione;
-- conviene scrivere l'operazione nel modo più semplice che conserva il tipo giusto. -- `type()`
+* attenzione alle parentesi superflue: una stringa resta una stringa anche senza "impacchettarla" ulteriormente. Aggiungerle può cambiare il modo in cui un interprete o un ambiente legge l'espressione;
+* conviene scrivere l'operazione nel modo più semplice che conserva il tipo giusto. -- `type()`
 </details>
 
 ## Struttura di uno script
@@ -119,7 +119,7 @@ Problemi del codice precedente:
 - Chi legge il codice non sa subito cosa rappresenta 23
 - Non puoi usare facilmente quel valore in altre parti del programma
 
-Per risolvere questo problema, usiamo le variabili.
+Per risolvere questo problema, usiamo le **variabili**.
 
 ```python
 temperatura = 23
@@ -173,7 +173,7 @@ nome studente
 if
 ```
 
-> **Attenzione:** in programmazione `=` non significa "e' uguale a" nel senso della matematica.
+> **Attenzione:** in programmazione `=` non significa "è uguale a" nel senso della matematica.
 > Significa invece "assegna alla variabile di sinistra il valore calcolato a destra".
 
 Per questo:
@@ -246,11 +246,19 @@ non è una formula matematica, ma un aggiornamento di stato:
 
 ## Tracciare dati, memoria e output
 
+Prima di procedere, vale la pena distinguere due cose che usiamo entrambe con la parola "programma":
+
+- il **codice sorgente** — il testo che scriviamo nel file `.py`. Non cambia mentre lo eseguiamo. Può essere eseguito zero, una o mille volte.
+- l'**esecuzione** — ciò che succede quando l'interprete legge quel codice e lo esegue con dati concreti. Ogni volta che lanciamo il programma, parte una nuova esecuzione: valori diversi in ingresso producono uno svolgimento diverso.
+
+Quando tracciamo un programma, non stiamo leggendo il file: stiamo simulando una specifica esecuzione.
+
 Lo **stato** di un programma non riguarda il testo che scriviamo nel file, ma il programma mentre viene eseguito.
 È l'insieme dei valori che, in un certo momento dell'esecuzione, sono conservati in memoria e disponibili.
 In questo modulo, in pratica, lo stato coincide soprattutto con i valori associati alle variabili.
 
-Tracciare un programma significa simulare a mano che cosa succede riga per riga, tenendo traccia dello stato delle variabili e di quello che viene stampato.
+Tracciare un programma significa simulare a mano che cosa succede riga per riga,
+tenendo traccia dello stato delle variabili e di quello che viene stampato.
 
 Dobbiamo abituarci a distinguere tre cose:
 
@@ -258,7 +266,7 @@ Dobbiamo abituarci a distinguere tre cose:
 - l'output che Python stampa (visibile solo se si usa `print()`);
 - l'ordine in cui le istruzioni vengono eseguite.
 
-per esempio:
+per esempio, consideriamo questo programma:
 
 ```python
 x = 4
@@ -269,13 +277,12 @@ y = x + 3
 
 Una tabella minima può contenere:
 
-| Passo | Istruzione                      | Stato della memoria | Output       |
+| Passo | Codice sorgente                 | Stato della memoria | Output       |
 | ----- | ------------------------------- | ------------------- | ------------ |
 | 1     | `x = 4`                         | `x → 4`             |              |
 | 2     | `print("ciao" + " " + "mondo")` | `x → 4`             | `ciao mondo` |
 | 3     | `print(x)`                      | `x → 4`             | `4`          |
 | 4     | `y = x + 3`                     | `x → 4, y → 7`      |              |
-
 
 ### Esempio guidato
 
@@ -287,11 +294,11 @@ print(y)
 
 Traccia:
 
-| Passo             | Stato della memoria | Output |
-| ----------------- | ------------------- | ------ |
-| dopo `x = 10`     | `x = 10`            |        |
-| dopo `y = x // 3` | `x = 10`, `y = 3`   |        |
-| dopo `print(y)`   | `x = 10`, `y = 3`   | `3`    |
+| Passo | Codice sorgente | Stato della memoria | Output |
+| ----- | --------------- | ------------------- | ------ |
+| 1     | `x = 10`        | `x → 10`            |        |
+| 2     | `y = x // 3`    | `x → 10, y → 3`     |        |
+| 3     | `print(y)`      | `x → 10, y → 3`     | `3`    |
 
 ## `input()`, e casting
 
@@ -304,10 +311,11 @@ print(temperatura + 273.15)
 print(temperatura * 9/5 + 32)
 ```
 
-Abbiamo un altro problema: se vogliamo eseguire questo script ogni giorno, dobbiamo aprire l'**editor** e modificare manualmente il valore 23.
+Abbiamo un altro problema:
+se vogliamo eseguire questo script ogni giorno, dobbiamo aprire l'**editor** e modificare manualmente il valore 23.
 Vorremmo fare sì che questo valore diventi un **parametro** del nostro programma in modo da poter eseguire ogni giorno lo script e vedere la temperatura in gradi Kelvin e Farenheit sul nostro schermo.
 
-Abbiamo gia' visto `print()` nel modulo 1.
+Abbiamo già visto `print()` nel modulo 1.
 Qui introduciamo il suo complemento: `input()`.
 
 `input()` è un comando utile per leggere un valore scritto dall'utente mentre il programma è in esecuzione.
@@ -332,7 +340,7 @@ Esempi:
 ```python
 nome = input("Come ti chiami? ")
 print(nome)
-eta = input("Eta': ")
+eta = input("Età: ")
 print(eta)
 ```
 
@@ -342,7 +350,7 @@ Possiamo usare `input()` anche senza messaggio:
 testo = input()
 ```
 
-## Semantica di `input()`
+## Semantica di assegnamento con `input()`
 
 `input()` mostra il messaggio, aspetta che l'utente scriva qualcosa e si ferma quando l'utente preme Invio, cioè inserisce un ritorno a capo.
 Solo a quel punto restituisce il testo letto.
@@ -353,10 +361,10 @@ nome = input("Come ti chiami? ")
 print("Ciao", nome)
 ```
 
-| Passo | Istruzione                         | Stato della memoria | Output             |
+| Passo | Codice sorgente                    | Stato della memoria | Output             |
 | ----- | ---------------------------------- | ------------------- | ------------------ |
-| 1     | `nome = input("Come ti chiami? ")` | `nome → "Ludovica"`   | `Come ti chiami? ` |
-| 2     | `print("Ciao", nome)`              | `nome → "Ludovica"`   | `Ciao Ludovica`    |
+| 1     | `nome = input("Come ti chiami? ")` | `nome → "Ludovica"` | `Come ti chiami? ` |
+| 2     | `print("Ciao", nome)`              | `nome → "Ludovica"` | `Ciao Ludovica`    |
 
 Succede questo:
 
@@ -385,7 +393,7 @@ Traceback (most recent call last):
 TypeError: can only concatenate str (not "int") to str
 ```
 
-| Passo | Istruzione             | Stato della memoria | Output     |
+| Passo | Codice sorgente        | Stato della memoria | Output     |
 | ----- | ---------------------- | ------------------- | ---------- |
 | 1     | `eta = input("Età: ")` | `eta → "33"`        | `Età: `    |
 | 2     | `print(eta + 1)`       | `eta → "33"`        | !!! ERRORE |
@@ -409,43 +417,32 @@ Alcune conversioni comuni:
 
 Questa operazione di conversione di chiama **casting**.
 
-
 ## Esercizi
 
 1. Scrivi un programma che legge nome e cognome e stampa un saluto, per esempio `Ciao, Mario Rossi!`.
-
 2. Scrivi un programma che legge l'età e stampa: `Tra un anno avrai X anni` e `Un anno fa avevi Y anni`.
-
 3. Scrivi un programma che legge due numeri interi e stampa la loro somma, il loro prodotto e il resto della divisione del primo per il secondo.
-
 4. Scrivi un programma che legge tre numeri e ne stampa la media.
-
 5. Scrivi un programma che legge una stringa e stampa:
    - la lunghezza della stringa;
    - il primo carattere;
    - l'ultimo carattere;
    - i primi tre caratteri.
-
 6. Scrivi un programma che legge due numeri e stampa prima i valori inseriti e poi gli stessi valori scambiati.
-
 7. Scrivi un programma che legge un nome e un anno di nascita e stampa una frase del tipo: `Ciao Anna, potresti avere 20 o 21 anni`.
-
 8. Scrivi un programma che legge un numero intero di secondi (es. `3723`) e stampa la conversione nel formato: `1 ore, 2 minuti, 3 secondi`.
-
 9. Scrivi un programma che legge nome e cognome e stampa:
     - il cognome tutto in maiuscolo;
     - il nome con solo la prima lettera maiuscola e il resto minuscolo;
     - le iniziali nel formato `M.R.`
-
 10. Scrivi un programma che legge una stringa e stampa:
     - la stringa senza il primo e l'ultimo carattere;
-
 11. Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. `20`), e stampa il prezzo scontato e il risparmio.
 
 ## Tipo `bool` e nuove operazioni
 
 Fin qui abbiamo lavorato con interi, stringhe e `float`.
-Ora introduciamo nuove operazioni che non producono un numero o una stringa, ma un valore booleano.
+Ora introduciamo **nuove operazioni** che non producono un numero o una stringa, ma un valore binario.
 
 Per esempio possiamo controllare:
 
@@ -495,8 +492,6 @@ Per esempio:
 | `s.isdigit()`         | controlla se tutti i caratteri sono cifre                    | `"123".isdigit()`         |
 | `s.isalpha()`         | controlla se tutti i caratteri sono lettere                  | `"ciao".isalpha()`        |
 
-Anche queste operazioni possono essere usate dentro una condizione `if`.
-
 Quando tracciamo o eseguiamo il programma, anche questi valori vanno rappresentati nello stato, proprio come interi, stringhe e `float`.
 
 ## Condizionare il flusso del programma
@@ -511,7 +506,7 @@ Ma molti problemi chiedono una scelta:
 - se il nome viene prima alfabeticamente, stampa in un certo ordine;
 - se l'input non è valido, reagisci in modo diverso.
 
-Per gestire queste biforcazioni serve un costrutto condizionale.
+Per gestire queste biforcazioni serve un **costrutto condizionale**.
 
 ## Sintassi di `if`
 
@@ -557,11 +552,11 @@ print("Hai "+str(x)+" anni")
 <details>
 <summary>Esecuzione n.1</summary>
 
-| Passo | Istruzione                            | Stato della memoria | Output                   |
+| Passo | Codice sorgente                       | Stato della memoria | Output                   |
 | ----- | ------------------------------------- | ------------------- | ------------------------ |
 | 1     | `x = input("Inserisci la tua età: ")` | `x → "33"`          | `Inserisci la tua età: ` |
 | 2     | `x = int(x)`                          | `x → 33`            |                          |
-| 3     | `if x > 18:`                          | `x → 33` →→→ TRUE   |                          |
+| 3     | `if x > 18:`                          | `x → 33` ---> TRUE  |                          |
 | 4     | `print("Sei maggiorenne")`            | `x → 33`            | `Sei maggiorenne!`       |
 | 5     | `print("Hai "+str(x)+" anni")`        | `x → 33`            | `Hai 33 anni`            |
 
@@ -574,20 +569,21 @@ print("Hai "+str(x)+" anni")
 | ----- | ------------------------------------- | ------------------- | ------------------------ |
 | 1     | `x = input("Inserisci la tua età: ")` | `x → "15"`          | `Inserisci la tua età: ` |
 | 2     | `x = int(x)`                          | `x → 15`            |                          |
-| 3     | `if x > 18:`                          | `x → 15` →→→ FALSE  |                          |
+| 3     | `if x > 18:`                          | `x → 15` ---> FALSE |                          |
 | 4     | `print("Hai "+str(x)+" anni")`        | `x → 15`            | `Hai 15 anni`            |
-
 </details>
 
-## `if-else` e `if` annidati
+> NB: tra la prima e la seconda esecuzione il numero di passi eseguiti è cambiato anche se il codice sorgente è rimasto invariato!
 
-Con `if` semplice possiamo eseguire un blocco solo quando una condizione e vera.
-Pero' spesso vogliamo descrivere anche che cosa succede quando quella stessa condizione e' falsa.
+## `if-else`, `if-elif-else` e `if` annidati
+
+Con `if` semplice possiamo eseguire un blocco solo quando una condizione è vera.
+Però spesso vogliamo descrivere anche che cosa succede quando quella stessa condizione è falsa.
 
 Per questo usiamo `if-else`, che separa esplicitamente due rami alternativi.
 Quando invece una decisione deve essere presa all'interno di un altro ramo, useremo `if` annidati.
 
-Se i casi possibili sono piu' di due ma restano sullo stesso livello, useremo `elif`.
+Se i casi possibili sono più di due ma restano sullo stesso livello, useremo `elif`.
 
 ## Sintassi di `if-else`
 
@@ -608,7 +604,6 @@ Qui ci sono due blocchi alternativi:
 - il blocco dopo `else`.
 
 `else` non ha una condizione propria: raccoglie tutti i casi in cui la condizione dell'`if` vale `False`.
-
 
 ## Semantica di `if-else`
 
@@ -652,7 +647,7 @@ print("Hai "+str(x)+" anni")
 | ----- | ------------------------------------- | ------------------- | ------------------------ |
 | 1     | `x = input("Inserisci la tua età: ")` | `x → "33"`          | `Inserisci la tua età: ` |
 | 2     | `x = int(x)`                          | `x → 33`            |                          |
-| 3     | `if x > 18:`                          | `x → 33` →→→ TRUE   |                          |
+| 3     | `if x > 18:`                          | `x → 33` ---> TRUE  |                          |
 | 4     | `print("Sei maggiorenne")`            | `x → 33`            | `Sei maggiorenne!`       |
 | 5     | `print("Hai "+str(x)+" anni")`        | `x → 33`            | `Hai 33 anni`            |
 
@@ -665,7 +660,7 @@ print("Hai "+str(x)+" anni")
 | ----- | ------------------------------------- | ------------------- | ------------------------ |
 | 1     | `x = input("Inserisci la tua età: ")` | `x → "15"`          | `Inserisci la tua età: ` |
 | 2     | `x = int(x)`                          | `x → 15`            |                          |
-| 3     | `if x > 18:`                          | `x → 15` →→→ FALSE  |                          |
+| 3     | `if x > 18:`                          | `x → 15` ---> FALSE |                          |
 | 4     | `print("Sei minorenne")`              | `x → 15`            | `Sei minorenne`          |
 | 5     | `print("Hai "+str(x)+" anni")`        | `x → 15`            | `Hai 15 anni`            |
 
@@ -740,32 +735,24 @@ Quindi:
    - `Buono` se è tra 24 e 27;
    - `Ottimo` se è 28 o più.
 10. Leggi una parola e stampa se è corta (meno di 4 lettere), media (da 4 a 7 lettere) o lunga (più di 7 lettere).
-
 11. Leggi una coppia di numeri che rappresentano un mese (1–12) e un anno e stampa il mese successivo con l'anno corretto.
     Per esempio: mese 12, anno 2024 → `Gennaio 2025`.
-
 12. Leggi nome, cognome e anno di nascita. Stampa sempre il nome completo e l'anno di nascita. Se l'anno di nascita è precedente al 2000, stampa anche `Nato/a nel secolo scorso`.
-
 13. Leggi due numeri interi. Stampa sempre entrambi i numeri.
     Se il primo è maggiore del secondo, stampa anche `Il primo è maggiore`.
     Stampa sempre anche la loro somma.
-
 14. Leggi una parola. Se ha più di 3 caratteri, stampa il secondo carattere; altrimenti stampa `Parola troppo corta`. In entrambi i casi stampa alla fine la lunghezza della parola.
-
 15. Leggi una parola. Costruisci una variabile `risultato`:
     - se la parola inizia con una lettera maiuscola, `risultato` vale `"maiuscola"`;
     - altrimenti vale `"minuscola"`.
     Stampa `La parola è: ` seguito da `risultato`.
-
 16. Leggi un numero intero. Costruisci una variabile `messaggio`:
     - se il numero è pari, `messaggio` vale `"pari"`;
     - altrimenti vale `"dispari"`.
     Stampa `Il numero X è` seguito da `messaggio`.
-
 17. Leggi due numeri interi `a` e `b`. Se `a` è maggiore di `b`, scambia i valori delle due variabili.
 Stampa sempre `a` e `b` alla fine: i valori usciti devono essere in ordine crescente.
 
-### Esercizi di traccia
 
 Per ciascun programma e input indicato, cerca di predire l'output del programma con gli input proposti e compila la tabella con lo stato della memoria.
 
@@ -823,7 +810,6 @@ print(str(a) + " " + str(b) + " - " + messaggio)
 ```
 
 - Traccia con input `9`, `2`
-
 
 **T4.**
 
