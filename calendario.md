@@ -3,7 +3,7 @@
 | 22 aprile | 6h   |
 | 28 aprile | 6h   |
 | 29 aprile | 6h   |
-| 5 maggio  | 8h   |
+| 5 maggio  | 9h   |
 | 6 maggio  | 6h   |
 | 19 maggio | 6h   |
 | 26 maggio | 6h   |
