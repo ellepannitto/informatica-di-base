@@ -107,169 +107,8 @@ a { color: #8b3f1d; }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai tracciare lo stato del programma durante l&#x27;esecuzione?</li><li>Sai riconoscere errori frequenti e localizzarli?</li><li>Sai usare casi di test per smascherare errori logici?</li><li>Sai usare condizioni composte con attenzione?</li><li>Sai applicare le leggi di De Morgan?</li><li>Sai modellare piccoli problemi con automi a stati finiti?</li><li>Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?</li></ul>
-    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>-</td><td>Errori nel codice: leggerli e correggerli</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>-</td><td>Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti</td></tr><tr><td>teoria</td><td>1h</td><td>cap. 3.5</td><td>Condizioni composte: `and`, `or`, `not`, tabelle di verità e precedenza degli operatori</td></tr><tr><td>teoria</td><td>0.5h</td><td>-</td><td>Valutazione lazy e leggi di De Morgan</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: valutare booleani, condizioni composte, De Morgan</td></tr><tr><td>teoria</td><td>1h</td><td>-</td><td>Automi a stati finiti come modello di partizione degli input: stati finali e intermedi</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: disegnare automi, trovare errori</td></tr></tbody></table>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="errori-nel-codice">Errori nel codice</h2><p>Abbiamo scritto dei programmi! Ma saranno corretti?</p><p><strong>Caso 1:</strong> il programma genera un errore</p><p><strong>Caso 2:</strong> il programma termina l&#x27;esecuzione senza generale alcun errore</p>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="primi-messaggi-di-errore">Primi messaggi di errore</h2><p>Un messaggio di errore contiene almeno tre informazioni utili:</p><table><thead><tr><th>Informazione</th><th>Domanda</th></tr></thead><tbody><tr><td>tipo di errore</td><td>che genere di problema e`?</td></tr><tr><td>riga segnalata</td><td>dove si manifesta?</td></tr><tr><td>contesto</td><td>quale operazione stava tentando Python?</td></tr></tbody></table><p>Esempi frequenti:</p><table><thead><tr><th>Errore</th><th>Causa tipica</th></tr></thead><tbody><tr><td><code>SyntaxError</code></td><td>sintassi non valida</td></tr><tr><td><code>NameError</code></td><td>nome di variabile non definito</td></tr><tr><td><code>TypeError</code></td><td>operazione tra tipi incompatibili</td></tr><tr><td><code>ValueError</code></td><td>conversione non possibile</td></tr></tbody></table><h3 id="esercizi">Esercizi</h3><p>Per ciascun programma: esegui il codice, individua il tipo di errore che produce e la riga in cui compare, poi spiega perché si verifica e correggi il codice di conseguenza.</p><p><strong>E1.</strong></p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
-cognome = input(&quot;Cognome: &quot;)
-eta = input(&quot;Età: &quot;)
-print(&quot;Ciao &quot; + nome + &quot; &quot; + cognome + &quot;!&quot;)
-print(&quot;Tra dieci anni avrai &quot; + eta + 10 + &quot; anni.&quot;)</code></pre><p><strong>E2.</strong></p><pre><code class="language-python">anno_nascita = input(&quot;Anno di nascita: &quot;)
-anno_corrente = 2025
-eta = anno_corrente - anno_nascita
-print(&quot;Hai circa &quot; + str(eta) + &quot; anni.&quot;)</code></pre><p><strong>E3.</strong></p><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
-lunghezza = len(parola)
-print(&quot;La parola ha &quot; + lunghezza + &quot; lettere.&quot;)</code></pre><p><strong>E4.</strong></p><pre><code class="language-python">x = int(input(&quot;Numero: &quot;))
-if x &gt; 0:
-    segno = &quot;positivo&quot;
-elif x &lt; 0:
-    segno = &quot;negativo&quot;
-print(&quot;Il numero è &quot; + segno)</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="testing-e-casi-limite">Testing e casi limite</h2><p>Anche se il programma non genera un errore, potrebbe comunque fare la cosa sbagliata: non basta che l&#x27;esecuzione si concluda per dire che &quot;funziona&quot;. Bisogna confrontare input e output attesi su casi scelti apposta.</p><p>Consideriamo questo programma, scritto per stampare un numero con il suo segno esplicito (<code>+7</code>, <code>-3</code>, <code>0</code>):</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
-if n &gt; 0:
-    segno = &quot;+&quot;
-else:
-    segno = &quot;-&quot;
-print(segno + str(n))</code></pre><p>Proviamolo su diversi input:</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>7</code></td><td><code>+7</code></td><td>?</td></tr><tr><td><code>-3</code></td><td><code>-3</code></td><td>?</td></tr><tr><td><code>0</code></td><td><code>0</code></td><td>?</td></tr></tbody></table><p>Sembra ragionevole: il ramo <code>if</code> (se maggiore di 0) aggiunge <code>+</code>, il ramo <code>else</code> aggiunge <code>-</code>.</p><p>Ma <code>str(-3)</code> restituisce già <code>&quot;-3&quot;</code>: concatenarci davanti un altro <code>&quot;-&quot;</code> produce <code>&quot;--3&quot;</code>. E per <code>0</code>, il ramo <code>else</code> produce <code>&quot;-0&quot;</code> invece di <code>&quot;0&quot;</code>.</p><p>Il programma non genera nessun errore, ma l&#x27;output è sbagliato per tutti i numeri non positivi.</p><p><strong>Perché succede:</strong> <code>str(n)</code> su un numero negativo include già il segno meno. Aggiungere <code>&quot;-&quot;</code> davanti raddoppia il segno.</p><p><strong>Correzione:</strong></p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
-if n &gt; 0:
-    print(&quot;+&quot; + str(n))
-elif n &lt; 0:
-    print(str(n))  # str(n) contiene già il segno
-else:
-    print(&quot;0&quot;)</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="metodo">Metodo</h2><ol><li>scegli un input piccolo;</li><li>scrivi l&#x27;output atteso;</li><li>esegui il programma;</li><li>confronta il risultato reale con quello previsto;</li><li>se modifichi il codice, ripeti gli stessi test.</li></ol>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-ifelifelse-e-testing">Esercizi: if/elif/else e testing</h2><p>Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:</p><ol><li><strong>scrivi i desiderata</strong> — prima di eseguire il codice, compila la tabella con l&#x27;output che ti aspetti per ogni input;</li><li><strong>esegui e controlla</strong> — lancia il programma con quegli input e annota l&#x27;output reale;</li><li><strong>confronta</strong> — dove differiscono, spiega perché.</li></ol><h3 id="esercizio-1">Esercizio 1</h3><p>Il programma riceve un numero intero e stampa <code>&quot;pari&quot;</code> se è pari, <code>&quot;dispari&quot;</code> se è dispari.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>-4</code></td><td></td><td></td></tr><tr><td><code>7</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
-if n &gt; 0 and n % 2 == 0:
-    print(&quot;pari&quot;)
-else:
-    print(&quot;dispari&quot;)</code></pre></details><h3 id="esercizio-2">Esercizio 2</h3><p>Il programma riceve un voto e stampa <code>&quot;promosso&quot;</code> se è almeno 18, <code>&quot;non promosso&quot;</code> altrimenti.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr><tr><td><code>18</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
-if voto &gt;= 18:
-    print(&quot;promosso&quot;)
-
-if voto &lt;= 18:
-    print(&quot;non promosso&quot;)</code></pre></details><h3 id="esercizio-3">Esercizio 3</h3><p>Il programma riceve un numero intero e stampa <code>&quot;positivo&quot;</code> se è maggiore di zero, <code>&quot;grande&quot;</code> se è maggiore di 10, <code>&quot;non positivo&quot;</code> negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>-2</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">x = int(input(&quot;x: &quot;))
-if x &gt; 0:
-    print(&quot;positivo&quot;)
-elif x &gt; 10:
-    print(&quot;grande&quot;)
-else:
-    print(&quot;non positivo&quot;)</code></pre></details><h3 id="esercizio-4">Esercizio 4</h3><p>Il programma riceve un intero e stampa <code>&quot;fizz&quot;</code> se è divisibile per 3, <code>&quot;buzz&quot;</code> se è divisibile per 5, <code>&quot;fizzbuzz&quot;</code> se è divisibile per entrambi, il numero stesso negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>9</code></td><td></td><td></td></tr></tbody></table><p>Scrivi il programma e testane il funzionamento.</p>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="comporre-condizioni">Comporre condizioni</h2><p>Fino adesso abbiamo visto operazioni che confrontano ad esempio numeri interi e restituiscono un valore booleano. Ma esistono anche operazioni che agiscono direttamente su valori booleani.</p><p>In particolare consideriamo tre operazioni:</p><ul><li><code>and</code></li><li><code>or</code></li><li><code>not</code></li></ul>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-and-or-not">Sintassi di <code>and</code>, <code>or</code>, <code>not</code></h2><p>Forme generali:</p><pre><code class="language-python">espressione_booleana and espressione_booleana</code></pre><pre><code class="language-python">espressione_booleana or espressione_booleana</code></pre><pre><code class="language-python">not espressione_booleana</code></pre><p>Queste operazioni si usano per costruire condizioni più complesse a partire da condizioni più semplici.</p><p>Esempi:</p><pre><code class="language-python">x &gt; 0 and x &lt; 10
-eta &gt;= 18 or ha_permesso
-not nome == &quot;Ludovica&quot;</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-and-or-not">Semantica di <code>and</code>, <code>or</code>, <code>not</code></h2><p>Queste operazioni prendono in ingresso valori booleani e restituiscono a loro volta un valore booleano.</p><h3 id="semantica-di-and">Semantica di <code>and</code></h3><pre><code class="language-python">A and B</code></pre><p>vale <code>True</code> solo quando <strong>entrambe</strong> le condizioni sono vere. Se almeno una delle due è falsa, il risultato è <code>False</code>.</p><p>Per esempio:</p><pre><code class="language-python">x &gt; 0 and x &lt; 10</code></pre><p>significa: &quot;x è maggiore di 0 e contemporaneamente minore di 10&quot;.</p><h3 id="tavola-di-verità-di-and">Tavola di verità di <code>and</code></h3><table><thead><tr><th>x</th><th>y</th><th>x and y</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>False</code></td><td><code>True</code></td><td><code>False</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><h3 id="semantica-di-or">Semantica di <code>or</code></h3><pre><code class="language-python">A or B</code></pre><p>vale <code>True</code> quando <strong>almeno una</strong> delle due condizioni è vera. Vale <code>False</code> solo quando sono false entrambe.</p><p>Per esempio:</p><pre><code class="language-python">voto &lt; 18 or voto &gt; 30</code></pre><p>significa: &quot;il voto è fuori dall&#x27;intervallo valido&quot;, potrebbe esserlo perché minore di 18 o perché maggiore di 30.</p><h3 id="tavola-di-verità-di-or">Tavola di verità di <code>or</code></h3><table><thead><tr><th>x</th><th>y</th><th>x or y</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>False</code></td><td><code>False</code></td></tr><tr><td><code>False</code></td><td><code>True</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><h3 id="semantica-di-not">Semantica di <code>not</code></h3><pre><code class="language-python">not A</code></pre><p>inverte il valore booleano della condizione:</p><ul><li>se <code>A</code> vale <code>True</code>, allora <code>not A</code> vale <code>False</code>;</li><li>se <code>A</code> vale <code>False</code>, allora <code>not A</code> vale <code>True</code>.</li></ul><p>Per esempio:</p><pre><code class="language-python">not x &gt; 0</code></pre><p>significa: &quot;non è vero che x è maggiore di 0&quot;, equivale a <code>x&lt;=0</code>.</p><h3 id="tavola-di-verità-di-not">Tavola di verità di <code>not</code></h3><table><thead><tr><th>x</th><th>not x</th></tr></thead><tbody><tr><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>False</code></td></tr></tbody></table>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><h3 id="valutare-espressioni-booleane">Valutare espressioni booleane</h3><p>Per ciascuna espressione e valori di variabili indicati, calcola il risultato (<code>True</code> o <code>False</code>) senza eseguire il codice.</p><ol><li><code>x = 5</code>, <code>y = 3</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>x = -2</code>, <code>y = -1</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>n = 7</code> → <code>not n &gt; 10</code></li><li><code>n = 15</code> → <code>not n &gt; 10</code></li><li><code>eta = 20</code>, <code>ha_documento = False</code> → <code>eta &gt;= 18 and ha_documento</code></li><li><code>eta = 16</code>, <code>ha_documento = True</code> → <code>eta &gt;= 18 or ha_documento</code></li></ol><h3 id="condizioni-composte-nei-programmi">Condizioni composte nei programmi</h3><ol><li>Scrivi un programma che legge un numero intero e stampa <code>Nel range</code> se è compreso tra 1 e 100 (estremi inclusi), <code>Fuori range</code> altrimenti.</li><li>Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione</li><li>Scrivi un programma che legge due stringhe e stampa <code>Almeno una è vuota</code> se almeno una delle due ha lunghezza zero, altrimenti stampa <code>Entrambe non vuote</code>.</li><li>Scrivi un programma che legge un numero intero e stampa <code>Fuori range</code> se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando <code>not</code> e <code>and</code>.</li><li>Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l&#x27;età desiderata.<ul><li>Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:</li></ul></li></ol><p><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></p>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="ordine-di-precedenza-degli-operatori">Ordine di precedenza degli operatori</h2><p>Quando una condizione contiene più operatori, Python non legge tutto &quot;da sinistra a destra&quot; in modo piatto. Usa invece un <strong>ordine di precedenza</strong>, cioè alcune operazioni vengono valutate prima di altre.</p><p>Nelle espressioni che useremo più spesso vale questa regola pratica:</p><ol><li>parentesi;</li><li>confronti come <code>&lt;</code>, <code>&lt;=</code>, <code>==</code>, <code>!=</code>, <code>&gt;</code>, <code>&gt;=</code>;</li><li><code>not</code>;</li><li><code>and</code>;</li><li><code>or</code>.</li></ol><p>Quindi <code>not</code> ha precedenza su <code>and</code>, e <code>and</code> ha precedenza su <code>or</code>.</p><p>Esempio:</p><pre><code class="language-python">True or False and False</code></pre><p>non si legge come:</p><pre><code class="language-python">(True or False) and False</code></pre><p>ma come:</p><pre><code class="language-python">True or (False and False)</code></pre><p>perché <code>and</code> viene valutato prima di <code>or</code>.</p><p>Un altro esempio:</p><pre><code class="language-python">not x &gt; 0 and y &gt; 0</code></pre><p>si legge come:</p><pre><code class="language-python">(not (x &gt; 0)) and (y &gt; 0)</code></pre><p>Come in matematica, con le parentesi possiamo influenzare l&#x27;ordine delle operazioni.</p><p>Confronta:</p><pre><code class="language-python">A or B and C</code></pre><p>con:</p><pre><code class="language-python">(A or B) and C</code></pre><p>Non sono in generale equivalenti.</p>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="valutazione-lazy">Valutazione lazy</h2><p>Gli operatori <code>and</code> e <code>or</code> non valutano sempre entrambe le parti dell&#x27;espressione. Python si ferma appena il risultato finale è già determinato.</p><p>Questo comportamento si chiama <strong>valutazione lazy</strong> oppure <strong>short-circuit</strong>.</p><p>Partiamo da questo esempio:</p><pre><code class="language-python">x = 5
-
-if x &gt; 0 and y &gt; 0:
-    print(&quot;Entrambi i numeri positivi!&quot;)</code></pre><details><summary>Dettagli</summary><p>Questo codice genera errore, perché <code>y</code> non è definita.</p></details><p>Ora consideriamo questo caso:</p><pre><code class="language-python">x = 5
-
-if x &gt; 0 or y &gt; 0:
-    print(&quot;Almeno un numero positivo!&quot;)</code></pre><p>Perchè non genera errore?</p><table><thead><tr><th><code>x &gt; 0</code></th><th><code>y &gt; 0</code></th><th><code>x &gt; 0 or y &gt; 0</code></th></tr></thead><tbody><tr><td><code>True</code></td><td><code>False</code></td><td><code>True</code></td></tr><tr><td><code>True</code></td><td><code>True</code></td><td><code>True</code></td></tr></tbody></table><p><code>x &gt; 0</code> vale già <code>True</code>, e questo basta a rendere vera tutta l&#x27;espressione con <code>or</code>. Di conseguenza Python non valuta <code>y &gt; 0</code>.</p><p>In generale:</p><ul><li>in <code>A or B</code>, se <code>A</code> vale <code>True</code>, Python non valuta <code>B</code>;</li><li>in <code>A and B</code>, se <code>A</code> vale <code>False</code>, Python non valuta <code>B</code>.</li></ul>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="leggi-di-de-morgan">Leggi di De Morgan</h2><p>Le condizioni composte compaiono molto presto nei programmi.</p><p>Per esempio, se automatizzassimo il controllo degli accessi in discoteca il programma potrebbe somigliare a qualcosa come:</p><pre><code class="language-python">if eta &gt;= 18 and ha_documento:
-    print(&quot;Accesso consentito&quot;)</code></pre><p>Qui stiamo combinando due condizioni semplici:</p><ul><li><code>eta &gt;= 18</code></li><li><code>ha_documento</code></li></ul><p>con l&#x27;operatore <code>and</code>.</p><p>Quando entra in gioco <code>not</code>, la lettura diventa meno immediata.</p><p>Supponiamo che il programma, invece che lasciare entrare, voglia stampare &quot;Accesso non consentito&quot; se:</p><ul><li>l&#x27;età è minore di 18, oppure</li><li>non si ha il documento</li></ul><pre><code class="language-python">if eta &lt; 18 or not ha_documento:
-    print(&quot;Accesso non consentito&quot;)</code></pre><p>Ma questo deve essere equivalente anche alla negazione della condizione precedente!</p><pre><code class="language-python">if not (eta &gt;= 18 and ha_documento):
-    print(&quot;Accesso non consentito&quot;)</code></pre><p>Le <strong>leggi di De Morgan</strong> servono a riscrivere negazioni di condizioni composte:</p><table><thead><tr><th>Forma</th><th>Equivalente</th></tr></thead><tbody><tr><td><code>not (A and B)</code></td><td><code>not A or not B</code></td></tr><tr><td><code>not (A or B)</code></td><td><code>not A and not B</code></td></tr></tbody></table><p>Esempio:</p><pre><code class="language-python">not (x &gt; 0 and y &gt; 0)</code></pre><p>equivale a:</p><pre><code class="language-python">not x &gt; 0 or not y &gt; 0</code></pre><p>ovvero:</p><pre><code class="language-python">x &lt;= 0 or y &lt;= 0</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><p>Riscrivi ciascuna condizione in forma equivalente usando le leggi di De Morgan, poi verifica con un esempio numerico.</p><ol><li><code>not (x &gt; 0 and y &gt; 0)</code></li><li><code>not (a == b or c == d)</code></li><li><code>not (eta &gt;= 18 and ha_documento)</code></li></ol>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="casi-e-tabelle-di-verità">Casi e tabelle di verità</h2><p>Prima di scrivere il codice conviene costruire una tabella dei casi: elencare esplicitamente tutte le combinazioni di input rilevanti e il comportamento atteso per ciascuna.</p><p>Questo serve a non dimenticare casi limite e a capire di quanti rami ha bisogno il programma.</p><p><strong>Esempio:</strong> esercizio 13 — nome, età attuale, età da raggiungere.</p><p>Quali combinazioni di input esistono?</p><p>Prima versione della tabella — solo i casi &quot;normali&quot;:</p><table><thead><tr><th>Confronto</th><th>Esempio</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>eta_desiderata &gt; eta_attuale</code></td><td>attuale=10, target=18</td><td><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></td></tr><tr><td><code>eta_desiderata == eta_attuale</code></td><td>attuale=18, target=18</td><td><code>Ciao Maria, hai già 18 anni come desideri</code></td></tr><tr><td><code>eta_desiderata &lt; eta_attuale</code></td><td>attuale=25, target=18</td><td><code>Ciao Maria, hai già superato i 18 anni</code></td></tr></tbody></table><p>La tabella mostra che servono tre rami: <code>if</code>, <code>elif</code>, <code>else</code>. Costruirla prima evita di accorgersi del caso <code>==</code> solo dopo aver scritto il codice.</p><p>Ma cosa succede se l&#x27;utente inserisce un&#x27;età negativa?</p><table><thead><tr><th>Input</th><th>Esempio</th><th>Comportamento del programma</th><th>Corretto?</th></tr></thead><tbody><tr><td><code>eta_attuale &lt; 0</code></td><td>attuale=-5, target=18</td><td>entra nel ramo <code>&gt;</code></td><td>no</td></tr><tr><td><code>eta_desiderata &lt; 0</code></td><td>attuale=10, target=-3</td><td>entra nel ramo <code>&lt;</code></td><td>no</td></tr><tr><td>entrambe negative, uguali</td><td>attuale=-5, target=-5</td><td>entra nel ramo <code>==</code></td><td>no</td></tr></tbody></table><p>Il programma non genera errori ma produce output privi di senso. Per gestirlo correttamente bisogna aggiungere una validazione degli input <strong>prima</strong> di tutto il resto:</p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
-eta_attuale = int(input(&quot;Età attuale: &quot;))
-eta_desiderata = int(input(&quot;Età desiderata: &quot;))
-
-if eta_attuale &lt; 0 or eta_desiderata &lt; 0:
-    print(&quot;Errore: le età non possono essere negative.&quot;)
-elif eta_desiderata &gt; eta_attuale:
-    anni_mancanti = eta_desiderata - eta_attuale
-    print(&quot;Ciao &quot; + nome + &quot;, oggi hai &quot; + str(eta_attuale) + &quot; anni, tra &quot; + str(anni_mancanti) + &quot; anni ne avrai &quot; + str(eta_desiderata) + &quot; come desideri&quot;)
-elif eta_desiderata == eta_attuale:
-    print(&quot;Ciao &quot; + nome + &quot;, hai già &quot; + str(eta_desiderata) + &quot; anni come desideri&quot;)
-else:
-    print(&quot;Ciao &quot; + nome + &quot;, hai già superato i &quot; + str(eta_desiderata) + &quot; anni&quot;)</code></pre><blockquote><p>La validazione dell&#x27;input è sempre il primo controllo da fare.<br>Gli altri rami assumono che i dati siano validi — ma solo perché lo abbiamo già verificato.</p></blockquote><table><thead><tr><th>Età attuale</th><th>Età desiderata</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>eta_attuale &lt;= 0</code></td><td><code>eta_desiderata &lt;= 0</code></td><td><code>INPUT NON VALIDO</code></td></tr><tr><td></td><td><code>eta_desiderata &gt; 0</code></td><td><code>INPUT NON VALIDO</code></td></tr><tr><td><code>eta_attuale &gt; 0</code></td><td><code>eta_desiderata &lt;= 0</code></td><td><code>INPUT NON VALIDO</code></td></tr><tr><td></td><td><code>eta_desiderata &lt; eta_attuale</code></td><td><code>Ciao Maria, hai già superato i 18 anni</code></td></tr><tr><td></td><td><code>eta_desiderata == eta_attuale</code></td><td><code>Ciao Maria, hai già 18 anni come desideri</code></td></tr><tr><td></td><td><code>eta_desiderata &gt; eta_attuale</code></td><td><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></td></tr></tbody></table>
-    
+    <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai modellare piccoli problemi con automi a stati finiti?</li><li>Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?</li><li>Sai definire sintassi e semantica del <code>while</code>?</li><li>Sai distinguere guardia del ciclo, stato e condizione di terminazione?</li><li>Sai usare il <code>while</code> conoscendo il numero di iterazioni da effettuare?</li></ul>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: valutare booleani, condizioni composte, De Morgan</td></tr><tr><td>teoria</td><td>1h</td><td>-</td><td>Automi a stati finiti come modello di partizione degli input: stati finali e intermedi</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: disegnare automi, trovare errori</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.1/4.2</td><td>Dal `if` al `while`: motivazione, struttura e tabella comparativa</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>-</td><td>Esercizi: contatori, dispari, potenze, sequenze e stop-word</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.7</td><td>Cicli annidati</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi</td></tr><tr><td>teoria</td><td>0.5h</td><td>-</td><td>Lo stato del programma durante un `while`: tracce di esecuzione</td></tr></tbody></table>
   </div>
 </section>
 
@@ -326,6 +165,111 @@ if c &lt; a and c &lt; b:
   </div>
 </section>
 
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="dal-if-al-while">Dal <code>if</code> al <code>while</code></h2><p>Abbiamo già visto il costrutto <code>if</code>:</p><pre><code class="language-python">if condizione:
+    blocco</code></pre><p>Il blocco viene eseguito <strong>al massimo una volta</strong>: se la condizione è vera, entra; altrimenti salta.</p><p>Ma se vogliamo ripetere il blocco finché la condizione resta vera?</p><pre><code class="language-python">x = 0
+
+if x &lt; 5:
+    print(x)
+    x = x + 1</code></pre><p>Questo stampa <code>0</code> e basta. Per stampare <code>0, 1, 2, 3, 4</code> dovremmo copiare il blocco cinque volte — e se non sappiamo in anticipo quante volte, non possiamo farlo.</p><p>Il <code>while</code> risolve esattamente questo problema:</p><pre><code class="language-python">x = 0
+
+while x &lt; 5:
+    print(x)
+    x = x + 1</code></pre><p>La struttura è identica all&#x27;<code>if</code>. La differenza è una sola: dopo aver eseguito il blocco, <code>while</code> <strong>torna a valutare la condizione</strong>. Se è ancora vera, ripete. Se è falsa, si ferma.</p><table><thead><tr><th></th><th><code>if</code></th><th><code>while</code></th></tr></thead><tbody><tr><td>valuta la condizione</td><td>una volta</td><td>a ogni iterazione</td></tr><tr><td>esegue il blocco</td><td>al massimo una volta</td><td>finché la condizione è vera</td></tr><tr><td>va verso la terminazione</td><td>sempre</td><td>solo se lo stato cambia</td></tr></tbody></table><p>Questa è la differenza fondamentale: con <code>while</code>, il blocco deve <strong>modificare lo stato</strong> in modo da portare prima o poi la condizione a diventare falsa. Se non lo fa, il ciclo non si ferma mai.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="sintassi-del-while">Sintassi del <code>while</code></h2><p>Forma generale:</p><pre><code class="language-python">while espressione_booleana:
+    istruzione-1
+    istruzione-2
+    ...
+    istruzione-k</code></pre><p>Parti da riconoscere:</p><ul><li><code>while</code> introduce una ripetizione condizionata;</li><li>la guardia è un&#x27;espressione booleana;</li><li>i due punti <code>:</code> aprono il blocco;</li><li>il blocco del ciclo va indentato.</li></ul>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="semantica-del-while">Semantica del <code>while</code></h2><ol><li>Python valuta la guardia;</li><li>se vale <code>True</code>, esegue il blocco;</li><li>poi torna a valutare la guardia (punto 1);</li><li>se vale <code>False</code>, esce dal ciclo.</li></ol><blockquote><p>le istruzioni da 1 a k vengono ripetute in ordine finchè lo stato del programma continua a soddisfare l&#x27;<code>espressione booleana</code></p></blockquote>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esempi">Esempi</h2><h3 id="contatore">contatore</h3><pre><code class="language-python">i = 0
+while i &lt; 5:
+    print(i)
+    i = i + 1</code></pre><ul><li><code>i = 0</code> è l&#x27;inizializzazione dello stato;</li><li><code>i &lt; 5</code> è la guardia: il ciclo continua finché vale <code>True</code>;</li><li><code>print(i)</code> è l&#x27;istruzione;</li><li><code>i = i + 1</code> è l&#x27;aggiornamento che avvicina il programma alla terminazione.</li></ul><blockquote><p>Cosa succede se si dimentica <code>i += 1</code>? La guardia non cambia mai e il ciclo non finisce mai: <strong>ciclo infinito</strong>.</p></blockquote><h3 id="input-ripetuto">input ripetuto</h3><pre><code class="language-python">risposta = input(&quot;Continuo? (s/n): &quot;)
+while risposta == &quot;s&quot;:
+    print(&quot;Ancora...&quot;)
+    risposta = input(&quot;Continuo? (s/n): &quot;)</code></pre><p>Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce l&#x27;utente.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che stampi i numeri da 1 a 10.</li><li>Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>n</code> a <code>0</code>.</li><li>Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>-n</code> a <code>n</code>.</li><li>Dato un certo numero (es. <code>pagine = 120</code>), stampa:</li></ol><pre><code>   Sto leggendo la pagina 1
+   Sto leggendo la pagina 2
+   ...</code></pre><p>fino all&#x27;ultima pagina.</p><ol><li>Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).</li><li>Scrivi un programma che legge una parola dall&#x27;input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).</li><li>Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito <code>2</code>:</li></ol><pre><code>   2^1 = 2
+   2^2 = 4
+   2^3 = 8
+   2^4 = 16
+   2^5 = 32
+   2^6 = 64
+   2^7 = 128
+   2^8 = 256
+   2^9 = 512</code></pre><ol><li>Scrivi un programma che chiede all&#x27;utente di inserire una parola. Il programma continua finché l&#x27;utente non scrive <code>fine</code>.</li></ol><pre><code>   Inserisci una parola: storia
+   Inserisci una parola: geografia
+   Inserisci una parola: fine</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="cicli-annidati">Cicli annidati</h2><p>Un ciclo può contenere un altro ciclo nel suo corpo. Il ciclo interno viene eseguito per intero a ogni iterazione del ciclo esterno.</p><p>Esempio: stampare tutte le combinazioni di pagina e riga.</p><pre><code class="language-python">pagine = 3
+righe = 5
+
+p = 1
+while p &lt;= pagine:
+    r = 1
+    while r &lt;= righe:
+        print(&quot;Pagina&quot;, p, &quot;Riga&quot;, r)
+        r = r + 1
+    p = p + 1</code></pre><p>Output:</p><pre><code>Pagina 1 Riga 1
+Pagina 1 Riga 2
+...
+Pagina 3 Riga 5</code></pre><p>Punti da osservare:</p><ul><li>il ciclo esterno controlla <code>p</code>, che va da <code>1</code> a <code>pagine</code>;</li><li>il ciclo interno controlla <code>r</code>, che <strong>riparte da <code>1</code> a ogni nuova pagina</strong>;</li><li>ogni ciclo ha la propria variabile di stato e il proprio aggiornamento.</li></ul>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="lo-stato-del-programma-durante-un-while">Lo stato del programma durante un <code>while</code></h2><p>Ogni ciclo <code>while</code> si legge seguendo come cambia lo stato a ogni iterazione.</p><h3 id="caso-1-contatore">Caso 1 · contatore</h3><pre><code class="language-python">i = 0
+while i &lt; 5:
+    print(i)
+    i = i + 1</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>i = 0</code></td><td><code>i → 0</code></td><td></td></tr><tr><td>2</td><td><code>while i &lt; 5</code> → True</td><td><code>i → 0</code></td><td></td></tr><tr><td>3</td><td><code>print(i)</code></td><td><code>i → 0</code></td><td><code>0</code></td></tr><tr><td>4</td><td><code>i = i + 1</code></td><td><code>i → 1</code></td><td></td></tr><tr><td>5</td><td><code>while i &lt; 5</code> → True</td><td><code>i → 1</code></td><td></td></tr><tr><td>6</td><td><code>print(i)</code></td><td><code>i → 1</code></td><td><code>1</code></td></tr><tr><td>7</td><td><code>i = i + 1</code></td><td><code>i → 2</code></td><td></td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>n</td><td><code>while i &lt; 5</code> → <strong>False</strong></td><td><code>i → 5</code></td><td></td></tr></tbody></table><h3 id="caso-2-valore-speciale-di-stop">Caso 2 · valore speciale di stop</h3><pre><code class="language-python">numero = int(input(&quot;Numero (-1 per terminare): &quot;))
+somma = 0
+while numero != -1:
+    somma = somma + numero
+    numero = int(input(&quot;Numero (-1 per terminare): &quot;))</code></pre><p>(ipotesi: l&#x27;utente inserisce <code>4</code>, poi <code>7</code>, poi <code>-1</code>)</p><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>numero = int(input(...))</code> ← utente: <code>4</code></td><td><code>numero → 4</code></td><td></td></tr><tr><td>2</td><td><code>somma = 0</code></td><td><code>numero → 4</code>, <code>somma → 0</code></td><td></td></tr><tr><td>3</td><td><code>while numero != -1</code> → True</td><td><code>numero → 4</code>, <code>somma → 0</code></td><td></td></tr><tr><td>4</td><td><code>somma = somma + numero</code></td><td><code>numero → 4</code>, <code>somma → 4</code></td><td></td></tr><tr><td>5</td><td><code>numero = int(input(...))</code> ← utente: <code>7</code></td><td><code>numero → 7</code>, <code>somma → 4</code></td><td></td></tr><tr><td>6</td><td><code>while numero != -1</code> → True</td><td><code>numero → 7</code>, <code>somma → 4</code></td><td></td></tr><tr><td>7</td><td><code>somma = somma + numero</code></td><td><code>numero → 7</code>, <code>somma → 11</code></td><td></td></tr><tr><td>8</td><td><code>numero = int(input(...))</code> ← utente: <code>-1</code></td><td><code>numero → -1</code>, <code>somma → 11</code></td><td></td></tr><tr><td>9</td><td><code>while numero != -1</code> → <strong>False</strong></td><td><code>numero → -1</code>, <code>somma → 11</code></td><td></td></tr></tbody></table><h3 id="caso-3-cicli-nidificati">Caso 3 · cicli nidificati</h3><pre><code class="language-python">p = 1
+while p &lt;= 2:
+    r = 1
+    while r &lt;= 3:
+        print(p, r)
+        r = r + 1
+    p = p + 1</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato della memoria</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>p = 1</code></td><td><code>p → 1</code></td><td></td></tr><tr><td>2</td><td><code>while p &lt;= 2</code> → True</td><td><code>p → 1</code></td><td></td></tr><tr><td>3</td><td><code>r = 1</code></td><td><code>p → 1</code>, <code>r → 1</code></td><td></td></tr><tr><td>4</td><td><code>while r &lt;= 3</code> → True</td><td><code>p → 1</code>, <code>r → 1</code></td><td></td></tr><tr><td>5</td><td><code>print(p, r)</code></td><td><code>p → 1</code>, <code>r → 1</code></td><td><code>1 1</code></td></tr><tr><td>6</td><td><code>r = r + 1</code></td><td><code>p → 1</code>, <code>r → 2</code></td><td></td></tr><tr><td>7</td><td><code>while r &lt;= 3</code> → True</td><td><code>p → 1</code>, <code>r → 2</code></td><td></td></tr><tr><td>8</td><td><code>print(p, r)</code></td><td><code>p → 1</code>, <code>r → 2</code></td><td><code>1 2</code></td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>n</td><td><code>while r &lt;= 3</code> → <strong>False</strong></td><td><code>p → 1</code>, <code>r → 4</code></td><td></td></tr><tr><td>n+1</td><td><code>p = p + 1</code></td><td><code>p → 2</code>, <code>r → 4</code></td><td></td></tr><tr><td>n+2</td><td><code>while p &lt;= 2</code> → True</td><td><code>p → 2</code>, <code>r → 4</code></td><td></td></tr><tr><td>n+3</td><td><code>r = 1</code> ← <strong>reinizializzazione</strong></td><td><code>p → 2</code>, <code>r → 1</code></td><td></td></tr><tr><td>…</td><td>…</td><td>…</td><td>…</td></tr><tr><td>m</td><td><code>while p &lt;= 2</code> → <strong>False</strong></td><td><code>p → 3</code></td><td></td></tr></tbody></table>
+    
+  </div>
+</section>
+
 </div>
 <div class="controls">
   <div class="nav">
@@ -333,7 +277,10 @@ if c &lt; a and c &lt; b:
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 18</div>
+  <div class="counter" id="counter">1 / 11</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

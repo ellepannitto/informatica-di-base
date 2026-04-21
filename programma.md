@@ -20,16 +20,8 @@ Se qualcosa non funziona non è un problema: l'installazione dell'ambiente fa pa
 
 Il testo consigliato è **Introduzione a Python** di **Tony Gaddis**, in italiano oppure in inglese.
 
-Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il corso. Il libro è solo un supporto aggiuntivo per chi vuole ripassare o leggere altri esempi.
-
-Riferimenti indicativi ai capitoli del libro (la numerazione puo variare leggermente tra edizione italiana e inglese):
-
-- **Modulo 0**: appendici sull'installazione di Python e sull'ambiente di lavoro
-- **Moduli 1-2**: capitoli **1-3** (introduzione, input/output, variabili, strutture decisionali)
-- **Moduli 3-4**: capitoli **3-4** (logica booleana e cicli)
-- **Moduli 5-7**: capitoli **5** e **7** (funzioni, liste, memoria e passaggio degli argomenti)
-- **Moduli 8-9**: capitoli **4** e **6** (iterazione e file)
-- **Modulo 10**: capitolo **9** (dizionari e set)
+Non è obbligatorio: **seguire le lezioni è sufficiente** per affrontare il corso.
+Il libro è solo un supporto aggiuntivo per chi vuole ripassare o leggere altri esempi.
 
 I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguono soprattutto le lezioni e le esercitazioni, piu che il libro.
 
@@ -56,54 +48,51 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 
 ### 02 | Variabili e strutture decisionali | slides=guida-lezioni/modulo-2.slides.html
 
-| Tipologia | Durata | Libro            | Argomento                                                                               |
-| --------- | ------ | ---------------- | --------------------------------------------------------------------------------------- |
-| theory    | 0.5h   | cap. 2.5         | Espressioni e istruzioni                                                                |
-| theory    | 0.5h   | cap. 2.5         | Variabili, assegnamento e stato: sintassi, semantica e tracciamento                     |
-| theory    | 0.5h   | cap. 2.6         | `input()` e casting con `int()`, `float()`, `str()`                                     |
-| exercise  | 0.5h   | -                | Esercizi: variabili, input/output, operazioni su stringhe e numeri                      |
-| theory    | 0.5h   | cap. 3.3/3.6     | Tipo `bool`, operatori di confronto e operazioni su stringhe che restituiscono booleani |
-| theory    | 0.5h   | cap. 3.1/3.2/3.4 | Sintassi e semantica di `if`, `if-else`, `elif` e condizioni annidate                   |
+| Tipologia | Durata | Libro            | Argomento                                                                                 |
+| --------- | ------ | ---------------- | ----------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | cap. 2.5         | Espressioni e istruzioni                                                                  |
+| theory    | 0.5h   | cap. 2.5         | Variabili, assegnamento e stato: sintassi, semantica e tracciamento                       |
+| theory    | 0.5h   | cap. 2.6         | `input()` e casting con `int()`, `float()`, `str()`                                       |
+| exercise  | 0.5h   | -                | Esercizi: variabili, input/output, operazioni su stringhe e numeri                        |
+| theory    | 0.5h   | cap. 3.3/3.6     | Tipo `bool`, operatori di confronto e operazioni su stringhe che restituiscono booleani   |
+| theory    | 0.5h   | cap. 3.1/3.2/3.4 | Sintassi e semantica di `if`, `if-else`, `elif` e condizioni annidate                     |
+| theory    | 1h     | -                | Errori nel codice: leggerli e correggerli                                                 |
+| exercise  | 0.5h   | -                | Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti |
+| theory    | 1h     | cap. 3.5         | Condizioni composte: `and`, `or`, `not`, tabelle di verità e precedenza degli operatori   |
+| theory    | 0.5h   | -                | Valutazione lazy e leggi di De Morgan                                                     |
 
-### 03 | Testare il programma e operazioni su booleani | slides=guida-lezioni/modulo-3.slides.html
+### 03 | Dall'if al while | slides=guida-lezioni/modulo-3.slides.html
 
-| Tipologia | Durata | Libro    | Argomento                                                                                 |
-| --------- | ------ | -------- | ----------------------------------------------------------------------------------------- |
-| theory    | 1h     | -        | Errori nel codice: leggerli e correggerli                                                 |
-| exercise  | 0.5h   | -        | Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti |
-| theory    | 1h     | cap. 3.5 | Condizioni composte: `and`, `or`, `not`, tabelle di verità e precedenza degli operatori   |
-| theory    | 0.5h   | -        | Valutazione lazy e leggi di De Morgan                                                     |
-| exercise  | 1h     | -        | Esercizi: valutare booleani, condizioni composte, De Morgan                               |
-| theory    | 1h     | -        | Automi a stati finiti come modello di partizione degli input: stati finali e intermedi    |
-| exercise  | 1h     | -        | Esercizi: disegnare automi, trovare errori                                                |
-
-### 04 | Ciclo while, sentinelle e convalida | slides=guida-lezioni/modulo-4.slides.html
 | Tipologia | Durata | Libro        | Argomento                                                                              |
 | --------- | ------ | ------------ | -------------------------------------------------------------------------------------- |
+| exercise  | 1h     | -            | Esercizi: valutare booleani, condizioni composte, De Morgan                            |
+| theory    | 1h     | -            | Automi a stati finiti come modello di partizione degli input: stati finali e intermedi |
+| exercise  | 1h     | -            | Esercizi: disegnare automi, trovare errori                                             |
 | theory    | 0.5h   | cap. 4.1/4.2 | Dal `if` al `while`: motivazione, struttura e tabella comparativa                      |
 | exercise  | 0.5h   | -            | Esercizi: contatori, dispari, potenze, sequenze e stop-word                            |
-| theory    | 0.5h   | cap. 4.5/4.6 | Sentinelle                                                                             |
-| exercise  | 1h     | -            | Esercizi: input ripetuto, conteggi, classificazione, tabellina con validazione, vocali |
 | theory    | 0.5h   | cap. 4.7     | Cicli annidati                                                                         |
 | exercise  | 1h     | -            | Esercizi                                                                               |
 | theory    | 0.5h   | -            | Lo stato del programma durante un `while`: tracce di esecuzione                        |
-| theory    | 0.5h   | -            | Automi a stati finiti e il `while`: stato `resta`, stato `fine`, self-loop             |
-| exercise  | 1h     | -            | Esercizi: riconoscimento di stringhe con automi                                        |
 
 ### P1 | Prova intermedia 1 | prova=true
-| Tipologia | Durata | Libro | Argomento                                                                 |
-| --------- | ------ | ----- | ------------------------------------------------------------------------- |
-| exercise  | 1h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali) |
-| exercise  | 1h     | —     | Correzione della prova                                                    |
+| Tipologia | Durata | Libro | Argomento                                                                                 |
+| --------- | ------ | ----- | ----------------------------------------------------------------------------------------- |
+| exercise  | 1h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
+| exercise  | 1h   | —     | Correzione della prova                                                                    |
 
-### 05 | Strutture dati: liste | slides=guida-lezioni/modulo-5.slides.html
+
+### 04 | Iterazione con sentinelle, convalida dell'input e liste | slides=guida-lezioni/modulo-4.slides.html
 | Tipologia | Durata | Libro                | Argomento                                                                                        |
 | --------- | ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
+| theory    | 0.5h   | cap. 4.5/4.6         | Sentinelle                                                                                       |
+| exercise  | 1h     | -                    | Esercizi: input ripetuto, conteggi, classificazione, tabellina con validazione, vocali           |
+| theory    | 0.5h   | -                    | Automi a stati finiti e il `while`: stato `resta`, stato `fine`, self-loop                       |
+| exercise  | 1h     | -                    | Esercizi: riconoscimento di stringhe con automi                                                  |
 | theory    | 1h     | cap. 7.1/7.2/7.3/7.4 | Liste                                                                                            |
 | exercise  | 1h     | -                    | Esercizi: costruire liste, accedere agli elementi, scorrere con `while`                          |
-| exercise  | 2h     | -                    | Esercizi: verifica di proprietà anche su liste annidate, serie multiple, conteggio per categoria |
+| exercise  | 1h     | -                    | Esercizi: verifica di proprietà anche su liste annidate, serie multiple, conteggio per categoria |
 
-### 06 | Funzioni e procedure | slides=
+### 05 | Funzioni e procedure | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                           |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | cap. ___ | [Definire funzioni: parametri, chiamata, valori di ritorno](guida-lezioni/modulo-6.slides.html#mod6-parametri)                             |
@@ -113,7 +102,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 3h     | cap. ___ | [Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili](guida-lezioni/modulo-6.slides.html#mod6-esercizi-funzioni) |
 
 
-### 07 | Memoria e passaggio degli argomenti | slides=
+### 06 | Memoria e passaggio degli argomenti | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                                    |
 | --------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | cap. ___ | [Funzioni vs procedure: quando restituire un valore e quando produrre solo un effetto](guida-lezioni/modulo-6.slides.html#mod6-procedure)           |
@@ -128,7 +117,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1.5h     | — | Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni)|
 | exercise  | 1.5h     | — | Correzione della prova |
 
-### 08 | Ciclo for e iterazione | slides=
+### 07 | Ciclo for e iterazione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                  |
 | --------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 0.5h   | cap. ___ | [Il ciclo `for` su stringhe, liste e `range()`](guida-lezioni/modulo-8.slides.html#mod8-for)                               |
@@ -136,7 +125,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1h     | cap. ___ | Esercizi con `for`: conteggi, scansioni, accumuli e trasformazioni su sequenze                                             |
 | exercise  | 1h     | cap. ___ | Esercizi: pattern di stampa, triangoli, rettangoli e uso degli indici nei cicli annidati                                   |
 
-### 09 | File e formati strutturati | slides=
+### 08 | File e formati strutturati | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                                                                               |
 | --------- | ------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | cap. ___ | [File di testo: aprire, leggere e scorrere un file riga per riga con `for`](guida-lezioni/modulo-9.slides.html#mod9-file)                                                                      |
@@ -154,7 +143,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1h     | — | Argomenti: moduli 8-9 (`for`, file, input/output, terminale, formati) |
 | exercise  | 1h     | — | Correzione della prova                                                     |
 
-### 10 | Dizionari, set e organizzazione dell'informazione | slides=
+### 09 | Dizionari, set e organizzazione dell'informazione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                          |
 | --------- | ------ | ----- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | cap. ___ | [Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso](guida-lezioni/modulo-10.slides.html#mod10-dizionari)                       |
@@ -162,12 +151,12 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 2h     | cap. ___ | [Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari](guida-lezioni/modulo-10.slides.html#mod10-frequenze)                 |
 
 
-### 11 | Git e controllo di versione | slides=
+### 10 | Git e controllo di versione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                             |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------------------- |
 | theory    | 1h     | — | [Git: repository, working tree, staging area, commit e storia del progetto](guida-lezioni/modulo-11.slides.html#mod11-git)                             |
 | theory    | 1h     | — | [Git da terminale: `git init`, `git status`, `git add`, `git commit`, `git log`](guida-lezioni/modulo-11.slides.html#mod11-git)                        |
-| exercise  | 1.5h   | — | Esercizi: creare un repository locale, tracciare file, salvare versioni e leggere `git status`        |
+| exercise  | 1h   | — | Esercizi: creare un repository locale, tracciare file, salvare versioni e leggere `git status`        |
 | theory    | 0.5h   | — | [GitHub: repository remoto, `clone`, `push`, `pull` e collaborazione di base](guida-lezioni/modulo-11.slides.html#mod11-github)                           |
 | exercise  | 0.5h   | — | Esercizi: clonare un repository, aggiungere modifiche e pubblicarle sul remoto                        |
 | exercise  | 1h     | — | Esercizi: leggere differenze tra file non tracciati, modificati e già staged                          |
