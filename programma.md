@@ -27,7 +27,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 
 ## Sistema di valutazione
 
-- Ci sono **3 prove intermedie facoltative**, una per blocco (moduli 1–3, 4–7, 8–9). Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.
+- Ci sono **3 prove intermedie facoltative**, una per blocco (moduli 1–3, 4–6, 7–8). Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.
 - Lo **scritto finale** copre i tre blocchi (moduli 1–9). Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale: le prove già superate alleggeriscono lo scritto e possono migliorare il voto complessivo.
 - L'esame si conclude con un **orale** che include live coding e domande di teoria. I moduli 10 e 11 sono testati solo in questa sede.
 
