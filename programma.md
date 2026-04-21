@@ -77,8 +77,8 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 ### P1 | Prova intermedia 1 | prova=true
 | Tipologia | Durata | Libro | Argomento                                                                                 |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------- |
-| exercise  | 1h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
-| exercise  | 1h   | —     | Correzione della prova                                                                    |
+| exercise  | 1.5h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
+| exercise  | 1.5h   | —     | Correzione della prova                                                                    |
 
 
 ### 04 | Iterazione con sentinelle, convalida dell'input e liste | slides=guida-lezioni/modulo-4.slides.html
