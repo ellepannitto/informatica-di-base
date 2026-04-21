@@ -11,7 +11,9 @@ Ricerca: risorse linguistiche, linguistica cognitiva e Natural Language Processi
 - PhD in Cognitive and Brain Sciences — CIMeC, Università di Trento
 - Laurea triennale e magistrale in Informatica Umanistica (Language Technologies) — Università di Pisa
 
-GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](https://scholar.google.it/citations?user=8oLH83IAAAAJ&hl=en)
+Mail: ellepannitto at gmail dot com · GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](https://scholar.google.it/citations?user=8oLH83IAAAAJ&hl=en)
+
+Ricevimento: venerdì 15-17, online
 
 ## Piano del corso
 
@@ -19,22 +21,22 @@ GitHub: [ellepannitto](https://github.com/ellepannitto) · Scholar: [profilo](ht
 
 Struttura: 30% lezione · 70% esercitazione
 
-| Modulo | Argomento                                                          | Blocco |
-| ------ | ------------------------------------------------------------------ | ------ |
-| 01     | Introduzione, REPL, tipi fondamentali, Von Neumann, terminale      | 1      |
-| 02     | Variabili, assegnamento, `if`/`elif`/`else`, `input()` e `print()` | 1      |
-| 03     | Istruzioni condizionali, stato del programma, errori               | 1      |
-| **P1** | **Prova intermedia — moduli 1–3**                                  |        |
-| 04     | Ciclo `while`, sentinelle, convalida dell'input                    | 2      |
-| 05     | Liste: creare, leggere, accumulare, redirezione dell'input         | 2      |
-| 06     | Funzioni: parametri, `return`, black box, scope                    | 2      |
-| 07     | Memoria, passaggio degli argomenti, side effects                   | 2      |
-| **P2** | **Prova intermedia — moduli 4–7**                                  |        |
-| 08     | Ciclo `for`, `range()`, cicli annidati, pattern di stampa          | 3      |
-| 09     | File di testo, CSV, JSON, terminale avanzato, `sys.argv`           | 3      |
-| **P3** | **Prova intermedia — moduli 8–9**                                  |        |
-| 10     | Dizionari, set, frequenze, lookup                                  | 4      |
-| 11     | Git: repository, commit, GitHub, collaborazione                    | 4      |
+| Modulo | Argomento                                                     | Blocco |
+| ------ | ------------------------------------------------------------- | ------ |
+| 01     | Introduzione, REPL, tipi fondamentali, Von Neumann, terminale | 1      |
+| 02     | Variabili, assegnamento, `if`/`elif`/`else`,                  | 1      |
+| 03     | Istruzioni condizionali, stato del programma, errori          | 1      |
+| **P1** | **Prova intermedia — moduli 1–3**                             |        |
+| 04     | Ciclo `while`, sentinelle, convalida dell'input               | 2      |
+| 05     | Liste: creare, leggere, accumulare                            | 2      |
+| 06     | Funzioni: parametri, `return`, black box, scope               | 2      |
+| 07     | Memoria, passaggio degli argomenti, side effects              | 2      |
+| **P2** | **Prova intermedia — moduli 4–7**                             |        |
+| 08     | Ciclo `for`, `range()`, cicli annidati, pattern di stampa     | 3      |
+| 09     | File di testo e formati                                       | 3      |
+| **P3** | **Prova intermedia — moduli 8–9**                             |        |
+| 10     | Dizionari, set, frequenze, lookup                             | 4      |
+| 11     | Git: repository, commit, GitHub, collaborazione               | 4      |
 
 I moduli 10 e 11 non sono coperti dalle prove intermedie ma sono inclusi nello scritto finale e nell'orale.
 
@@ -90,7 +92,8 @@ Non ci interessa:
 ## Perché Python
 
 - è un vero linguaggio di programmazione;
-- ha una sintassi leggibile, quindi lascia vedere bene i concetti;
+- ha una sintassi leggibile, quindi possiamo concentrarci (spesso) sul concetto sottostante;
+- ha moltissime librerie e ottima documentazione per i progetti più complessi;
 - permette di passare rapidamente da un problema a un programma eseguibile.
 
 ```python
@@ -104,9 +107,9 @@ print("LA MIA SPESA DI OGGI:")
 for prodotto, costo in acquisti.items():
     spesa_totale = spesa_totale + costo
 
-    print(prodotto, costo)
+    print(prodotto, costo, "euro")
 
-print("TOTALE: ", spesa_totale)
+print("TOTALE: ", spesa_totale, "euro")
 ```
 
 <details>
@@ -114,22 +117,17 @@ print("TOTALE: ", spesa_totale)
 
 ```text
 LA MIA SPESA DI OGGI:
-detersivo 5
-prosciutto 3
-mortadella 2
-TOTALE:  10
+detersivo 5 euro
+prosciutto 3 euro
+mortadella 2 euro
+TOTALE:  10 euro
 ```
 
 </details>
 
-- Python è un linguaggio generale;
-- ha moltissime librerie e ottima documentazione;
-- permette sia scripting rapido sia progetti più strutturati.
+## Python in quattro aggettivi
 
-## Python in tre aggettivi
-
-Python è un linguaggio **multiparadigma**, **interpretato** e **ad alto livello**.
-
+Python è un linguaggio **multiparadigma**, **dinamicamente tipizzato**, **interpretato** e **ad alto livello**.
 
 | Aggettivo                   | Significato                                                                                                      |
 | --------------------------- | ---------------------------------------------------------------------------------------------------------------- |
@@ -138,7 +136,7 @@ Python è un linguaggio **multiparadigma**, **interpretato** e **ad alto livello
 | **dinamicamente tipizzato** | i tipi non si dichiarano: vengono determinati a runtime, e operazioni tra tipi incompatibili producono un errore |
 | **multiparadigma**          | supporta stili diversi di programmazione (imperativo, funzionale, a oggetti)                                     |
 
-> Per ora basta sapere che esistono. Alla fine della lezione queste parole avranno un significato preciso.
+> Alla fine della lezione queste parole avranno un significato preciso.
 
 > non vogliamo scrivere codice elegante, ma codice **corretto**, **leggibile** e **controllabile**.
 
@@ -224,7 +222,7 @@ Il tipo di un valore determina quali operazioni hanno senso su di esso.
 - `6 * 7 = 42`
 - da `44` avanzano `2`
 
-![Divisione intera e resto](/divisione.png)
+![Divisione intera e resto](imgs/divisione.png)
 
 ```python
 >>> 44 // 6
@@ -288,7 +286,7 @@ Qui Python non sta facendo un calcolo aritmetico: sta mettendo insieme due seque
 In informatica si conta a partire da zero.
 
 ```
- l   i   n   g   u   i   s   t   i   c   a
+ i   n   f   o   r   m   a   t   i   c   a
  0   1   2   3   4   5   6   7   8   9  10
 -11 -10  -9  -8  -7  -6  -5  -4  -3  -2  -1
 ```
@@ -296,20 +294,22 @@ In informatica si conta a partire da zero.
 Si può anche contare dal fondo usando indici negativi: `-1` è l'ultimo carattere, `-2` il penultimo e così via.
 
 ```python
->>> "linguistica"[0]
-'l'
->>> "linguistica"[-1]
+>>> "informatica"[0]
+'i'
+>>> "informatica"[-1]
 'a'
->>> "linguistica"[-3]
+>>> "informatica"[-3]
 'i'
 ```
 
 Le sottostringhe si leggono anche per intervalli:
 
 ```python
->>> "linguistica"[0:3]
-'lin'
->>> "linguistica"[-3:]
+>>> "informatica"[0:3]
+'inf'
+>>> "informatica"[:3]
+'inf'
+>>> "informatica"[-3:]
 'ica'
 ```
 
@@ -425,10 +425,10 @@ la distanza tra le due cose è enorme, e l'interprete la colma.
 
 Due famiglie importanti di *traduttori*:
 
-| Strumento       | Che cosa fa                                                   | Esempio tipico |
-| --------------- | ------------------------------------------------------------- | -------------- |
-| **Interprete**  | legge ed esegue il programma riga per riga                    | Python         |
-| **Compilatore** | traduce tutto il programma in anticipo, poi produce un eseguibile | C, C++     |
+| Strumento       | Che cosa fa                                                       | Esempio tipico     |
+| --------------- | ----------------------------------------------------------------- | ------------------ |
+| **Interprete**  | legge ed esegue il programma riga per riga                        | Python, Javascript |
+| **Compilatore** | traduce tutto il programma in anticipo, poi produce un eseguibile | C, Java            |
 
 Per capire la differenza tra i due approcci, immaginate un libro scritto in caratteri *thai* che volete leggere.
 
@@ -453,7 +453,8 @@ Per capire la differenza tra i due approcci, immaginate un libro scritto in cara
 Tutti i computer moderni seguono un'architettura descritta da Von Neumann negli anni '40, che rimane valida ancora oggi.
 
 L'idea centrale è questa: **un programma è una sequenza di istruzioni memorizzate insieme ai dati**.
-La CPU le legge una alla volta, le esegue, e produce un risultato.
+
+La **CPU** (Central Processing Unit) le legge una alla volta, le esegue, e produce un risultato.
 
 ### I componenti
 
@@ -509,6 +510,8 @@ Ogni volta che lo facciamo, sotto il cofano succede questo:
 
 ### Attività: simulare Von Neumann
 
+> Adattato da [cse4k12.org — How Computers Work](https://cse4k12.org/how_computers_work/index.html), usato con licenza CC BY-NC-SA.
+
 **Setup.** Ci servono 3 volontari! Ciascuno riceve un foglio e interpreta un componente:
 
 | Ruolo       | Componente Von Neumann | Cosa fa durante la simulazione                                                                                                        |
@@ -519,25 +522,10 @@ Ogni volta che lo facciamo, sotto il cofano succede questo:
 
 <details>
 
-**Il programma.** La CPU riceve queste istruzioni e le esegue in ordine:
-
-```
-Aggiungi 3 a x
-Aggiungi 2 a y
-Disegna (x, y)
-Aggiungi 2 a x
-Aggiungi 1 a y
-Disegna (x, y)
-Sottrai 4 da x
-Aggiungi 2 a y
-Disegna (x, y)
-Aggiungi 2 a x
-Disegna (x, y)
-FINE
-```
+**Il programma.** La CPU riceve una lista di istruzioni e le esegue in ordine:
 
 **Come funziona.**
-- Quando la CPU incontra `Aggiungi N a x`, lo dice ad alta voce alla Memoria. La Memoria aggiorna `x` sul suo foglio.
+- Quando la CPU incontra `Aggiungi N a x/y`, lo dice ad alta voce alla Memoria. La Memoria aggiorna `x` e `y` sul suo foglio.
 - Quando la CPU incontra `Disegna (x, y)`, chiede alla Memoria i valori correnti di `x` e `y`, poi li passa allo Schermo. Lo Schermo colora quella casella.
 - Alla fine la CPU dice `FINE`. Lo Schermo mostra il risultato agli altri.
 
@@ -567,10 +555,9 @@ FINE
 **Domande di discussione.**
 
 - La CPU sapeva cosa stava disegnando? Perché no?
-- Cosa avrebbe prodotto un errore di un'istruzione (es. `Aggiungi 4 a x` invece di `Aggiungi 3 a x`)?
+- Cosa avrebbe prodotto un errore di un'istruzione (es. `Aggiungi x a 4` oppure `Aggiungi "ciao" a x` invece di `Aggiungi 3 a x`)?
 - Dove "viveva" il programma? Dove vivevano `x` e `y`?
 - Se la Memoria dimenticasse il valore di `x` a metà esecuzione, cosa succederebbe?
-- Quali componenti di Von Neumann abbiamo simulato? Quale mancava?
 
 > Il punto più importante: **la CPU non capisce cosa sta disegnando**.
 > Esegue le istruzioni una alla volta, meccanicamente.
