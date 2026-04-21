@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this teaching material, please cite it using the metadata below."
+title: "Informatica di Base"
+type: software
+authors:
+  - family-names: "Pannitto"
+    given-names: "Ludovica"
+    affiliation: "University of Bologna"
+    email: "ellepannitto@gmail.com"
+license: "CC-BY-NC-SA-4.0"
+repository-code: "https://github.com/ellepannitto/informatica-di-base"
+url: "https://github.com/ellepannitto/informatica-di-base"
+abstract: "Materiali didattici e script di generazione per il corso Informatica di Base."
