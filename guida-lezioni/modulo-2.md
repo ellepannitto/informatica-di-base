@@ -444,6 +444,157 @@ Questa operazione di conversione di chiama **casting**.
     - la stringa senza il primo e l'ultimo carattere;
 11. Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. `20`), e stampa il prezzo scontato e il risparmio.
 
+<details>
+<summary>Soluzione — Esercizio 1</summary>
+
+```python
+nome = input("Nome: ")
+cognome = input("Cognome: ")
+print("Ciao, " + nome + " " + cognome + "!")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 2</summary>
+
+```python
+eta = int(input("Età: "))
+print("Tra un anno avrai", eta + 1, "anni")
+print("Un anno fa avevi", eta - 1, "anni")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 3</summary>
+
+```python
+a = int(input("Primo numero: "))
+b = int(input("Secondo numero: "))
+print("Somma:", a + b)
+print("Prodotto:", a * b)
+print("Resto:", a % b)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 4</summary>
+
+```python
+a = float(input("Primo numero: "))
+b = float(input("Secondo numero: "))
+c = float(input("Terzo numero: "))
+print("Media:", (a + b + c) / 3)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 5</summary>
+
+```python
+s = input("Stringa: ")
+print("Lunghezza:", len(s))
+print("Primo carattere:", s[0])
+print("Ultimo carattere:", s[-1])
+print("Primi tre caratteri:", s[:3])
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 6</summary>
+
+```python
+a = int(input("Primo numero: "))
+b = int(input("Secondo numero: "))
+print("Valori inseriti:", a, b)
+c = a
+a = b
+b = c
+print("Valori scambiati:", a, b)
+```
+
+oppure:
+
+```python
+a = int(input("Primo numero: "))
+b = int(input("Secondo numero: "))
+print("Valori inseriti:", a, b)
+print("Valori scambiati:", b, a)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 7</summary>
+
+```python
+nome = input("Nome: ")
+anno_nascita = int(input("Anno di nascita: "))
+anno_corrente = 2026
+eta = anno_corrente - anno_nascita
+print("Ciao " + nome + ", potresti avere " + str(eta - 1) + " o " + str(eta) + " anni")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 8</summary>
+
+```python
+secondi = int(input("Secondi: "))
+
+ore = secondi // 3600
+minuti = (secondi // 60) % 60
+sec = secondi % 60
+
+print(ore, "ore")
+print(minuti, "minuti")
+print(sec, "secondi")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 9</summary>
+
+```python
+nome = input("Nome: ")
+cognome = input("Cognome: ")
+print(cognome.upper())
+print(nome[0].upper() + nome[1:].lower())
+print(nome[0].upper() + "." + cognome[0].upper() + ".")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 10</summary>
+
+```python
+s = input("Stringa: ")
+print(s[1:-1])
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 11</summary>
+
+```python
+prezzo = float(input("Prezzo (€): "))
+sconto = int(input("Sconto (%): "))
+risparmio = prezzo * sconto / 100
+prezzo_scontato = prezzo - risparmio
+print("Prezzo scontato:", prezzo_scontato)
+print("Risparmio:", risparmio)
+```
+
+</details>
+
 ## Tipo `bool` e nuove operazioni
 
 Fin qui abbiamo lavorato con interi, stringhe e `float`.
@@ -758,6 +909,274 @@ Quindi:
 17. Leggi due numeri interi `a` e `b`. Se `a` è maggiore di `b`, scambia i valori delle due variabili.
 Stampa sempre `a` e `b` alla fine: i valori usciti devono essere in ordine crescente.
 
+<details>
+<summary>Soluzione — Esercizio 1</summary>
+
+```python
+numero = int(input("Inserisci un numero: "))
+
+if numero > 0:
+    print("Positivo")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 2</summary>
+
+```python
+parola = input("Parola: ")
+if len(parola) > 5:
+    print("La parola è lunga")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 3</summary>
+
+```python
+n = int(input("Numero: "))
+if n % 2 == 0:
+    print("Pari")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 4</summary>
+
+```python
+n = int(input("Numero: "))
+if n % 2 == 0:
+    print("Pari")
+else:
+    print("Dispari")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 5</summary>
+
+```python
+a = int(input("Primo numero: "))
+b = int(input("Secondo numero: "))
+if a > b:
+    print(a)
+elif b > a:
+    print(b)
+else:
+    print("I numeri sono uguali")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 6</summary>
+
+```python
+nome1 = input("Primo nome: ")
+nome2 = input("Secondo nome: ")
+if nome1 <= nome2:
+    print(nome1)
+    print(nome2)
+else:
+    print(nome2)
+    print(nome1)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 7</summary>
+
+```python
+parola = input("Parola: ")
+if parola[0].lower() in "aeiou":
+    print("Inizia con una vocale")
+else:
+    print("Non inizia con una vocale")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 8</summary>
+
+```python
+n = int(input("Numero: "))
+if n < 0:
+    print("Negativo")
+elif n == 0:
+    print("Zero")
+else:
+    print("Positivo")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 9</summary>
+
+```python
+voto = int(input("Voto: "))
+if voto < 18:
+    print("Insufficiente")
+elif voto <= 23:
+    print("Sufficiente")
+elif voto <= 27:
+    print("Buono")
+else:
+    print("Ottimo")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 10</summary>
+
+```python
+parola = input("Parola: ")
+if len(parola) < 4:
+    print("Corta")
+elif len(parola) <= 7:
+    print("Media")
+else:
+    print("Lunga")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 11</summary>
+
+```python
+mese = int(input("Mese (1-12): "))
+anno = int(input("Anno: "))
+
+if mese == 12:
+    mese_succ = 1
+    anno_succ = anno + 1
+else:
+    mese_succ = mese + 1
+    anno_succ = anno
+
+if mese_succ == 1:
+    nome_mese = "Gennaio"
+elif mese_succ == 2:
+    nome_mese = "Febbraio"
+elif mese_succ == 3:
+    nome_mese = "Marzo"
+elif mese_succ == 4:
+    nome_mese = "Aprile"
+elif mese_succ == 5:
+    nome_mese = "Maggio"
+elif mese_succ == 6:
+    nome_mese = "Giugno"
+elif mese_succ == 7:
+    nome_mese = "Luglio"
+elif mese_succ == 8:
+    nome_mese = "Agosto"
+elif mese_succ == 9:
+    nome_mese = "Settembre"
+elif mese_succ == 10:
+    nome_mese = "Ottobre"
+elif mese_succ == 11:
+    nome_mese = "Novembre"
+else:
+    nome_mese = "Dicembre"
+
+print(nome_mese, anno_succ)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 12</summary>
+
+```python
+nome = input("Nome: ")
+cognome = input("Cognome: ")
+anno = int(input("Anno di nascita: "))
+print(nome + " " + cognome)
+print(anno)
+if anno < 2000:
+    print("Nato/a nel secolo scorso")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 13</summary>
+
+```python
+a = int(input("Primo numero: "))
+b = int(input("Secondo numero: "))
+print(a, b)
+if a > b:
+    print("Il primo è maggiore")
+print("Somma:", a + b)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 14</summary>
+
+```python
+parola = input("Parola: ")
+if len(parola) > 3:
+    print(parola[1])
+else:
+    print("Parola troppo corta")
+print(len(parola))
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 15</summary>
+
+```python
+parola = input("Parola: ")
+if parola[0].isupper():
+    risultato = "maiuscola"
+else:
+    risultato = "minuscola"
+print("La parola è: " + risultato)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 16</summary>
+
+```python
+n = int(input("Numero: "))
+if n % 2 == 0:
+    messaggio = "pari"
+else:
+    messaggio = "dispari"
+print("Il numero " + str(n) + " è " + messaggio)
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 17</summary>
+
+```python
+a = int(input("a: "))
+b = int(input("b: "))
+if a > b:
+    tmp = a
+    a = b
+    b = tmp
+print(a, b)
+```
+
+</details>
 
 Per ciascun programma e input indicato, cerca di predire l'output del programma con gli input proposti e compila la tabella con lo stato della memoria.
 
@@ -781,6 +1200,36 @@ print(etichetta + ": " + str(x))
 - Traccia con input `3`, `4`
 - Traccia con input `6`, `7`
 
+<details>
+<summary>Soluzione — T1</summary>
+
+Input: `x = 3`, `y = 4`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `x = int(input("x: "))` | x=3 | |
+| `y = int(input("y: "))` | x=3, y=4 | |
+| `z = x + y` | x=3, y=4, z=7 | |
+| `if z > 10:` → False | x=3, y=4, z=7 | |
+| `elif z > 0:` → True | x=3, y=4, z=7 | |
+| `x = x + 1` | x=4, y=4, z=7 | |
+| `etichetta = "medio"` | x=4, y=4, z=7, etichetta="medio" | |
+| `print(etichetta + ": " + str(x))` | | `medio: 4` |
+
+Input: `x = 6`, `y = 7`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `x = int(input("x: "))` | x=6 | |
+| `y = int(input("y: "))` | x=6, y=7 | |
+| `z = x + y` | x=6, y=7, z=13 | |
+| `if z > 10:` → True | x=6, y=7, z=13 | |
+| `x = x * 2` | x=12, y=7, z=13 | |
+| `etichetta = "grande"` | x=12, y=7, z=13, etichetta="grande" | |
+| `print(etichetta + ": " + str(x))` | | `grande: 12` |
+
+</details>
+
 **T2.**
 
 ```python
@@ -796,6 +1245,32 @@ print(risultato)
 
 - Traccia con input `"python"`
 - Traccia con input `"ciao"`
+
+<details>
+<summary>Soluzione — T2</summary>
+
+Input: `"python"`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `s = input("Parola: ")` | s="python" | |
+| `n = len(s)` | s="python", n=6 | |
+| `if n > 4:` → True | s="python", n=6 | |
+| `s = s[0].upper() + s[1:]` | s="Python", n=6 | |
+| `risultato = s + " (" + str(n) + ")"` | s="Python", n=6, risultato="Python (6)" | |
+| `print(risultato)` | | `Python (6)` |
+
+Input: `"ciao"`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `s = input("Parola: ")` | s="ciao" | |
+| `n = len(s)` | s="ciao", n=4 | |
+| `if n > 4:` → False | s="ciao", n=4 | |
+| `risultato = s.upper()` | s="ciao", n=4, risultato="CIAO" | |
+| `print(risultato)` | | `CIAO` |
+
+</details>
 
 **T3.**
 
@@ -815,6 +1290,26 @@ print(str(a) + " " + str(b) + " - " + messaggio)
 ```
 
 - Traccia con input `9`, `2`
+
+<details>
+<summary>Soluzione — T3</summary>
+
+Input: `a = 9`, `b = 2`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `a = int(input("a: "))` | a=9 | |
+| `b = int(input("b: "))` | a=9, b=2 | |
+| `if a > b:` → True | a=9, b=2 | |
+| `tmp = a` | a=9, b=2, tmp=9 | |
+| `a = b` | a=2, b=2, tmp=9 | |
+| `b = tmp` | a=2, b=9, tmp=9 | |
+| `diff = b - a` | a=2, b=9, tmp=9, diff=7 | |
+| `if diff > 5:` → True | a=2, b=9, tmp=9, diff=7 | |
+| `messaggio = "distanti"` | a=2, b=9, diff=7, messaggio="distanti" | |
+| `print(str(a) + " " + str(b) + " - " + messaggio)` | | `2 9 - distanti` |
+
+</details>
 
 **T4.**
 
@@ -836,6 +1331,35 @@ print("Fine: " + str(n))
 - Traccia con input `-3`
 - Traccia con input `4`
 
+<details>
+<summary>Soluzione — T4</summary>
+
+Input: `-3`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `n = int(input("n: "))` | n=-3 | |
+| `print("Inizio")` | n=-3 | `Inizio` |
+| `if n < 0:` → True | n=-3 | |
+| `print("Negativo")` | n=-3 | `Negativo` |
+| `n = -n` | n=3 | |
+| `print("Valore assoluto: " + str(n))` | n=3 | `Valore assoluto: 3` |
+| `print("Fine: " + str(n))` | n=3 | `Fine: 3` |
+
+Input: `4`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `n = int(input("n: "))` | n=4 | |
+| `print("Inizio")` | n=4 | `Inizio` |
+| `if n < 0:` → False | n=4 | |
+| `elif n == 0:` → False | n=4 | |
+| `else: print("Positivo")` | n=4 | `Positivo` |
+| `n = n * n` | n=16 | |
+| `print("Fine: " + str(n))` | n=16 | `Fine: 16` |
+
+</details>
+
 **T5.**
 
 ```python
@@ -854,6 +1378,36 @@ print("Distanza: " + str(diff))
 
 - Traccia con input `a = 7`, `b = 2`
 - Traccia con input `a = 3`, `b = 3`
+
+<details>
+<summary>Soluzione — T5</summary>
+
+Input: `a = 7`, `b = 2`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `a = int(input("a: "))` | a=7 | |
+| `b = int(input("b: "))` | a=7, b=2 | |
+| `print("a=" + str(a) + " b=" + str(b))` | a=7, b=2 | `a=7 b=2` |
+| `if a > b:` → True | a=7, b=2 | |
+| `print("a è maggiore")` | a=7, b=2 | `a è maggiore` |
+| `diff = a - b` | a=7, b=2, diff=5 | |
+| `print("Differenza: " + str(diff))` | a=7, b=2, diff=5 | `Differenza: 5` |
+| `print("Distanza: " + str(diff))` | a=7, b=2, diff=5 | `Distanza: 5` |
+
+Input: `a = 3`, `b = 3`
+
+| Istruzione | Stato memoria | Output |
+| ---------- | ------------- | ------ |
+| `a = int(input("a: "))` | a=3 | |
+| `b = int(input("b: "))` | a=3, b=3 | |
+| `print("a=" + str(a) + " b=" + str(b))` | a=3, b=3 | `a=3 b=3` |
+| `if a > b:` → False | a=3, b=3 | |
+| `else: print("b è maggiore o uguale")` | a=3, b=3 | `b è maggiore o uguale` |
+| `diff = b - a` | a=3, b=3, diff=0 | |
+| `print("Distanza: " + str(diff))` | a=3, b=3, diff=0 | `Distanza: 0` |
+
+</details>
 
 ## Errori nel codice
 
@@ -1204,6 +1758,22 @@ Per ciascuna espressione e valori di variabili indicati, calcola il risultato (`
 7. `eta = 20`, `ha_documento = False` → `eta >= 18 and ha_documento`
 8. `eta = 16`, `ha_documento = True` → `eta >= 18 or ha_documento`
 
+<details>
+<summary>Soluzioni — Valutare espressioni booleane</summary>
+
+| # | Variabili | Espressione | Sviluppo | Risultato |
+| - | --------- | ----------- | -------- | --------- |
+| 1 | x=5, y=3 | `x > 0 and y > 0` | `True and True` | `True` |
+| 2 | x=-2, y=4 | `x > 0 and y > 0` | `False and True` | `False` |
+| 3 | x=-2, y=4 | `x > 0 or y > 0` | `False or True` | `True` |
+| 4 | x=-2, y=-1 | `x > 0 or y > 0` | `False or False` | `False` |
+| 5 | n=7 | `not n > 10` | `not False` | `True` |
+| 6 | n=15 | `not n > 10` | `not True` | `False` |
+| 7 | eta=20, ha_documento=False | `eta >= 18 and ha_documento` | `True and False` | `False` |
+| 8 | eta=16, ha_documento=True | `eta >= 18 or ha_documento` | `False or True` | `True` |
+
+</details>
+
 ### Condizioni composte nei programmi
 
 1. Scrivi un programma che legge un numero intero e stampa `Nel range` se è compreso tra 1 e 100 (estremi inclusi), `Fuori range` altrimenti.
@@ -1213,6 +1783,95 @@ Per ciascuna espressione e valori di variabili indicati, calcola il risultato (`
 5. Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l'età desiderata.
     - Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:
       `Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri`
+
+<details>
+<summary>Soluzione — Esercizio 1</summary>
+
+```python
+n = int(input("Numero: "))
+if n >= 1 and n <= 100:
+    print("Nel range")
+else:
+    print("Fuori range")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 2</summary>
+
+```python
+anno = int(input("Anno: "))
+if (anno % 4 == 0 and anno % 100 != 0) or anno % 400 == 0:
+    print("Bisestile")
+else:
+    print("Non bisestile")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 3</summary>
+
+```python
+s1 = input("Prima stringa: ")
+s2 = input("Seconda stringa: ")
+if len(s1) == 0 or len(s2) == 0:
+    print("Almeno una è vuota")
+else:
+    print("Entrambe non vuote")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 4</summary>
+
+```python
+n = int(input("Numero: "))
+if n < 0 or n > 10:
+    print("Fuori range")
+```
+
+Con `not` e `and`:
+
+```python
+if not (n >= 0 and n <= 10):
+    print("Fuori range")
+```
+
+Le due condizioni sono equivalenti per le leggi di De Morgan: `not (A and B)` ↔ `not A or not B`.
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 5</summary>
+
+```python
+nome = input("Nome: ")
+eta_attuale = int(input("Età attuale: "))
+eta_desiderata = int(input("Età desiderata: "))
+anni_mancanti = eta_desiderata - eta_attuale
+print("Ciao " + nome + ", oggi hai " + str(eta_attuale) + " anni, tra " + str(anni_mancanti) + " anni ne avrai " + str(eta_desiderata) + " come desideri")
+```
+
+Con validazione degli input:
+
+```python
+nome = input("Nome: ")
+eta_attuale = int(input("Età attuale: "))
+eta_desiderata = int(input("Età desiderata: "))
+
+if eta_attuale <= 0 or eta_desiderata <= 0:
+    print("Errore: le età devono essere maggiori di zero.")
+elif eta_attuale >= eta_desiderata:
+    print("Errore: l'età attuale deve essere minore di quella desiderata.")
+else:
+    anni_mancanti = eta_desiderata - eta_attuale
+    print("Ciao " + nome + ", oggi hai " + str(eta_attuale) + " anni, tra " + str(anni_mancanti) + " anni ne avrai " + str(eta_desiderata) + " come desideri")
+```
+
+</details>
 
 ## Ordine di precedenza degli operatori
 

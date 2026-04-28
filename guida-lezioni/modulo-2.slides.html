@@ -227,7 +227,53 @@ print(int(eta) + 1)</code></pre><p>Alcune conversioni comuni:</p><table><thead><
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che legge nome e cognome e stampa un saluto, per esempio <code>Ciao, Mario Rossi!</code>.</li><li>Scrivi un programma che legge l&#x27;età e stampa: <code>Tra un anno avrai X anni</code> e <code>Un anno fa avevi Y anni</code>.</li><li>Scrivi un programma che legge due numeri interi e stampa la loro somma, il loro prodotto e il resto della divisione del primo per il secondo.</li><li>Scrivi un programma che legge tre numeri e ne stampa la media.</li><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la lunghezza della stringa;</li><li>il primo carattere;</li><li>l&#x27;ultimo carattere;</li><li>i primi tre caratteri.</li></ul></li><li>Scrivi un programma che legge due numeri e stampa prima i valori inseriti e poi gli stessi valori scambiati.</li><li>Scrivi un programma che legge un nome e un anno di nascita e stampa una frase del tipo: <code>Ciao Anna, potresti avere 20 o 21 anni</code>.</li><li>Scrivi un programma che legge un numero intero di secondi (es. <code>3723</code>) e stampa la conversione nel formato: <code>1 ore, 2 minuti, 3 secondi</code>.</li><li>Scrivi un programma che legge nome e cognome e stampa:<ul><li>il cognome tutto in maiuscolo;</li><li>il nome con solo la prima lettera maiuscola e il resto minuscolo;</li><li>le iniziali nel formato <code>M.R.</code></li></ul></li><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la stringa senza il primo e l&#x27;ultimo carattere;</li></ul></li><li>Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. <code>20</code>), e stampa il prezzo scontato e il risparmio.</li></ol>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che legge nome e cognome e stampa un saluto, per esempio <code>Ciao, Mario Rossi!</code>.</li><li>Scrivi un programma che legge l&#x27;età e stampa: <code>Tra un anno avrai X anni</code> e <code>Un anno fa avevi Y anni</code>.</li><li>Scrivi un programma che legge due numeri interi e stampa la loro somma, il loro prodotto e il resto della divisione del primo per il secondo.</li><li>Scrivi un programma che legge tre numeri e ne stampa la media.</li><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la lunghezza della stringa;</li><li>il primo carattere;</li><li>l&#x27;ultimo carattere;</li><li>i primi tre caratteri.</li></ul></li><li>Scrivi un programma che legge due numeri e stampa prima i valori inseriti e poi gli stessi valori scambiati.</li><li>Scrivi un programma che legge un nome e un anno di nascita e stampa una frase del tipo: <code>Ciao Anna, potresti avere 20 o 21 anni</code>.</li><li>Scrivi un programma che legge un numero intero di secondi (es. <code>3723</code>) e stampa la conversione nel formato: <code>1 ore, 2 minuti, 3 secondi</code>.</li><li>Scrivi un programma che legge nome e cognome e stampa:<ul><li>il cognome tutto in maiuscolo;</li><li>il nome con solo la prima lettera maiuscola e il resto minuscolo;</li><li>le iniziali nel formato <code>M.R.</code></li></ul></li><li>Scrivi un programma che legge una stringa e stampa:<ul><li>la stringa senza il primo e l&#x27;ultimo carattere;</li></ul></li><li>Scrivi un programma che legge un prezzo in euro (numero decimale) e una percentuale di sconto (numero intero, es. <code>20</code>), e stampa il prezzo scontato e il risparmio.</li></ol><details><summary>Soluzione — Esercizio 1</summary><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+cognome = input(&quot;Cognome: &quot;)
+print(&quot;Ciao, &quot; + nome + &quot; &quot; + cognome + &quot;!&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 2</summary><pre><code class="language-python">eta = int(input(&quot;Età: &quot;))
+print(&quot;Tra un anno avrai&quot;, eta + 1, &quot;anni&quot;)
+print(&quot;Un anno fa avevi&quot;, eta - 1, &quot;anni&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 3</summary><pre><code class="language-python">a = int(input(&quot;Primo numero: &quot;))
+b = int(input(&quot;Secondo numero: &quot;))
+print(&quot;Somma:&quot;, a + b)
+print(&quot;Prodotto:&quot;, a * b)
+print(&quot;Resto:&quot;, a % b)</code></pre></details><details><summary>Soluzione — Esercizio 4</summary><pre><code class="language-python">a = float(input(&quot;Primo numero: &quot;))
+b = float(input(&quot;Secondo numero: &quot;))
+c = float(input(&quot;Terzo numero: &quot;))
+print(&quot;Media:&quot;, (a + b + c) / 3)</code></pre></details><details><summary>Soluzione — Esercizio 5</summary><pre><code class="language-python">s = input(&quot;Stringa: &quot;)
+print(&quot;Lunghezza:&quot;, len(s))
+print(&quot;Primo carattere:&quot;, s[0])
+print(&quot;Ultimo carattere:&quot;, s[-1])
+print(&quot;Primi tre caratteri:&quot;, s[:3])</code></pre></details><details><summary>Soluzione — Esercizio 6</summary><pre><code class="language-python">a = int(input(&quot;Primo numero: &quot;))
+b = int(input(&quot;Secondo numero: &quot;))
+print(&quot;Valori inseriti:&quot;, a, b)
+c = a
+a = b
+b = c
+print(&quot;Valori scambiati:&quot;, a, b)</code></pre><p>oppure:</p><pre><code class="language-python">a = int(input(&quot;Primo numero: &quot;))
+b = int(input(&quot;Secondo numero: &quot;))
+print(&quot;Valori inseriti:&quot;, a, b)
+print(&quot;Valori scambiati:&quot;, b, a)</code></pre></details><details><summary>Soluzione — Esercizio 7</summary><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+anno_nascita = int(input(&quot;Anno di nascita: &quot;))
+anno_corrente = 2026
+eta = anno_corrente - anno_nascita
+print(&quot;Ciao &quot; + nome + &quot;, potresti avere &quot; + str(eta - 1) + &quot; o &quot; + str(eta) + &quot; anni&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 8</summary><pre><code class="language-python">secondi = int(input(&quot;Secondi: &quot;))
+
+ore = secondi // 3600
+minuti = (secondi // 60) % 60
+sec = secondi % 60
+
+print(ore, &quot;ore&quot;)
+print(minuti, &quot;minuti&quot;)
+print(sec, &quot;secondi&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 9</summary><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+cognome = input(&quot;Cognome: &quot;)
+print(cognome.upper())
+print(nome[0].upper() + nome[1:].lower())
+print(nome[0].upper() + &quot;.&quot; + cognome[0].upper() + &quot;.&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 10</summary><pre><code class="language-python">s = input(&quot;Stringa: &quot;)
+print(s[1:-1])</code></pre></details><details><summary>Soluzione — Esercizio 11</summary><pre><code class="language-python">prezzo = float(input(&quot;Prezzo (€): &quot;))
+sconto = int(input(&quot;Sconto (%): &quot;))
+risparmio = prezzo * sconto / 100
+prezzo_scontato = prezzo - risparmio
+print(&quot;Prezzo scontato:&quot;, prezzo_scontato)
+print(&quot;Risparmio:&quot;, risparmio)</code></pre></details>
     
   </div>
 </section>
@@ -366,7 +412,123 @@ else:
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><ol><li>Leggi un numero intero e stampa <code>Positivo</code> solo se è maggiore di zero.</li><li>Leggi una parola e stampa <code>La parola è lunga</code> solo se ha più di 5 caratteri.</li><li>Leggi un numero intero e stampa <code>Pari</code> solo se è divisibile per 2.</li><li>Leggi un numero intero e stampa <code>Pari</code> oppure <code>Dispari</code> a seconda se è divisibile per due o meno.</li><li>Leggi due numeri interi e stampa il maggiore o un messaggio se sono uguali.</li><li>Leggi due nomi e stampali nell&#x27;ordine alfabetico corretto.</li><li>Leggi una parola e controlla se inizia con una vocale; stampa un messaggio diverso nei due casi.</li><li>Leggi un numero intero e stampa <code>Negativo</code>, <code>Zero</code> o <code>Positivo</code>.</li><li>Leggi un voto da 0 a 30 e stampa:<ul><li><code>Insufficiente</code> se il voto è minore di 18;</li><li><code>Sufficiente</code> se è tra 18 e 23;</li><li><code>Buono</code> se è tra 24 e 27;</li><li><code>Ottimo</code> se è 28 o più.</li></ul></li><li>Leggi una parola e stampa se è corta (meno di 4 lettere), media (da 4 a 7 lettere) o lunga (più di 7 lettere).</li><li>Leggi una coppia di numeri che rappresentano un mese (1–12) e un anno e stampa il mese successivo con l&#x27;anno corretto.</li></ol><p>Per esempio: mese 12, anno 2024 → <code>Gennaio 2025</code>.</p><ol><li>Leggi nome, cognome e anno di nascita. Stampa sempre il nome completo e l&#x27;anno di nascita. Se l&#x27;anno di nascita è precedente al 2000, stampa anche <code>Nato/a nel secolo scorso</code>.</li><li>Leggi due numeri interi. Stampa sempre entrambi i numeri.</li></ol><p>Se il primo è maggiore del secondo, stampa anche <code>Il primo è maggiore</code>. Stampa sempre anche la loro somma.</p><ol><li>Leggi una parola. Se ha più di 3 caratteri, stampa il secondo carattere; altrimenti stampa <code>Parola troppo corta</code>. In entrambi i casi stampa alla fine la lunghezza della parola.</li><li>Leggi una parola. Costruisci una variabile <code>risultato</code>:<ul><li>se la parola inizia con una lettera maiuscola, <code>risultato</code> vale <code>&quot;maiuscola&quot;</code>;</li><li>altrimenti vale <code>&quot;minuscola&quot;</code>.</li></ul></li></ol><p>Stampa <code>La parola è: </code> seguito da <code>risultato</code>.</p><ol><li>Leggi un numero intero. Costruisci una variabile <code>messaggio</code>:<ul><li>se il numero è pari, <code>messaggio</code> vale <code>&quot;pari&quot;</code>;</li><li>altrimenti vale <code>&quot;dispari&quot;</code>.</li></ul></li></ol><p>Stampa <code>Il numero X è</code> seguito da <code>messaggio</code>.</p><ol><li>Leggi due numeri interi <code>a</code> e <code>b</code>. Se <code>a</code> è maggiore di <code>b</code>, scambia i valori delle due variabili.</li></ol><p>Stampa sempre <code>a</code> e <code>b</code> alla fine: i valori usciti devono essere in ordine crescente.</p><p>Per ciascun programma e input indicato, cerca di predire l&#x27;output del programma con gli input proposti e compila la tabella con lo stato della memoria.</p><p><strong>T1.</strong></p><pre><code class="language-python">x = int(input(&quot;x: &quot;))
+    <h2 id="esercizi">Esercizi</h2><ol><li>Leggi un numero intero e stampa <code>Positivo</code> solo se è maggiore di zero.</li><li>Leggi una parola e stampa <code>La parola è lunga</code> solo se ha più di 5 caratteri.</li><li>Leggi un numero intero e stampa <code>Pari</code> solo se è divisibile per 2.</li><li>Leggi un numero intero e stampa <code>Pari</code> oppure <code>Dispari</code> a seconda se è divisibile per due o meno.</li><li>Leggi due numeri interi e stampa il maggiore o un messaggio se sono uguali.</li><li>Leggi due nomi e stampali nell&#x27;ordine alfabetico corretto.</li><li>Leggi una parola e controlla se inizia con una vocale; stampa un messaggio diverso nei due casi.</li><li>Leggi un numero intero e stampa <code>Negativo</code>, <code>Zero</code> o <code>Positivo</code>.</li><li>Leggi un voto da 0 a 30 e stampa:<ul><li><code>Insufficiente</code> se il voto è minore di 18;</li><li><code>Sufficiente</code> se è tra 18 e 23;</li><li><code>Buono</code> se è tra 24 e 27;</li><li><code>Ottimo</code> se è 28 o più.</li></ul></li><li>Leggi una parola e stampa se è corta (meno di 4 lettere), media (da 4 a 7 lettere) o lunga (più di 7 lettere).</li><li>Leggi una coppia di numeri che rappresentano un mese (1–12) e un anno e stampa il mese successivo con l&#x27;anno corretto.</li></ol><p>Per esempio: mese 12, anno 2024 → <code>Gennaio 2025</code>.</p><ol><li>Leggi nome, cognome e anno di nascita. Stampa sempre il nome completo e l&#x27;anno di nascita. Se l&#x27;anno di nascita è precedente al 2000, stampa anche <code>Nato/a nel secolo scorso</code>.</li><li>Leggi due numeri interi. Stampa sempre entrambi i numeri.</li></ol><p>Se il primo è maggiore del secondo, stampa anche <code>Il primo è maggiore</code>. Stampa sempre anche la loro somma.</p><ol><li>Leggi una parola. Se ha più di 3 caratteri, stampa il secondo carattere; altrimenti stampa <code>Parola troppo corta</code>. In entrambi i casi stampa alla fine la lunghezza della parola.</li><li>Leggi una parola. Costruisci una variabile <code>risultato</code>:<ul><li>se la parola inizia con una lettera maiuscola, <code>risultato</code> vale <code>&quot;maiuscola&quot;</code>;</li><li>altrimenti vale <code>&quot;minuscola&quot;</code>.</li></ul></li></ol><p>Stampa <code>La parola è: </code> seguito da <code>risultato</code>.</p><ol><li>Leggi un numero intero. Costruisci una variabile <code>messaggio</code>:<ul><li>se il numero è pari, <code>messaggio</code> vale <code>&quot;pari&quot;</code>;</li><li>altrimenti vale <code>&quot;dispari&quot;</code>.</li></ul></li></ol><p>Stampa <code>Il numero X è</code> seguito da <code>messaggio</code>.</p><ol><li>Leggi due numeri interi <code>a</code> e <code>b</code>. Se <code>a</code> è maggiore di <code>b</code>, scambia i valori delle due variabili.</li></ol><p>Stampa sempre <code>a</code> e <code>b</code> alla fine: i valori usciti devono essere in ordine crescente.</p><details><summary>Soluzione — Esercizio 1</summary><pre><code class="language-python">numero = int(input(&quot;Inserisci un numero: &quot;))
+
+if numero &gt; 0:
+    print(&quot;Positivo&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 2</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+if len(parola) &gt; 5:
+    print(&quot;La parola è lunga&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 3</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n % 2 == 0:
+    print(&quot;Pari&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 4</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n % 2 == 0:
+    print(&quot;Pari&quot;)
+else:
+    print(&quot;Dispari&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 5</summary><pre><code class="language-python">a = int(input(&quot;Primo numero: &quot;))
+b = int(input(&quot;Secondo numero: &quot;))
+if a &gt; b:
+    print(a)
+elif b &gt; a:
+    print(b)
+else:
+    print(&quot;I numeri sono uguali&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 6</summary><pre><code class="language-python">nome1 = input(&quot;Primo nome: &quot;)
+nome2 = input(&quot;Secondo nome: &quot;)
+if nome1 &lt;= nome2:
+    print(nome1)
+    print(nome2)
+else:
+    print(nome2)
+    print(nome1)</code></pre></details><details><summary>Soluzione — Esercizio 7</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+if parola[0].lower() in &quot;aeiou&quot;:
+    print(&quot;Inizia con una vocale&quot;)
+else:
+    print(&quot;Non inizia con una vocale&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 8</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n &lt; 0:
+    print(&quot;Negativo&quot;)
+elif n == 0:
+    print(&quot;Zero&quot;)
+else:
+    print(&quot;Positivo&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 9</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+if voto &lt; 18:
+    print(&quot;Insufficiente&quot;)
+elif voto &lt;= 23:
+    print(&quot;Sufficiente&quot;)
+elif voto &lt;= 27:
+    print(&quot;Buono&quot;)
+else:
+    print(&quot;Ottimo&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 10</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+if len(parola) &lt; 4:
+    print(&quot;Corta&quot;)
+elif len(parola) &lt;= 7:
+    print(&quot;Media&quot;)
+else:
+    print(&quot;Lunga&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 11</summary><pre><code class="language-python">mese = int(input(&quot;Mese (1-12): &quot;))
+anno = int(input(&quot;Anno: &quot;))
+
+if mese == 12:
+    mese_succ = 1
+    anno_succ = anno + 1
+else:
+    mese_succ = mese + 1
+    anno_succ = anno
+
+if mese_succ == 1:
+    nome_mese = &quot;Gennaio&quot;
+elif mese_succ == 2:
+    nome_mese = &quot;Febbraio&quot;
+elif mese_succ == 3:
+    nome_mese = &quot;Marzo&quot;
+elif mese_succ == 4:
+    nome_mese = &quot;Aprile&quot;
+elif mese_succ == 5:
+    nome_mese = &quot;Maggio&quot;
+elif mese_succ == 6:
+    nome_mese = &quot;Giugno&quot;
+elif mese_succ == 7:
+    nome_mese = &quot;Luglio&quot;
+elif mese_succ == 8:
+    nome_mese = &quot;Agosto&quot;
+elif mese_succ == 9:
+    nome_mese = &quot;Settembre&quot;
+elif mese_succ == 10:
+    nome_mese = &quot;Ottobre&quot;
+elif mese_succ == 11:
+    nome_mese = &quot;Novembre&quot;
+else:
+    nome_mese = &quot;Dicembre&quot;
+
+print(nome_mese, anno_succ)</code></pre></details><details><summary>Soluzione — Esercizio 12</summary><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+cognome = input(&quot;Cognome: &quot;)
+anno = int(input(&quot;Anno di nascita: &quot;))
+print(nome + &quot; &quot; + cognome)
+print(anno)
+if anno &lt; 2000:
+    print(&quot;Nato/a nel secolo scorso&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 13</summary><pre><code class="language-python">a = int(input(&quot;Primo numero: &quot;))
+b = int(input(&quot;Secondo numero: &quot;))
+print(a, b)
+if a &gt; b:
+    print(&quot;Il primo è maggiore&quot;)
+print(&quot;Somma:&quot;, a + b)</code></pre></details><details><summary>Soluzione — Esercizio 14</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+if len(parola) &gt; 3:
+    print(parola[1])
+else:
+    print(&quot;Parola troppo corta&quot;)
+print(len(parola))</code></pre></details><details><summary>Soluzione — Esercizio 15</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+if parola[0].isupper():
+    risultato = &quot;maiuscola&quot;
+else:
+    risultato = &quot;minuscola&quot;
+print(&quot;La parola è: &quot; + risultato)</code></pre></details><details><summary>Soluzione — Esercizio 16</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n % 2 == 0:
+    messaggio = &quot;pari&quot;
+else:
+    messaggio = &quot;dispari&quot;
+print(&quot;Il numero &quot; + str(n) + &quot; è &quot; + messaggio)</code></pre></details><details><summary>Soluzione — Esercizio 17</summary><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+b = int(input(&quot;b: &quot;))
+if a &gt; b:
+    tmp = a
+    a = b
+    b = tmp
+print(a, b)</code></pre></details><p>Per ciascun programma e input indicato, cerca di predire l&#x27;output del programma con gli input proposti e compila la tabella con lo stato della memoria.</p><p><strong>T1.</strong></p><pre><code class="language-python">x = int(input(&quot;x: &quot;))
 y = int(input(&quot;y: &quot;))
 z = x + y
 if z &gt; 10:
@@ -377,14 +539,14 @@ elif z &gt; 0:
     etichetta = &quot;medio&quot;
 else:
     etichetta = &quot;piccolo&quot;
-print(etichetta + &quot;: &quot; + str(x))</code></pre><ul><li>Traccia con input <code>3</code>, <code>4</code></li><li>Traccia con input <code>6</code>, <code>7</code></li></ul><p><strong>T2.</strong></p><pre><code class="language-python">s = input(&quot;Parola: &quot;)
+print(etichetta + &quot;: &quot; + str(x))</code></pre><ul><li>Traccia con input <code>3</code>, <code>4</code></li><li>Traccia con input <code>6</code>, <code>7</code></li></ul><details><summary>Soluzione — T1</summary><p>Input: <code>x = 3</code>, <code>y = 4</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>x = int(input(&quot;x: &quot;))</code></td><td>x=3</td><td></td></tr><tr><td><code>y = int(input(&quot;y: &quot;))</code></td><td>x=3, y=4</td><td></td></tr><tr><td><code>z = x + y</code></td><td>x=3, y=4, z=7</td><td></td></tr><tr><td><code>if z &gt; 10:</code> → False</td><td>x=3, y=4, z=7</td><td></td></tr><tr><td><code>elif z &gt; 0:</code> → True</td><td>x=3, y=4, z=7</td><td></td></tr><tr><td><code>x = x + 1</code></td><td>x=4, y=4, z=7</td><td></td></tr><tr><td><code>etichetta = &quot;medio&quot;</code></td><td>x=4, y=4, z=7, etichetta=&quot;medio&quot;</td><td></td></tr><tr><td><code>print(etichetta + &quot;: &quot; + str(x))</code></td><td></td><td><code>medio: 4</code></td></tr></tbody></table><p>Input: <code>x = 6</code>, <code>y = 7</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>x = int(input(&quot;x: &quot;))</code></td><td>x=6</td><td></td></tr><tr><td><code>y = int(input(&quot;y: &quot;))</code></td><td>x=6, y=7</td><td></td></tr><tr><td><code>z = x + y</code></td><td>x=6, y=7, z=13</td><td></td></tr><tr><td><code>if z &gt; 10:</code> → True</td><td>x=6, y=7, z=13</td><td></td></tr><tr><td><code>x = x * 2</code></td><td>x=12, y=7, z=13</td><td></td></tr><tr><td><code>etichetta = &quot;grande&quot;</code></td><td>x=12, y=7, z=13, etichetta=&quot;grande&quot;</td><td></td></tr><tr><td><code>print(etichetta + &quot;: &quot; + str(x))</code></td><td></td><td><code>grande: 12</code></td></tr></tbody></table></details><p><strong>T2.</strong></p><pre><code class="language-python">s = input(&quot;Parola: &quot;)
 n = len(s)
 if n &gt; 4:
     s = s[0].upper() + s[1:]
     risultato = s + &quot; (&quot; + str(n) + &quot;)&quot;
 else:
     risultato = s.upper()
-print(risultato)</code></pre><ul><li>Traccia con input <code>&quot;python&quot;</code></li><li>Traccia con input <code>&quot;ciao&quot;</code></li></ul><p><strong>T3.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+print(risultato)</code></pre><ul><li>Traccia con input <code>&quot;python&quot;</code></li><li>Traccia con input <code>&quot;ciao&quot;</code></li></ul><details><summary>Soluzione — T2</summary><p>Input: <code>&quot;python&quot;</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>s = input(&quot;Parola: &quot;)</code></td><td>s=&quot;python&quot;</td><td></td></tr><tr><td><code>n = len(s)</code></td><td>s=&quot;python&quot;, n=6</td><td></td></tr><tr><td><code>if n &gt; 4:</code> → True</td><td>s=&quot;python&quot;, n=6</td><td></td></tr><tr><td><code>s = s[0].upper() + s[1:]</code></td><td>s=&quot;Python&quot;, n=6</td><td></td></tr><tr><td><code>risultato = s + &quot; (&quot; + str(n) + &quot;)&quot;</code></td><td>s=&quot;Python&quot;, n=6, risultato=&quot;Python (6)&quot;</td><td></td></tr><tr><td><code>print(risultato)</code></td><td></td><td><code>Python (6)</code></td></tr></tbody></table><p>Input: <code>&quot;ciao&quot;</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>s = input(&quot;Parola: &quot;)</code></td><td>s=&quot;ciao&quot;</td><td></td></tr><tr><td><code>n = len(s)</code></td><td>s=&quot;ciao&quot;, n=4</td><td></td></tr><tr><td><code>if n &gt; 4:</code> → False</td><td>s=&quot;ciao&quot;, n=4</td><td></td></tr><tr><td><code>risultato = s.upper()</code></td><td>s=&quot;ciao&quot;, n=4, risultato=&quot;CIAO&quot;</td><td></td></tr><tr><td><code>print(risultato)</code></td><td></td><td><code>CIAO</code></td></tr></tbody></table></details><p><strong>T3.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
 b = int(input(&quot;b: &quot;))
 if a &gt; b:
     tmp = a
@@ -395,7 +557,7 @@ if diff &gt; 5:
     messaggio = &quot;distanti&quot;
 else:
     messaggio = &quot;vicini&quot;
-print(str(a) + &quot; &quot; + str(b) + &quot; - &quot; + messaggio)</code></pre><ul><li>Traccia con input <code>9</code>, <code>2</code></li></ul><p><strong>T4.</strong></p><pre><code class="language-python">n = int(input(&quot;n: &quot;))
+print(str(a) + &quot; &quot; + str(b) + &quot; - &quot; + messaggio)</code></pre><ul><li>Traccia con input <code>9</code>, <code>2</code></li></ul><details><summary>Soluzione — T3</summary><p>Input: <code>a = 9</code>, <code>b = 2</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>a = int(input(&quot;a: &quot;))</code></td><td>a=9</td><td></td></tr><tr><td><code>b = int(input(&quot;b: &quot;))</code></td><td>a=9, b=2</td><td></td></tr><tr><td><code>if a &gt; b:</code> → True</td><td>a=9, b=2</td><td></td></tr><tr><td><code>tmp = a</code></td><td>a=9, b=2, tmp=9</td><td></td></tr><tr><td><code>a = b</code></td><td>a=2, b=2, tmp=9</td><td></td></tr><tr><td><code>b = tmp</code></td><td>a=2, b=9, tmp=9</td><td></td></tr><tr><td><code>diff = b - a</code></td><td>a=2, b=9, tmp=9, diff=7</td><td></td></tr><tr><td><code>if diff &gt; 5:</code> → True</td><td>a=2, b=9, tmp=9, diff=7</td><td></td></tr><tr><td><code>messaggio = &quot;distanti&quot;</code></td><td>a=2, b=9, diff=7, messaggio=&quot;distanti&quot;</td><td></td></tr><tr><td><code>print(str(a) + &quot; &quot; + str(b) + &quot; - &quot; + messaggio)</code></td><td></td><td><code>2 9 - distanti</code></td></tr></tbody></table></details><p><strong>T4.</strong></p><pre><code class="language-python">n = int(input(&quot;n: &quot;))
 print(&quot;Inizio&quot;)
 if n &lt; 0:
     print(&quot;Negativo&quot;)
@@ -406,7 +568,7 @@ elif n == 0:
 else:
     print(&quot;Positivo&quot;)
     n = n * n
-print(&quot;Fine: &quot; + str(n))</code></pre><ul><li>Traccia con input <code>-3</code></li><li>Traccia con input <code>4</code></li></ul><p><strong>T5.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+print(&quot;Fine: &quot; + str(n))</code></pre><ul><li>Traccia con input <code>-3</code></li><li>Traccia con input <code>4</code></li></ul><details><summary>Soluzione — T4</summary><p>Input: <code>-3</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>n = int(input(&quot;n: &quot;))</code></td><td>n=-3</td><td></td></tr><tr><td><code>print(&quot;Inizio&quot;)</code></td><td>n=-3</td><td><code>Inizio</code></td></tr><tr><td><code>if n &lt; 0:</code> → True</td><td>n=-3</td><td></td></tr><tr><td><code>print(&quot;Negativo&quot;)</code></td><td>n=-3</td><td><code>Negativo</code></td></tr><tr><td><code>n = -n</code></td><td>n=3</td><td></td></tr><tr><td><code>print(&quot;Valore assoluto: &quot; + str(n))</code></td><td>n=3</td><td><code>Valore assoluto: 3</code></td></tr><tr><td><code>print(&quot;Fine: &quot; + str(n))</code></td><td>n=3</td><td><code>Fine: 3</code></td></tr></tbody></table><p>Input: <code>4</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>n = int(input(&quot;n: &quot;))</code></td><td>n=4</td><td></td></tr><tr><td><code>print(&quot;Inizio&quot;)</code></td><td>n=4</td><td><code>Inizio</code></td></tr><tr><td><code>if n &lt; 0:</code> → False</td><td>n=4</td><td></td></tr><tr><td><code>elif n == 0:</code> → False</td><td>n=4</td><td></td></tr><tr><td><code>else: print(&quot;Positivo&quot;)</code></td><td>n=4</td><td><code>Positivo</code></td></tr><tr><td><code>n = n * n</code></td><td>n=16</td><td></td></tr><tr><td><code>print(&quot;Fine: &quot; + str(n))</code></td><td>n=16</td><td><code>Fine: 16</code></td></tr></tbody></table></details><p><strong>T5.</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
 b = int(input(&quot;b: &quot;))
 print(&quot;a=&quot; + str(a) + &quot; b=&quot; + str(b))
 if a &gt; b:
@@ -416,7 +578,7 @@ if a &gt; b:
 else:
     print(&quot;b è maggiore o uguale&quot;)
     diff = b - a
-print(&quot;Distanza: &quot; + str(diff))</code></pre><ul><li>Traccia con input <code>a = 7</code>, <code>b = 2</code></li><li>Traccia con input <code>a = 3</code>, <code>b = 3</code></li></ul>
+print(&quot;Distanza: &quot; + str(diff))</code></pre><ul><li>Traccia con input <code>a = 7</code>, <code>b = 2</code></li><li>Traccia con input <code>a = 3</code>, <code>b = 3</code></li></ul><details><summary>Soluzione — T5</summary><p>Input: <code>a = 7</code>, <code>b = 2</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>a = int(input(&quot;a: &quot;))</code></td><td>a=7</td><td></td></tr><tr><td><code>b = int(input(&quot;b: &quot;))</code></td><td>a=7, b=2</td><td></td></tr><tr><td><code>print(&quot;a=&quot; + str(a) + &quot; b=&quot; + str(b))</code></td><td>a=7, b=2</td><td><code>a=7 b=2</code></td></tr><tr><td><code>if a &gt; b:</code> → True</td><td>a=7, b=2</td><td></td></tr><tr><td><code>print(&quot;a è maggiore&quot;)</code></td><td>a=7, b=2</td><td><code>a è maggiore</code></td></tr><tr><td><code>diff = a - b</code></td><td>a=7, b=2, diff=5</td><td></td></tr><tr><td><code>print(&quot;Differenza: &quot; + str(diff))</code></td><td>a=7, b=2, diff=5</td><td><code>Differenza: 5</code></td></tr><tr><td><code>print(&quot;Distanza: &quot; + str(diff))</code></td><td>a=7, b=2, diff=5</td><td><code>Distanza: 5</code></td></tr></tbody></table><p>Input: <code>a = 3</code>, <code>b = 3</code></p><table><thead><tr><th>Istruzione</th><th>Stato memoria</th><th>Output</th></tr></thead><tbody><tr><td><code>a = int(input(&quot;a: &quot;))</code></td><td>a=3</td><td></td></tr><tr><td><code>b = int(input(&quot;b: &quot;))</code></td><td>a=3, b=3</td><td></td></tr><tr><td><code>print(&quot;a=&quot; + str(a) + &quot; b=&quot; + str(b))</code></td><td>a=3, b=3</td><td><code>a=3 b=3</code></td></tr><tr><td><code>if a &gt; b:</code> → False</td><td>a=3, b=3</td><td></td></tr><tr><td><code>else: print(&quot;b è maggiore o uguale&quot;)</code></td><td>a=3, b=3</td><td><code>b è maggiore o uguale</code></td></tr><tr><td><code>diff = b - a</code></td><td>a=3, b=3, diff=0</td><td></td></tr><tr><td><code>print(&quot;Distanza: &quot; + str(diff))</code></td><td>a=3, b=3, diff=0</td><td><code>Distanza: 0</code></td></tr></tbody></table></details>
     
   </div>
 </section>
@@ -521,7 +683,37 @@ not nome == &quot;Ludovica&quot;</code></pre>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><h3 id="valutare-espressioni-booleane">Valutare espressioni booleane</h3><p>Per ciascuna espressione e valori di variabili indicati, calcola il risultato (<code>True</code> o <code>False</code>) senza eseguire il codice.</p><ol><li><code>x = 5</code>, <code>y = 3</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>x = -2</code>, <code>y = -1</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>n = 7</code> → <code>not n &gt; 10</code></li><li><code>n = 15</code> → <code>not n &gt; 10</code></li><li><code>eta = 20</code>, <code>ha_documento = False</code> → <code>eta &gt;= 18 and ha_documento</code></li><li><code>eta = 16</code>, <code>ha_documento = True</code> → <code>eta &gt;= 18 or ha_documento</code></li></ol><h3 id="condizioni-composte-nei-programmi">Condizioni composte nei programmi</h3><ol><li>Scrivi un programma che legge un numero intero e stampa <code>Nel range</code> se è compreso tra 1 e 100 (estremi inclusi), <code>Fuori range</code> altrimenti.</li><li>Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione</li><li>Scrivi un programma che legge due stringhe e stampa <code>Almeno una è vuota</code> se almeno una delle due ha lunghezza zero, altrimenti stampa <code>Entrambe non vuote</code>.</li><li>Scrivi un programma che legge un numero intero e stampa <code>Fuori range</code> se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando <code>not</code> e <code>and</code>.</li><li>Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l&#x27;età desiderata.<ul><li>Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:</li></ul></li></ol><p><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></p>
+    <h2 id="esercizi">Esercizi</h2><h3 id="valutare-espressioni-booleane">Valutare espressioni booleane</h3><p>Per ciascuna espressione e valori di variabili indicati, calcola il risultato (<code>True</code> o <code>False</code>) senza eseguire il codice.</p><ol><li><code>x = 5</code>, <code>y = 3</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 and y &gt; 0</code></li><li><code>x = -2</code>, <code>y = 4</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>x = -2</code>, <code>y = -1</code> → <code>x &gt; 0 or y &gt; 0</code></li><li><code>n = 7</code> → <code>not n &gt; 10</code></li><li><code>n = 15</code> → <code>not n &gt; 10</code></li><li><code>eta = 20</code>, <code>ha_documento = False</code> → <code>eta &gt;= 18 and ha_documento</code></li><li><code>eta = 16</code>, <code>ha_documento = True</code> → <code>eta &gt;= 18 or ha_documento</code></li></ol><details><summary>Soluzioni — Valutare espressioni booleane</summary><table><thead><tr><th>#</th><th>Variabili</th><th>Espressione</th><th>Sviluppo</th><th>Risultato</th></tr></thead><tbody><tr><td>1</td><td>x=5, y=3</td><td><code>x &gt; 0 and y &gt; 0</code></td><td><code>True and True</code></td><td><code>True</code></td></tr><tr><td>2</td><td>x=-2, y=4</td><td><code>x &gt; 0 and y &gt; 0</code></td><td><code>False and True</code></td><td><code>False</code></td></tr><tr><td>3</td><td>x=-2, y=4</td><td><code>x &gt; 0 or y &gt; 0</code></td><td><code>False or True</code></td><td><code>True</code></td></tr><tr><td>4</td><td>x=-2, y=-1</td><td><code>x &gt; 0 or y &gt; 0</code></td><td><code>False or False</code></td><td><code>False</code></td></tr><tr><td>5</td><td>n=7</td><td><code>not n &gt; 10</code></td><td><code>not False</code></td><td><code>True</code></td></tr><tr><td>6</td><td>n=15</td><td><code>not n &gt; 10</code></td><td><code>not True</code></td><td><code>False</code></td></tr><tr><td>7</td><td>eta=20, ha_documento=False</td><td><code>eta &gt;= 18 and ha_documento</code></td><td><code>True and False</code></td><td><code>False</code></td></tr><tr><td>8</td><td>eta=16, ha_documento=True</td><td><code>eta &gt;= 18 or ha_documento</code></td><td><code>False or True</code></td><td><code>True</code></td></tr></tbody></table></details><h3 id="condizioni-composte-nei-programmi">Condizioni composte nei programmi</h3><ol><li>Scrivi un programma che legge un numero intero e stampa <code>Nel range</code> se è compreso tra 1 e 100 (estremi inclusi), <code>Fuori range</code> altrimenti.</li><li>Un anno è bisestile se è divisibile per 4 ma non per 100, oppure se è divisibile per 400. Scrivi un programma che verifica questa condizione</li><li>Scrivi un programma che legge due stringhe e stampa <code>Almeno una è vuota</code> se almeno una delle due ha lunghezza zero, altrimenti stampa <code>Entrambe non vuote</code>.</li><li>Scrivi un programma che legge un numero intero e stampa <code>Fuori range</code> se è minore di 0 oppure maggiore di 10. Poi riscrivi la stessa condizione usando <code>not</code> e <code>and</code>.</li><li>Scrivi un programma che legge nome, età attuale ed età da raggiungere. Il programma stampa un saluto, la tua età attuale e tra quanti anni raggiungerai l&#x27;età desiderata.<ul><li>Ad esempio Maria ha 10 anni e vuole averne 18, il programma stamperà:</li></ul></li></ol><p><code>Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri</code></p><details><summary>Soluzione — Esercizio 1</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n &gt;= 1 and n &lt;= 100:
+    print(&quot;Nel range&quot;)
+else:
+    print(&quot;Fuori range&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 2</summary><pre><code class="language-python">anno = int(input(&quot;Anno: &quot;))
+if (anno % 4 == 0 and anno % 100 != 0) or anno % 400 == 0:
+    print(&quot;Bisestile&quot;)
+else:
+    print(&quot;Non bisestile&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 3</summary><pre><code class="language-python">s1 = input(&quot;Prima stringa: &quot;)
+s2 = input(&quot;Seconda stringa: &quot;)
+if len(s1) == 0 or len(s2) == 0:
+    print(&quot;Almeno una è vuota&quot;)
+else:
+    print(&quot;Entrambe non vuote&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 4</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n &lt; 0 or n &gt; 10:
+    print(&quot;Fuori range&quot;)</code></pre><p>Con <code>not</code> e <code>and</code>:</p><pre><code class="language-python">if not (n &gt;= 0 and n &lt;= 10):
+    print(&quot;Fuori range&quot;)</code></pre><p>Le due condizioni sono equivalenti per le leggi di De Morgan: <code>not (A and B)</code> ↔ <code>not A or not B</code>.</p></details><details><summary>Soluzione — Esercizio 5</summary><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+eta_attuale = int(input(&quot;Età attuale: &quot;))
+eta_desiderata = int(input(&quot;Età desiderata: &quot;))
+anni_mancanti = eta_desiderata - eta_attuale
+print(&quot;Ciao &quot; + nome + &quot;, oggi hai &quot; + str(eta_attuale) + &quot; anni, tra &quot; + str(anni_mancanti) + &quot; anni ne avrai &quot; + str(eta_desiderata) + &quot; come desideri&quot;)</code></pre><p>Con validazione degli input:</p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+eta_attuale = int(input(&quot;Età attuale: &quot;))
+eta_desiderata = int(input(&quot;Età desiderata: &quot;))
+
+if eta_attuale &lt;= 0 or eta_desiderata &lt;= 0:
+    print(&quot;Errore: le età devono essere maggiori di zero.&quot;)
+elif eta_attuale &gt;= eta_desiderata:
+    print(&quot;Errore: l&#x27;età attuale deve essere minore di quella desiderata.&quot;)
+else:
+    anni_mancanti = eta_desiderata - eta_attuale
+    print(&quot;Ciao &quot; + nome + &quot;, oggi hai &quot; + str(eta_attuale) + &quot; anni, tra &quot; + str(anni_mancanti) + &quot; anni ne avrai &quot; + str(eta_desiderata) + &quot; come desideri&quot;)</code></pre></details>
     
   </div>
 </section>
