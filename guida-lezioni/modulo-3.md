@@ -7,267 +7,284 @@
 - Sai definire sintassi e semantica del `while`?
 - Sai distinguere guardia del ciclo, stato e condizione di terminazione?
 - Sai usare il `while` conoscendo il numero di iterazioni da effettuare?
+- Sai riconoscere errori frequenti e localizzarli?
+- Sai usare casi di test per smascherare errori logici?
+- Sai applicare le leggi di De Morgan?
 
-## Automi a stati finiti
+## Errori nel codice
 
-Quello che fa un programma con `if/elif/else` è, in fondo, sempre la stessa cosa:
-**partizionare** gli input in classi, e associare a ciascuna classe un comportamento diverso.
+Abbiamo scritto dei programmi!
+Ma saranno corretti?
 
-Un **automa a stati finiti** è il modello astratto di questa idea.
+**Caso 1:** il programma genera un errore
 
-Invece di pensare al codice riga per riga, un automa descrive:
+**Caso 2:** il programma termina l'esecuzione senza generale alcun errore
 
-- quali **classi di input** esistono;
-- a quale **output** (o stato) ciascuna classe conduce;
-- se ci sono input che non sono stati considerati.
+## Primi messaggi di errore
 
-### Struttura di un automa
+Un messaggio di errore contiene almeno tre informazioni utili:
 
-Un automa è definito da:
+| Informazione   | Domanda                                 |
+| -------------- | --------------------------------------- |
+| tipo di errore | che genere di problema e`?              |
+| riga segnalata | dove si manifesta?                      |
+| contesto       | quale operazione stava tentando Python? |
 
-- un insieme di **stati** (le situazioni possibili del programma);
-- un insieme di **input** possibili;
-- una **funzione di transizione**: dato uno stato e un input, restituisce lo stato successivo;
-- uno **stato iniziale**;
-- un insieme di **stati finali** (gli output validi).
+Esempi frequenti:
 
-### Esempio: classificare un numero
+| Errore        | Causa tipica                      |
+| ------------- | --------------------------------- |
+| `SyntaxError` | sintassi non valida               |
+| `NameError`   | nome di variabile non definito    |
+| `TypeError`   | operazione tra tipi incompatibili |
+| `ValueError`  | conversione non possibile         |
 
-Consideriamo il programma che classifica un numero come `negativo`, `zero` o `positivo`.
+### Esercizi
 
-Gli input sono tutti gli interi. Le classi di output sono tre:
+Per ciascun programma: esegui il codice, individua il tipo di errore che produce e la riga in cui compare, poi spiega perché si verifica e correggi il codice di conseguenza.
 
-| Input                          | Output       |
-| ------------------------------ | ------------ |
-| `...-200, ...-13, ...-2, -1`   | `"negativo"` |
-| `0`                            | `"zero"`     |
-| `1, 2, ..., 17, ... 3456, ...` | `"positivo"` |
+**E1.**
 
-L'automa ha tre possibili stati finali corrispondenti alle tre classi.
-Ogni intero appartiene esattamente a una classe:
-la partizione è **completa** (nessun input mancante) e **disgiunta** (nessun input in due classi contemporaneamente).
-
+Il codice chiede all'utente di inserire nome, cognome ed età e poi stampa la stringa
 ```
-              ┌─── n < 0 ────► ╔═══════════╗
-              │                ║ negativo  ║
-   ┌───────┐  │                ╚═══════════╝
-──►│ start │──┼─── n == 0 ───► ╔═══════════╗
-   └───────┘  │                ║   zero    ║
-              │                ╚═══════════╝
-              └─── n > 0 ────► ╔═══════════╗
-                               ║ positivo  ║
-                               ╚═══════════╝
+Ciao [NOME] [COGNOME]!
+Tra dieci anni avrai X anni.
 ```
-
-Quando scriviamo `if/elif/else` stiamo implementando questa partizione nel codice.
-
-### Usare l'automa per ragionare sui casi
-
-Il vantaggio del modello è che forza a chiedersi:
-
-- **la partizione è completa?** Ogni input possibile finisce in qualche classe?
-- **la partizione è disgiunta?** Nessun input soddisfa due condizioni contemporaneamente?
-- **ho considerato i casi limite?** Cosa succede con `0`, con valori negativi, con stringhe vuote?
-
-Riprendiamo l'esercizio 13 (nome, età attuale, età desiderata).
-
-Prima di aggiungere la validazione degli input, la partizione era:
-
-![Prima versione età desiderata e attuale](imgs/eta-retta.png)
-
-Questa partizione è **completa** per gli interi, ma non distingue gli input validi da quelli non validi.
-
-Aggiungendo la validazione, la partizione diventa:
-
-![alt text](imgs/eta-retta-valida.png)
-
-```
-                                                       ┌─ desiderata <= 0 ─┐
-                                                       ▼                   |
-                    ┌── attuale <= 0 ───────► ╔═════════╗ ─────────────────┘
-                    │                         ║ ERRORE  ║
-   ┌───────┐        │                         ╚═════════╝◄────────────────────┐
-──►│ start │────────┤                                                         |
-   └───────┘        │                                                         |
-                    └── attuale > 0 ──────► ┌──────────────┐                  |
-                                            │ input valido │─ desiderata <= 0 ┘
-                                            └──────┬───────┘
-                                      ┌────────────┼────────────┐
-                                      │            │            │
-                                 des > att    des == att    des < att
-                                      │            │            │
-                                      ▼            ▼            ▼
-                               ╔════════════╗ ╔══════════╗ ╔═══════════════╗
-                               ║ tra Y anni ║ ║ già ora  ║ ║ già superato  ║
-                               ╚════════════╝ ╚══════════╝ ╚═══════════════╝
-```
-
-> Disegnare l'automa — anche solo come tabella — è un modo per verificare che il codice copra davvero tutti i casi prima ancora di scrivere un `if`.
-
-### Automi su sequenze: input che arriva in più passi
-
-Fino a qui l'automa riceveva un solo valore e si spostava in uno stato finale.
-Ma il problema dell'età desiderata mostra qualcosa di diverso:
-l'input **arriva in due passi** — prima `eta_attuale`, poi `eta_desiderata` — e lo stato del programma cambia a ogni passo.
-
-Possiamo pensarlo così:
-
-1. si parte dallo **stato iniziale**;
-2. arriva il primo valore (`eta_attuale`): a seconda del valore, si segue una transizione;
-3. arriva il secondo valore (`eta_desiderata`): a seconda del valore, si segue un'altra transizione;
-4. si arriva a uno stato finale che descrive il caso.
-
-L'automa dell'età desiderata che abbiamo visto sopra funziona esattamente così:
-le frecce non sono tutte uscenti dallo stesso punto, ma il percorso dipende da quello che leggiamo in sequenza.
-
-> Questo è il primo passo verso i programmi che leggono sequenze di dati: ogni nuovo valore letto è un passo nell'automa.
-
-## Esercizi finali
-
-### Scrivere il programma
-
-Per questi esercizi, prima di scrivere il codice:
-
-1. identifica le classi di input (quanti casi distinti esistono?);
-2. compila la tabella dei desiderata;
-3. scrivi il programma e verifica.
-
-**F1.** Il programma legge un numero intero e stampa `"divisibile per 2"`, `"divisibile per 3"`, `"divisibile per entrambi"` o `"nessuno dei due"`.
-
-| Input | Output atteso |
-| ----- | ------------- |
-| `6`   |               |
-| `4`   |               |
-| `9`   |               |
-| `7`   |               |
-
-**F2.** Il programma legge una stringa e stampa `"vuota"`, `"corta"` (1–3 caratteri), `"normale"` (4–10) o `"lunga"` (più di 10).
-
-| Input          | Output atteso |
-| -------------- | ------------- |
-| `""`           |               |
-| `"ciao"`       |               |
-| `"hi"`         |               |
-| `"informatica"`|               |
-
-**F3.** Il programma legge tre interi `a`, `b`, `c` e stampa `"triangolo"` se formano un triangolo valido (la somma di due lati qualsiasi è maggiore del terzo), `"no"` altrimenti.
-
-| `a` | `b` | `c` | Output atteso |
-| --- | --- | --- | ------------- |
-| `3` | `4` | `5` |               |
-| `1` | `2` | `5` |               |
-| `5` | `5` | `5` |               |
-| `0` | `3` | `3` |               |
-
-**F4.** Il programma legge due stringhe `s1` e `s2` e stampa la più lunga. Se hanno la stessa lunghezza, stampa quella che viene prima in ordine alfabetico.
-
-| `s1`    | `s2`   | Output atteso |
-| ------- | ------ | ------------- |
-| `"abc"` | `"de"` |               |
-| `"hi"`  | `"ab"` |               |
-| `"mela"`| `"pero"`|              |
-
-### Trovare l'errore
-
-Per questi esercizi compila prima i desiderata, poi esegui il codice e confronta.
-
-**D1.** Il programma legge un voto e stampa la valutazione corrispondente.
 
 ```python
-voto = int(input("Voto: "))
-if voto >= 18:
-    if voto >= 24:
-        if voto >= 28:
-            print("Ottimo")
-        print("Buono")
-    print("Sufficiente")
+nome = input("Nome: ")
+cognome = input("Cognome: ")
+eta = input("Età: ")
+print("Ciao " + nome + " " + cognome + "!")
+print("Tra dieci anni avrai " + eta + 10 + " anni.")
 ```
+
+**E2.**
+
+Il codice chiede all'utente di inserire l'anno di nascita e calcola l'età attuale.
+
+```python
+anno_nascita = input("Anno di nascita: ")
+anno_corrente = 2026
+eta = anno_corrente - anno_nascita
+print("Hai circa " + str(eta) + " anni.")
+```
+
+**E3.**
+
+Il codice chiede all'utente di inserire una parola e poi ne stampa la lunghezza
+
+```python
+parola = input("Parola: ")
+lunghezza = len(parola)
+print("La parola ha " + lunghezza + " lettere.")
+```
+
+**E4.**
+
+Il codice chiede all'utente di inserire un numero intero e poi ne stampa il segno (positivo se compreso tra 0 e +inf, negativo altrimenti)
+
+```python
+x = int(input("Numero: "))
+if x > 0:
+    segno = "positivo"
+elif x < 0:
+    segno = "negativo"
+print("Il numero è " + segno)
+```
+
+## Testing e casi limite
+
+Anche se il programma non genera un errore, potrebbe comunque fare la cosa sbagliata: non basta che l'esecuzione si concluda per dire che "funziona".
+Bisogna confrontare input e output attesi su casi scelti apposta.
+
+Consideriamo questo programma, scritto per stampare un numero con il suo segno esplicito (`+7`, `-3`, `0`):
+
+```python
+n = int(input("Numero: "))
+if n > 0:
+    segno = "+"
+else:
+    segno = "-"
+print(segno + str(n))
+```
+
+Proviamolo su diversi input:
+
+| Input  | Output atteso | Output reale |
+| ------ | ------------- | ------------ |
+| `7`    | `+7`          | ?            |
+| `-3`   | `-3`          | ?            |
+| `0`    | `0`           | ?            |
+
+Sembra ragionevole: il ramo `if` (se maggiore di 0) aggiunge `+`, il ramo `else` aggiunge `-`.
+
+Ma `str(-3)` restituisce già `"-3"`: concatenarci davanti un altro `"-"` produce `"--3"`.
+E per `0`, il ramo `else` produce `"-0"` invece di `"0"`.
+
+Il programma non genera nessun errore, ma l'output è sbagliato per tutti i numeri non positivi.
+
+**Perché succede:** `str(n)` su un numero negativo include già il segno meno.
+Aggiungere `"-"` davanti raddoppia il segno.
+
+**Correzione:**
+
+```python
+n = int(input("Numero: "))
+if n > 0:
+    print("+" + str(n))
+elif n < 0:
+    print(str(n))  # str(n) contiene già il segno
+else:
+    print("0")
+```
+
+## Metodo
+
+1. scegli un input piccolo;
+2. scrivi l'output atteso;
+3. esegui il programma;
+4. confronta il risultato reale con quello previsto;
+5. se modifichi il codice, ripeti gli stessi test.
+
+## Esercizi: if/elif/else e testing
+
+Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:
+
+1. **scrivi i desiderata** — prima di eseguire il codice, compila la tabella con l'output che ti aspetti per ogni input;
+2. **esegui e controlla** — lancia il programma con quegli input e annota l'output reale;
+3. **confronta** — dove differiscono, spiega perché.
+
+### Esercizio 1
+
+Il programma riceve un numero intero e stampa `"pari"` se è pari, `"dispari"` se è dispari.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `0`   |               |              |
+| `3`   |               |              |
+| `-4`  |               |              |
+| `7`   |               |              |
+
+<details>
+```python
+n = int(input("Numero: "))
+if n > 0 and n % 2 == 0:
+    print("pari")
+else:
+    print("dispari")
+```
+</details>
+
+### Esercizio 2
+
+Il programma riceve un voto e stampa `"promosso"` se è almeno 18, `"non promosso"` altrimenti.
 
 | Input | Output atteso | Output reale |
 | ----- | ------------- | ------------ |
 | `15`  |               |              |
-| `20`  |               |              |
-| `26`  |               |              |
 | `30`  |               |              |
+| `18`  |               |              |
 
 <details>
-<summary>Soluzione — D1</summary>
-
-| Input | Output atteso | Output reale |
-| ----- | ------------- | ------------ |
-| `15`  | (nessuno)     | (nessuno)    |
-| `20`  | `Sufficiente` | `Sufficiente` |
-| `26`  | `Buono`       | `Buono` + `Sufficiente` |
-| `30`  | `Ottimo`      | `Ottimo` + `Buono` + `Sufficiente` |
-
-**Bug:** i `print` delle categorie inferiori non sono dentro rami `else` — vengono eseguiti sempre, anche dopo aver già stampato una categoria più alta. Per voto=30 il programma entra in tutti e tre gli `if` annidati e stampa tre righe.
-
-**Codice corretto:**
 
 ```python
 voto = int(input("Voto: "))
-if voto >= 28:
-    print("Ottimo")
-elif voto >= 24:
-    print("Buono")
-elif voto >= 18:
-    print("Sufficiente")
-```
+if voto >= 18:
+    print("promosso")
 
-Con `elif` ogni ramo è esclusivo: appena uno è vero, gli altri vengono saltati.
+if voto <= 18:
+    print("non promosso")
+```
 
 </details>
 
-**D2.** Il programma legge tre interi e stampa il minore.
 
-```python
-a = int(input("a: "))
-b = int(input("b: "))
-c = int(input("c: "))
-if a < b and a < c:
-    print("Il minore è " + str(a))
-if b < a and b < c:
-    print("Il minore è " + str(b))
-if c < a and c < b:
-    print("Il minore è " + str(c))
-```
+### Esercizio 3
 
-| `a` | `b` | `c` | Output atteso | Output reale |
-| --- | --- | --- | ------------- | ------------ |
-| `1` | `2` | `3` |               |              |
-| `3` | `1` | `2` |               |              |
-| `2` | `2` | `3` |               |              |
-| `2` | `2` | `2` |               |              |
+Il programma riceve un numero intero e stampa `"positivo"` se è maggiore di zero, `"grande"` se è maggiore di 10, `"non positivo"` negli altri casi.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `5`   |               |              |
+| `15`  |               |              |
+| `-2`  |               |              |
+
 
 <details>
-<summary>Soluzione — D2</summary>
-
-| `a` | `b` | `c` | Output atteso | Output reale |
-| --- | --- | --- | ------------- | ------------ |
-| `1` | `2` | `3` | `Il minore è 1` | `Il minore è 1` |
-| `3` | `1` | `2` | `Il minore è 1` | `Il minore è 1` |
-| `2` | `2` | `3` | `Il minore è 2` | (nessuno) |
-| `2` | `2` | `2` | `Il minore è 2` | (nessuno) |
-
-**Bug:** le condizioni usano `<` stretto. Quando due valori sono uguali e sono entrambi il minimo (es. `a=2, b=2`), nessuna delle tre condizioni risulta vera — né `a < b` né `b < a` — e il programma non stampa nulla.
-
-**Codice corretto:**
 
 ```python
-a = int(input("a: "))
-b = int(input("b: "))
-c = int(input("c: "))
-minore = a
-if b < minore:
-    minore = b
-if c < minore:
-    minore = c
-print("Il minore è " + str(minore))
+x = int(input("x: "))
+if x > 0:
+    print("positivo")
+elif x > 10:
+    print("grande")
+else:
+    print("non positivo")
 ```
 
-Invece di confrontare coppie di variabili, si tiene traccia del minimo corrente: si parte da `a` e si aggiorna solo se si trova qualcosa di più piccolo. Funziona anche con valori uguali.
-
 </details>
+
+### Esercizio 4
+
+Il programma riceve un intero e stampa `"fizz"` se è divisibile per 3, `"buzz"` se è divisibile per 5, `"fizzbuzz"` se è divisibile per entrambi, il numero stesso negli altri casi.
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `1`   |               |              |
+| `3`   |               |              |
+| `5`   |               |              |
+| `15`  |               |              |
+| `9`   |               |              |
+
+Scrivi il programma e testane il funzionamento.
+
+## Valutazione lazy
+
+Gli operatori `and` e `or` non valutano sempre entrambe le parti dell'espressione.
+Python si ferma appena il risultato finale è già determinato.
+
+Questo comportamento si chiama **valutazione lazy** oppure **short-circuit**.
+
+Partiamo da questo esempio:
+
+```python
+x = 5
+
+if x > 0 and y > 0:
+    print("Entrambi i numeri positivi!")
+```
+
+<details>
+Questo codice genera errore, perché `y` non è definita.
+</details>
+
+Ora consideriamo questo caso:
+
+```python
+x = 5
+
+if x > 0 or y > 0:
+    print("Almeno un numero positivo!")
+```
+
+Perchè non genera errore?
+
+| `x > 0` | `y > 0` | `x > 0 or y > 0` |
+| ------- | ------- | ---------------- |
+| `True`  | `False` | `True`           |
+| `True`  | `True`  | `True`           |
+
+`x > 0` vale già `True`, e questo basta a rendere vera tutta l'espressione con `or`.
+Di conseguenza Python non valuta `y > 0`.
+
+In generale:
+
+- in `A or B`, se `A` vale `True`, Python non valuta `B`;
+- in `A and B`, se `A` vale `False`, Python non valuta `B`.
+
+
+
 
 ## Dal `if` al `while`
 

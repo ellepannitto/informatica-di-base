@@ -78,10 +78,9 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | Tipologia | Durata | Libro | Argomento                                                                                 |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------- |
 | exercise  | 1.5h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
-| exercise  | 1.5h   | —     | Correzione della prova                                                                    |
 
 
-### 04 | Iterazione con sentinelle, convalida dell'input e liste | slides=guida-lezioni/modulo-4.slides.html
+### 04 | Iterazione con sentinelle, e liste | slides=guida-lezioni/modulo-4.slides.html
 | Tipologia | Durata | Libro                | Argomento                                                                                        |
 | --------- | ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
 | theory    | 0.5h   | cap. 4.5/4.6         | Sentinelle                                                                                       |

@@ -10,12 +10,8 @@
 - Sai definire la sintassi dei costrutti `if`, `if-else`, `elif`?
 - Sai definire la semantica dei costrutti `if`, `if-else`, `elif`?
 - Sai scrivere semplici decisioni con `if`, `if-else`, `elif`?
-- Sai organizzare uno script in sezioni leggibili?
 - Sai tracciare lo stato del programma durante l'esecuzione?
-- Sai riconoscere errori frequenti e localizzarli?
-- Sai usare casi di test per smascherare errori logici?
 - Sai usare condizioni composte con attenzione?
-- Sai applicare le leggi di De Morgan?
 
 ## Recap operativo
 
@@ -1409,233 +1405,7 @@ Input: `a = 3`, `b = 3`
 
 </details>
 
-## Errori nel codice
 
-Abbiamo scritto dei programmi!
-Ma saranno corretti?
-
-**Caso 1:** il programma genera un errore
-
-**Caso 2:** il programma termina l'esecuzione senza generale alcun errore
-
-## Primi messaggi di errore
-
-Un messaggio di errore contiene almeno tre informazioni utili:
-
-| Informazione   | Domanda                                 |
-| -------------- | --------------------------------------- |
-| tipo di errore | che genere di problema e`?              |
-| riga segnalata | dove si manifesta?                      |
-| contesto       | quale operazione stava tentando Python? |
-
-Esempi frequenti:
-
-| Errore        | Causa tipica                      |
-| ------------- | --------------------------------- |
-| `SyntaxError` | sintassi non valida               |
-| `NameError`   | nome di variabile non definito    |
-| `TypeError`   | operazione tra tipi incompatibili |
-| `ValueError`  | conversione non possibile         |
-
-### Esercizi
-
-Per ciascun programma: esegui il codice, individua il tipo di errore che produce e la riga in cui compare, poi spiega perché si verifica e correggi il codice di conseguenza.
-
-**E1.**
-
-Il codice chiede all'utente di inserire nome, cognome ed età e poi stampa la stringa
-```
-Ciao [NOME] [COGNOME]!
-Tra dieci anni avrai X anni.
-```
-
-```python
-nome = input("Nome: ")
-cognome = input("Cognome: ")
-eta = input("Età: ")
-print("Ciao " + nome + " " + cognome + "!")
-print("Tra dieci anni avrai " + eta + 10 + " anni.")
-```
-
-**E2.**
-
-Il codice chiede all'utente di inserire l'anno di nascita e calcola l'età attuale.
-
-```python
-anno_nascita = input("Anno di nascita: ")
-anno_corrente = 2026
-eta = anno_corrente - anno_nascita
-print("Hai circa " + str(eta) + " anni.")
-```
-
-**E3.**
-
-Il codice chiede all'utente di inserire una parola e poi ne stampa la lunghezza
-
-```python
-parola = input("Parola: ")
-lunghezza = len(parola)
-print("La parola ha " + lunghezza + " lettere.")
-```
-
-**E4.**
-
-Il codice chiede all'utente di inserire un numero intero e poi ne stampa il segno (positivo se compreso tra 0 e +inf, negativo altrimenti)
-
-```python
-x = int(input("Numero: "))
-if x > 0:
-    segno = "positivo"
-elif x < 0:
-    segno = "negativo"
-print("Il numero è " + segno)
-```
-
-## Testing e casi limite
-
-Anche se il programma non genera un errore, potrebbe comunque fare la cosa sbagliata: non basta che l'esecuzione si concluda per dire che "funziona".
-Bisogna confrontare input e output attesi su casi scelti apposta.
-
-Consideriamo questo programma, scritto per stampare un numero con il suo segno esplicito (`+7`, `-3`, `0`):
-
-```python
-n = int(input("Numero: "))
-if n > 0:
-    segno = "+"
-else:
-    segno = "-"
-print(segno + str(n))
-```
-
-Proviamolo su diversi input:
-
-| Input  | Output atteso | Output reale |
-| ------ | ------------- | ------------ |
-| `7`    | `+7`          | ?            |
-| `-3`   | `-3`          | ?            |
-| `0`    | `0`           | ?            |
-
-Sembra ragionevole: il ramo `if` (se maggiore di 0) aggiunge `+`, il ramo `else` aggiunge `-`.
-
-Ma `str(-3)` restituisce già `"-3"`: concatenarci davanti un altro `"-"` produce `"--3"`.
-E per `0`, il ramo `else` produce `"-0"` invece di `"0"`.
-
-Il programma non genera nessun errore, ma l'output è sbagliato per tutti i numeri non positivi.
-
-**Perché succede:** `str(n)` su un numero negativo include già il segno meno.
-Aggiungere `"-"` davanti raddoppia il segno.
-
-**Correzione:**
-
-```python
-n = int(input("Numero: "))
-if n > 0:
-    print("+" + str(n))
-elif n < 0:
-    print(str(n))  # str(n) contiene già il segno
-else:
-    print("0")
-```
-
-## Metodo
-
-1. scegli un input piccolo;
-2. scrivi l'output atteso;
-3. esegui il programma;
-4. confronta il risultato reale con quello previsto;
-5. se modifichi il codice, ripeti gli stessi test.
-
-## Esercizi: if/elif/else e testing
-
-Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:
-
-1. **scrivi i desiderata** — prima di eseguire il codice, compila la tabella con l'output che ti aspetti per ogni input;
-2. **esegui e controlla** — lancia il programma con quegli input e annota l'output reale;
-3. **confronta** — dove differiscono, spiega perché.
-
-### Esercizio 1
-
-Il programma riceve un numero intero e stampa `"pari"` se è pari, `"dispari"` se è dispari.
-
-| Input | Output atteso | Output reale |
-| ----- | ------------- | ------------ |
-| `0`   |               |              |
-| `3`   |               |              |
-| `-4`  |               |              |
-| `7`   |               |              |
-
-<details>
-```python
-n = int(input("Numero: "))
-if n > 0 and n % 2 == 0:
-    print("pari")
-else:
-    print("dispari")
-```
-</details>
-
-### Esercizio 2
-
-Il programma riceve un voto e stampa `"promosso"` se è almeno 18, `"non promosso"` altrimenti.
-
-| Input | Output atteso | Output reale |
-| ----- | ------------- | ------------ |
-| `15`  |               |              |
-| `30`  |               |              |
-| `18`  |               |              |
-
-<details>
-
-```python
-voto = int(input("Voto: "))
-if voto >= 18:
-    print("promosso")
-
-if voto <= 18:
-    print("non promosso")
-```
-
-</details>
-
-
-### Esercizio 3
-
-Il programma riceve un numero intero e stampa `"positivo"` se è maggiore di zero, `"grande"` se è maggiore di 10, `"non positivo"` negli altri casi.
-
-| Input | Output atteso | Output reale |
-| ----- | ------------- | ------------ |
-| `5`   |               |              |
-| `15`  |               |              |
-| `-2`  |               |              |
-
-
-<details>
-
-```python
-x = int(input("x: "))
-if x > 0:
-    print("positivo")
-elif x > 10:
-    print("grande")
-else:
-    print("non positivo")
-```
-
-</details>
-
-### Esercizio 4
-
-Il programma riceve un intero e stampa `"fizz"` se è divisibile per 3, `"buzz"` se è divisibile per 5, `"fizzbuzz"` se è divisibile per entrambi, il numero stesso negli altri casi.
-
-| Input | Output atteso | Output reale |
-| ----- | ------------- | ------------ |
-| `1`   |               |              |
-| `3`   |               |              |
-| `5`   |               |              |
-| `15`  |               |              |
-| `9`   |               |              |
-
-Scrivi il programma e testane il funzionamento.
 
 ## Comporre condizioni
 
@@ -1948,49 +1718,7 @@ con:
 
 Non sono in generale equivalenti.
 
-## Valutazione lazy
 
-Gli operatori `and` e `or` non valutano sempre entrambe le parti dell'espressione.
-Python si ferma appena il risultato finale è già determinato.
-
-Questo comportamento si chiama **valutazione lazy** oppure **short-circuit**.
-
-Partiamo da questo esempio:
-
-```python
-x = 5
-
-if x > 0 and y > 0:
-    print("Entrambi i numeri positivi!")
-```
-
-<details>
-Questo codice genera errore, perché `y` non è definita.
-</details>
-
-Ora consideriamo questo caso:
-
-```python
-x = 5
-
-if x > 0 or y > 0:
-    print("Almeno un numero positivo!")
-```
-
-Perchè non genera errore?
-
-| `x > 0` | `y > 0` | `x > 0 or y > 0` |
-| ------- | ------- | ---------------- |
-| `True`  | `False` | `True`           |
-| `True`  | `True`  | `True`           |
-
-`x > 0` vale già `True`, e questo basta a rendere vera tutta l'espressione con `or`.
-Di conseguenza Python non valuta `y > 0`.
-
-In generale:
-
-- in `A or B`, se `A` vale `True`, Python non valuta `B`;
-- in `A and B`, se `A` vale `False`, Python non valuta `B`.
 
 ## Leggi di De Morgan
 
@@ -2062,64 +1790,59 @@ Riscrivi ciascuna condizione in forma equivalente usando le leggi di De Morgan, 
 2. `not (a == b or c == d)`
 3. `not (eta >= 18 and ha_documento)`
 
-## Casi e tabelle di verità
+<details>
+<summary>Soluzioni — Leggi di De Morgan</summary>
 
-Prima di scrivere il codice conviene costruire una tabella dei casi:
-elencare esplicitamente tutte le combinazioni di input rilevanti e il comportamento atteso per ciascuna.
+**Esercizio 1.** `not (x > 0 and y > 0)`
 
-Questo serve a non dimenticare casi limite e a capire di quanti rami ha bisogno il programma.
+Applicando `not (A and B)` → `not A or not B`:
 
-**Esempio:** esercizio 13 — nome, età attuale, età da raggiungere.
-
-Quali combinazioni di input esistono?
-
-Prima versione della tabella — solo i casi "normali":
-
-| Confronto                       | Esempio               | Output atteso                                                        |
-| ------------------------------- | --------------------- | -------------------------------------------------------------------- |
-| `eta_desiderata > eta_attuale`  | attuale=10, target=18 | `Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri` |
-| `eta_desiderata == eta_attuale` | attuale=18, target=18 | `Ciao Maria, hai già 18 anni come desideri`                          |
-| `eta_desiderata < eta_attuale`  | attuale=25, target=18 | `Ciao Maria, hai già superato i 18 anni`                             |
-
-La tabella mostra che servono tre rami: `if`, `elif`, `else`.
-Costruirla prima evita di accorgersi del caso `==` solo dopo aver scritto il codice.
-
-Ma cosa succede se l'utente inserisce un'età negativa?
-
-| Input                          | Esempio               | Comportamento del programma    | Corretto? |
-| ------------------------------ | --------------------- | ------------------------------ | --------- |
-| `eta_attuale < 0`              | attuale=-5, target=18 | entra nel ramo `>`             | no        |
-| `eta_desiderata < 0`           | attuale=10, target=-3 | entra nel ramo `<`             | no        |
-| entrambe negative, uguali      | attuale=-5, target=-5 | entra nel ramo `==`            | no        |
-
-Il programma non genera errori ma produce output privi di senso.
-Per gestirlo correttamente bisogna aggiungere una validazione degli input **prima** di tutto il resto:
-
-```python
-nome = input("Nome: ")
-eta_attuale = int(input("Età attuale: "))
-eta_desiderata = int(input("Età desiderata: "))
-
-if eta_attuale < 0 or eta_desiderata < 0:
-    print("Errore: le età non possono essere negative.")
-elif eta_desiderata > eta_attuale:
-    anni_mancanti = eta_desiderata - eta_attuale
-    print("Ciao " + nome + ", oggi hai " + str(eta_attuale) + " anni, tra " + str(anni_mancanti) + " anni ne avrai " + str(eta_desiderata) + " come desideri")
-elif eta_desiderata == eta_attuale:
-    print("Ciao " + nome + ", hai già " + str(eta_desiderata) + " anni come desideri")
-else:
-    print("Ciao " + nome + ", hai già superato i " + str(eta_desiderata) + " anni")
+```
+not x > 0 or not y > 0
 ```
 
-> La validazione dell'input è sempre il primo controllo da fare.
-> Gli altri rami assumono che i dati siano validi — ma solo perché lo abbiamo già verificato.
+ovvero:
 
-| Età attuale        | Età desiderata                  | Output atteso                                                        |
-| ------------------ | ------------------------------- | -------------------------------------------------------------------- |
-| `eta_attuale <= 0` | `eta_desiderata <= 0`           | `INPUT NON VALIDO`                                                   |
-|                    | `eta_desiderata > 0`            | `INPUT NON VALIDO`                                                   |
-| `eta_attuale > 0`  | `eta_desiderata <= 0`           | `INPUT NON VALIDO`                                                   |
-|                    | `eta_desiderata < eta_attuale`  | `Ciao Maria, hai già superato i 18 anni`                             |
-|                    | `eta_desiderata == eta_attuale` | `Ciao Maria, hai già 18 anni come desideri`                          |
-|                    | `eta_desiderata > eta_attuale`  | `Ciao Maria, oggi hai 10 anni, tra 8 anni ne avrai 18 come desideri` |
+```
+x <= 0 or y <= 0
+```
 
+Verifica con `x = 3`, `y = -1`: la forma originale dà `not (True and False)` = `not False` = `True`; la forma semplificata dà `False or True` = `True`. ✓
+
+---
+
+**Esercizio 2.** `not (a == b or c == d)`
+
+Applicando `not (A or B)` → `not A and not B`:
+
+```
+not a == b and not c == d
+```
+
+ovvero:
+
+```
+a != b and c != d
+```
+
+Verifica con `a = 1`, `b = 2`, `c = 3`, `d = 3`: la forma originale dà `not (False or True)` = `not True` = `False`; la forma semplificata dà `True and False` = `False`. ✓
+
+---
+
+**Esercizio 3.** `not (eta >= 18 and ha_documento)`
+
+Applicando `not (A and B)` → `not A or not B`:
+
+```
+not eta >= 18 or not ha_documento
+```
+
+ovvero:
+
+```
+eta < 18 or not ha_documento
+```
+
+Verifica con `eta = 20`, `ha_documento = False`: la forma originale dà `not (True and False)` = `not False` = `True`; la forma semplificata dà `False or True` = `True`. ✓
+
+</details>
