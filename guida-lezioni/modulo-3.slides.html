@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 03 · Testare il programma e operazioni su booleani - Slides</title>
+<title>Modulo 03 · Dall&#x27;if al while - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -100,7 +100,7 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 03 · Testare il programma e operazioni su booleani</h1>
+    <h1>Modulo 03 · Dall&#x27;if al while</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
@@ -152,7 +152,13 @@ if voto &gt;= 18:
         if voto &gt;= 28:
             print(&quot;Ottimo&quot;)
         print(&quot;Buono&quot;)
-    print(&quot;Sufficiente&quot;)</code></pre><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>20</code></td><td></td><td></td></tr><tr><td><code>26</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr></tbody></table><p><strong>D2.</strong> Il programma legge tre interi e stampa il minore.</p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+    print(&quot;Sufficiente&quot;)</code></pre><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>20</code></td><td></td><td></td></tr><tr><td><code>26</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr></tbody></table><details><summary>Soluzione — D1</summary><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td>(nessuno)</td><td>(nessuno)</td></tr><tr><td><code>20</code></td><td><code>Sufficiente</code></td><td><code>Sufficiente</code></td></tr><tr><td><code>26</code></td><td><code>Buono</code></td><td><code>Buono</code> + <code>Sufficiente</code></td></tr><tr><td><code>30</code></td><td><code>Ottimo</code></td><td><code>Ottimo</code> + <code>Buono</code> + <code>Sufficiente</code></td></tr></tbody></table><p><strong>Bug:</strong> i <code>print</code> delle categorie inferiori non sono dentro rami <code>else</code> — vengono eseguiti sempre, anche dopo aver già stampato una categoria più alta. Per voto=30 il programma entra in tutti e tre gli <code>if</code> annidati e stampa tre righe.</p><p><strong>Codice corretto:</strong></p><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+if voto &gt;= 28:
+    print(&quot;Ottimo&quot;)
+elif voto &gt;= 24:
+    print(&quot;Buono&quot;)
+elif voto &gt;= 18:
+    print(&quot;Sufficiente&quot;)</code></pre><p>Con <code>elif</code> ogni ramo è esclusivo: appena uno è vero, gli altri vengono saltati.</p></details><p><strong>D2.</strong> Il programma legge tre interi e stampa il minore.</p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
 b = int(input(&quot;b: &quot;))
 c = int(input(&quot;c: &quot;))
 if a &lt; b and a &lt; c:
@@ -160,7 +166,15 @@ if a &lt; b and a &lt; c:
 if b &lt; a and b &lt; c:
     print(&quot;Il minore è &quot; + str(b))
 if c &lt; a and c &lt; b:
-    print(&quot;Il minore è &quot; + str(c))</code></pre><table><thead><tr><th><code>a</code></th><th><code>b</code></th><th><code>c</code></th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>2</code></td><td><code>3</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td><code>1</code></td><td><code>2</code></td><td></td><td></td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>3</code></td><td></td><td></td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>2</code></td><td></td><td></td></tr></tbody></table>
+    print(&quot;Il minore è &quot; + str(c))</code></pre><table><thead><tr><th><code>a</code></th><th><code>b</code></th><th><code>c</code></th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>2</code></td><td><code>3</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td><code>1</code></td><td><code>2</code></td><td></td><td></td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>3</code></td><td></td><td></td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>2</code></td><td></td><td></td></tr></tbody></table><details><summary>Soluzione — D2</summary><table><thead><tr><th><code>a</code></th><th><code>b</code></th><th><code>c</code></th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>2</code></td><td><code>3</code></td><td><code>Il minore è 1</code></td><td><code>Il minore è 1</code></td></tr><tr><td><code>3</code></td><td><code>1</code></td><td><code>2</code></td><td><code>Il minore è 1</code></td><td><code>Il minore è 1</code></td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>3</code></td><td><code>Il minore è 2</code></td><td>(nessuno)</td></tr><tr><td><code>2</code></td><td><code>2</code></td><td><code>2</code></td><td><code>Il minore è 2</code></td><td>(nessuno)</td></tr></tbody></table><p><strong>Bug:</strong> le condizioni usano <code>&lt;</code> stretto. Quando due valori sono uguali e sono entrambi il minimo (es. <code>a=2, b=2</code>), nessuna delle tre condizioni risulta vera — né <code>a &lt; b</code> né <code>b &lt; a</code> — e il programma non stampa nulla.</p><p><strong>Codice corretto:</strong></p><pre><code class="language-python">a = int(input(&quot;a: &quot;))
+b = int(input(&quot;b: &quot;))
+c = int(input(&quot;c: &quot;))
+minore = a
+if b &lt; minore:
+    minore = b
+if c &lt; minore:
+    minore = c
+print(&quot;Il minore è &quot; + str(minore))</code></pre><p>Invece di confrontare coppie di variabili, si tiene traccia del minimo corrente: si parte da <code>a</code> e si aggiorna solo se si trova qualcosa di più piccolo. Funziona anche con valori uguali.</p></details>
     
   </div>
 </section>

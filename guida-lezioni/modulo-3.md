@@ -1,4 +1,4 @@
-# Modulo 03 · Testare il programma e operazioni su booleani
+# Modulo 03 · Dall'if al while
 
 ## A fine lezione
 
@@ -190,6 +190,34 @@ if voto >= 18:
 | `26`  |               |              |
 | `30`  |               |              |
 
+<details>
+<summary>Soluzione — D1</summary>
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `15`  | (nessuno)     | (nessuno)    |
+| `20`  | `Sufficiente` | `Sufficiente` |
+| `26`  | `Buono`       | `Buono` + `Sufficiente` |
+| `30`  | `Ottimo`      | `Ottimo` + `Buono` + `Sufficiente` |
+
+**Bug:** i `print` delle categorie inferiori non sono dentro rami `else` — vengono eseguiti sempre, anche dopo aver già stampato una categoria più alta. Per voto=30 il programma entra in tutti e tre gli `if` annidati e stampa tre righe.
+
+**Codice corretto:**
+
+```python
+voto = int(input("Voto: "))
+if voto >= 28:
+    print("Ottimo")
+elif voto >= 24:
+    print("Buono")
+elif voto >= 18:
+    print("Sufficiente")
+```
+
+Con `elif` ogni ramo è esclusivo: appena uno è vero, gli altri vengono saltati.
+
+</details>
+
 **D2.** Il programma legge tre interi e stampa il minore.
 
 ```python
@@ -210,6 +238,36 @@ if c < a and c < b:
 | `3` | `1` | `2` |               |              |
 | `2` | `2` | `3` |               |              |
 | `2` | `2` | `2` |               |              |
+
+<details>
+<summary>Soluzione — D2</summary>
+
+| `a` | `b` | `c` | Output atteso | Output reale |
+| --- | --- | --- | ------------- | ------------ |
+| `1` | `2` | `3` | `Il minore è 1` | `Il minore è 1` |
+| `3` | `1` | `2` | `Il minore è 1` | `Il minore è 1` |
+| `2` | `2` | `3` | `Il minore è 2` | (nessuno) |
+| `2` | `2` | `2` | `Il minore è 2` | (nessuno) |
+
+**Bug:** le condizioni usano `<` stretto. Quando due valori sono uguali e sono entrambi il minimo (es. `a=2, b=2`), nessuna delle tre condizioni risulta vera — né `a < b` né `b < a` — e il programma non stampa nulla.
+
+**Codice corretto:**
+
+```python
+a = int(input("a: "))
+b = int(input("b: "))
+c = int(input("c: "))
+minore = a
+if b < minore:
+    minore = b
+if c < minore:
+    minore = c
+print("Il minore è " + str(minore))
+```
+
+Invece di confrontare coppie di variabili, si tiene traccia del minimo corrente: si parte da `a` e si aggiorna solo se si trova qualcosa di più piccolo. Funziona anche con valori uguali.
+
+</details>
 
 ## Dal `if` al `while`
 

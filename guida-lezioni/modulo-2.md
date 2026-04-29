@@ -1443,6 +1443,12 @@ Per ciascun programma: esegui il codice, individua il tipo di errore che produce
 
 **E1.**
 
+Il codice chiede all'utente di inserire nome, cognome ed età e poi stampa la stringa
+```
+Ciao [NOME] [COGNOME]!
+Tra dieci anni avrai X anni.
+```
+
 ```python
 nome = input("Nome: ")
 cognome = input("Cognome: ")
@@ -1453,14 +1459,18 @@ print("Tra dieci anni avrai " + eta + 10 + " anni.")
 
 **E2.**
 
+Il codice chiede all'utente di inserire l'anno di nascita e calcola l'età attuale.
+
 ```python
 anno_nascita = input("Anno di nascita: ")
-anno_corrente = 2025
+anno_corrente = 2026
 eta = anno_corrente - anno_nascita
 print("Hai circa " + str(eta) + " anni.")
 ```
 
 **E3.**
+
+Il codice chiede all'utente di inserire una parola e poi ne stampa la lunghezza
 
 ```python
 parola = input("Parola: ")
@@ -1469,6 +1479,8 @@ print("La parola ha " + lunghezza + " lettere.")
 ```
 
 **E4.**
+
+Il codice chiede all'utente di inserire un numero intero e poi ne stampa il segno (positivo se compreso tra 0 e +inf, negativo altrimenti)
 
 ```python
 x = int(input("Numero: "))
