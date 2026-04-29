@@ -93,6 +93,61 @@ elif x < 0:
 print("Il numero è " + segno)
 ```
 
+<details>
+<summary>Soluzioni — E1–E4</summary>
+
+**E1.** `TypeError` alla riga `print("Tra dieci anni avrai " + eta + 10 + " anni.")`.
+`eta` è una stringa (restituita da `input()`); non si può sommare una stringa a un intero.
+
+```python
+nome = input("Nome: ")
+cognome = input("Cognome: ")
+eta = int(input("Età: "))
+print("Ciao " + nome + " " + cognome + "!")
+print("Tra dieci anni avrai " + str(eta + 10) + " anni.")
+```
+
+---
+
+**E2.** `TypeError` alla riga `eta = anno_corrente - anno_nascita`.
+`anno_nascita` è una stringa; non si può sottrarre una stringa da un intero.
+
+```python
+anno_nascita = int(input("Anno di nascita: "))
+anno_corrente = 2026
+eta = anno_corrente - anno_nascita
+print("Hai circa " + str(eta) + " anni.")
+```
+
+---
+
+**E3.** `TypeError` alla riga `print("La parola ha " + lunghezza + " lettere.")`.
+`lunghezza` è un intero; non si può concatenare un intero a una stringa.
+
+```python
+parola = input("Parola: ")
+lunghezza = len(parola)
+print("La parola ha " + str(lunghezza) + " lettere.")
+```
+
+---
+
+**E4.** `NameError` alla riga `print("Il numero è " + segno)` quando `x == 0`.
+Se l'utente inserisce `0`, né il ramo `if` né l'`elif` vengono eseguiti e `segno` non viene mai definita.
+
+```python
+x = int(input("Numero: "))
+if x > 0:
+    segno = "positivo"
+elif x < 0:
+    segno = "negativo"
+else:
+    segno = "zero"
+print("Il numero è " + segno)
+```
+
+</details>
+
 ## Testing e casi limite
 
 Anche se il programma non genera un errore, potrebbe comunque fare la cosa sbagliata: non basta che l'esecuzione si concluda per dire che "funziona".
@@ -167,6 +222,8 @@ Il programma riceve un numero intero e stampa `"pari"` se è pari, `"dispari"` s
 | `7`   |               |              |
 
 <details>
+<summary>Codice da testare</summary>
+
 ```python
 n = int(input("Numero: "))
 if n > 0 and n % 2 == 0:
@@ -174,6 +231,31 @@ if n > 0 and n % 2 == 0:
 else:
     print("dispari")
 ```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 1</summary>
+
+| Input | Output atteso | Output reale |
+| ----- | ------------- | ------------ |
+| `0`   | `pari`        | `dispari`    |
+| `3`   | `dispari`     | `dispari`    |
+| `-4`  | `pari`        | `dispari`    |
+| `7`   | `dispari`     | `dispari`    |
+
+**Bug:** la condizione `n > 0 and n % 2 == 0` esclude `0` e i numeri negativi pari (es. `-4`), che vengono trattati come dispari.
+
+**Correzione:** basta controllare la divisibilità per 2, indipendentemente dal segno.
+
+```python
+n = int(input("Numero: "))
+if n % 2 == 0:
+    print("pari")
+else:
+    print("dispari")
+```
+
 </details>
 
 ### Esercizio 2
@@ -187,6 +269,7 @@ Il programma riceve un voto e stampa `"promosso"` se è almeno 18, `"non promoss
 | `18`  |               |              |
 
 <details>
+<summary>Codice da testare</summary>
 
 ```python
 voto = int(input("Voto: "))
@@ -199,6 +282,28 @@ if voto <= 18:
 
 </details>
 
+<details>
+<summary>Soluzione — Esercizio 2</summary>
+
+| Input | Output atteso   | Output reale                        |
+| ----- | --------------- | ----------------------------------- |
+| `15`  | `non promosso`  | `non promosso`                      |
+| `30`  | `promosso`      | `promosso`                          |
+| `18`  | `promosso`      | `promosso` + `non promosso` (bug!)  |
+
+**Bug:** i due `if` sono indipendenti, non alternativi. Per `voto = 18` entrambe le condizioni (`>= 18` e `<= 18`) sono vere e vengono stampate entrambe le stringhe.
+
+**Correzione:** usare `if-else` per rendere i due rami mutualmente esclusivi.
+
+```python
+voto = int(input("Voto: "))
+if voto >= 18:
+    print("promosso")
+else:
+    print("non promosso")
+```
+
+</details>
 
 ### Esercizio 3
 
@@ -212,6 +317,7 @@ Il programma riceve un numero intero e stampa `"positivo"` se è maggiore di zer
 
 
 <details>
+<summary>Codice da testare</summary>
 
 ```python
 x = int(input("x: "))
@@ -219,6 +325,31 @@ if x > 0:
     print("positivo")
 elif x > 10:
     print("grande")
+else:
+    print("non positivo")
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 3</summary>
+
+| Input | Output atteso  | Output reale   |
+| ----- | -------------- | -------------- |
+| `5`   | `positivo`     | `positivo`     |
+| `15`  | `grande`       | `positivo`     |
+| `-2`  | `non positivo` | `non positivo` |
+
+**Bug:** l'`elif x > 10` non viene mai raggiunto per numeri maggiori di 10, perché la condizione `x > 0` è già vera e Python si ferma al primo ramo vero.
+
+**Correzione:** controllare prima il caso più restrittivo (`> 10`).
+
+```python
+x = int(input("x: "))
+if x > 10:
+    print("grande")
+elif x > 0:
+    print("positivo")
 else:
     print("non positivo")
 ```
@@ -238,6 +369,33 @@ Il programma riceve un intero e stampa `"fizz"` se è divisibile per 3, `"buzz"`
 | `9`   |               |              |
 
 Scrivi il programma e testane il funzionamento.
+
+<details>
+<summary>Soluzione — Esercizio 4</summary>
+
+| Input | Output atteso |
+| ----- | ------------- |
+| `1`   | `1`           |
+| `3`   | `fizz`        |
+| `5`   | `buzz`        |
+| `15`  | `fizzbuzz`    |
+| `9`   | `fizz`        |
+
+**Attenzione all'ordine dei rami:** il caso `fizzbuzz` (divisibile per entrambi) deve essere controllato prima degli altri due, altrimenti viene assorbito dal ramo `fizz` o `buzz`.
+
+```python
+n = int(input("Numero: "))
+if n % 3 == 0 and n % 5 == 0:
+    print("fizzbuzz")
+elif n % 3 == 0:
+    print("fizz")
+elif n % 5 == 0:
+    print("buzz")
+else:
+    print(n)
+```
+
+</details>
 
 ## Valutazione lazy
 
@@ -418,6 +576,105 @@ Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce 
    Inserisci una parola: geografia
    Inserisci una parola: fine
    ```
+
+<details>
+<summary>Soluzione — Esercizio 1</summary>
+
+```python
+i = 1
+while i <= 10:
+    print(i)
+    i = i + 1
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 2</summary>
+
+```python
+n = int(input("n: "))
+while n >= 0:
+    print(n)
+    n = n - 1
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 3</summary>
+
+```python
+n = int(input("n: "))
+i = -n
+while i <= n:
+    print(i)
+    i = i + 1
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 4</summary>
+
+```python
+pagine = 120
+i = 1
+while i <= pagine:
+    print("Sto leggendo la pagina", i)
+    i = i + 1
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 5</summary>
+
+```python
+i = 1
+while i <= 10:
+    print(i)
+    i = i + 2
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 6</summary>
+
+```python
+parola = input("Parola: ")
+i = 0
+while i < len(parola):
+    print(parola[i])
+    i = i + 2
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 7</summary>
+
+```python
+base = int(input("Base: "))
+esp = 1
+while base ** esp <= 1000:
+    print(str(base) + "^" + str(esp) + " = " + str(base ** esp))
+    esp = esp + 1
+```
+
+</details>
+
+<details>
+<summary>Soluzione — Esercizio 8</summary>
+
+```python
+parola = input("Inserisci una parola: ")
+while parola != "fine":
+    parola = input("Inserisci una parola: ")
+```
+
+</details>
 
 ## Cicli annidati
 

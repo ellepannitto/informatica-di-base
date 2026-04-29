@@ -108,7 +108,7 @@ a { color: #8b3f1d; }
 <section class="slide">
   <div class="slide-inner">
     <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai modellare piccoli problemi con automi a stati finiti?</li><li>Sai ragionare sui casi limite anche quando il codice sembra plausibile a prima vista?</li><li>Sai definire sintassi e semantica del <code>while</code>?</li><li>Sai distinguere guardia del ciclo, stato e condizione di terminazione?</li><li>Sai usare il <code>while</code> conoscendo il numero di iterazioni da effettuare?</li><li>Sai riconoscere errori frequenti e localizzarli?</li><li>Sai usare casi di test per smascherare errori logici?</li><li>Sai applicare le leggi di De Morgan?</li></ul>
-    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: valutare booleani, condizioni composte, De Morgan</td></tr><tr><td>teoria</td><td>1h</td><td>-</td><td>Automi a stati finiti come modello di partizione degli input: stati finali e intermedi</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: disegnare automi, trovare errori</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.1/4.2</td><td>Dal `if` al `while`: motivazione, struttura e tabella comparativa</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>-</td><td>Esercizi: contatori, dispari, potenze, sequenze e stop-word</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.7</td><td>Cicli annidati</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi</td></tr><tr><td>teoria</td><td>0.5h</td><td>-</td><td>Lo stato del programma durante un `while`: tracce di esecuzione</td></tr></tbody></table>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>-</td><td>Errori nel codice: leggerli e correggerli</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>-</td><td>Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti</td></tr><tr><td>teoria</td><td>0.5h</td><td>-</td><td>Valutazione lazy e leggi di De Morgan</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.1/4.2</td><td>Dal `if` al `while`: motivazione, struttura e tabella comparativa</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>-</td><td>Esercizi: contatori, dispari, potenze, sequenze e stop-word</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. 4.7</td><td>Cicli annidati</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi</td></tr><tr><td>teoria</td><td>0.5h</td><td>-</td><td>Lo stato del programma durante un `while`: tracce di esecuzione</td></tr></tbody></table>
   </div>
 </section>
 
@@ -136,7 +136,23 @@ if x &gt; 0:
     segno = &quot;positivo&quot;
 elif x &lt; 0:
     segno = &quot;negativo&quot;
-print(&quot;Il numero è &quot; + segno)</code></pre>
+print(&quot;Il numero è &quot; + segno)</code></pre><details><summary>Soluzioni — E1–E4</summary><p><strong>E1.</strong> <code>TypeError</code> alla riga <code>print(&quot;Tra dieci anni avrai &quot; + eta + 10 + &quot; anni.&quot;)</code>. <code>eta</code> è una stringa (restituita da <code>input()</code>); non si può sommare una stringa a un intero.</p><pre><code class="language-python">nome = input(&quot;Nome: &quot;)
+cognome = input(&quot;Cognome: &quot;)
+eta = int(input(&quot;Età: &quot;))
+print(&quot;Ciao &quot; + nome + &quot; &quot; + cognome + &quot;!&quot;)
+print(&quot;Tra dieci anni avrai &quot; + str(eta + 10) + &quot; anni.&quot;)</code></pre><hr><p><strong>E2.</strong> <code>TypeError</code> alla riga <code>eta = anno_corrente - anno_nascita</code>. <code>anno_nascita</code> è una stringa; non si può sottrarre una stringa da un intero.</p><pre><code class="language-python">anno_nascita = int(input(&quot;Anno di nascita: &quot;))
+anno_corrente = 2026
+eta = anno_corrente - anno_nascita
+print(&quot;Hai circa &quot; + str(eta) + &quot; anni.&quot;)</code></pre><hr><p><strong>E3.</strong> <code>TypeError</code> alla riga <code>print(&quot;La parola ha &quot; + lunghezza + &quot; lettere.&quot;)</code>. <code>lunghezza</code> è un intero; non si può concatenare un intero a una stringa.</p><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+lunghezza = len(parola)
+print(&quot;La parola ha &quot; + str(lunghezza) + &quot; lettere.&quot;)</code></pre><hr><p><strong>E4.</strong> <code>NameError</code> alla riga <code>print(&quot;Il numero è &quot; + segno)</code> quando <code>x == 0</code>. Se l&#x27;utente inserisce <code>0</code>, né il ramo <code>if</code> né l&#x27;<code>elif</code> vengono eseguiti e <code>segno</code> non viene mai definita.</p><pre><code class="language-python">x = int(input(&quot;Numero: &quot;))
+if x &gt; 0:
+    segno = &quot;positivo&quot;
+elif x &lt; 0:
+    segno = &quot;negativo&quot;
+else:
+    segno = &quot;zero&quot;
+print(&quot;Il numero è &quot; + segno)</code></pre></details>
     
   </div>
 </section>
@@ -168,22 +184,44 @@ else:
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-ifelifelse-e-testing">Esercizi: if/elif/else e testing</h2><p>Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:</p><ol><li><strong>scrivi i desiderata</strong> — prima di eseguire il codice, compila la tabella con l&#x27;output che ti aspetti per ogni input;</li><li><strong>esegui e controlla</strong> — lancia il programma con quegli input e annota l&#x27;output reale;</li><li><strong>confronta</strong> — dove differiscono, spiega perché.</li></ol><h3 id="esercizio-1">Esercizio 1</h3><p>Il programma riceve un numero intero e stampa <code>&quot;pari&quot;</code> se è pari, <code>&quot;dispari&quot;</code> se è dispari.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>-4</code></td><td></td><td></td></tr><tr><td><code>7</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+    <h2 id="esercizi-ifelifelse-e-testing">Esercizi: if/elif/else e testing</h2><p>Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:</p><ol><li><strong>scrivi i desiderata</strong> — prima di eseguire il codice, compila la tabella con l&#x27;output che ti aspetti per ogni input;</li><li><strong>esegui e controlla</strong> — lancia il programma con quegli input e annota l&#x27;output reale;</li><li><strong>confronta</strong> — dove differiscono, spiega perché.</li></ol><h3 id="esercizio-1">Esercizio 1</h3><p>Il programma riceve un numero intero e stampa <code>&quot;pari&quot;</code> se è pari, <code>&quot;dispari&quot;</code> se è dispari.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>-4</code></td><td></td><td></td></tr><tr><td><code>7</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
 if n &gt; 0 and n % 2 == 0:
     print(&quot;pari&quot;)
 else:
-    print(&quot;dispari&quot;)</code></pre></details><h3 id="esercizio-2">Esercizio 2</h3><p>Il programma riceve un voto e stampa <code>&quot;promosso&quot;</code> se è almeno 18, <code>&quot;non promosso&quot;</code> altrimenti.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr><tr><td><code>18</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+    print(&quot;dispari&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 1</summary><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td><code>pari</code></td><td><code>dispari</code></td></tr><tr><td><code>3</code></td><td><code>dispari</code></td><td><code>dispari</code></td></tr><tr><td><code>-4</code></td><td><code>pari</code></td><td><code>dispari</code></td></tr><tr><td><code>7</code></td><td><code>dispari</code></td><td><code>dispari</code></td></tr></tbody></table><p><strong>Bug:</strong> la condizione <code>n &gt; 0 and n % 2 == 0</code> esclude <code>0</code> e i numeri negativi pari (es. <code>-4</code>), che vengono trattati come dispari.</p><p><strong>Correzione:</strong> basta controllare la divisibilità per 2, indipendentemente dal segno.</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n % 2 == 0:
+    print(&quot;pari&quot;)
+else:
+    print(&quot;dispari&quot;)</code></pre></details><h3 id="esercizio-2">Esercizio 2</h3><p>Il programma riceve un voto e stampa <code>&quot;promosso&quot;</code> se è almeno 18, <code>&quot;non promosso&quot;</code> altrimenti.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr><tr><td><code>18</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
 if voto &gt;= 18:
     print(&quot;promosso&quot;)
 
 if voto &lt;= 18:
-    print(&quot;non promosso&quot;)</code></pre></details><h3 id="esercizio-3">Esercizio 3</h3><p>Il programma riceve un numero intero e stampa <code>&quot;positivo&quot;</code> se è maggiore di zero, <code>&quot;grande&quot;</code> se è maggiore di 10, <code>&quot;non positivo&quot;</code> negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>-2</code></td><td></td><td></td></tr></tbody></table><details><summary>Dettagli</summary><pre><code class="language-python">x = int(input(&quot;x: &quot;))
+    print(&quot;non promosso&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 2</summary><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td><code>non promosso</code></td><td><code>non promosso</code></td></tr><tr><td><code>30</code></td><td><code>promosso</code></td><td><code>promosso</code></td></tr><tr><td><code>18</code></td><td><code>promosso</code></td><td><code>promosso</code> + <code>non promosso</code> (bug!)</td></tr></tbody></table><p><strong>Bug:</strong> i due <code>if</code> sono indipendenti, non alternativi. Per <code>voto = 18</code> entrambe le condizioni (<code>&gt;= 18</code> e <code>&lt;= 18</code>) sono vere e vengono stampate entrambe le stringhe.</p><p><strong>Correzione:</strong> usare <code>if-else</code> per rendere i due rami mutualmente esclusivi.</p><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+if voto &gt;= 18:
+    print(&quot;promosso&quot;)
+else:
+    print(&quot;non promosso&quot;)</code></pre></details><h3 id="esercizio-3">Esercizio 3</h3><p>Il programma riceve un numero intero e stampa <code>&quot;positivo&quot;</code> se è maggiore di zero, <code>&quot;grande&quot;</code> se è maggiore di 10, <code>&quot;non positivo&quot;</code> negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>-2</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">x = int(input(&quot;x: &quot;))
 if x &gt; 0:
     print(&quot;positivo&quot;)
 elif x &gt; 10:
     print(&quot;grande&quot;)
 else:
-    print(&quot;non positivo&quot;)</code></pre></details><h3 id="esercizio-4">Esercizio 4</h3><p>Il programma riceve un intero e stampa <code>&quot;fizz&quot;</code> se è divisibile per 3, <code>&quot;buzz&quot;</code> se è divisibile per 5, <code>&quot;fizzbuzz&quot;</code> se è divisibile per entrambi, il numero stesso negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>9</code></td><td></td><td></td></tr></tbody></table><p>Scrivi il programma e testane il funzionamento.</p>
+    print(&quot;non positivo&quot;)</code></pre></details><details><summary>Soluzione — Esercizio 3</summary><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td><code>positivo</code></td><td><code>positivo</code></td></tr><tr><td><code>15</code></td><td><code>grande</code></td><td><code>positivo</code></td></tr><tr><td><code>-2</code></td><td><code>non positivo</code></td><td><code>non positivo</code></td></tr></tbody></table><p><strong>Bug:</strong> l&#x27;<code>elif x &gt; 10</code> non viene mai raggiunto per numeri maggiori di 10, perché la condizione <code>x &gt; 0</code> è già vera e Python si ferma al primo ramo vero.</p><p><strong>Correzione:</strong> controllare prima il caso più restrittivo (<code>&gt; 10</code>).</p><pre><code class="language-python">x = int(input(&quot;x: &quot;))
+if x &gt; 10:
+    print(&quot;grande&quot;)
+elif x &gt; 0:
+    print(&quot;positivo&quot;)
+else:
+    print(&quot;non positivo&quot;)</code></pre></details><h3 id="esercizio-4">Esercizio 4</h3><p>Il programma riceve un intero e stampa <code>&quot;fizz&quot;</code> se è divisibile per 3, <code>&quot;buzz&quot;</code> se è divisibile per 5, <code>&quot;fizzbuzz&quot;</code> se è divisibile per entrambi, il numero stesso negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>9</code></td><td></td><td></td></tr></tbody></table><p>Scrivi il programma e testane il funzionamento.</p><details><summary>Soluzione — Esercizio 4</summary><table><thead><tr><th>Input</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>1</code></td></tr><tr><td><code>3</code></td><td><code>fizz</code></td></tr><tr><td><code>5</code></td><td><code>buzz</code></td></tr><tr><td><code>15</code></td><td><code>fizzbuzz</code></td></tr><tr><td><code>9</code></td><td><code>fizz</code></td></tr></tbody></table><p><strong>Attenzione all&#x27;ordine dei rami:</strong> il caso <code>fizzbuzz</code> (divisibile per entrambi) deve essere controllato prima degli altri due, altrimenti viene assorbito dal ramo <code>fizz</code> o <code>buzz</code>.</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+if n % 3 == 0 and n % 5 == 0:
+    print(&quot;fizzbuzz&quot;)
+elif n % 3 == 0:
+    print(&quot;fizz&quot;)
+elif n % 5 == 0:
+    print(&quot;buzz&quot;)
+else:
+    print(n)</code></pre></details>
     
   </div>
 </section>
@@ -262,7 +300,34 @@ while risposta == &quot;s&quot;:
    2^8 = 256
    2^9 = 512</code></pre><ol><li>Scrivi un programma che chiede all&#x27;utente di inserire una parola. Il programma continua finché l&#x27;utente non scrive <code>fine</code>.</li></ol><pre><code>   Inserisci una parola: storia
    Inserisci una parola: geografia
-   Inserisci una parola: fine</code></pre>
+   Inserisci una parola: fine</code></pre><details><summary>Soluzione — Esercizio 1</summary><pre><code class="language-python">i = 1
+while i &lt;= 10:
+    print(i)
+    i = i + 1</code></pre></details><details><summary>Soluzione — Esercizio 2</summary><pre><code class="language-python">n = int(input(&quot;n: &quot;))
+while n &gt;= 0:
+    print(n)
+    n = n - 1</code></pre></details><details><summary>Soluzione — Esercizio 3</summary><pre><code class="language-python">n = int(input(&quot;n: &quot;))
+i = -n
+while i &lt;= n:
+    print(i)
+    i = i + 1</code></pre></details><details><summary>Soluzione — Esercizio 4</summary><pre><code class="language-python">pagine = 120
+i = 1
+while i &lt;= pagine:
+    print(&quot;Sto leggendo la pagina&quot;, i)
+    i = i + 1</code></pre></details><details><summary>Soluzione — Esercizio 5</summary><pre><code class="language-python">i = 1
+while i &lt;= 10:
+    print(i)
+    i = i + 2</code></pre></details><details><summary>Soluzione — Esercizio 6</summary><pre><code class="language-python">parola = input(&quot;Parola: &quot;)
+i = 0
+while i &lt; len(parola):
+    print(parola[i])
+    i = i + 2</code></pre></details><details><summary>Soluzione — Esercizio 7</summary><pre><code class="language-python">base = int(input(&quot;Base: &quot;))
+esp = 1
+while base ** esp &lt;= 1000:
+    print(str(base) + &quot;^&quot; + str(esp) + &quot; = &quot; + str(base ** esp))
+    esp = esp + 1</code></pre></details><details><summary>Soluzione — Esercizio 8</summary><pre><code class="language-python">parola = input(&quot;Inserisci una parola: &quot;)
+while parola != &quot;fine&quot;:
+    parola = input(&quot;Inserisci una parola: &quot;)</code></pre></details>
     
   </div>
 </section>

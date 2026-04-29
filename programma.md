@@ -56,18 +56,15 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 0.5h   | -                | Esercizi: variabili, input/output, operazioni su stringhe e numeri                        |
 | theory    | 0.5h   | cap. 3.3/3.6     | Tipo `bool`, operatori di confronto e operazioni su stringhe che restituiscono booleani   |
 | theory    | 0.5h   | cap. 3.1/3.2/3.4 | Sintassi e semantica di `if`, `if-else`, `elif` e condizioni annidate                     |
-| theory    | 1h     | -                | Errori nel codice: leggerli e correggerli                                                 |
-| exercise  | 0.5h   | -                | Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti |
 | theory    | 1h     | cap. 3.5         | Condizioni composte: `and`, `or`, `not`, tabelle di verità e precedenza degli operatori   |
-| theory    | 0.5h   | -                | Valutazione lazy e leggi di De Morgan                                                     |
 
 ### 03 | Dall'if al while | slides=guida-lezioni/modulo-3.slides.html
 
 | Tipologia | Durata | Libro        | Argomento                                                                              |
 | --------- | ------ | ------------ | -------------------------------------------------------------------------------------- |
-| exercise  | 1h     | -            | Esercizi: valutare booleani, condizioni composte, De Morgan                            |
-| theory    | 1h     | -            | Automi a stati finiti come modello di partizione degli input: stati finali e intermedi |
-| exercise  | 1h     | -            | Esercizi: disegnare automi, trovare errori                                             |
+| theory    | 1h     | -                | Errori nel codice: leggerli e correggerli                                                 |
+| exercise  | 0.5h   | -                | Testing e casi limite: confrontare output atteso e reale, programmi che sembrano corretti |
+| theory    | 0.5h   | -                | Valutazione lazy e leggi di De Morgan                                                     |
 | theory    | 0.5h   | cap. 4.1/4.2 | Dal `if` al `while`: motivazione, struttura e tabella comparativa                      |
 | exercise  | 0.5h   | -            | Esercizi: contatori, dispari, potenze, sequenze e stop-word                            |
 | theory    | 0.5h   | cap. 4.7     | Cicli annidati                                                                         |
