@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 05 · Liste e lettura dei dati - Slides</title>
+<title>Modulo 05 · Funzioni - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -100,136 +100,234 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 05 · Liste e lettura dei dati</h1>
+    <h1>Modulo 05 · Funzioni</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai rappresentare dati ordinati con una lista?</li><li>Sai usare le operazioni fondamentali sulle liste?</li><li>Sai trasformare una stringa in lista con <code>split()</code>?</li><li>Sai leggere sequenze di dati e accumularle in una lista?</li><li>Sai ragionare sulla differenza tra lista e stringa?</li></ul>
-    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>cap. 7.1/7.2/7.3/7.4</td><td>Liste</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: costruire liste, accedere agli elementi, scorrere con `while`</td></tr><tr><td>esercitazione</td><td>2h</td><td>-</td><td>Esercizi: verifica di proprietà anche su liste annidate, serie multiple, conteggio per categoria</td></tr></tbody></table>
+    <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai definire funzioni con parametri e valore di ritorno?</li><li>Sai distinguere funzione e procedura?</li><li>Sai scomporre un problema in sottoproblemi più piccoli?</li><li>Sai progettare interfacce semplici con responsabilità singola?</li><li>Sai leggere una funzione come black box?</li><li>Sai costruire piccole utility testabili e riusabili?</li></ul>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Definire funzioni: parametri, chiamata, valori di ritorno</td></tr><tr><td>esercitazione</td><td>1h</td><td>-</td><td>Esercizi: scomporre un programma in funzioni piccole</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Firma di una funzione, black box e responsabilità singola</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Scope: variabili locali, parametri e visibilità dei nomi dentro e fuori una funzione</td></tr><tr><td>esercitazione</td><td>1.5h</td><td>-</td><td>Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili</td></tr></tbody></table>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="due-problemi-che-il-while-da-solo-non-riesce-a-risolvere">Due problemi che il <code>while</code> da solo non riesce a risolvere</h2><h3 id="problema-1-stampa-i-numeri-al-contrario">Problema 1: stampa i numeri al contrario</h3><p>Scrivi un programma che legge numeri interi uno alla volta (terminati da <code>0</code>) e li stampa in ordine inverso rispetto a quello in cui sono stati inseriti.</p><p>Esempio:</p><pre><code>Input:  3  7  2  5  0
-Output: 5  2  7  3</code></pre><p>Prova a risolverlo usando solo le variabili che conosci. Cosa manca?</p><p>Il problema è che quando arriva lo <code>0</code>, i numeri precedenti non esistono più: ogni nuova lettura sovrascrive la variabile. Per stampare al contrario bisogna prima raccogliere tutti i valori, poi scorrere la raccolta in senso inverso.</p><p>Con le sole variabili del modulo 4:</p><pre><code class="language-python">numero = int(input())
-while numero != 0:
-    # qui vorremmo &quot;ricordare&quot; numero, ma dove?
-    numero = int(input())
-# a questo punto non sappiamo più cosa è stato inserito</code></pre><p>Il <code>while</code> sa iterare, ma non sa ricordare una sequenza di valori.</p><h3 id="problema-2-chi-è-sopra-la-media">Problema 2: chi è sopra la media?</h3><p>Scrivi un programma che legge numeri interi uno alla volta (terminati da <code>0</code>) e stampa quelli che superano la media di tutti i numeri inseriti.</p><p>Esempio:</p><pre><code>Input:  4  8  2  6  0
-Media:  5.0
-Output: 8  6</code></pre><p>Anche volendo, questo problema è impossibile da risolvere con una sola passata: per sapere se <code>4</code> è sopra la media, devi già conoscere anche <code>8</code>, <code>2</code> e <code>6</code>. La media si può calcolare solo dopo aver letto l&#x27;ultimo numero.</p><p>Servono due passate sugli stessi dati:</p><ol><li>leggi tutti i numeri, calcola la media;</li><li>scorri di nuovo gli stessi numeri e stampa quelli sopra la media.</li></ol><p>Per fare la seconda passata i numeri devono essere ancora disponibili — e con variabili singole non lo sono.</p><p>Entrambi i problemi hanno la stessa radice: il programma ha bisogno di <strong>ricordare una sequenza di valori</strong> per poterla usare dopo. Questa è esattamente la funzione di una lista.</p>
-    
-  </div>
-</section>
+    <h2 id="codice-che-si-ripete">Codice che si ripete?</h2><p>Negli esercizi sulle liste abbiamo scritto molte volte questo stesso blocco:</p><pre><code class="language-python">numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())</code></pre><p>Eccolo in tre esercizi diversi, fianco a fianco:</p><pre><code class="language-python"># Es. 10 — stampa al contrario
+numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="liste-creare-e-popolare">Liste: creare e popolare</h2><p>Una lista è una sequenza ordinata di valori tenuti insieme sotto un unico nome.</p><h3 id="creare-una-lista">Creare una lista</h3><p>Lista con elementi già noti:</p><pre><code class="language-python">voti = [28, 30, 24, 27]
-nomi = [&quot;Alice&quot;, &quot;Bruno&quot;, &quot;Carla&quot;]</code></pre><p>Lista vuota, da riempire dopo:</p><pre><code class="language-python">numeri = []</code></pre><p>La lista vuota è il punto di partenza quando non si conosce in anticipo quanti elementi ci saranno, la situazione dei problemi di apertura.</p><h3 id="aggiungere-elementi-append">Aggiungere elementi: <code>append</code></h3><pre><code class="language-python">numeri = []
-numeri.append(4)
-numeri.append(8)
-numeri.append(2)
-print(numeri)   # [4, 8, 2]</code></pre><p>Ogni chiamata ad <code>append</code> aggiunge un elemento <strong>in coda</strong>. L&#x27;ordine di inserimento viene conservato.</p><h3 id="leggere-la-lunghezza-len">Leggere la lunghezza: <code>len</code></h3><pre><code class="language-python">voti = [28, 30, 24, 27]
-print(len(voti))   # 4</code></pre><h3 id="accedere-a-un-elemento-listai">Accedere a un elemento: <code>lista[i]</code></h3><p>Gli indici partono da <code>0</code>.</p><pre><code class="language-python">voti = [28, 30, 24, 27]
-#        0   1   2   3
-
-print(voti[0])   # 28  (primo)
-print(voti[3])   # 27  (quarto)
-print(voti[-1])  # 27  (ultimo, contando da destra)</code></pre><pre><code>indice:   0    1    2    3
-        +----+----+----+----+
-voti:   | 28 | 30 | 24 | 27 |
-        +----+----+----+----+</code></pre><h3 id="modificare-un-elemento">Modificare un elemento</h3><pre><code class="language-python">voti[0] = 29
-print(voti)   # [29, 30, 24, 27]</code></pre><details><summary>Dettagli</summary><p>Questa è una differenza rispetto alle stringhe!</p></details><h3 id="concatenare-due-liste">Concatenare due liste</h3><pre><code class="language-python">a = [1, 2, 3]
-b = [4, 5, 6]
-print(a + b)   # [1, 2, 3, 4, 5, 6]</code></pre><p><code>+</code> non modifica <code>a</code> né <code>b</code>: produce una nuova lista.</p><h3 id="riepilogo-operazioni">Riepilogo operazioni</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th><th>Nota</th></tr></thead><tbody><tr><td>Lista vuota</td><td><code>L = []</code></td><td></td></tr><tr><td>Aggiunta in coda</td><td><code>L.append(x)</code></td><td>modifica <code>L</code> sul posto</td></tr><tr><td>Lunghezza</td><td><code>len(L)</code></td><td></td></tr><tr><td>Accesso per indice</td><td><code>L[i]</code></td><td>da <code>0</code> a <code>len(L)-1</code></td></tr><tr><td>Ultimo elemento</td><td><code>L[-1]</code></td><td></td></tr><tr><td>Modifica elemento</td><td><code>L[i] = x</code></td><td>modifica <code>L</code> sul posto</td></tr><tr><td>Concatenazione</td><td><code>L1 + L2</code></td><td>produce una nuova lista</td></tr><tr><td>Conteggio occorr.</td><td><code>L.count(x)</code></td><td></td></tr></tbody></table><blockquote><p>Python permette liste con elementi di tipo diverso, ma nella pratica conviene costruire liste omogenee (tutti interi, tutte stringhe, …): è più semplice applicare le stesse operazioni a tutti gli elementi.</p></blockquote><h3 id="tornare-al-problema-1-numeri-al-contrario">Tornare al Problema 1: numeri al contrario</h3><p>Con <code>append</code> possiamo raccogliere i numeri mentre li leggiamo, e usarli dopo:</p><pre><code class="language-python">numeri = []
-numero = int(input())
-while numero != 0:
-    numeri.append(numero)
-    numero = int(input())
-
-# ora numeri contiene tutta la sequenza
 i = len(numeri) - 1
 while i &gt;= 0:
     print(numeri[i])
-    i = i - 1</code></pre><p>Il <code>while</code> di lettura accumula; il secondo <code>while</code> scorre la lista al contrario.</p>
-    
-  </div>
-</section>
+    i = i - 1</code></pre><pre><code class="language-python"># Es. 9 — trova il massimo
+numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-base">Esercizi base</h2><ol><li>Crea una lista con i numeri da 1 a 5 usando <code>append</code> in un ciclo <code>while</code>. Poi stampa la lista.</li><li>Data la lista <code>voti = [24, 28, 30, 18, 27]</code>, stampa il primo e l&#x27;ultimo voto.</li><li>Data la lista <code>nomi = [&quot;Alice&quot;, &quot;Bruno&quot;, &quot;Carla&quot;, &quot;Dario&quot;]</code>, stampa il secondo e il penultimo nome.</li><li>Leggi numeri interi dall&#x27;input fino a <code>0</code> e salvali in una lista. Stampa la lista alla fine.</li><li>Leggi parole dall&#x27;input fino a <code>fine</code> e salvale in una lista. Stampa quante parole sono state inserite.</li><li>Data una lista di numeri, calcola e stampa la somma di tutti gli elementi senza usare <code>sum()</code>.</li><li>Data una lista di numeri, stampa solo quelli maggiori di 10.</li><li>Data una lista di parole, stampa solo quelle che iniziano per vocale.</li><li>Data la lista <code>prezzi = [3.5, 1.2, 7.8, 4.0]</code>, stampa il prezzo più alto senza usare <code>max()</code>: scorri la lista con un <code>while</code> e tieni traccia del massimo.</li><li>Leggi numeri fino a <code>0</code>, salvali in una lista, poi stampa la lista al contrario (come nel Problema 1).</li><li>Data una frase letta dall&#x27;input, usa <code>split()</code> per ottenere la lista delle parole e stampane la lunghezza.</li></ol>
-    
-  </div>
-</section>
+massimo = numeri[0]
+i = 1
+while i &lt; len(numeri):
+    if numeri[i] &gt; massimo:
+        massimo = numeri[i]
+    i = i + 1
+print(massimo)</code></pre><pre><code class="language-python"># Es. 12 — media e valori sopra la media
+numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="liste-di-liste">Liste di liste</h2><p>Una lista può contenere qualsiasi tipo di valore — incluse altre liste. Questo permette di rappresentare strutture a due dimensioni come <strong>matrici</strong>, tabelle e griglie.</p><pre><code class="language-python">matrice = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]</code></pre><p><code>matrice</code> è una lista di 3 elementi, ognuno dei quali è una lista di 3 interi.</p><h3 id="accesso-agli-elementi">Accesso agli elementi</h3><p>Per accedere a un elemento servono due indici: prima la riga, poi la colonna.</p><pre><code class="language-python">matrice[0]      # [1, 2, 3]  — prima riga intera
-matrice[0][0]   # 1          — riga 0, colonna 0
-matrice[1][2]   # 6          — riga 1, colonna 2
-matrice[2][-1]  # 9          — ultima colonna della terza riga</code></pre><pre><code>         col 0  col 1  col 2
-        +------+------+------+
-riga 0  |  1   |  2   |  3   |
-        +------+------+------+
-riga 1  |  4   |  5   |  6   |
-        +------+------+------+
-riga 2  |  7   |  8   |  9   |
-        +------+------+------+</code></pre><h3 id="stampare-una-matrice-riga-per-riga">Stampare una matrice riga per riga</h3><pre><code class="language-python">i = 0
-while i &lt; len(matrice):
-    print(matrice[i])
-    i = i + 1</code></pre><p>Output:</p><pre><code>[1, 2, 3]
-[4, 5, 6]
-[7, 8, 9]</code></pre><p>Per stampare elemento per elemento con due cicli annidati:</p><pre><code class="language-python">i = 0
-while i &lt; len(matrice):
-    j = 0
-    while j &lt; len(matrice[i]):
-        print(matrice[i][j], end=&quot; &quot;)
-        j = j + 1
-    print()   # a capo alla fine di ogni riga
-    i = i + 1</code></pre><p>Output:</p><pre><code>1 2 3
-4 5 6
-7 8 9</code></pre><h3 id="costruire-una-matrice-con-input">Costruire una matrice con input</h3><pre><code class="language-python">righe = int(input(&quot;Righe: &quot;))
-colonne = int(input(&quot;Colonne: &quot;))
-
-matrice = []
+somma = 0
 i = 0
-while i &lt; righe:
-    riga = []
-    j = 0
-    while j &lt; colonne:
-        val = int(input())
-        riga.append(val)
-        j = j + 1
-    matrice.append(riga)
-    i = i + 1</code></pre>
+while i &lt; len(numeri):
+    somma = somma + numeri[i]
+    i = i + 1
+media = somma / len(numeri)
+print(&quot;Media:&quot;, media)</code></pre><p>Le prime cinque righe sono <strong>identiche</strong> in tutti e tre. Se domani vogliamo cambiare la sentinella da <code>0</code> a <code>-1</code>, o aggiungere un prompt all&#x27;<code>input()</code>, dobbiamo modificarle in ogni punto in cui compaiono — e rischiamo di dimenticarne uno.</p><p>Questo è il problema che le funzioni risolvono: isoliamo quel blocco in un posto solo, gli diamo un nome, e lo chiamiamo quando serve.</p><pre><code class="language-python">def leggi_lista(sentinella):
+    numeri = []
+    n = int(input())
+    while n != sentinella:
+        numeri.append(n)
+        n = int(input())
+    return numeri</code></pre><p>I tre programmi diventano:</p><pre><code class="language-python"># Es. 10 — stampa al contrario
+numeri = leggi_lista()
+
+i = len(numeri) - 1
+while i &gt;= 0:
+    print(numeri[i])
+    i = i - 1</code></pre><pre><code class="language-python"># Es. 9 — trova il massimo
+numeri = leggi_lista()
+
+massimo = numeri[0]
+i = 1
+while i &lt; len(numeri):
+    if numeri[i] &gt; massimo:
+        massimo = numeri[i]
+    i = i + 1
+print(massimo)</code></pre><pre><code class="language-python"># Es. 12 — media e valori sopra la media
+numeri = leggi_lista()
+
+somma = 0
+i = 0
+while i &lt; len(numeri):
+    somma = somma + numeri[i]
+    i = i + 1
+media = somma / len(numeri)
+print(&quot;Media:&quot;, media)</code></pre><p>La logica di lettura esiste in un posto solo. Se la modifichiamo, cambia ovunque.</p><p>Lo stesso ragionamento vale per qualsiasi blocco che compare più volte: contare le vocali, trovare il minimo, verificare se una stringa è palindroma. Ogni volta che ti sorprendi a copiare e incollare le stesse righe, è il momento di scrivere una funzione.</p>
     
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="split-e-prime-trasformazioni"><code>split()</code> e prime trasformazioni</h2><p>Una nuova operazione importante sulle stringhe e&#x27; questa:</p><pre><code class="language-python">incipit = &quot;Era una notte incantevole, una di quelle notti...&quot;
-parole = incipit.split()
-print(parole)</code></pre><p><code>split()</code> prende una stringa e restituisce una <strong>lista</strong> di sottostringhe.</p><h3 id="attenzione-split-taglia-dove-gli-diciamo-di-tagliare">Attenzione: <code>split()</code> taglia dove gli diciamo di tagliare</h3><p>Con <code>split()</code> senza argomenti:</p><ul><li>il taglio avviene sugli spazi;</li><li>quindi <code>&quot;La Spezia&quot;</code> diventa due elementi se c&#x27;è uno spazio in mezzo;</li><li>mentre <code>&quot;andata,&quot;</code> resta un unico elemento, perché la virgola non viene separata automaticamente.</li></ul>
+    <h2 id="perché-servono-le-funzioni">Perché servono le funzioni</h2><p>Le funzioni servono a evitare duplicazione, isolare un compito preciso e rendere il codice più leggibile.</p><ul><li>una funzione riceve input;</li><li>esegue una trasformazione;</li><li>restituisce un risultato.</li></ul><p>Esempio:</p><pre><code class="language-python">def triplo_del_successore(x):
+    successore = x+1
+    return 3 * successore</code></pre><ul><li>una funzione è una <strong>delega</strong>;</li><li>non dobbiamo saper fare tutto da soli nel codice principale;</li><li>dobbiamo anche saper decidere quale sottoproblema affidare a un blocco specializzato.</li></ul><p>Pensiamo alla costruzione di una casa. Chiamiamo un elettricista e gli diciamo: &quot;ho bisogno di un impianto per una casa da 80 mq con tre stanze&quot;. L&#x27;elettricista fa il suo lavoro e ti consegna l&#x27;impianto finito. Non ti interessa come lo fa: ti interessa che funzioni.</p><p>Se poi costruiamo una seconda casa, richiamiamo lo stesso elettricista — questa volta per 120 mq e cinque stanze. Stessa persona, stesso mestiere, parametri diversi.</p><p>In programmazione funziona esattamente così:</p><ul><li>la <strong>funzione</strong> è l&#x27;elettricista — sa fare un lavoro preciso;</li><li>i <strong>parametri</strong> sono le istruzioni che gli dai ogni volta — cambiano da chiamata a chiamata;</li><li>il <strong>valore di ritorno</strong> è il risultato che ti consegna.</li></ul><pre><code class="language-python">def impianto_elettrico(metri_quadri, num_stanze):
+    # ... calcola il materiale necessario ...
+    return costo</code></pre><p>Chiamarla con valori diversi produce risultati diversi, ma la logica interna è scritta una volta sola.</p><p>Quando il programma cresce, iniziamo a ripetere pezzi di ragionamento:</p><ul><li>la stessa trasformazione su input diversi;</li><li>lo stesso controllo in più punti;</li><li>lo stesso sottoproblema dentro programmi più grandi.</li></ul><p>Definite una funzione serve a isolare quel comportamento in un blocco riusabile.</p>
     
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-avanzati">Esercizi avanzati</h2><h3 id="sequenze-e-proprietà">Sequenze e proprietà</h3><ol><li>Leggi numeri fino a <code>0</code>. Costruisci due liste separate: una con i numeri pari e una con i dispari. Stampa entrambe.</li><li>Leggi numeri fino a <code>0</code>, salvali in una lista, calcola la media e stampa quelli che superano la media (come nel Problema 2).</li><li>Scrivi un programma che legge 5 parole e le salva in una lista. Stampa <code>uguale</code> se la prima e l&#x27;ultima parola sono identiche, <code>diversa</code> altrimenti.</li><li>Scrivi un programma che legge una stringa e controlla se è palindroma (ignora spazi e maiuscole/minuscole). Esempi: <code>anna</code>, <code>i topi non avevano nipoti</code>.</li><li>Scrivi un programma che chiede numeri interi fino a <code>0</code>. Controlla se ogni <code>1</code> nella sequenza è immediatamente seguito da un <code>2</code>. Stampa <code>Sequenza corretta</code> o <code>Sequenza errata</code>.<ul><li><code>9 1 2 6 1 2 0</code> → corretta</li><li><code>9 1 6 1 2 0</code> → errata</li></ul></li><li>Data una stringa letta dall&#x27;input, stampa la frequenza di ogni lettera che compare almeno una volta.</li></ol><h3 id="serie-multiple-e-conteggio-per-categoria">Serie multiple e conteggio per categoria</h3><ol><li>Scrivi un programma che legge parole fino a <code>fine</code> e conta quante iniziano per ciascuna vocale (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>). Stampa il conteggio per ogni vocale.</li><li>Scrivi un programma che legge 5 lettere, poi legge parole fino a <code>fine</code>. Per ogni lettera letta all&#x27;inizio, stampa quante parole iniziano con quella lettera.</li><li>Scrivi un programma che legge tre serie di numeri, ognuna terminata da <code>0</code>. Per ogni serie, stampa i numeri al contrario.</li></ol><pre><code>    Input:  4 12 0 / 9 7 6 0 / 4 1 -3 8 0
-    Output: [12, 4] / [6, 7, 9] / [8, -3, 1, 4]</code></pre><ol><li>Scrivi un programma che legge una serie di numeri terminata da <code>0</code>. Per ogni numero <code>n</code>, stampa tutti i numeri pari compresi tra <code>0</code> (incluso) e <code>n</code> (escluso).</li></ol><pre><code>    Input: 6 10 0   Output: 0 2 4  /  0 2 4 6 8</code></pre><h3 id="due-liste">Due liste</h3><ol><li>Date due liste di interi, costruisci una lista con gli elementi <strong>in comune</strong> (intersezione, in ordine di apparizione in <code>a</code>).</li></ol><pre><code class="language-python">    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5, 1]  # → [7, 1, 9]</code></pre><ol><li>Date due liste, costruisci una lista con tutti gli elementi che compaiono in almeno una delle due, <strong>senza duplicati</strong> (unione).</li></ol><pre><code class="language-python">    a = [3, 7, 1]; b = [7, 2, 9]  # → [3, 7, 1, 2, 9]</code></pre><ol><li>Date due liste <code>a</code> e <code>b</code>, costruisci una lista con gli elementi di <code>a</code> che <strong>non</strong> compaiono in <code>b</code> (differenza <code>a − b</code>).</li></ol><pre><code class="language-python">    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5]  # → [3, 1, 4]</code></pre><ol><li>Date due liste, controlla se sono <strong>disgiunte</strong> (nessun elemento in comune). Stampa <code>sì</code> o <code>no</code>.</li><li>Stessi esercizi 11–13, ma le liste possono contenere duplicati. Decidi come gestirli.</li></ol><pre><code class="language-python">    a = [1, 2, 2, 3]; b = [2, 2, 4]
-    # intersezione con molteplicità: [2, 2]; differenza a − b: [1, 3]</code></pre><ol><li>Date due liste <strong>già ordinate in modo crescente</strong>, costruisci la lista unione ordinata <strong>senza usare <code>sort()</code></strong> (algoritmo di merge).</li></ol><pre><code class="language-python">    a = [1, 3, 5, 7]; b = [2, 3, 6, 8]  # → [1, 2, 3, 3, 5, 6, 7, 8]</code></pre><ol><li>Come l&#x27;esercizio 16, ma costruisci solo l&#x27;<strong>intersezione ordinata</strong> (elementi presenti in entrambe, senza duplicati).</li></ol><pre><code class="language-python">    a = [1, 3, 5, 7]; b = [2, 3, 6, 7]  # → [3, 7]</code></pre><h3 id="matrici">Matrici</h3><ol><li>Crea a mano una matrice 3×3 con i numeri da 1 a 9 e stampala riga per riga.</li><li>Data una matrice quadrata <code>n×n</code>, stampa solo la diagonale principale (elementi dove <code>i == j</code>).</li></ol><pre><code class="language-python">    matrice = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # output: 1  5  9</code></pre><ol><li>Data una matrice, calcola la somma di tutti gli elementi.</li><li>Leggi dall&#x27;input una matrice <code>n×m</code> (prima <code>n</code>, poi <code>m</code>, poi i valori riga per riga). Stampa la somma degli elementi di ogni riga.</li><li>Data una matrice, costruisci la sua <strong>trasposta</strong>: una nuova matrice dove righe e colonne sono scambiate.</li></ol><pre><code class="language-python">    originale = [[1, 2, 3], [4, 5, 6]]  # trasposta: [[1, 4], [2, 5], [3, 6]]</code></pre><ol><li>Data una matrice quadrata <code>n×n</code>, stampa la <strong>diagonale secondaria</strong> (elementi con <code>i + j == n − 1</code>).</li><li>Data una matrice di interi, trova la posizione <code>(riga, colonna)</code> del valore massimo.</li><li>Data una matrice di interi, stampa <code>sì</code> se ogni riga è ordinata in modo non-decrescente (ogni elemento è ≥ al precedente nella stessa riga), <code>no</code> altrimenti.</li><li>Data una matrice quadrata <code>n×n</code>, stampa <code>sì</code> se è <strong>simmetrica</strong> (<code>matrice[i][j] == matrice[j][i]</code> per ogni <code>i</code>, <code>j</code>), <code>no</code> altrimenti.</li><li>Data una matrice, stampa per ogni coppia di righe adiacenti <code>i</code> e <code>i+1</code> se la <strong>somma</strong> della riga <code>i+1</code> è maggiore della somma della riga <code>i</code>.</li><li>Data una matrice, stampa <code>sì</code> se per ogni indice <code>i</code> compreso tra <code>0</code> e <code>len(matrice) − 2</code>, tutti gli elementi di <code>matrice[i+1]</code> sono <strong>pari</strong>, <code>no</code> altrimenti.</li><li>Data una matrice quadrata <code>n×n</code>, verifica che la <strong>somma di ogni riga</strong> sia uguale alla somma della colonna con lo stesso indice (somma riga 0 == somma colonna 0, ecc.). Stampa <code>sì</code> o <code>no</code>.</li><li>Data una matrice di interi, stampa <code>sì</code> se per ogni cella <code>matrice[i][j]</code> (con <code>i &lt; len(matrice) − 1</code>), la cella sottostante <code>matrice[i+1][j]</code> è strettamente maggiore, <code>no</code> altrimenti (la matrice è strettamente crescente per colonne dall&#x27;alto verso il basso).</li></ol><h3 id="progetto-impiccato">Progetto: impiccato</h3><ol><li>Scrivi un programma che fa giocare l&#x27;utente al gioco dell&#x27;impiccato.<ul><li>Il giocatore B propone una lettera alla volta. Se la lettera è presente nella parola segreta, tutte le sue posizioni vengono svelate.</li><li>Nella cartella <code>impiccato/</code> trovi i file <code>parola_segreta.py</code> e <code>impiccato.py</code> con la struttura di partenza. <code>impiccato.py</code> contiene la funzione <code>update(guess, parola, lettera)</code> che aggiorna la stringa di underscore:</li></ul></li></ol><pre><code class="language-python">      update(&quot;____&quot;, &quot;casa&quot;, &quot;a&quot;)  # → &quot;_a_a&quot;
-      update(&quot;_a_a&quot;, &quot;casa&quot;, &quot;c&quot;)  # → &quot;ca_a&quot;</code></pre><ol><li>Estendi l&#x27;impiccato aggiungendo un numero massimo di tentativi (6 nella versione classica, oppure dipendente dalla lunghezza della parola) e la possibilità di indovinare l&#x27;intera parola in un turno.</li></ol>
+    <h2 id="sintassi-della-definizione-di-funzione">Sintassi della definizione di funzione</h2><p>Una funzione va definita e poi chiamata. Sono due cose distinte.</p><p><strong>La definizione è un&#x27;istruzione.</strong> Quando Python incontra la definizione, salva il codice della funzione in memoria — ma non lo esegue ancora. La funzione esiste, ma non ha fatto nulla.</p><p><strong>La chiamata o invocazione è un&#x27;espressione.</strong> Quando scriviamo <code>area_rettangolo(4, 6)</code>, Python esegue il corpo della funzione e produce un valore. Quel valore ha un tipo — in questo caso <code>int</code>. Possiamo usarlo ovunque si può usare un&#x27;espressione: in un <code>print</code>, in un assegnamento, in una condizione (a seconda del tipo!).</p><pre><code class="language-python">def area_rettangolo(base, altezza):
+    return base * altezza
+
+print(area_rettangolo(4, 6))</code></pre><pre><code class="language-python">risultato = area_rettangolo(4, 6)   # int
+print(area_rettangolo(3, 5))        # int stampato
+if area_rettangolo(2, 2) &gt; 3:       # int confrontato
+    print(&quot;grande&quot;)</code></pre><h3 id="sintassi-generale">Sintassi generale</h3><pre><code class="language-python">def nome_funzione(parametro_1, parametro_2, ..., parametro_n):
+
+    # istruzione_1
+    # ...
+    # istruzione_n
+
+    return espressione</code></pre><p>Parti da riconoscere:</p><ul><li><code>def</code> introduce la definizione della funzione;</li><li>il nome della funzione ha le stesse restrizioni di un nome di variabile (lettere, cifre, <code>_</code>; non può iniziare con una cifra; non può essere una parola chiave);</li><li>i parametri sono nomi di variabile a tutti gli effetti — valgono le stesse regole; non possono essere numeri, stringhe o espressioni;</li><li>i due punti <code>:</code> aprono il blocco;</li><li><code>return</code> restituisce il risultato.</li></ul>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="invocare-una-funzione">Invocare una funzione</h2><h3 id="sintassi-dellinvocazione">Sintassi dell&#x27;invocazione</h3><pre><code class="language-python">nome_funzione(argomento_1, argomento_2, ..., argomento_n)</code></pre><p>Gli argomenti sono espressioni: possono essere valori, variabili, o qualsiasi espressione con il tipo giusto.</p><pre><code class="language-python">area_rettangolo(4, 6)           # valori
+area_rettangolo(base, altezza)  # variabili
+area_rettangolo(b * 2, h + 1)   # espressioni</code></pre><p>Il numero di argomenti deve corrispondere al numero di parametri nella definizione.</p><h3 id="semantica-dellinvocazione">Semantica dell&#x27;invocazione</h3><p>Quando Python incontra una chiamata di funzione:</p><ol><li>valuta ciascun argomento da sinistra a destra;</li><li>assegna ogni valore al parametro corrispondente <strong>per posizione</strong>:</li></ol><pre><code>chiamata:        area_rettangolo( 4  ,    6   )
+                                  |       |
+                                  |       |
+                                  ↓       ↓
+definizione:  def area_rettangolo(base, altezza):</code></pre><p>All&#x27;interno del corpo, <code>base</code> varrà <code>4</code> e <code>altezza</code> varrà <code>6</code>.</p><ol><li>esegue il corpo della funzione con quei valori;</li><li>quando incontra <code>return</code>, valuta l&#x27;espressione dopo <code>return</code>, interrompe il corpo e restituisce quel valore al chiamante;</li><li>la chiamata nel programma principale si &quot;sostituisce&quot; con quel valore.</li></ol><p>Tutto ciò che sta dopo un <code>return</code> nello stesso ramo non viene eseguito.</p><h3 id="commentare-che-cosa-fa-una-funzione">Commentare che cosa fa una funzione</h3><p>Dopo una definizione conviene lasciare almeno traccia di:</p><ul><li>che cosa fa la funzione;</li><li>che cosa si aspetta in input;</li><li>che cosa restituisce in output.</li></ul><p>Questo è utile perché un nome di parametro da solo non garantisce abbastanza contesto, soprattutto quando il codice cresce.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="tracciare-lo-stato-con-le-funzioni">Tracciare lo stato con le funzioni</h2><p>Nei moduli precedenti abbiamo imparato a compilare la tabella dello stato riga per riga. Con le funzioni lo stato si divide in due parti: la memoria del <strong>programma principale</strong> e la memoria <strong>locale della funzione</strong>, che esiste solo durante la chiamata.</p><p>Consideriamo:</p><pre><code class="language-python">def triplo_del_successore(x):
+    successore = x + 1
+    triplo = 3 * successore
+    return triplo
+
+n = 15
+risultato = triplo_del_successore(n)
+print(risultato)</code></pre><table><thead><tr><th>passo</th><th>riga</th><th>stato principale</th><th>stato funzione</th><th>output</th></tr></thead><tbody><tr><td>1</td><td><code>n = 15</code></td><td>n=15</td><td>—</td><td></td></tr><tr><td>2</td><td><code>triplo_del_successore(n)</code> — chiamata</td><td>n=15</td><td>x=15</td><td></td></tr><tr><td>3</td><td><code>successore = x + 1</code></td><td>n=15</td><td>x=15, successore=16</td><td></td></tr><tr><td>4</td><td><code>triplo = 3 * successore</code></td><td>n=15</td><td>x=15, successore=16, triplo=48</td><td></td></tr><tr><td>5</td><td><code>return triplo</code></td><td>n=15</td><td>→ restituisce 48, memoria locale chiusa</td><td></td></tr><tr><td>6</td><td><code>risultato = 48</code></td><td>n=15, risultato=48</td><td>—</td><td></td></tr><tr><td>7</td><td><code>print(risultato)</code></td><td>n=15, risultato=48</td><td>—</td><td>48</td></tr></tbody></table><p>Tre cose da notare:</p><ul><li>al passo 2 la memoria locale si <strong>apre</strong>: <code>x</code> riceve il valore di <code>n</code>;</li><li>al passo 5 la memoria locale si <strong>chiude</strong>: <code>successore</code> e <code>triplo</code> spariscono, solo il valore di ritorno passa al chiamante;</li><li>il programma principale non vede mai <code>successore</code> né <code>triplo</code>: esistono solo dentro la funzione.</li></ul>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="scope">Scope</h2><p>Lo <strong>scope</strong> (o ambito) di una variabile è la parte del programma in cui quella variabile esiste ed è accessibile.</p><p>In Python ogni funzione ha il proprio scope locale: le variabili create dentro una funzione — inclusi i parametri — esistono solo per la durata di quella chiamata. Il programma principale ha il proprio scope globale.</p><p>Le due memorie sono <strong>separate e indipendenti</strong>. Questo ha tre conseguenze importanti.</p><h3 id="1-le-variabili-locali-non-sono-visibili-fuori-dalla-funzione">1 · Le variabili locali non sono visibili fuori dalla funzione</h3><pre><code class="language-python">def calcola():
+    risultato = 42
+    return risultato
+
+print(risultato)   # NameError: risultato non esiste qui</code></pre><p><code>risultato</code> esiste solo dentro <code>calcola</code>. Fuori dalla funzione, quel nome non è definito.</p><h3 id="2-le-variabili-esterne-non-sono-visibili-dentro-la-funzione">2 · Le variabili esterne non sono visibili dentro la funzione</h3><pre><code class="language-python">x = 10
+
+def raddoppia():
+    return x * 2   # funziona, ma è una cattiva pratica: x viene &quot;catturata&quot; dallo scope globale</code></pre><p>Usare variabili globali dentro una funzione è tecnicamente possibile ma va evitato: rende la funzione dipendente dal contesto esterno e difficile da riusare. La regola pratica è: <strong>tutto ciò di cui la funzione ha bisogno deve entrare come parametro</strong>.</p><pre><code class="language-python">def raddoppia(x):   # corretto: x è un parametro
+    return x * 2</code></pre><h3 id="3-stesso-nome-variabili-diverse">3 · Stesso nome, variabili diverse</h3><p>Se una variabile nel programma principale e una variabile dentro la funzione hanno lo stesso nome, sono due variabili distinte e non si influenzano a vicenda.</p><pre><code class="language-python">def incrementa(x):
+    x = x + 1       # questa x è locale alla funzione
+    return x
+
+x = 5               # questa x è nel programma principale
+y = incrementa(x)
+print(x)            # 5  — x nel programma principale non è cambiata
+print(y)            # 6</code></pre><p>Traccia dello stato:</p><table><thead><tr><th>passo</th><th>riga</th><th>stato principale</th><th>stato funzione</th></tr></thead><tbody><tr><td>1</td><td><code>x = 5</code></td><td>x=5</td><td>—</td></tr><tr><td>2</td><td><code>incrementa(x)</code> — chiamata</td><td>x=5</td><td>x=5 (copia)</td></tr><tr><td>3</td><td><code>x = x + 1</code></td><td>x=5</td><td>x=6</td></tr><tr><td>4</td><td><code>return x</code></td><td>x=5</td><td>→ restituisce 6, memoria locale chiusa</td></tr><tr><td>5</td><td><code>y = 6</code></td><td>x=5, y=6</td><td>—</td></tr></tbody></table><p>La <code>x</code> della funzione è una copia del valore passato, non la stessa variabile. Modificarla dentro la funzione non tocca la <code>x</code> di fuori.</p><hr>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi">Esercizi</h2><h3 id="tracciare-lo-stato">Tracciare lo stato</h3><p><strong>1.</strong> Compila la tabella dello stato per il seguente programma:</p><pre><code class="language-python">def somma(a, b):
+    risultato = a + b
+    return risultato
+
+x = 3
+y = 7
+z = somma(x, y)
+print(z)</code></pre><table><thead><tr><th>passo</th><th>riga</th><th>stato principale</th><th>stato funzione</th><th>output</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><p><strong>2.</strong> Compila la tabella dello stato per il seguente programma:</p><pre><code class="language-python">def is_pari(n):
+    return n % 2 == 0
+
+x = 4
+if is_pari(x):
+    print(&quot;pari&quot;)
+else:
+    print(&quot;dispari&quot;)</code></pre><table><thead><tr><th>passo</th><th>riga</th><th>stato principale</th><th>stato funzione</th><th>output</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><h3 id="trovare-lerrore">Trovare l&#x27;errore</h3><p><strong>3.</strong> Il seguente programma vuole stampare il doppio di un numero, ma non funziona. Individua l&#x27;errore e correggilo.</p><pre><code class="language-python">def doppio(n):
+    n = n * 2
+
+x = 5
+print(doppio(x))</code></pre><p><strong>4.</strong> Il seguente programma vuole calcolare la somma di tre numeri usando una funzione, ma produce un risultato sbagliato. Individua l&#x27;errore.</p><pre><code class="language-python">def somma(a, b):
+    return a + b
+
+print(somma(1, 2, 3))</code></pre><p><strong>5.</strong> Il seguente programma vuole usare il risultato della funzione in una condizione, ma produce un errore. Spiega perché e correggilo.</p><pre><code class="language-python">def messaggio(nome):
+    print(&quot;Ciao, &quot; + nome)
+
+if messaggio(&quot;Alice&quot;) == &quot;Ciao, Alice&quot;:
+    print(&quot;ok&quot;)</code></pre><h3 id="scope">Scope</h3><p><strong>6.</strong> Il seguente programma produce un errore oppure stampa qualcosa? Spiega cosa succede e perché.</p><pre><code class="language-python">def calcola():
+    x = 100
+    return x
+
+calcola()
+print(x)</code></pre><p><strong>7.</strong> Considera il seguente programma. Cosa stampa? Spiega perché <code>n</code> nel programma principale non cambia.</p><pre><code class="language-python">def azzera(n):
+    n = 0
+    return n
+
+n = 42
+azzera(n)
+print(n)</code></pre><p><strong>8.</strong> Il seguente programma vuole raddoppiare una variabile globale dall&#x27;interno di una funzione. Funziona come ci si aspetta? Riscrivilo nel modo corretto.</p><pre><code class="language-python">valore = 10
+
+def raddoppia():
+    return valore * 2
+
+print(raddoppia())</code></pre><p><strong>9.</strong> Cosa stampa il seguente programma? Compila la tabella dello stato.</p><pre><code class="language-python">def f(x):
+    y = x * 2
+    return y
+
+x = 3
+y = 10
+risultato = f(5)
+print(x, y, risultato)</code></pre><table><thead><tr><th>passo</th><th>riga</th><th>stato principale</th><th>stato funzione</th><th>output</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td><td></td></tr></tbody></table><p><strong>10.</strong> Il seguente programma contiene un errore di scope. Individualo e correggilo senza usare variabili globali.</p><pre><code class="language-python">def calcola_sconto():
+    return prezzo * sconto / 100
+
+prezzo = 80
+sconto = 20
+print(calcola_sconto())</code></pre><h3 id="scrivere-funzioni">Scrivere funzioni</h3><p><strong>11.</strong> Scrivi una funzione <code>perimetro_rettangolo(base, altezza)</code> che restituisce il perimetro di un rettangolo.</p><pre><code>perimetro_rettangolo(3, 5)  →  16</code></pre><p><strong>12.</strong> Scrivi una funzione <code>è_divisibile(n, d)</code> che restituisce <code>True</code> se <code>n</code> è divisibile per <code>d</code>, <code>False</code> altrimenti.</p><pre><code>è_divisibile(12, 4)  →  True
+è_divisibile(7, 3)   →  False</code></pre><p><strong>13.</strong> Scrivi una funzione <code>massimo(a, b)</code> che restituisce il maggiore tra due numeri senza usare <code>max()</code>.</p><pre><code>massimo(3, 7)  →  7
+massimo(5, 5)  →  5</code></pre><p><strong>14.</strong> Scrivi una funzione <code>conta_vocali(s)</code> che riceve una stringa e restituisce il numero di vocali che contiene.</p><pre><code>conta_vocali(&quot;informatica&quot;)  →  5
+conta_vocali(&quot;ritmo&quot;)        →  2</code></pre><p><strong>15.</strong> Scrivi una funzione <code>ripeti(s, n)</code> che restituisce la stringa <code>s</code> ripetuta <code>n</code> volte, separata da spazi, senza usare l&#x27;operatore <code>*</code>.</p><pre><code>ripeti(&quot;ciao&quot;, 3)  →  &quot;ciao ciao ciao&quot;
+ripeti(&quot;ok&quot;, 1)    →  &quot;ok&quot;</code></pre>
     
   </div>
 </section>
@@ -241,7 +339,10 @@ print(parole)</code></pre><p><code>split()</code> prende una stringa e restituis
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 8</div>
+  <div class="counter" id="counter">1 / 9</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));
