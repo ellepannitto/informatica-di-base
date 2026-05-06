@@ -161,13 +161,13 @@ print(&quot;Media:&quot;, media)</code></pre><p>Le prime cinque righe sono <stro
         numeri.append(n)
         n = int(input())
     return numeri</code></pre><p>I tre programmi diventano:</p><pre><code class="language-python"># Es. 10 — stampa al contrario
-numeri = leggi_lista()
+numeri = leggi_lista(0)
 
 i = len(numeri) - 1
 while i &gt;= 0:
     print(numeri[i])
     i = i - 1</code></pre><pre><code class="language-python"># Es. 9 — trova il massimo
-numeri = leggi_lista()
+numeri = leggi_lista(0)
 
 massimo = numeri[0]
 i = 1
@@ -176,7 +176,7 @@ while i &lt; len(numeri):
         massimo = numeri[i]
     i = i + 1
 print(massimo)</code></pre><pre><code class="language-python"># Es. 12 — media e valori sopra la media
-numeri = leggi_lista()
+numeri = leggi_lista(0)
 
 somma = 0
 i = 0
@@ -185,6 +185,17 @@ while i &lt; len(numeri):
     i = i + 1
 media = somma / len(numeri)
 print(&quot;Media:&quot;, media)</code></pre><p>La logica di lettura esiste in un posto solo. Se la modifichiamo, cambia ovunque.</p><p>Lo stesso ragionamento vale per qualsiasi blocco che compare più volte: contare le vocali, trovare il minimo, verificare se una stringa è palindroma. Ogni volta che ti sorprendi a copiare e incollare le stesse righe, è il momento di scrivere una funzione.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="funzioni-in-matematica">Funzioni in matematica</h2><p>In matematica hai già incontrato le funzioni. Per esempio:</p><blockquote><p><strong>f(x) = 2x + 1</strong></p></blockquote><p>Questa funzione prende un numero <code>x</code> e restituisce un numero: il doppio di <code>x</code> più uno.</p><table><thead><tr><th><code>x</code></th><th><code>f(x) = 2x + 1</code></th></tr></thead><tbody><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>3</td></tr><tr><td>3</td><td>7</td></tr><tr><td>−2</td><td>−3</td></tr><tr><td>10</td><td>21</td></tr></tbody></table><p>Scrivere <code>f(3)</code> vuol dire applicare la regola a <code>3</code> e ottenere <code>7</code>.</p><p>Tre cose che già sai:</p><ul><li>una funzione ha un <strong>nome</strong> (<code>f</code>);</li><li>riceve uno o più <strong>input</strong> (<code>x</code>) e produce un <strong>output</strong> (<code>f(x)</code>);</li><li>la regola è scritta una volta sola, ma puoi applicarla a qualunque valore.</li></ul><p>In Python si scrive esattamente la stessa cosa:</p><pre><code class="language-python">def f(x):
+    return 2 * x + 1
+
+f(3)   # → 7
+f(10)  # → 21</code></pre><p>Il parallelismo è diretto:</p><table><thead><tr><th>matematica</th><th>Python</th></tr></thead><tbody><tr><td>nome della funzione</td><td><code>def nome_funzione</code></td></tr><tr><td>variabile <code>x</code></td><td>parametro <code>x</code></td></tr><tr><td><code>f(x) = ...</code></td><td><code>return ...</code></td></tr><tr><td><code>f(3)</code></td><td><code>f(3)</code></td></tr></tbody></table><p>La differenza principale: in Python la funzione può fare cose più complesse di una formula — può contenere variabili, cicli, condizioni. Ma la struttura è la stessa.</p>
     
   </div>
 </section>
@@ -248,7 +259,7 @@ print(risultato)</code></pre><table><thead><tr><th>passo</th><th>riga</th><th>st
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="scope">Scope</h2><p>Lo <strong>scope</strong> (o ambito) di una variabile è la parte del programma in cui quella variabile esiste ed è accessibile.</p><p>In Python ogni funzione ha il proprio scope locale: le variabili create dentro una funzione — inclusi i parametri — esistono solo per la durata di quella chiamata. Il programma principale ha il proprio scope globale.</p><p>Le due memorie sono <strong>separate e indipendenti</strong>. Questo ha tre conseguenze importanti.</p><h3 id="1-le-variabili-locali-non-sono-visibili-fuori-dalla-funzione">1 · Le variabili locali non sono visibili fuori dalla funzione</h3><pre><code class="language-python">def calcola():
+    <h2 id="scope-non">Scope (non 🧹🧹)</h2><p>Lo <strong>scope</strong> (o ambito) di una variabile è la parte del programma in cui quella variabile esiste ed è accessibile.</p><p>In Python ogni funzione ha il proprio scope locale: le variabili create dentro una funzione — inclusi i parametri — esistono solo per la durata di quella chiamata. Il programma principale ha il proprio scope globale.</p><p>Le due memorie sono <strong>separate e indipendenti</strong>. Questo ha tre conseguenze importanti.</p><h3 id="1-le-variabili-locali-non-sono-visibili-fuori-dalla-funzione">1 · Le variabili locali non sono visibili fuori dalla funzione</h3><pre><code class="language-python">def calcola():
     risultato = 42
     return risultato
 
@@ -339,7 +350,7 @@ ripeti(&quot;ok&quot;, 1)    →  &quot;ok&quot;</code></pre>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 9</div>
+  <div class="counter" id="counter">1 / 10</div>
   <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
     <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
   </a>
