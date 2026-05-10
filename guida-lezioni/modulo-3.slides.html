@@ -55,6 +55,10 @@ th, td { border: 1px solid rgba(23, 33, 43, 0.12); padding: 0.55rem 0.7rem; vert
 th { background: #f2e7d7; }
 hr { border: 0; border-top: 1px solid rgba(23, 33, 43, 0.12); margin: 1.2rem 0; }
 a { color: #8b3f1d; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78em; font-weight: 600; background: rgba(139,63,29,0.1); border: 1px solid rgba(139,63,29,0.25); color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: rgba(139,63,29,0.18); }
 .controls {
   position: fixed;
   left: 0;
@@ -184,7 +188,7 @@ else:
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-ifelifelse-e-testing">Esercizi: if/elif/else e testing</h2><p>Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:</p><ol><li><strong>scrivi i desiderata</strong> — prima di eseguire il codice, compila la tabella con l&#x27;output che ti aspetti per ogni input;</li><li><strong>esegui e controlla</strong> — lancia il programma con quegli input e annota l&#x27;output reale;</li><li><strong>confronta</strong> — dove differiscono, spiega perché.</li></ol><h3 id="esercizio-1">Esercizio 1</h3><p>Il programma riceve un numero intero e stampa <code>&quot;pari&quot;</code> se è pari, <code>&quot;dispari&quot;</code> se è dispari.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>-4</code></td><td></td><td></td></tr><tr><td><code>7</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+    <h2 id="esercizi-ifelifelse-e-testing">Esercizi: if/elif/else e testing</h2><p>Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:</p><ol><li><strong>scrivi i desiderata</strong> — prima di eseguire il codice, compila la tabella con l&#x27;output che ti aspetti per ogni input;</li><li><strong>esegui e controlla</strong> — lancia il programma con quegli input e annota l&#x27;output reale;</li><li><strong>confronta</strong> — dove differiscono, spiega perché.</li></ol><h3 id="esercizio-1-m3-test-01">Esercizio 1 — [M3-TEST-01]</h3><p>Il programma riceve un numero intero e stampa <code>&quot;pari&quot;</code> se è pari, <code>&quot;dispari&quot;</code> se è dispari.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>0</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>-4</code></td><td></td><td></td></tr><tr><td><code>7</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
 if n &gt; 0 and n % 2 == 0:
     print(&quot;pari&quot;)
 else:
@@ -192,7 +196,7 @@ else:
 if n % 2 == 0:
     print(&quot;pari&quot;)
 else:
-    print(&quot;dispari&quot;)</code></pre></details><h3 id="esercizio-2">Esercizio 2</h3><p>Il programma riceve un voto e stampa <code>&quot;promosso&quot;</code> se è almeno 18, <code>&quot;non promosso&quot;</code> altrimenti.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr><tr><td><code>18</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
+    print(&quot;dispari&quot;)</code></pre></details><h3 id="esercizio-2-m3-test-02">Esercizio 2 — [M3-TEST-02]</h3><p>Il programma riceve un voto e stampa <code>&quot;promosso&quot;</code> se è almeno 18, <code>&quot;non promosso&quot;</code> altrimenti.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>30</code></td><td></td><td></td></tr><tr><td><code>18</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">voto = int(input(&quot;Voto: &quot;))
 if voto &gt;= 18:
     print(&quot;promosso&quot;)
 
@@ -201,7 +205,7 @@ if voto &lt;= 18:
 if voto &gt;= 18:
     print(&quot;promosso&quot;)
 else:
-    print(&quot;non promosso&quot;)</code></pre></details><h3 id="esercizio-3">Esercizio 3</h3><p>Il programma riceve un numero intero e stampa <code>&quot;positivo&quot;</code> se è maggiore di zero, <code>&quot;grande&quot;</code> se è maggiore di 10, <code>&quot;non positivo&quot;</code> negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>-2</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">x = int(input(&quot;x: &quot;))
+    print(&quot;non promosso&quot;)</code></pre></details><h3 id="esercizio-3-m3-test-03">Esercizio 3 — [M3-TEST-03]</h3><p>Il programma riceve un numero intero e stampa <code>&quot;positivo&quot;</code> se è maggiore di zero, <code>&quot;grande&quot;</code> se è maggiore di 10, <code>&quot;non positivo&quot;</code> negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>-2</code></td><td></td><td></td></tr></tbody></table><details><summary>Codice da testare</summary><pre><code class="language-python">x = int(input(&quot;x: &quot;))
 if x &gt; 0:
     print(&quot;positivo&quot;)
 elif x &gt; 10:
@@ -213,7 +217,7 @@ if x &gt; 10:
 elif x &gt; 0:
     print(&quot;positivo&quot;)
 else:
-    print(&quot;non positivo&quot;)</code></pre></details><h3 id="esercizio-4">Esercizio 4</h3><p>Il programma riceve un intero e stampa <code>&quot;fizz&quot;</code> se è divisibile per 3, <code>&quot;buzz&quot;</code> se è divisibile per 5, <code>&quot;fizzbuzz&quot;</code> se è divisibile per entrambi, il numero stesso negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>9</code></td><td></td><td></td></tr></tbody></table><p>Scrivi il programma e testane il funzionamento.</p><details><summary>Soluzione — Esercizio 4</summary><table><thead><tr><th>Input</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>1</code></td></tr><tr><td><code>3</code></td><td><code>fizz</code></td></tr><tr><td><code>5</code></td><td><code>buzz</code></td></tr><tr><td><code>15</code></td><td><code>fizzbuzz</code></td></tr><tr><td><code>9</code></td><td><code>fizz</code></td></tr></tbody></table><p><strong>Attenzione all&#x27;ordine dei rami:</strong> il caso <code>fizzbuzz</code> (divisibile per entrambi) deve essere controllato prima degli altri due, altrimenti viene assorbito dal ramo <code>fizz</code> o <code>buzz</code>.</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
+    print(&quot;non positivo&quot;)</code></pre></details><h3 id="esercizio-4-m3-test-04">Esercizio 4 — [M3-TEST-04]</h3><p>Il programma riceve un intero e stampa <code>&quot;fizz&quot;</code> se è divisibile per 3, <code>&quot;buzz&quot;</code> se è divisibile per 5, <code>&quot;fizzbuzz&quot;</code> se è divisibile per entrambi, il numero stesso negli altri casi.</p><table><thead><tr><th>Input</th><th>Output atteso</th><th>Output reale</th></tr></thead><tbody><tr><td><code>1</code></td><td></td><td></td></tr><tr><td><code>3</code></td><td></td><td></td></tr><tr><td><code>5</code></td><td></td><td></td></tr><tr><td><code>15</code></td><td></td><td></td></tr><tr><td><code>9</code></td><td></td><td></td></tr></tbody></table><p>Scrivi il programma e testane il funzionamento.</p><details><summary>Soluzione — Esercizio 4</summary><table><thead><tr><th>Input</th><th>Output atteso</th></tr></thead><tbody><tr><td><code>1</code></td><td><code>1</code></td></tr><tr><td><code>3</code></td><td><code>fizz</code></td></tr><tr><td><code>5</code></td><td><code>buzz</code></td></tr><tr><td><code>15</code></td><td><code>fizzbuzz</code></td></tr><tr><td><code>9</code></td><td><code>fizz</code></td></tr></tbody></table><p><strong>Attenzione all&#x27;ordine dei rami:</strong> il caso <code>fizzbuzz</code> (divisibile per entrambi) deve essere controllato prima degli altri due, altrimenti viene assorbito dal ramo <code>fizz</code> o <code>buzz</code>.</p><pre><code class="language-python">n = int(input(&quot;Numero: &quot;))
 if n % 3 == 0 and n % 5 == 0:
     print(&quot;fizzbuzz&quot;)
 elif n % 3 == 0:
@@ -288,9 +292,9 @@ while risposta == &quot;s&quot;:
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che stampi i numeri da 1 a 10.</li><li>Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>n</code> a <code>0</code>.</li><li>Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>-n</code> a <code>n</code>.</li><li>Dato un certo numero (es. <code>pagine = 120</code>), stampa:</li></ol><pre><code>   Sto leggendo la pagina 1
+    <h2 id="esercizi">Esercizi</h2><ol class="exercise-list"><li><a id="m3-while-01" class="ex-id" href="../soluzioni-esercizi.html#m3-while-01">[M3-WHILE-01]</a> Scrivi un programma che stampi i numeri da 1 a 10.</li><li><a id="m3-while-02" class="ex-id" href="../soluzioni-esercizi.html#m3-while-02">[M3-WHILE-02]</a> Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>n</code> a <code>0</code>.</li><li><a id="m3-while-03" class="ex-id" href="../soluzioni-esercizi.html#m3-while-03">[M3-WHILE-03]</a> Scrivi un programma che legge un numero <code>n</code> dall&#x27;input e stampa i numeri da <code>-n</code> a <code>n</code>.</li><li><a id="m3-while-04" class="ex-id" href="../soluzioni-esercizi.html#m3-while-04">[M3-WHILE-04]</a> Dato un certo numero (es. <code>pagine = 120</code>), stampa:</li></ol><pre><code>   Sto leggendo la pagina 1
    Sto leggendo la pagina 2
-   ...</code></pre><p>fino all&#x27;ultima pagina.</p><ol><li>Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).</li><li>Scrivi un programma che legge una parola dall&#x27;input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).</li><li>Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito <code>2</code>:</li></ol><pre><code>   2^1 = 2
+   ...</code></pre><p>fino all&#x27;ultima pagina.</p><ol class="exercise-list"><li><a id="m3-while-05" class="ex-id" href="../soluzioni-esercizi.html#m3-while-05">[M3-WHILE-05]</a> Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).</li><li><a id="m3-while-06" class="ex-id" href="../soluzioni-esercizi.html#m3-while-06">[M3-WHILE-06]</a> Scrivi un programma che legge una parola dall&#x27;input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).</li><li><a id="m3-while-07" class="ex-id" href="../soluzioni-esercizi.html#m3-while-07">[M3-WHILE-07]</a> Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito <code>2</code>:</li></ol><pre><code>   2^1 = 2
    2^2 = 4
    2^3 = 8
    2^4 = 16
@@ -298,7 +302,7 @@ while risposta == &quot;s&quot;:
    2^6 = 64
    2^7 = 128
    2^8 = 256
-   2^9 = 512</code></pre><ol><li>Scrivi un programma che chiede all&#x27;utente di inserire una parola. Il programma continua finché l&#x27;utente non scrive <code>fine</code>.</li></ol><pre><code>   Inserisci una parola: storia
+   2^9 = 512</code></pre><ol class="exercise-list"><li><a id="m3-while-08" class="ex-id" href="../soluzioni-esercizi.html#m3-while-08">[M3-WHILE-08]</a> Scrivi un programma che chiede all&#x27;utente di inserire una parola. Il programma continua finché l&#x27;utente non scrive <code>fine</code>.</li></ol><pre><code>   Inserisci una parola: storia
    Inserisci una parola: geografia
    Inserisci una parola: fine</code></pre><details><summary>Soluzione — Esercizio 1</summary><pre><code class="language-python">i = 1
 while i &lt;= 10:

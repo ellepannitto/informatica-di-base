@@ -72,32 +72,28 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 1h     | -            | Esercizi                                                                                  |
 | theory    | 0.5h   | -            | Lo stato del programma durante un `while`: tracce di esecuzione                           |
 
-### P1 | Prova intermedia 1 | prova=true | esercitazione=esami/esercizi.pdf
+### 04 | Iterazione con sentinelle, e liste | slides=guida-lezioni/modulo-4.slides.html
+| Tipologia | Durata | Libro                | Argomento                                                                                        |
+| --------- | ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
+| exercise  | 2h     | -                    | Ripasso pre-compitino                                                                            |
+| theory    | 1h     | cap. 4.5/4.6         | Paradigmi di programmazione con while                                                            |
+| exercise  | 1h     | -                    | Esercizi                                                                                         |
+| theory    | 1h     | cap. 7.1/7.2/7.3/7.4 | Liste                                                                                            |
+| exercise  | 1h     | -                    | Esercizi                                                                                         |
+
+### P1 | Prova intermedia 1 | prova=true | esercitazione=esami/esercizi.pdf esercitazione=esami/esercizi-2.pdf esercitazione=esami/soluzioni-esercizi.pdf esercitazione=esami/soluzioni-esercizi-2.pdf esercitazione=esami/compiti/compitino-1/registro-correzione.html
 | Tipologia | Durata | Libro | Argomento                                                                                 |
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------- |
 | exercise  | 1.5h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
 
-
-### 04 | Iterazione con sentinelle, e liste | slides=guida-lezioni/modulo-4.slides.html
-| Tipologia | Durata | Libro                | Argomento                                                                                        |
-| --------- | ------ | -------------------- | ------------------------------------------------------------------------------------------------ |
-| theory    | 0.5h   | cap. 4.5/4.6         | Sentinelle                                                                                       |
-| exercise  | 1h     | -                    | Esercizi: input ripetuto, conteggi, classificazione, tabellina con validazione, vocali           |
-| theory    | 0.5h   | -                    | Automi a stati finiti e il `while`: stato `resta`, stato `fine`, self-loop                       |
-| exercise  | 1h     | -                    | Esercizi: riconoscimento di stringhe con automi                                                  |
-| theory    | 1h     | cap. 7.1/7.2/7.3/7.4 | Liste                                                                                            |
-| exercise  | 1h     | -                    | Esercizi: costruire liste, accedere agli elementi, scorrere con `while`                          |
-| exercise  | 1h     | -                    | Esercizi: verifica di proprietà anche su liste annidate, serie multiple, conteggio per categoria |
-
-### 05 | Funzioni e procedure | slides=
-| Tipologia | Durata | Libro | Argomento                                                                                                                           |
-| --------- | ------ | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 1h     | cap. ___ | [Definire funzioni: parametri, chiamata, valori di ritorno](guida-lezioni/modulo-6.slides.html#mod6-parametri)                             |
-| exercise  | 1h     | cap. ___ | Esercizi: scomporre un programma in funzioni piccole                                                                                |
-| theory    | 0.5h   | cap. ___ | [Firma di una funzione, black box e responsabilità singola](guida-lezioni/modulo-6.slides.html#mod6-black-box)                             |
-| theory    | 0.5h   | cap. ___ | Scope: variabili locali, parametri e visibilità dei nomi dentro e fuori una funzione                                                |
-| exercise  | 3h     | cap. ___ | [Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili](guida-lezioni/modulo-6.slides.html#mod6-esercizi-funzioni) |
-
+### 05 | Funzioni e procedure | slides=guida-lezioni/modulo-5.slides.html
+| Tipologia | Durata | Libro    | Argomento                                                                            |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------ |
+| theory    | 1h     | cap. ___ | Definire funzioni: parametri, chiamata, valori di ritorno                            |
+| exercise  | 1h     | -        | Esercizi: scomporre un programma in funzioni piccole                                 |
+| theory    | 0.5h   | cap. ___ | Firma di una funzione, black box e responsabilità singola                            |
+| theory    | 0.5h   | cap. ___ | Scope: variabili locali, parametri e visibilità dei nomi dentro e fuori una funzione |
+| exercise  | 1.5h   | -        | Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili        |
 
 ### 06 | Memoria e passaggio degli argomenti | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                                    |
