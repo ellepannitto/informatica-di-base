@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 06 · Funzioni e procedure - Slides</title>
+<title>Modulo 06 · Memoria e passaggio degli argomenti - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -43,7 +43,7 @@ p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.38rem 0; }
-blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+blockquote { border-top: 4px solid #c97f31; border-bottom: 4px solid #c97f31; padding: 0.8rem 1.5rem; background: #fff6ea; border-radius: 14px; text-align: center; max-width: 80%; margin-left: auto; margin-right: auto; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
 details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
@@ -55,6 +55,10 @@ th, td { border: 1px solid rgba(23, 33, 43, 0.12); padding: 0.55rem 0.7rem; vert
 th { background: #f2e7d7; }
 hr { border: 0; border-top: 1px solid rgba(23, 33, 43, 0.12); margin: 1.2rem 0; }
 a { color: #8b3f1d; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78em; font-weight: 600; background: rgba(139,63,29,0.1); border: 1px solid rgba(139,63,29,0.25); color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: rgba(139,63,29,0.18); }
 .controls {
   position: fixed;
   left: 0;
@@ -100,185 +104,325 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 06 · Funzioni e procedure</h1>
+    <h1>Modulo 06 · Memoria e passaggio degli argomenti</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="a-fine-lezione">A fine lezione</h2><ul><li>Sai spiegare la differenza tra una variabile che punta a un intero e una che punta a una lista?</li><li>Sai prevedere cosa succede alla lista originale quando la passi a una funzione e la modifichi dentro?</li><li>Sai distinguere una funzione pura da una funzione void?</li><li>Sai riconoscere quando una funzione ha un effetto collaterale?</li><li>Sai scrivere una versione in-place e una versione con copia di una stessa operazione su lista?</li></ul>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Funzioni pure e funzioni void: sintassi, semantica e principio di progetto</td></tr><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Variabili come nomi associati a oggetti: il modello dei barattoli, tipi mutabili e immutabili</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Alias: quando due nomi puntano allo stesso oggetto; identità vs uguaglianza (`is` vs `==`)</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Passaggio per riferimento: effetti collaterali, copie e differenza tra in-place e funzione pura</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Import e librerie: moduli locali, libreria standard e `random` (`randint`, `random()`, `shuffle`)</td></tr><tr><td>esercitazione</td><td>2h</td><td>cap. ___</td><td>Esercizi: tracciamento della memoria, alias vs copia, funzioni void, modifiche in-place, `random`</td></tr></tbody></table>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai definire funzioni con parametri e valore di ritorno?</li><li>Sai distinguere funzione e procedura?</li><li>Sai scomporre un problema in sottoproblemi più piccoli?</li><li>Sai progettare interfacce semplici e responsabilità singole?</li><li>Sai leggere una funzione come black box?</li><li>Sai costruire piccole utility testabili e riusabili?</li></ul><hr><a id="mod6-funzioni"></a>
+    <h2 id="variabili-come-nomi">Variabili come nomi</h2><p>Per immaginare lo stato dell&#x27;esecuzione, finora abbiamo usato la metafora dei barattoli: una variabile è come un barattolo con un nome scritto sopra, e dentro il barattolo si mette un valore.</p><p>Questo modello funziona per i programmi semplici, ma crea problemi non appena usiamo le liste.</p><p>Consideriamo questo programma:</p><pre><code class="language-python">x = 42
+y = x</code></pre><ul><li><code>x = 42</code> crea un barattolo contenente <code>42</code> e attacca l&#x27;etichetta <code>x</code>:</li></ul><p><img src="imgs/etichetta-singola.svg" alt="x = 42: un&#x27;etichetta su un barattolo"></p><ul><li><code>y = x</code> attacca una seconda etichetta <code>y</code> <strong>allo stesso barattolo</strong> — non crea un barattolo nuovo:</li></ul><p><img src="imgs/etichetta-doppia.svg" alt="y = x: due etichette sullo stesso barattolo"></p><p>Dopo queste due istruzioni, <code>x</code> e <code>y</code> sono due etichette sullo <strong>stesso barattolo</strong>:</p><pre><code>  x ──┐
+      ├──► [ 42 ]
+  y ──┘</code></pre><p>Si potrebbe pensare che Python crei due barattoli separati, ognuno con il proprio <code>42</code>:</p><p><img src="imgs/etichetta-doppia-sbagliata.svg" alt="modello errato: due barattoli separati"></p><p>Ma non è così. Non ci sono due <code>42</code> in memoria — ce n&#x27;è uno solo, con due etichette attaccate allo stesso barattolo:</p><p><img src="imgs/etichetta-doppia.svg" alt="modello corretto: due etichette sullo stesso barattolo"></p><p>Possiamo verificarlo con <code>id()</code>, che restituisce un numero che identifica univocamente un oggetto durante l&#x27;esecuzione:</p><pre><code class="language-python">print(id(x))   # es. 4305765744
+print(id(y))   # stesso numero: stesso oggetto</code></pre><h3 id="cosa-succede-con-y-y-1">Cosa succede con <code>y = y + 1</code></h3><pre><code class="language-python">y = y + 1</code></pre><p>Il barattolo <code>42</code> è sigillato: non si può modificare. Python crea un <strong>nuovo barattolo</strong> con <code>43</code> e sposta l&#x27;etichetta <code>y</code> su di esso; l&#x27;etichetta <code>x</code> rimane sul barattolo <code>42</code>.</p><pre><code>  x ──► [ 42 ]
+  y ──► [ 43 ]   ← nuovo barattolo; [ 42 ] non è cambiato</code></pre><pre><code class="language-python">print(x)       # 42  ← x non è cambiata
+print(y)       # 43
+print(id(x))   # stesso di prima
+print(id(y))   # numero diverso: barattolo diverso</code></pre><p>Questo comportamento vale per tutti i tipi <strong>immutabili</strong>: interi, float, stringhe, booleani. Una volta creati, non cambiano. L&#x27;assegnazione sposta il riferimento, non modifica l&#x27;oggetto.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="perche-servono-le-funzioni">Perche&#x27; servono le funzioni</h2><p>Le funzioni servono a evitare duplicazione, isolare un compito preciso e rendere il codice piu&#x27; leggibile.</p><p>Idea chiave:</p><ul><li>una funzione riceve input;</li><li>esegue una trasformazione;</li><li>restituisce un risultato.</li></ul><p>Esempio:</p><pre><code class="language-python">def triplo_del_successore(x):
-    return 3 * (x + 1)</code></pre><p>Quando il problema cresce, conviene quasi sempre chiedersi:</p><blockquote><p>quale parte del programma posso trasformare in una funzione autonoma?</p></blockquote><p>Una metafora molto utile:</p><ul><li>una funzione e&#x27; una <strong>delega</strong>;</li><li>non dobbiamo saper fare tutto da soli nel codice principale;</li><li>dobbiamo anche saper decidere quale sottoproblema affidare a un blocco specializzato.</li></ul><p>L&#x27;analogia usata a lezione era quella della costruzione di una casa:</p><ul><li>non fai tutto da solo;</li><li>chiami l&#x27;ingegnere, l&#x27;idraulico, l&#x27;elettricista;</li><li>a ciascuno dai gli input giusti;</li><li>da ciascuno ricevi un risultato utile per il progetto complessivo.</li></ul><p>In programmazione vale lo stesso principio:</p><ul><li>una funzione e&#x27; un pezzo di lavoro ben definito;</li><li>puo&#x27; essere scritto da noi oppure da altri;</li><li>saper programmare vuol dire anche saper riusare soluzioni gia&#x27; disponibili.</li></ul><hr><a id="mod6-parametri"></a>
+    <h2 id="le-liste-sono-diverse-barattoli-aperti">Le liste sono diverse: barattoli aperti</h2><p>C&#x27;è una distinzione fondamentale tra due tipi di variabili:</p><ul><li>Tipi <strong>immutabili</strong>: barattoli sigillati (interi, stringhe, …) di cui non si può cambiare il contenuto; se serve un valore diverso, si crea un barattolo nuovo e si sposta l&#x27;etichetta</li></ul><p><img src="imgs/barattolo-sigillato.svg" alt="barattolo sigillato: x = 43 crea un nuovo barattolo"></p><ul><li>Tipi <strong>mutabili</strong>: barattoli aperti (liste, …), a cui si può aggiungere o togliere contenuto senza creare un nuovo barattolo; chi ha un&#x27;etichetta su quel barattolo vede subito le modifiche.</li></ul><p><img src="imgs/barattolo-aperto.svg" alt="barattolo aperto: .append(4) modifica lo stesso barattolo"></p><p>Le liste sono <strong>mutabili</strong>: si possono modificare senza creare un nuovo oggetto.</p><pre><code class="language-python">lista = [1, 2, 3]
+print(id(lista))   # es. 4372891456
+
+lista.append(4)
+print(id(lista))   # stesso numero: è ancora lo stesso oggetto, modificato</code></pre><h3 id="operazioni-in-place-sulle-liste">Operazioni in-place sulle liste</h3><p>Queste operazioni modificano la lista esistente, senza crearne una nuova:</p><pre><code class="language-python">numeri = [3, 1, 4, 1, 5]
+
+numeri.append(9)        # aggiunge in fondo
+numeri.sort()           # ordina sul posto
+numeri.reverse()        # inverte sul posto
+numeri.pop()            # rimuove l&#x27;ultimo elemento
+del numeri[0]           # rimuove l&#x27;elemento all&#x27;indice 0</code></pre><p>Tutte restituiscono <code>None</code> — non producono una nuova lista, modificano quella esistente.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-def">Il problema che porta a <code>def</code></h2><p>Quando il programma cresce, iniziamo a ripetere pezzi di ragionamento:</p><ul><li>la stessa trasformazione su input diversi;</li><li>lo stesso controllo in piu&#x27; punti;</li><li>lo stesso sottoproblema dentro programmi piu&#x27; grandi.</li></ul><p><code>def</code> serve a isolare quel comportamento in un blocco riusabile.</p><hr>
+    <h2 id="alias-quando-due-nomi-puntano-allo-stesso-oggetto">Alias: quando due nomi puntano allo stesso oggetto</h2><pre><code class="language-python">a = [1, 2, 3]
+b = a</code></pre><p><code>b = a</code> <strong>non copia la lista</strong>. Copia solo il riferimento: ora <code>a</code> e <code>b</code> puntano allo <strong>stesso oggetto</strong>.</p><pre><code>  a ──┐
+      ├──► [ 1, 2, 3 ]
+  b ──┘</code></pre><p>Quindi qualsiasi modifica fatta tramite <code>b</code> sarà visibile anche da <code>a</code>:</p><pre><code class="language-python">b.append(4)
+print(a)   # [1, 2, 3, 4]  ← anche a è cambiata!</code></pre><p>Questo si chiama <strong>aliasing</strong>: due nomi diversi per lo stesso oggetto.</p><h3 id="come-fare-una-copia-vera">Come fare una copia vera</h3><p>Per ottenere una lista indipendente dobbiamo costruirne una nuova elemento per elemento:</p><pre><code class="language-python">def copia_lista(originale):
+    nuova = []
+    i = 0
+    while i &lt; len(originale):
+        nuova.append(originale[i])
+        i = i + 1
+    return nuova</code></pre><pre><code class="language-python">a = [1, 2, 3]
+b = copia_lista(a)</code></pre><p>Ora <code>a</code> e <code>b</code> puntano a <strong>oggetti diversi</strong> — due barattoli con lo stesso contenuto:</p><pre><code>  a ──► [ 1, 2, 3 ]
+  b ──► [ 1, 2, 3 ]   ← barattolo nuovo, costruito elemento per elemento</code></pre><p>Modificare <code>b</code> non tocca <code>a</code>, perché sono oggetti indipendenti:</p><pre><code class="language-python">b.append(4)
+print(a)   # [1, 2, 3]   ← a non è cambiata
+print(b)   # [1, 2, 3, 4]</code></pre><h3 id="identità-vs-uguaglianza-is-vs">Identità vs uguaglianza: <code>is</code> vs <code>==</code></h3><ul><li><code>a == b</code> confronta il <strong>contenuto</strong> — <code>True</code> se i valori sono uguali;</li><li><code>a is b</code> confronta l&#x27;<strong>identità</strong> — <code>True</code> solo se <code>a</code> e <code>b</code> puntano allo stesso oggetto.</li></ul><pre><code class="language-python">a = [1, 2, 3]
+b = copia_lista(a)   # oggetto diverso, stesso contenuto
+c = a                # alias: stesso oggetto
+
+print(a == b)   # True  ← contenuto uguale
+print(a is b)   # False ← oggetti diversi
+
+print(a == c)   # True  ← contenuto uguale
+print(a is c)   # True  ← stesso oggetto</code></pre><h3 id="tabella-di-tracciamento-alias-vs-copia">Tabella di tracciamento: alias vs copia</h3><pre><code class="language-python">a = [10, 20, 30]
+b = a                  # alias
+c = copia_lista(a)     # copia
+
+b[0] = 99
+c[2] = 77</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato del programma</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [10, 20, 30]</code></td><td><code>a</code> → <code>[10, 20, 30]</code></td><td>—</td></tr><tr><td>2</td><td><code>b = a</code></td><td><code>a,b</code> → <code>[10, 20, 30]</code> (stesso oggetto)</td><td>—</td></tr><tr><td>3</td><td><code>c = copia_lista(a)</code></td><td><code>a,b</code> → <code>[10, 20, 30]</code> · <code>c</code> → <code>[10, 20, 30]</code> (oggetto nuovo)</td><td>—</td></tr><tr><td>4</td><td><code>b[0] = 99</code></td><td><code>a,b</code> → <code>[99, 20, 30]</code> · <code>c</code> → <code>[10, 20, 30]</code></td><td>—</td></tr><tr><td>5</td><td><code>c[2] = 77</code></td><td><code>a,b</code> → <code>[99, 20, 30]</code> · <code>c</code> → <code>[10, 20, 77]</code></td><td>—</td></tr><tr><td>6</td><td><code>print(a)</code></td><td><code>a,b</code> → <code>[99, 20, 30]</code> · <code>c</code> → <code>[10, 20, 77]</code></td><td><code>[99, 20, 30]</code></td></tr><tr><td>7</td><td><code>print(c)</code></td><td><code>a,b</code> → <code>[99, 20, 30]</code> · <code>c</code> → <code>[10, 20, 77]</code></td><td><code>[10, 20, 77]</code></td></tr></tbody></table><p>Al passo 4 la modifica tramite <code>b</code> cambia anche <code>a</code>, perché puntano allo stesso barattolo. Al passo 5 la modifica su <code>c</code> non tocca <code>a</code> né <code>b</code>, perché <code>c</code> è un barattolo indipendente.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-def">Sintassi di <code>def</code></h2><p>Una funzione si definisce con <code>def</code> e si usa tramite chiamata.</p><pre><code class="language-python">def area_rettangolo(base, altezza):
-    return base * altezza
-
-print(area_rettangolo(4, 6))</code></pre><p>Parti da riconoscere:</p><ul><li><code>def</code> introduce la definizione della funzione;</li><li>il nome della funzione descrive il comportamento;</li><li>tra parentesi compaiono i parametri;</li><li>i due punti <code>:</code> aprono il blocco;</li><li><code>return</code> restituisce il risultato.</li></ul><h3 id="struttura-generale">Struttura generale</h3><pre><code class="language-python">def nome_funzione(parametro1, parametro2):
-    return risultato</code></pre><hr>
+    <h2 id="esercizi-riferimenti-e-memoria">Esercizi: riferimenti e memoria</h2><h3 id="cosa-stampa-questo-programma">Cosa stampa questo programma?</h3><p>Per ciascun frammento, compila la tabella riga per riga e scrivi l&#x27;output finale prima di eseguire il codice.</p><p><strong>A1.</strong></p><pre><code class="language-python">x = 5
+y = x
+y = y + 3
+print(x)
+print(y)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato del programma</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = 5</code></td><td></td><td></td></tr><tr><td>2</td><td><code>y = x</code></td><td></td><td></td></tr><tr><td>3</td><td><code>y = y + 3</code></td><td></td><td></td></tr><tr><td>4</td><td><code>print(x)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(y)</code></td><td></td><td></td></tr></tbody></table><p><strong>A2.</strong></p><pre><code class="language-python">a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)
+print(b)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato del programma</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [1, 2, 3]</code></td><td></td><td></td></tr><tr><td>2</td><td><code>b = a</code></td><td></td><td></td></tr><tr><td>3</td><td><code>b.append(4)</code></td><td></td><td></td></tr><tr><td>4</td><td><code>print(a)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(b)</code></td><td></td><td></td></tr></tbody></table><p><strong>A3.</strong></p><pre><code class="language-python">a = [1, 2, 3]
+b = copia_lista(a)
+b.append(4)
+print(a)
+print(b)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato del programma</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [1, 2, 3]</code></td><td></td><td></td></tr><tr><td>2</td><td><code>b = copia_lista(a)</code></td><td></td><td></td></tr><tr><td>3</td><td><code>b.append(4)</code></td><td></td><td></td></tr><tr><td>4</td><td><code>print(a)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(b)</code></td><td></td><td></td></tr></tbody></table><p><strong>A4.</strong></p><pre><code class="language-python">a = [10, 20, 30]
+b = a
+a = [10, 20, 30]
+b.append(99)
+print(a)
+print(b)</code></pre><p>Attenzione: al passo 3 <code>a</code> viene <strong>riassegnata</strong> — non modificata.</p><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato del programma</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [10, 20, 30]</code></td><td></td><td></td></tr><tr><td>2</td><td><code>b = a</code></td><td></td><td></td></tr><tr><td>3</td><td><code>a = [10, 20, 30]</code></td><td></td><td></td></tr><tr><td>4</td><td><code>b.append(99)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(a)</code></td><td></td><td></td></tr><tr><td>6</td><td><code>print(b)</code></td><td></td><td></td></tr></tbody></table><h3 id="vero-o-falso">Vero o falso?</h3><p>Per ciascuna affermazione scrivi V o F e motiva la risposta.</p><ol><li>Dopo <code>x = 3</code> e <code>y = x</code>, eseguire <code>y = y + 1</code> cambia anche <code>x</code>.</li><li>Dopo <code>a = [1, 2]</code> e <code>b = a</code>, eseguire <code>b.append(3)</code> cambia anche <code>a</code>.</li><li>Dopo <code>a = [1, 2]</code> e <code>b = copia_lista(a)</code>, le due liste puntano allo stesso oggetto.</li><li>Se <code>a == b</code> allora <code>a is b</code>.</li><li>Se <code>a is b</code> allora <code>a == b</code>.</li><li><code>a = [1, 2, 3]</code> e <code>b = [1, 2, 3]</code> scritti su righe separate creano due riferimenti distinti.</li></ol><h3 id="scrivere-codice-con-il-comportamento-richiesto">Scrivere codice con il comportamento richiesto</h3><p>Per ciascun esercizio scrivi un programma che produca esattamente l&#x27;output indicato. Verifica con <code>print</code> e, dove richiesto, con <code>is</code>.</p><p><strong>B1.</strong> Inizializza una lista contenente i numeri <code>1, 2, 3</code>. Crea una seconda variabile che punta alla <strong>stessa lista</strong> e usala per aggiungere <code>99</code>. Stampa entrambe le variabili e verifica con <code>is</code> che siano lo stesso oggetto.</p><p>Output atteso:</p><pre><code>[1, 2, 3, 99]
+[1, 2, 3, 99]
+True</code></pre><p><strong>B2.</strong> Inizializza una lista contenente i numeri <code>1, 2, 3</code>. Creane una <strong>copia indipendente</strong> e aggiungi <code>99</code> alla copia. Stampa entrambe e verifica con <code>is</code> che siano oggetti distinti.</p><p>Output atteso:</p><pre><code>[1, 2, 3]
+[1, 2, 3, 99]
+False</code></pre><p><strong>B3.</strong> Leggi numeri interi dall&#x27;input fino a quando l&#x27;utente inserisce <code>0</code>. Salva in una lista solo i numeri <strong>pari</strong>. Poi crea una copia della lista e, nella copia, sostituisci ogni numero con il suo doppio. Stampa la lista originale e la copia.</p><p>Esempio:</p><pre><code>Input: 4 7 2 9 6 0
+Lista pari:  [4, 2, 6]
+Lista doppi: [8, 4, 12]</code></pre><p><strong>B4.</strong> Leggi numeri interi dall&#x27;input fino a <code>0</code>. Salva tutti i numeri in una lista. Crea una seconda lista che contiene solo i numeri <strong>maggiori della media</strong>. Stampa la lista originale e la lista filtrata. La lista originale non deve essere modificata.</p><p>Esempio:</p><pre><code>Input: 3 8 2 10 5 0
+Lista originale: [3, 8, 2, 10, 5]
+Sopra la media: [8, 10]</code></pre><p><strong>B4.</strong> Leggi numeri interi positivi dall&#x27;input fino a <code>0</code> (ignora i numeri negativi). Salva tutti i numeri in una lista. Crea una seconda lista che contiene solo i numeri <strong>maggiori della media</strong> e sostituisci questi numeri con <code>-1</code> nella lista originale. Stampa la lista originale e la lista filtrata.</p><p>Esempio:</p><pre><code>Input: 3 8 2 10 5 0
+Lista originale: [3, -1, 2, -1, 5]
+Sopra la media: [8, 10]</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-def">Semantica di <code>def</code></h2><p>Qui:</p><ul><li><code>base</code> e <code>altezza</code> sono parametri;</li><li><code>4</code> e <code>6</code> sono argomenti concreti;</li><li><code>return</code> consegna il risultato al chiamante.</li></ul><p>Questo modello e&#x27; fondamentale per poter comporre programmi piu&#x27; grandi a partire da blocchi affidabili.</p><p>Va distinta con forza la differenza tra:</p><ul><li><strong>definizione</strong> della funzione;</li><li><strong>invocazione</strong> della funzione.</li></ul><p>Definire una funzione significa salvare da qualche parte un comportamento riusabile. Invocarla significa usarla davvero con valori concreti.</p><p>Esempio discusso a lezione:</p><pre><code class="language-python">def triplo_del_successore(x):
-    successore = x + 1
-    triplo = 3 * successore
-    return triplo</code></pre><p>Quando poi scriviamo:</p><pre><code class="language-python">triplo_del_successore(15)</code></pre><p>non stiamo piu&#x27; parlando in astratto: stiamo chiedendo alla funzione di lavorare davvero sul valore <code>15</code>.</p><h3 id="parametri-ipotetici-e-argomenti-reali">Parametri ipotetici e argomenti reali</h3><p>Questa distinzione e&#x27; importante:</p><ul><li>nella definizione usiamo nomi come <code>x</code>, <code>planimetria</code>, <code>budget</code>;</li><li>nella chiamata passiamo valori concreti;</li><li>i nomi dei parametri non devono per forza essere <code>x</code>, <code>y</code>, <code>z</code>;</li><li>conviene scegliere nomi che facciano capire il ruolo di ogni input.</li></ul><p>Ci sono anche due buone pratiche molto concrete.</p><hr>
+    <h2 id="passaggio-degli-argomenti-alle-funzioni">Passaggio degli argomenti alle funzioni</h2><p>Quando si chiama una funzione, Python associa i parametri formali agli oggetti passati come argomenti — esattamente come farebbe con <code>=</code>.</p><h3 id="tipi-immutabili-il-parametro-è-una-copia-locale">Tipi immutabili: il parametro è una copia locale</h3><pre><code class="language-python">def incrementa(n):
+    n = n + 1
+    print(&quot;dentro:&quot;, n)
+
+x = 10
+incrementa(x)
+print(&quot;fuori:&quot;, x)</code></pre><pre><code>dentro: 11
+fuori: 10</code></pre><p><code>n</code> dentro la funzione inizia puntando allo stesso oggetto di <code>x</code>. Ma quando scriviamo <code>n = n + 1</code>, creiamo un nuovo oggetto e spostiamo solo <code>n</code> — <code>x</code> rimane invariata.</p><pre><code>  x ──┐
+      ├──► [ 10 ]   ← all&#x27;inizio puntano allo stesso oggetto
+  n ──┘
+
+  dopo n = n + 1:
+  x ──► [ 10 ]
+  n ──► [ 11 ]   ← n ora punta a un nuovo oggetto</code></pre><h3 id="tipi-mutabili-il-parametro-punta-allo-stesso-oggetto">Tipi mutabili: il parametro punta allo stesso oggetto</h3><pre><code class="language-python">def sostituisci_pari(lista):
+    i = 0
+    while i &lt; len(lista):
+        if lista[i]%2==0:
+            lista[i] = 0
+        i = i + 1
+    return lista
+
+numeri = [10, 11, 20, 21, 30, 31]
+numeri_2 = sostituisci_pari(numeri)
+print(numeri_2)       # [0, 11, 0, 21, 0, 31]
+print(numeri)  # [0, 11, 0, 21, 0, 31]  ← la lista originale è cambiata!</code></pre><p>Qui <code>lista</code> e <code>numeri</code> puntano <strong>allo stesso oggetto</strong>. Quando <code>lista[i] = 0</code> modifica la lista, la modifica è visibile anche da <code>numeri</code>.</p><pre><code>  numeri ──┐
+           ├──► [ 10, 11, 20, 21, 30, 31 ]
+  lista  ──┘
+
+  dopo le modifiche dentro la funzione:
+  numeri ──┐
+           ├──► [ 0, 11, 0, 21, 0, 31 ]
+  lista  ──┘</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-return">Il problema che porta a <code>return</code></h2><p>Definire una funzione non basta: spesso vogliamo che il suo risultato possa essere riusato fuori dal blocco della funzione.</p><p>Per esempio:</p><ul><li>calcolare un&#x27;area e poi stamparla;</li><li>controllare se una parola e&#x27; palindroma e poi usare il risultato in un <code>if</code>;</li><li>costruire una nuova stringa e poi assegnarla a una variabile.</li></ul><p>Per questo la funzione deve poter restituire un valore al chiamante.</p><hr>
+    <h2 id="effetti-collaterali">Effetti collaterali</h2><p>L&#x27;esempio precedente mostra un comportamento sottile: <code>sostituisci_pari</code> riceve <code>numeri</code> come argomento, lo modifica attraverso il parametro <code>lista</code>, e la modifica è visibile anche fuori dalla funzione — senza che il codice chiamante lo abbia richiesto esplicitamente.</p><p>Una funzione ha un <strong>effetto collaterale</strong> quando modifica qualcosa al di fuori del proprio scope locale. Gli effetti collaterali più comuni sono:</p><ul><li><strong>modificare un oggetto mutabile</strong> passato come parametro (liste, dizionari, …);</li><li><strong>modificare una variabile globale</strong>;</li><li><strong>stampare a schermo</strong> con <code>print</code>;</li><li><strong>scrivere su un file</strong>.</li></ul><h3 id="effetti-collaterali-visibili-e-nascosti">Effetti collaterali visibili e nascosti</h3><p>Gli effetti collaterali sono <strong>utili</strong> quando vogliamo modificare una struttura condivisa senza doverla copiare.</p><p>Sono <strong>pericolosi</strong> quando chi chiama la funzione non sa che la lista verrà modificata. L&#x27;errore tipico:</p><pre><code class="language-python">def analisi(dati):
+    dati.sort()                    # effetto collaterale nascosto
+    media = sum(dati) / len(dati)
+    return media
+
+numeri = [5, 3, 1, 4, 2]
+risultato = analisi(numeri)
+print(numeri)   # [1, 2, 3, 4, 5]  ← la lista è stata ordinata di nascosto!</code></pre><p>Il chiamante passa <code>numeri</code> aspettandosi solo la media — e si trova la lista riordinata senza averlo richiesto.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-return">Sintassi di <code>return</code></h2><p>Forma tipica:</p><pre><code class="language-python">return espressione</code></pre><p>Esempi:</p><pre><code class="language-python">return triplo
-return base * altezza
-return True</code></pre><p><code>return</code> compare dentro il blocco della funzione.</p><hr>
+    <h2 id="reminder-funzioni-pure">Reminder: Funzioni pure</h2><h3 id="sintassi">Sintassi</h3><pre><code class="language-python">def nome_funzione(parametro_1, ..., parametro_n):
+    # istruzioni
+    return espressione</code></pre><ul><li><code>return espressione</code> è obbligatorio e produce il valore che la funzione restituisce.</li></ul><h3 id="semantica-della-chiamata">Semantica della chiamata</h3><p>Quando Python incontra <code>nome_funzione(arg_1, ..., arg_n)</code>:</p><ol><li>valuta gli argomenti da sinistra a destra;</li><li>assegna ogni valore al parametro corrispondente per posizione;</li><li>esegue il corpo della funzione;</li><li>quando incontra <code>return</code>, valuta l&#x27;espressione e <strong>restituisce quel valore</strong> al chiamante;</li><li>la chiamata si sostituisce con il valore restituito — è un&#x27;<strong>espressione</strong> con un tipo.</li></ol><pre><code class="language-python">media = somma_lista(dati) / len(dati)   # il valore entra in un calcolo
+print(somma_lista(dati))                # il valore viene passato a print
+if somma_lista(dati) &gt; 100:             # il valore viene confrontato
+    ...</code></pre><h3 id="principio-di-progetto">Principio di progetto</h3><p>Una funzione pura non deve leggere né modificare variabili globali, né modificare gli oggetti ricevuti come parametri. Il risultato dipende esclusivamente dagli argomenti — chiamarla due volte con gli stessi argomenti produce sempre lo stesso risultato.</p><p>Python non lo impone: è una scelta del programmatore. Rispettarla rende le funzioni prevedibili, testabili e componibili.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-return">Semantica di <code>return</code></h2><p>Quando Python esegue <code>return</code>:</p><ol><li>valuta l&#x27;espressione dopo <code>return</code>;</li><li>produce quel valore come risultato della funzione;</li><li>interrompe l&#x27;esecuzione del corpo della funzione;</li><li>restituisce il controllo al chiamante.</li></ol><p>Per questo tutto cio&#x27; che sta dopo un <code>return</code> nello stesso ramo non viene eseguito.</p><h3 id="commentare-che-cosa-fa-una-funzione">Commentare che cosa fa una funzione</h3><p>Dopo una definizione conviene lasciare almeno traccia di:</p><ul><li>che cosa fa la funzione;</li><li>che cosa si aspetta in input;</li><li>che cosa restituisce in output.</li></ul><p>Questo e&#x27; utile perche&#x27; un nome di parametro da solo non garantisce abbastanza contesto, soprattutto quando il codice cresce.</p><h3 id="evitare-collisioni-inutili-di-nomi">Evitare collisioni inutili di nomi</h3><p>C&#x27;e&#x27; anche una domanda utile:</p><ul><li>che succede se usiamo per una nostra funzione un nome gia&#x27; occupato da una funzione importata?</li></ul><p>Il punto didattico da trattenere e&#x27; questo:</p><ul><li>quando importiamo librerie, aggiungiamo al nostro ambiente molti nomi gia&#x27; esistenti;</li><li>se riusiamo gli stessi nomi senza accorgercene, il codice diventa piu&#x27; ambiguo e fragile;</li><li>conviene quindi scegliere nomi chiari e non in conflitto con funzioni gia&#x27; importanti del linguaggio o delle librerie usate.</li></ul><p>Quindi:</p><pre><code class="language-python">def area(base, altezza):
-    return base * altezza</code></pre><p>e&#x27; meglio di una versione con parametri chiamati in modo oscuro, se il problema non e&#x27; puramente astratto.</p><hr>
+    <h2 id="funzioni-void">Funzioni void</h2><p>Problema: Vogliamo una funzione che raddoppi tutti gli elementi di una lista.</p><p><strong>Tentativo con <code>return</code> (funzione pura):</strong></p><pre><code class="language-python">def raddoppia(lista):
+    nuova = []
+    i = 0
+    while i &lt; len(lista):
+        nuova.append(lista[i] * 2)
+        i = i + 1
+    return nuova</code></pre><p>In questo modo dobbiamo per forza assegnare di nuovo la variabile <code>numeri</code> per usare il valore restituito:</p><pre><code class="language-python">numeri = raddoppia(numeri)
+print(numeri)            # [2, 4, 6]</code></pre><p>Ma abbiamo visto che è possibile anche modificare direttamente la lista originale tramite una funzione e ottenere un comportamento del genere:</p><pre><code class="language-python">numeri = [1, 2, 3]
+raddoppia(numeri)        # effettua un&#x27;azione su numeri
+print(numeri)            # [2, 4, 6]  ← lista modificata!</code></pre><p>Per fare ciò abbiamo bisogno di un nuovo tipo di funzioni: le <strong>funzioni void</strong></p><p>Grazie al fatto che <code>lista</code> e <code>numeri</code> possono puntare allo <strong>stesso barattolo</strong>, possiamo modificare ogni elemento direttamente dall&#x27;interno della funzione usando l&#x27;assegnazione per indice:</p><pre><code class="language-python">def raddoppia_in_place(lista):
+    i = 0
+    while i &lt; len(lista):
+        lista[i] = lista[i] * 2
+        i = i + 1</code></pre><pre><code class="language-python">numeri = [1, 2, 3]
+raddoppia_in_place(numeri)
+print(numeri)            # [2, 4, 6]  ← la lista originale è cambiata</code></pre><p>Non c&#x27;è <code>return</code> — non serve. La funzione non calcola un valore: produce un <strong>effetto</strong> sul barattolo condiviso. Questa è la struttura di tutte le funzioni void.</p><blockquote><p>&quot;void&quot; non è una parola chiave Python (a differenza di C o Java) — è un termine convenzionale per descrivere questo comportamento.</p></blockquote><h3 id="sintassi-delle-funzioni-void">Sintassi delle funzioni void</h3><pre><code class="language-python">def nome_funzione(parametro_1, ..., parametro_n):
+    # istruzioni</code></pre><ul><li>non c&#x27;è <code>return</code>;</li><li>Python restituisce implicitamente <code>None</code>.</li></ul><h3 id="semantica-della-chiamata-void">Semantica della chiamata void</h3><p>Quando Python incontra <code>nome_funzione(arg_1, ..., arg_n)</code>:</p><ol><li>valuta gli argomenti da sinistra a destra;</li><li>assegna ogni valore al parametro corrispondente per posizione;</li><li>esegue il corpo della funzione — gli effetti collaterali avvengono qui;</li><li>raggiunta la fine del corpo, la funzione termina restituendo <code>None</code>;</li><li>la chiamata è un&#x27;<strong>istruzione</strong> — non c&#x27;è un valore utile da riusare.</li></ol><pre><code class="language-python">raddoppia_elementi(dati)              # istruzione: corretto
+risultato = raddoppia_elementi(dati)  # risultato è None: sbagliato
+if raddoppia_elementi(dati):          # confronta None: sbagliato
+    ...</code></pre><blockquote><p>Le funzioni void sono il posto naturale per gli <strong>effetti collaterali</strong>. Il loro scopo è produrre un effetto nel mondo esterno — modificare una lista, stampare, scrivere su file — non calcolare un valore.</p></blockquote><h3 id="riepilogo-quale-tipo-di-funzione-usare">Riepilogo: quale tipo di funzione usare</h3><table><thead><tr><th>Vuoi...</th><th>Usa...</th></tr></thead><tbody><tr><td>Calcolare un valore da riusare altrove</td><td>funzione pura</td></tr><tr><td>Stampare un risultato</td><td>funzione void</td></tr><tr><td>Modificare una lista in-place</td><td>funzione void</td></tr><tr><td>Produrre una nuova lista senza toccare l&#x27;originale</td><td>funzione pura</td></tr></tbody></table>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="memoria-locale-della-funzione">Memoria locale della funzione</h2><p>Una prima idea di <strong>memoria locale</strong> e&#x27; questa:</p><ul><li>quando una funzione viene chiamata, immaginiamo che riceva una tabella di memoria separata;</li><li>dentro quella tabella vivono i parametri e le variabili locali della funzione;</li><li>quando arriviamo a <code>return</code>, il valore torna al chiamante e quella memoria locale puo&#x27; essere considerata chiusa.</li></ul><p>Questo modello e&#x27; didatticamente molto utile per leggere correttamente le chiamate di funzione nei casi elementari.</p><p>Per leggere correttamente una chiamata come:</p><pre><code class="language-python">n = 15
-risultato = triplo_del_successore(n)</code></pre><p>conviene pensare cosi&#x27;:</p><ol><li>il programma principale ha la sua memoria;</li><li>la funzione riceve il valore <code>15</code> come input del parametro <code>x</code>;</li><li>dentro la funzione si calcolano <code>successore</code> e <code>triplo</code>;</li><li><code>return triplo</code> restituisce <code>48</code>;</li><li>il programma principale assegna <code>48</code> a <code>risultato</code>.</li></ol><p>Questo schema aiuta moltissimo quando iniziano i dubbi su:</p><ul><li>&quot;quale <code>x</code> sto usando?&quot;</li><li>&quot;dove e&#x27; stata creata questa variabile?&quot;</li><li>&quot;perche&#x27; il valore restituito non coincide con il nome usato dentro la funzione?&quot;</li></ul><hr>
+    <h2 id="una-distinzione-didattica-non-una-regola-di-python">Una distinzione didattica, non una regola di Python</h2><blockquote><p>La distinzione tra funzione pura e funzione void è uno strumento per <strong>imparare a ragionare</strong> sul codice — non una regola imposta da Python. In Python non esiste nessuna parola chiave, nessun controllo, nessuna differenza sintattica: tutto si scrive con <code>def</code>, e una funzione può restituire un valore, produrre effetti collaterali, o fare entrambe le cose insieme.</p></blockquote><p>La libreria standard lo fa spesso:</p><pre><code class="language-python"># list.pop(): rimuove l&#x27;ultimo elemento E lo restituisce
+numeri = [10, 20, 30]
+ultimo = numeri.pop()
+print(ultimo)   # 30
+print(numeri)   # [10, 20]  ← la lista è cambiata</code></pre><pre><code class="language-python"># sostituisci_pari: modifica la lista passata E la restituisce
+def sostituisci_pari(lista):
+    i = 0
+    while i &lt; len(lista):
+        if lista[i] % 2 == 0:
+            lista[i] = 0
+        i = i + 1
+    return lista
+
+numeri = [10, 11, 20]
+risultato = sostituisci_pari(numeri)
+print(risultato)  # [0, 11, 0]
+print(numeri)     # [0, 11, 0]  ← stessa lista: risultato e numeri puntano allo stesso oggetto</code></pre><p>Questi esempi esistono, e li incontrerete. La distinzione pura/void serve a costruire un&#x27;abitudine: quando scrivete una funzione, decidete cosa fa — calcola un valore o produce un effetto — e non mescolate i due ruoli senza una ragione precisa.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="indentazione-e-blocchi">Indentazione e blocchi</h2><p>La lezione chiudeva l&#x27;introduzione alle funzioni con un punto sintattico fondamentale:</p><ul><li>il corpo della funzione deve essere indentato;</li><li>in Python l&#x27;indentazione non e&#x27; estetica, ma parte della sintassi;</li><li>di solito un editor/IDE la inserisce automaticamente, ma va comunque capita.</li></ul><p>Esempio:</p><pre><code class="language-python">def triplo_del_successore(n):
-    successore = n + 1
-    triplo = 3 * successore
-    return triplo</code></pre><p>Qui tutto cio&#x27; che appartiene alla funzione e&#x27; rientrato di un livello.</p><p>Questo serve a far capire all&#x27;interprete:</p><ul><li>dove inizia il blocco della funzione;</li><li>dove finisce;</li><li>quali istruzioni appartengono a quel sottoproblema e non al programma principale.</li></ul><hr><a id="mod6-black-box"></a>
+    <h2 id="esercizi">Esercizi</h2><h3 id="tracciamento-della-memoria">Tracciamento della memoria</h3><p>Per ciascun frammento, compila la tabella passo per passo: indica lo stato di tutte le variabili dopo ogni istruzione e, se qualcosa viene stampato, scrivilo nella colonna output.</p><p><strong>T1.</strong> Alias e modifica in-place.</p><pre><code class="language-python">a = [1, 2, 3]
+b = a
+b.append(4)
+print(a)
+print(b)
+print(a is b)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [1, 2, 3]</code></td><td></td><td></td></tr><tr><td>2</td><td><code>b = a</code></td><td></td><td></td></tr><tr><td>3</td><td><code>b.append(4)</code></td><td></td><td></td></tr><tr><td>4</td><td><code>print(a)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(b)</code></td><td></td><td></td></tr><tr><td>6</td><td><code>print(a is b)</code></td><td></td><td></td></tr></tbody></table><p><strong>T2.</strong> Copia esplicita e modifica.</p><pre><code class="language-python">a = [1, 2, 3]
+b = copia_lista(a)
+b.append(4)
+print(a)
+print(b)
+print(a is b)</code></pre><p>(Usa la funzione <code>copia_lista</code> vista a lezione.)</p><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>a = [1, 2, 3]</code></td><td></td><td></td></tr><tr><td>2</td><td><code>b = copia_lista(a)</code></td><td></td><td></td></tr><tr><td>3</td><td><code>b.append(4)</code></td><td></td><td></td></tr><tr><td>4</td><td><code>print(a)</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(b)</code></td><td></td><td></td></tr><tr><td>6</td><td><code>print(a is b)</code></td><td></td><td></td></tr></tbody></table><p><strong>T3.</strong> Passaggio di lista a funzione void.</p><pre><code class="language-python">def f(lista):
+    lista.append(99)
+
+x = [10, 20]
+f(x)
+print(x)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = [10, 20]</code></td><td></td><td></td></tr><tr><td>2</td><td>chiama <code>f(x)</code></td><td></td><td></td></tr><tr><td>3</td><td><code>lista.append(99)</code></td><td></td><td></td></tr><tr><td>4</td><td>fine <code>f</code></td><td></td><td></td></tr><tr><td>5</td><td><code>print(x)</code></td><td></td><td></td></tr></tbody></table><p><strong>T4.</strong> Tipo immutabile come parametro.</p><pre><code class="language-python">def h(n):
+    n = n + 1
+    return n
+
+x = 5
+y = h(x)
+print(x)
+print(y)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>x = 5</code></td><td></td><td></td></tr><tr><td>2</td><td>chiama <code>h(x)</code></td><td></td><td></td></tr><tr><td>3</td><td><code>n = n + 1</code></td><td></td><td></td></tr><tr><td>4</td><td><code>return n</code></td><td></td><td></td></tr><tr><td>5</td><td><code>y = h(x)</code></td><td></td><td></td></tr><tr><td>6</td><td><code>print(x)</code></td><td></td><td></td></tr><tr><td>7</td><td><code>print(y)</code></td><td></td><td></td></tr></tbody></table><h3 id="scrivere-funzioni-pure">Scrivere funzioni pure</h3><p><strong>E1.</strong> Scrivi una funzione pura <code>massimo(lista)</code> che restituisce il valore massimo di una lista di interi.</p><p><strong>E2.</strong> Scrivi una funzione pura <code>conta(lista, valore)</code> che restituisce quante volte <code>valore</code> compare in <code>lista</code>.</p><p><strong>E3.</strong> Scrivi una funzione pura <code>inverti(lista)</code> che restituisce una <strong>nuova lista</strong> con gli elementi in ordine inverso, senza modificare quella originale.</p><p><strong>E4.</strong> Scrivi una funzione pura <code>rimuovi_duplicati(lista)</code> che restituisce una <strong>nuova lista</strong> con gli stessi elementi ma senza ripetizioni (mantenendo l&#x27;ordine di prima apparizione).</p><pre><code class="language-python">rimuovi_duplicati([1, 2, 1, 3, 2, 4])  # → [1, 2, 3, 4]</code></pre><p><strong>E5.</strong> Scrivi una funzione pura <code>unisci(a, b)</code> che restituisce una nuova lista con tutti gli elementi di <code>a</code> seguiti da tutti gli elementi di <code>b</code>, senza modificare né <code>a</code> né <code>b</code>.</p><p><strong>E6.</strong> Scrivi una funzione pura <code>filtra_pari(lista)</code> che restituisce una nuova lista contenente solo i numeri pari.</p><h3 id="scrivere-funzioni-void">Scrivere funzioni void</h3><p><strong>E7.</strong> Scrivi una funzione void <code>inverti_in_place(lista)</code> che inverte la lista <strong>modificandola direttamente</strong>, senza creare una lista nuova.</p><p><strong>E8.</strong> Scrivi una funzione void <code>azzera_negativi(lista)</code> che sostituisce ogni numero negativo con <code>0</code> <strong>nella lista originale</strong>.</p><pre><code class="language-python">dati = [3, -1, 7, -4, 0]
+azzera_negativi(dati)
+print(dati)   # [3, 0, 7, 0, 0]</code></pre><p><strong>E9.</strong> Scrivi una funzione void <code>moltiplica_elementi(lista, fattore)</code> che moltiplica ogni elemento della lista per <code>fattore</code>, modificando la lista originale.</p><pre><code class="language-python">dati = [1, 2, 3, 4]
+moltiplica_elementi(dati, 3)
+print(dati)   # [3, 6, 9, 12]</code></pre><p><strong>E10.</strong> Scrivi una funzione void <code>aggiungi_tutti(destinazione, sorgente)</code> che aggiunge tutti gli elementi di <code>sorgente</code> in fondo a <code>destinazione</code> in-place, senza creare nuove liste.</p><pre><code class="language-python">a = [1, 2, 3]
+b = [4, 5, 6]
+aggiungi_tutti(a, b)
+print(a)   # [1, 2, 3, 4, 5, 6]
+print(b)   # [4, 5, 6]  ← invariata</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="firma-e-black-box">Firma e black box</h2><p>Nel programma del corso il modulo 6 insiste sulla lettura delle funzioni come <strong>black box</strong>.</p><p>Una funzione andrebbe capita almeno a questo livello:</p><ul><li>che cosa riceve;</li><li>che cosa restituisce;</li><li>quale problema risolve;</li><li>che cosa non deve fare.</li></ul><p>Per esempio:</p><pre><code class="language-python">def is_palindroma(s):
-    ...</code></pre><p>ci interessa leggere la firma come:</p><ul><li>input: una stringa <code>s</code></li><li>output: <code>True</code> oppure <code>False</code></li></ul><p>senza dover ragionare subito su ogni dettaglio interno.</p><hr><a id="mod6-procedure"></a>
+    <h2 id="import-e-file-di-libreria">Import e file di libreria</h2><p>Scrivere sempre le stesse funzioni di supporto in ogni programma è scomodo. Python permette di mettere funzioni in un file separato — chiamato <strong>modulo</strong> o <strong>libreria</strong> — e di riusarle altrove con <code>import</code>.</p><h3 id="librerie-locali">Librerie locali</h3><p>Un file Python può contenere funzioni da riusare in altri file della stessa cartella. Supponiamo di avere due file:</p><pre><code class="language-python"># utils.py
+
+def somma_lista(lista):
+    totale = 0
+    i = 0
+    while i &lt; len(lista):
+        totale = totale + lista[i]
+        i = i + 1
+    return totale
+
+def inverti(lista):
+    risultato = []
+    i = len(lista) - 1
+    while i &gt;= 0:
+        risultato.append(lista[i])
+        i = i - 1
+    return risultato</code></pre><pre><code class="language-python"># main.py
+
+import utils
+
+dati = [3, 1, 4, 1, 5]
+print(utils.somma_lista(dati))
+print(utils.inverti(dati))</code></pre><p>La sintassi <code>utils.somma_lista(dati)</code> si legge: &quot;cerca la funzione <code>somma_lista</code> dentro il modulo <code>utils</code>&quot;. Il prefisso serve a evitare confusione quando due moduli diversi definiscono funzioni con lo stesso nome.</p><p>Regole da ricordare:</p><ul><li>il nome del modulo è il nome del file senza <code>.py</code>;</li><li><code>import utils</code> cerca <code>utils.py</code> nella stessa cartella del file che importa;</li><li>le funzioni importate si comportano esattamente come quelle definite nello stesso file — incluso il passaggio degli argomenti.</li></ul><h3 id="librerie-standard-random">Librerie standard: <code>random</code></h3><p>Python viene distribuito con una collezione di librerie già pronte, chiamata <strong>libreria standard</strong>. Non contengono codice da scrivere: basta importarle.</p><p>Una delle più usate è <code>random</code>, che genera valori casuali:</p><pre><code class="language-python">import random
+
+print(random.randint(1, 6))    # intero casuale tra 1 e 6 (inclusi)
+print(random.random())         # float casuale tra 0.0 e 1.0</code></pre><p>Ogni chiamata a <code>randint</code> produce un risultato diverso — non è deterministica come le funzioni che abbiamo scritto finora.</p><p>Esempio: simulare dieci lanci di dado e raccogliere i risultati in una lista.</p><pre><code class="language-python">import random
+
+def lanci_dado(n):
+    risultati = []
+    i = 0
+    while i &lt; n:
+        risultati.append(random.randint(1, 6))
+        i = i + 1
+    return risultati
+
+print(lanci_dado(10))   # es. [3, 1, 6, 2, 6, 4, 1, 5, 3, 2]</code></pre><p><code>random</code> offre anche <code>random.shuffle(lista)</code>, che mescola una lista <strong>in-place</strong> (funzione void):</p><pre><code class="language-python">import random
+
+carte = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+random.shuffle(carte)
+print(carte)   # ordine casuale</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="funzioni-vs-procedure">Funzioni vs procedure</h2><p>Una distinzione pratica utile:</p><ul><li>una <strong>funzione</strong> restituisce un valore;</li><li>una <strong>procedura</strong> produce soprattutto un effetto, per esempio una stampa.</li></ul><p>Esempio di funzione:</p><pre><code class="language-python">def successore(x):
-    return x + 1</code></pre><p>Esempio di procedura:</p><pre><code class="language-python">def saluta(nome):
-    print(&quot;Ciao&quot;, nome)</code></pre><p>La differenza conta quando vogliamo:</p><ul><li>riusare un risultato in altre espressioni;</li><li>testare il comportamento;</li><li>separare logica e presentazione.</li></ul><hr><a id="mod6-esercizi-funzioni"></a>
-  </div>
-</section>
+    <h2 id="esercizi-con-random">Esercizi con <code>random</code></h2><p><strong>L1.</strong> Scrivi una funzione <code>conta_sei(n)</code> che simula <code>n</code> lanci di un dado a sei facce e restituisce quante volte è uscito <code>6</code>.</p><pre><code class="language-python">print(conta_sei(1000))   # es. 162  (circa 1/6 di 1000)</code></pre><p><strong>L2.</strong> Scrivi una funzione <code>lista_casuale(n, minimo, massimo)</code> che restituisce una lista di <code>n</code> interi casuali compresi tra <code>minimo</code> e <code>massimo</code>.</p><pre><code class="language-python">print(lista_casuale(5, 1, 100))   # es. [47, 3, 82, 19, 61]</code></pre><p><strong>L3.</strong> Usando <code>random.shuffle</code>, scrivi una funzione void <code>mischia(lista)</code> che mescola la lista originale. Poi scrivi una funzione pura <code>mescolata(lista)</code> che restituisce una <strong>nuova lista</strong> mescolata senza modificare l&#x27;originale.</p><pre><code class="language-python">dati = [1, 2, 3, 4, 5]
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-assegnati-ricostruire-strip-e-join">Esercizi assegnati: ricostruire <code>strip</code> e <code>join</code></h2><p>Tra gli esercizi gia&#x27; assegnati ce ne sono due molto adatti a questo modulo, perche&#x27; obbligano a progettare bene comportamento e responsabilita&#x27; della funzione.</p><h3 id="1-ricostruire-strip">1. Ricostruire <code>strip</code></h3><p>Leggere:</p><ul><li>una stringa iniziale;</li><li>poi una sequenza di caratteri da rimuovere, uno per riga;</li><li>la sequenza termina con riga vuota.</li></ul><p>Obiettivo:</p><ul><li>rimuovere dall&#x27;inizio e dalla fine della stringa tutti i caratteri appartenenti all&#x27;insieme letto;</li><li>senza usare <code>strip()</code>.</li></ul><p>Questo esercizio e&#x27; utile perche&#x27; costringe a distinguere:</p><ul><li>bordo sinistro e bordo destro;</li><li>condizione di arresto;</li><li>caratteri interni che non vanno toccati.</li></ul><h3 id="2-ricostruire-join">2. Ricostruire <code>join</code></h3><p>Leggere:</p><ul><li>una stringa separatore;</li><li>poi una sequenza di parole, una per riga;</li><li>fermarsi quando compare <code>fine</code>.</li></ul><p>Obiettivo:</p><ul><li>costruire la stringa finale senza usare <code>join()</code>.</li></ul><p>Questo esercizio e&#x27; molto formativo perche&#x27; fa emergere subito un problema classico:</p><ul><li>come evitare un separatore in piu&#x27; all&#x27;inizio o alla fine.</li></ul><p>Il contratto del problema si puo&#x27; chiarire cosi&#x27;:</p><ul><li>la consegna va letta soprattutto come relazione tra input e output;</li><li>la prima riga letta e&#x27; il separatore;</li><li>le righe successive sono le parole da unire;</li><li><code>fine</code> serve solo a terminare la lettura e non va inserito nel risultato.</li></ul><p>Questo aiuta a distinguere due sottoproblemi:</p><ol><li>leggere correttamente i dati;</li><li>costruire la stringa finale senza separatore in eccesso.</li></ol><p>Una buona osservazione di metodo:</p><ul><li><code>split</code>, <code>strip</code> e <code>join</code> non si imparano solo &quot;a memoria&quot;;</li><li>conviene leggere la documentazione e capire su quale oggetto vivono;</li><li>per esempio <code>&quot;-&quot;.join(lista)</code> e non <code>lista.join(&quot;-&quot;)</code>, semplicemente perche&#x27; in Python quel metodo e&#x27; definito sulla stringa separatore.</li></ul><p>Questo non va preso come un fatto metafisico, ma come una convenzione concreta del linguaggio:</p><ul><li>alcune operazioni sono metodi delle stringhe;</li><li>altre sono funzioni globali;</li><li>parte del lavoro del programmatore e&#x27; capire quale interfaccia espone l&#x27;oggetto che sta usando.</li></ul><p>Questi esercizi servono anche a ricordare che:</p><ul><li>ricostruire <code>strip</code> o <code>join</code> non serve solo a copiare un metodo gia&#x27; esistente;</li><li>serve a capire che comportamento preciso ci aspettiamo;</li><li>e quindi a progettare meglio la funzione prima ancora di scriverla.</li></ul><hr>
-  </div>
-</section>
+mischia(dati)
+print(dati)          # ordine casuale, originale modificata
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="import-e-file-di-libreria">Import e file di libreria</h2><p>Qui conviene introdurre anche un passaggio utile:</p><ul><li>un file Python puo&#x27; contenere codice da eseguire subito;</li><li>ma puo&#x27; anche contenere funzioni, costanti o strutture dati da riusare altrove;</li><li>in questo secondo caso lo trattiamo come una piccola libreria locale.</li></ul><p>Schema minimo:</p><pre><code class="language-python">
-def somma1(x):
-    return x + 1</code></pre><pre><code class="language-python">
-import mialib
-
-print(mialib.somma1(4))</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-import">Il problema che porta a <code>import</code></h2><p>Non tutto il codice che ci serve deve stare nello stesso file.</p><p>A volte vogliamo:</p><ul><li>riusare funzioni scritte altrove;</li><li>separare il codice in file diversi;</li><li>usare librerie gia&#x27; disponibili.</li></ul><p><code>import</code> serve a rendere accessibili nomi definiti in un altro modulo.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-import">Sintassi di <code>import</code></h2><p>Forma base:</p><pre><code class="language-python">import nome_modulo</code></pre><p>Esempi:</p><pre><code class="language-python">import sys
-import mialib</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-import">Semantica di <code>import</code></h2><p>Quando Python esegue <code>import nome_modulo</code>:</p><ol><li>cerca il modulo richiesto;</li><li>lo carica;</li><li>rende disponibile quel nome nell&#x27;ambiente corrente.</li></ol><p>Dopo:</p><pre><code class="language-python">import mialib</code></pre><p>possiamo accedere agli oggetti del modulo con il prefisso:</p><pre><code class="language-python">mialib.somma1(4)</code></pre><p>Punti chiave:</p><ul><li>il nome della libreria coincide con il nome del file senza <code>.py</code>;</li><li><code>import mialib</code> rende disponibili gli oggetti definiti in quel file;</li><li>il prefisso <code>mialib.</code> evita collisioni tra nomi uguali provenienti da file diversi.</li></ul><p>Questo si collega bene a una buona pratica gia&#x27; vista:</p><ul><li>non dare per scontato che nomi come <code>len</code>, <code>print</code> o altri identificatori importanti siano sempre liberi;</li><li>quando usiamo librerie, il namespace conta.</li></ul><h3 id="perche-stanno-bene-nel-modulo-6">Perche&#x27; stanno bene nel modulo 6</h3><p>Questi esercizi sono ideali come funzioni del tipo:</p><pre><code class="language-python">def my_strip(s, chars):
-    ...
-
-def my_join(separatore, parole):
-    ...</code></pre><p>perche&#x27; permettono di:</p><ul><li>definire un contratto chiaro;</li><li>testare casi normali e casi limite;</li><li>riusare la soluzione in programmi diversi.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="soluzioni-commentate-palindromi-e-normalizzazione">Soluzioni commentate: palindromi e normalizzazione</h2><p>Tra le soluzioni svolte compaiono due idee molto utili per questo modulo.</p><h3 id="is-palindroma-come-funzione-di-confronto-simmetrico"><code>is_palindroma</code> come funzione di confronto simmetrico</h3><p>Una soluzione efficace controlla la stringa solo fino a meta&#x27;:</p><pre><code class="language-python">condizione = True
-
-for i in range(len(parola) // 2):
-    if parola[i] != parola[-1 - i]:
-        condizione = False</code></pre><p>Il punto didattico importante non e&#x27; solo il risultato, ma il ragionamento:</p><ul><li>confrontiamo posizioni speculari;</li><li>non serve scorrere tutta la stringa;</li><li>possiamo fermarci concettualmente a meta&#x27;.</li></ul><p>Questa e&#x27; una base molto buona per una funzione:</p><pre><code class="language-python">def is_palindroma(s):
-    ...</code></pre><h3 id="separare-normalizzazione-e-controllo">Separare normalizzazione e controllo</h3><p>In un&#x27;altra soluzione, prima di controllare il palindromo si normalizza la stringa:</p><ul><li>conversione in minuscolo;</li><li>rimozione di spazi;</li><li>rimozione di punteggiatura e apostrofi.</li></ul><p>Questo insegna una distinzione cruciale:</p><ul><li>una funzione puo&#x27; preparare il dato;</li><li>un&#x27;altra puo&#x27; verificare la proprieta&#x27; richiesta.</li></ul><p>E&#x27; un ottimo esempio di scomposizione in sottoproblemi:</p><ol><li><code>normalizza_testo(s)</code></li><li><code>is_palindroma(s)</code></li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-suggeriti-per-la-scomposizione-in-funzioni">Esercizi suggeriti per la scomposizione in funzioni</h2><ol><li>scrivi una funzione che restituisce il massimo di una lista di interi positivi;</li><li>scrivi <code>is_palindroma(s)</code> che ignora maiuscole e spazi;</li><li>scrivi <code>conta_vocali(s)</code>;</li><li>scrivi <code>stampa_rettangolo(base, altezza)</code> come procedura;</li><li>riscrivi un programma lungo dividendolo in funzioni piccole con un solo compito.</li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi-my-strip-e-my-join">Esercizi: <code>my_strip</code> e <code>my_join</code></h2><h3 id="my-strip"><code>my_strip</code></h3><p>Scrivi un programma che effettua la stessa operazione della funzione <code>strip</code> — <strong>senza usarla</strong>.</p><p>Il programma legge dall&#x27;input:</p><ul><li>una stringa da trattare;</li><li>una sequenza di caratteri da rimuovere, uno per riga; la sequenza termina con una riga vuota.</li></ul><p>Il programma rimuove dall&#x27;inizio e dalla fine della stringa tutti i caratteri appartenenti alla sequenza letta e stampa la stringa risultante.</p><p>Esempi:</p><p>Input:</p><pre><code>..hello world!!
-.
-!
-</code></pre><p>Output: <code>hello world</code></p><p>Input:</p><pre><code>  pic-nic -
- 
-.
-,
--
-</code></pre><p>Output: <code>pic-nic</code></p><blockquote><p>Lo spazio iniziale viene rimosso; il <code>-</code> finale viene rimosso; il <code>-</code> dentro <code>pic-nic</code> rimane.</p></blockquote><h3 id="my-join"><code>my_join</code></h3><p>Scrivi un programma che effettua la stessa operazione della funzione <code>join</code> — <strong>senza usarla</strong>.</p><p>Il programma legge dall&#x27;input:</p><ul><li>una stringa separatore;</li><li>una sequenza di parole, una per riga; la sequenza termina con <code>fine</code>.</li></ul><p>Il programma restituisce una stringa composta da tutte le parole intervallate dal separatore.</p><p>Esempio:</p><p>Input:</p><pre><code>, 
-pane
-formaggio
-salame
-fine</code></pre><p>Output: <code>pane, formaggio, salame</code></p><blockquote><p>Attenzione al separatore in eccesso: come eviti di aggiungerne uno all&#x27;inizio o alla fine?</p></blockquote><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il materiale necessario per:</p><ul><li>definire funzioni con parametri e <code>return</code>;</li><li>distinguere funzione e procedura;</li><li>ragionare in termini di firma e black box;</li><li>progettare utility riusabili;</li><li>usare esercizi come <code>my_strip</code> e <code>my_join</code> per consolidare astrazione e testing.</li></ul>
+nuova = mescolata(dati)
+print(dati)          # invariata
+print(nuova)         # ordine diverso</code></pre>
+    
   </div>
 </section>
 
@@ -289,7 +433,10 @@ fine</code></pre><p>Output: <code>pane, formaggio, salame</code></p><blockquote>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 23</div>
+  <div class="counter" id="counter">1 / 14</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));
