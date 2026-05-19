@@ -1,0 +1,90 @@
+<svg width="545" height="245" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#555"/>
+    </marker>
+  </defs>
+
+  <!-- BARATTOLO APERTO PRIMA ([1,2,3]) - center x=115 -->
+  <!-- Bordo apertura (senza coperchio) -->
+  <rect x="51" y="12" width="128" height="10" rx="6"
+        fill="rgba(200,225,245,0.55)" stroke="#6090b0" stroke-width="1.8"/>
+  <!-- Corpo -->
+  <path d="M 55 20 L 55 186 Q 55 207 115 207 Q 175 207 175 186 L 175 20 Z"
+        fill="rgba(210,235,255,0.28)" stroke="#6090b0" stroke-width="2"/>
+  <!-- Riflesso vetro -->
+  <path d="M 68 24 L 68 183"
+        fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Elementi lista: 3 celle, 24px wide, gap 4px -->
+  <!-- start x = 115 - (24*3 + 4*2)/2 = 115 - 40 = 75 -->
+  <rect x="75" y="100" width="24" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="87" y="124" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">1</text>
+
+  <rect x="103" y="100" width="24" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="115" y="124" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">2</text>
+
+  <rect x="131" y="100" width="24" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="143" y="124" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">3</text>
+
+  <!-- Etichetta x a sinistra -->
+  <line x1="55" y1="115" x2="18" y2="115"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <circle cx="18" cy="115" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <rect x="20" y="95" width="52" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="46" y="122" text-anchor="middle"
+        font-size="24" font-weight="bold" font-family="monospace" fill="#3a2800">x</text>
+
+  <!-- FRECCIA con istruzione -->
+  <line x1="180" y1="120" x2="260" y2="120"
+        stroke="#555" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="220" y="111" text-anchor="middle"
+        font-family="monospace" font-size="12" fill="#333">.append(4)</text>
+
+  <!-- BARATTOLO APERTO DOPO ([1,2,3,4]) - center x=380 -->
+  <!-- Bordo apertura -->
+  <rect x="316" y="12" width="128" height="10" rx="6"
+        fill="rgba(200,225,245,0.55)" stroke="#6090b0" stroke-width="1.8"/>
+  <!-- Corpo -->
+  <path d="M 320 20 L 320 186 Q 320 207 380 207 Q 440 207 440 186 L 440 20 Z"
+        fill="rgba(210,235,255,0.28)" stroke="#6090b0" stroke-width="2"/>
+  <!-- Riflesso vetro -->
+  <path d="M 333 24 L 333 183"
+        fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Elementi lista: 4 celle, 22px wide, gap 3px -->
+  <!-- start x = 380 - (22*4 + 3*3)/2 = 380 - (88+9)/2 = 380 - 48 = 332 -->
+  <rect x="332" y="100" width="22" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="343" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">1</text>
+
+  <rect x="357" y="100" width="22" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="368" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">2</text>
+
+  <rect x="382" y="100" width="22" height="36" rx="3"
+        fill="rgba(255,218,90,0.75)" stroke="#c8a010" stroke-width="1.5"/>
+  <text x="393" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">3</text>
+
+  <!-- Elemento nuovo: colore diverso -->
+  <rect x="407" y="100" width="22" height="36" rx="3"
+        fill="rgba(110,200,130,0.80)" stroke="#5a9a6a" stroke-width="1.5"/>
+  <text x="418" y="124" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a4a2a">4</text>
+
+  <!-- Etichetta x a destra (stesso barattolo, stessa etichetta) -->
+  <line x1="440" y1="115" x2="476" y2="115"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <circle cx="476" cy="115" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <rect x="478" y="95" width="52" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="504" y="122" text-anchor="middle"
+        font-size="24" font-weight="bold" font-family="monospace" fill="#3a2800">x</text>
+
+  <!-- Didascalia -->
+  <text x="380" y="228" text-anchor="middle"
+        font-size="11" fill="#555">stesso barattolo, stessa etichetta</text>
+</svg>

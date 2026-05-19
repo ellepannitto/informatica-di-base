@@ -1,0 +1,72 @@
+<svg width="600" height="270" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+
+  <!-- === BARATTOLO SINISTRO: etichetta x, valore 42 === -->
+
+  <!-- Coperchio -->
+  <rect x="88" y="10" width="104" height="18" rx="5"
+        fill="#7a9e7a" stroke="#4a7a4a" stroke-width="1.5"/>
+  <!-- Banda coperchio -->
+  <rect x="82" y="26" width="116" height="8" rx="3"
+        fill="#9aba9a" stroke="#5a8a5a" stroke-width="1"/>
+  <!-- Collo -->
+  <rect x="94" y="33" width="92" height="16" rx="4"
+        fill="rgba(200,225,245,0.45)" stroke="#6090b0" stroke-width="1.8"/>
+  <!-- Corpo -->
+  <path d="M 78 47 L 78 200 Q 78 228 140 228 Q 202 228 202 200 L 202 47 Z"
+        fill="rgba(210,235,255,0.28)" stroke="#6090b0" stroke-width="2"/>
+  <!-- Riflesso -->
+  <path d="M 90 52 L 90 205 Q 91 218 96 222"
+        fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Valore -->
+  <text x="140" y="155" text-anchor="middle"
+        font-size="56" font-weight="bold" fill="#1a3a60" opacity="0.85">42</text>
+
+  <!-- Etichetta x a sinistra -->
+  <line x1="25" y1="118" x2="78" y2="118"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <circle cx="26" cy="118" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <rect x="28" y="98" width="64" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="60" y="125" text-anchor="middle"
+        font-size="26" font-weight="bold" font-family="monospace" fill="#3a2800">x</text>
+
+  <!-- === BARATTOLO DESTRO: etichetta y, valore 42 === -->
+  <!-- (spostato di +300 rispetto al sinistro) -->
+
+  <!-- Coperchio -->
+  <rect x="388" y="10" width="104" height="18" rx="5"
+        fill="#7a9e7a" stroke="#4a7a4a" stroke-width="1.5"/>
+  <!-- Banda coperchio -->
+  <rect x="382" y="26" width="116" height="8" rx="3"
+        fill="#9aba9a" stroke="#5a8a5a" stroke-width="1"/>
+  <!-- Collo -->
+  <rect x="394" y="33" width="92" height="16" rx="4"
+        fill="rgba(200,225,245,0.45)" stroke="#6090b0" stroke-width="1.8"/>
+  <!-- Corpo -->
+  <path d="M 378 47 L 378 200 Q 378 228 440 228 Q 502 228 502 200 L 502 47 Z"
+        fill="rgba(210,235,255,0.28)" stroke="#6090b0" stroke-width="2"/>
+  <!-- Riflesso -->
+  <path d="M 390 52 L 390 205 Q 391 218 396 222"
+        fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Valore -->
+  <text x="440" y="155" text-anchor="middle"
+        font-size="56" font-weight="bold" fill="#1a3a60" opacity="0.85">42</text>
+
+  <!-- Etichetta y a destra -->
+  <line x1="502" y1="118" x2="549" y2="118"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <circle cx="548" cy="118" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <rect x="508" y="98" width="64" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="540" y="125" text-anchor="middle"
+        font-size="26" font-weight="bold" font-family="monospace" fill="#3a2800">y</text>
+
+  <!-- Punto interrogativo al centro -->
+  <text x="300" y="140" text-anchor="middle"
+        font-size="40" fill="#cc4444" opacity="0.7">?</text>
+
+  <!-- Didascalia -->
+  <text x="300" y="255" text-anchor="middle"
+        font-size="12" fill="#cc4444">modello errato: due barattoli in memoria con lo stesso valore</text>
+
+</svg>

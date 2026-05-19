@@ -1,0 +1,50 @@
+<svg width="340" height="270" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
+
+  <!-- Coperchio -->
+  <rect x="118" y="10" width="104" height="18" rx="5"
+        fill="#7a9e7a" stroke="#4a7a4a" stroke-width="1.5"/>
+  <!-- Banda del coperchio -->
+  <rect x="112" y="26" width="116" height="8" rx="3"
+        fill="#9aba9a" stroke="#5a8a5a" stroke-width="1"/>
+
+  <!-- Collo del barattolo -->
+  <rect x="124" y="33" width="92" height="16" rx="4"
+        fill="rgba(200,225,245,0.45)" stroke="#6090b0" stroke-width="1.8"/>
+
+  <!-- Corpo del barattolo -->
+  <path d="M 108 47 L 108 200 Q 108 228 170 228 Q 232 228 232 200 L 232 47 Z"
+        fill="rgba(210,235,255,0.28)" stroke="#6090b0" stroke-width="2"/>
+
+  <!-- Riflesso del vetro -->
+  <path d="M 120 52 L 120 205 Q 121 218 126 222"
+        fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Valore dentro al barattolo -->
+  <text x="170" y="155" text-anchor="middle"
+        font-size="56" font-weight="bold" fill="#1a3a60" opacity="0.85">42</text>
+
+  <!-- Etichetta x (alta) -->
+  <!-- Filo -->
+  <line x1="25" y1="100" x2="108" y2="100"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <!-- Occhiello -->
+  <circle cx="26" cy="100" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <!-- Tag -->
+  <rect x="28" y="80" width="64" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="60" y="107" text-anchor="middle"
+        font-size="26" font-weight="bold" font-family="monospace" fill="#3a2800">x</text>
+
+  <!-- Etichetta y (bassa) -->
+  <!-- Filo -->
+  <line x1="25" y1="155" x2="108" y2="155"
+        stroke="#a08040" stroke-width="1.4" stroke-dasharray="4,3"/>
+  <!-- Occhiello -->
+  <circle cx="26" cy="155" r="5" fill="white" stroke="#a08040" stroke-width="1.5"/>
+  <!-- Tag -->
+  <rect x="28" y="135" width="64" height="40" rx="5"
+        fill="#fffbe6" stroke="#c8a820" stroke-width="1.8"/>
+  <text x="60" y="162" text-anchor="middle"
+        font-size="26" font-weight="bold" font-family="monospace" fill="#3a2800">y</text>
+
+</svg>
