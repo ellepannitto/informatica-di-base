@@ -1,338 +1,460 @@
-# Modulo 04 · Iterazione con sentinelle, convalida dell'input e liste
+# Modulo 04 · Paradigmi di programmazione con while e liste
 
 ## A fine lezione
 
-- Sai usare `while` quando non conosci in anticipo il numero di iterazioni?
 - Sai progettare cicli con sentinelle e input ripetuto?
 - Sai riconoscere errori tipici come loop infinito e stato non aggiornato?
-- Sai applicare `while` a conteggi, validazione e piccoli automi?
+- Sai applicare `while` a conteggi, validazione e sequenze di lunghezza variabile?
 - Sai rappresentare dati ordinati con una lista?
 - Sai usare le operazioni fondamentali sulle liste?
 - Sai trasformare una stringa in lista con `split()`?
 - Sai leggere sequenze di dati e accumularle in una lista?
-- Sai ragionare sulla differenza tra lista e stringa?
 
-## Quando l'utente decide quando fermarsi
+## Paradigmi del `while`
 
-In alcuni esercizi il numero di iterazioni dipende da un valore noto in anticipo (es. `pagine = 120`).
-Ma a volte il programma non sa quante volte dovrà ripetere: dipende dall'apparire di un valore in modo non determinabile a priori.
+La condizione del `while` può dipendere da cose molto diverse. Ecco cinque schemi ricorrenti.
 
-Esempio: sommare numeri finché l'utente non inserisce `-1`.
+### 1 · Contatore
+
+> Stampa i numeri da 1 a 10.
+
+**Indizi nel testo:** c'è un numero (**contatore**) preciso di ripetizioni ("da 1 a 10", "5 volte", "per ogni elemento"). Si sa già quante volte il ciclo dovrà girare.
+
+Come scorre l'esecuzione:
+
+```
+i:    1    2    3    4    5    6    7    8    9   10   11
+    ──────────────────────────────────────────────────────
+≤10?  ✓    ✓    ✓    ✓    ✓    ✓    ✓    ✓    ✓    ✓    ✗
+      ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓    ↓   STOP
+    stampa ...
+```
+
+| passo | `i` | `i <= 10`? | stampa | `i` dopo |
+|-------|-----|------------|--------|----------|
+| 1     | 1   | ✓          | 1      | 2        |
+| 2     | 2   | ✓          | 2      | 3        |
+| …     | …   | ✓          | …      | …        |
+| 10    | 10  | ✓          | 10     | 11       |
+| 11    | 11  | ✗ → stop   | —      | —        |
 
 <details>
 
 ```python
-numero = int(input("Numero (-1 per terminare): "))
-somma = 0
-
-while numero != -1:
-    somma = somma + numero
-    numero = int(input("Numero (-1 per terminare): "))
+i = 1                # inizializza il contatore
+while i <= 10:       # condizione: non abbiamo ancora raggiunto il limite
+    print(i)
+    i = i + 1        # aggiorna il contatore — senza questa riga, loop infinito
 ```
 
 </details>
 
-Lo schema è lo stesso dei due esempi visti prima:
+### 2 · Soglia su accumulatore
 
-- si legge il primo valore **prima** del ciclo (inizializzazione dello stato);
-- la guardia controlla se continuare;
-- nel corpo si fa il lavoro utile e si **rilegge** il valore (aggiornamento dello stato).
+> Chiedi numeri all'utente e sommali. Fermati quando la somma supera 100.
 
-La differenza rispetto al contatore è che qui lo stato non cambia in modo prevedibile: cambia perché l'utente inserisce un valore diverso. Il programma si ferma quando quel valore soddisfa una condizione speciale concordata (`-1`, `"fine"`, ecc.).
+**Indizi nel testo:** c'è un valore (**accumulatore**) che cresce ad ogni passo ("somma", "totale", "prodotto") e una soglia da raggiungere ("finché non supera", "almeno", "fino a raggiungere"). Non si sa in anticipo quante iterazioni servono ma la guardia del while non dipende direttamente dall'input inserito dall'utente.
 
-## Esercizi
+Come scorre l'esecuzione (esempio con input `30, 25, 20, 40`):
 
-1. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e conta quanti numeri interi sono stati inseriti.
-2. Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e, per ogni numero inserito, se il numero è pari stampa `Hai inserito un numero pari!` altrimenti stampa `Hai inserito un numero dispari!`.
-3. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce la parola `fine`. Per ogni parola inserita, se la parola è più lunga di 5 caratteri stampa `parola lunga` altrimenti stampa `parola breve`.
-4. Scrivi un programma che legge un numero compreso tra 1 e 10 (controlla che il numero inserito sia lecito, altrimenti stampa un messaggio di errore) e stampa la tabellina di quel numero. Ad esempio, se viene inserito `3`:
-    ```
-    3 x 0 = 0
-    3 x 1 = 3
-    3 x 2 = 6
-    ...
-    3 x 10 = 30
-    ```
-5. Chiedi all'utente di inserire una stringa e calcola quante vocali contiene.
-6. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Per ogni parola inserita calcola quante vocali contiene. Alla fine, stampa il numero totale di vocali incontrate.
-7. Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Alla fine, stampa quante delle parole inserite finiscono per vocale.
-8. Scrivi un programma che legge parole dall'input finché l'utente non scrive `fine`. Conta quante parole iniziano con una lettera maiuscola.
-9. Scrivi un programma che legge parole dall'input e si ferma alla prima parola più lunga di 6 caratteri, stampandola. Se non compare nessuna parola così lunga prima di `fine`, stampa `nessuna`.
-10. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`, e al termine stampa il massimo tra quelli inseriti. (Se non viene inserito nessun numero prima dello zero, stampa un messaggio apposito.)
-11. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Al termine stampa quanti erano pari e quanti dispari, e quale delle due categorie era più numerosa.
-12. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0` e calcola la media dei valori inseriti. Se non viene inserito nessun valore prima dello zero, stampa `nessun dato`.
-13. Scrivi un programma che legge una sequenza di numeri positivi terminata da `-1` e stampa ogni numero insieme al suo scarto rispetto al numero precedente. Per il primo numero lo scarto non esiste; per gli altri stampa `differenza: +3` o `differenza: -5` ecc.
-14. Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Stampa `sì` se la sequenza è non-decrescente (ogni numero è ≥ al precedente), `no` altrimenti.
-15. Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Controlla se ogni `1` è seguito da un `2`. Esempi:
-    - `9, 1, 2, 6, 1, 2, 0` → `Sequenza corretta`
-    - `9, 1, 6, 1, 2, 0` → `Sequenza errata`
-16. Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Controlla se tra le parole inserite compare la parola `lingua`. Stampa `sì` o `no`.
+```
+input:    30      25      20      40
+        ──────────────────────────────────────
+somma:   0 → 30 → 55 → 75 → 115
+             <100  <100  <100   ≥100
+              ✓     ✓     ✓      ✗
+                                STOP
+```
 
-## Esercizi
+| passo | `n` letto | `somma` prima | `somma < 100`? | `somma` dopo |
+|-------|-----------|---------------|----------------|--------------|
+| 1     | 30        | 0             | ✓              | 30           |
+| 2     | 25        | 30            | ✓              | 55           |
+| 3     | 20        | 55            | ✓              | 75           |
+| 4     | 40        | 75            | ✓              | 115          |
+| 5     | —         | 115           | ✗ → stop       | —            |
 
-Gli esercizi con pattern di stampa costringono a distinguere il ciclo esterno (righe) dal ciclo interno (simboli per riga), e mostrano subito gli errori di guardia, inizializzazione e incremento.
+A differenza del contatore, non si può sapere in anticipo quante righe avrà la tabella: dipende dai valori inseriti.
 
-1. Dati due numeri (es. `pagine = 3` e `righe = 5`), stampa tutte le combinazioni di pagine e righe come nell'esempio sopra.
-2. Stampa la tavola pitagorica da 1 a 10:
-    ```
-    1 x 1 = 1
-    1 x 2 = 2
-    ...
-    10 x 10 = 100
-    ```
-3. Chiedi all'utente `n` dall'input. Stampa un quadrato di asterischi `n x n`:
-    ```
-    ***
-    ***
-    ***
-    ```
-4. Scrivi un programma che legge un intero positivo `n` e stampa tutte le sue cifre, una per riga, partendo da quella meno significativa. (Es.: `n = 374` → `4`, `7`, `3`.) Non usare stringhe: estrai le cifre con divisione e modulo.
-5. Scrivi un programma che legge un intero positivo `n` e stabilisce se è primo. Un numero è primo se è divisibile solo per 1 e per se stesso.
-6. Scrivi un programma che legge un intero positivo `n` e stampa la sequenza di Collatz: se `n` è pari calcola `n // 2`, se è dispari calcola `3 * n + 1`; ripeti finché `n` non diventa `1`. Stampa ogni valore e, alla fine, quanti passi sono stati necessari.
-7. Scrivi un programma che simula un gioco: il computer sceglie un numero tra 1 e 100 (es. `segreto = 42`), l'utente prova a indovinarlo inserendo tentativi. Dopo ogni tentativo il programma dice `troppo basso`, `troppo alto` oppure `esatto!`. Conta i tentativi.
-8. Scrivi un programma che legge un intero positivo `n` e stampa il suo fattoriale (`n! = 1 × 2 × … × n`).
-9. Scrivi un programma che verifica se una stringa letta dall'input è un palindromo usando un ciclo `while` e confrontando caratteri dalla testa e dalla coda, senza usare lo slicing `[::-1]`.
-10. Scrivi un programma che legge parole finché l'utente non scrive `fine` e le stampa in ordine inverso rispetto all'ordine di inserimento. (Usa una lista per memorizzarle, poi scorri al contrario.)
-11. Scrivi un programma che legge un intero positivo `n` e stampa i primi `n` numeri della sequenza di Fibonacci: `0, 1, 1, 2, 3, 5, 8, …`
-
-## Automi a stati finiti e il `while`
-
-In modulo 3 abbiamo usato gli automi per descrivere come un `if/elif/else` **partiziona** gli input:
-dato un input, l'automa sceglie un ramo e raggiunge uno stato finale e si ferma lì.
-
-Con il `while` cambia la natura dell'input: non un singolo valore o una sequenza determinata, ma una **sequenza** di cui non conosciamo necessariamente la lunghezza in anticipo. Il ciclo legge un elemento alla volta e aggiorna lo stato; si ferma quando la sequenza è esaurita o quando una condizione segnala la fine.
-
-### Esempio: valore speciale di stop
+<details>
 
 ```python
-numero = int(input("Numero (-1 per terminare): "))
-somma = 0
-while numero != -1:
-    somma = somma + numero
-    numero = int(input("Numero (-1 per terminare): "))
+somma = 0             # inizializza l'accumulatore
+while somma < 100:    # condizione: il risultato non ha ancora raggiunto la soglia
+    n = int(input("Numero: "))
+    somma = somma + n # aggiorna l'accumulatore
+print("Totale:", somma)
 ```
-
-La struttura dell'automa è identica: uno stato `resta` con un cappio su sé stesso finché la guardia è vera, e una transizione verso `fine` quando arriva il valore speciale.
-
-```
-         ┌───────────────────┐
-         │   numero ≠ -1,    │
-         ▼                   │
-──►  ┌──────────────┐        │
-     │    resta     │────────┘
-     └──────────────┘
-           │  numero = -1
-           ▼
-        ╔══════╗
-        ║ fine ║
-        ╚══════╝
-```
-
-> La domanda da farsi sempre è: **quale valore dello stato porta la guardia a diventare falsa?**
-> Se non esiste, il ciclo non termina mai.
-
-## Esercizi: riconoscimento di stringhe
-
-Un automa a stati finiti legge una sequenza **una lettera alla volta**.
-A ogni passo:
-
-1. guarda il carattere corrente;
-2. segue la transizione corrispondente allo stato in cui si trova;
-3. aggiorna lo stato.
-
-Quando la sequenza è finita:
-- se ci si trova in uno **stato finale** (╔══╗), la sequenza è accettata;
-- se lo stato non è finale, la sequenza non è accettata.
-
-### Come seguire un automa su una stringa concreta
-
-Esempio: costruiamo un automa che controlla se nella sequenza è stata inserita almeno una vocale.
-
-Due stati: `non_trovata` (nessuna vocale vista finora) e `trovata` (almeno una vocale letta — stato finale).
-
-```
-         ┌──── non_vocale ──────────────────┐
-         ▼                                  │
-     ┌──────────────────┐                   │
-──►  │   non_trovata    │───────────────────┘
-     └──────────────────┘
-          │
-          │ vocale
-          ▼
-        ╔══════════╗
-        ║  trovata ║◄─── qualsiasi ───┐
-        ╚══════════╝──────────────────┘
-```
-
-Se la sequenza finisce in `trovata` (╔══╗): accettata.
-Se finisce in `non_trovata`: non accettata.
-
-Tracciamento su `"bac"`:
-
-| Passo | Carattere | Stato corrente | Transizione         | Stato successivo |
-| ----- | --------- | -------------- | ------------------- | ---------------- |
-| 1     | `b`       | `non_trovata`  | b non è vocale      | `non_trovata`    |
-| 2     | `a`       | `non_trovata`  | a è vocale          | `trovata`        |
-| 3     | `c`       | `trovata`      | già in stato finale | `trovata`        |
-| fine  |           | `trovata` → ╔══╗ |                   | **sì**           |
-
-Stessa stringa, risultato opposto: `"bcd"`.
-
-| Passo | Carattere    | Stato corrente | Transizione    | Stato successivo        |
-| ----- | ------------ | -------------- | -------------- | ----------------------- |
-| 1     | `b`          | `non_trovata`  | b non è vocale | `non_trovata`           |
-| 2     | `c`          | `non_trovata`  | c non è vocale | `non_trovata`           |
-| 3     | `d`          | `non_trovata`  | d non è vocale | `non_trovata`           |
-| fine  | fine stringa | `non_trovata`  | fine stringa   | `fine stringa` → **no** |
-
-La regola è sempre la stessa: **l'accettazione dipende da dove porta la transizione fine stringa**,
-non da cosa è successo durante il percorso.
-
-Per ogni esercizio:
-
-1. identifica gli **stati** necessari (cosa devo ricordare mentre scorro la stringa?);
-2. disegna l'automa con stati, transizioni e **stati finali** (doppio bordo);
-3. scrivi il programma con un `while`.
-
-
-**Problema:** data una stringa, stampare `sì` se contiene almeno una vocale, `no` altrimenti.
-
-**Stati:** due
-— `non_trovata` (nessuna vocale vista finora) e
-- `trovata` (stato finale ╔══╗).
-
-**Programma:**
-
-```python
-stringa = input("Stringa: ")
-stato = "non_trovata"
-i = 0
-while i < len(stringa) and stato == "non_trovata":
-    if stringa[i] in "aeiouAEIOU":
-        stato = "trovata"
-    i = i + 1
-
-if stato == "trovata":
-    print("sì")
-else:
-    print("no")
-```
-
-La guardia del `while` ha due condizioni: non aver finito la stringa **e** non aver già trovato la vocale. Appena una vocale viene trovata, il ciclo si interrompe senza leggere il resto.
 
 </details>
 
-### Esempio svolto: ogni `a` seguita da `b`
+### 3 · Proprietà matematica
 
-**Problema:** data una stringa, stampare `sì` se ogni `a` è immediatamente seguita da `b`, `no` altrimenti
+> Dato un numero intero positivo, scopri se è divisibile per 5 usando solo la sottrazione.
 
-**Cosa mi aspetto:**
+**Indizi nel testo:** la condizione riguarda una proprietà del numero stesso ("finché è positivo", "finché è pari", "finché non è 0", "se è divisibile"). Non c'è un contatore né un input da attendere: il valore si trasforma da solo ad ogni passo. Il risultato emerge solo alla fine, dal valore rimasto.
 
-- `"abxab"` → sì
-- `"axb"` → no
-- `"a"` → no
-- `""` → sì
-
-**Stati:** tre
-— `ok` (finora tutto corretto),
-- `dopo_a` (l'ultimo carattere letto era `a`, aspettiamo `b`),
-- `errore` (trovata una `a` non seguita da `b`). Da `errore` non si esce.
+Come scorre l'esecuzione:
 
 ```
-     ┌ ≠ a ─┐                               ┌───── 'a' ──┐
-     ▼      |                               ▼            │
-──►  ╔═══════╗              'a'        ┌──────────┐      │
-     ║  ok   ║ ──────────────────────► │  dopo_a  │──────┘
-     ╚═══════╝                         └──────────┘
-       ▲                                  │ |
-       └──────────── b ───────────────────┘ |
-                                            │ ≠ a, b
-                                            ▼
-                                       ┌─────────┐◄── qualsiasi ──┐
-                                       │ errore  │                |
-                                       └─────────┘────────────────┘
+n = 15               n = 13
+15 → 10 → 5 → 0     13 → 8 → 3 → -2
+ ✓    ✓    ✓   ✗      ✓    ✓    ✓    ✗
+           STOP                  STOP
+n == 0 → divisibile  n < 0 → non divisibile
 ```
 
-Il diagramma diventa denso: è normale per automi con tre stati e transizioni incrociate.
-Guardiamo la tabella delle transizioni:
+| passo | `n` prima | `n > 0`? | `n` dopo |
+|-------|-----------|----------|----------|
+| 1     | 15        | ✓        | 10       |
+| 2     | 10        | ✓        | 5        |
+| 3     | 5         | ✓        | 0        |
+| 4     | 0         | ✗ → stop | —        |
 
-| Stato corrente | Carattere letto        | Stato successivo |
-| -------------- | ---------------------- | ---------------- |
-| `ok`           | `a`                    | `dopo_a`         |
-| `ok`           | tutto tranne `a`       | `ok`             |
-| `dopo_a`       | `b`                    | `ok`             |
-| `dopo_a`       | `a`                    | `dopo_a`         |
-| `dopo_a`       | tutto tranne `a` e `b` | `errore`         |
-| `errore`       | qualsiasi carattere    | `errore`         |
+Dopo il ciclo, `n == 0` significa che le sottrazioni si sono fermate esattamente a zero: il numero era divisibile per 5.
 
-**Traccia su `"abxab"`:**
-
-| Passo | Carattere | Stato corrente | Stato successivo |
-| ----- | --------- | -------------- | ---------------- |
-| 1     | `a`       | `ok`           | `dopo_a`         |
-| 2     | `b`       | `dopo_a`       | `ok`             |
-| 3     | `x`       | `ok`           | `ok`             |
-| 4     | `a`       | `ok`           | `dopo_a`         |
-| 5     | `b`       | `dopo_a`       | `ok`             |
-| fine  |           | `ok` → ╔══╗    |                  |
-
-**Traccia su `"axb"`:**
-
-| Passo | Carattere | Stato corrente        | Stato successivo |
-| ----- | --------- | --------------------- | ---------------- |
-| 1     | `a`       | `ok`                  | `dopo_a`         |
-| 2     | `x`       | `dopo_a`              | `errore`         |
-| 3     | `b`       | `errore`              | `errore`         |
-| fine  |           | `errore` → non finale |                  |
-
-**Programma:**
+<details>
 
 ```python
-stringa = input("Stringa: ")
-stato = "ok"
-i = 0
-while i < len(stringa) and stato != "errore":
-    c = stringa[i]
-    if stato == "ok":
-        if c == "a":
-            stato = "dopo_a"
-    elif stato == "dopo_a":
-        if c == "b":
-            stato = "ok"
-        else:
-            stato = "errore"
-    i = i + 1
-
-# attenzione: se la stringa finisce con 'a' siamo ancora in dopo_a → errore
-if stato == "dopo_a":
-    stato = "errore"
-
-if stato == "ok":
-    print("sì")
+n = int(input("n: "))
+while n > 0:         # condizione: proprietà del valore corrente
+    n = n - 5        # trasforma il valore secondo la regola
+if n == 0:
+    print("divisibile per 5")
 else:
-    print("no")
+    print("non divisibile per 5")
 ```
 
-## Esercizi
+</details>
 
-Per ciascun esercizio:
+### 4 · Sentinella
 
-1. Definisci gli stati dell'automa e indica quale è quello iniziale e quali sono quelli finali (accettanti).
-2. Elenca le transizioni: per ogni stato, cosa succede leggendo ciascun tipo di carattere.
-3. Scegli due stringhe di test — una che produce `sì` e una che produce `no` — e mostra il percorso di riconoscimento in una tabella (come nelle tracce viste sopra).
+> Chiedi numeri all'utente e conta quanti numeri sono stati inseriti. L'utente inserisce `0` per terminare.
 
-1. **Almeno una vocale.** Data una stringa, stampa `sì` se contiene almeno una vocale (`a`, `e`, `i`, `o`, `u`), `no` altrimenti.
-2. **Tutte maiuscole.** Data una stringa, stampa `sì` se tutti i caratteri sono lettere maiuscole, `no` altrimenti.
-3. **Termina con vocale.** Data una stringa, stampa `sì` se l'ultimo carattere è una vocale, `no` altrimenti. (Lo stato finale dell'automa, non il primo carattere trovato, determina il risultato.)
-4. **Numero pari di vocali.** Data una stringa, stampa `sì` se il numero totale di vocali è pari (zero è pari), `no` altrimenti.
-5. **Nessuno spazio doppio.** Data una stringa, stampa `sì` se non contiene due spazi consecutivi, `no` altrimenti.
-6. **Due vocali consecutive.** Data una stringa, stampa `sì` se contiene almeno due vocali consecutive (es. `"piaue"` → sì, `"cane"` → no), `no` altrimenti.
-7. **Ogni `a` seguita da `b`.**
-8. **Il numero di `a` è uguale al numero di `b`.** Data una stringa, stampa `sì` se il numero di occorrenze di `a` è uguale al numero di occorrenze di `b`, `no` altrimenti.
-9. **Contiene sia una `a` che una `b`.** Data una stringa, stampa `sì` se contiene almeno una `a` e almeno una `b` (in qualsiasi ordine), `no` altrimenti. (Servono quattro stati: `nessuna`, `solo_a`, `solo_b`, `entrambe`.)
-10. **`ab` mai seguita da `c`.** Data una stringa, stampa `sì` se ogni volta che compare la sottostringa `ab`, il carattere immediatamente successivo non è `c` (es. `"xabx"` → sì, `"abc"` → no).
-11. **Alternanza obbligata.** Data una stringa composta solo da lettere, stampa `sì` se vocali e consonanti si alternano rigorosamente (es. `"banana"` → sì, `"cane"` → no, `"aei"` → no).
-12. **Numero intero ben formato.** Data una stringa, stampa `sì` se rappresenta un intero valido: un segno opzionale (`+` o `-`) seguito da almeno una cifra (es. `"-42"` → sì, `"3"` → sì, `"+"` → no, `"1a2"` → no).
+**Indizi nel testo:** l'utente inserisce una sequenza di lunghezza non nota ("finché l'utente vuole", "uno per riga", "fino a quando inserisce X"). C'è un valore speciale (**sentinella**) che segnala la fine (`0`, `-1`, `"fine"`, …).
+
+Come scorre l'esecuzione (esempio con input `7, 3, 9, 0`):
+
+```
+input:    7       3       9       0
+        ──────────────────────────────────────
+         ≠0      ≠0      ≠0      =0
+          ✓       ✓       ✓       ✗
+                                 STOP
+```
+
+| passo | `numero` letto | `numero != 0`? | `contatore` |
+|-------|----------------|----------------|-------------|
+| —     | 7              | (prima lettura) | 0          |
+| 1     | —              | ✓              | 1           |
+| —     | 3              | (rilettura)    | 1           |
+| 2     | —              | ✓              | 2           |
+| —     | 9              | (rilettura)    | 2           |
+| 3     | —              | ✓              | 3           |
+| —     | 0              | (rilettura)    | 3           |
+| 4     | —              | ✗ → stop       | 3           |
+
+La prima lettura va fatta **prima** del ciclo, così la guardia ha già un valore da controllare. Lo `0` viene letto ma non contato: la condizione lo blocca prima di entrare nel corpo.
+
+<details>
+
+```python
+numero = int(input("Numero (0 per terminare): "))  # prima lettura — fuori dal ciclo
+contatore = 0
+while numero != 0:        # condizione: il valore letto non è la sentinella
+    contatore = contatore + 1
+    numero = int(input("Numero (0 per terminare): "))  # rileggi prima di controllare
+print("Numeri inseriti:", contatore)
+```
+
+</details>
+
+### 5 · Validazione (retry)
+
+> Chiedi un voto all'utente. Se il voto non è compreso tra 0 e 30, ripeti la richiesta.
+
+**Indizi nel testo:** il programma deve accettare solo certi valori ("controlla che sia valido", "se non è nel range", "ripeti finché l'utente non inserisce un valore corretto").
+
+A differenza della sentinella, qui non c'è un valore speciale di uscita: il ciclo finisce non appena l'input soddisfa i vincoli.
+
+<details>
+
+```python
+voto = int(input("Voto (0-30): "))
+while voto < 0 or voto > 30:   # condizione: il valore non è accettabile
+    print("Valore non valido.")
+    voto = int(input("Voto (0-30): "))
+print("Voto accettato:", voto)
+```
+
+</details>
+
+## Esercizi - livello base
+
+**1.** `[M4-WB-01]` *(sentinella)* Scrivi un programma che chiede all'utente di inserire una serie di numeri. Il programma si ferma quando l'utente inserisce `0` e stampa il prodotto di tutti i numeri inseriti.
+
+```
+Input:  2  3  4  0
+Output: 24
+```
+
+<details>
+Leggi il primo numero <strong>prima</strong> del ciclo. La guardia controlla se il numero è diverso da <code>0</code>. Nel corpo: aggiorna il prodotto, poi rileggi il prossimo numero. Lo <code>0</code> non va contato.
+</details>
+
+**2.** `[M4-WB-02]` *(sentinella)* Scrivi un programma che chiede all'utente di inserire un numero. Il programma si ferma quando l'utente inserisce `0` e, per ogni numero inserito, stampa `pari` o `dispari`.
+
+```
+Input:  3  4  7  0
+Output: dispari
+        pari
+        dispari
+```
+
+<details>
+Schema identico all'esercizio 1: leggi fuori dal ciclo, controlla la sentinella nella guardia, fai il lavoro nel corpo prima di rileggere. Qui il "lavoro" è un'istruzione <code>if</code>.
+</details>
+
+**3.** `[M4-WB-03]` *(contatore)* Scrivi un programma che legge un intero positivo `n` e stampa il suo fattoriale (`n! = 1 × 2 × … × n`).
+
+```
+Input:  5
+Output: 120
+```
+
+<details>
+Inizializza un accumulatore <code>prodotto = 1</code> e un contatore <code>i = 1</code>. La guardia è <code>i &lt;= n</code>. Nel corpo moltiplica <code>prodotto</code> per <code>i</code>, poi incrementa <code>i</code>.
+</details>
+
+**4.** `[M4-WB-04]` *(contatore)* Chiedi all'utente di inserire una stringa e calcola quante vocali contiene.
+
+```
+Input:  informatica
+Output: 5
+```
+
+<details>
+Usa un indice <code>i = 0</code> che scorre da <code>0</code> a <code>len(stringa) - 1</code>. Ad ogni passo controlla se <code>stringa[i]</code> è una vocale e aggiorna un contatore.
+</details>
+
+**5.** `[M4-WB-05]` *(soglia su accumulatore)* Chiedi numeri interi all'utente e sommali. Smetti di chiedere quando la somma raggiunge o supera 100. Alla fine stampa la somma.
+
+```
+Input:  30  25  20  40
+Output: 115
+```
+
+<details>
+Inizializza <code>somma = 0</code>. La guardia è <code>somma &lt; 100</code>. Nel corpo: leggi un numero e aggiungilo alla somma. Non serve leggere fuori dal ciclo: qui la condizione dipende dalla somma, non dall'input.
+</details>
+
+**6.** `[M4-WB-06]` *(soglia su accumulatore)* Chiedi all'utente di inserire parole una alla volta. Smetti di chiedere quando la lunghezza totale delle parole inserite supera 20 caratteri. Stampa una stringa che contiene tutte le parole lette separate da spazio.
+
+```
+Input:  casa  libro  sole  mare  notte
+Output: casa libro sole mare notte
+```
+
+*(casa=4, libro=5, sole=4, mare=4 → totale 17; notte=5 → totale 22 > 20, stop)*
+
+<details>
+L'accumulatore non è una somma di numeri ma la somma delle lunghezze: <code>totale = totale + len(parola)</code>. La guardia è <code>totale &lt;= 20</code>. Accumula anche le parole lette in una stringa separata da aggiornare ad ogni passo.
+</details>
+
+**7.** `[M4-WB-07]` *(proprietà matematica)* Leggi un numero intero positivo `n`. Conta quante volte si può dividere per 2 prima che diventi dispari. Stampa il conteggio.
+
+```
+Input:  24
+Output: 3
+```
+
+*(24 → 12 → 6 → 3, tre divisioni)*
+
+<details>
+La guardia controlla una proprietà di <code>n</code>: <code>n % 2 == 0</code>. Nel corpo dividi <code>n</code> per 2 e incrementa un contatore. Non serve input dentro il ciclo: <code>n</code> si trasforma da solo.
+</details>
+
+**8.** `[M4-WB-08]` *(proprietà matematica)* Data una stringa letta dall'input, stampa tutti i caratteri che precedono la prima vocale. Se la stringa non contiene vocali, stampa tutta la stringa.
+
+```
+Input:  stringa
+Output: str
+
+Input:  bcdf
+Output: bcdf
+```
+
+<details>
+Usa un indice <code>i = 0</code>. La guardia ha due condizioni collegate da <code>and</code>: non aver superato la lunghezza della stringa (<code>i &lt; len(s)</code>) e il carattere corrente non essere una vocale (<code>s[i] not in "aeiouAEIOU"</code>). Nel corpo stampa <code>s[i]</code> e incrementa <code>i</code>.
+</details>
+
+**9.** `[M4-WB-09]` *(validazione)* Chiedi all'utente di inserire un anno compreso tra 1900 e 2100. Alla fine stampa `Anno accettato: <anno>`.
+
+```
+Input:  1800  2050
+Output: Anno accettato: 2050
+```
+
+<details>
+Leggi il primo anno prima del ciclo. La guardia è la condizione di <em>rifiuto</em>: <code>anno &lt; 1900 or anno &gt; 2100</code>. Nel corpo stampa un messaggio di errore e rileggi. Quando il ciclo finisce, il valore è già quello valido.
+</details>
+
+**10.** `[M4-WB-10]` *(validazione)* Chiedi all'utente di inserire una parola. Ripeti la richiesta finché la parola non inizia con una lettera maiuscola. Stampa `Parola accettata`.
+
+```
+Input:  ciao  Ciao
+Output: Parola accettata
+```
+
+<details>
+La guardia è la condizione di rifiuto: <code>parola[0]</code> non è maiuscolo. Puoi controllarlo confrontando <code>parola[0]</code> con la sua versione maiuscola: <code>parola[0] != parola[0].upper()</code>.
+</details>
+
+**11.** `[M4-WB-11]` Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce la parola `fine`. Per ogni parola inserita, se la parola è più lunga di 5 caratteri stampa `parola lunga` altrimenti stampa `parola breve`.
+
+```
+Input:  gatto  programmazione  sole  fine
+Output: parola breve
+        parola lunga
+        parola breve
+```
+
+<details>
+Paradigma: <em>sentinella</em>. La sentinella è la stringa <code>"fine"</code>. Leggi la prima parola prima del ciclo. La guardia controlla <code>parola != "fine"</code>. Usa <code>len(parola)</code> per decidere cosa stampare.
+</details>
+
+**12.** `[M4-WB-12]` Scrivi un programma che chiede all'utente di inserire una parola e continua finché non scrive `fine`. Controlla se tra le parole inserite compare la parola `informatica`. Stampa `sì` o `no`.
+
+```
+Input:  python  informatica  matematica  fine
+Output: sì
+
+Input:  python  algebra  fine
+Output: no
+```
+
+<details>
+Paradigma: <em>sentinella</em>. Tieni una variabile booleana <code>trovata = False</code>. Nel corpo, se la parola corrente è <code>"informatica"</code> aggiorna <code>trovata</code>. Dopo il ciclo, stampa in base al valore di <code>trovata</code>.
+</details>
+
+**13.** `[M4-WB-13]` Leggi un intero positivo `n` e stampa tutti i multipli di 3 da 3 fino a `n`.
+
+```
+Input:  15
+Output: 3  6  9  12  15
+```
+
+<details>
+Paradigma: <em>contatore</em>. Usa un contatore <code>i = 3</code>. La guardia è <code>i &lt;= n</code>. Nel corpo stampa <code>i</code> e incrementa di 3.
+</details>
+
+**14.** `[M4-WB-14]` Chiedi all'utente di inserire numeri interi. Smetti quando il prodotto di tutti i numeri inseriti supera 1000. Stampa quanti numeri hai letto.
+
+```
+Input:  4  5  6  9
+Output: 4
+```
+
+*(4×5=20, 20×6=120, 120×9=1080 > 1000, stop dopo 4 numeri)*
+
+<details>
+Paradigma: <em>soglia su accumulatore</em>. L'accumulatore è un prodotto, non una somma: inizializza <code>prodotto = 1</code> e aggiorna con <code>prodotto = prodotto * n</code>. La guardia è <code>prodotto &lt;= 1000</code>. Non serve leggere fuori dal ciclo.
+</details>
+
+**15.** `[M4-WB-15]` Leggi un intero positivo `n`. Applica ripetutamente la regola: se `n` è divisibile per 3, dividilo per 3; altrimenti fermati. Stampa il valore finale di `n`.
+
+```
+Input:  27
+Output: 1
+
+Input:  12
+Output: 4
+```
+
+*(27 → 9 → 3 → 1; 12 → 4, poi 4 % 3 ≠ 0 stop)*
+
+<details>
+Paradigma: <em>proprietà matematica</em>. La guardia controlla <code>n % 3 == 0</code>. Nel corpo <code>n = n // 3</code>. Il valore si trasforma da solo, senza leggere input nel ciclo.
+</details>
+
+**16.** `[M4-WB-16]` Chiedi all'utente di inserire un numero intero dispari. Stampa `Numero dispari accettato`.
+
+```
+Input:  4  6  7
+Output: Numero dispari accettato
+```
+
+<details>
+Paradigma: <em>validazione</em>. La guardia è la condizione di rifiuto: <code>n % 2 == 0</code> (il numero è pari, quindi non accettabile). Leggi prima del ciclo, rileggi nel corpo.
+</details>
+
+## Esercizi - livello intermedio
+
+**1.** `[M4-WI-01]` Scrivi un programma che legge un numero compreso tra 1 e 10 (controlla che il numero inserito sia lecito, altrimenti ripeti la richiesta) e stampa la tabellina di quel numero. Ad esempio, se viene inserito `3`:
+
+```
+3 x 0 = 0
+3 x 1 = 3
+3 x 2 = 6
+...
+3 x 10 = 30
+```
+
+**2.** `[M4-WI-02]` Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Per ogni parola inserita calcola quante vocali contiene. Alla fine, stampa il numero totale di vocali incontrate.
+
+**3.** `[M4-WI-03]` Scrivi un programma che chiede all'utente di inserire una parola. Il programma si ferma quando l'utente inserisce `fine`. Alla fine, stampa quante delle parole inserite finiscono per vocale.
+
+**4.** `[M4-WI-04]` Scrivi un programma che legge parole dall'input finché l'utente non scrive `fine`. Conta quante parole iniziano con una lettera maiuscola.
+
+**5.** `[M4-WI-05]` Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`, e al termine stampa il massimo tra quelli inseriti. (Se non viene inserito nessun numero prima dello zero, stampa un messaggio apposito.)
+
+**6.** `[M4-WI-06]` Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Al termine stampa quanti erano pari e quanti dispari, e quale delle due categorie era più numerosa.
+
+**7.** `[M4-WI-07]` Scrivi un programma che legge numeri interi finché l'utente non inserisce `0` e calcola la media dei valori inseriti. Se non viene inserito nessun valore prima dello zero, stampa `nessun dato`.
+
+**8.** `[M4-WI-08]` Dati due numeri (es. `pagine = 3` e `righe = 5`), stampa tutte le combinazioni di pagine e righe.
+
+**9.** `[M4-WI-09]` Chiedi all'utente `n` dall'input. Stampa un quadrato di asterischi `n x n`:
+
+```
+***
+***
+***
+```
+
+**10.** `[M4-WI-10]` Scrivi un programma che legge un intero positivo `n` e stampa la sequenza di Collatz: se `n` è pari calcola `n // 2`, se è dispari calcola `3 * n + 1`; ripeti finché `n` non diventa `1`. Stampa ogni valore e, alla fine, quanti passi sono stati necessari.
+
+**11.** `[M4-WI-11]` Leggi interi uno alla volta. Continua a leggere finché ogni nuovo numero è strettamente maggiore del precedente. Quando la sequenza si interrompe (o l'utente inserisce 0), stampa quanti numeri validi hai letto.
+
+**12.** `[M4-WI-12]` Leggi interi positivi uno alla volta, finché ogni nuovo numero è strettamente maggiore del precedente. Per ogni coppia consecutiva (a, b) con b > a+1, stampa anche tutti i numeri interi compresi tra a e b (esclusi). Es.: se l'utente inserisce 13 poi 16, stampa anche 14 e 15.
+
+**13.** `[M4-WI-13]` Scrivi un programma che legge un intero positivo `n` e stampa i primi `n` numeri della sequenza di Fibonacci: `0, 1, 1, 2, 3, 5, 8, …`
+
+## Esercizi - livello avanzato
+
+**1.** `[M4-WA-01]` Scrivi un programma che legge parole dall'input e si ferma alla prima parola più lunga di 6 caratteri oppure quando trova la parola fine. Se il programma trova una parola più lunga di 6 caratteri, la stampa. Se non compare nessuna parola così lunga prima di `fine`, stampa `nessuna`.
+
+**2.** `[M4-WA-02]` Stampa la tavola pitagorica da 1 a 10:
+
+```
+1 x 1 = 1
+1 x 2 = 2
+...
+10 x 10 = 100
+```
+
+**3.** `[M4-WA-03]` Scrivi un programma che legge un intero positivo `n` e stampa tutte le sue cifre, una per riga, partendo da quella meno significativa. (Es.: `n = 374` → `4`, `7`, `3`.) Non usare stringhe: estrai le cifre con divisione e modulo.
+
+**4.** `[M4-WA-04]` Scrivi un programma che legge una sequenza di numeri positivi terminata da `-1` e stampa ogni numero insieme al suo scarto rispetto al numero precedente. Per il primo numero lo scarto non esiste; per gli altri stampa `differenza: +3` o `differenza: -5` ecc.
+
+**5.** `[M4-WA-05]` Scrivi un programma che legge numeri interi finché l'utente non inserisce `0`. Stampa `sì` se la sequenza è non-decrescente (ogni numero è ≥ al precedente), `no` altrimenti.
+
+**6.** `[M4-WA-06]` Scrivi un programma che legge un intero positivo `n` e stabilisce se è primo. Un numero è primo se è divisibile solo per 1 e per se stesso.
+
+**7.** `[M4-WA-07]` Scrivi un programma che chiede all'utente di inserire dei numeri interi e si ferma quando scrive `0`. Controlla se ogni `1` è seguito da un `2`. Esempi:
+
+- `9, 1, 2, 6, 1, 2, 0` → `Sequenza corretta`
+- `9, 1, 6, 1, 2, 0` → `Sequenza errata`
 
 ## Due problemi che il `while` da solo non riesce a risolvere
 
@@ -347,19 +469,19 @@ Input:  3  7  2  5  0
 Output: 5  2  7  3
 ```
 
-Prova a risolverlo usando solo le variabili che conosci. Cosa manca?
-
-Il problema è che quando arriva lo `0`, i numeri precedenti non esistono più: ogni nuova lettura sovrascrive la variabile. Per stampare al contrario bisogna prima raccogliere tutti i valori, poi scorrere la raccolta in senso inverso.
-
-Con le sole variabili del modulo 4:
+Possiamo risolverlo usando solo i costrutti che conosciamo? Cosa manca?
 
 ```python
-numero = int(input())
-while numero != 0:
-    # qui vorremmo "ricordare" numero, ma dove?
-    numero = int(input())
+n = int(input("Inserisci un numero:"))
+
+while n != 0:
+    # fai qualcosa, vorremmo "ricordare" numero, ma dove?
+    n = int(input("Inserisci un numero:"))
+
 # a questo punto non sappiamo più cosa è stato inserito
 ```
+
+Il problema è che quando arriva lo `0`, i numeri precedenti non esistono più: ogni nuova lettura sovrascrive la variabile. Per stampare al contrario bisogna prima raccogliere tutti i valori, poi scorrere la raccolta in senso inverso.
 
 Il `while` sa iterare, ma non sa ricordare una sequenza di valori.
 
@@ -375,15 +497,14 @@ Media:  5.0
 Output: 8  6
 ```
 
-Anche volendo, questo problema è impossibile da risolvere con una sola passata: per sapere se `4` è sopra la media, devi già conoscere anche `8`, `2` e `6`. La media si può calcolare solo dopo aver letto l'ultimo numero.
+Per sapere se `4` è sopra la media, devi già conoscere anche `8`, `2` e `6`. La media si può calcolare solo dopo aver letto l'ultimo numero.
 
-Servono due passate sugli stessi dati:
+Servono quindi due iterazioni sugli stessi dati:
 
 1. leggi tutti i numeri, calcola la media;
 2. scorri di nuovo gli stessi numeri e stampa quelli sopra la media.
 
-Per fare la seconda passata i numeri devono essere ancora disponibili — e con variabili singole non lo sono.
-
+Per fare la seconda iterazione i numeri devono essere ancora disponibili — e con variabili singole non lo sono.
 
 Entrambi i problemi hanno la stessa radice: il programma ha bisogno di **ricordare una sequenza di valori** per poterla usare dopo.
 Questa è esattamente la funzione di una lista.
@@ -495,6 +616,8 @@ while numero != 0:
     numeri.append(numero)
     numero = int(input())
 
+print(numeri)
+
 # ora numeri contiene tutta la sequenza
 i = len(numeri) - 1
 while i >= 0:
@@ -504,114 +627,9 @@ while i >= 0:
 
 Il `while` di lettura accumula; il secondo `while` scorre la lista al contrario.
 
-## Esercizi base
+## Una nuova operazione sulle stringe
 
-1. Crea una lista con i numeri da 1 a 5 usando `append` in un ciclo `while`. Poi stampa la lista.
-2. Data la lista `voti = [24, 28, 30, 18, 27]`, stampa il primo e l'ultimo voto.
-3. Data la lista `nomi = ["Alice", "Bruno", "Carla", "Dario"]`, stampa il secondo e il penultimo nome.
-4. Leggi numeri interi dall'input fino a `0` e salvali in una lista. Stampa la lista alla fine.
-5. Leggi parole dall'input fino a `fine` e salvale in una lista. Stampa quante parole sono state inserite.
-6. Data una lista di numeri, calcola e stampa la somma di tutti gli elementi senza usare `sum()`.
-7. Data una lista di numeri, stampa solo quelli maggiori di 10.
-8. Data una lista di parole, stampa solo quelle che iniziano per vocale.
-9. Data la lista `prezzi = [3.5, 1.2, 7.8, 4.0]`, stampa il prezzo più alto senza usare `max()`: scorri la lista con un `while` e tieni traccia del massimo.
-10. Leggi numeri fino a `0`, salvali in una lista, poi stampa la lista al contrario (come nel Problema 1).
-11. Data una frase letta dall'input, usa `split()` per ottenere la lista delle parole e stampane la lunghezza.
-
-## Liste di liste
-
-Una lista può contenere qualsiasi tipo di valore — incluse altre liste. Questo permette di rappresentare strutture a due dimensioni come **matrici**, tabelle e griglie.
-
-```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-```
-
-`matrice` è una lista di 3 elementi, ognuno dei quali è una lista di 3 interi.
-
-### Accesso agli elementi
-
-Per accedere a un elemento servono due indici: prima la riga, poi la colonna.
-
-```python
-matrice[0]      # [1, 2, 3]  — prima riga intera
-matrice[0][0]   # 1          — riga 0, colonna 0
-matrice[1][2]   # 6          — riga 1, colonna 2
-matrice[2][-1]  # 9          — ultima colonna della terza riga
-```
-
-```
-         col 0  col 1  col 2
-        +------+------+------+
-riga 0  |  1   |  2   |  3   |
-        +------+------+------+
-riga 1  |  4   |  5   |  6   |
-        +------+------+------+
-riga 2  |  7   |  8   |  9   |
-        +------+------+------+
-```
-
-### Stampare una matrice riga per riga
-
-```python
-i = 0
-while i < len(matrice):
-    print(matrice[i])
-    i = i + 1
-```
-
-Output:
-```
-[1, 2, 3]
-[4, 5, 6]
-[7, 8, 9]
-```
-
-Per stampare elemento per elemento con due cicli annidati:
-
-```python
-i = 0
-while i < len(matrice):
-    j = 0
-    while j < len(matrice[i]):
-        print(matrice[i][j], end=" ")
-        j = j + 1
-    print()   # a capo alla fine di ogni riga
-    i = i + 1
-```
-
-Output:
-```
-1 2 3
-4 5 6
-7 8 9
-```
-
-### Costruire una matrice con input
-
-```python
-righe = int(input("Righe: "))
-colonne = int(input("Colonne: "))
-
-matrice = []
-i = 0
-while i < righe:
-    riga = []
-    j = 0
-    while j < colonne:
-        val = int(input())
-        riga.append(val)
-        j = j + 1
-    matrice.append(riga)
-    i = i + 1
-```
-
-## `split()` e prime trasformazioni
-
-Una nuova operazione importante sulle stringhe e' questa:
+Una nuova operazione importante sulle stringhe è questa:
 
 ```python
 incipit = "Era una notte incantevole, una di quelle notti..."
@@ -621,7 +639,6 @@ print(parole)
 
 `split()` prende una stringa e restituisce una **lista** di sottostringhe.
 
-
 ### Attenzione: `split()` taglia dove gli diciamo di tagliare
 
 Con `split()` senza argomenti:
@@ -630,91 +647,123 @@ Con `split()` senza argomenti:
 - quindi `"La Spezia"` diventa due elementi se c'è uno spazio in mezzo;
 - mentre `"andata,"` resta un unico elemento, perché la virgola non viene separata automaticamente.
 
-## Esercizi avanzati
+## Esercizi sulle liste
 
-### Sequenze e proprietà
+### Livello base
 
-1. Leggi numeri fino a `0`. Costruisci due liste separate: una con i numeri pari e una con i dispari. Stampa entrambe.
-2. Leggi numeri fino a `0`, salvali in una lista, calcola la media e stampa quelli che superano la media (come nel Problema 2).
-3. Scrivi un programma che legge 5 parole e le salva in una lista. Stampa `uguale` se la prima e l'ultima parola sono identiche, `diversa` altrimenti.
-4. Scrivi un programma che legge una stringa e controlla se è palindroma (ignora spazi e maiuscole/minuscole). Esempi: `anna`, `i topi non avevano nipoti`.
-5. Scrivi un programma che chiede numeri interi fino a `0`. Controlla se ogni `1` nella sequenza è immediatamente seguito da un `2`. Stampa `Sequenza corretta` o `Sequenza errata`.
-    - `9 1 2 6 1 2 0` → corretta
-    - `9 1 6 1 2 0` → errata
-6. Data una stringa letta dall'input, stampa la frequenza di ogni lettera che compare almeno una volta.
+**1.** `[M4-LB-01]` Crea una lista con i numeri da 1 a 5 usando `append` in un ciclo `while`. Poi stampa la lista.
 
-### Serie multiple e conteggio per categoria
+**2.** `[M4-LB-02]` Data la lista `voti = [24, 28, 30, 18, 27]`, stampa il primo e l'ultimo voto.
 
-7. Scrivi un programma che legge parole fino a `fine` e conta quante iniziano per ciascuna vocale (`a`, `e`, `i`, `o`, `u`). Stampa il conteggio per ogni vocale.
-8. Scrivi un programma che legge 5 lettere, poi legge parole fino a `fine`. Per ogni lettera letta all'inizio, stampa quante parole iniziano con quella lettera.
-9. Scrivi un programma che legge tre serie di numeri, ognuna terminata da `0`. Per ogni serie, stampa i numeri al contrario.
-    ```
-    Input:  4 12 0 / 9 7 6 0 / 4 1 -3 8 0
-    Output: [12, 4] / [6, 7, 9] / [8, -3, 1, 4]
-    ```
-10. Scrivi un programma che legge una serie di numeri terminata da `0`. Per ogni numero `n`, stampa tutti i numeri pari compresi tra `0` (incluso) e `n` (escluso).
-    ```
-    Input: 6 10 0   Output: 0 2 4  /  0 2 4 6 8
-    ```
+**3.** `[M4-LB-03]` Data la lista `nomi = ["Alice", "Bruno", "Carla", "Dario"]`, stampa il secondo e il penultimo nome.
 
-### Due liste
+**4.** `[M4-LB-04]` Leggi numeri interi dall'input fino a `0` e salvali in una lista. Stampa la lista alla fine.
 
-11. Date due liste di interi, costruisci una lista con gli elementi **in comune** (intersezione, in ordine di apparizione in `a`).
-    ```python
-    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5, 1]  # → [7, 1, 9]
-    ```
-12. Date due liste, costruisci una lista con tutti gli elementi che compaiono in almeno una delle due, **senza duplicati** (unione).
-    ```python
-    a = [3, 7, 1]; b = [7, 2, 9]  # → [3, 7, 1, 2, 9]
-    ```
-13. Date due liste `a` e `b`, costruisci una lista con gli elementi di `a` che **non** compaiono in `b` (differenza `a − b`).
-    ```python
-    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5]  # → [3, 1, 4]
-    ```
-14. Date due liste, controlla se sono **disgiunte** (nessun elemento in comune). Stampa `sì` o `no`.
-15. Stessi esercizi 11–13, ma le liste possono contenere duplicati. Decidi come gestirli.
-    ```python
-    a = [1, 2, 2, 3]; b = [2, 2, 4]
-    # intersezione con molteplicità: [2, 2]; differenza a − b: [1, 3]
-    ```
-16. Date due liste **già ordinate in modo crescente**, costruisci la lista unione ordinata **senza usare `sort()`** (algoritmo di merge).
-    ```python
-    a = [1, 3, 5, 7]; b = [2, 3, 6, 8]  # → [1, 2, 3, 3, 5, 6, 7, 8]
-    ```
-17. Come l'esercizio 16, ma costruisci solo l'**intersezione ordinata** (elementi presenti in entrambe, senza duplicati).
-    ```python
-    a = [1, 3, 5, 7]; b = [2, 3, 6, 7]  # → [3, 7]
-    ```
+**5.** `[M4-LB-05]` Leggi parole dall'input fino a `fine` e salvale in una lista. Stampa quante parole sono state inserite.
 
-### Matrici
+**6.** `[M4-LB-06]` Data una lista di numeri, calcola e stampa la somma di tutti gli elementi senza usare `sum()`.
 
-18. Crea a mano una matrice 3×3 con i numeri da 1 a 9 e stampala riga per riga.
-19. Data una matrice quadrata `n×n`, stampa solo la diagonale principale (elementi dove `i == j`).
-    ```python
-    matrice = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # output: 1  5  9
-    ```
-20. Data una matrice, calcola la somma di tutti gli elementi.
-21. Leggi dall'input una matrice `n×m` (prima `n`, poi `m`, poi i valori riga per riga). Stampa la somma degli elementi di ogni riga.
-22. Data una matrice, costruisci la sua **trasposta**: una nuova matrice dove righe e colonne sono scambiate.
-    ```python
-    originale = [[1, 2, 3], [4, 5, 6]]  # trasposta: [[1, 4], [2, 5], [3, 6]]
-    ```
-23. Data una matrice quadrata `n×n`, stampa la **diagonale secondaria** (elementi con `i + j == n − 1`).
-24. Data una matrice di interi, trova la posizione `(riga, colonna)` del valore massimo.
-25. Data una matrice di interi, stampa `sì` se ogni riga è ordinata in modo non-decrescente (ogni elemento è ≥ al precedente nella stessa riga), `no` altrimenti.
-26. Data una matrice quadrata `n×n`, stampa `sì` se è **simmetrica** (`matrice[i][j] == matrice[j][i]` per ogni `i`, `j`), `no` altrimenti.
-27. Data una matrice, stampa per ogni coppia di righe adiacenti `i` e `i+1` se la **somma** della riga `i+1` è maggiore della somma della riga `i`.
-28. Data una matrice, stampa `sì` se per ogni indice `i` compreso tra `0` e `len(matrice) − 2`, tutti gli elementi di `matrice[i+1]` sono **pari**, `no` altrimenti.
-29. Data una matrice quadrata `n×n`, verifica che la **somma di ogni riga** sia uguale alla somma della colonna con lo stesso indice (somma riga 0 == somma colonna 0, ecc.). Stampa `sì` o `no`.
-30. Data una matrice di interi, stampa `sì` se per ogni cella `matrice[i][j]` (con `i < len(matrice) − 1`), la cella sottostante `matrice[i+1][j]` è strettamente maggiore, `no` altrimenti (la matrice è strettamente crescente per colonne dall'alto verso il basso).
+**7.** `[M4-LB-07]` Data una lista di numeri, stampa solo quelli maggiori di 10.
 
-### Progetto: impiccato
+**8.** `[M4-LB-08]` Data una lista di parole, stampa solo quelle che iniziano per vocale.
 
-31. Scrivi un programma che fa giocare l'utente al gioco dell'impiccato.
-    - Il giocatore B propone una lettera alla volta. Se la lettera è presente nella parola segreta, tutte le sue posizioni vengono svelate.
-    - Nella cartella `impiccato/` trovi i file `parola_segreta.py` e `impiccato.py` con la struttura di partenza. `impiccato.py` contiene la funzione `update(guess, parola, lettera)` che aggiorna la stringa di underscore:
-      ```python
-      update("____", "casa", "a")  # → "_a_a"
-      update("_a_a", "casa", "c")  # → "ca_a"
-      ```
-32. Estendi l'impiccato aggiungendo un numero massimo di tentativi (6 nella versione classica, oppure dipendente dalla lunghezza della parola) e la possibilità di indovinare l'intera parola in un turno.
+**9.** `[M4-LB-09]` Data la lista `prezzi = [3.5, 1.2, 7.8, 4.0]`, stampa il prezzo più alto senza usare `max()`: scorri la lista con un `while` e tieni traccia del massimo.
+
+**10.** `[M4-LB-10]` Leggi parole finché l'utente non scrive `fine` e stampale in ordine inverso rispetto all'ordine di inserimento.
+
+### Livello intermedio
+
+**11.** `[M4-LI-01]` Leggi numeri interi dall'input fino a `0`. Costruisci una lista con i soli numeri **pari** e stampala.
+
+```
+Input:  3  8  5  4  7  2  0
+Output: [8, 4, 2]
+```
+
+**12.** `[M4-LI-02]` Data la lista `voti = [18, 25, 30, 22, 28, 19]`, calcola e stampa la media. Poi stampa separatamente i voti sopra la media e quelli sotto.
+
+```
+Media: 23.67
+Sopra: [25, 30, 28]
+Sotto: [18, 22, 19]
+```
+
+**13.** `[M4-LI-03]` Leggi parole dall'input fino a `fine`. Costruisci due liste: una con le parole che hanno lunghezza pari, una con quelle di lunghezza dispari. Stampa entrambe.
+
+```
+Input:  sole  luna  cane  gatto  fine
+Output: pari:    ['sole', 'luna', 'cane']
+        dispari: ['gatto']
+```
+
+**14.** `[M4-LI-04]` Verifica se una parola letta dall'input è un **palindromo** usando una lista: converti la stringa in lista di caratteri, poi confronta il primo con l'ultimo, il secondo con il penultimo, ecc., usando un ciclo `while` con due indici.
+
+```
+Input:  radar
+Output: palindromo
+
+Input:  cane
+Output: non palindromo
+```
+
+**15.** `[M4-LI-05]` Leggi numeri interi dall'input fino a `0` e costruisci una lista. Poi stampa la lista senza duplicati (ogni valore deve comparire una sola volta, nel primo ordine in cui è apparso).
+
+```
+Input:  3  1  4  1  5  3  2  0
+Output: [3, 1, 4, 5, 2]
+```
+
+**16.** `[M4-LI-06]` Date due liste di numeri interi già definite nel codice, costruisci una terza lista con gli elementi **in comune** tra le due (senza duplicati).
+
+```
+a = [1, 3, 5, 7, 3]
+b = [3, 5, 6, 7]
+Output: [3, 5, 7]
+```
+
+### Livello avanzato
+
+**17.** `[M4-LA-01]` Leggi numeri interi dall'input fino a `0`. Stampa il **secondo massimo** della sequenza (il più grande tra tutti i valori escluso il massimo assoluto). Se ci sono meno di due valori distinti, stampa un messaggio apposito.
+
+```
+Input:  5  3  9  7  9  0
+Output: secondo massimo: 7
+```
+
+**18.** `[M4-LA-02]` Leggi parole dall'input fino a `fine`. Stampa la parola **più lunga** e quella **più corta**. In caso di parità di lunghezza prendi la prima apparsa.
+
+```
+Input:  sole  programmazione  io  cane  fine
+Output: più lunga:  programmazione
+        più corta:  io
+```
+
+**19.** `[M4-LA-03]` Leggi una sequenza di numeri interi dall'input fino a `0` e salvali in una lista. Poi stampa tutte le coppie `(lista[i], lista[i+1])` di elementi consecutivi tali che il secondo è strettamente maggiore del primo.
+
+```
+Input:  2  5  3  8  8  1  0
+Output: (2, 5)
+        (3, 8)
+```
+
+**20.** `[M4-LA-04]` Leggi parole dall'input fino a `fine` e salvale in una lista. Poi stampa, per ogni parola, quante volte quella parola è già apparsa in precedenza nella lista (inclusa la posizione corrente, la prima occorrenza vale 0 ripetizioni).
+
+```
+Input:  gatto  cane  gatto  gatto  cane  fine
+Output: gatto: 0
+        cane: 0
+        gatto: 1
+        gatto: 2
+        cane: 1
+```
+**21.** `[M4-LA-05]` Data una frase letta dall'input, usa `split()` per ottenere la lista delle parole e stampane la lunghezza.
+
+**22.** `[M4-LA-06]` Data una lista di interi, invertila senza crearne una nuova. Usa due indici (uno all'inizio, uno alla fine) e scambia gli elementi avvicinandoli al centro. (Es.: `[1, 2, 3, 4, 5]` → `[5, 4, 3, 2, 1]`)
+
+**23.** `[M4-LA-07]` Data una lista di interi che contiene alcuni zeri, sposta tutti gli zeri alla fine conservando l'ordine degli altri elementi, senza creare una nuova lista. (Es.: `[0, 3, 0, 1, 5, 0, 2]` → `[3, 1, 5, 2, 0, 0, 0]`)
+
+**24.** `[M4-LA-08]` Data una lista e un intero `k`, ruota la lista di `k` posizioni verso sinistra in place, senza creare una nuova lista. (Es.: `[1, 2, 3, 4, 5]` con `k=2` → `[3, 4, 5, 1, 2]`)
+
+**25.** `[M4-LA-09]` Leggi interi fino a 0 e salvali in una lista. Trova il valore massimo e stampa sia il valore sia l'indice in cui si trova. In caso di parità, prendi la prima occorrenza.
+
+**26.** `[M4-LA-10]` Date due liste già ordinate in modo crescente (es. `a=[1,3,5,7]` e `b=[2,4,6]`), costruisci una terza lista che contiene tutti gli elementi in ordine crescente, senza usare `sort()`. (Suggerimento: usa due indici, uno per lista, e avanza quello con il valore minore.)

@@ -1,394 +1,646 @@
-# Modulo 05 · Liste e lettura dei dati
+# Modulo 05 · Funzioni
 
 ## A fine lezione
 
-- Sai rappresentare dati ordinati con una lista?
-- Sai usare le operazioni fondamentali sulle liste?
-- Sai trasformare una stringa in lista con `split()`?
-- Sai leggere sequenze di dati e accumularle in una lista?
-- Sai ragionare sulla differenza tra lista e stringa?
+- Sai definire funzioni con parametri e valore di ritorno?
+- Sai distinguere funzione e procedura?
+- Sai scomporre un problema in sottoproblemi più piccoli?
+- Sai progettare interfacce semplici con responsabilità singola?
+- Sai leggere una funzione come black box?
+- Sai costruire piccole utility testabili e riusabili?
 
-## Due problemi che il `while` da solo non riesce a risolvere
+## Codice che si ripete?
 
-### Problema 1: stampa i numeri al contrario
-
-Scrivi un programma che legge numeri interi uno alla volta (terminati da `0`) e li stampa in ordine inverso rispetto a quello in cui sono stati inseriti.
-
-Esempio:
-
-```
-Input:  3  7  2  5  0
-Output: 5  2  7  3
-```
-
-Prova a risolverlo usando solo le variabili che conosci. Cosa manca?
-
-Il problema è che quando arriva lo `0`, i numeri precedenti non esistono più: ogni nuova lettura sovrascrive la variabile. Per stampare al contrario bisogna prima raccogliere tutti i valori, poi scorrere la raccolta in senso inverso.
-
-Con le sole variabili del modulo 4:
-
-```python
-numero = int(input())
-while numero != 0:
-    # qui vorremmo "ricordare" numero, ma dove?
-    numero = int(input())
-# a questo punto non sappiamo più cosa è stato inserito
-```
-
-Il `while` sa iterare, ma non sa ricordare una sequenza di valori.
-
-### Problema 2: chi è sopra la media?
-
-Scrivi un programma che legge numeri interi uno alla volta (terminati da `0`) e stampa quelli che superano la media di tutti i numeri inseriti.
-
-Esempio:
-
-```
-Input:  4  8  2  6  0
-Media:  5.0
-Output: 8  6
-```
-
-Anche volendo, questo problema è impossibile da risolvere con una sola passata: per sapere se `4` è sopra la media, devi già conoscere anche `8`, `2` e `6`. La media si può calcolare solo dopo aver letto l'ultimo numero.
-
-Servono due passate sugli stessi dati:
-
-1. leggi tutti i numeri, calcola la media;
-2. scorri di nuovo gli stessi numeri e stampa quelli sopra la media.
-
-Per fare la seconda passata i numeri devono essere ancora disponibili — e con variabili singole non lo sono.
-
-
-Entrambi i problemi hanno la stessa radice: il programma ha bisogno di **ricordare una sequenza di valori** per poterla usare dopo.
-Questa è esattamente la funzione di una lista.
-
-## Liste: creare e popolare
-
-Una lista è una sequenza ordinata di valori tenuti insieme sotto un unico nome.
-
-### Creare una lista
-
-Lista con elementi già noti:
-
-```python
-voti = [28, 30, 24, 27]
-nomi = ["Alice", "Bruno", "Carla"]
-```
-
-Lista vuota, da riempire dopo:
+Negli esercizi sulle liste abbiamo scritto molte volte questo stesso blocco:
 
 ```python
 numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 ```
 
-La lista vuota è il punto di partenza quando non si conosce in anticipo quanti elementi ci saranno, la situazione dei problemi di apertura.
-
-### Aggiungere elementi: `append`
+Eccolo in tre esercizi diversi, fianco a fianco:
 
 ```python
+# Es. 10 — stampa al contrario
 numeri = []
-numeri.append(4)
-numeri.append(8)
-numeri.append(2)
-print(numeri)   # [4, 8, 2]
-```
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 
-Ogni chiamata ad `append` aggiunge un elemento **in coda**. L'ordine di inserimento viene conservato.
-
-### Leggere la lunghezza: `len`
-
-```python
-voti = [28, 30, 24, 27]
-print(len(voti))   # 4
-```
-
-### Accedere a un elemento: `lista[i]`
-
-Gli indici partono da `0`.
-
-```python
-voti = [28, 30, 24, 27]
-#        0   1   2   3
-
-print(voti[0])   # 28  (primo)
-print(voti[3])   # 27  (quarto)
-print(voti[-1])  # 27  (ultimo, contando da destra)
-```
-
-```
-indice:   0    1    2    3
-        +----+----+----+----+
-voti:   | 28 | 30 | 24 | 27 |
-        +----+----+----+----+
-```
-
-### Modificare un elemento
-
-```python
-voti[0] = 29
-print(voti)   # [29, 30, 24, 27]
-```
-
-<details>
-Questa è una differenza rispetto alle stringhe!
-</details>
-
-### Concatenare due liste
-
-```python
-a = [1, 2, 3]
-b = [4, 5, 6]
-print(a + b)   # [1, 2, 3, 4, 5, 6]
-```
-
-`+` non modifica `a` né `b`: produce una nuova lista.
-
-### Riepilogo operazioni
-
-| Operazione          | Sintassi         | Nota                          |
-| ------------------- | ---------------- | ----------------------------- |
-| Lista vuota         | `L = []`         |                               |
-| Aggiunta in coda    | `L.append(x)`    | modifica `L` sul posto        |
-| Lunghezza           | `len(L)`         |                               |
-| Accesso per indice  | `L[i]`           | da `0` a `len(L)-1`           |
-| Ultimo elemento     | `L[-1]`          |                               |
-| Modifica elemento   | `L[i] = x`       | modifica `L` sul posto        |
-| Concatenazione      | `L1 + L2`        | produce una nuova lista       |
-| Conteggio occorr.   | `L.count(x)`     |                               |
-
-> Python permette liste con elementi di tipo diverso, ma nella pratica conviene costruire liste omogenee (tutti interi, tutte stringhe, …): è più semplice applicare le stesse operazioni a tutti gli elementi.
-
-### Tornare al Problema 1: numeri al contrario
-
-Con `append` possiamo raccogliere i numeri mentre li leggiamo, e usarli dopo:
-
-```python
-numeri = []
-numero = int(input())
-while numero != 0:
-    numeri.append(numero)
-    numero = int(input())
-
-# ora numeri contiene tutta la sequenza
 i = len(numeri) - 1
 while i >= 0:
     print(numeri[i])
     i = i - 1
 ```
 
-Il `while` di lettura accumula; il secondo `while` scorre la lista al contrario.
-
-## Esercizi base
-
-1. Crea una lista con i numeri da 1 a 5 usando `append` in un ciclo `while`. Poi stampa la lista.
-2. Data la lista `voti = [24, 28, 30, 18, 27]`, stampa il primo e l'ultimo voto.
-3. Data la lista `nomi = ["Alice", "Bruno", "Carla", "Dario"]`, stampa il secondo e il penultimo nome.
-4. Leggi numeri interi dall'input fino a `0` e salvali in una lista. Stampa la lista alla fine.
-5. Leggi parole dall'input fino a `fine` e salvale in una lista. Stampa quante parole sono state inserite.
-6. Data una lista di numeri, calcola e stampa la somma di tutti gli elementi senza usare `sum()`.
-7. Data una lista di numeri, stampa solo quelli maggiori di 10.
-8. Data una lista di parole, stampa solo quelle che iniziano per vocale.
-9. Data la lista `prezzi = [3.5, 1.2, 7.8, 4.0]`, stampa il prezzo più alto senza usare `max()`: scorri la lista con un `while` e tieni traccia del massimo.
-10. Leggi numeri fino a `0`, salvali in una lista, poi stampa la lista al contrario (come nel Problema 1).
-11. Data una frase letta dall'input, usa `split()` per ottenere la lista delle parole e stampane la lunghezza.
-
-## Liste di liste
-
-Una lista può contenere qualsiasi tipo di valore — incluse altre liste. Questo permette di rappresentare strutture a due dimensioni come **matrici**, tabelle e griglie.
-
 ```python
-matrice = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
-```
+# Es. 9 — trova il massimo
+numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
 
-`matrice` è una lista di 3 elementi, ognuno dei quali è una lista di 3 interi.
-
-### Accesso agli elementi
-
-Per accedere a un elemento servono due indici: prima la riga, poi la colonna.
-
-```python
-matrice[0]      # [1, 2, 3]  — prima riga intera
-matrice[0][0]   # 1          — riga 0, colonna 0
-matrice[1][2]   # 6          — riga 1, colonna 2
-matrice[2][-1]  # 9          — ultima colonna della terza riga
-```
-
-```
-         col 0  col 1  col 2
-        +------+------+------+
-riga 0  |  1   |  2   |  3   |
-        +------+------+------+
-riga 1  |  4   |  5   |  6   |
-        +------+------+------+
-riga 2  |  7   |  8   |  9   |
-        +------+------+------+
-```
-
-### Stampare una matrice riga per riga
-
-```python
-i = 0
-while i < len(matrice):
-    print(matrice[i])
+massimo = numeri[0]
+i = 1
+while i < len(numeri):
+    if numeri[i] > massimo:
+        massimo = numeri[i]
     i = i + 1
+print(massimo)
 ```
-
-Output:
-```
-[1, 2, 3]
-[4, 5, 6]
-[7, 8, 9]
-```
-
-Per stampare elemento per elemento con due cicli annidati:
 
 ```python
+# Es. 12 — media e valori sopra la media
+numeri = []
+n = int(input())
+while n != 0:
+    numeri.append(n)
+    n = int(input())
+
+somma = 0
 i = 0
-while i < len(matrice):
-    j = 0
-    while j < len(matrice[i]):
-        print(matrice[i][j], end=" ")
-        j = j + 1
-    print()   # a capo alla fine di ogni riga
+while i < len(numeri):
+    somma = somma + numeri[i]
     i = i + 1
+media = somma / len(numeri)
+print("Media:", media)
 ```
 
-Output:
-```
-1 2 3
-4 5 6
-7 8 9
-```
+Le prime cinque righe sono **identiche** in tutti e tre. Se domani vogliamo cambiare la sentinella da `0` a `-1`, o aggiungere un prompt all'`input()`, dobbiamo modificarle in ogni punto in cui compaiono — e rischiamo di dimenticarne uno.
 
-### Costruire una matrice con input
+Questo è il problema che le funzioni risolvono: isoliamo quel blocco in un posto solo, gli diamo un nome, e lo chiamiamo quando serve.
 
 ```python
-righe = int(input("Righe: "))
-colonne = int(input("Colonne: "))
+def leggi_lista(sentinella):
+    numeri = []
+    n = int(input())
+    while n != sentinella:
+        numeri.append(n)
+        n = int(input())
+    return numeri
+```
 
-matrice = []
+I tre programmi diventano:
+
+```python
+# Es. 10 — stampa al contrario
+numeri = leggi_lista(0)
+
+i = len(numeri) - 1
+while i >= 0:
+    print(numeri[i])
+    i = i - 1
+```
+
+```python
+# Es. 9 — trova il massimo
+numeri = leggi_lista(0)
+
+massimo = numeri[0]
+i = 1
+while i < len(numeri):
+    if numeri[i] > massimo:
+        massimo = numeri[i]
+    i = i + 1
+print(massimo)
+```
+
+```python
+# Es. 12 — media e valori sopra la media
+numeri = leggi_lista(0)
+
+somma = 0
 i = 0
-while i < righe:
-    riga = []
-    j = 0
-    while j < colonne:
-        val = int(input())
-        riga.append(val)
-        j = j + 1
-    matrice.append(riga)
+while i < len(numeri):
+    somma = somma + numeri[i]
     i = i + 1
+media = somma / len(numeri)
+print("Media:", media)
 ```
 
-## `split()` e prime trasformazioni
+La logica di lettura esiste in un posto solo. Se la modifichiamo, cambia ovunque.
 
-Una nuova operazione importante sulle stringhe e' questa:
+Lo stesso ragionamento vale per qualsiasi blocco che compare più volte: contare le vocali, trovare il minimo, verificare se una stringa è palindroma. Ogni volta che ti sorprendi a copiare e incollare le stesse righe, è il momento di scrivere una funzione.
+
+## Funzioni in matematica
+
+In matematica hai già incontrato le funzioni. Per esempio:
+
+> **f(x) = 2x + 1**
+
+Questa funzione prende un numero `x` e restituisce un numero: il doppio di `x` più uno.
+
+| `x`  | `f(x) = 2x + 1` |
+|------|-----------------|
+| 0    | 1               |
+| 1    | 3               |
+| 3    | 7               |
+| −2   | −3              |
+| 10   | 21              |
+
+Scrivere `f(3)` vuol dire applicare la regola a `3` e ottenere `7`.
+
+Tre cose che già sai:
+
+- una funzione ha un **nome** (`f`);
+- riceve uno o più **input** (`x`) e produce un **output** (`f(x)`);
+- la regola è scritta una volta sola, ma puoi applicarla a qualunque valore.
+
+In Python si scrive esattamente la stessa cosa:
 
 ```python
-incipit = "Era una notte incantevole, una di quelle notti..."
-parole = incipit.split()
-print(parole)
+def f(x):
+    return 2 * x + 1
+
+f(3)   # → 7
+f(10)  # → 21
 ```
 
-`split()` prende una stringa e restituisce una **lista** di sottostringhe.
+Il parallelismo è diretto:
 
+| matematica       | Python               |
+|------------------|----------------------|
+| nome della funzione | `def nome_funzione` |
+| variabile `x`    | parametro `x`        |
+| `f(x) = ...`     | `return ...`         |
+| `f(3)`           | `f(3)`               |
 
-### Attenzione: `split()` taglia dove gli diciamo di tagliare
+La differenza principale: in Python la funzione può fare cose più complesse di una formula — può contenere variabili, cicli, condizioni. Ma la struttura è la stessa.
 
-Con `split()` senza argomenti:
+## Perché servono le funzioni
 
-- il taglio avviene sugli spazi;
-- quindi `"La Spezia"` diventa due elementi se c'è uno spazio in mezzo;
-- mentre `"andata,"` resta un unico elemento, perché la virgola non viene separata automaticamente.
+Le funzioni servono a evitare duplicazione, isolare un compito preciso e rendere il codice più leggibile.
 
-## Esercizi avanzati
+- una funzione riceve input;
+- esegue una trasformazione;
+- restituisce un risultato.
 
-### Sequenze e proprietà
+Esempio:
 
-1. Leggi numeri fino a `0`. Costruisci due liste separate: una con i numeri pari e una con i dispari. Stampa entrambe.
-2. Leggi numeri fino a `0`, salvali in una lista, calcola la media e stampa quelli che superano la media (come nel Problema 2).
-3. Scrivi un programma che legge 5 parole e le salva in una lista. Stampa `uguale` se la prima e l'ultima parola sono identiche, `diversa` altrimenti.
-4. Scrivi un programma che legge una stringa e controlla se è palindroma (ignora spazi e maiuscole/minuscole). Esempi: `anna`, `i topi non avevano nipoti`.
-5. Scrivi un programma che chiede numeri interi fino a `0`. Controlla se ogni `1` nella sequenza è immediatamente seguito da un `2`. Stampa `Sequenza corretta` o `Sequenza errata`.
-    - `9 1 2 6 1 2 0` → corretta
-    - `9 1 6 1 2 0` → errata
-6. Data una stringa letta dall'input, stampa la frequenza di ogni lettera che compare almeno una volta.
+```python
+def triplo_del_successore(x):
+    successore = x+1
+    return 3 * successore
+```
 
-### Serie multiple e conteggio per categoria
+- una funzione è una **delega**;
+- non dobbiamo saper fare tutto da soli nel codice principale;
+- dobbiamo anche saper decidere quale sottoproblema affidare a un blocco specializzato.
 
-7. Scrivi un programma che legge parole fino a `fine` e conta quante iniziano per ciascuna vocale (`a`, `e`, `i`, `o`, `u`). Stampa il conteggio per ogni vocale.
-8. Scrivi un programma che legge 5 lettere, poi legge parole fino a `fine`. Per ogni lettera letta all'inizio, stampa quante parole iniziano con quella lettera.
-9. Scrivi un programma che legge tre serie di numeri, ognuna terminata da `0`. Per ogni serie, stampa i numeri al contrario.
-    ```
-    Input:  4 12 0 / 9 7 6 0 / 4 1 -3 8 0
-    Output: [12, 4] / [6, 7, 9] / [8, -3, 1, 4]
-    ```
-10. Scrivi un programma che legge una serie di numeri terminata da `0`. Per ogni numero `n`, stampa tutti i numeri pari compresi tra `0` (incluso) e `n` (escluso).
-    ```
-    Input: 6 10 0   Output: 0 2 4  /  0 2 4 6 8
-    ```
+Pensiamo alla costruzione di una casa. Chiamiamo un elettricista e gli diciamo: "ho bisogno di un impianto per una casa da 80 mq con tre stanze". L'elettricista fa il suo lavoro e ti consegna l'impianto finito. Non ti interessa come lo fa: ti interessa che funzioni.
 
-### Due liste
+Se poi costruiamo una seconda casa, richiamiamo lo stesso elettricista — questa volta per 120 mq e cinque stanze. Stessa persona, stesso mestiere, parametri diversi.
 
-11. Date due liste di interi, costruisci una lista con gli elementi **in comune** (intersezione, in ordine di apparizione in `a`).
-    ```python
-    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5, 1]  # → [7, 1, 9]
-    ```
-12. Date due liste, costruisci una lista con tutti gli elementi che compaiono in almeno una delle due, **senza duplicati** (unione).
-    ```python
-    a = [3, 7, 1]; b = [7, 2, 9]  # → [3, 7, 1, 2, 9]
-    ```
-13. Date due liste `a` e `b`, costruisci una lista con gli elementi di `a` che **non** compaiono in `b` (differenza `a − b`).
-    ```python
-    a = [3, 7, 1, 9, 4]; b = [7, 2, 9, 5]  # → [3, 1, 4]
-    ```
-14. Date due liste, controlla se sono **disgiunte** (nessun elemento in comune). Stampa `sì` o `no`.
-15. Stessi esercizi 11–13, ma le liste possono contenere duplicati. Decidi come gestirli.
-    ```python
-    a = [1, 2, 2, 3]; b = [2, 2, 4]
-    # intersezione con molteplicità: [2, 2]; differenza a − b: [1, 3]
-    ```
-16. Date due liste **già ordinate in modo crescente**, costruisci la lista unione ordinata **senza usare `sort()`** (algoritmo di merge).
-    ```python
-    a = [1, 3, 5, 7]; b = [2, 3, 6, 8]  # → [1, 2, 3, 3, 5, 6, 7, 8]
-    ```
-17. Come l'esercizio 16, ma costruisci solo l'**intersezione ordinata** (elementi presenti in entrambe, senza duplicati).
-    ```python
-    a = [1, 3, 5, 7]; b = [2, 3, 6, 7]  # → [3, 7]
-    ```
+In programmazione funziona esattamente così:
 
-### Matrici
+- la **funzione** è l'elettricista — sa fare un lavoro preciso;
+- i **parametri** sono le istruzioni che gli dai ogni volta — cambiano da chiamata a chiamata;
+- il **valore di ritorno** è il risultato che ti consegna.
 
-18. Crea a mano una matrice 3×3 con i numeri da 1 a 9 e stampala riga per riga.
-19. Data una matrice quadrata `n×n`, stampa solo la diagonale principale (elementi dove `i == j`).
-    ```python
-    matrice = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # output: 1  5  9
-    ```
-20. Data una matrice, calcola la somma di tutti gli elementi.
-21. Leggi dall'input una matrice `n×m` (prima `n`, poi `m`, poi i valori riga per riga). Stampa la somma degli elementi di ogni riga.
-22. Data una matrice, costruisci la sua **trasposta**: una nuova matrice dove righe e colonne sono scambiate.
-    ```python
-    originale = [[1, 2, 3], [4, 5, 6]]  # trasposta: [[1, 4], [2, 5], [3, 6]]
-    ```
-23. Data una matrice quadrata `n×n`, stampa la **diagonale secondaria** (elementi con `i + j == n − 1`).
-24. Data una matrice di interi, trova la posizione `(riga, colonna)` del valore massimo.
-25. Data una matrice di interi, stampa `sì` se ogni riga è ordinata in modo non-decrescente (ogni elemento è ≥ al precedente nella stessa riga), `no` altrimenti.
-26. Data una matrice quadrata `n×n`, stampa `sì` se è **simmetrica** (`matrice[i][j] == matrice[j][i]` per ogni `i`, `j`), `no` altrimenti.
-27. Data una matrice, stampa per ogni coppia di righe adiacenti `i` e `i+1` se la **somma** della riga `i+1` è maggiore della somma della riga `i`.
-28. Data una matrice, stampa `sì` se per ogni indice `i` compreso tra `0` e `len(matrice) − 2`, tutti gli elementi di `matrice[i+1]` sono **pari**, `no` altrimenti.
-29. Data una matrice quadrata `n×n`, verifica che la **somma di ogni riga** sia uguale alla somma della colonna con lo stesso indice (somma riga 0 == somma colonna 0, ecc.). Stampa `sì` o `no`.
-30. Data una matrice di interi, stampa `sì` se per ogni cella `matrice[i][j]` (con `i < len(matrice) − 1`), la cella sottostante `matrice[i+1][j]` è strettamente maggiore, `no` altrimenti (la matrice è strettamente crescente per colonne dall'alto verso il basso).
+```python
+def impianto_elettrico(metri_quadri, num_stanze):
+    # ... calcola il materiale necessario ...
+    return costo
+```
 
-### Progetto: impiccato
+Chiamarla con valori diversi produce risultati diversi, ma la logica interna è scritta una volta sola.
 
-31. Scrivi un programma che fa giocare l'utente al gioco dell'impiccato.
-    - Il giocatore B propone una lettera alla volta. Se la lettera è presente nella parola segreta, tutte le sue posizioni vengono svelate.
-    - Nella cartella `impiccato/` trovi i file `parola_segreta.py` e `impiccato.py` con la struttura di partenza. `impiccato.py` contiene la funzione `update(guess, parola, lettera)` che aggiorna la stringa di underscore:
-      ```python
-      update("____", "casa", "a")  # → "_a_a"
-      update("_a_a", "casa", "c")  # → "ca_a"
-      ```
-32. Estendi l'impiccato aggiungendo un numero massimo di tentativi (6 nella versione classica, oppure dipendente dalla lunghezza della parola) e la possibilità di indovinare l'intera parola in un turno.
+Quando il programma cresce, iniziamo a ripetere pezzi di ragionamento:
+
+- la stessa trasformazione su input diversi;
+- lo stesso controllo in più punti;
+- lo stesso sottoproblema dentro programmi più grandi.
+
+Definite una funzione serve a isolare quel comportamento in un blocco riusabile.
+
+## Sintassi della definizione di funzione
+
+Una funzione va definita e poi chiamata. Sono due cose distinte.
+
+**La definizione è un'istruzione.** Quando Python incontra la definizione, salva il codice della funzione in memoria — ma non lo esegue ancora. La funzione esiste, ma non ha fatto nulla.
+
+**La chiamata o invocazione è un'espressione.** Quando scriviamo `area_rettangolo(4, 6)`, Python esegue il corpo della funzione e produce un valore. Quel valore ha un tipo — in questo caso `int`. Possiamo usarlo ovunque si può usare un'espressione: in un `print`, in un assegnamento, in una condizione (a seconda del tipo!).
+
+```python
+def area_rettangolo(base, altezza):
+    return base * altezza
+
+print(area_rettangolo(4, 6))
+```
+
+```python
+risultato = area_rettangolo(4, 6)   # int
+print(area_rettangolo(3, 5))        # int stampato
+if area_rettangolo(2, 2) > 3:       # int confrontato
+    print("grande")
+```
+
+### Sintassi generale
+
+```python
+def nome_funzione(parametro_1, parametro_2, ..., parametro_n):
+
+    # istruzione_1
+    # ...
+    # istruzione_n
+
+    return espressione
+```
+
+Parti da riconoscere:
+
+- `def` introduce la definizione della funzione;
+- il nome della funzione ha le stesse restrizioni di un nome di variabile (lettere, cifre, `_`; non può iniziare con una cifra; non può essere una parola chiave);
+- i parametri sono nomi di variabile a tutti gli effetti — valgono le stesse regole; non possono essere numeri, stringhe o espressioni;
+- i due punti `:` aprono il blocco;
+- `return` restituisce il risultato.
+
+## Invocare una funzione
+
+### Sintassi dell'invocazione
+
+```python
+nome_funzione(argomento_1, argomento_2, ..., argomento_n)
+```
+
+Gli argomenti sono espressioni: possono essere valori, variabili, o qualsiasi espressione con il tipo giusto.
+
+```python
+area_rettangolo(4, 6)           # valori
+area_rettangolo(base, altezza)  # variabili
+area_rettangolo(b * 2, h + 1)   # espressioni
+```
+
+Il numero di argomenti deve corrispondere al numero di parametri nella definizione.
+
+### Semantica dell'invocazione
+
+Quando Python incontra una chiamata di funzione:
+
+1. valuta ciascun argomento da sinistra a destra;
+2. assegna ogni valore al parametro corrispondente **per posizione**:
+```
+chiamata:        area_rettangolo( 4  ,    6   )
+                                  |       |
+                                  |       |
+                                  ↓       ↓
+definizione:  def area_rettangolo(base, altezza):
+```
+All'interno del corpo, `base` varrà `4` e `altezza` varrà `6`.
+3. esegue il corpo della funzione con quei valori;
+4. quando incontra `return`, valuta l'espressione dopo `return`, interrompe il corpo e restituisce quel valore al chiamante;
+5. la chiamata nel programma principale si "sostituisce" con quel valore.
+
+Tutto ciò che sta dopo un `return` nello stesso ramo non viene eseguito.
+
+### Commentare che cosa fa una funzione
+
+Dopo una definizione conviene lasciare almeno traccia di:
+
+- che cosa fa la funzione;
+- che cosa si aspetta in input;
+- che cosa restituisce in output.
+
+Questo è utile perché un nome di parametro da solo non garantisce abbastanza contesto, soprattutto quando il codice cresce.
+
+## Tracciare lo stato con le funzioni
+
+Nei moduli precedenti abbiamo imparato a compilare la tabella dello stato riga per riga. Con le funzioni lo stato si divide in due parti: la memoria del **programma principale** e la memoria **locale della funzione**, che esiste solo durante la chiamata.
+
+Consideriamo:
+
+```python
+def triplo_del_successore(x):
+    successore = x + 1
+    triplo = 3 * successore
+    return triplo
+
+n = 15
+risultato = triplo_del_successore(n)
+print(risultato)
+```
+
+| passo | riga                                  | stato principale   | stato funzione                          | output |
+| ----- | ------------------------------------- | ------------------ | --------------------------------------- | ------ |
+| 1     | `n = 15`                              | n=15               | —                                       |        |
+| 2     | `triplo_del_successore(n)` — chiamata | n=15               | x=15                                    |        |
+| 3     | `successore = x + 1`                  | n=15               | x=15, successore=16                     |        |
+| 4     | `triplo = 3 * successore`             | n=15               | x=15, successore=16, triplo=48          |        |
+| 5     | `return triplo`                       | n=15               | → restituisce 48, memoria locale chiusa |        |
+| 6     | `risultato = 48`                      | n=15, risultato=48 | —                                       |        |
+| 7     | `print(risultato)`                    | n=15, risultato=48 | —                                       | 48     |
+
+Tre cose da notare:
+
+- al passo 2 la memoria locale si **apre**: `x` riceve il valore di `n`;
+- al passo 5 la memoria locale si **chiude**: `successore` e `triplo` spariscono, solo il valore di ritorno passa al chiamante;
+- il programma principale non vede mai `successore` né `triplo`: esistono solo dentro la funzione.
+
+## Scope (non 🧹🧹)
+
+Lo **scope** (o ambito) di una variabile è la parte del programma in cui quella variabile esiste ed è accessibile.
+
+In Python ogni funzione ha il proprio scope locale:
+le variabili create dentro una funzione — inclusi i parametri — esistono solo per la durata di quella chiamata.
+Il programma principale ha il proprio scope globale.
+
+Le due memorie sono **separate e indipendenti**. Questo ha tre conseguenze importanti.
+
+### 1 · Le variabili locali non sono visibili fuori dalla funzione
+
+```python
+def calcola():
+    risultato = 42
+    return risultato
+
+print(risultato)   # NameError: risultato non esiste qui
+```
+
+`risultato` esiste solo dentro `calcola`. Fuori dalla funzione, quel nome non è definito.
+
+### 2 · Le variabili esterne non sono visibili dentro la funzione
+
+```python
+x = 10
+
+def raddoppia():
+    return x * 2   # funziona, ma è una cattiva pratica: x viene "catturata" dallo scope globale
+```
+
+Usare variabili globali dentro una funzione è tecnicamente possibile ma va evitato:
+rende la funzione dipendente dal contesto esterno e difficile da riusare.
+La regola pratica è: **tutto ciò di cui la funzione ha bisogno deve entrare come parametro**.
+
+```python
+def raddoppia(x):   # corretto: x è un parametro
+    return x * 2
+```
+
+### 3 · Stesso nome, variabili diverse
+
+Se una variabile nel programma principale e una variabile dentro la funzione hanno lo stesso nome,
+sono due variabili distinte e non si influenzano a vicenda.
+
+```python
+def incrementa(x):
+    x = x + 1       # questa x è locale alla funzione
+    return x
+
+x = 5               # questa x è nel programma principale
+y = incrementa(x)
+print(x)            # 5  — x nel programma principale non è cambiata
+print(y)            # 6
+```
+
+Traccia dello stato:
+
+| passo | riga | stato principale | stato funzione |
+|-------|------|-----------------|----------------|
+| 1 | `x = 5` | x=5 | — |
+| 2 | `incrementa(x)` — chiamata | x=5 | x=5 (copia) |
+| 3 | `x = x + 1` | x=5 | x=6 |
+| 4 | `return x` | x=5 | → restituisce 6, memoria locale chiusa |
+| 5 | `y = 6` | x=5, y=6 | — |
+
+La `x` della funzione è una copia del valore passato, non la stessa variabile.
+Modificarla dentro la funzione non tocca la `x` di fuori.
+
+---
+
+## Esercizi
+
+### Tracciare lo stato
+
+**1.** `[M5-TRACE-01]` Compila la tabella dello stato per il seguente programma:
+
+```python
+def somma(a, b):
+    risultato = a + b
+    return risultato
+
+x = 3
+y = 7
+z = somma(x, y)
+print(z)
+```
+
+| passo | riga | stato principale | stato funzione | output |
+|-------|------|-----------------|----------------|--------|
+| | | | | |
+
+**2.** `[M5-TRACE-02]` Compila la tabella dello stato per il seguente programma:
+
+```python
+def is_pari(n):
+    return n % 2 == 0
+
+x = 4
+if is_pari(x):
+    print("pari")
+else:
+    print("dispari")
+```
+
+| passo | riga | stato principale | stato funzione | output |
+|-------|------|-----------------|----------------|--------|
+| | | | | |
+
+### Trovare l'errore
+
+**3.** `[M5-ERR-01]` Il seguente programma vuole stampare il doppio di un numero, ma non funziona. Individua l'errore e correggilo.
+
+```python
+def doppio(n):
+    n = n * 2
+
+x = 5
+print(doppio(x))
+```
+
+**4.** `[M5-ERR-02]` Il seguente programma vuole calcolare la somma di tre numeri usando una funzione, ma produce un risultato sbagliato. Individua l'errore.
+
+```python
+def somma(a, b):
+    return a + b
+
+print(somma(1, 2, 3))
+```
+
+**5.** `[M5-ERR-03]` Il seguente programma vuole usare il risultato della funzione in una condizione, ma produce un errore. Spiega perché e correggilo.
+
+```python
+def messaggio(nome):
+    print("Ciao, " + nome)
+
+if messaggio("Alice") == "Ciao, Alice":
+    print("ok")
+```
+
+### Scope
+
+**6.** `[M5-SCOPE-01]` Il seguente programma produce un errore oppure stampa qualcosa? Spiega cosa succede e perché.
+
+```python
+def calcola():
+    x = 100
+    return x
+
+calcola()
+print(x)
+```
+
+**7.** `[M5-SCOPE-02]` Considera il seguente programma. Cosa stampa? Spiega perché `n` nel programma principale non cambia.
+
+```python
+def azzera(n):
+    n = 0
+    return n
+
+n = 42
+azzera(n)
+print(n)
+```
+
+**8.** `[M5-SCOPE-03]` Il seguente programma vuole raddoppiare una variabile globale dall'interno di una funzione. Funziona come ci si aspetta? Riscrivilo nel modo corretto.
+
+```python
+valore = 10
+
+def raddoppia():
+    return valore * 2
+
+print(raddoppia())
+```
+
+**9.** `[M5-SCOPE-04]` Cosa stampa il seguente programma? Compila la tabella dello stato.
+
+```python
+def f(x):
+    y = x * 2
+    return y
+
+x = 3
+y = 10
+risultato = f(5)
+print(x, y, risultato)
+```
+
+| passo | riga | stato principale | stato funzione | output |
+|-------|------|-----------------|----------------|--------|
+| | | | | |
+
+**10.** `[M5-SCOPE-05]` Il seguente programma contiene un errore di scope. Individualo e correggilo senza usare variabili globali.
+
+```python
+def calcola_sconto():
+    return prezzo * sconto / 100
+
+prezzo = 80
+sconto = 20
+print(calcola_sconto())
+```
+
+### Scrivere funzioni
+
+**11.** `[M5-WRITE-01]` Scrivi una funzione `perimetro_rettangolo(base, altezza)` che restituisce il perimetro di un rettangolo.
+
+```
+perimetro_rettangolo(3, 5)  →  16
+```
+
+**12.** `[M5-WRITE-02]` Scrivi una funzione `divisibile(n, d)` che restituisce `True` se `n` è divisibile per `d`, `False` altrimenti.
+
+```
+divisibile(12, 4)  →  True
+divisibile(7, 3)   →  False
+```
+
+**13.** `[M5-WRITE-03]` Scrivi una funzione `massimo(a, b)` che restituisce il maggiore tra due numeri senza usare `max()`.
+
+```
+massimo(3, 7)  →  7
+massimo(5, 5)  →  5
+```
+
+**14.** `[M5-WRITE-04]` Scrivi una funzione `conta_vocali(s)` che riceve una stringa e restituisce il numero di vocali che contiene.
+
+```
+conta_vocali("informatica")  →  5
+conta_vocali("ritmo")        →  2
+```
+
+**15.** `[M5-WRITE-05]` Scrivi una funzione `ripeti(s, n)` che restituisce la stringa `s` ripetuta `n` volte, separata da spazi, senza usare l'operatore `*`.
+
+```
+ripeti("ciao", 3)  →  "ciao ciao ciao"
+ripeti("ok", 1)    →  "ok"
+```
+
+**16.** `[M5-WRITE-06]` Scrivi una funzione `valore_assoluto(n)` che restituisce il valore assoluto di un numero senza usare `abs()`.
+
+```
+valore_assoluto(-3)  →  3
+valore_assoluto(5)   →  5
+```
+
+**17.** `[M5-WRITE-07]` Scrivi una funzione `è_vocale(c)` che riceve un carattere e restituisce `True` se è una vocale (maiuscola o minuscola), `False` altrimenti.
+
+```
+è_vocale("a")  →  True
+è_vocale("b")  →  False
+```
+
+**18.** `[M5-WRITE-08]` Scrivi una funzione `fahrenheit_in_celsius(f)` che converte gradi Fahrenheit in Celsius con la formula `(f - 32) × 5 / 9`.
+
+```
+fahrenheit_in_celsius(32)   →  0.0
+fahrenheit_in_celsius(212)  →  100.0
+```
+
+**19.** `[M5-WRITE-09]` Scrivi una funzione `minimo(a, b)` che restituisce il minore tra due numeri senza usare `min()`.
+
+```
+minimo(3, 7)  →  3
+minimo(5, 5)  →  5
+```
+
+**20.** `[M5-WRITE-10]` Scrivi una funzione `media(a, b, c)` che restituisce la media aritmetica di tre numeri.
+
+```
+media(4, 8, 6)  →  6.0
+```
+
+### Scrivere funzioni — livello avanzato
+
+**21.** `[M5-WRITE-11]` Scrivi una funzione `somma_cifre(n)` che riceve un intero positivo e restituisce la somma delle sue cifre, senza convertirlo in stringa (usa `%` e `//`).
+
+```
+somma_cifre(123)  →  6
+somma_cifre(9)    →  9
+```
+
+**22.** `[M5-WRITE-12]` Scrivi una funzione `è_primo(n)` che restituisce `True` se `n` è un numero primo, `False` altrimenti.
+
+```
+è_primo(7)   →  True
+è_primo(12)  →  False
+```
+
+**23.** `[M5-WRITE-14]` Scrivi una funzione `inverti_stringa(s)` che restituisce la stringa invertita senza usare lo slicing `[::-1]`. Costruisci il risultato carattere per carattere partendo dalla fine.
+
+```
+inverti_stringa("ciao")   →  "oaic"
+inverti_stringa("radar")  →  "radar"
+```
+
+**24.** `[M5-WRITE-15]` Scrivi una funzione `conta_occorrenze(lista, valore)` che restituisce quante volte `valore` compare nella lista, senza usare `.count()`.
+
+```
+conta_occorrenze([3, 1, 4, 1, 5, 1], 1)  →  3
+```
+

@@ -27,9 +27,10 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 
 ## Sistema di valutazione
 
-- Ci sono **3 prove intermedie facoltative**, una per blocco (moduli 1–3, 4–6, 7–8). Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.
-- Lo **scritto finale** copre i tre blocchi (moduli 1–9). Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale: le prove già superate alleggeriscono lo scritto e possono migliorare il voto complessivo.
-- L'esame si conclude con un **orale** che include live coding e domande di teoria. I moduli 10 e 11 sono testati solo in questa sede.
+- Ci sono **2 prove intermedie facoltative**, una per i moduli 1–3 e una per i moduli 4–6. Si svolgono durante le ore di corso e sono già comprese nel monte ore totale.
+- Lo **scritto finale** copre entrambe le prove intermedie (moduli 1–6). Per ogni blocco viene considerata la valutazione più favorevole tra prova intermedia e scritto finale: le prove già superate alleggeriscono lo scritto e possono migliorare il voto complessivo.
+- È possibile recuperare solo una delle due prove intermedie in sede dello scritto finale.
+- L'esame si conclude con un **orale** che include live coding e domande di teoria. I moduli dal 7 in poi sono testati in questa sede
 
 ## Moduli
 
@@ -86,7 +87,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | --------- | ------ | ----- | ----------------------------------------------------------------------------------------- |
 | exercise  | 1.5h     | —     | Argomenti: moduli 1-3 (basi, tipi, memoria, stato, strutture decisionali, semplici while) |
 
-### 05 | Funzioni e procedure | slides=guida-lezioni/modulo-5.slides.html
+### 05 | Funzioni | slides=guida-lezioni/modulo-5.slides.html
 | Tipologia | Durata | Libro    | Argomento                                                                            |
 | --------- | ------ | -------- | ------------------------------------------------------------------------------------ |
 | theory    | 1h     | cap. ___ | Definire funzioni: parametri, chiamata, valori di ritorno                            |
@@ -95,54 +96,44 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | theory    | 0.5h   | cap. ___ | Scope: variabili locali, parametri e visibilità dei nomi dentro e fuori una funzione |
 | exercise  | 1.5h   | -        | Esercizi: `my_strip`, `my_join`, `is_palindroma` e semplici utility riusabili        |
 
-### 06 | Memoria e passaggio degli argomenti | slides=
-| Tipologia | Durata | Libro | Argomento                                                                                                                                    |
-| --------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 1h     | cap. ___ | [Funzioni vs procedure: quando restituire un valore e quando produrre solo un effetto](guida-lezioni/modulo-6.slides.html#mod6-procedure)           |
-| theory    | 1h     | cap. ___ | [Variabili come nomi associati a valori e oggetti; stato della memoria durante l'esecuzione](guida-lezioni/modulo-7.slides.html#mod7-memoria-liste) |
-| exercise  | 2h     | cap. ___ | Esercizi: elaborare liste lette da input, inversione, conteggi e prime trasformazioni                                                        |
-| theory    | 1h     | cap. ___ | Passaggio per valore e per riferimento e side effects                                                                                        |
-| exercise  | 1h     | cap. ___ | [Esercizi: modifiche in-place, copie, effetti collaterali e debugging di funzioni](guida-lezioni/modulo-7.slides.html#mod7-copie)                   |
+### 06 | Memoria e passaggio degli argomenti | slides=guida-lezioni/modulo-6.slides.html | dispensa=guida-lezioni/dispense/modulo-6-dispensa.pdf
+| Tipologia | Durata | Libro    | Argomento                                                                                         |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------------------------- |
+| theory    | 1h     | cap. ___ | Funzioni pure e funzioni void: sintassi, semantica e principio di progetto                        |
+| theory    | 1h     | cap. ___ | Variabili come nomi associati a oggetti: il modello dei barattoli, tipi mutabili e immutabili     |
+| theory    | 0.5h   | cap. ___ | Alias: quando due nomi puntano allo stesso oggetto; identità vs uguaglianza (`is` vs `==`)        |
+| theory    | 1h     | cap. ___ | Passaggio per riferimento: effetti collaterali, copie e differenza tra in-place e funzione pura   |
+| exercise  | 2h     | cap. ___ | Esercizi: tracciamento della memoria, alias vs copia, funzioni void, modifiche in-place, `random` |
+| theory    | 0.5h   | cap. ___ | Import e librerie: moduli locali, libreria standard e `random` (`randint`, `random()`, `shuffle`) |
 
-### P2 | Prova intermedia 2 | prova=true
+### 07 | Ciclo for e matrici | slides=guida-lezioni/modulo-7.slides.html
+| Tipologia | Durata | Libro    | Argomento                                                                                                                                                                                      |
+| --------- | ------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| exercise  | 2.5h   | —        | Preparazione al compitino P2: ripasso teoria (liste, while, funzioni, scope, aliasing, tipi mutabili/immutabili), trova l'errore, tracciamento dello stato, programmazione guidata passo-passo |
+| theory    | 1h     | cap. ___ | Il ciclo `for`: da `while` a `for` (motivazione), sintassi, semantica, `range()` e schemi ricorrenti (scansione, trasformazione, accumulo)                                                     |
+| exercise  | 1.5h   | —        | Esercizi con `for`: stringhe lettera per lettera, `range()`, tabelline, pattern e trasformazioni su liste                                                                                      |
+
+### P2 | Prova intermedia 2 | prova=true | esercitazione=esami/esercizi-3.pdf esercitazione=esami/soluzioni-esercizi-3.pdf esercitazione=esami/esercizi-4.pdf
 | Tipologia | Durata | Libro | Argomento |
 | --------- | ------ | ----- | --------- |
-| exercise  | 1.5h     | — | Argomenti: moduli 4-7 (while e convalida, liste e input, funzioni)|
-| exercise  | 1.5h     | — | Correzione della prova |
+| exercise  | 1.5h     | — | Argomenti: moduli 4-6 (while e convalida, liste e input, funzioni pure e void, memoria e riferimenti) |
 
-### 07 | Ciclo for e iterazione | slides=
+### 08 | Dizionari, set e organizzazione dell'informazione | slides=
+| Tipologia | Durata | Libro    | Argomento                                                                  |
+| --------- | ------ | -------- | -------------------------------------------------------------------------- |
+| theory    | 1h     | cap. ___ | Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso             |
+| exercise  | 1h     | -        | Dizionari                                                                  |
+| theory    | 0.5h   | cap. ___ | Set e tuple: appartenenza, eliminazione dei duplicati e operazioni di base |
+| exercise  | 2h     | cap. ___ | Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari       |
+
+### 09 | Strutture dati: dizionari | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                  |
 | --------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 0.5h   | cap. ___ | [Il ciclo `for` su stringhe, liste e `range()`](guida-lezioni/modulo-8.slides.html#mod8-for)                               |
 | theory    | 0.5h   | cap. ___ | [Cicli annidati con `for`: righe, colonne, pattern e costruzione di stringhe](guida-lezioni/modulo-8.slides.html#mod8-for) |
 | exercise  | 1h     | cap. ___ | Esercizi con `for`: conteggi, scansioni, accumuli e trasformazioni su sequenze                                             |
 | exercise  | 1h     | cap. ___ | Esercizi: pattern di stampa, triangoli, rettangoli e uso degli indici nei cicli annidati                                   |
-
-### 08 | File e formati strutturati | slides=
-| Tipologia | Durata | Libro | Argomento                                                                                                                                                                               |
-| --------- | ------ | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 1h     | cap. ___ | [File di testo: aprire, leggere e scorrere un file riga per riga con `for`](guida-lezioni/modulo-9.slides.html#mod9-file)                                                                      |
-| theory    | 0.5h   | cap. ___ | [Formati di input/output: testo semplice, CSV, JSON e HTML](guida-lezioni/modulo-9.slides.html#mod9-formati)                                                                                   |
-| theory    | 0.5h   | cap. ___ | [Differenza tra standard input, file aperto con `open()` e parametri da riga di comando](guida-lezioni/modulo-9.slides.html#mod9-file) |
 | exercise  | 0.5h   | cap. ___ | [Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle](guida-lezioni/modulo-9.slides.html#mod9-terminale) |
 | exercise  | 0.5h   | cap. ___ | [Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`](guida-lezioni/modulo-9.slides.html#mod9-terminale)              |
-| exercise  | 2h     | cap. ___ | Esercizi su file di testo, CSV e JSON: lettura, scrittura e semplici trasformazioni |
-| exercise  | 1h     | cap. ___ | Esercizi: parametri da riga di comando, output su file e piccole pipeline di elaborazione |
-
-
-### P3 | Prova intermedia 3 | prova=true
-| Tipologia | Durata | Libro | Argomento                                                                  |
-| --------- | ------ | ----- | -------------------------------------------------------------------------- |
-| exercise  | 1h     | — | Argomenti: moduli 8-9 (`for`, file, input/output, terminale, formati) |
-| exercise  | 1h     | — | Correzione della prova                                                     |
-
-### 09 | Dizionari, set e organizzazione dell'informazione | slides=
-| Tipologia | Durata | Libro | Argomento                                                                                                                          |
-| --------- | ------ | ----- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| theory    | 1h     | cap. ___ | [Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso](guida-lezioni/modulo-10.slides.html#mod10-dizionari)                       |
-| theory    | 1h     | cap. ___ | [Set: appartenenza, eliminazione dei duplicati e operazioni di base](guida-lezioni/modulo-10.slides.html#mod10-set)                 |
-| exercise  | 2h     | cap. ___ | [Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari](guida-lezioni/modulo-10.slides.html#mod10-frequenze)                 |
-
 
 ### 10 | Git e controllo di versione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                             |

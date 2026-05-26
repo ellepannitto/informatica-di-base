@@ -319,34 +319,34 @@ Qui il carattere iniziale è incluso, quello finale no. Omettere il secondo indi
 
 Scrivi un'espressione che calcoli:
 
-1. il successore di `15`;
-2. la metà del triplo di `12`;
-3. il triplo della metà di `12`;
-4. il resto della divisione tra `137` e `12`;
-5. il doppio della differenza tra `15` e `7`;
-6. il doppio della differenza tra `3` e `7`;
-7. la somma dei primi tre numeri pari;
-8. la media di `2`, `5`, `9`;
-9. il resto della divisione tra `44` e `7`;
-10. la somma dei quadrati dei primi tre numeri naturali.
-11. la lunghezza della stringa `"Happy families are all alike"`;
-12. la sua versione tutta maiuscola;
-13. la concatenazione di `"Happy families are all alike"` e `"every unhappy family is unhappy in its own way"`;
-14. la stessa concatenazione ma con uno spazio in mezzo;
-15. il primo carattere di `"informatica"`;
-16. il sesto carattere di `"supercalifragilistichespiralidoso"` in maiuscolo;
-17. la concatenazione del sesto, nono, decimo, ventiseiesimo e ventisettesimo carattere della stessa stringa;
-18. il quintultimo carattere di `"supercalifragilistichespiralidoso"`;
-19. il carattere centrale di `"informatica"`.
+1. `[M1-REPL-01]` il successore di `15`;
+2. `[M1-REPL-02]` la metà del triplo di `12`;
+3. `[M1-REPL-03]` il triplo della metà di `12`;
+4. `[M1-REPL-04]` il resto della divisione tra `137` e `12`;
+5. `[M1-REPL-05]` il doppio della differenza tra `15` e `7`;
+6. `[M1-REPL-06]` il doppio della differenza tra `3` e `7`;
+7. `[M1-REPL-07]` la somma dei primi tre numeri pari;
+8. `[M1-REPL-08]` la media di `2`, `5`, `9`;
+9. `[M1-REPL-09]` il resto della divisione tra `44` e `7`;
+10. `[M1-REPL-10]` la somma dei quadrati dei primi tre numeri naturali.
+11. `[M1-REPL-11]` la lunghezza della stringa `"Happy families are all alike"`;
+12. `[M1-REPL-12]` la sua versione tutta maiuscola;
+13. `[M1-REPL-13]` la concatenazione di `"Happy families are all alike"` e `"every unhappy family is unhappy in its own way"`;
+14. `[M1-REPL-14]` la stessa concatenazione ma con uno spazio in mezzo;
+15. `[M1-REPL-15]` il primo carattere di `"informatica"`;
+16. `[M1-REPL-16]` il sesto carattere di `"supercalifragilistichespiralidoso"` in maiuscolo;
+17. `[M1-REPL-17]` la concatenazione del sesto, nono, decimo, ventiseiesimo e ventisettesimo carattere della stessa stringa;
+18. `[M1-REPL-18]` il quintultimo carattere di `"supercalifragilistichespiralidoso"`;
+19. `[M1-REPL-19]` il carattere centrale di `"informatica"`.
 
 ### Che cosa produce?
 
-1. `5 * (2 + 4)`
-2. `152 % 9`
-3. `"banana" + "fragola"`
-4. `"olio".upper()`
-5. `len("carote")`
-6. `"cenerentola"[8]`
+1. `[M1-PROD-01]` `5 * (2 + 4)`
+2. `[M1-PROD-02]` `152 % 9`
+3. `[M1-PROD-03]` `"banana" + "fragola"`
+4. `[M1-PROD-04]` `"olio".upper()`
+5. `[M1-PROD-05]` `len("carote")`
+6. `[M1-PROD-06]` `"cenerentola"[8]`
 
 ---
 

@@ -210,7 +210,7 @@ Per ognuno degli esercizi seguenti il metodo è sempre lo stesso:
 2. **esegui e controlla** — lancia il programma con quegli input e annota l'output reale;
 3. **confronta** — dove differiscono, spiega perché.
 
-### Esercizio 1
+### Esercizio 1 — [M3-TEST-01]
 
 Il programma riceve un numero intero e stampa `"pari"` se è pari, `"dispari"` se è dispari.
 
@@ -258,7 +258,7 @@ else:
 
 </details>
 
-### Esercizio 2
+### Esercizio 2 — [M3-TEST-02]
 
 Il programma riceve un voto e stampa `"promosso"` se è almeno 18, `"non promosso"` altrimenti.
 
@@ -305,7 +305,7 @@ else:
 
 </details>
 
-### Esercizio 3
+### Esercizio 3 — [M3-TEST-03]
 
 Il programma riceve un numero intero e stampa `"positivo"` se è maggiore di zero, `"grande"` se è maggiore di 10, `"non positivo"` negli altri casi.
 
@@ -356,7 +356,7 @@ else:
 
 </details>
 
-### Esercizio 4
+### Esercizio 4 — [M3-TEST-04]
 
 Il programma riceve un intero e stampa `"fizz"` se è divisibile per 3, `"buzz"` se è divisibile per 5, `"fizzbuzz"` se è divisibile per entrambi, il numero stesso negli altri casi.
 
@@ -546,19 +546,19 @@ Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce 
 
 ## Esercizi
 
-1. Scrivi un programma che stampi i numeri da 1 a 10.
-2. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `n` a `0`.
-3. Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `-n` a `n`.
-4. Dato un certo numero (es. `pagine = 120`), stampa:
+1. `[M3-WHILE-01]` Scrivi un programma che stampi i numeri da 1 a 10.
+2. `[M3-WHILE-02]` Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `n` a `0`.
+3. `[M3-WHILE-03]` Scrivi un programma che legge un numero `n` dall'input e stampa i numeri da `-n` a `n`.
+4. `[M3-WHILE-04]` Dato un certo numero (es. `pagine = 120`), stampa:
    ```
    Sto leggendo la pagina 1
    Sto leggendo la pagina 2
    ...
    ```
    fino all'ultima pagina.
-5. Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).
-6. Scrivi un programma che legge una parola dall'input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).
-7. Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito `2`:
+5. `[M3-WHILE-05]` Scrivi un programma che stampi i numeri dispari compresi tra 1 e 10 (inclusi).
+6. `[M3-WHILE-06]` Scrivi un programma che legge una parola dall'input e stampa solo le lettere in posizione pari (indice 0, 2, 4, …).
+7. `[M3-WHILE-07]` Scrivi un programma che chiede in input un intero e stampa le potenze di quel numero finché il valore non eccede 1000. Ad esempio, se viene inserito `2`:
    ```
    2^1 = 2
    2^2 = 4
@@ -570,7 +570,7 @@ Qui il numero di ripetizioni non è noto in anticipo: dipende da cosa inserisce 
    2^8 = 256
    2^9 = 512
    ```
-8. Scrivi un programma che chiede all'utente di inserire una parola. Il programma continua finché l'utente non scrive `fine`.
+8. `[M3-WHILE-08]` Scrivi un programma che chiede all'utente di inserire una parola. Il programma continua finché l'utente non scrive `fine`.
    ```
    Inserisci una parola: storia
    Inserisci una parola: geografia

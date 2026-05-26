@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 07 · Memoria e passaggio degli argomenti</title>
+<title>Modulo 07 · Ciclo for e matrici</title>
 <style>
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -17,7 +17,7 @@ p, ul, ol, blockquote, table, pre { margin: 0 0 1rem; }
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 12px; }
 ul, ol { padding-left: 1.4rem; }
 li { margin: 0.3rem 0; }
-blockquote { border-left: 4px solid #c97f31; padding: 0.75rem 1rem; background: #fff8ef; color: #503521; }
+blockquote { border-top: 3px solid #c97f31; border-bottom: 3px solid #c97f31; padding: 0.75rem 1.5rem; background: #fff8ef; color: #503521; text-align: center; max-width: 82%; margin-left: auto; margin-right: auto; }
 details { margin: 0 0 1rem; border: 1px solid #ddd5ca; border-radius: 10px; background: #fffdfa; overflow: hidden; }
 summary { cursor: pointer; font-weight: 600; padding: 0.8rem 1rem; background: #f3ece2; }
 details > :not(summary) { padding-left: 1rem; padding-right: 1rem; }
@@ -30,6 +30,12 @@ th { background: #efe7db; }
 hr { border: 0; border-top: 1px solid #d8d1c7; margin: 2rem 0; }
 a { color: #8b3f1d; }
 [id] { scroll-margin-top: 20px; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.82em; font-weight: 600; background: #f3ece2; border: 1px solid #ddd5ca; color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: #e8d9c5; border-color: #c9b89e; }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #d8d1c7; font-size: 0.82rem; color: #777; display: flex; align-items: center; gap: 0.6rem; }
+footer img { margin: 0; border-radius: 0; height: 22px; width: auto; display: inline; }
 @media (max-width: 700px) {
   .page { padding: 24px 14px 56px; }
   table { display: block; overflow-x: auto; }
@@ -38,31 +44,304 @@ a { color: #8b3f1d; }
 </head>
 <body>
 <main class="page">
-<h1 id="modulo-07-memoria-e-passaggio-degli-argomenti">Modulo 07 · Memoria e passaggio degli argomenti</h1><hr><h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere tra variabili semplici e strutture mutabili?</li><li>Sai spiegare cosa succede quando due nomi puntano alla stessa lista?</li><li>Sai riconoscere effetti collaterali e modifiche in-place?</li><li>Sai usare copie esplicite quando serve isolare i dati?</li></ul><hr><a id="mod7-memoria-liste"></a><h2 id="liste-e-memoria-il-caso-speciale">Liste e memoria: il caso speciale</h2><p>Il passaggio cruciale e&#x27; da:</p><pre><code class="language-python">a = 1
-b = a</code></pre><p>a:</p><pre><code class="language-python">a = [1, 2, 3]
-b = a</code></pre><p>Nel primo caso i due nomi contengono semplicemente lo stesso valore intero. Nel secondo caso i due nomi fanno riferimento alla <strong>stessa lista</strong> in memoria.</p><h3 id="modello-intuitivo">Modello intuitivo</h3><table><thead><tr><th>Nome</th><th>Valore</th></tr></thead><tbody><tr><td><code>a</code></td><td>lista in memoria</td></tr><tr><td><code>b</code></td><td>stessa lista in memoria</td></tr></tbody></table><p>Questo significa che modificare la lista tramite uno dei due nomi modifica l&#x27;oggetto condiviso.</p><hr><h2 id="alias-e-modifiche-condivise">Alias e modifiche condivise</h2><p>Esempio classico:</p><pre><code class="language-python">a = [1, 2, 3]
-b = a
+<h1 id="modulo-07-ciclo-for-e-matrici">Modulo 07 · Ciclo for e matrici</h1><h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai usare il ciclo <code>for</code> su stringhe, liste e <code>range()</code>?</li><li>Sai spiegare la differenza tra <code>for</code> e <code>while</code>?</li><li>Sai usare cicli annidati per lavorare su matrici?</li></ul><h2 id="preparazione-al-compitino-teoria">Preparazione al compitino: Teoria</h2><p><strong>Lista</strong></p><p>Una lista è una sequenza ordinata (perchè ordinata) di valori (che tipo di valori?), modificabile dopo la creazione.</p><pre><code class="language-python">numeri = [1, 2, 3]
+numeri[0] = 10       # modifica in-place
+numeri.append(4)     # aggiunge in fondo</code></pre><ul><li>gli elementi si accedono tramite indice (da <code>0</code>);</li><li><code>len(lista)</code> restituisce il numero di elementi;</li><li>le liste sono <strong>mutabili</strong>: il loro contenuto può cambiare.</li></ul><p><strong><code>while</code>: sintassi e semantica</strong></p><pre><code class="language-python">while condizione:
+    # blocco</code></pre><ul><li>la condizione viene valutata prima di ogni iterazione;</li><li>se è vera, il blocco viene eseguito;</li><li>se è falsa, il ciclo termina;</li><li>se la condizione non diventa mai falsa, il ciclo non termina mai.</li></ul><p><strong>Definizione vs chiamata di funzione</strong></p><p>La <strong>definizione</strong> (<code>def</code>) descrive cosa fa la funzione — non esegue nulla, crea solo un &quot;template&quot;. La <strong>chiamata</strong> (o invocazione) esegue effettivamente il corpo della funzione con gli argomenti forniti.</p><pre><code class="language-python">def somma(a, b):   # definizione: niente viene eseguito qui
+    return a + b
 
-print(&quot;Lista a:&quot;, a)
-print(&quot;Lista b:&quot;, b)
+risultato = somma(3, 4)   # chiamata: il corpo viene eseguito ora</code></pre><p>Una funzione può essere definita una volta e chiamata molte volte, con argomenti diversi.</p><p><strong>Tipi mutabili e immutabili</strong></p><table><thead><tr><th>Tipo</th><th>Mutabile?</th><th>Conseguenza</th></tr></thead><tbody><tr><td><code>list</code></td><td>Sì</td><td>il contenuto può cambiare dopo la creazione (<code>lista[0] = 99</code>, <code>lista.append(x)</code>)</td></tr><tr><td><code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code></td><td>No</td><td>non si può modificare il valore — si può solo crearne uno nuovo</td></tr></tbody></table><p>La distinzione è importante nelle funzioni: riassegnare un intero dentro una funzione non cambia mai la variabile esterna; modificare una lista in-place sì (perché il parametro è un alias della lista originale).</p><p><strong>Funzione pura vs. funzione void</strong></p><table><thead><tr><th></th><th>Funzione pura</th><th>Funzione void</th></tr></thead><tbody><tr><td>Restituisce un valore?</td><td>sì (<code>return</code>)</td><td>no</td></tr><tr><td>Modifica il suo parametro?</td><td>no</td><td>spesso sì</td></tr><tr><td>Come si usa il risultato?</td><td><code>risultato = f(x)</code> -- la chiamata è un&#x27;<strong>espressione</strong></td><td>si chiama e basta -- la chiamata è un&#x27;<strong>istruzione</strong></td></tr></tbody></table><p><strong>Scope</strong></p><p>Le variabili definite dentro una funzione sono <strong>locali</strong>: non esistono fuori.</p><pre><code class="language-python">def doppio(n):
+    n = n * 2      # n locale — non tocca la variabile esterna
+    return n
 
-b[0] = 1000
+x = 3
+y = doppio(x)
+print(x)  # 3  — x non è cambiato
+print(y)  # 6</code></pre><p>Regola pratica: riassegnare un parametro dentro la funzione non cambia mai la variabile esterna, a prescindere dal tipo.</p><p><strong>Aliasing</strong></p><p>Quando si assegna una lista a un secondo nome, i due nomi puntano alla <strong>stessa lista</strong> in memoria.</p><pre><code class="language-python">a = [1, 2, 3]
+b = a          # b non è una copia: b è un alias di a
 
-print(&quot;Lista a:&quot;, a)
-print(&quot;Lista b:&quot;, b)</code></pre><p>Output concettuale:</p><ul><li>prima: entrambe mostrano <code>[1, 2, 3]</code></li><li>dopo: entrambe mostrano <code>[1000, 2, 3]</code></li></ul><p>Perche&#x27;?</p><p>Perche&#x27; <code>a</code> e <code>b</code> non sono due liste diverse. Sono due nomi per la stessa lista.</p><p>La seconda lezione spiegava questo fenomeno in termini di memoria:</p><ul><li>nella tabella delle variabili, per una lista non viene memorizzato direttamente tutto il contenuto;</li><li>viene memorizzato un riferimento a una zona di memoria dove quella lista vive;</li><li>quindi con <code>b = a</code> non stiamo duplicando la lista, stiamo duplicando quel riferimento.</li></ul><p>Una metafora ancora piu&#x27; concreta:</p><ul><li>per un valore semplice come un intero possiamo immaginare un cassetto che contiene direttamente il valore;</li><li>per una lista il cassetto contiene soprattutto un indirizzo;</li><li>il contenuto vero della lista vive altrove, in una zona di memoria dedicata che puo&#x27; crescere.</li></ul><p>Per questo:</p><ul><li>copiare un intero significa copiare il valore;</li><li>copiare una lista con <code>=</code> significa copiare il riferimento al suo indirizzo.</li></ul><p>Questo spiega perche&#x27; una modifica fatta tramite <code>b</code> resta visibile anche tramite <code>a</code>.</p><hr><a id="mod7-copie"></a><h2 id="copie-e-isolamento-dei-dati">Copie e isolamento dei dati</h2><p>Quando vuoi evitare aliasing, devi costruire una copia.</p><p>Serve anche l&#x27;uso di <code>copy</code>:</p><pre><code class="language-python">import copy
+b[0] = 99
+print(a)       # [99, 2, 3] — anche a è cambiata</code></pre><p>Questo spiega perchè una funzione void puè modificare una lista passata come argomento: dentro la funzione il parametro è un alias della lista originale.</p><h2 id="preparazione-al-compitino-cosa-stampa-questo-codice">Preparazione al compitino: Cosa stampa questo codice?</h2><pre><code class="language-python">def doppio(n):
+    n = n * 2
+    return n
 
-a = [1, 2, 3]
-b = copy.deepcopy(a)</code></pre><p>Nel modello introduttivo del corso, il punto importante e&#x27; questo:</p><ul><li>assegnare <code>b = a</code> non copia;</li><li>copiare significa creare un nuovo oggetto indipendente.</li></ul><p>Il punto si vede bene con:</p><pre><code class="language-python">a = [1, 2, 3]
-b = a
-b[0] = 1000</code></pre><p>e poi con la versione corretta:</p><pre><code class="language-python">import copy
+x = 3
+y = doppio(x)
+print(x, y)</code></pre><details><summary>Dettagli</summary><p><strong>Come ragionare:</strong></p><p>La funzione riceve <code>x</code> che vale <code>3</code>. All&#x27;interno, <code>n = n * 2</code> crea una variabile locale <code>n</code> con valore <code>6</code> — non modifica <code>x</code>, che è un intero (immutabile). La funzione restituisce <code>6</code>, assegnato a <code>y</code>.</p><p><strong>Risposta:</strong> <code>3 6</code></p></details><h2 id="preparazione-al-compitino-trova-lerrore">Preparazione al compitino: Trova l&#x27;errore</h2><h3 id="trova-lerrore-1">Trova l&#x27;errore (1)</h3><p>Il programma vuole stampare se in <code>lista</code> c&#x27;è almeno un elemento ripetuto oppure no.</p><pre><code class="language-python">lista = [1, 2, 3, 1, 4]
 
-a = [1, 2, 3]
-b = copy.deepcopy(a)
-b[0] = 1000</code></pre><p>Nel secondo caso:</p><ul><li><code>a</code> resta <code>[1, 2, 3]</code>;</li><li><code>b</code> diventa <code>[1000, 2, 3]</code>.</li></ul><p>Questo e&#x27; uno dei passaggi piu&#x27; importanti per evitare bug difficili da vedere.</p><h3 id="regola-pratica">Regola pratica</h3><p>Se devi modificare una lista senza toccare l&#x27;originale, chiediti sempre:</p><blockquote><p>sto usando un secondo nome per la stessa lista oppure una vera copia?</p></blockquote><hr><h2 id="collegamento-con-il-passaggio-degli-argomenti">Collegamento con il passaggio degli argomenti</h2><p>Quando una lista viene passata a una funzione, il comportamento osservabile assomiglia a quello dell&#x27;aliasing:</p><ul><li>la funzione riceve un accesso allo stesso oggetto;</li><li>una modifica in-place puo&#x27; essere visibile anche fuori;</li><li>per questo bisogna distinguere con cura tra lettura, modifica e copia.</li></ul><p>Questo modulo estende proprio quell&#x27;intuizione.</p><hr><h2 id="esercizi-suggeriti">Esercizi suggeriti</h2><ol><li>Scrivi un programma con:</li></ol><pre><code class="language-python">a = [1, 2, 3]
-b = a
-b[1] = 99
-print(a)
-print(b)</code></pre><p>Predici l&#x27;output prima di eseguirlo.</p><ol><li>Ripeti l&#x27;esercizio usando una copia esplicita.</li><li>Scrivi una funzione che modifica il primo elemento di una lista e osserva se il cambiamento resta visibile fuori dalla funzione.</li></ol><hr><h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie la parte sulle liste e la memoria:</p><ul><li>differenza tra valori immutabili e liste mutabili;</li><li>aliasing;</li><li>modifiche condivise;</li><li>copie come strumento per evitare effetti collaterali inattesi.</li></ul>
+trovato = False
+i = 0
+while i &lt; len(lista):
+    j = i + 1
+    while j &lt; len(lista):
+        if lista[j] == lista[i]:
+            trovato = True
+    i = i + 1
+
+if trovato:
+    print(&quot;c&#x27;è almeno un elemento ripetuto&quot;)
+else:
+    print(&quot;nessun elemento ripetuto&quot;)</code></pre><blockquote><p><strong>Come ragionare?</strong> Prima di tutto, cerca di capire se il programma termina e come va avanti la sua esecuzione. Per farlo, dobbiamo controllare il valore delle variabili nello stato ad ogni passo dell&#x27;esecuzione.<br>Proviamo su un input più piccolo per prendere confidenza: <code>lista = [1, 2, 1]</code>.</p></blockquote><details><summary>Dettagli</summary><pre><code class="language-python">1 trovato = False
+2 i = 0
+
+3 while i &lt; len(lista):
+4     j = i + 1
+
+5     while j &lt; len(lista):
+
+6         if lista[j] == lista[i]:
+7             trovato = True
+
+8     i = i + 1</code></pre><table><thead><tr><th>Riga</th><th><code>i</code></th><th><code>j</code></th><th><code>trovato</code></th><th>i &lt; len(lista)</th><th>j &lt; len(lista)</th><th>lista[j] == lista[i]</th></tr></thead><tbody><tr><td>1</td><td>-</td><td>-</td><td>False</td><td></td><td></td><td></td></tr><tr><td>2</td><td>0</td><td>-</td><td>False</td><td></td><td></td><td></td></tr><tr><td>3</td><td>0</td><td>-</td><td>False</td><td>0&lt;3? True</td><td></td><td></td></tr><tr><td>4</td><td>0</td><td>1</td><td>False</td><td>-</td><td>-</td><td>-</td></tr><tr><td>5</td><td>0</td><td>1</td><td>False</td><td>-</td><td>1&lt;3? True</td><td>-</td></tr><tr><td>6</td><td>0</td><td>1</td><td>False</td><td>-</td><td>-</td><td>lista[0]==lista[1] -&gt; 1 == 2? False</td></tr><tr><td>5</td><td>0</td><td>1</td><td>False</td><td>-</td><td>1&lt;3? True</td><td>-</td></tr><tr><td>6</td><td>0</td><td>1</td><td>False</td><td>-</td><td>-</td><td>lista[0]==lista[1] -&gt; 1 == 2? False</td></tr><tr><td>5</td><td>0</td><td>1</td><td>False</td><td>-</td><td>1&lt;3? True</td><td>-</td></tr><tr><td>6</td><td>0</td><td>1</td><td>False</td><td>-</td><td>-</td><td>lista[0]==lista[1] -&gt; 1 == 2? False</td></tr><tr><td>5</td><td>0</td><td>1</td><td>False</td><td>-</td><td>1&lt;3? True</td><td>-</td></tr><tr><td>6</td><td>0</td><td>1</td><td>False</td><td>-</td><td>-</td><td>lista[0]==lista[1] -&gt; 1 == 2? False</td></tr><tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr></tbody></table><p><strong>Trovato il problema?</strong>: <code>j</code> non cambia mai: il ciclo interno non termina mai.</p><p><strong>Errore:</strong> dentro il ciclo interno manca l&#x27;aggiornamento di <code>j</code>. La guardia <code>j &lt; len(lista)</code> non diventa mai falsa, quindi il <code>while</code> interno gira all&#x27;infinito.</p></details><details><summary>Dettagli</summary><p><strong>Codice corretto:</strong></p><pre><code class="language-python">lista = [1, 2, 3, 1, 4]
+
+trovato = False
+i = 0
+while i &lt; len(lista):
+    j = i + 1
+    while j &lt; len(lista):
+        if lista[j] == lista[i]:
+            trovato = True
+        j = j + 1
+    i = i + 1
+
+if trovato:
+    print(&quot;c&#x27;è almeno un elemento ripetuto&quot;)
+else:
+    print(&quot;nessun elemento ripetuto&quot;)</code></pre></details><h3 id="trova-lerrore-2">Trova l&#x27;errore (2)</h3><p>Il programma vuole stampare se in <code>lista</code> c&#x27;è almeno un elemento ripetuto oppure no.</p><pre><code class="language-python">lista = [1, 2, 3, 1, 4]
+
+i = 0
+while i &lt; len(lista):
+    trovato = False
+    j = i + 1
+    while j &lt; len(lista):
+        if lista[j] == lista[i]:
+            trovato = True
+        j = j + 1
+    i = i + 1
+
+if trovato:
+    print(&quot;c&#x27;è almeno un elemento ripetuto&quot;)
+else:
+    print(&quot;nessun elemento ripetuto&quot;)</code></pre><blockquote><p><strong>Come ragionare?</strong> Sappiamo che il programma termina perché abbiamo controllato prima. Adesso dobbiamo capire se fa effettivamente quello che vogliamo.<br><br>Per trovare un errore logico servono input &quot;furbi&quot;: casi in cui la risposta giusta è <strong>sì</strong> e casi in cui è <strong>no</strong>, e confrontiamo quello che ci aspettiamo con quello che otteniamo.<br><br>Proviamo <code>lista = [1, 1]</code> (risposta attesa: <em>c&#x27;è almeno un elemento ripetuto</em>) e <code>lista = [1, 2]</code> (risposta attesa: <em>nessun elemento ripetuto</em>).</p></blockquote><details><summary>Dettagli</summary><pre><code class="language-python">1  i = 0
+
+2  while i &lt; len(lista):
+3      trovato = False
+4      j = i + 1
+
+5      while j &lt; len(lista):
+
+6          if lista[j] == lista[i]:
+7              trovato = True
+8          j = j + 1
+
+9      i = i + 1</code></pre><p><strong>Con <code>lista = [1, 1]</code></strong> (risposta attesa: <em>c&#x27;è almeno un elemento ripetuto</em>):</p><table><thead><tr><th>Riga</th><th><code>i</code></th><th><code>j</code></th><th><code>trovato</code></th><th><code>i &lt; len(lista)</code></th><th><code>j &lt; len(lista)</code></th><th><code>lista[j] == lista[i]</code></th></tr></thead><tbody><tr><td>1</td><td>0</td><td>—</td><td>—</td><td></td><td></td><td></td></tr><tr><td>2</td><td>0</td><td>—</td><td>—</td><td>0&lt;2? Vero</td><td></td><td></td></tr><tr><td>3</td><td>0</td><td>—</td><td>False</td><td></td><td></td><td></td></tr><tr><td>4</td><td>0</td><td>1</td><td>False</td><td></td><td></td><td></td></tr><tr><td>5</td><td>0</td><td>1</td><td>False</td><td></td><td>1&lt;2? Vero</td><td></td></tr><tr><td>6</td><td>0</td><td>1</td><td>False</td><td></td><td></td><td>lista[1]=1 == lista[0]=1? Sì</td></tr><tr><td>7</td><td>0</td><td>1</td><td>True</td><td></td><td></td><td></td></tr><tr><td>8</td><td>0</td><td>2</td><td>True</td><td></td><td></td><td></td></tr><tr><td>5</td><td>0</td><td>2</td><td>True</td><td></td><td>2&lt;2? Falso</td><td></td></tr><tr><td>9</td><td>1</td><td>2</td><td>True</td><td></td><td></td><td></td></tr><tr><td>2</td><td>1</td><td>2</td><td>True</td><td>1&lt;2? Vero</td><td></td><td></td></tr><tr><td>3</td><td>1</td><td>2</td><td><strong>False</strong> ← reset!</td><td></td><td></td><td></td></tr><tr><td>4</td><td>1</td><td>2</td><td>False</td><td></td><td></td><td></td></tr><tr><td>5</td><td>1</td><td>2</td><td>False</td><td></td><td>2&lt;2? Falso</td><td></td></tr><tr><td>9</td><td>2</td><td>2</td><td>False</td><td></td><td></td><td></td></tr><tr><td>2</td><td>2</td><td>2</td><td>False</td><td>2&lt;2? Falso</td><td></td><td></td></tr></tbody></table><p>Fine ciclo: <code>trovato = False</code> → stampa &quot;nessun elemento ripetuto&quot; ❌</p><p>L&#x27;input <code>[1, 2]</code> non rivelerebbe nulla perché la risposta corretta era già &quot;no&quot;. È <code>[1, 1]</code> che smonta il programma.</p><p><strong>Errore:</strong> <code>trovato = False</code> è dentro il ciclo esterno, quindi viene reimpostato a <code>False</code> ad ogni iterazione. Alla riga 3 della seconda iterazione, il valore <code>True</code> conquistato viene cancellato.</p></details><details><summary>Dettagli</summary><p><strong>Codice corretto:</strong></p><pre><code class="language-python">lista = [1, 2, 3, 1, 4]
+
+trovato = False
+i = 0
+while i &lt; len(lista):
+    j = i + 1
+    while j &lt; len(lista):
+        if lista[j] == lista[i]:
+            trovato = True
+        j = j + 1
+    i = i + 1
+
+if trovato:
+    print(&quot;c&#x27;è almeno un elemento ripetuto&quot;)
+else:
+    print(&quot;nessun elemento ripetuto&quot;)</code></pre></details><h3 id="trova-lerrore-3">Trova l&#x27;errore (3)</h3><p>Il programma vuole costruire la lista che, per ogni elemento di <code>lista</code>, conta quanti elementi <strong>uguali a lui</strong> lo <strong>precedono</strong>.</p><pre><code class="language-python">lista = [1, 2, 1, 3, 1]
+
+contatori = []
+i = 0
+while i &lt; len(lista):
+    contatore = 0
+    j = 0
+    while j &lt; len(lista):
+        if lista[j] == lista[i]:
+            contatore = contatore + 1
+        j = j + 1
+    contatori.append(contatore)
+    i = i + 1
+
+print(contatori)</code></pre><blockquote><p><strong>Come ragionare?</strong> Il programma ha sia <code>i = i + 1</code> che <code>j = j + 1</code>: termina. Dobbiamo quindi controllare se l&#x27;output è corretto.<br><br>Input furbo: <code>lista = [1, 1]</code>. Risposta attesa: <code>[0, 1]</code> (il primo <code>1</code> non ha precedenti uguali; il secondo ne ha uno).</p></blockquote><details><summary>Dettagli</summary><pre><code class="language-python">1  contatori = []
+2  i = 0
+
+3  while i &lt; len(lista):
+4      contatore = 0
+5      j = 0
+
+6      while j &lt; len(lista):
+7          if lista[j] == lista[i]:
+8              contatore = contatore + 1
+9          j = j + 1
+
+10     contatori.append(contatore)
+11     i = i + 1</code></pre><p><strong>Con <code>lista = [1, 1]</code></strong> — tracciamo la prima iterazione esterna (<code>i=0</code>):</p><table><thead><tr><th>Riga</th><th><code>i</code></th><th><code>j</code></th><th><code>contatore</code></th><th><code>j &lt; len(lista)</code></th><th><code>lista[j] == lista[i]</code></th></tr></thead><tbody><tr><td>3</td><td>0</td><td>—</td><td>—</td><td>0&lt;2? Vero</td><td></td></tr><tr><td>4</td><td>0</td><td>—</td><td>0</td><td></td><td></td></tr><tr><td>5</td><td>0</td><td>0</td><td>0</td><td></td><td></td></tr><tr><td>6</td><td>0</td><td>0</td><td>0</td><td>0&lt;2? Vero</td><td></td></tr><tr><td>7</td><td>0</td><td>0</td><td>0</td><td></td><td>lista[0]=1 == lista[0]=1? Sì</td></tr><tr><td>8</td><td>0</td><td>0</td><td>1</td><td></td><td></td></tr><tr><td>9</td><td>0</td><td>1</td><td>1</td><td></td><td></td></tr><tr><td>6</td><td>0</td><td>1</td><td>1</td><td>1&lt;2? Vero</td><td></td></tr><tr><td>7</td><td>0</td><td>1</td><td>1</td><td></td><td>lista[1]=1 == lista[0]=1? Sì</td></tr><tr><td>8</td><td>0</td><td>1</td><td>2</td><td></td><td></td></tr><tr><td>9</td><td>0</td><td>2</td><td>2</td><td></td><td></td></tr><tr><td>6</td><td>0</td><td>2</td><td>2</td><td>2&lt;2? Falso</td><td></td></tr><tr><td>10</td><td>0</td><td>2</td><td>2</td><td></td><td>→ <code>contatori = [2]</code></td></tr></tbody></table><p>Il primo elemento ottiene <code>contatore = 2</code>, ma la risposta attesa era <code>0</code>. Il ciclo interno ha contato <strong>tutti</strong> gli <code>1</code> della lista, non solo quelli che vengono prima di <code>i=0</code>.</p><p><strong>Errore:</strong> la guardia del ciclo interno è <code>j &lt; len(lista)</code> invece di <code>j &lt; i</code>. Così <code>j</code> scorre tutta la lista, contando anche gli elementi che vengono <em>dopo</em> la posizione <code>i</code>, e contando perfino <code>lista[i]</code> stesso.</p></details><details><summary>Dettagli</summary><p><strong>Codice corretto:</strong></p><pre><code class="language-python">lista = [1, 2, 1, 3, 1]
+
+contatori = []
+i = 0
+while i &lt; len(lista):
+    contatore = 0
+    j = 0
+    while j &lt; i:
+        if lista[j] == lista[i]:
+            contatore = contatore + 1
+        j = j + 1
+    contatori.append(contatore)
+    i = i + 1
+
+print(contatori)</code></pre></details><h2 id="preparazione-al-compitino-tracciamento-dello-stato">Preparazione al compitino: Tracciamento dello stato</h2><pre><code class="language-python">def raddoppia(lista):
+    i = 0
+    while i &lt; len(lista):
+        lista[i] = lista[i] * 2
+        i = i + 1
+
+valori = [1, 3, 5]
+raddoppia(valori)
+print(valori)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato - globale</th><th>Stato - funzione</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>valori = [1, 3, 5]</code></td><td><code>valori=[1,3,5]</code></td><td>—</td><td></td></tr><tr><td>2</td><td><code>raddoppia(valori)</code></td><td><code>valori=[1,3,5]</code></td><td><code>lista→valori, i=0</code></td><td></td></tr><tr><td>3</td><td><code>lista[0] = 1*2</code></td><td><code>valori=[2,3,5]</code></td><td><code>lista→valori, i=0</code></td><td></td></tr><tr><td>4</td><td><code>i = i + 1</code></td><td><code>valori=[2,3,5]</code></td><td><code>lista→valori, i=1</code></td><td></td></tr><tr><td>5</td><td><code>lista[1] = 3*2</code></td><td><code>valori=[2,6,5]</code></td><td><code>lista→valori, i=1</code></td><td></td></tr><tr><td>6</td><td><code>i = i + 1</code></td><td><code>valori=[2,6,5]</code></td><td><code>lista→valori, i=2</code></td><td></td></tr><tr><td>7</td><td><code>lista[2] = 5*2</code></td><td><code>valori=[2,6,10]</code></td><td><code>lista→valori, i=2</code></td><td></td></tr><tr><td>8</td><td><code>i = i + 1</code></td><td><code>valori=[2,6,10]</code></td><td><code>lista→valori, i=3</code></td><td></td></tr><tr><td>9</td><td>fine <code>raddoppia</code></td><td><code>valori=[2,6,10]</code></td><td>—</td><td></td></tr><tr><td>10</td><td><code>print(valori)</code></td><td><code>valori=[2,6,10]</code></td><td>—</td><td><code>[2, 6, 10]</code></td></tr></tbody></table><p><strong>Cosa osservare:</strong> <code>lista</code> e <code>valori</code> puntano alla stessa lista in memoria. Le modifiche fatte dentro la funzione (in-place) sono visibili fuori.</p><h2 id="preparazione-al-compitino-programmazione">Preparazione al compitino: Programmazione</h2><h3 id="scrivi-una-funzione-pura-che-riceve-una-lista-di-interi-e-restituisce-una-nuova-lista-con-solo-i-numeri-pari-senza-modificare-loriginale">Scrivi una funzione pura che riceve una lista di interi e restituisce una nuova lista con solo i numeri pari, senza modificare l&#x27;originale.</h3><p><strong>Step 1 — firma della funzione</strong></p><p>La funzione riceve una lista e restituisce qualcosa, quindi è una funzione pura con <code>return</code>.</p><pre><code class="language-python">def filtra_pari(lista):
+    ...
+    return ...</code></pre><p><strong>Step 2 — dove metto i risultati?</strong></p><p>Non posso modificare <code>lista</code> (funzione pura!). Ho bisogno di una lista nuova, che all&#x27;inizio è vuota.</p><pre><code class="language-python">def filtra_pari(lista):
+    risultato = []
+    ...
+    return risultato</code></pre><p><strong>Step 3 — quale tipo di ciclo scelgo?</strong></p><p>Ci sono due paradigmi principali per il <code>while</code> su una lista:</p><table><thead><tr><th>Paradigma</th><th>Guardia</th><th>Quando usarlo</th></tr></thead><tbody><tr><td><strong>Scansione completa</strong></td><td><code>i &lt; len(lista)</code></td><td>devo esaminare <em>tutti</em> gli elementi (trasformare, filtrare, sommare...)</td></tr><tr><td><strong>Ricerca con uscita anticipata</strong></td><td><code>i &lt; len(lista) and not trovato</code></td><td>mi interessa solo scorrere la lista finchè <em>trovo il primo elemento</em> che soddisfa una condizione</td></tr></tbody></table><p>Qui voglio raccogliere <strong>tutti</strong> i pari, non solo il primo: devo scorrere tutta la lista. Scelgo la <strong>scansione completa</strong>.</p><pre><code class="language-python">def filtra_pari(lista):
+    risultato = []
+    i = 0
+    while i &lt; len(lista):
+        ...
+        i = i + 1
+    return risultato</code></pre><p><strong>Step 4 — cosa faccio per ogni elemento?</strong></p><p>Voglio tenere solo i pari. Un numero è pari se <code>lista[i] % 2 == 0</code>. Se la condizione è vera, aggiungo l&#x27;elemento a <code>risultato</code>.</p><pre><code class="language-python">def filtra_pari(lista):
+    risultato = []
+    i = 0
+    while i &lt; len(lista):
+        if lista[i] % 2 == 0:
+            risultato.append(lista[i])
+        i = i + 1
+    return risultato</code></pre><p><strong>Verifica:</strong> <code>filtra_pari([1, 2, 3, 4, 5])</code> → <code>risultato</code> cresce così:</p><table><thead><tr><th><code>i</code></th><th><code>lista[i]</code></th><th><code>lista[i] % 2 == 0</code>?</th><th><code>risultato</code> dopo <code>append</code></th></tr></thead><tbody><tr><td>0</td><td>1</td><td>No</td><td><code>[]</code></td></tr><tr><td>1</td><td>2</td><td>Sì</td><td><code>[2]</code></td></tr><tr><td>2</td><td>3</td><td>No</td><td><code>[2]</code></td></tr><tr><td>3</td><td>4</td><td>Sì</td><td><code>[2, 4]</code></td></tr><tr><td>4</td><td>5</td><td>No</td><td><code>[2, 4]</code></td></tr></tbody></table><p>Restituisce <code>[2, 4]</code>. La lista originale <code>[1, 2, 3, 4, 5]</code> non è stata modificata.</p><h3 id="scrivi-una-funzione-pura-che-riceve-una-lista-di-interi-e-restituisce-la-posizione-del-primo-numero-positivo-se-non-ce-nè-nessuno-restituisce--1">Scrivi una funzione pura che riceve una lista di interi e restituisce la posizione del primo numero positivo. Se non ce n&#x27;è nessuno, restituisce <code>-1</code>.</h3><p><strong>Step 1 — firma della funzione</strong></p><p>La funzione riceve una lista e restituisce un intero (un indice), quindi è una funzione pura con <code>return</code>.</p><pre><code class="language-python">def primo_positivo(lista):
+    ...
+    return ...</code></pre><p><strong>Step 2 — ho bisogno di una lista risultato?</strong></p><p>No: qui non accumulo elementi, cerco un indice. Ho bisogno solo di tenere traccia di dove sono arrivato (<code>i</code>) e di sapere se ho trovato qualcosa (<code>trovato</code>).</p><pre><code class="language-python">def primo_positivo(lista):
+    trovato = False
+    i = 0
+    ...
+    return posizione</code></pre><p><strong>Step 3 — quale tipo di ciclo scelgo?</strong></p><table><thead><tr><th>Paradigma</th><th>Guardia</th><th>Quando usarlo</th></tr></thead><tbody><tr><td><strong>Scansione completa</strong></td><td><code>i &lt; len(lista)</code></td><td>devo esaminare <em>tutti</em> gli elementi</td></tr><tr><td><strong>Ricerca con uscita anticipata</strong></td><td><code>i &lt; len(lista) and not trovato</code></td><td>mi interessa solo <em>trovare il primo</em> elemento che soddisfa una condizione</td></tr></tbody></table><p>Qui voglio solo il <strong>primo</strong> positivo: appena lo trovo posso fermarmi. Scelgo la <strong>ricerca con uscita anticipata</strong>.</p><pre><code class="language-python">def primo_positivo(lista):
+    trovato = False
+    i = 0
+    while i &lt; len(lista) and not trovato:
+        ...
+        i = i + 1
+    return posizione</code></pre><p><strong>Step 4 — cosa faccio per ogni elemento?</strong></p><p>Se <code>lista[i] &gt; 0</code>, ho trovato quello che cercavo: setto <code>trovato = True</code>. In questo caso <strong>non</strong> incremento <code>i</code>, così al termine del ciclo <code>i</code> punta esattamente all&#x27;elemento trovato.</p><pre><code class="language-python">def primo_positivo(lista):
+    trovato = False
+    i = 0
+    while i &lt; len(lista) and not trovato:
+        if lista[i] &gt; 0:
+            trovato = True
+        else:
+            i = i + 1
+    return posizione</code></pre><p><strong>Step 5 — cosa restituisco?</strong></p><p>Se <code>trovato</code> è <code>True</code>, restituisco <code>i</code>. Se invece il ciclo è finito senza trovare nulla (ho esaurito la lista), restituisco <code>-1</code>.</p><pre><code class="language-python">def primo_positivo(lista):
+    posizione = -1
+    trovato = False
+    i = 0
+    while i &lt; len(lista) and not trovato:
+        if lista[i] &gt; 0:
+            trovato = True
+        else:
+            i = i + 1
+    posizione = i
+    return posizione</code></pre><p><strong>Verifica:</strong> <code>primo_positivo([-3, 0, -1, 5, 2])</code>:</p><table><thead><tr><th><code>i</code></th><th><code>lista[i]</code></th><th>guardia <code>not trovato</code></th><th><code>lista[i] &gt; 0</code>?</th><th><code>trovato</code></th></tr></thead><tbody><tr><td>0</td><td>-3</td><td>Vero</td><td>No</td><td>False</td></tr><tr><td>1</td><td>0</td><td>Vero</td><td>No</td><td>False</td></tr><tr><td>2</td><td>-1</td><td>Vero</td><td>No</td><td>False</td></tr><tr><td>3</td><td>5</td><td>Vero</td><td>Sì</td><td>True</td></tr><tr><td>—</td><td>—</td><td>Falso → esce</td><td></td><td></td></tr></tbody></table><p><code>trovato = True</code>, <code>i = 3</code> → restituisce <code>3</code>.</p><h3 id="scrivi-una-funzione-pura-che-riceve-una-lista-di-interi-e-un-intero-k-e-restituisce-una-nuova-lista-in-cui-dopo-ogni-numero-pari-viene-inserito-k-senza-modificare-la-lista-originale">Scrivi una funzione pura che riceve una lista di interi e un intero <code>k</code>, e restituisce una nuova lista in cui dopo ogni numero pari viene inserito <code>k</code>, senza modificare la lista originale.</h3><p>Esempio: <code>inserisci_dopo_pari([3, 4, 9, 2, 8, 7], 0)</code> → <code>[3, 4, 0, 9, 2, 0, 8, 0, 7]</code></p><p><strong>Step 1 — firma della funzione</strong></p><p>La funzione riceve una lista e un intero <code>k</code>, e restituisce una lista nuova: funzione pura con <code>return</code>.</p><pre><code class="language-python">def inserisci_dopo_pari(lista, k):
+    ...
+    return risultato</code></pre><p><strong>Step 2 — dove metto i risultati?</strong></p><p>Non posso modificare <code>lista</code>. Ho bisogno di una lista nuova, inizialmente vuota, in cui copio ogni elemento (e inserisco <code>k</code> dove serve).</p><pre><code class="language-python">def inserisci_dopo_pari(lista, k):
+    risultato = []
+    ...
+    return risultato</code></pre><p><strong>Step 3 — quale tipo di ciclo scelgo?</strong></p><p>Devo esaminare <strong>tutti</strong> gli elementi (per ognuno decido se inserire <code>k</code> dopo): scelgo la <strong>scansione completa</strong>.</p><pre><code class="language-python">def inserisci_dopo_pari(lista, k):
+    risultato = []
+    i = 0
+    while i &lt; len(lista):
+        ...
+        i = i + 1
+    return risultato</code></pre><p><strong>Step 4 — cosa faccio per ogni elemento?</strong></p><p>Per ogni elemento ho due cose da fare:</p><ol><li>aggiungerlo sempre a <code>risultato</code>;</li><li>se è pari (<code>lista[i] % 2 == 0</code>), aggiungere anche <code>k</code> subito dopo.</li></ol><pre><code class="language-python">def inserisci_dopo_pari(lista, k):
+    risultato = []
+    i = 0
+    while i &lt; len(lista):
+        risultato.append(lista[i])
+        if lista[i] % 2 == 0:
+            risultato.append(k)
+        i = i + 1
+    return risultato</code></pre><p><strong>Verifica:</strong> <code>inserisci_dopo_pari([3, 4, 9, 2, 8, 7], 0)</code>:</p><table><thead><tr><th><code>i</code></th><th><code>lista[i]</code></th><th><code>lista[i] % 2 == 0</code>?</th><th><code>risultato</code> dopo il passo</th></tr></thead><tbody><tr><td>0</td><td>3</td><td>No</td><td><code>[3]</code></td></tr><tr><td>1</td><td>4</td><td>Sì → append <code>0</code></td><td><code>[3, 4, 0]</code></td></tr><tr><td>2</td><td>9</td><td>No</td><td><code>[3, 4, 0, 9]</code></td></tr><tr><td>3</td><td>2</td><td>Sì → append <code>0</code></td><td><code>[3, 4, 0, 9, 2, 0]</code></td></tr><tr><td>4</td><td>8</td><td>Sì → append <code>0</code></td><td><code>[3, 4, 0, 9, 2, 0, 8, 0]</code></td></tr><tr><td>5</td><td>7</td><td>No</td><td><code>[3, 4, 0, 9, 2, 0, 8, 0, 7]</code></td></tr></tbody></table><p>Restituisce <code>[3, 4, 0, 9, 2, 0, 8, 0, 7]</code>. La lista originale non è stata modificata.</p><h2 id="il-costrutto-for">Il costrutto <code>for</code></h2><h3 id="da-while-a-for">Da <code>while</code> a <code>for</code></h3><p>Abbiamo scritto molti cicli di questo tipo:</p><pre><code class="language-python">i = 0
+while i &lt; len(lista):
+    # fai qualcosa con lista[i]
+    i = i + 1</code></pre><p>Questo schema ha tre parti meccaniche che dobbiamo ricordare ogni volta:</p><ul><li>inizializzare <code>i</code>,</li><li>scrivere la guardia giusta,</li><li>aggiornare <code>i</code>.</li></ul><p>Se dimentichiamo una di queste parti, il programma non funziona (o non termina). Concettualmente, in realtà, quello che vogliamo fare è <strong>esaminare ogni elemento della lista</strong> in ordine.</p><p>Il <code>for</code> ci permette di scrivere la stessa cosa in modo più compatto, delegando a Python la gestione dell&#x27;indice:</p><pre><code class="language-python">for elemento in lista:
+    # fai qualcosa con elemento</code></pre><p>Le due versioni sono equivalenti:</p><pre><code class="language-python"># con while                      # con for
+i = 0                            for elemento in lista:
+while i &lt; len(lista):                print(elemento)
+    print(lista[i])
+    i = i + 1</code></pre><h2 id="sintassi-del-for">Sintassi del <code>for</code></h2><pre><code class="language-python">for variabile in [espressione_iterabile]:
+    # istruzioni</code></pre><p>Parti da riconoscere:</p><ul><li><code>for</code> introduce un&#x27;iterazione;</li><li><code>variabile</code> è il nome che prende l&#x27;elemento corrente ad ogni passo;</li><li><code>espressione_iterabile</code> è <strong>qualunque valore che permette l&#x27;iterazione</strong> — cioè che può fornire i suoi elementi uno alla volta. Le liste sono iterabili, ma lo sono anche le stringhe, i file, e altri oggetti che vedremo;</li><li>i due punti <code>:</code> aprono il blocco;</li><li>il blocco va indentato.</li></ul><h2 id="semantica-del-for">Semantica del <code>for</code></h2><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><h3 id="for-e-stato-del-programma"><code>for</code> e stato del programma</h3><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
+    print(parola)</code></pre><table><thead><tr><th>Passo</th><th>Codice sorgente</th><th>Stato</th><th>Output</th></tr></thead><tbody><tr><td>1</td><td><code>for parola in [...]</code></td><td><code>parola→&quot;Ciao&quot;</code></td><td></td></tr><tr><td>2</td><td><code>print(parola)</code></td><td><code>parola→&quot;Ciao&quot;</code></td><td><code>Ciao</code></td></tr><tr><td>3</td><td><code>for parola in [...]</code></td><td><code>parola→&quot;Mondo&quot;</code></td><td></td></tr><tr><td>4</td><td><code>print(parola)</code></td><td><code>parola→&quot;Mondo&quot;</code></td><td><code>Mondo</code></td></tr><tr><td>5</td><td><code>for parola in [...]</code></td><td><code>parola→&quot;Python&quot;</code></td><td></td></tr><tr><td>6</td><td><code>print(parola)</code></td><td><code>parola→&quot;Python&quot;</code></td><td><code>Python</code></td></tr></tbody></table><blockquote><p>Con il <code>while</code> si itera sull&#x27;<strong>indice</strong> e si recupera il valore come <code>lista[i]</code>.<br>Con il <code>for</code> si itera direttamente sul <strong>valore</strong>: <code>parola</code> è già l&#x27;elemento, non la sua posizione.</p></blockquote><pre><code>while:   i → lista[i] → valore
+for:              parola → valore</code></pre><h2 id="la-funzione-range">La funzione <code>range()</code></h2><p><code>range</code> è un tipo iterabile e immutabile che produce una sequenza di interi. Non è una lista — non occupa spazio in memoria per tutti i valori — ma si comporta come un iterabile: si può usare direttamente in un <code>for</code>.</p><pre><code class="language-python">range(n)       # da 0 a n-1
+range(a, b)    # da a a b-1
+range(a, b, s) # da a a b-1, con passo s</code></pre><p><strong>Ripetere un&#x27;azione n volte</strong></p><p>Quando non ci interessa il numero in sé ma vogliamo solo ripetere qualcosa, usiamo <code>range</code> come contatore:</p><pre><code class="language-python">for i in range(5):
+    print(&quot;ciao&quot;)</code></pre><p>Output: <code>ciao</code> stampato 5 volte.</p><pre><code class="language-python">for _ in range(5):
+    print(&quot;ciao&quot;)</code></pre><p>La variabile <code>_</code> è una convenzione per indicare &quot;questo valore non mi serve&quot;.</p><p><strong>Generare una lista di numeri pari</strong></p><pre><code class="language-python">pari = []
+for n in range(0, 10, 2):
+    pari.append(n)
+
+print(pari)   # [0, 2, 4, 6, 8]</code></pre><p><code>range(0, 10, 2)</code> produce <code>0, 2, 4, 6, 8</code> — parte da <code>0</code>, si ferma prima di <code>10</code>, avanza di <code>2</code>.</p><p><strong>Generare una lista di numeri dispari</strong></p><pre><code class="language-python">dispari = []
+for n in range(1, 10, 2):
+    dispari.append(n)
+
+print(dispari)   # [1, 3, 5, 7, 9]</code></pre><p>Basta cambiare il punto di partenza da <code>0</code> a <code>1</code>.</p><p><strong>Esempio:</strong></p><pre><code class="language-python">for n in range(25, 35):
+    print(n)</code></pre><p>Stampa i numeri da <code>25</code> a <code>34</code>.</p><h2 id="scansioni-trasformazioni-e-accumuli">Scansioni, trasformazioni e accumuli</h2><p>Con <code>for</code> ricorrono tre schemi molto frequenti.</p><h3 id="scansione">Scansione</h3><pre><code class="language-python">for carattere in parola:
+    print(carattere)</code></pre><h3 id="trasformazione">Trasformazione</h3><pre><code class="language-python">parole = [&quot;Giacomo&quot;, &quot;Alessia&quot;, &quot;Martina&quot;, &quot;Francesco&quot;]
+parole_minuscole = []
+
+for parola in parole:
+    parole_minuscole.append(parola.lower())</code></pre><h3 id="accumulo">Accumulo</h3><pre><code class="language-python">numeri = [4, 9, 10, 2, -3]
+somma = 0
+
+for numero in numeri:
+    somma += numero</code></pre><h2 id="liste-di-liste">Liste di liste</h2><p>Una lista può contenere qualsiasi tipo di valore — incluse altre liste. Questo permette di rappresentare strutture a due dimensioni come <strong>matrici</strong>, tabelle e griglie.</p><pre><code class="language-python">matrice = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]</code></pre><p><code>matrice</code> è una lista di 3 elementi, ognuno dei quali è una lista di 3 interi.</p><h3 id="accesso-agli-elementi">Accesso agli elementi</h3><p>Per accedere a un elemento servono due indici: prima la riga, poi la colonna.</p><pre><code class="language-python">matrice[0]      # [1, 2, 3]  — prima riga intera
+matrice[0][0]   # 1          — riga 0, colonna 0
+matrice[1][2]   # 6          — riga 1, colonna 2
+matrice[2][-1]  # 9          — ultima colonna della terza riga</code></pre><pre><code>         col 0  col 1  col 2
+        +------+------+------+
+riga 0  |  1   |  2   |  3   |
+        +------+------+------+
+riga 1  |  4   |  5   |  6   |
+        +------+------+------+
+riga 2  |  7   |  8   |  9   |
+        +------+------+------+</code></pre><h2 id="esercizi">Esercizi</h2><ol><li>Stampa i numeri da 0 a 9.</li><li>Leggi due interi dall&#x27;input e scrivi una funzione void che li prende come parametro e stampa tutti i numeri compresi (estremi inclusi). Il programma deve passare i numeri alla funzione nell&#x27;ordine corretto (il minore come primo parametro, il maggiore come secondo)</li><li>Scrivi una funzione che  prende come paramtro un numero n maggiore di 0 e una stringa e stampa n volte una stessa stringa. Poi leggi un intero e una stringa dall&#x27;input e esegui la funzione.</li><li>Chiedi all&#x27;utente una parola e stampala lettera per lettera, una per riga.</li><li>Chiedi all&#x27;utente una parola e stampala lettera per lettera indicando anche la posizione (Prova sia con il for che con il while!).</li><li>Stampa solo i caratteri in posizione pari di una stringa.</li><li>Chiedi all&#x27;utente un numero <code>n</code> e stampa la tabellina di quel numero da 1 a 10.</li><li>Calcola la somma e la media di una lista di numeri.</li><li>Leggi due numeri (base, altezza) e stampa un rettangolo vuoto. Esempio per base=4, altezza=3:</li></ol><pre><code>    ****
+    *  *
+    ****</code></pre><ol><li>Leggi tre numeri (k, base, altezza) e stampa <code>k</code> rettangoli uno dopo l&#x27;altro. Esempio per k=3, base=4, altezza=3:</li></ol><pre><code>    ****
+    *  *
+    ****
+
+    ****
+    *  *
+    ****
+
+    ****
+    *  *
+    ****</code></pre><ol><li>Leggi tre numeri (k, base, altezza) e stampa <code>k</code> rettangoli affiancati. Esempio per k=3, base=4, altezza=3:</li></ol><pre><code>    **** **** ****
+    *  * *  * *  *
+    **** **** ****</code></pre><ol><li>Leggi <code>n</code> e stampa una piramide. Esempio per <code>n=5</code>:</li></ol><pre><code>    1
+    22
+    333
+    4444
+    55555</code></pre><ol><li>Leggi <code>n</code> e stampa una piramide diversa. Esempio per <code>n=5</code>:</li></ol><pre><code>    1
+    12
+    123
+    1234
+    12345</code></pre><ol><li>Data una matrice quadrata `n×n (ovvero una lista che contiene in ogni posizione un elemento di tipo lista), stampa solo i numeri sulla diagonale principale.</li></ol><pre><code class="language-python">    matrice = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]  # output: 1  5  9</code></pre><ol><li>Crea a mano una matrice 3×3 con i numeri da 1 a 9 e stampala riga per riga.</li><li>Data una matrice, calcola la somma di tutti gli elementi.</li><li>Leggi dall&#x27;input una matrice <code>n×m</code> e stampala riga per riga (hai creato una funzione per l&#x27;esercizio 15? puoi riusarla?)</li><li>Data una matrice, costruisci la trasposta: una nuova matrice dove righe e colonne sono scambiate.</li></ol><pre><code class="language-python">    originale = [[1, 2, 3], [4, 5, 6]]  # trasposta: [[1, 4], [2, 5], [3, 6]]</code></pre><ol><li>Data una matrice di interi, trova la posizione <code>(riga, colonna)</code> del valore massimo.</li><li>Data una matrice quadrata <code>n×n</code>, stampa <code>sì</code> se è simmetrica (<code>matrice[i][j] == matrice[j][i]</code>), <code>no</code> altrimenti.</li></ol>
+<footer>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license">
+<img src="https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png" alt="CC BY-NC-SA 4.0">
+</a>
+Ludovica Pannitto — Università degli Studi di Salerno —
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a>
+</footer>
 </main>
 </body>
 </html>
