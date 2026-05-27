@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 08 · Ciclo for e iterazione - Slides</title>
+<title>Modulo 08 · File, Dizionari e Set - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -43,7 +43,7 @@ p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.38rem 0; }
-blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+blockquote { border-top: 4px solid #c97f31; border-bottom: 4px solid #c97f31; padding: 0.8rem 1.5rem; background: #fff6ea; border-radius: 14px; text-align: center; max-width: 80%; margin-left: auto; margin-right: auto; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
 details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
@@ -55,6 +55,10 @@ th, td { border: 1px solid rgba(23, 33, 43, 0.12); padding: 0.55rem 0.7rem; vert
 th { background: #f2e7d7; }
 hr { border: 0; border-top: 1px solid rgba(23, 33, 43, 0.12); margin: 1.2rem 0; }
 a { color: #8b3f1d; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78em; font-weight: 600; background: rgba(139,63,29,0.1); border: 1px solid rgba(139,63,29,0.25); color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: rgba(139,63,29,0.18); }
 .controls {
   position: fixed;
   left: 0;
@@ -100,187 +104,295 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 08 · Ciclo for e iterazione</h1>
+    <h1>Modulo 08 · File, Dizionari e Set</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere i tre modi per far arrivare dati a un programma?</li><li>Sai usare <code>sys.argv</code> per leggere argomenti da riga di comando?</li><li>Sai aprire, leggere e scrivere file con <code>open()</code> e <code>with</code>?</li><li>Sai usare i dizionari per associare chiavi e valori?</li><li>Sai contare frequenze con un dizionario?</li><li>Sai iterare su chiavi, valori e coppie chiave-valore?</li><li>Sai usare i set come insiemi di elementi unici?</li><li>Sai distinguere lista, dizionario e set e scegliere la struttura giusta?</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai usare il ciclo <code>for</code> su stringhe, liste e <code>range()</code>?</li><li>Sai spiegare la semantica elementare dell&#x27;iterazione?</li><li>Sai leggere il comportamento del <code>for</code> in termini di stato?</li><li>Sai applicare il <code>for</code> a conteggi, trasformazioni e scansioni?</li><li>Sai usare cicli annidati per costruire pattern e output strutturato?</li></ul><hr><a id="mod8-for"></a>
+    <h2 id="tre-modi-per-far-arrivare-dati-a-un-programma">Tre modi per far arrivare dati a un programma</h2><p>Fino a questo punto i programmi hanno ricevuto dati in due modi: scritti direttamente nel codice oppure letti con <code>input()</code>.</p><p>Normalmente però:</p><ul><li>i dati sono salvati in file sul disco (o su altri sistemi di archiviazione, e.g., il cloud)</li><li>oppure potrebbero arrivare come parametri tramite riga di comando.</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-al-for">Il problema che porta al <code>for</code></h2><p>Si puo&#x27; partire da un esempio come questo:</p><pre><code class="language-python">incipit = &quot;Era una notte incantevole, una di quelle notti...&quot;
-parole = incipit.split()
+    <h2 id="sysargv-argomenti-da-riga-di-comando"><code>sys.argv</code>: argomenti da riga di comando</h2><p>Fino a questo momento abbiamo usato la riga di comando per invocare l&#x27;interprete Python e passargli il file contenente codice sorgente, delegando al codice la gestione dell&#x27;input.</p><pre><code class="language-bash">python3 script.py</code></pre><p>Possiamo però anche sfruttare la riga di comando per passare direttamente dei valori all&#x27;interprete.</p><pre><code class="language-bash">python3 script.py ciao 42</code></pre><p>All&#x27;interno del programma, i valori <code>ciao</code> e <code>42</code> sono accessibili tramite <code>sys.argv</code>, una lista che Python riempie automaticamente. Per usarla bisogna importare il modulo <code>sys</code>:</p><pre><code class="language-python">import sys
 
-parole[0] = parole[0].lower()
-parole[1] = parole[1].lower()
-parole[2] = parole[2].lower()</code></pre><p>Problemi evidenti:</p><ul><li>il codice e&#x27; lungo e fragile;</li><li>dipende dalla lunghezza della lista;</li><li>non e&#x27; riusabile;</li><li>ripete sempre la stessa operazione concettuale.</li></ul><p>Il <code>for</code> nasce proprio per esprimere una stessa azione ripetuta su una sequenza, con una forma del linguaggio chiara e riusabile.</p><hr>
+print(sys.argv)   # [&#x27;script.py&#x27;, &#x27;ciao&#x27;, &#x27;42&#x27;]</code></pre><ul><li><code>sys.argv</code> è una variabile di tipo <strong>list</strong>;</li><li><code>sys.argv[0]</code> è il nome dello script;</li><li><code>sys.argv[1]</code> e i successivi sono i valori passati dall&#x27;utente, come <strong>stringhe</strong>.</li></ul><p>Esempio:</p><pre><code class="language-python">import sys
+
+nome = sys.argv[1]
+print(&quot;Ciao,&quot;, nome)</code></pre><pre><code class="language-bash">python3 script.py Ludovica
+# Ciao, Ludovica</code></pre><h3 id="esercizi">Esercizi</h3><ol><li>Scrivi un programma che riceve due numeri da riga di comando e stampa la loro somma.</li></ol><pre><code>   python3 somma.py 3 7
+   10</code></pre><ol><li>Scrivi un programma che riceve una parola da riga di comando e stampa quante lettere ha.</li></ol><pre><code>   python3 lunghezza.py banana
+   6</code></pre><ol><li>Scrivi un programma che riceve una lista di numeri da riga di comando e stampa il massimo.</li></ol><pre><code>   python3 massimo.py 4 7 2 9 1
+   9</code></pre><ol><li>Scrivi un programma che riceve una parola da riga di comando e la stampa al contrario.</li></ol><pre><code>   python3 rovescia.py ciao
+   oaic</code></pre><ol><li>Scrivi un programma che riceve una serie di parole da riga di comando e, per ognuna di esse, stampa se è palindroma o meno.</li></ol><pre><code>   python3 palindromo.py ciao radar pizza anna
+   ciao - no
+   radar - sì
+   pizza - no
+   anna - sì</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-del-for">Sintassi del <code>for</code></h2><pre><code class="language-python">for identificatore in iterabile:</code></pre><p>Parti da riconoscere:</p><ul><li><code>for</code> introduce un&#x27;iterazione;</li><li><code>identificatore</code> e&#x27; la variabile di iterazione;</li><li><code>iterabile</code> e&#x27; la sequenza o struttura che stiamo attraversando;</li><li>i due punti <code>:</code> aprono il blocco;</li><li>il blocco del ciclo va indentato.</li></ul><hr>
+    <h2 id="e-quindi-i-file">E quindi i file?</h2><p><code>sys.argv</code> e <code>input()</code> vanno bene per dati semplici, ma hanno due limiti:</p><ul><li>i dati sono <strong>volatili</strong>: spariscono quando il programma finisce;</li><li>i dati sono <strong>piccoli</strong>: non è pratico passare cento numeri da riga di comando.</li></ul><p>Immagina di voler analizzare i voti di tutti gli studenti di un corso:</p><pre><code>Sandra Rossi   27
+Matteo Bianchi 19
+Giuseppe Verdi  30
+Antonella Ferrari   18
+...</code></pre><p>Questi dati sono:</p><ul><li><strong>strutturati</strong> (ogni riga ha lo stesso formato: nome e cognome nella prima colonna e voto nella seconda),</li><li><strong>persistenti</strong> (esistono indipendentemente dal programma)</li><li>(potenzialmente) <strong>grandi</strong> (possono essere migliaia di righe).</li></ul><p>Tipicamente, sono dati che manteniamo su dei file.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-del-for">Semantica del <code>for</code></h2><p>Semantica intuitiva:</p><ol><li>Python prende un elemento dell&#x27;iterabile.</li><li>Lo assegna alla variabile di iterazione.</li><li>Esegue il blocco.</li><li>Passa all&#x27;elemento successivo.</li><li>Quando gli elementi finiscono, continua dopo il <code>for</code>.</li></ol><p>Esempio:</p><pre><code class="language-python">for parola in [&quot;Ciao&quot;, &quot;Mondo&quot;, &quot;Python&quot;]:
-    print(parola.lower())</code></pre><p>Il <code>for</code> e&#x27; utile quando:</p><ul><li>la stessa operazione concettuale va ripetuta molte volte;</li><li>il codice manuale diventerebbe lungo e fragile;</li><li>non vogliamo scrivere una riga separata per ogni posizione della sequenza.</li></ul><hr><a id="mod8-range"></a>
+    <h2 id="dove-sono-i-file-il-filesystem-e-il-filepath">Dove sono i file: Il filesystem e il filepath</h2><p>Il <strong>filesystem</strong> è la struttura ad albero con cui il sistema operativo organizza i file su disco. Ogni file e ogni cartella ha una posizione unica nell&#x27;albero, descritta dal suo <strong>percorso</strong> (filepath).</p><pre><code>/                          ← radice (root)
+├── home/
+│   └── ludovica/
+│       ├── script.py
+│       └── dati/
+│           └── voti.txt
+└── usr/
+    └── bin/</code></pre><h3 id="percorso-assoluto">Percorso assoluto</h3><p>Parte dalla radice <code>/</code> e descrive il percorso completo:</p><pre><code>/home/ludovica/dati/voti.txt</code></pre><p>Funziona indipendentemente da dove ci si trova nel filesystem.</p><h3 id="percorso-relativo">Percorso relativo</h3><p>Parte dalla <strong>cartella corrente</strong> (la cartella da cui si lancia lo script):</p><pre><code>dati/voti.txt       ← entra nella sottocartella dati/
+../altro/file.txt   ← risale di un livello con ..
+voti.txt            ← nella stessa cartella dello script</code></pre><p>La posizione del percorso relativo dipende da dove si trova lo script nel filesystem. Ecco un esempio:</p><pre><code>/home/ludovica/
+├── progetto/
+│   ├── script.py          ← lo script è qui
+│   └── dati/
+│       └── voti.txt
+└── altro/
+    └── note.txt</code></pre><p>Se si lancia lo script con:</p><pre><code class="language-bash">cd /home/ludovica/progetto
+python3 script.py</code></pre><p>allora la <strong>cartella corrente</strong> è <code>/home/ludovica/progetto/</code> e i percorsi relativi si interpretano così:</p><pre><code class="language-python">open(&quot;dati/voti.txt&quot;)       # → /home/ludovica/progetto/dati/voti.txt  ✓
+open(&quot;voti.txt&quot;)            # → /home/ludovica/progetto/voti.txt        ✗ non esiste
+open(&quot;../altro/note.txt&quot;)   # → /home/ludovica/altro/note.txt           ✓</code></pre><p>Se invece si lancia da una cartella diversa:</p><pre><code class="language-bash">cd /home/ludovica
+python3 progetto/script.py</code></pre><p>la cartella corrente diventa <code>/home/ludovica/</code> e gli stessi percorsi puntano a posti diversi:</p><pre><code class="language-python">open(&quot;dati/voti.txt&quot;)       # → /home/ludovica/dati/voti.txt           ✗ non esiste!</code></pre><p>Per questo motivo è importante <strong>lanciare lo script dalla cartella giusta</strong>.</p><h3 id="recap-dei-comandi-bash-utili">Recap dei comandi bash utili</h3><table><thead><tr><th>Comando</th><th>Significato</th></tr></thead><tbody><tr><td><code>pwd</code></td><td>stampa la cartella corrente (print working directory)</td></tr><tr><td><code>ls</code></td><td>elenca i file nella cartella corrente</td></tr><tr><td><code>ls dati/</code></td><td>elenca i file nella sottocartella <code>dati/</code></td></tr><tr><td><code>cd dati/</code></td><td>entra nella cartella <code>dati/</code></td></tr><tr><td><code>cd ..</code></td><td>risale di un livello</td></tr><tr><td><code>cd ~</code></td><td>torna alla cartella home</td></tr><tr><td><code>mkdir nome</code></td><td>crea una nuova cartella</td></tr><tr><td><code>cp origine destinazione</code></td><td>copia un file</td></tr><tr><td><code>mv origine destinazione</code></td><td>sposta o rinomina un file</td></tr><tr><td><code>rm file</code></td><td>elimina un file (irreversibile)</td></tr><tr><td><code>cat file</code></td><td>stampa il contenuto di un file</td></tr><tr><td><code>python3 script.py</code></td><td>esegue uno script Python</td></tr></tbody></table><p>La cartella corrente è importante: quando si usa un percorso relativo in Python (es. <code>open(&quot;dati/voti.txt&quot;)</code>), Python lo interpreta rispetto alla cartella da cui è stato lanciato lo script, non rispetto alla cartella dove si trova il file <code>.py</code>.</p><h3 id="esercitazione-navigare-il-filesystem">Esercitazione: navigare il filesystem</h3><p>Apri un terminale e segui questi passi uno alla volta.</p><p><strong>1. Dove sono?</strong></p><pre><code class="language-bash">pwd</code></pre><p>Leggi il percorso assoluto che viene stampato. È la tua cartella home.</p><p><strong>2. Cosa c&#x27;è qui?</strong></p><pre><code class="language-bash">ls</code></pre><p>Osserva i file e le cartelle presenti.</p><p><strong>3. Crea una struttura di cartelle</strong></p><pre><code class="language-bash">mkdir esercizi
+mkdir esercizi/modulo8
+mkdir esercizi/modulo8/dati</code></pre><p><strong>4. Verifica la struttura</strong></p><pre><code class="language-bash">ls esercizi/
+ls esercizi/modulo8/</code></pre><p><strong>5. Entra nella cartella di lavoro</strong></p><pre><code class="language-bash">cd esercizi/modulo8
+pwd</code></pre><p>Il percorso stampato ora finisce con <code>esercizi/modulo8</code>. Questa è la tua nuova cartella corrente.</p><p><strong>6. Crea un file di testo</strong></p><pre><code class="language-bash">echo &quot;Sandra,Rossi,27&quot; &gt; dati/studenti.txt
+echo &quot;Matteo,Bianchi,19&quot; &gt;&gt; dati/studenti.txt
+echo &quot;Giuseppe,Verdi,30&quot; &gt;&gt; dati/studenti.txt</code></pre><p>(<code>&gt;</code> sovrascrive, <code>&gt;&gt;</code> aggiunge in coda.)</p><p><strong>7. Controlla il contenuto</strong></p><pre><code class="language-bash">cat dati/studenti.txt</code></pre><p><strong>8. Torna alla home</strong></p><pre><code class="language-bash">cd ~
+pwd</code></pre><p>Nella prossima sezione scaricheremo dalla repository git uno script già pronto che legge i file di dati — e vedremo cosa succede se lo si lancia dalla cartella sbagliata.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-range">Il problema che porta a <code>range()</code></h2><p>A volte non vogliamo scorrere una lista gia&#x27; pronta, ma ripetere qualcosa un numero fissato di volte oppure lavorare su un intervallo di numeri.</p><p>Per questo serve un oggetto che rappresenti una sequenza di indici o contatori.</p><hr>
+    <h2 id="cosè-un-file-per-python">Cos&#x27;è un file per Python</h2><p>Un file è una sequenza di dati salvata su disco. Per Python, un file è identificato univocamente dal suo <strong>percorso</strong> (path): una stringa che descrive dove si trova nel filesystem.</p><pre><code class="language-python">&quot;dati.txt&quot;                # nella stessa cartella dello script
+&quot;data/testo.txt&quot;          # nella sottocartella data/
+&quot;../esercizi/testo.txt&quot;   # risale di un livello, poi entra in esercizi/
+&quot;/home/utente/note.txt&quot;   # percorso assoluto</code></pre><p>Per lavorare con un file, Python crea un oggetto speciale chiamato <strong>file handler</strong> (o file object): una variabile che rappresenta il canale aperto tra il programma e il file su disco. Attraverso questo handler si legge e si scrive; il file fisico non viene mai manipolato direttamente.</p><pre><code class="language-python">handler = open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;)
+# handler è ora il canale verso il file</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-range">Sintassi di <code>range()</code></h2><p><code>range(n)</code> serve per ripetere qualcosa un numero fissato di volte.</p><pre><code class="language-python">for numero in range(5):
-    print(numero)</code></pre><p>Forme piu&#x27; comuni:</p><pre><code class="language-python">range(n)
-range(a, b)</code></pre><hr>
+    <h2 id="la-funzione-open">La funzione <code>open()</code></h2><p><code>open()</code> è una funzione che riceve il percorso di un file e restituisce un <strong>file handler</strong>: l&#x27;oggetto attraverso cui leggere o scrivere il file.</p><pre><code class="language-python">open(percorso, mode, encoding)</code></pre><h3 id="parametro-percorso">Parametro <code>percorso</code></h3><p>Una <strong>stringa</strong> con il path del file. Può essere relativo (rispetto alla cartella da cui si lancia lo script) o assoluto.</p><h3 id="parametro-mode">Parametro <code>mode</code></h3><p>Controlla cosa si può fare con il file una volta aperto:</p><table><thead><tr><th>Valore</th><th>Significato</th></tr></thead><tbody><tr><td><code>&quot;r&quot;</code></td><td>lettura (default); il file deve esistere</td></tr><tr><td><code>&quot;w&quot;</code></td><td>scrittura; crea il file se non esiste, <strong>sovrascrive</strong> se esiste</td></tr><tr><td><code>&quot;a&quot;</code></td><td>scrittura in coda (append); crea il file se non esiste, aggiunge alla fine se esiste</td></tr></tbody></table><h3 id="parametro-encoding">Parametro <code>encoding</code></h3><p>Su disco un file è una sequenza di <strong>byte</strong>. Un byte è formato da 8 <strong>bit</strong>, ciascuno dei quali può valere 0 o 1:</p><pre><code>  bit:   1  0  1  1  0  1  0  0
+         ^                     ^
+       (più significativo)   (meno significativo)
+
+  valore decimale: 128 + 0 + 32 + 16 + 0 + 4 + 0 + 0 = 180
+  range possibile: 0 … 255  (2⁸ = 256 valori)</code></pre><p>L&#x27;encoding è la tavola di corrispondenza che dice come trasformare quei byte in caratteri leggibili.</p><h3 id="ascii">ASCII</h3><p>Il primo encoding standardizzato è <strong>ASCII</strong> (1963). Usa 7 bit per carattere, quindi può rappresentare solo 128 simboli: le lettere inglesi maiuscole e minuscole, le cifre, la punteggiatura e alcuni caratteri di controllo.</p><pre><code>Dec  Char       Dec  Char       Dec  Char
+ 65   A          97   a          48   0
+ 66   B          98   b          49   1
+ 67   C          99   c          50   2
+ 32   (spazio)   46   .          10   \n (newline)</code></pre><p>ASCII è sufficiente per l&#x27;inglese, ma non ha lettere accentate, caratteri greci, arabi, cinesi, emoji, ecc.</p><h3 id="il-problema-256-valori-non-bastano">Il problema: 256 valori non bastano</h3><p>Con un byte si possono rappresentare 256 valori (0–255). Nel corso degli anni ogni paese ha definito il proprio modo di usare i valori 128–255 per le proprie lettere speciali: Latin-1 per l&#x27;Europa occidentale, cp1251 per il cirillico, ecc. Il risultato è che lo stesso byte  <code>11100000</code> (224 in decimale) significa <code>à</code> in Latin-1 e <code>а</code> (a cirillica) in cp1251.</p><h3 id="utf-8">UTF-8</h3><p><strong>UTF-8</strong> risolve il problema: è un encoding a <strong>lunghezza variabile</strong> che può rappresentare tutti i circa 150000 caratteri dello standard Unicode.</p><ul><li>I caratteri ASCII (0–127) occupano <strong>1 byte</strong>, identico a ASCII — retrocompatibile.</li><li>I caratteri latini estesi (lettere accentate) occupano <strong>2 byte</strong>.</li><li>I caratteri di altri alfabeti occupano <strong>3 byte</strong>.</li><li>Gli emoji e i simboli rari occupano <strong>4 byte</strong>.</li></ul><p>Esempi:</p><pre><code>Carattere   byte (un gruppo per byte, in binario)
+&#x27;A&#x27;         01000001
+&#x27;à&#x27;         11000011  10100000
+&#x27;è&#x27;         11000011  10101000
+&#x27;ù&#x27;         11000011  10111001
+&#x27;€&#x27;         11100010  10000010  10101100
+&#x27;😀&#x27;        11110000  10011111  10011000  10000000</code></pre><p>Lo stesso file letto con encoding sbagliato produce caratteri incomprensibili. Per esempio, la stringa <code>&quot;città&quot;</code> salvata in UTF-8 e letta come Latin-1 diventa <code>&quot;cittÃ &quot;</code> perché i due byte <code>C3 A0</code> di <code>à</code> vengono interpretati come due caratteri Latin-1 separati.</p><p>Usare sempre <code>encoding=&quot;utf-8&quot;</code> sui file che si creano. Quando si legge un file prodotto da altri e si vedono caratteri strani, è probabile che l&#x27;encoding sia sbagliato.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-range">Semantica di <code>range()</code></h2><p><code>range(5)</code> produce:</p><pre><code class="language-python">0, 1, 2, 3, 4</code></pre><p>Due dettagli importanti:</p><ul><li><code>range(5)</code> conta da <code>0</code> a <code>4</code>;</li><li><code>range(a, b)</code> parte da <code>a</code> e arriva a <code>b - 1</code>.</li></ul><p>Esempio:</p><pre><code class="language-python">for n in range(25, 35):
-    print(n)</code></pre><p>stampa i numeri da <code>25</code> a <code>34</code>.</p><hr>
+    <h2 id="valore-restituito">Valore restituito</h2><p><code>open()</code> restituisce un oggetto di tipo <strong>file handler</strong>. Non è una stringa né una lista: è un canale verso il file, e i suoi metodi (<code>read()</code>, <code>readlines()</code>, <code>write()</code>, …) permettono di trasferire dati.</p><p>Il file handler è un <strong>iterabile</strong>: supporta il <code>for</code>, che consegna una riga alla volta.</p><pre><code class="language-python">for line in file_in:      # OK: itera riga per riga
+    print(line)</code></pre><p>Non supporta però l&#x27;accesso diretto per posizione:</p><pre><code class="language-python">file_in[0]    # ERRORE: i file handler non sono indicizzabili</code></pre><p>Per accedere a una riga specifica bisogna prima caricare tutto il contenuto in una lista con <code>readlines()</code>, e poi indicizzare quella.</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
+file_in = open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;)
+print(file_in.readlines())
+file_in.close()</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="for-e-stato-del-programma"><code>for</code> e stato del programma</h2><p>Conviene anche tracciare:</p><pre><code class="language-python">for x in [24, -13, 8]:
-    y = x + 1
-
-print(x, y)</code></pre><p>Alla fine del ciclo:</p><ul><li><code>x</code> contiene l&#x27;ultimo elemento iterato;</li><li><code>y</code> contiene l&#x27;ultimo valore calcolato.</li></ul><p>Questo aiuta a capire che:</p><ul><li>il <code>for</code> aggiorna la variabile di iterazione a ogni passo;</li><li>lo stato continua a cambiare durante il ciclo;</li><li>il valore finale osservabile dipende dall&#x27;ultima iterazione.</li></ul><p>Un errore tipico e&#x27; riusare male i nomi:</p><pre><code class="language-python">number = int(input())
-
-for number in range(number):
-    ...</code></pre><p>Qui la variabile del <code>for</code> sovrascrive il valore letto prima. Meglio:</p><pre><code class="language-python">numero = int(input())
-
-for i in range(numero):
-    ...</code></pre><hr>
+    <h2 id="with-e-la-gestione-sicura-dei-file"><code>with</code> e la gestione sicura dei file</h2><p>Aprire un file non basta: bisogna anche ricordarsi di chiuderlo.</p><p>Perché?</p><ul><li>Il sistema operativo tiene un limite al numero di file che un processo può tenere aperti contemporaneamente. Se un programma apre molti file senza mai chiuderli, a un certo punto ottiene un errore.</li><li>Quando si <strong>scrive</strong> su un file, Python non invia i dati subito al disco: li accumula in un <strong>buffer</strong> in memoria per efficienza. La chiusura del file svuota il buffer e garantisce che tutti i dati vengano effettivamente salvati. Un programma che termina senza chiudere i file di output può perdere le ultime righe scritte.</li></ul><p><code>with</code> rende questa gestione automatica: il file viene chiuso al termine del blocco indentato, anche se si verifica un errore nel mezzo.</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        print(line)</code></pre><p>Quando Python esegue un blocco <code>with</code>:</p><ol><li>apre la risorsa;</li><li>la rende disponibile tramite il nome (nome di variabile) dopo <code>as</code>;</li><li>esegue il blocco indentato;</li><li>alla fine chiude correttamente la risorsa.</li></ol>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="valore-corrente-e-posizione">Valore corrente e posizione</h2><p>A volte non basta avere il valore corrente: serve anche sapere in quale posizione della lista stiamo lavorando.</p><p>Per esempio:</p><pre><code class="language-python">for posizione, parola in enumerate(parole):
-    parole[posizione] = parola.lower()</code></pre><p><code>enumerate()</code> permette di ottenere insieme:</p><ul><li>posizione;</li><li>valore corrente.</li></ul><p>Questo e&#x27; spesso piu&#x27; pulito che gestire a mano:</p><pre><code class="language-python">posizione = 0
-...
-posizione += 1</code></pre><hr>
+    <h2 id="leggere-un-file">Leggere un file</h2><p>Tre strategie principali:</p><pre><code class="language-python"># tutto il contenuto in una stringa
+contenuto = file_in.read()
+
+# lista di righe
+righe = file_in.readlines()
+
+# riga per riga (il più comune)
+for line in file_in:
+    ...</code></pre><h3 id="strip-e-split-sui-dati-letti"><code>strip()</code> e <code>split()</code> sui dati letti</h3><p>Le righe lette da file contengono spesso caratteri indesiderati ai bordi (spazi, fine riga). Prima di usare i dati conviene ripulirli:</p><pre><code class="language-python">somma = 0.0
+
+with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        somma = somma + float(line.strip())</code></pre><p>Per segmentare una riga in campi:</p><pre><code class="language-python">with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        campi = line.strip().split(&quot;,&quot;)</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-enumerate">Il problema che porta a <code>enumerate()</code></h2><p>In molti esercizi il solo valore corrente non basta.</p><p>Serve anche la posizione:</p><ul><li>per riscrivere un elemento nella lista;</li><li>per stampare indice e contenuto;</li><li>per distinguere posizione e valore senza un contatore separato.</li></ul><p><code>enumerate()</code> nasce proprio per evitare quella gestione manuale.</p><hr>
+    <h2 id="ottenere-i-file-di-dati-git-e-github">Ottenere i file di dati: git e GitHub</h2><p>I file di esempio per questi esercizi si trovano in una <strong>repository git</strong> su GitHub. Git è un sistema di <strong>controllo versione</strong>: tiene traccia di tutte le modifiche ai file nel tempo e permette a più persone di lavorare sullo stesso progetto.</p><p>GitHub è una piattaforma web che ospita repository git e le rende accessibili a chiunque.</p><h3 id="clonare-una-repository">Clonare una repository</h3><p>Per scaricare una repository sul proprio computer si usa il comando <code>clone</code>:</p><pre><code class="language-bash">git clone https://github.com/ellepannitto/informatica-di-base-dati.git</code></pre><p>Questo crea una cartella locale <code>informatica-di-base-dati/</code> con i file di esempio e uno script di prova:</p><pre><code>informatica-di-base-dati/
+├── dati/
+│   ├── voti.txt
+│   ├── voti_materie.txt
+│   ├── numeri.txt
+│   └── testo.txt
+└── leggi.py</code></pre><h3 id="eseguire-lo-script-dalla-cartella-giusta">Eseguire lo script dalla cartella giusta</h3><p>Entra nella cartella clonata e lancia lo script:</p><pre><code class="language-bash">cd informatica-di-base-dati
+python3 leggi.py</code></pre><p>Lo script legge <code>dati/voti.txt</code> (percorso relativo rispetto alla cartella corrente) e stampa nome, cognome e voto di ogni studente.</p><h3 id="cosa-succede-se-lanci-lo-script-dalla-cartella-sbagliata">Cosa succede se lanci lo script dalla cartella sbagliata?</h3><pre><code class="language-bash">cd ..
+python3 informatica-di-base-dati/leggi.py</code></pre><p>Ottieni un <code>FileNotFoundError</code> perché il percorso relativo <code>dati/voti.txt</code> è ora interpretato rispetto alla cartella genitore, dove quella sottocartella non esiste. Per farlo funzionare bisogna rientrare nella cartella giusta:</p><pre><code class="language-bash">cd informatica-di-base-dati
+python3 leggi.py</code></pre><h3 id="aggiornare-i-file">Aggiornare i file</h3><p>Se i file del repository vengono aggiornati in seguito, per scaricare le ultime versioni basta eseguire dalla cartella del progetto:</p><pre><code class="language-bash">git pull</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="sintassi-di-enumerate">Sintassi di <code>enumerate()</code></h2><p>Forma tipica:</p><pre><code class="language-python">for posizione, valore in enumerate(sequenza):
-    ...</code></pre><p>Esempio:</p><pre><code class="language-python">for posizione, parola in enumerate(parole):
-    parole[posizione] = parola.lower()</code></pre><hr>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Apri un file di testo e stampa ogni riga così com&#x27;è.</li><li>Apri un file di testo e stampa solo le righe non vuote.</li><li>Apri un file di testo e stampa ogni riga in maiuscolo.</li><li>Apri un file di testo e stampa il numero di righe che contiene.</li><li>Apri un file che contiene un numero per riga e stampa ogni numero moltiplicato per 2.</li></ol><p>Considera un file <code>voti.txt</code> con il formato seguente (nome, cognome, voto separati da virgola):</p><pre><code>Sandra,Rossi,27
+Matteo,Bianchi,19
+Giuseppe,Verdi,30
+Antonella,Ferrari,18
+Luigi,Esposito,24</code></pre><ol><li>Leggi il file e stampa il nome e cognome di ogni studente (ignora il voto).</li><li>Leggi il file e stampa il nome e cognome degli studenti che hanno superato l&#x27;esame (voto &gt;= 18).</li><li>Leggi il file e stampa la media dei voti.</li><li>Leggi il file e stampa il nome e cognome dello studente con il voto più alto.</li><li>Leggi il file e stampa quanti studenti hanno preso 30.</li><li>Leggi un file testuale e stampalo su una sola riga.</li><li>Stampa le parole di un testo una per riga.</li><li>Conta righe, parole e caratteri di un file.</li></ol>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-enumerate">Semantica di <code>enumerate()</code></h2><p><code>enumerate(sequenza)</code> permette di iterare ottenendo insieme:</p><ul><li>la posizione corrente;</li><li>il valore corrente.</li></ul><p>Quindi, a ogni iterazione:</p><ol><li>Python prende il prossimo elemento della sequenza;</li><li>gli associa anche il suo indice;</li><li>assegna entrambi alle variabili del <code>for</code>.</li></ol><hr>
+    <h2 id="scrivere-su-un-file">Scrivere su un file</h2><h3 id="redirezione-della-shell">Redirezione della shell</h3><p>Il modo più semplice per salvare l&#x27;output di un programma su file è usare la redirezione della shell, senza modificare il codice Python:</p><pre><code class="language-bash">python3 script.py &gt; output.txt</code></pre><p>Il simbolo <code>&gt;</code> dice alla shell di intercettare tutto ciò che il programma stampa su schermo e di scriverlo nel file indicato. Il programma Python non sa che l&#x27;output va su file: continua a usare <code>print()</code> normalmente.</p><h3 id="apertura-in-modalità-scrittura">Apertura in modalità scrittura</h3><p>Quando è il programma a dover decidere dove o cosa scrivere, si usa <code>open()</code> con mode <code>&quot;w&quot;</code>:</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
+    print(&quot;ciao&quot;, file=file_output)</code></pre><ul><li><code>print(..., file=file_output)</code> scrive nel file invece che sullo schermo;</li><li><code>&quot;w&quot;</code> crea il file se non esiste e <strong>sovrascrive</strong> il contenuto se esiste già.</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="scansioni-trasformazioni-e-accumuli">Scansioni, trasformazioni e accumuli</h2><p>Con <code>for</code> ricorrono tre schemi molto frequenti:</p><h3 id="scansione">Scansione</h3><pre><code class="language-python">for carattere in parola:
-    print(carattere)</code></pre><h3 id="trasformazione">Trasformazione</h3><pre><code class="language-python">parole_minuscole = []
-
-for parola in parole:
-    parole_minuscole.append(parola.lower())</code></pre><h3 id="accumulo">Accumulo</h3><pre><code class="language-python">somma = 0
-
-for numero in numeri:
-    somma += numero</code></pre><p>Questi tre schemi ricorrono continuamente negli esercizi del modulo.</p><hr>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Scrivi un programma che legge il nome di un file di output da <code>sys.argv</code> e scrive al suo interno i numeri da 1 a 10, uno per riga.</li></ol><ol><li>Scrivi un programma che legge da <code>sys.argv</code> il nome di un file di input e il nome di un file di output, e copia il contenuto del primo nel secondo tutto in maiuscolo.</li></ol><ol><li>Scrivi un programma che chiede all&#x27;utente un nome di file tramite <code>input()</code> e scrive in quel file le prime 5 righe di testo digitate dall&#x27;utente.</li></ol><pre><code>   Nome del file di output: appunti.txt
+   Riga 1: ciao
+   Riga 2: questo è un test
+   Riga 3: terza riga
+   Riga 4: quarta
+   Riga 5: fine</code></pre><ol><li>Scrivi un programma che legge dall&#x27;utente una sequenza di parole (una per riga, fino a riga vuota) e le scrive su un file il cui nome è passato da <code>sys.argv</code>.</li></ol><ol><li>Leggi <code>dati/voti.txt</code> e scrivi due file separati: <code>sufficienti.txt</code> con le righe degli studenti che hanno superato l&#x27;esame (voto &gt;= 18) e <code>insufficienti.txt</code> con gli altri.</li></ol><pre><code>   python3 filtra.py dati/voti.txt sufficienti.txt insufficienti.txt</code></pre><ol><li>Leggi <code>dati/voti.txt</code> e distribuisci casualmente ogni riga in uno di due file usando <code>random.random()</code>: se il valore estratto è minore di 0.5 la riga va in <code>parte1.txt</code>, altrimenti in <code>parte2.txt</code>. Stampa quante righe sono finite in ciascun file.</li></ol><pre><code class="language-python">   import random
+   # random.random() restituisce un float tra 0.0 e 1.0</code></pre><ol><li>Leggi <code>dati/testo.txt</code> e scrivi in <code>brevi.txt</code> solo le righe con meno di 50 caratteri e in <code>lunghe.txt</code> solo quelle con 50 o più caratteri.</li></ol><ol><li>Leggi <code>dati/numeri.txt</code> e scrivi in <code>positivi.txt</code> i numeri positivi e in <code>negativi.txt</code> quelli negativi (ignora gli zeri).</li></ol>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="cicli-annidati">Cicli annidati</h2><p>Quando il problema ha due dimensioni, servono spesso due cicli:</p><ul><li>riga e colonna;</li><li>pagina e riga;</li><li>riga e contenuto della riga.</li></ul><p>Schema:</p><pre><code class="language-python">for i in range(1, n + 1):
-    stringa = &quot;&quot;
-    for j in range(1, i + 1):
-        stringa += str(i)
-    print(stringa)</code></pre><p>Se dentro usi <code>i</code>, il pattern dipende dall&#x27;indice esterno. Se usi <code>j</code>, il pattern cambia:</p><pre><code class="language-python">for i in range(1, n + 1):
-    stringa = &quot;&quot;
-    for j in range(1, i + 1):
-        stringa += str(j)
-    print(stringa)</code></pre><p>Questo e&#x27; un ottimo esercizio per capire che gli indici dei cicli annidati hanno ruoli diversi.</p><hr>
+    <h2 id="dati-strutturati-dizionari">Dati strutturati: Dizionari</h2><p>Immaginiamo di avere un file con tutti i voti di tutti gli studenti per tutte le materie:</p><pre><code>Sandra,Rossi,matematica,28
+Matteo,Bianchi,matematica,22
+Sandra,Rossi,informatica,30
+Sandra,Rossi,linguistica,27
+Matteo,Bianchi,informatica,19
+Matteo,Bianchi,linguistica,25
+...</code></pre><p>Vogliamo calcolare la media dei voti per ogni studente. Il problema è che ogni studente compare su più righe: dobbiamo raccogliere tutti i suoi voti mentre leggiamo il file, e poi calcolare la media alla fine.</p><p>Con una lista non possiamo farlo facilmente: la lista non ha un modo diretto per rispondere alla domanda &quot;dammi tutti i voti di Sandra Rossi&quot;. Dovremmo scorrere tutta la lista ogni volta.</p><p>Ci serve una struttura che associ un <strong>nome</strong> (la chiave) a una <strong>lista di voti</strong> (il valore). Questa struttura è il <strong>dizionario</strong>.</p><pre><code class="language-python">voti = {
+    &quot;Sandra Rossi&quot;:  [28, 30, 27],
+    &quot;Matteo Bianchi&quot;: [22, 19, 25],
+}</code></pre><p>Con questa struttura, aggiungere un voto è immediato:</p><pre><code class="language-python">studente = &quot;Sandra Rossi&quot;
+if studente not in voti:
+    voti[studente] = []
+voti[studente].append(28)</code></pre><p>E calcolare la media di ogni studente diventa un semplice ciclo:</p><pre><code class="language-python">for studente, lista_voti in voti.items():
+    media = sum(lista_voti) / len(lista_voti)
+    print(studente, media)</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="pattern-di-stampa">Pattern di stampa</h2><p>Gli esercizi su triangoli, piramidi e rettangoli servono a consolidare:</p><ul><li>uso di <code>range()</code>;</li><li>distinzione tra ciclo esterno e ciclo interno;</li><li>costruzione progressiva di una stringa;</li><li>controllo di quando andare a capo.</li></ul><p>Per esempio:</p><pre><code class="language-python">stringa = &quot;*&quot;
-
-for i in range(1, n + 1):
-    print(stringa)
-    stringa = stringa + &quot;*&quot;</code></pre><hr>
+    <h2 id="dizionari">Dizionari</h2><p>Un dizionario si scrive tra <code>{</code> e <code>}</code>. Ogni elemento è una coppia <code>chiave: valore</code> separata da virgola:</p><pre><code class="language-python">{}                                       # dizionario vuoto
+{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}       # chiavi stringa, valori interi
+{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;} # chiavi e valori stringa
+{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}   # valore che è una lista</code></pre><p>Per creare un dizionario vuoto e popolarlo un elemento alla volta si usa l&#x27;assegnazione con <code>[]</code>:</p><pre><code class="language-python">d = {}                 # dizionario vuoto
+d[&quot;chiave&quot;] = valore   # aggiunge (o aggiorna) la coppia chiave → valore</code></pre><p>La chiave tra <code>[]</code> deve essere un valore <strong>immutabile</strong> (stringa, intero, …). Il valore a destra può essere qualunque espressione Python. Se la chiave esiste già, il valore viene <strong>sovrascritto</strong>:</p><pre><code class="language-python">d = {}
+d[&quot;gatto&quot;] = 1
+d[&quot;gatto&quot;] = 5   # ora d[&quot;gatto&quot;] vale 5, non 1</code></pre><h3 id="semantica">Semantica</h3><p>Un dizionario associa una <strong>chiave</strong> a un <strong>valore</strong>:</p><ul><li>la chiave deve essere <strong>immutabile</strong> (stringa, intero, tupla) — non si possono usare liste o altri dizionari come chiavi;</li><li>il valore può essere di <strong>qualunque tipo</strong>, incluse liste o altri dizionari;</li><li>l&#x27;accesso avviene tramite la chiave, non tramite la posizione.</li></ul><p>Se si accede a una chiave che non esiste si ottiene un <code>KeyError</code>:</p><pre><code class="language-python">d = {&quot;gatto&quot;: 1}
+d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo si usa prima <code>in</code>:</p><pre><code class="language-python">if &quot;cane&quot; in d:
+    print(d[&quot;cane&quot;])</code></pre><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista può contenere le stesse informazioni, ma il significato dei campi resta implicito nelle posizioni:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 30]</code></pre><p>Con un dizionario la struttura diventa più leggibile e meno fragile:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 30}</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="for-e-while-nello-stesso-esercizio"><code>for</code> e <code>while</code> nello stesso esercizio</h2><p>Se usi sia <code>for</code> sia <code>while</code>, chiediti sempre:</p><ul><li>quale dei due controlla la struttura principale del problema;</li><li>quale variabile governa davvero la terminazione;</li><li>se stai riusando male la stessa variabile in due ruoli diversi.</li></ul><p>Quando il comportamento e&#x27; confuso, conviene tracciare a mano i valori a ogni iterazione.</p><hr>
+    <h2 id="operazioni-fondamentali">Operazioni fondamentali</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Accesso</td><td><code>D[k]</code></td></tr><tr><td>Aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>Appartenenza</td><td><code>k in D</code></td></tr><tr><td>Numero di chiavi</td><td><code>len(D)</code></td></tr><tr><td>Chiavi</td><td><code>D.keys()</code></td></tr><tr><td>Valori</td><td><code>D.values()</code></td></tr><tr><td>Coppie</td><td><code>D.items()</code></td></tr></tbody></table>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="caratteri-di-escape-e-stampa">Caratteri di escape e stampa</h2><p>Alcuni caratteri speciali utili quando si prepara output:</p><table><thead><tr><th>Sequenza</th><th>Effetto</th></tr></thead><tbody><tr><td><code>\\n</code></td><td>nuova riga</td></tr><tr><td><code>\\t</code></td><td>tabulazione</td></tr><tr><td><code>\&quot;</code> o <code>\&#x27;</code></td><td>virgolette dentro una stringa</td></tr></tbody></table><p>Esempi:</p><pre><code class="language-python">print(&quot;hello\nworld&quot;)
-print(&quot;a\tb&quot;)
-print(&quot;\&quot;print\&quot;&quot;)</code></pre><hr>
+    <h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi (default):</p><pre><code class="language-python">for chiave in dizionario:
+    print(chiave, dizionario[chiave])</code></pre><p>Iterare su coppie chiave-valore con <code>items()</code>:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
+    print(chiave, valore)</code></pre><p><code>items()</code> restituisce coppie <code>(chiave, valore)</code> che Python spacchetta direttamente nelle due variabili del <code>for</code>.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><h3 id="base">Base</h3><ol><li>stampa i numeri da 0 a 9;</li><li>stampa i numeri da 25 a 34;</li><li>stampa 10 volte una stessa stringa.</li></ol><h3 id="stringhe-e-liste">Stringhe e liste</h3><ol><li>Scrivi un programma che chiede all&#x27;utente una parola e la stampa lettera per lettera, una per riga.</li><li>Scrivi un programma che chiede all&#x27;utente una parola e la stampa lettera per lettera indicando anche la posizione.</li><li>stampa solo i caratteri in posizione pari;</li><li>trasforma una lista di parole in minuscolo.</li></ol><h3 id="tabellina-e-sequenze">Tabellina e sequenze</h3><ol><li>Scrivi un programma che chiede all&#x27;utente un numero <code>n</code> e stampa la tabellina di quel numero da 1 a 10.</li><li>Scrivi un programma che chiede all&#x27;utente 5 parole e le memorizza in una lista. Controlla che la prima e l&#x27;ultima parola inserite siano la stessa.</li></ol><h3 id="cicli-annidati-e-pattern-ascii">Cicli annidati e pattern ASCII</h3><ol><li>Scrivi un programma che chiede all&#x27;utente un numero <code>n</code> e stampa un triangolo di asterischi. Esempio per <code>n=4</code>:</li></ol><pre><code>    *
-    **
-    ***
-    ****</code></pre><ol><li>Scrivi un programma che legge due numeri (base, altezza) e stampa un rettangolo vuoto di quelle dimensioni. Esempio per base=4, altezza=3:</li></ol><pre><code>    ****
-    *  *
-    ****</code></pre><ol><li>Scrivi un programma che legge tre numeri (k, base, altezza) e stampa <code>k</code> rettangoli vuoti affiancati. Esempio per k=3, base=4, altezza=3:</li></ol><pre><code>    **** **** ****
-    *  * *  * *  *
-    **** **** ****</code></pre><ol><li>Scrivi un programma che legge un numero <code>n</code> e stampa una piramide come nell&#x27;esempio. Esempio per <code>n=5</code>:</li></ol><pre><code>    1
-    22
-    333
-    4444
-    55555</code></pre><ol><li>Scrivi un programma che legge un numero <code>n</code> e stampa una piramide come nell&#x27;esempio. Esempio per <code>n=5</code>:</li></ol><pre><code>    1
-    12
-    123
-    1234
-    12345</code></pre><h3 id="sequenze-con-for-e-accumulatori">Sequenze con <code>for</code> e accumulatori</h3><ol><li>stampa un triangolo di numeri;</li><li>stampa un quadrato di <code>+</code> di lato <code>n</code>;</li><li>costruisci pattern diversi cambiando l&#x27;indice usato nel ciclo interno.</li></ol><hr>
+    <h2 id="esercizi">Esercizi</h2><ol><li>Dato il seguente dizionario:</li></ol><pre><code class="language-python">   traduzione = {&quot;gatto&quot;: &quot;cat&quot;, &quot;cane&quot;: &quot;dog&quot;, &quot;topo&quot;: &quot;mouse&quot;, &quot;uccello&quot;: &quot;bird&quot;}</code></pre><p>Scrivi un programma che chiede all&#x27;utente una parola italiana e stampa la traduzione in inglese. Se la parola non è nel dizionario, stampa <code>Parola non trovata</code>.</p><ol><li>Scrivi un programma <code>conta_lettere.py</code> che prende come parametro una parola e conta quante volte compare ciascuna lettera usando un dizionario. Esempio:</li></ol><pre><code>   python3 conta_lettere.py banana
+   b: 1
+   a: 3
+   n: 2</code></pre><ol><li>Scrivi un programma che legge una stringa dall&#x27;input e stampa la frequenza di ogni lettera, ordinata dalla più frequente alla meno frequente.</li></ol><ol><li>Scrivi un programma che legge dall&#x27;input una serie di parole (una per riga, fino a riga vuota) e stampa quante volte è stata inserita ciascuna parola distinta.</li></ol><ol><li>Leggi <code>testo.txt</code> e conta la frequenza di ogni parola. Stampa le 10 parole più frequenti con il loro conteggio.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa la parola più lunga e la parola più corta (escludi le parole di un solo carattere).</li></ol><ol><li>Leggi <code>voti.txt</code> (formato <code>nome,cognome,voto</code>) e costruisci un dizionario <code>cognome → lista di voti</code>. Stampa per ogni cognome la media dei voti.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> (formato <code>nome,cognome,materia,voto</code>) e stampa, per ogni studente, la materia in cui ha preso il voto più alto.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e costruisci un dizionario <code>materia → voto medio</code>. Stampa le materie ordinate dal voto medio più alto al più basso.</li></ol><ol><li>Scrivi un programma che simula 1000 lanci di un dado a sei facce usando <code>random.randint(1, 6)</code> e usa un dizionario per contare quante volte è uscita ciascuna faccia. Stampa i risultati.</li></ol><ol><li>Scrivi un programma che genera una lista di 500 numeri casuali tra 1 e 10 con <code>random.randint</code>, li raggruppa in un dizionario <code>numero → quante volte è comparso</code>, e stampa il numero più frequente.</li></ol>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il nucleo dell&#x27;iterazione con <code>for</code>:</p><ul><li>sintassi e semantica;</li><li>uso di <code>range()</code>;</li><li>tracciamento della variabile di iterazione;</li><li>scansioni, trasformazioni e accumuli;</li><li>cicli annidati e pattern di stampa.</li></ul>
+    <h2 id="set">Set</h2><p>Un <strong>set</strong> è una collezione di elementi <strong>unici</strong> e <strong>non ordinati</strong>.</p><pre><code class="language-python">s = {1, 2, 3, 2, 1}   # {1, 2, 3} — i duplicati vengono rimossi
+s = set()              # set vuoto (non {} che è un dizionario vuoto)</code></pre><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Aggiunta</td><td><code>s.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>s.remove(x)</code></td></tr><tr><td>Appartenenza</td><td><code>x in s</code></td></tr><tr><td>Numero di elementi</td><td><code>len(s)</code></td></tr></tbody></table><h3 id="quando-usare-un-set">Quando usare un set</h3><p>Un set è utile quando:</p><ul><li>si vuole sapere <strong>se un elemento è già stato visto</strong> (senza contarlo);</li><li>si vuole eliminare i duplicati da una sequenza;</li><li>si vogliono confrontare due insiemi (chi è in entrambi, chi manca).</li></ul><pre><code class="language-python"># eliminare duplicati da una lista
+parole = [&quot;gatto&quot;, &quot;cane&quot;, &quot;gatto&quot;, &quot;topo&quot;, &quot;cane&quot;]
+uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><table><thead><tr><th>Struttura</th><th>Usa quando…</th></tr></thead><tbody><tr><td><strong>Lista</strong></td><td>l&#x27;ordine conta, ci possono essere duplicati, accedi per posizione</td></tr><tr><td><strong>Dizionario</strong></td><td>hai coppie chiave → valore, cerchi per nome non per posizione</td></tr><tr><td><strong>Set</strong></td><td>ti interessano solo gli elementi distinti, vuoi verificare appartenenza velocemente</td></tr></tbody></table><h3 id="esercizi">Esercizi</h3><ol><li>Scrivi un programma che legge una serie di parole dall&#x27;input (una per riga, fino a riga vuota) e stampa quante sono le parole <strong>distinte</strong> inserite.</li></ol><ol><li>Scrivi un programma che legge due file di testo e stampa le parole che compaiono in entrambi i file.</li></ol><ol><li>Scrivi un programma che legge <code>voti.txt</code> e stampa i cognomi degli studenti senza ripetizioni.</li></ol><ol><li>Scrivi un programma che legge <code>testo.txt</code> e stampa quante parole distinte contiene il file (il <strong>vocabolario</strong> del testo).</li></ol>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2>A fine lezione</h2>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Tre modi per far arrivare dati: codice, `input()`, `sys.argv`, file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi con `sys.argv`: somme, lunghezze, massimo, palindromi</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Filesystem e filepath: struttura ad albero, percorso assoluto e relativo, cartella corrente, comandi bash utili</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>File in Python: `open()` (percorso, mode, encoding), byte e bit, ASCII e UTF-8, file handler, `with`, lettura con `for`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Scrivere su file: redirezione shell con `&gt;`, `open(&quot;w&quot;)`, `print(file=…)`, modalità append</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr><tr><td>teoria</td><td>0h</td><td>—</td><td>Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi</td></tr><tr><td>teoria</td><td>0h</td><td>cap. ___</td><td>Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`</td></tr><tr><td>esercitazione</td><td>0h</td><td>—</td><td>Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo</td></tr><tr><td>teoria</td><td>0h</td><td>cap. ___</td><td>Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set</td></tr><tr><td>esercitazione</td><td>0h</td><td>—</td><td>Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file</td></tr></tbody></table>
   </div>
 </section>
 
@@ -291,7 +403,10 @@ print(&quot;\&quot;print\&quot;&quot;)</code></pre><hr>
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 21</div>
+  <div class="counter" id="counter">1 / 23</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));

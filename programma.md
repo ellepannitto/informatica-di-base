@@ -118,13 +118,21 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | --------- | ------ | ----- | --------- |
 | exercise  | 1.5h     | — | Argomenti: moduli 4-6 (while e convalida, liste e input, funzioni pure e void, memoria e riferimenti) |
 
-### 08 | Dizionari, set e organizzazione dell'informazione | slides=
-| Tipologia | Durata | Libro    | Argomento                                                                  |
-| --------- | ------ | -------- | -------------------------------------------------------------------------- |
-| theory    | 1h     | cap. ___ | Dizionari: chiavi, valori, accesso, aggiornamento e casi d'uso             |
-| exercise  | 1h     | -        | Dizionari                                                                  |
-| theory    | 0.5h   | cap. ___ | Set e tuple: appartenenza, eliminazione dei duplicati e operazioni di base |
-| exercise  | 2h     | cap. ___ | Esercizi: frequenze, raggruppamenti, conteggi e lookup con dizionari       |
+### 08 | File, Dizionari e Set | slides=guida-lezioni/modulo-8.slides.html
+| Tipologia | Durata | Libro    | Argomento                                                                                                                   |
+| --------- | ------ | -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| theory    | 0.5h   | cap. ___ | Tre modi per far arrivare dati: codice, `input()`, `sys.argv`, file                                                         |
+| exercise  | 0.5h   | —        | Esercizi con `sys.argv`: somme, lunghezze, massimo, palindromi                                                              |
+| theory    | 0.5h   | cap. ___ | Filesystem e filepath: struttura ad albero, percorso assoluto e relativo, cartella corrente, comandi bash utili             |
+| theory    | 0.5h   | cap. ___ | File in Python: `open()` (percorso, mode, encoding), byte e bit, ASCII e UTF-8, file handler, `with`, lettura con `for`     |
+| exercise  | 1h     | —        | Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`                                   |
+| theory    | 0.5h   | cap. ___ | Scrivere su file: redirezione shell con `>`, `open("w")`, `print(file=…)`, modalità append                                  |
+| exercise  | 0.5h   | —        | Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file                    |
+| theory    | 0h     | —        | Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi                                |
+| theory    | 0h     | cap. ___ | Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()` |
+| exercise  | 0h     | —        | Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo               |
+| theory    | 0h     | cap. ___ | Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set             |
+| exercise  | 0h     | —        | Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file                                               |
 
 ### 09 | Strutture dati: dizionari | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                                                  |
