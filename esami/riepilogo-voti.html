@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="it"><head>
+<meta charset="UTF-8">
+<title>Riepilogo voti — Informatica di Base</title>
+<style>
+body{font-family:Arial,sans-serif;font-size:12px;margin:30px;color:#222;}
+h1{font-size:1.3em;margin-bottom:6px;}
+p.sub{color:#555;font-size:0.9em;margin:2px 0 16px;}
+table{border-collapse:collapse;width:100%;margin-top:12px;}
+th,td{border:1px solid #bbb;padding:4px 7px;text-align:center;white-space:nowrap;}
+th{background:#2c3e50;color:#fff;font-weight:bold;}
+th.grp{background:#34495e;}
+td.zero{color:#c0392b;}
+td.full{color:#27ae60;font-weight:bold;}
+td.tot{background:#fef9e7;font-weight:bold;}
+td.ins{color:#c0392b;font-weight:bold;}
+td.lode{color:#8e44ad;font-weight:bold;}
+td.ok{font-weight:bold;}
+td.si{color:#27ae60;font-weight:bold;}
+td.no{color:#c0392b;font-weight:bold;}
+td.mat{font-family:monospace;text-align:left;font-size:11px;}
+td.miss{color:#aaa;}
+td.commento{text-align:left;white-space:normal;font-style:italic;color:#555;min-width:200px;max-width:400px;}
+tr:nth-child(even){background:#f7f9fa;}
+tr:hover{background:#eaf4fb;}
+tr.stat td{background:#ecf0f1;font-style:italic;font-weight:bold;}
+</style>
+</head><body>
+<h1>Riepilogo voti — Informatica di Base</h1>
+<p class='sub'>Teoria = Es.1–4 /10 &nbsp;·&nbsp; Analisi = Es.5–6 /10 &nbsp;·&nbsp; Programmazione = Es.7–8 /16</p>
+<table><thead>
+<tr>
+  <th rowspan='2'>Matricola</th>
+  <th colspan='5' class='grp'>Prima prova intermedia</th>
+  <th colspan='5' class='grp'>Seconda prova intermedia</th>
+  <th rowspan='2'>Media</th>
+  <th rowspan='2'>Ammissione orale</th>
+  <th rowspan='2'>Commenti</th>
+</tr><tr>
+  <th class='grp'>Teoria /10</th><th class='grp'>Analisi /10</th><th class='grp'>Prog /16</th><th class='grp'>Tot /36</th><th class='grp'>Voto</th>
+  <th class='grp'>Teoria /10</th><th class='grp'>Analisi /10</th><th class='grp'>Prog /16</th><th class='grp'>Tot /36</th><th class='grp'>Voto</th>
+</tr></thead><tbody>
+<tr><td class='mat'>1212500127</td><td>6.5</td><td>7</td><td>2.5</td><td class="tot">16</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>1212501072</td><td class="full">10</td><td>7</td><td class="zero">0</td><td class="tot">17</td><td class="ins">INS</td><td class="full">10</td><td>6</td><td class="zero">0</td><td class="tot">16</td><td class="ins">INS</td><td class="ok">17</td><td class="ins">no</td><td class='commento'>non posso ammetterti all'orale di informatica con 0/16 in entrambi i compitini per la parte di programmazione. Ti consiglio di rifare lo scritto completo concentrando lo studio sugli esercizi che richiedono la scrittura di codice</td></tr>
+<tr><td class='mat'>1212501086</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="full">10</td><td>9</td><td>1.5</td><td class="tot">20.5</td><td class="ok">21</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>1212501413</td><td>6</td><td>5</td><td>2.5</td><td class="tot">13.5</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500023</td><td class="full">10</td><td>7</td><td>7</td><td class="tot">24</td><td class="ok">24</td><td>6.5</td><td>6</td><td>14</td><td class="tot">26.5</td><td class="ok">27</td><td class="ok">25</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500037</td><td class="full">10</td><td>7.5</td><td>5</td><td class="tot">22.5</td><td class="ok">23</td><td>9</td><td>9</td><td>10</td><td class="tot">28</td><td class="ok">28</td><td class="ok">25</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500046</td><td>4</td><td>8</td><td>5</td><td class="tot">17</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500052</td><td class="full">10</td><td class="full">10</td><td>11</td><td class="tot">31</td><td class="lode">30L</td><td class="full">10</td><td>3.5</td><td>10</td><td class="tot">23.5</td><td class="ok">24</td><td class="ok">27</td><td class="si">sì</td><td class='commento'>le funzioni e la gestione della memoria sembrano creare qualche problema...</td></tr>
+<tr><td class='mat'>sa12500072</td><td>5</td><td>5</td><td>4</td><td class="tot">14</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500094</td><td>9</td><td>5</td><td>14.5</td><td class="tot">28.5</td><td class="ok">29</td><td>9</td><td>6</td><td>5</td><td class="tot">20</td><td class="ok">20</td><td class="ok">24</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500098</td><td>7</td><td>9</td><td>10</td><td class="tot">26</td><td class="ok">26</td><td>7.5</td><td>9.5</td><td>13.5</td><td class="tot">30.5</td><td class="lode">30L</td><td class="ok">28</td><td class="si">sì</td><td class='commento'>ottimo!</td></tr>
+<tr><td class='mat'>sa12500127</td><td>7</td><td class="zero">0</td><td>1</td><td class="tot">8</td><td class="ins">INS</td><td>6</td><td>2</td><td>5.5</td><td class="tot">13.5</td><td class="ins">INS</td><td class="ok">11</td><td class="ins">no</td><td class='commento'>ottimo miglioramento! Ti consiglio di rifare entrambi gli scritti con calma, magari in due sessioni diverse, per dedicarti allo studio con calma</td></tr>
+<tr><td class='mat'>sa12500132</td><td>7</td><td>3</td><td>2</td><td class="tot">12</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500142</td><td>4</td><td>4</td><td class="zero">0</td><td class="tot">8</td><td class="ins">INS</td><td class="full">10</td><td>8</td><td>6</td><td class="tot">24</td><td class="ok">24</td><td class="ok">16</td><td class="ins">no</td><td class='commento'>ottimo miglioramento! ti consiglierei di rifare il primo scritto per avvicinarti al voto della seconda parte</td></tr>
+<tr><td class='mat'>sa12500143</td><td>8</td><td>6</td><td>3</td><td class="tot">17</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500154</td><td>5.5</td><td>2</td><td>0.5</td><td class="tot">8</td><td class="ins">INS</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500155</td><td>8</td><td class="full">10</td><td>12.5</td><td class="tot">30.5</td><td class="lode">30L</td><td>7.5</td><td>9</td><td>14</td><td class="tot">30.5</td><td class="lode">30L</td><td class="lode">30L</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500169</td><td>8.5</td><td>7</td><td>13</td><td class="tot">28.5</td><td class="ok">29</td><td>6</td><td>7</td><td>11.5</td><td class="tot">24.5</td><td class="ok">25</td><td class="ok">27</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500173</td><td>9</td><td>9</td><td>14</td><td class="tot">32</td><td class="lode">30L</td><td>3</td><td>7</td><td>13.5</td><td class="tot">23.5</td><td class="ok">24</td><td class="ok">28</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500175</td><td>5</td><td>6.5</td><td>6</td><td class="tot">17.5</td><td class="ok">18</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500176</td><td>7</td><td>6</td><td>6</td><td class="tot">19</td><td class="ok">19</td><td>8</td><td>1</td><td>6.5</td><td class="tot">15.5</td><td class="ins">INS</td><td class="ok">17</td><td class="ins">no</td><td class='commento'>rivedere le funzioni e l'analisi del codice</td></tr>
+<tr><td class='mat'>sa12500190</td><td>8.5</td><td>8.5</td><td>5.5</td><td class="tot">22.5</td><td class="ok">23</td><td>7.5</td><td>9</td><td>9</td><td class="tot">25.5</td><td class="ok">26</td><td class="ok">24</td><td class="si">sì</td><td class='commento'>proverei a rifare lo scritto con più calma e meno ansia, le basi ci sono :)</td></tr>
+<tr><td class='mat'>sa12500226</td><td>6</td><td>7</td><td>5</td><td class="tot">18</td><td class="ok">18</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500229</td><td class="full">10</td><td>5</td><td>14</td><td class="tot">29</td><td class="ok">29</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12500248</td><td>9</td><td class="full">10</td><td>8</td><td class="tot">27</td><td class="ok">27</td><td>9</td><td class="full">10</td><td class="full">16</td><td class="tot">35</td><td class="lode">30L</td><td class="lode">30L</td><td class="si">sì</td><td class='commento'></td></tr>
+<tr><td class='mat'>sa12590009</td><td>7</td><td>9.5</td><td>12.5</td><td class="tot">29</td><td class="ok">29</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class="tot">—</td><td class="miss">—</td><td class="miss">—</td><td class="miss">—</td><td class='commento'></td></tr>
+<tr class='stat'>
+<td>Media (26 stud.)</td>
+<td>7.5</td><td>6.6</td><td>6.6</td><td>20.6</td><td></td>
+<td>7.9</td><td>6.8</td><td>9.1</td><td>23.8</td><td></td>
+<td colspan='3'></td></tr>
+</tbody></table>
+<p class='sub'>26 studenti &nbsp;·&nbsp; P2 corretti: 15 &nbsp;·&nbsp; Ammessi all'orale: 10 &nbsp;·&nbsp; Non ammessi: 4</p>
+</body></html>

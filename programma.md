@@ -113,7 +113,7 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | theory    | 1h     | cap. ___ | Il ciclo `for`: da `while` a `for` (motivazione), sintassi, semantica, `range()` e schemi ricorrenti (scansione, trasformazione, accumulo)                                                     |
 | exercise  | 1.5h   | —        | Esercizi con `for`: stringhe lettera per lettera, `range()`, tabelline, pattern e trasformazioni su liste                                                                                      |
 
-### P2 | Prova intermedia 2 | prova=true | esercitazione=esami/esercizi-3.pdf esercitazione=esami/soluzioni-esercizi-3.pdf esercitazione=esami/esercizi-4.pdf
+### P2 | Prova intermedia 2 | prova=true | esercitazione=esami/esercizi-3.pdf esercitazione=esami/soluzioni-esercizi-3.pdf esercitazione=esami/esercizi-4.pdf esercitazione=esami/compiti/compitino-2/registro-correzione.html
 | Tipologia | Durata | Libro | Argomento |
 | --------- | ------ | ----- | --------- |
 | exercise  | 1.5h     | — | Argomenti: moduli 4-6 (while e convalida, liste e input, funzioni pure e void, memoria e riferimenti) |
