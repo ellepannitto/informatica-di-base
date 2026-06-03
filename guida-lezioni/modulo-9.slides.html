@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 09 · File e formati strutturati - Slides</title>
+<title>Modulo 09 · Dizionari, set e file - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -43,7 +43,7 @@ p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.38rem 0; }
-blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+blockquote { border-top: 4px solid #c97f31; border-bottom: 4px solid #c97f31; padding: 0.8rem 1.5rem; background: #fff6ea; border-radius: 14px; text-align: center; max-width: 80%; margin-left: auto; margin-right: auto; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
 details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
@@ -55,6 +55,10 @@ th, td { border: 1px solid rgba(23, 33, 43, 0.12); padding: 0.55rem 0.7rem; vert
 th { background: #f2e7d7; }
 hr { border: 0; border-top: 1px solid rgba(23, 33, 43, 0.12); margin: 1.2rem 0; }
 a { color: #8b3f1d; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78em; font-weight: 600; background: rgba(139,63,29,0.1); border: 1px solid rgba(139,63,29,0.25); color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: rgba(139,63,29,0.18); }
 .controls {
   position: fixed;
   left: 0;
@@ -100,192 +104,104 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 09 · File e formati strutturati</h1>
+    <h1>Modulo 09 · Dizionari, set e file</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="autovalutazione">Autovalutazione</h2><p><strong>File (recap modulo 8)</strong></p><ul><li>Sai aprire file di testo in lettura e in scrittura?</li><li>Sai leggere un file come stringa, come lista di righe o riga per riga?</li><li>Sai distinguere tra standard input, file aperto con <code>open()</code> e parametri da riga di comando?</li><li>Sai usare <code>split()</code>, <code>strip()</code> e conversioni di tipo sui dati letti da file?</li><li>Sai scrivere output su file?</li><li>Sai usare alcune utility da terminale per ispezionare file e cartelle?</li></ul><p><strong>Dizionari (nuovo)</strong></p><ul><li>Sai creare un dizionario e accedere ai suoi valori?</li><li>Sai aggiungere, aggiornare e verificare l&#x27;esistenza di una chiave?</li><li>Sai iterare su chiavi, valori e coppie chiave-valore?</li><li>Sai usare un dizionario per contare occorrenze?</li><li>Sai scegliere quando usare un dizionario invece di una lista?</li></ul><p><strong>Set (nuovo)</strong></p><ul><li>Sai creare un set e aggiungere elementi?</li><li>Sai verificare se un elemento appartiene a un set?</li><li>Sai usare un set per eliminare duplicati?</li><li>Sai usare le operazioni insiemistiche (unione, intersezione, differenza)?</li><li>Sai scegliere quando usare un set invece di una lista o un dizionario?</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai aprire file di testo in lettura e in scrittura?</li><li>Sai leggere un file come stringa, come lista di righe o riga per riga?</li><li>Sai distinguere tra standard input, file aperto con <code>open()</code> e parametri da riga di comando?</li><li>Sai usare <code>split()</code>, <code>strip()</code> e conversioni di tipo sui dati letti da file?</li><li>Sai scrivere output su file?</li><li>Sai riconoscere i formati di base: testo semplice, CSV, JSON e HTML?</li><li>Sai usare alcune utility da terminale per ispezionare file e cartelle?</li></ul><hr><a id="mod9-file"></a>
+    <h2 id="dati-reali-strutturati-persistenti-e-grandi">Dati reali: strutturati, persistenti e grandi</h2><p>Fino ad ora abbiamo scritto programmi che lavorano su dati inventati nel codice o inseriti a mano dall&#x27;utente. Questo va bene per esercitarsi, ma non è così che funziona il mondo reale.</p><p>I dati reali hanno tre caratteristiche che cambiano il modo in cui dobbiamo pensare ai programmi.</p><p><strong>Sono persistenti.</strong> Nell&#x27;architettura di von Neumann, la memoria RAM è volatile: quando il programma finisce, tutto quello che c&#x27;era in memoria sparisce. I file esistono sul disco — una memoria secondaria permanente — e sopravvivono alla chiusura del programma. Lavorare con file significa lavorare con dati che esistono prima e dopo l&#x27;esecuzione del nostro codice.</p><p><strong>Sono potenzialmente grandi.</strong> Un file di testo può contenere milioni di righe. Non possiamo aspettarci di caricare tutto in una lista e poi ragionare: dobbiamo scegliere come leggere (tutto in una volta, riga per riga) in base alla dimensione dei dati.</p><p><strong>Sono strutturati.</strong> I dati raramente arrivano come numeri isolati. Arrivano come tabelle (CSV), dizionari annidati (JSON), testi con marcatura (HTML). La struttura del dato determina anche quale struttura dati Python conviene usare per rappresentarlo.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-open">Il problema che porta a <code>open()</code></h2><p>Finche&#x27; i dati sono scritti direttamente nel codice o arrivano da <code>input()</code>, i programmi restano piccoli.</p><p>Ma presto vogliamo lavorare su:</p><ul><li>testi salvati su disco;</li><li>file di dati;</li><li>input riutilizzabili.</li></ul><p>Per farlo il programma deve poter aprire un file.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-open">Sintassi di <code>open()</code></h2><p>I file sono un nuovo tipo di sorgente dati.</p><p>Esempio base:</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
+    <h2 id="recap-file-io">Recap: file I/O</h2><h3 id="la-funzione-open">La funzione <code>open()</code></h3><p>Finché i dati sono scritti direttamente nel codice o arrivano da <code>input()</code>, i programmi restano piccoli.</p><p>Ma presto vogliamo lavorare su:</p><ul><li>testi salvati su disco;</li><li>file di dati;</li><li>input riutilizzabili.</li></ul><p>Per farlo il programma deve poter aprire un file.</p><pre><code class="language-python">nome_file = &quot;data/testo.txt&quot;
 file_in = open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;)
 print(file_in.read())
-file_in.close()</code></pre><p>Forma generale:</p><pre><code class="language-python">open(percorso, mode, encoding=&quot;utf-8&quot;)</code></pre><hr>
-  </div>
-</section>
+file_in.close()</code></pre><p>Forma generale:</p><pre><code class="language-python">open(percorso, mode, encoding=&quot;utf-8&quot;)</code></pre><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>Punti chiave:</p><ul><li>il nome del file è una stringa;</li><li>il percorso può essere assoluto oppure relativo;</li><li><code>open(...)</code> restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><h3 id="il-costrutto-with">Il costrutto <code>with</code></h3><p>Aprire un file non basta: bisogna anche ricordarsi di chiuderlo correttamente.</p><p>Se il programma cresce, scrivere sempre:</p><ul><li>apri;</li><li>usa;</li><li>chiudi</li></ul><p>può diventare fragile. <code>with</code> serve a rendere questa gestione più sicura e leggibile.</p><p>Quando Python esegue un blocco <code>with</code>:</p><ol><li>apre la risorsa;</li><li>la rende disponibile tramite il nome dopo <code>as</code> (che quindi deve rispettare tutti i constraint su nome di variabile);</li><li>esegue il blocco indentato;</li><li>alla fine chiude correttamente la risorsa.</li></ol><h3 id="read-e-readlines"><code>read()</code> e <code>readlines()</code></h3><p>Una volta aperto un file, dobbiamo decidere come leggerlo.</p><pre><code class="language-python">contenuto = file_handler.read()       # tutto il contenuto come stringa unica
+righe = file_handler.readlines()      # lista di righe
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-open">Semantica di <code>open()</code></h2><p>Nel corso conviene usare soprattutto la forma con <code>with</code>:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
-    for line in file_in:
-        print(line)</code></pre><h3 id="parametri-essenziali-di-open">Parametri essenziali di <code>open</code></h3><table><thead><tr><th>Parametro</th><th>Significato</th></tr></thead><tbody><tr><td><code>file</code></td><td>percorso del file</td></tr><tr><td><code>mode</code></td><td>modalita&#x27;, tipicamente <code>r</code> o <code>w</code></td></tr><tr><td><code>encoding</code></td><td>codifica del testo, spesso <code>utf-8</code></td></tr></tbody></table><p>Punti chiave:</p><ul><li>il nome del file e&#x27; una stringa;</li><li>il percorso puo&#x27; essere assoluto oppure relativo;</li><li><code>open(...)</code> restituisce un oggetto che permette di fare operazioni di input/output sul file aperto.</li></ul><hr>
-  </div>
-</section>
+for line in file_handler:             # una riga alla volta
+    ...</code></pre><h3 id="split-e-strip"><code>split()</code> e <code>strip()</code></h3><p>Quando leggiamo da file otteniamo testo grezzo. Molto spesso ci servono unità più piccole: righe, campi, parole.</p><p>Ogni riga di un file termina con un carattere speciale chiamato <strong>newline</strong>, scritto <code>\n</code>. Non è una barra e una n: è un singolo carattere invisibile che rappresenta &quot;vai a capo&quot;. Quando Python legge una riga da file, questo carattere è incluso nella stringa.</p><pre><code class="language-python">riga = &quot;Sandra,Rossi,informatica,30\n&quot;   # il \n è il fine riga
 
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-with">Il problema che porta a <code>with</code></h2><p>Aprire un file non basta: bisogna anche ricordarsi di chiuderlo correttamente.</p><p>Se il programma cresce, scrivere sempre:</p><ul><li>apri;</li><li>usa;</li><li>chiudi</li></ul><p>puo&#x27; diventare fragile. <code>with</code> serve a rendere questa gestione piu&#x27; sicura e leggibile.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-with">Sintassi di <code>with</code></h2><p>Forma tipica:</p><pre><code class="language-python">with open(&quot;data/testo.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
-    for line in file_in:
-        print(line)</code></pre><p>Parti da riconoscere:</p><ul><li><code>with</code> introduce un contesto di lavoro;</li><li><code>open(...)</code> crea la risorsa da usare;</li><li><code>as file_in</code> assegna un nome a quella risorsa;</li><li>il blocco indentato contiene le operazioni da fare.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-with">Semantica di <code>with</code></h2><p>Quando Python esegue un blocco <code>with</code>:</p><ol><li>apre la risorsa;</li><li>la rende disponibile tramite il nome dopo <code>as</code>;</li><li>esegue il blocco indentato;</li><li>alla fine chiude correttamente la risorsa.</li></ol><p>Per questo <code>with</code> e&#x27; spesso preferibile a:</p><pre><code class="language-python">file_in = open(...)
-...
-file_in.close()</code></pre><p>perche&#x27; rende piu&#x27; sicura la gestione del file.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-read-e-readlines">Il problema che porta a <code>read()</code> e <code>readlines()</code></h2><p>Una volta aperto un file, dobbiamo decidere come leggerlo.</p><p>Possibili bisogni:</p><ul><li>leggere tutto il contenuto in una volta;</li><li>ottenere una lista di righe;</li><li>scorrere il file riga per riga.</li></ul><p><code>read()</code> e <code>readlines()</code> servono proprio a esprimere queste strategie.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-read-e-readlines">Sintassi di <code>read()</code> e <code>readlines()</code></h2><pre><code class="language-python">contenuto = file_handler.read()
-righe = file_handler.readlines()
-
-for line in file_handler:
-    ...</code></pre><p><code>read()</code> e <code>readlines()</code> sono metodi dell&#x27;oggetto file.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-read-e-readlines">Semantica di <code>read()</code> e <code>readlines()</code></h2><p>Differenza pratica:</p><ul><li><code>read()</code> prende tutto il contenuto come una stringa unica;</li><li><code>readlines()</code> costruisce una lista di righe;</li><li><code>for line in file_handler</code> legge una riga alla volta.</li></ul><p>Per file piccoli possono andare bene tutte e tre. Per file piu&#x27; grandi, la lettura riga per riga e&#x27; spesso la soluzione piu&#x27; pulita.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-split">Il problema che porta a <code>split()</code></h2><p>Quando leggiamo da file, otteniamo testo grezzo.</p><p>Molto spesso pero&#x27; ci servono unita&#x27; piu&#x27; piccole:</p><ul><li>righe;</li><li>campi;</li><li>parole.</li></ul><p><code>split()</code> serve a segmentare una stringa usando un separatore.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-split">Sintassi di <code>split()</code></h2><p>Possiamo anche leggere tutto e poi segmentare esplicitamente:</p><pre><code class="language-python">contenuto = file_handler.read()
-righe = contenuto.split(&quot;\n&quot;)
-campi = contenuto.split(&quot;\t&quot;)</code></pre><p>Forma generale:</p><pre><code class="language-python">stringa.split(separatore)</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-split">Semantica di <code>split()</code></h2><p>Questo aiuta a capire che:</p><ul><li>il file non contiene gia&#x27; una lista;</li><li>siamo noi a scegliere come segmentare;</li><li>newline e tab si scrivono come <code>\n</code> e <code>\t</code>.</li></ul><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-strip">Il problema che porta a <code>strip()</code></h2><p>Le righe lette da file contengono spesso caratteri indesiderati ai bordi:</p><ul><li>spazi;</li><li>tab;</li><li>fine riga.</li></ul><p>Prima di convertire o confrontare i dati conviene ripulirli.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-strip">Sintassi di <code>strip()</code></h2><p>Forma tipica:</p><pre><code class="language-python">line.strip()</code></pre><p>Possiamo usarlo anche con argomenti:</p><pre><code class="language-python">line.strip(&quot;.,;&quot;)</code></pre><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="semantica-di-strip">Semantica di <code>strip()</code></h2><p>Quando leggiamo da file:</p><ul><li>ogni riga letta e&#x27; una stringa;</li><li>puo&#x27; contenere il carattere di fine riga;</li><li>se ci servono numeri dobbiamo convertire.</li></ul><p>Schema tipico:</p><pre><code class="language-python">somma = 0.0
+riga.split(&quot;,&quot;)          # [&#x27;Sandra&#x27;, &#x27;Rossi&#x27;, &#x27;informatica&#x27;, &#x27;30\n&#x27;]  — il \n rimane nell&#x27;ultimo campo
+riga.strip()             # &#x27;Sandra,Rossi,informatica,30&#x27;               — strip() rimuove il \n
+riga.strip().split(&quot;,&quot;)  # [&#x27;Sandra&#x27;, &#x27;Rossi&#x27;, &#x27;informatica&#x27;, &#x27;30&#x27;]    — risultato pulito</code></pre><p>Schema tipico:</p><pre><code class="language-python">somma = 0
 
 with open(&quot;dati.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
     for line in file_in:
-        somma = somma + float(line.strip())</code></pre><p><code>strip()</code> senza argomenti toglie i caratteri bianchi ai bordi:</p><ul><li>spazi;</li><li>tab;</li><li>ritorni a capo.</li></ul><p>Se serve, possiamo anche specificare quali caratteri togliere.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="scrivere-su-un-file">Scrivere su un file</h2><p>Forma base:</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;ciao&quot;, file=file_output)</code></pre><p>Attenzione:</p><ul><li><code>w</code> sovrascrive il contenuto precedente;</li><li>il nome del file e&#x27; sempre una stringa che rappresenta un percorso.</li></ul><h3 id="standard-output-e-file">Standard output e file</h3><p><code>print(...)</code> di default scrive sullo standard output, cioe&#x27; sul canale che il terminale mostra a schermo.</p><p>Con <code>file=...</code> possiamo mandare lo stesso output in un file aperto.</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;ciao&quot;, file=file_output)</code></pre><h3 id="redirezione-della-shell-vs-scrittura-in-python">Redirezione della shell vs scrittura in Python</h3><ol><li>Redirezione della shell:</li></ol><pre><code class="language-bash">python3 script.py &gt; output.txt</code></pre><ol><li>Scrittura esplicita in Python:</li></ol><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
-    print(&quot;ciao&quot;, file=file_output)</code></pre><p>Nel primo caso e&#x27; la shell che intercetta lo standard output. Nel secondo caso e&#x27; il programma Python che decide dove scrivere.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="il-problema-che-porta-a-sysargv">Il problema che porta a <code>sys.argv</code></h2><p>Se il nome del file di input e di output e&#x27; scritto nel codice, ogni volta che cambia dobbiamo modificare lo script.</p><p>Molto meglio passare questi dati dall&#x27;esterno, da riga di comando.</p><p>Per farlo il programma deve poter leggere gli argomenti con cui e&#x27; stato lanciato.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="sintassi-di-sysargv">Sintassi di <code>sys.argv</code></h2><p>Forma tipica:</p><pre><code class="language-python">import sys
+        somma = somma + int(line.strip())</code></pre><p><code>strip()</code> senza argomenti toglie i caratteri bianchi ai bordi. Se serve, possiamo anche specificare quali caratteri togliere:</p><pre><code class="language-python">line.strip(&quot;.,;&quot;)</code></pre><h3 id="scrivere-su-un-file">Scrivere su un file</h3><p>Forma base:</p><pre><code class="language-python">with open(&quot;output.txt&quot;, &quot;w&quot;, encoding=&quot;utf-8&quot;) as file_output:
+    print(&quot;ciao&quot;, file=file_output)</code></pre><p>Attenzione:</p><ul><li><code>w</code> sovrascrive il contenuto precedente;</li><li>il nome del file è sempre una stringa che rappresenta un percorso.</li></ul><p><code>print(...)</code> di default scrive sullo standard output. Con <code>file=...</code> possiamo mandare lo stesso output in un file aperto.</p><p>Alternativa: redirezione dalla shell:</p><pre><code class="language-bash">python3 script.py &gt; output.txt</code></pre><p>Nel secondo caso è la shell che intercetta lo standard output. Nel primo caso è il programma Python che decide dove scrivere.</p><h3 id="sysargv"><code>sys.argv</code></h3><p>Se il nome del file di input e di output è scritto nel codice, ogni volta che cambia dobbiamo modificare lo script. Molto meglio passare questi dati dall&#x27;esterno, da riga di comando.</p><pre><code class="language-python">import sys
 
 nome_input = sys.argv[1]
-nome_output = sys.argv[2]
-files = sys.argv[1:]</code></pre><hr>
+nome_output = sys.argv[2]</code></pre><p><code>sys.argv</code> è una lista che contiene gli argomenti passati al programma da riga di comando:</p><ul><li><code>sys.argv[0]</code> è il nome dello script;</li><li><code>sys.argv[1]</code> e i successivi sono gli argomenti forniti dall&#x27;utente.</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="semantica-di-sysargv">Semantica di <code>sys.argv</code></h2><p><code>sys.argv</code> e&#x27; una lista che contiene gli argomenti passati al programma da riga di comando.</p><p>In particolare:</p><ul><li><code>sys.argv[0]</code> e&#x27; il nome dello script;</li><li><code>sys.argv[1]</code> e i successivi sono gli argomenti forniti dall&#x27;utente.</li></ul><p>Per questo:</p><pre><code class="language-python">files = sys.argv[1:]</code></pre><p>significa:</p><ul><li>ignora il nome dello script;</li><li>prendi tutti i file o parametri passati dopo.</li></ul><hr>
+    <h2 id="standard-input-open-e-sysargv">Standard input, <code>open()</code> e <code>sys.argv</code></h2><p>Ci sono tre modi diversi per far arrivare dati a un programma.</p><p><strong>1. Standard input</strong></p><pre><code class="language-python">numero = int(input(&quot;Inserisci un numero: &quot;))</code></pre><p><strong>2. File aperto con <code>open()</code></strong></p><pre><code class="language-python">with open(&quot;input.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
+    for line in file_in:
+        numero = int(line.strip())</code></pre><p><strong>3. Parametri da riga di comando</strong></p><pre><code class="language-python">import sys
+
+numero = int(sys.argv[1])</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="standard-input-open-e-sysargv">Standard input, <code>open()</code> e <code>sys.argv</code></h2><p>Ci sono tre modi diversi per far arrivare dati a un programma.</p><h3 id="1-standard-input">1. Standard input</h3><pre><code class="language-python">numero = int(input())</code></pre><h3 id="2-file-aperto-con-open">2. File aperto con <code>open()</code></h3><pre><code class="language-python">with open(&quot;input.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_in:
-    ...</code></pre><h3 id="3-parametri-da-riga-di-comando">3. Parametri da riga di comando</h3><pre><code class="language-python">import sys
-
-nome_input = sys.argv[1]
-nome_output = sys.argv[2]</code></pre><hr><a id="mod9-terminale"></a>
+    <h2 id="recap-git-e-github">Recap: git e GitHub</h2><p>Nel modulo 8 abbiamo visto anche cos&#x27;è <strong>repository git</strong> su GitHub.</p><p><strong>Git</strong> è un sistema di controllo versione: tiene traccia di tutte le modifiche ai file nel tempo e permette a più persone di lavorare sullo stesso progetto.</p><p><strong>GitHub</strong> è una piattaforma web che ospita repository git e le rende accessibili a chiunque.</p><h3 id="clonare-la-repository">Clonare la repository</h3><p>Per scaricare la repository con i file di dati:</p><pre><code class="language-bash">git clone https://github.com/ellepannitto/informatica-di-base-dati.git</code></pre><p>Questo crea una cartella locale con i file di esempio:</p><pre><code>informatica-di-base-dati/
+├── dati/
+│   ├── voti.txt
+│   ├── voti_materie.txt
+│   ├── numeri.txt
+│   └── testo.txt
+└── scripts/
+    └── leggi.py</code></pre><h3 id="usare-la-repository">Usare la repository</h3><p>Entra nella cartella clonata prima di lanciare gli script:</p><pre><code class="language-bash">cd informatica-di-base-dati
+python3 scripts/leggi.py</code></pre><p>I percorsi relativi come <code>dati/voti.txt</code> sono interpretati rispetto alla <strong>cartella corrente</strong>. Se lanciamo lo script dalla cartella sbagliata ottieni un <code>FileNotFoundError</code>.</p><h3 id="aggiornare-i-file">Aggiornare i file</h3><p>Se la repository viene aggiornata, per scaricare le ultime versioni:</p><pre><code class="language-bash">git pull</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esplorazione-rapida-da-terminale-su-file-di-testo">Esplorazione rapida da terminale su file di testo</h2><p>Le utility da terminale sono utili per:</p><ul><li>ispezionare rapidamente un file;</li><li>fare piccole trasformazioni;</li><li>capire il procedimento logico prima di scrivere uno script piu&#x27; completo.</li></ul><table><thead><tr><th>Comando</th><th>Uso tipico</th></tr></thead><tbody><tr><td><code>cat file.txt</code></td><td>mostra tutto il file</td></tr><tr><td><code>less file.txt</code></td><td>scorre il file una schermata alla volta</td></tr><tr><td><code>head file.txt</code></td><td>mostra l&#x27;inizio del file</td></tr><tr><td><code>tail file.txt</code></td><td>mostra la fine del file</td></tr><tr><td><code>grep pattern file.txt</code></td><td>filtra le righe che contengono un pattern</td></tr><tr><td><code>cut ...</code></td><td>seleziona campi o colonne</td></tr><tr><td><code>sort</code></td><td>ordina le righe</td></tr><tr><td><code>uniq</code> / <code>uniq -c</code></td><td>elimina duplicati consecutivi o li conta</td></tr><tr><td><code>wc</code></td><td>conta righe, parole o caratteri</td></tr></tbody></table><h3 id="pipe-e-risultati-intermedi">Pipe e risultati intermedi</h3><pre><code class="language-bash">cat alice.txt | tr &#x27; &#x27; &#x27;\n&#x27;</code></pre><p>La pipe <code>|</code> passa l&#x27;output del comando precedente come input del successivo.</p><p>Possiamo anche salvare risultati intermedi:</p><pre><code class="language-bash">cat alice.txt | tr &#x27; &#x27; &#x27;\n&#x27; &gt; parole.txt
-sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></a>
+    <h2 id="esplorazione-rapida-da-terminale">Esplorazione rapida da terminale</h2><p>Quando lavoriamo con file di dati, spesso abbiamo bisogno di capire cosa c&#x27;è dentro prima di scrivere uno script. Il problema è che non tutti i file si possono aprire con un programma con interfaccia grafica.</p><p>Un file CSV o di testo si può aprire con Excel o con un editor di testo, ma un file con milioni di righe potrebbe bloccare il programma, o il file potrebbe avere un formato che il programma non riconosce. In molti contesti reali — server remoti, ambienti di calcolo, pipeline di dati — non c&#x27;è nemmeno un&#x27;interfaccia grafica disponibile.</p><p>Il terminale permette di ispezionare qualsiasi file di testo in modo rapido e controllato, indipendentemente dalla sua dimensione o dal formato.</p><p><code>bash</code> fornisce delle utility utili per:</p><ul><li>ispezionare rapidamente un file;</li><li>fare piccole trasformazioni;</li><li>capire il procedimento logico da seguire prima di scrivere uno script più completo.</li></ul><table><thead><tr><th>Comando</th><th>Uso tipico</th></tr></thead><tbody><tr><td><code>cat file.txt</code></td><td>mostra tutto il file</td></tr><tr><td><code>less file.txt</code></td><td>scorre il file una schermata alla volta</td></tr><tr><td><code>head file.txt</code></td><td>mostra l&#x27;inizio del file</td></tr><tr><td><code>tail file.txt</code></td><td>mostra la fine del file</td></tr><tr><td><code>grep pattern file.txt</code></td><td>filtra le righe che contengono un pattern</td></tr><tr><td><code>cut ...</code></td><td>seleziona campi o colonne</td></tr><tr><td><code>sort</code></td><td>ordina le righe</td></tr><tr><td><code>uniq</code> / <code>uniq -c</code></td><td>elimina duplicati consecutivi o li conta</td></tr><tr><td><code>wc</code></td><td>conta righe, parole o caratteri</td></tr></tbody></table><h3 id="la-pipe">La pipe <code>|</code></h3><p>Ogni utility da terminale fa una cosa sola: <code>wc</code> conta, <code>sort</code> ordina, <code>grep</code> filtra. La potenza vera arriva quando si collegano più comandi in sequenza.</p><p>La pipe <code>|</code> collega lo standard output di un comando allo standard input del successivo, senza creare file intermedi:</p><pre><code>comando1 | comando2 | comando3</code></pre><p>L&#x27;output di <code>comando1</code> diventa l&#x27;input di <code>comando2</code>, l&#x27;output di <code>comando2</code> diventa l&#x27;input di <code>comando3</code>, e così via. È come una catena di montaggio: ogni passaggio riceve il risultato del precedente e lo trasforma.</p><p>Esempio: quante parole distinte contiene un testo?</p><pre><code class="language-bash">cat testo.txt | tr &#x27; &#x27; &#x27;\n&#x27; | sort | uniq | wc -l</code></pre><p>Passo per passo:</p><ul><li><code>cat testo.txt</code> — stampa il file intero</li><li><code>tr &#x27; &#x27; &#x27;\n&#x27;</code> — sostituisce ogni spazio con un a capo: una parola per riga</li><li><code>sort</code> — ordina le righe alfabeticamente (necessario perché <code>uniq</code> lavora su righe consecutive)</li><li><code>uniq</code> — elimina le righe duplicate consecutive</li><li><code>wc -l</code> — conta le righe rimaste</li></ul><p>Se invece vogliamo salvare il risultato in un file si usa <code>&gt;</code>:</p><pre><code class="language-bash">cat testo.txt | tr &#x27; &#x27; &#x27;\n&#x27; | sort | uniq &gt; parole-uniche.txt</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="formati-di-inputoutput">Formati di input/output</h2><h3 id="testo-semplice">Testo semplice</h3><ul><li>una riga dopo l&#x27;altra;</li><li>nessuna struttura esplicita oltre ai caratteri e ai separatori.</li></ul><h3 id="csv">CSV</h3><ul><li>valori separati da virgole o altro separatore;</li><li>ogni riga rappresenta spesso un record.</li></ul><h3 id="json">JSON</h3><ul><li>struttura annidata;</li><li>tipicamente oggetti, liste, chiavi e valori.</li></ul><h3 id="html">HTML</h3><ul><li>testo con marcatura;</li><li>utile quando vogliamo estrarre informazioni da pagine o frammenti strutturati.</li></ul><p>Nel corso, per questi formati, il punto non e&#x27; entrare subito in librerie avanzate, ma capire:</p><ul><li>che tipo di struttura ha il dato;</li><li>quale metodo di lettura e segmentazione conviene usare;</li><li>quando basta il testo semplice e quando serve una rappresentazione piu&#x27; ricca.</li></ul><hr>
+    <h2 id="esercizi-con-i-file-della-repository">Esercizi con i file della repository</h2><p>Entra nella cartella <code>informatica-di-base-dati/</code> e prova i comandi seguenti. Per ognuno, prima di eseguirlo, prova a immaginare cosa produrrà.</p><p><strong><code>dati/voti.txt</code></strong> — formato: <code>nome,cognome,voto</code> (1000 righe)</p><ol><li>Quante righe ha il file?</li></ol><pre><code class="language-bash">   wc -l dati/voti.txt</code></pre><ol><li>Mostra le prime 10 righe.</li></ol><pre><code class="language-bash">   head dati/voti.txt</code></pre><ol><li>Mostra le ultime 5 righe.</li></ol><pre><code class="language-bash">   tail -5 dati/voti.txt</code></pre><ol><li>Quante righe contengono il voto <code>30</code>?</li></ol><pre><code class="language-bash">   grep &quot;,30&quot; dati/voti.txt | wc -l</code></pre><ol><li>Estrai solo i cognomi (seconda colonna) e contali senza ripetizioni.</li></ol><pre><code class="language-bash">   cut -d&#x27;,&#x27; -f2 dati/voti.txt | sort | uniq | wc -l</code></pre><p><strong><code>dati/voti_materie.txt</code></strong> — formato: <code>nome,cognome,materia,voto</code> (1000 righe)</p><ol><li>Quali materie compaiono nel file? (senza ripetizioni)</li></ol><pre><code class="language-bash">   cut -d&#x27;,&#x27; -f3 dati/voti_materie.txt | sort | uniq</code></pre><ol><li>Quanti voti ci sono per la materia <code>fisica</code>?</li></ol><pre><code class="language-bash">   grep &quot;,fisica,&quot; dati/voti_materie.txt | wc -l</code></pre><ol><li>Mostra tutte le righe di <code>informatica</code>, ordinate per voto.</li></ol><pre><code class="language-bash">   grep &quot;,informatica,&quot; dati/voti_materie.txt | sort -t&#x27;,&#x27; -k4 -n</code></pre><p><strong><code>dati/numeri.txt</code></strong> — un numero intero per riga (1000 righe, anche negativi)</p><ol><li>Ordina i numeri dal più piccolo al più grande.</li></ol><pre><code class="language-bash">   sort -n dati/numeri.txt | head</code></pre><ol><li>Quanti numeri positivi ci sono?</li></ol><pre><code class="language-bash">    grep -v &#x27;^-&#x27; dati/numeri.txt | wc -l</code></pre><p><strong><code>dati/testo.txt</code></strong> — frasi in italiano, una per riga (1000 righe)</p><ol><li>Quante righe contengono la parola <code>Python</code>?</li></ol><pre><code class="language-bash">    grep &quot;Python&quot; dati/testo.txt | wc -l</code></pre><ol><li>Mostra le righe che contengono <code>lista</code> o <code>dizionario</code>.</li></ol><pre><code class="language-bash">    grep -E &quot;lista|dizionario&quot; dati/testo.txt</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><h3 id="lettura-e-scrittura-di-base">Lettura e scrittura di base</h3><ol><li>leggi un file di numeri e calcolane la somma;</li><li>leggi un file testuale e stampalo su una sola riga;</li><li>stampa le parole di un testo una per riga;</li><li>leggi un file e produci un secondo file in minuscolo;</li><li>conta righe, parole e caratteri di un file;</li><li>usa <code>sys.argv</code> per scegliere il file di input;</li><li>salva l&#x27;output di uno script in un file;</li><li>ispeziona un file da terminale con <code>cat</code>, <code>head</code>, <code>tail</code>, <code>grep</code>, <code>sort</code>, <code>wc</code>.</li></ol><h3 id="input-da-file-come-stdin">Input da file come stdin</h3><p>I seguenti esercizi usano la redirezione dell&#x27;input (<code>python3 script.py &lt; input.txt</code>). Prepara un file di input per ogni esercizio e prova a eseguirlo in entrambi i modi: con <code>input()</code> interattivo e con il file.</p><ol><li>Scrivi un programma che legge una serie di numeri finché non incontra <code>0</code>. Per ogni numero <code>n</code> letto, stampa tutti i numeri pari compresi tra <code>0</code> (incluso) e <code>n</code> (escluso).</li></ol><p>Input:</p><pre><code>   6
+    <h2 id="formati-di-inputoutput">Formati di input/output</h2><p><strong>Testo semplice</strong> — una riga dopo l&#x27;altra; nessuna struttura esplicita oltre ai caratteri e ai separatori.</p><p><strong>CSV</strong> — valori separati da virgole o altro separatore; ogni riga rappresenta spesso un record.</p><p><strong>JSON</strong> — struttura annidata; tipicamente oggetti, liste, chiavi e valori.</p><p><strong>HTML</strong> — testo con marcatura; utile quando vogliamo estrarre informazioni da pagine o frammenti strutturati.</p><p>Di solito esistono libreria apposite per leggere ognuno di questi formati ma a noi importa:</p><ul><li>capire che tipo di struttura ha il dato;</li><li>scoprire quale metodo di lettura e segmentazione conviene usare;</li><li>che struttura dati usare: quando basta il testo semplice e quando serve una rappresentazione più ricca.</li></ul>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-lettura-e-scrittura-di-base">Esercizi: lettura e scrittura di base</h2><p>Usa i file nella cartella <code>dati/</code> della repository <code>informatica-di-base-dati</code>.</p><ol><li>Leggi <code>dati/numeri.txt</code> e stampa la somma di tutti i numeri.</li><li>Leggi <code>dati/testo.txt</code> e stampalo su una sola riga (sostituisci ogni fine riga con uno spazio).</li><li>Leggi <code>dati/testo.txt</code> e stampa le parole una per riga.</li><li>Leggi <code>dati/testo.txt</code> e produci un file <code>testo_minuscolo.txt</code> con lo stesso contenuto in minuscolo.</li><li>Leggi <code>dati/testo.txt</code> e stampa quante righe, quante parole e quanti caratteri contiene.</li><li>Riscrivi l&#x27;esercizio 1 usando <code>sys.argv</code>: il nome del file deve essere passato come argomento da riga di comando (prova con <code>dati/numeri.txt</code>).</li><li>Riscrivi l&#x27;esercizio 3 salvando l&#x27;output in un file <code>parole.txt</code> invece di stamparlo.</li></ol><p>Per gli esercizi 8–12 l&#x27;input arriva da tastiera o da file rediretto. Crea un piccolo file <code>test_input.txt</code> con la sequenza di esempio e prova con <code>python3 script.py &lt; test_input.txt</code>.</p><ol><li>Scrivi un programma che legge una serie di numeri finché non incontra <code>0</code>. Per ogni numero <code>n</code> letto, stampa tutti i numeri pari compresi tra <code>0</code> (incluso) e <code>n</code> (escluso).</li></ol><p>Input di esempio (<code>test_input.txt</code>):</p><pre><code>   6
    10
    0</code></pre><p>Output:</p><pre><code>   0 2 4
-   0 2 4 6 8</code></pre><ol><li>Scrivi un programma che legge una stringa e controlla se è palindroma (ignora maiuscole e spazi). Esempio: <code>I topi non avevano nipoti</code> è palindroma.</li></ol><ol><li>Scrivi un programma che legge una sequenza di stringhe finché non incontra <code>fine</code> e conta il numero di parole che iniziano per ogni vocale (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>).</li></ol><ol><li>Scrivi un programma che legge 5 lettere, poi una sequenza di stringhe finché non incontra <code>fine</code>, e conta il numero di parole che iniziano per ciascuna delle lettere lette.</li></ol><ol><li>Scrivi un programma che legge tre serie di numeri separate da <code>0</code>. Per ogni serie stampa i numeri letti al contrario.</li></ol><p>Input:</p><pre><code>    4
+   0 2 4 6 8</code></pre><ol><li>Scrivi un programma che legge una stringa e controlla se è palindroma (ignora maiuscole e spazi). Esempio: <code>I topi non avevano nipoti</code> è palindroma. Prova anche a redirigere <code>dati/testo.txt</code> e controlla quante righe risultano palindrome.</li></ol><ol><li>Scrivi un programma che legge una sequenza di stringhe finché non incontra <code>fine</code> e conta il numero di parole che iniziano per ogni vocale (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>). Prova anche con <code>python3 script.py &lt; dati/testo.txt</code> (il programma leggerà fino a EOF invece che fino a <code>fine</code>).</li></ol><ol><li>Scrivi un programma che legge 5 lettere, poi una sequenza di stringhe finché non incontra <code>fine</code>, e conta il numero di parole che iniziano per ciascuna delle lettere lette.</li></ol><ol><li>Scrivi un programma che legge tre serie di numeri separate da <code>0</code>. Per ogni serie stampa i numeri letti al contrario.</li></ol><p>Input di esempio (<code>test_input.txt</code>):</p><pre><code>    4
     12
     0
     9
@@ -298,13 +214,154 @@ sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></
     8
     0</code></pre><p>Output:</p><pre><code>    [12, 4]
     [6, 7, 9]
-    [8, -3, 1, 4]</code></pre><h3 id="file-di-testo-trasformazioni">File di testo: trasformazioni</h3><ol><li>Scrivi un programma che legge un file di testo e scrive su un nuovo file lo stesso testo con tutte le lettere in minuscolo e le righe vuote rimosse.</li><li>Scrivi un programma che legge un file di testo riga per riga e produce un secondo file contenente solo le righe che contengono la parola <code>palla</code> (senza distinzione maiuscole/minuscole).</li><li>Scrivi un programma che legge un file di testo riga per riga e conta quante righe ci sono, quante parole e quanti caratteri. Stampa i tre conteggi.</li></ol><hr>
+    [8, -3, 1, 4]</code></pre><ol><li>Leggi <code>dati/testo.txt</code> e scrivi su <code>testo_pulito.txt</code> lo stesso testo con tutte le lettere in minuscolo e le righe vuote rimosse.</li></ol><ol><li>Leggi <code>dati/testo.txt</code> riga per riga e scrivi su <code>righe_python.txt</code> solo le righe che contengono la parola <code>Python</code> (senza distinzione maiuscole/minuscole).</li></ol><ol><li>Leggi <code>dati/testo.txt</code> riga per riga e stampa quante righe, quante parole e quanti caratteri contiene il file. Verifica il risultato con <code>wc dati/testo.txt</code>.</li></ol>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo raccoglie il materiale su:</p><ul><li>apertura e lettura di file;</li><li>segmentazione del testo con <code>split()</code> e <code>strip()</code>;</li><li>scrittura su file;</li><li>differenza tra standard input, file aperto e parametri da riga di comando;</li><li>utility da terminale per file di testo;</li><li>primi formati strutturati: testo semplice, CSV, JSON e HTML.</li></ul>
+    <h2 id="dati-strutturati">Dati strutturati</h2><p>Immaginiamo di avere un file con tutti i voti di tutti gli studenti per tutte le materie:</p><pre><code>Sandra,Rossi,matematica,28
+Matteo,Bianchi,matematica,22
+Sandra,Rossi,informatica,30
+Sandra,Rossi,linguistica,27
+Matteo,Bianchi,informatica,19
+Matteo,Bianchi,linguistica,25
+...</code></pre><p><strong>Problema 1:</strong> Vogliamo calcolare la media dei voti per ogni studente. Il problema è che ogni studente compare su più righe: dobbiamo raccogliere tutti i suoi voti mentre leggiamo il file, e poi calcolare la media alla fine.</p><p>Con una lista non possiamo farlo facilmente: la lista non ha un modo diretto per rispondere alla domanda &quot;dammi tutti i voti di Sandra Rossi&quot;. Dovremmo scorrere tutta la lista ogni volta.</p><p>Ci serve una struttura che associ un <strong>nome</strong> (la chiave) a una <strong>lista di voti</strong> (il valore). Questa struttura è il <strong>dizionario</strong>.</p><pre><code class="language-python">voti = {
+    &quot;Sandra Rossi&quot;:  [28, 30, 27],
+    &quot;Matteo Bianchi&quot;: [22, 19, 25],
+}</code></pre><p><strong>Problema 2:</strong> Vogliamo la lista di tutti gli studenti distinti.</p><p>Ogni studente compare su più righe. Se raccogliamo i nomi in una lista man mano che leggiamo il file, otterremo duplicati:</p><pre><code class="language-python">[&quot;Sandra Rossi&quot;, &quot;Matteo Bianchi&quot;, &quot;Sandra Rossi&quot;, &quot;Sandra Rossi&quot;, &quot;Matteo Bianchi&quot;, ...]</code></pre><p>Potremmo controllare ogni volta se il nome è già nella lista prima di aggiungerlo, ma su file grandi diventa lento. Ci serve una struttura che tenga solo elementi distinti: il <strong>set</strong>.</p><pre><code class="language-python">studenti = set()
+
+studenti.add(&quot;Sandra Rossi&quot;)
+studenti.add(&quot;Matteo Bianchi&quot;)
+studenti.add(&quot;Sandra Rossi&quot;)   # già presente: non viene aggiunto
+
+# studenti → {&quot;Sandra Rossi&quot;, &quot;Matteo Bianchi&quot;}</code></pre><table><thead><tr><th>Problema</th><th>Struttura</th></tr></thead><tbody><tr><td>Associare un nome a un valore</td><td><code>dict</code></td></tr><tr><td>Tenere solo elementi distinti</td><td><code>set</code></td></tr></tbody></table>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="dizionari">Dizionari</h2><p>Un dizionario si scrive tra <code>{</code> e <code>}</code>. Ogni elemento è una coppia <code>chiave: valore</code> separata da virgola:</p><pre><code class="language-python">{}                                       # dizionario vuoto
+{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}       # chiavi stringa, valori interi
+{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;} # chiavi e valori stringa
+{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}   # valore che è una lista</code></pre><p>Per creare un dizionario vuoto e popolarlo un elemento alla volta si usa l&#x27;assegnazione con <code>[]</code>:</p><pre><code class="language-python">d = {}                 # dizionario vuoto
+d[&quot;chiave&quot;] = valore   # aggiunge (o aggiorna) la coppia chiave → valore</code></pre><p>La chiave tra <code>[]</code> deve essere un valore <strong>immutabile</strong> (stringa, intero, …). Il valore a destra può essere qualunque espressione Python. Se la chiave esiste già, il valore viene <strong>sovrascritto</strong>:</p><pre><code class="language-python">d = {}
+d[&quot;gatto&quot;] = 1
+d[&quot;gatto&quot;] = 5   # ora d[&quot;gatto&quot;] vale 5, non 1</code></pre><h3 id="semantica">Semantica</h3><p>Un dizionario associa una <strong>chiave</strong> a un <strong>valore</strong>:</p><ul><li>la chiave deve essere <strong>immutabile</strong> (stringa, intero, tupla) — non si possono usare liste o altri dizionari come chiavi;</li><li>il valore può essere di <strong>qualunque tipo</strong>, incluse liste o altri dizionari;</li><li>l&#x27;accesso avviene tramite la chiave, non tramite la posizione.</li></ul><p>Se si accede a una chiave che non esiste si ottiene un <code>KeyError</code>:</p><pre><code class="language-python">d = {&quot;gatto&quot;: 1}
+d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo si usa prima <code>in</code>:</p><pre><code class="language-python">if &quot;cane&quot; in d:
+    print(d[&quot;cane&quot;])</code></pre><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista può contenere le stesse informazioni, ma il significato dei campi resta implicito nelle posizioni:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 32]</code></pre><p>Con un dizionario la struttura diventa più leggibile e meno fragile:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 32}</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="operazioni-fondamentali">Operazioni fondamentali</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Accesso</td><td><code>D[k]</code></td></tr><tr><td>Aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>Appartenenza</td><td><code>k in D</code></td></tr><tr><td>Numero di chiavi</td><td><code>len(D)</code></td></tr><tr><td>Chiavi</td><td><code>D.keys()</code></td></tr><tr><td>Valori</td><td><code>D.values()</code></td></tr><tr><td>Coppie</td><td><code>D.items()</code></td></tr></tbody></table>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi (default):</p><pre><code class="language-python">for chiave in dizionario:
+    print(chiave, dizionario[chiave])</code></pre><p>Iterare su coppie chiave-valore con <code>items()</code>:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
+    print(chiave, valore)</code></pre><p><code>items()</code> restituisce coppie <code>(chiave, valore)</code> che Python spacchetta direttamente nelle due variabili del <code>for</code>.</p><p>Si può iterare un dizionario con il <code>while</code>? No. Il <code>while</code> richiede una condizione booleana e un aggiornamento manuale — non sa come scorrere una struttura dati.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="problema-completo-media-dei-voti-per-studente">Problema completo: media dei voti per studente</h2><p>Il file <code>dati/voti_materie.txt</code> contiene i voti di tutti gli studenti per tutte le materie. Vogliamo calcolare la media dei voti per ogni studente e l&#x27;elenco delle materie presenti.</p><h3 id="passo-1-leggere-il-file-riga-per-riga">Passo 1: leggere il file riga per riga</h3><p>Ogni riga ha quattro campi separati da virgola:</p><pre><code class="language-python">with open(&quot;dati/voti_materie.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
+    for line in f:
+        nome, cognome, materia, voto = line.strip().split(&quot;,&quot;)
+        studente = nome + &quot; &quot; + cognome
+        voto = int(voto)</code></pre><h3 id="passo-2-raccogliere-i-voti-per-studente">Passo 2: raccogliere i voti per studente</h3><p>Ogni studente compare su più righe. Usiamo un dizionario <code>studente → lista di voti</code>:</p><pre><code class="language-python">voti = {}
+
+with open(&quot;dati/voti_materie.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
+    for line in f:
+        nome, cognome, materia, voto = line.strip().split(&quot;,&quot;)
+        studente = nome + &quot; &quot; + cognome
+        voto = int(voto)
+
+        if studente not in voti:
+            voti[studente] = []
+        voti[studente].append(voto)</code></pre><p>Dopo la lettura del file, <code>voti</code> contiene:</p><pre><code class="language-python">{
+    &quot;Sandra Rossi&quot;:   [28, 30, 27],
+    &quot;Matteo Bianchi&quot;: [22, 19, 25],
+    ...
+}</code></pre><h3 id="passo-3-calcolare-la-media-per-ogni-studente">Passo 3: calcolare la media per ogni studente</h3><pre><code class="language-python">for studente, lista_voti in voti.items():
+    media = sum(lista_voti) / len(lista_voti)
+    print(studente, round(media, 2))</code></pre><h3 id="passo-4-raccogliere-le-materie-distinte">Passo 4: raccogliere le materie distinte</h3><p>Se usassimo una lista, ogni materia comparirebbe più volte. Usiamo un set:</p><pre><code class="language-python">materie = set()
+
+with open(&quot;dati/voti_materie.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
+    for line in f:
+        nome, cognome, materia, voto = line.strip().split(&quot;,&quot;)
+        materie.add(materia)
+
+print(materie)  # {&#x27;fisica&#x27;, &#x27;informatica&#x27;, &#x27;linguistica&#x27;, &#x27;matematica&#x27;, &#x27;statistica&#x27;}</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-dizionari">Esercizi: dizionari</h2><ol><li>Dato il seguente dizionario:</li></ol><pre><code class="language-python">   traduzione = {&quot;gatto&quot;: &quot;cat&quot;, &quot;cane&quot;: &quot;dog&quot;, &quot;topo&quot;: &quot;mouse&quot;, &quot;uccello&quot;: &quot;bird&quot;}</code></pre><p>Scrivi un programma che chiede all&#x27;utente una parola italiana e stampa la traduzione in inglese. Se la parola non è nel dizionario, stampa <code>Parola non trovata</code>.</p><ol><li>Scrivi un programma <code>conta_lettere.py</code> che prende come parametro una parola e conta quante volte compare ciascuna lettera usando un dizionario. Esempio:</li></ol><pre><code>   python3 conta_lettere.py banana
+   b: 1
+   a: 3
+   n: 2</code></pre><ol><li>Scrivi un programma che legge una stringa dall&#x27;input e stampa la frequenza di ogni lettera, ordinata dalla più frequente alla meno frequente.</li></ol><ol><li>Scrivi un programma che legge dall&#x27;input una serie di parole (una per riga, fino a riga vuota) e stampa quante volte è stata inserita ciascuna parola distinta.</li></ol><ol><li>Leggi <code>testo.txt</code> e conta la frequenza di ogni parola. Stampa le 10 parole più frequenti con il loro conteggio.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa la parola più lunga e la parola più corta (escludi le parole di un solo carattere).</li></ol><ol><li>Leggi <code>voti.txt</code> (formato <code>nome,cognome,voto</code>) e costruisci un dizionario <code>cognome → lista di voti</code>. Stampa per ogni cognome la media dei voti.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> (formato <code>nome,cognome,materia,voto</code>) e stampa, per ogni studente, la materia in cui ha preso il voto più alto.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e costruisci un dizionario <code>materia → voto medio</code>. Stampa le materie ordinate dal voto medio più alto al più basso.</li></ol><ol><li>Scrivi un programma che simula 1000 lanci di un dado a sei facce usando <code>random.randint(1, 6)</code> e usa un dizionario per contare quante volte è uscita ciascuna faccia. Stampa i risultati.</li></ol><ol><li>Scrivi un programma che genera una lista di 500 numeri casuali tra 1 e 10 con <code>random.randint</code>, li raggruppa in un dizionario <code>numero → quante volte è comparso</code>, e stampa il numero più frequente.</li></ol>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="set">Set</h2><p>Un <strong>set</strong> è una collezione di elementi <strong>unici</strong> e <strong>non ordinati</strong>:</p><ul><li>non mantengono l&#x27;ordine;</li><li>non ammettono duplicati;</li><li>sono modificabili;</li><li>gli elementi al loro interno devono essere immutabili.</li></ul><pre><code class="language-python">s = {1, 2, 3, 2, 1}   # {1, 2, 3} — i duplicati vengono rimossi
+s = set()              # set vuoto (non {} che è un dizionario vuoto)</code></pre><p>Esempi:</p><pre><code class="language-python">{3, 4, 5, 6}
+{&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;}
+
+set(&quot;linguistica&quot;)
+set([&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;elefante&quot;])</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="operazioni-fondamentali-sui-set">Operazioni fondamentali sui set</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Lunghezza</td><td><code>len(S)</code></td></tr><tr><td>Aggiunta</td><td><code>S.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>S.remove(x)</code></td></tr><tr><td>Appartenenza</td><td><code>x in S</code></td></tr><tr><td>Unione</td><td>`S1 \</td><td>S2`</td></tr><tr><td>Intersezione</td><td><code>S1 &amp; S2</code></td></tr><tr><td>Differenza</td><td><code>S1 - S2</code></td></tr></tbody></table><p><code>set(lista)</code> è spesso il modo più rapido per eliminare i duplicati da una sequenza.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="quando-usare-un-set">Quando usare un set</h2><p>Un set è utile quando:</p><ul><li>si vuole sapere <strong>se un elemento è già stato visto</strong> (senza contarlo);</li><li>si vuole eliminare i duplicati da una sequenza;</li><li>si vogliono confrontare due insiemi (chi è in entrambi, chi manca).</li></ul><pre><code class="language-python"># eliminare duplicati da una lista
+parole = [&quot;gatto&quot;, &quot;cane&quot;, &quot;gatto&quot;, &quot;topo&quot;, &quot;cane&quot;]
+uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}</code></pre>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="esercizi-set">Esercizi: set</h2><ol><li>Scrivi un programma che legge una serie di parole dall&#x27;input (una per riga, fino a riga vuota) e stampa quante sono le parole <strong>distinte</strong> inserite.</li></ol><ol><li>Scrivi un programma che legge due file di testo e stampa le parole che compaiono in entrambi i file.</li></ol><ol><li>Scrivi un programma che legge <code>voti.txt</code> e stampa i cognomi degli studenti senza ripetizioni.</li></ol><ol><li>Scrivi un programma che legge <code>testo.txt</code> e stampa quante parole distinte contiene il file (il <strong>vocabolario</strong> del testo).</li></ol><ol><li>Date due liste, costruisci e stampa la loro unione e intersezione usando i set.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa quante parole distinte contiene (vocabolario).</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e stampa l&#x27;insieme delle materie presenti nel file usando un set.</li></ol>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><table><thead><tr><th>Struttura</th><th>Quando usarla</th></tr></thead><tbody><tr><td><code>list</code></td><td>conserva ordine e ripetizioni, accedi per posizione</td></tr><tr><td><code>dict</code></td><td>associa chiavi a valori, cerchi per nome non per posizione</td></tr><tr><td><code>set</code></td><td>insiemi, controllo di appartenenza, eliminazione duplicati</td></tr></tbody></table><p>Esempi pratici:</p><ul><li>vocabolario senza ripetizioni → <code>set</code></li><li>sequenza da mantenere in ordine → <code>list</code></li><li>rubrica parola → frequenza → <code>dict</code></li><li>confronto tra parole di due testi → <code>set</code></li></ul><p>La scelta dipende dal problema.</p>
+    
+  </div>
+</section>
+
+<section class="slide">
+  <div class="slide-inner">
+    <h2>A fine lezione</h2>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>esercitazione</td><td>1.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr><tr><td>teoria</td><td>0.5h</td><td>—</td><td>Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi</td></tr><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>[Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle](guida-lezioni/modulo-9.slides.html#mod9-terminale)</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>[Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`](guida-lezioni/modulo-9.slides.html#mod9-terminale)</td></tr></tbody></table>
   </div>
 </section>
 
@@ -315,7 +372,10 @@ sort parole.txt &gt; parole-ordinate.txt</code></pre><hr><a id="mod9-formati"></
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 27</div>
+  <div class="counter" id="counter">1 / 22</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));
