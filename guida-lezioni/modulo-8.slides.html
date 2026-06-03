@@ -111,7 +111,7 @@ a.ex-id:hover { background: rgba(139,63,29,0.18); }
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere i tre modi per far arrivare dati a un programma?</li><li>Sai usare <code>sys.argv</code> per leggere argomenti da riga di comando?</li><li>Sai aprire, leggere e scrivere file con <code>open()</code> e <code>with</code>?</li><li>Sai usare i dizionari per associare chiavi e valori?</li><li>Sai contare frequenze con un dizionario?</li><li>Sai iterare su chiavi, valori e coppie chiave-valore?</li><li>Sai usare i set come insiemi di elementi unici?</li><li>Sai distinguere lista, dizionario e set e scegliere la struttura giusta?</li></ul>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere i tre modi per far arrivare dati a un programma?</li><li>Sai usare <code>sys.argv</code> per leggere argomenti da riga di comando?</li><li>Sai aprire, leggere e scrivere file con <code>open()</code> e <code>with</code>?</li></ul>
     
   </div>
 </section>
@@ -312,87 +312,8 @@ Luigi,Esposito,24</code></pre><ol><li>Leggi il file e stampa il nome e cognome d
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="dati-strutturati-dizionari">Dati strutturati: Dizionari</h2><p>Immaginiamo di avere un file con tutti i voti di tutti gli studenti per tutte le materie:</p><pre><code>Sandra,Rossi,matematica,28
-Matteo,Bianchi,matematica,22
-Sandra,Rossi,informatica,30
-Sandra,Rossi,linguistica,27
-Matteo,Bianchi,informatica,19
-Matteo,Bianchi,linguistica,25
-...</code></pre><p>Vogliamo calcolare la media dei voti per ogni studente. Il problema è che ogni studente compare su più righe: dobbiamo raccogliere tutti i suoi voti mentre leggiamo il file, e poi calcolare la media alla fine.</p><p>Con una lista non possiamo farlo facilmente: la lista non ha un modo diretto per rispondere alla domanda &quot;dammi tutti i voti di Sandra Rossi&quot;. Dovremmo scorrere tutta la lista ogni volta.</p><p>Ci serve una struttura che associ un <strong>nome</strong> (la chiave) a una <strong>lista di voti</strong> (il valore). Questa struttura è il <strong>dizionario</strong>.</p><pre><code class="language-python">voti = {
-    &quot;Sandra Rossi&quot;:  [28, 30, 27],
-    &quot;Matteo Bianchi&quot;: [22, 19, 25],
-}</code></pre><p>Con questa struttura, aggiungere un voto è immediato:</p><pre><code class="language-python">studente = &quot;Sandra Rossi&quot;
-if studente not in voti:
-    voti[studente] = []
-voti[studente].append(28)</code></pre><p>E calcolare la media di ogni studente diventa un semplice ciclo:</p><pre><code class="language-python">for studente, lista_voti in voti.items():
-    media = sum(lista_voti) / len(lista_voti)
-    print(studente, media)</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="dizionari">Dizionari</h2><p>Un dizionario si scrive tra <code>{</code> e <code>}</code>. Ogni elemento è una coppia <code>chiave: valore</code> separata da virgola:</p><pre><code class="language-python">{}                                       # dizionario vuoto
-{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}       # chiavi stringa, valori interi
-{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;} # chiavi e valori stringa
-{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}   # valore che è una lista</code></pre><p>Per creare un dizionario vuoto e popolarlo un elemento alla volta si usa l&#x27;assegnazione con <code>[]</code>:</p><pre><code class="language-python">d = {}                 # dizionario vuoto
-d[&quot;chiave&quot;] = valore   # aggiunge (o aggiorna) la coppia chiave → valore</code></pre><p>La chiave tra <code>[]</code> deve essere un valore <strong>immutabile</strong> (stringa, intero, …). Il valore a destra può essere qualunque espressione Python. Se la chiave esiste già, il valore viene <strong>sovrascritto</strong>:</p><pre><code class="language-python">d = {}
-d[&quot;gatto&quot;] = 1
-d[&quot;gatto&quot;] = 5   # ora d[&quot;gatto&quot;] vale 5, non 1</code></pre><h3 id="semantica">Semantica</h3><p>Un dizionario associa una <strong>chiave</strong> a un <strong>valore</strong>:</p><ul><li>la chiave deve essere <strong>immutabile</strong> (stringa, intero, tupla) — non si possono usare liste o altri dizionari come chiavi;</li><li>il valore può essere di <strong>qualunque tipo</strong>, incluse liste o altri dizionari;</li><li>l&#x27;accesso avviene tramite la chiave, non tramite la posizione.</li></ul><p>Se si accede a una chiave che non esiste si ottiene un <code>KeyError</code>:</p><pre><code class="language-python">d = {&quot;gatto&quot;: 1}
-d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo si usa prima <code>in</code>:</p><pre><code class="language-python">if &quot;cane&quot; in d:
-    print(d[&quot;cane&quot;])</code></pre><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista può contenere le stesse informazioni, ma il significato dei campi resta implicito nelle posizioni:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 30]</code></pre><p>Con un dizionario la struttura diventa più leggibile e meno fragile:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 30}</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="operazioni-fondamentali">Operazioni fondamentali</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Accesso</td><td><code>D[k]</code></td></tr><tr><td>Aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>Appartenenza</td><td><code>k in D</code></td></tr><tr><td>Numero di chiavi</td><td><code>len(D)</code></td></tr><tr><td>Chiavi</td><td><code>D.keys()</code></td></tr><tr><td>Valori</td><td><code>D.values()</code></td></tr><tr><td>Coppie</td><td><code>D.items()</code></td></tr></tbody></table>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi (default):</p><pre><code class="language-python">for chiave in dizionario:
-    print(chiave, dizionario[chiave])</code></pre><p>Iterare su coppie chiave-valore con <code>items()</code>:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
-    print(chiave, valore)</code></pre><p><code>items()</code> restituisce coppie <code>(chiave, valore)</code> che Python spacchetta direttamente nelle due variabili del <code>for</code>.</p>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><ol><li>Dato il seguente dizionario:</li></ol><pre><code class="language-python">   traduzione = {&quot;gatto&quot;: &quot;cat&quot;, &quot;cane&quot;: &quot;dog&quot;, &quot;topo&quot;: &quot;mouse&quot;, &quot;uccello&quot;: &quot;bird&quot;}</code></pre><p>Scrivi un programma che chiede all&#x27;utente una parola italiana e stampa la traduzione in inglese. Se la parola non è nel dizionario, stampa <code>Parola non trovata</code>.</p><ol><li>Scrivi un programma <code>conta_lettere.py</code> che prende come parametro una parola e conta quante volte compare ciascuna lettera usando un dizionario. Esempio:</li></ol><pre><code>   python3 conta_lettere.py banana
-   b: 1
-   a: 3
-   n: 2</code></pre><ol><li>Scrivi un programma che legge una stringa dall&#x27;input e stampa la frequenza di ogni lettera, ordinata dalla più frequente alla meno frequente.</li></ol><ol><li>Scrivi un programma che legge dall&#x27;input una serie di parole (una per riga, fino a riga vuota) e stampa quante volte è stata inserita ciascuna parola distinta.</li></ol><ol><li>Leggi <code>testo.txt</code> e conta la frequenza di ogni parola. Stampa le 10 parole più frequenti con il loro conteggio.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa la parola più lunga e la parola più corta (escludi le parole di un solo carattere).</li></ol><ol><li>Leggi <code>voti.txt</code> (formato <code>nome,cognome,voto</code>) e costruisci un dizionario <code>cognome → lista di voti</code>. Stampa per ogni cognome la media dei voti.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> (formato <code>nome,cognome,materia,voto</code>) e stampa, per ogni studente, la materia in cui ha preso il voto più alto.</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e costruisci un dizionario <code>materia → voto medio</code>. Stampa le materie ordinate dal voto medio più alto al più basso.</li></ol><ol><li>Scrivi un programma che simula 1000 lanci di un dado a sei facce usando <code>random.randint(1, 6)</code> e usa un dizionario per contare quante volte è uscita ciascuna faccia. Stampa i risultati.</li></ol><ol><li>Scrivi un programma che genera una lista di 500 numeri casuali tra 1 e 10 con <code>random.randint</code>, li raggruppa in un dizionario <code>numero → quante volte è comparso</code>, e stampa il numero più frequente.</li></ol>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="set">Set</h2><p>Un <strong>set</strong> è una collezione di elementi <strong>unici</strong> e <strong>non ordinati</strong>.</p><pre><code class="language-python">s = {1, 2, 3, 2, 1}   # {1, 2, 3} — i duplicati vengono rimossi
-s = set()              # set vuoto (non {} che è un dizionario vuoto)</code></pre><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Aggiunta</td><td><code>s.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>s.remove(x)</code></td></tr><tr><td>Appartenenza</td><td><code>x in s</code></td></tr><tr><td>Numero di elementi</td><td><code>len(s)</code></td></tr></tbody></table><h3 id="quando-usare-un-set">Quando usare un set</h3><p>Un set è utile quando:</p><ul><li>si vuole sapere <strong>se un elemento è già stato visto</strong> (senza contarlo);</li><li>si vuole eliminare i duplicati da una sequenza;</li><li>si vogliono confrontare due insiemi (chi è in entrambi, chi manca).</li></ul><pre><code class="language-python"># eliminare duplicati da una lista
-parole = [&quot;gatto&quot;, &quot;cane&quot;, &quot;gatto&quot;, &quot;topo&quot;, &quot;cane&quot;]
-uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}</code></pre>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><table><thead><tr><th>Struttura</th><th>Usa quando…</th></tr></thead><tbody><tr><td><strong>Lista</strong></td><td>l&#x27;ordine conta, ci possono essere duplicati, accedi per posizione</td></tr><tr><td><strong>Dizionario</strong></td><td>hai coppie chiave → valore, cerchi per nome non per posizione</td></tr><tr><td><strong>Set</strong></td><td>ti interessano solo gli elementi distinti, vuoi verificare appartenenza velocemente</td></tr></tbody></table><h3 id="esercizi">Esercizi</h3><ol><li>Scrivi un programma che legge una serie di parole dall&#x27;input (una per riga, fino a riga vuota) e stampa quante sono le parole <strong>distinte</strong> inserite.</li></ol><ol><li>Scrivi un programma che legge due file di testo e stampa le parole che compaiono in entrambi i file.</li></ol><ol><li>Scrivi un programma che legge <code>voti.txt</code> e stampa i cognomi degli studenti senza ripetizioni.</li></ol><ol><li>Scrivi un programma che legge <code>testo.txt</code> e stampa quante parole distinte contiene il file (il <strong>vocabolario</strong> del testo).</li></ol>
-    
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
     <h2>A fine lezione</h2>
-    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Tre modi per far arrivare dati: codice, `input()`, `sys.argv`, file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi con `sys.argv`: somme, lunghezze, massimo, palindromi</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Filesystem e filepath: struttura ad albero, percorso assoluto e relativo, cartella corrente, comandi bash utili</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>File in Python: `open()` (percorso, mode, encoding), byte e bit, ASCII e UTF-8, file handler, `with`, lettura con `for`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Scrivere su file: redirezione shell con `&gt;`, `open(&quot;w&quot;)`, `print(file=…)`, modalità append</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr><tr><td>teoria</td><td>0h</td><td>—</td><td>Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi</td></tr><tr><td>teoria</td><td>0h</td><td>cap. ___</td><td>Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`</td></tr><tr><td>esercitazione</td><td>0h</td><td>—</td><td>Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo</td></tr><tr><td>teoria</td><td>0h</td><td>cap. ___</td><td>Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set</td></tr><tr><td>esercitazione</td><td>0h</td><td>—</td><td>Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file</td></tr></tbody></table>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Tre modi per far arrivare dati: codice, `input()`, `sys.argv`, file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi con `sys.argv`: somme, lunghezze, massimo, palindromi</td></tr><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Filesystem e filepath: struttura ad albero, percorso assoluto e relativo, cartella corrente, comandi bash utili</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>File in Python: `open()` (percorso, mode, encoding), byte e bit, ASCII e UTF-8, file handler, `with`, lettura con `for`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Scrivere su file: redirezione shell con `&gt;`, `open(&quot;w&quot;)`, `print(file=…)`, modalità append</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr></tbody></table>
   </div>
 </section>
 
@@ -403,7 +324,7 @@ uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 23</div>
+  <div class="counter" id="counter">1 / 16</div>
   <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
     <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
   </a>
