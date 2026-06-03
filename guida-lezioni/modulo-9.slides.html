@@ -243,14 +243,14 @@ studenti.add(&quot;Sandra Rossi&quot;)   # già presente: non viene aggiunto
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="dizionari">Dizionari</h2><p>Un dizionario si scrive tra <code>{</code> e <code>}</code>. Ogni elemento è una coppia <code>chiave: valore</code> separata da virgola:</p><pre><code class="language-python">{}                                       # dizionario vuoto
-{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}       # chiavi stringa, valori interi
-{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;} # chiavi e valori stringa
-{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}   # valore che è una lista</code></pre><p>Per creare un dizionario vuoto e popolarlo un elemento alla volta si usa l&#x27;assegnazione con <code>[]</code>:</p><pre><code class="language-python">d = {}                 # dizionario vuoto
+    <h2 id="dizionari">Dizionari</h2><p>Un dizionario si scrive tra <code>{</code> e <code>}</code>. Ogni elemento è una coppia <code>chiave: valore</code> separata da virgola:</p><pre><code class="language-python">{}                                        # dizionario vuoto
+{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}         # chiavi stringa, valori interi
+{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;}   # chiavi e valori stringa
+{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}     # valore che è una lista</code></pre><p>Per creare un dizionario vuoto e popolarlo un elemento alla volta si usa l&#x27;assegnazione con <code>[]</code>:</p><pre><code class="language-python">d = {}                 # dizionario vuoto
 d[&quot;chiave&quot;] = valore   # aggiunge (o aggiorna) la coppia chiave → valore</code></pre><p>La chiave tra <code>[]</code> deve essere un valore <strong>immutabile</strong> (stringa, intero, …). Il valore a destra può essere qualunque espressione Python. Se la chiave esiste già, il valore viene <strong>sovrascritto</strong>:</p><pre><code class="language-python">d = {}
 d[&quot;gatto&quot;] = 1
 d[&quot;gatto&quot;] = 5   # ora d[&quot;gatto&quot;] vale 5, non 1</code></pre><h3 id="semantica">Semantica</h3><p>Un dizionario associa una <strong>chiave</strong> a un <strong>valore</strong>:</p><ul><li>la chiave deve essere <strong>immutabile</strong> (stringa, intero, tupla) — non si possono usare liste o altri dizionari come chiavi;</li><li>il valore può essere di <strong>qualunque tipo</strong>, incluse liste o altri dizionari;</li><li>l&#x27;accesso avviene tramite la chiave, non tramite la posizione.</li></ul><p>Se si accede a una chiave che non esiste si ottiene un <code>KeyError</code>:</p><pre><code class="language-python">d = {&quot;gatto&quot;: 1}
-d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo si usa prima <code>in</code>:</p><pre><code class="language-python">if &quot;cane&quot; in d:
+d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo possiamo controllare se la chiave esiste con l&#x27;operazione <code>in</code>:</p><pre><code class="language-python">if &quot;cane&quot; in d:
     print(d[&quot;cane&quot;])</code></pre><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista può contenere le stesse informazioni, ma il significato dei campi resta implicito nelle posizioni:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 32]</code></pre><p>Con un dizionario la struttura diventa più leggibile e meno fragile:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 32}</code></pre>
     
   </div>
@@ -258,7 +258,7 @@ d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo s
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="operazioni-fondamentali">Operazioni fondamentali</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Accesso</td><td><code>D[k]</code></td></tr><tr><td>Aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>Appartenenza</td><td><code>k in D</code></td></tr><tr><td>Numero di chiavi</td><td><code>len(D)</code></td></tr><tr><td>Chiavi</td><td><code>D.keys()</code></td></tr><tr><td>Valori</td><td><code>D.values()</code></td></tr><tr><td>Coppie</td><td><code>D.items()</code></td></tr></tbody></table>
+    <h2 id="operazioni-fondamentali">Operazioni fondamentali</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Accesso</td><td><code>D[k]</code></td></tr><tr><td>Assegnamento o Aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>Appartenenza</td><td><code>k in D</code></td></tr><tr><td>Numero di chiavi</td><td><code>len(D)</code></td></tr><tr><td>Chiavi</td><td><code>D.keys()</code></td></tr><tr><td>Valori (non molto usato)</td><td><code>D.values()</code></td></tr><tr><td>Coppie</td><td><code>D.items()</code></td></tr></tbody></table>
     
   </div>
 </section>
@@ -267,7 +267,7 @@ d[&quot;cane&quot;]   # KeyError: &#x27;cane&#x27;</code></pre><p>Per evitarlo s
   <div class="slide-inner">
     <h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi (default):</p><pre><code class="language-python">for chiave in dizionario:
     print(chiave, dizionario[chiave])</code></pre><p>Iterare su coppie chiave-valore con <code>items()</code>:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
-    print(chiave, valore)</code></pre><p><code>items()</code> restituisce coppie <code>(chiave, valore)</code> che Python spacchetta direttamente nelle due variabili del <code>for</code>.</p><p>Si può iterare un dizionario con il <code>while</code>? No. Il <code>while</code> richiede una condizione booleana e un aggiornamento manuale — non sa come scorrere una struttura dati.</p>
+    print(chiave, valore)</code></pre><p><code>items()</code> restituisce coppie <code>(chiave, valore)</code> che Python spacchetta direttamente nelle due variabili del <code>for</code>.</p><blockquote><p>Si può iterare un dizionario con il <code>while</code>? No. Il <code>while</code> richiede una condizione booleana e un aggiornamento manuale — non sa come scorrere una struttura dati.</p></blockquote>
     
   </div>
 </section>
@@ -294,14 +294,7 @@ with open(&quot;dati/voti_materie.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8
     ...
 }</code></pre><h3 id="passo-3-calcolare-la-media-per-ogni-studente">Passo 3: calcolare la media per ogni studente</h3><pre><code class="language-python">for studente, lista_voti in voti.items():
     media = sum(lista_voti) / len(lista_voti)
-    print(studente, round(media, 2))</code></pre><h3 id="passo-4-raccogliere-le-materie-distinte">Passo 4: raccogliere le materie distinte</h3><p>Se usassimo una lista, ogni materia comparirebbe più volte. Usiamo un set:</p><pre><code class="language-python">materie = set()
-
-with open(&quot;dati/voti_materie.txt&quot;, &quot;r&quot;, encoding=&quot;utf-8&quot;) as f:
-    for line in f:
-        nome, cognome, materia, voto = line.strip().split(&quot;,&quot;)
-        materie.add(materia)
-
-print(materie)  # {&#x27;fisica&#x27;, &#x27;informatica&#x27;, &#x27;linguistica&#x27;, &#x27;matematica&#x27;, &#x27;statistica&#x27;}</code></pre>
+    print(studente, round(media, 2))</code></pre>
     
   </div>
 </section>
@@ -322,15 +315,15 @@ print(materie)  # {&#x27;fisica&#x27;, &#x27;informatica&#x27;, &#x27;linguistic
 s = set()              # set vuoto (non {} che è un dizionario vuoto)</code></pre><p>Esempi:</p><pre><code class="language-python">{3, 4, 5, 6}
 {&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;}
 
-set(&quot;linguistica&quot;)
-set([&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;elefante&quot;])</code></pre>
+set(&quot;linguistica&quot;)  # crea un set dai caratteri della stringa: {&#x27;l&#x27;, &#x27;i&#x27;, &#x27;n&#x27;, &#x27;g&#x27;, &#x27;u&#x27;, &#x27;s&#x27;, &#x27;t&#x27;, &#x27;c&#x27;, &#x27;a&#x27;}
+set([&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;elefante&quot;])  # crea un set da una lista, eliminando i duplicati</code></pre>
     
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="operazioni-fondamentali-sui-set">Operazioni fondamentali sui set</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Lunghezza</td><td><code>len(S)</code></td></tr><tr><td>Aggiunta</td><td><code>S.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>S.remove(x)</code></td></tr><tr><td>Appartenenza</td><td><code>x in S</code></td></tr><tr><td>Unione</td><td>`S1 \</td><td>S2`</td></tr><tr><td>Intersezione</td><td><code>S1 &amp; S2</code></td></tr><tr><td>Differenza</td><td><code>S1 - S2</code></td></tr></tbody></table><p><code>set(lista)</code> è spesso il modo più rapido per eliminare i duplicati da una sequenza.</p>
+    <h2 id="operazioni-fondamentali-sui-set">Operazioni fondamentali sui set</h2><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Lunghezza</td><td><code>len(S)</code></td></tr><tr><td>Aggiunta</td><td><code>S.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>S.remove(x)</code></td></tr><tr><td>Appartenenza</td><td><code>x in S</code></td></tr></tbody></table><p><code>set(lista)</code> è spesso il modo più rapido per eliminare i duplicati da una sequenza.</p>
     
   </div>
 </section>
@@ -346,14 +339,14 @@ uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="esercizi-set">Esercizi: set</h2><ol><li>Scrivi un programma che legge una serie di parole dall&#x27;input (una per riga, fino a riga vuota) e stampa quante sono le parole <strong>distinte</strong> inserite.</li></ol><ol><li>Scrivi un programma che legge due file di testo e stampa le parole che compaiono in entrambi i file.</li></ol><ol><li>Scrivi un programma che legge <code>voti.txt</code> e stampa i cognomi degli studenti senza ripetizioni.</li></ol><ol><li>Scrivi un programma che legge <code>testo.txt</code> e stampa quante parole distinte contiene il file (il <strong>vocabolario</strong> del testo).</li></ol><ol><li>Date due liste, costruisci e stampa la loro unione e intersezione usando i set.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa quante parole distinte contiene (vocabolario).</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e stampa l&#x27;insieme delle materie presenti nel file usando un set.</li></ol>
+    <h2 id="esercizi-set">Esercizi: set</h2><ol><li>Scrivi un programma che legge una serie di parole dall&#x27;input (una per riga, fino a riga vuota) e stampa quante sono le parole <strong>distinte</strong> inserite.</li></ol><ol><li>Scrivi un programma che legge due file di testo (<code>lista_a.txt</code> e <code>lista_b.txt</code>) e stampa le parole che compaiono in entrambi i file.</li></ol><ol><li>Scrivi un programma che legge <code>voti.txt</code> e stampa i cognomi degli studenti senza ripetizioni.</li></ol><ol><li>Scrivi un programma che legge <code>testo.txt</code> e stampa quante parole distinte contiene il file (il <strong>vocabolario</strong> del testo).</li></ol><ol><li>Date due liste, costruisci e stampa la loro unione e intersezione usando i set.</li></ol><ol><li>Leggi <code>testo.txt</code> e stampa quante parole distinte contiene (vocabolario).</li></ol><ol><li>Leggi <code>voti_materie.txt</code> e stampa l&#x27;insieme delle materie presenti nel file usando un set.</li></ol>
     
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><table><thead><tr><th>Struttura</th><th>Quando usarla</th></tr></thead><tbody><tr><td><code>list</code></td><td>conserva ordine e ripetizioni, accedi per posizione</td></tr><tr><td><code>dict</code></td><td>associa chiavi a valori, cerchi per nome non per posizione</td></tr><tr><td><code>set</code></td><td>insiemi, controllo di appartenenza, eliminazione duplicati</td></tr></tbody></table><p>Esempi pratici:</p><ul><li>vocabolario senza ripetizioni → <code>set</code></li><li>sequenza da mantenere in ordine → <code>list</code></li><li>rubrica parola → frequenza → <code>dict</code></li><li>confronto tra parole di due testi → <code>set</code></li></ul><p>La scelta dipende dal problema.</p>
+    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><table><thead><tr><th>Struttura</th><th>Quando usarla</th></tr></thead><tbody><tr><td><code>list</code></td><td>conserva ordine e ripetizioni, accedi per posizione</td></tr><tr><td><code>dict</code></td><td>associa chiavi a valori, cerchi per nome non per posizione</td></tr><tr><td><code>set</code></td><td>insiemi, controllo di appartenenza, eliminazione duplicati</td></tr></tbody></table>
     
   </div>
 </section>
@@ -361,7 +354,7 @@ uniche = set(parole)   # {&quot;gatto&quot;, &quot;cane&quot;, &quot;topo&quot;}
 <section class="slide">
   <div class="slide-inner">
     <h2>A fine lezione</h2>
-    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>esercitazione</td><td>1.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr><tr><td>teoria</td><td>0.5h</td><td>—</td><td>Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi</td></tr><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>[Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle](guida-lezioni/modulo-9.slides.html#mod9-terminale)</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>[Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`](guida-lezioni/modulo-9.slides.html#mod9-terminale)</td></tr></tbody></table>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>esercitazione</td><td>1.5h</td><td>—</td><td>Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file</td></tr><tr><td>teoria</td><td>0.5h</td><td>—</td><td>Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi</td></tr><tr><td>teoria</td><td>1h</td><td>cap. ___</td><td>Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo</td></tr><tr><td>teoria</td><td>0.5h</td><td>cap. ___</td><td>Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>cap. ___</td><td>Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`</td></tr></tbody></table>
   </div>
 </section>
 

@@ -125,22 +125,21 @@ I moduli su **Git**, **terminale** e parte del materiale sugli **automi** seguon
 | exercise  | 0.5h   | —        | Esercizi con `sys.argv`: somme, lunghezze, massimo, palindromi                                                          |
 | theory    | 1h      | cap. ___ | Filesystem e filepath: struttura ad albero, percorso assoluto e relativo, cartella corrente, comandi bash utili         |
 | theory    | 0.5h   | cap. ___ | File in Python: `open()` (percorso, mode, encoding), byte e bit, ASCII e UTF-8, file handler, `with`, lettura con `for` |
-| exercise  | 1h     | —        | Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`                               |
+| exercise  | 1.5h     | —        | Esercizi lettura file: righe, campi CSV, filtraggio, conteggi su `voti.txt` e `testo.txt`                               |
 | theory    | 0.5h   | cap. ___ | Scrivere su file: redirezione shell con `>`, `open("w")`, `print(file=…)`, modalità append                              |
-| exercise  | 0.5h   | —        | Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file                |
 
 
-### 09 | Strutture dati: dizionari e set | slides=
-| Tipologia | Durata | Libro | Argomento                                                                                                                  |
-| --------- | ------ | ----- | -------------------------------------------------------------------------------------------------------------------------- |
-| exercise  | 1.5h   | —        | Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file                |
-| theory    | 0.5h     | —        | Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi                                |
-| theory    | 1h     | cap. ___ | Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()` |
-| exercise  | 1h     | —        | Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo               |
-| theory    | 0.5h     | cap. ___ | Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set             |
-| exercise  | 0.5h     | —        | Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file                                               |
-| exercise  | 0.5h   | cap. ___ | [Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle](guida-lezioni/modulo-9.slides.html#mod9-terminale) |
-| exercise  | 0.5h   | cap. ___ | [Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`](guida-lezioni/modulo-9.slides.html#mod9-terminale)              |
+### 09 | Strutture dati: dizionari e set | slides=guida-lezioni/modulo-9.slides.html
+| Tipologia | Durata | Libro    | Argomento                                                                                                                                 |
+| --------- | ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| exercise  | 1.5h   | —        | Esercizi scrittura file: filtro voti, split casuale con `random.random()`, copia maiuscolo, input → file                                  |
+| theory    | 0.5h   | —        | Git e GitHub: repository, `git clone`, `git pull`; scaricare i file di dati per gli esercizi                                              |
+| theory    | 1h     | cap. ___ | Dizionari: sintassi, semantica, operazioni fondamentali, iterazione con `items()`, valori complessi, frequenze e `sorted()`               |
+| exercise  | 1h     | —        | Esercizi dizionari: traduzione, conta lettere, frequenze su file, voti per studente, materia con voto massimo                             |
+| theory    | 0.5h   | cap. ___ | Set: sintassi, `add()`, `remove()`, unione, intersezione, differenza; quando scegliere lista / dizionario / set                           |
+| exercise  | 0.5h   | —        | Esercizi set: parole distinte, vocabolario di un testo, intersezione tra file                                                             |
+| exercise  | 0.5h   | cap. ___ | Esplorazione rapida da terminale: `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc`, `uniq` e utility simili per leggere file e cartelle |
+| exercise  | 0.5h   | cap. ___ | Esercizi da terminale: ispezionare file e filtrare contenuti con `cat`, `head`, `tail`, `grep`, `cut`, `sort`, `wc` e `uniq`              |
 
 ### 10 | Git e controllo di versione | slides=
 | Tipologia | Durata | Libro | Argomento                                                                                             |
