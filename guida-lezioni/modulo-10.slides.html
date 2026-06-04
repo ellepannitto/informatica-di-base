@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Modulo 10 · Dizionari, set e organizzazione dell&#x27;informazione - Slides</title>
+<title>Modulo 10 · Git e controllo di versione - Slides</title>
 <style>
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; overflow: hidden; }
@@ -43,7 +43,7 @@ p, ul, ol, blockquote, table, pre { margin: 0 0 1.1rem; font-size: clamp(1.08rem
 img { max-width: 100%; height: auto; display: block; margin: 1rem auto; border-radius: 18px; box-shadow: 0 14px 42px rgba(35, 40, 46, 0.18); }
 ul, ol { padding-left: 1.35rem; }
 li { margin: 0.38rem 0; }
-blockquote { border-left: 5px solid #c97f31; padding: 0.8rem 1rem; background: #fff6ea; border-radius: 0 14px 14px 0; }
+blockquote { border-top: 4px solid #c97f31; border-bottom: 4px solid #c97f31; padding: 0.8rem 1.5rem; background: #fff6ea; border-radius: 14px; text-align: center; max-width: 80%; margin-left: auto; margin-right: auto; }
 details { margin: 0 0 1rem; border: 1px solid rgba(23, 33, 43, 0.12); border-radius: 14px; background: rgba(255,255,255,0.72); overflow: hidden; }
 summary { cursor: pointer; font-weight: 700; padding: 0.75rem 0.95rem; background: rgba(23, 33, 43, 0.06); }
 details > :not(summary) { padding-left: 0.95rem; padding-right: 0.95rem; }
@@ -55,6 +55,10 @@ th, td { border: 1px solid rgba(23, 33, 43, 0.12); padding: 0.55rem 0.7rem; vert
 th { background: #f2e7d7; }
 hr { border: 0; border-top: 1px solid rgba(23, 33, 43, 0.12); margin: 1.2rem 0; }
 a { color: #8b3f1d; }
+ol.exercise-list { list-style: none; padding-left: 0; }
+ol.exercise-list > li { display: flex; align-items: baseline; gap: 0.5em; flex-wrap: wrap; }
+a.ex-id { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.78em; font-weight: 600; background: rgba(139,63,29,0.1); border: 1px solid rgba(139,63,29,0.25); color: #8b3f1d; padding: 0.05rem 0.4rem; border-radius: 5px; text-decoration: none; white-space: nowrap; flex-shrink: 0; }
+a.ex-id:hover { background: rgba(139,63,29,0.18); }
 .controls {
   position: fixed;
   left: 0;
@@ -100,101 +104,232 @@ a { color: #8b3f1d; }
 <section class="slide title-slide active">
   <div class="slide-inner">
     <p class="eyebrow">Informatica di Base</p>
-    <h1>Modulo 10 · Dizionari, set e organizzazione dell&#x27;informazione</h1>
+    <h1>Modulo 10 · Git e controllo di versione</h1>
     <p class="instructions">Freccia destra o spazio per avanzare. Freccia sinistra per tornare.</p>
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <hr>
+    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai distinguere tra Git e GitHub?</li><li>Sai configurare Git con il tuo nome e indirizzo email?</li><li>Sai inizializzare un repository locale?</li><li>Sai leggere <code>git status</code>?</li><li>Sai aggiungere file allo staging area e creare commit?</li><li>Sai consultare la storia del progetto con <code>git log</code>?</li><li>Sai confrontare versioni con <code>git diff</code>?</li><li>Sai recuperare una versione precedente di un file?</li><li>Sai usare <code>.gitignore</code> per escludere file?</li><li>Sai clonare un repository e sincronizzarlo con un remoto?</li></ul>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="autovalutazione">Autovalutazione</h2><ul><li>Sai usare i <code>dict</code> per associare chiavi e valori?</li><li>Sai contare frequenze e raggruppare dati con i dizionari?</li><li>Sai iterare su chiavi, valori e coppie chiave-valore?</li><li>Sai usare i <code>set</code> come insiemi di elementi unici?</li><li>Sai distinguere lista, dizionario e set?</li><li>Sai applicare dizionari e set a problemi di lookup, frequenza, confronto e filtraggio?</li></ul><hr><a id="mod10-dizionari"></a>
+    <h2 id="esercizio-1-il-gioco-dellimpiccato">Esercizio 1: Il gioco dell&#x27;impiccato</h2><p>Il gioco dell&#x27;impiccato funziona così:</p><ul><li>Il programma sceglie una parola segreta.</li><li>Il giocatore deve indovinare la parola lettera per lettera.</li><li>Ad ogni tentativo sbagliato si avvicina alla sconfitta.</li><li>Vince se scopre tutta la parola prima di esaurire i tentativi.</li></ul><p><strong>Passo 1 — Scegli una parola</strong></p><p>Ci serve:</p><ul><li>una lista di parole segrete (lette da un file?)</li><li>un modo per scegliere una parola casualmente</li></ul><details><summary>Dettagli</summary><pre><code class="language-python">PAROLE = []
+
+with open(file_input, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_handler:
+	for line in file_handler:
+		PAROLE.append(line.strip())
+
+parola = random.choice(PAROLE)
+print(parola)</code></pre></details><p>Prima di scrivere il codice, vediamo come si svolge il gioco passo per passo. La parola segreta è <code>algoritmo</code> (9 lettere).</p><pre><code>INIZIO
+  parola:   _ _ _ _ _ _ _ _ _
+  errori:   0 / 6
+  tentate:  —
+
+Provo &#x27;a&#x27;  →  INDOVINATA
+  parola:   a _ _ _ _ _ _ _ _
+  errori:   0 / 6
+  tentate:  a
+
+Provo &#x27;z&#x27;  →  SBAGLIATA
+  parola:   a _ _ _ _ _ _ _ _
+  errori:   1 / 6
+  tentate:  a  z
+
+Provo &#x27;o&#x27;  →  INDOVINATA
+  parola:   a _ _ o _ _ _ _ o
+  errori:   1 / 6
+  tentate:  a  o  z
+
+Provo &#x27;l&#x27;  →  INDOVINATA
+  parola:   a l _ o _ _ _ _ o
+  errori:   1 / 6
+  tentate:  a  l  o  z
+
+  ... continua finché:
+  - tutte le lettere sono scoperte  →  VITTORIA
+  - gli errori raggiungono 6        →  SCONFITTA</code></pre><p>Alcune osservazioni:</p><ul><li>la lunghezza della parola è nota fin dall&#x27;inizio (quanti <code>_</code>?);</li><li>l&#x27;insieme delle lettere tentate cresce ad ogni turno;</li><li>l&#x27;errore si aggiunge solo se la lettera non è nella parola.</li></ul><p><strong>Passo 2 — Mostra la parola nascosta</strong></p><p>Ci serve una funzione che riceve la parola e un insieme di lettere già indovinate, e restituisce una stringa con i caratteri scoperti e <code>_</code> al posto di quelli ancora nascosti.</p><p>Esempio:</p><pre><code>parola = &quot;algoritmo&quot;
+lettere_indovinate = {&quot;a&quot;, &quot;o&quot;}
+-&gt; &quot;a _ _ o _ _ _ _ o&quot;</code></pre><details><summary>Dettagli</summary><pre><code class="language-python">def mostra_stato(parola, lettere_indovinate):
+
+	nuova_stringa = &quot;&quot;
+	for lettera in parola:
+		if lettera in lettere_indovinate:
+			nuova_stringa = nuova_stringa + lettera
+		else:
+			nuova_stringa = nuova_stringa + &quot;_&quot;
+
+	return nuova_stringa</code></pre></details><p><strong>Passo 3 — Loop di gioco</strong></p><p>Ad ogni passo del gioco, l&#x27;interfaccia:</p><ul><li>mostra lo stato attuale;</li><li>mostra il numero di errori commessi fino a questo punto;</li><li>chiede una lettera all&#x27;utente;</li><li>controlla se è già stata tentata;</li><li>se no, controlla se la lettera è nella parola;</li></ul><details><summary>Dettagli</summary><pre><code class="language-python">MAX_ERRORI = 6
+lettere_indovinate = set()
+lettere_tentate = set()
+errori = 0
+
+print(mostra_stato(parola, lettere_indovinate))
+print(f&quot;Errori: {errori}/{MAX_ERRORI}&quot;)
+
+lettera = input(&quot;Indovina una lettera: &quot;)
+
+if lettera in lettere_tentate:
+	print(&quot;Hai già tentato questa lettera.&quot;)
+
+else:
+	lettere_tentate.add(lettera)
+
+	if lettera not in parola:
+		errori += 1
+		print(f&quot;Sbagliato! La lettera &#x27;{lettera}&#x27; non c&#x27;è.&quot;)
+	else:
+		print(f&quot;Brav*! La lettera &#x27;{lettera}&#x27; è presente.&quot;)
+		lettere_indovinate.add(lettera)</code></pre></details><p><strong>Passo 4 — Condizioni di vittoria e sconfitta</strong></p><p>Quando finisce il gioco?</p><ul><li>se tutte le lettere della parola sono state indovinate -&gt; vittoria;</li><li>se si esaurisce il numero di errori -&gt; sconfitta.</li></ul><details><summary>Dettagli</summary><pre><code class="language-python">
+while errori &lt; MAX_ERRORI or not indovinato:
+	...</code></pre></details><h3 id="esercizio-2-confronto-di-vocabolari">Esercizio 2: Confronto di vocabolari</h3><p>Hai due file di testo. Vuoi capire quanto sono simili in termini di vocabolario.</p><p>Scrivi un programma <code>confronta.py</code> che:</p><ol><li>Legge due file di testo passati come argomenti da linea di comando.</li><li>Per ciascun file, costruisce:<ul><li>il dizionario delle frequenze (parola -&gt; conteggio);</li><li>il set del vocabolario (parole distinte).</li></ul></li><li>Stampa per ciascun file:<ul><li>il numero totale di parole;</li><li>la dimensione del vocabolario;</li><li>le 5 parole più frequenti con il loro conteggio.</li></ul></li><li>Stampa le statistiche di confronto:<ul><li>numero di parole in comune tra i due vocabolari;</li><li>numero di parole presenti solo nel primo file;</li><li>numero di parole presenti solo nel secondo file.</li></ul></li></ol><p>Esempio di output:</p><pre><code>=== file1.txt ===
+Parole totali: 1204
+Vocabolario: 342 parole distinte
+Top 5: the (98), of (72), and (65), to (54), a (48)
+
+=== file2.txt ===
+Parole totali: 876
+Vocabolario: 289 parole distinte
+Top 5: il (88), di (76), e (60), la (55), in (42)
+
+=== Confronto ===
+Parole in comune: 12
+Solo nel primo file: 330
+Solo nel secondo file: 277</code></pre>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="dizionari-associare-chiavi-e-valori">Dizionari: associare chiavi e valori</h2><p>Un dizionario permette di associare:</p><ul><li>una <strong>chiave</strong>;</li><li>un <strong>valore</strong>.</li></ul><p>Nel caso delle frequenze:</p><ul><li>chiave -&gt; parola</li><li>valore -&gt; numero di occorrenze</li></ul><p>Esempi:</p><pre><code class="language-python">{}
-{&quot;the&quot;: 156, &quot;cat&quot;: 20, &quot;is&quot;: 80}
-{&quot;lazio&quot;: &quot;roma&quot;, &quot;campania&quot;: &quot;napoli&quot;}
-{&quot;molise&quot;: [&quot;campobasso&quot;, &quot;isernia&quot;]}</code></pre><p>Idea chiave:</p><ul><li>la chiave deve essere immutabile;</li><li>il valore puo&#x27; essere di qualunque tipo;</li><li>il dizionario e&#x27; utile quando vuoi recuperare rapidamente un&#x27;informazione associata a una chiave.</li></ul><h3 id="lista-o-dizionario">Lista o dizionario?</h3><p>Una lista puo&#x27; contenere le stesse informazioni di un dizionario, ma nella lista il significato dei campi resta implicito nelle posizioni.</p><p>Per esempio:</p><pre><code class="language-python">persona_lista = [&quot;Ludovica&quot;, &quot;Pannitto&quot;, 30]</code></pre><p>Con un dizionario:</p><pre><code class="language-python">persona = {&quot;nome&quot;: &quot;Ludovica&quot;, &quot;cognome&quot;: &quot;Pannitto&quot;, &quot;eta&quot;: 30}</code></pre><p>la struttura diventa piu&#x27; leggibile e meno fragile.</p><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>chiavi</td><td><code>D.keys()</code></td></tr><tr><td>valori</td><td><code>D.values()</code></td></tr><tr><td>coppie</td><td><code>D.items()</code></td></tr><tr><td>appartenenza di una chiave</td><td><code>k in D</code></td></tr><tr><td>accesso</td><td><code>D[k]</code></td></tr><tr><td>aggiornamento</td><td><code>D[k] = v</code></td></tr><tr><td>cancellazione</td><td><code>del D[k]</code></td></tr><tr><td>numero di chiavi</td><td><code>len(D)</code></td></tr></tbody></table><hr>
+    <h2 id="git-e-controllo-di-versione">Git e controllo di versione</h2><blockquote><p>Materiale adattato da: <a href="https://swcarpentry.github.io/git-novice/">Version Control with Git</a> — Software Carpentry, licenza <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p></blockquote><h3 id="che-cosè-il-controllo-di-versione">Che cos&#x27;è il controllo di versione</h3><p>Immagina di lavorare a un progetto nel tempo. Senza strumenti appositi, la cartella finisce per contenere:</p><pre><code>relazione.txt
+relazione_v2.txt
+relazione_finale.txt
+relazione_finale_def.txt
+relazione_finale_def_vera.txt
+relazione_finale_def_vera2.txt</code></pre><p>Questo sistema è una soluzione manuale a un problema reale: vogliamo poter tornare indietro se sbagliamo qualcosa. Ma non funziona bene:</p><ul><li>non si capisce quale sia la versione più recente;</li><li>non si sa cosa è cambiato tra una versione e l&#x27;altra;</li><li>se due persone lavorano sullo stesso file, i cambiamenti si sovrascrivono.</li></ul><p>Il <strong>controllo di versione</strong> risolve questi problemi in modo sistematico. È un sistema che:</p><ul><li>registra ogni modifica come una fotografia commentata (_snapshot_) dello stato del progetto;</li><li>conserva tutta la storia: si può tornare a qualsiasi versione precedente in qualsiasi momento;</li><li>tiene traccia di chi ha cambiato cosa e quando, rendendo la collaborazione possibile;</li><li>permette di lavorare in parallelo su parti diverse dello stesso progetto.</li></ul><pre><code>tempo ──────────────────────────────────────────────►
+
+[c1]────[c2]────[c3]────[c4]────[c5]
+  │        │       │       │       │
+aggiunto  corretta aggiunto corrette HEAD
+ input    media    output  stampe  (ora)</code></pre><p>Ogni nodo è un commit: una fotografia dello stato del progetto in quel momento. Puoi sempre tornare a qualsiasi commit precedente.</p><p>Puoi pensarlo come un sistema di salvataggio automatico con memoria infinita e commenti. Non sostituisce solo <code>tesi_finale_def_vera2.txt</code>: sostituisce anche la cartella <code>Dropbox/backup-20240312/</code>, il tasto Ctrl+Z, e le email con allegati <code>script_nuovo.py</code>.</p><p><strong>Git</strong> è il sistema di controllo di versione più diffuso al mondo. Lo usano singole persone per i propri progetti personali, team di ricerca, aziende con migliaia di sviluppatori, e praticamente ogni progetto software open source. Impararlo è una competenza trasversale: vale in informatica, in linguistica computazionale, in data science, in bioinformatica — ovunque si scriva codice o si gestiscano file di testo.</p><h3 id="git-non-è-github">Git non è GitHub</h3><p>Una distinzione importante prima di cominciare:</p><ul><li><strong>Git</strong> è il programma installato sul tuo computer che gestisce la storia del progetto;</li><li><strong>GitHub</strong> è un sito web che ospita repository Git e facilita la collaborazione.</li></ul><p>Puoi usare Git senza GitHub (lavorando solo in locale). GitHub diventa utile quando vuoi condividere il progetto, lavorarci da più computer, o collaborare con altre persone. GitHub è anche il posto dove vive la maggior parte del software open source del mondo.</p><h3 id="configurazione-di-git">Configurazione di Git</h3><p>Prima di usare Git per la prima volta, bisogna configurare il proprio nome e indirizzo email. Queste informazioni vengono incluse in ogni commit.</p><pre><code class="language-bash">git config --global user.name &quot;Nomecognome&quot;
+git config --global user.email &quot;indirizzo@email.com&quot;</code></pre><p>Per verificare la configurazione:</p><pre><code class="language-bash">git config --list</code></pre><p>L&#x27;opzione <code>--global</code> significa che la configurazione vale per tutti i progetti sul tuo computer. Puoi sovrascriverla per un singolo progetto omettendo <code>--global</code>.</p><h3 id="creare-un-repository">Creare un repository</h3><p>Un <strong>repository</strong> è una cartella il cui contenuto viene tracciato da Git.</p><p>Per trasformare una cartella esistente in un repository:</p><pre><code class="language-bash">cd nome-cartella-progetto
+git init</code></pre><p>Esempio:</p><pre><code class="language-bash">mkdir progetto-git
+cd progetto-git
+git init</code></pre><p>Output tipico:</p><pre><code>Initialized empty Git repository in /percorso/progetto-git/.git/</code></pre><h4 id="la-cartella-git">La cartella <code>.git</code></h4><p>Quando esegui <code>git init</code>, Git crea una cartella nascosta chiamata <code>.git</code>.</p><pre><code>progetto-git/
+└── .git/
+    ├── config
+    ├── HEAD
+    ├── objects/
+    └── refs/</code></pre><p>Quella cartella contiene tutta la storia del progetto. Non va modificata a mano. Se la cancelli, perdi la storia.</p><p>Per verificare che Git stia monitorando la cartella:</p><pre><code class="language-bash">git status</code></pre><p>Output su un repository appena creato:</p><pre><code>On branch main
+
+No commits yet
+
+nothing to commit (create/copy files and use &quot;git add&quot; to track)</code></pre><blockquote><p><strong>Attenzione</strong>: non inizializzare un repository dentro un altro repository.<br>Se fai <code>git init</code> dentro una cartella già tracciata, Git si confonde.</p></blockquote><h3 id="tracciare-le-modifiche">Tracciare le modifiche</h3><p>Il flusso di lavoro base di Git è sempre lo stesso:</p><pre><code>modifica file -&gt; git add -&gt; git commit</code></pre><p>Questi tre passi si ripetono continuamente. Ogni volta che arrivi a un punto stabile — hai aggiunto una funzione, corretto un bug, completato una sezione — fai un commit. La storia del progetto è la sequenza di questi commit.</p><h4 id="lo-staging-area-perché-esiste">Lo staging area: perché esiste?</h4><p>Tra la modifica e il commit c&#x27;è un passo intermedio: lo <strong>staging area</strong> (area di preparazione).</p><p>Sembra una complicazione inutile, ma serve a qualcosa di preciso: puoi modificare dieci file ma committare solo quelli pronti, lasciando gli altri fuori dalla fotografia.</p><pre><code>                   git add             git commit
+cartella ─────────────────────► staging ──────────────► repository
+di lavoro                        area                    (storia)
+(file modificati)               (pronti)                 (commit)
+
+                  git restore --staged
+                ◄───────────────────────</code></pre><p>Con <code>git add</code> scegli cosa includere nel prossimo commit. Con <code>git commit</code> salvi quella selezione come snapshot permanente. Con <code>git restore --staged</code> puoi togliere un file dallo staging area se hai cambiato idea.</p><h4 id="aggiungere-file-allo-staging-area">Aggiungere file allo staging area</h4><p>Crea un file e controllane lo stato:</p><pre><code class="language-bash">echo &quot;primo contenuto&quot; &gt; file.txt
+git status</code></pre><p>Output:</p><pre><code>Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        file.txt</code></pre><p>Il file esiste ma Git non lo sta ancora tracciando. Per includerlo nel prossimo commit:</p><pre><code class="language-bash">git add file.txt
+git status</code></pre><p>Output:</p><pre><code>Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+        new file: file.txt</code></pre><p>Il file è nello <strong>staging area</strong>: è pronto per essere salvato.</p><h4 id="creare-un-commit">Creare un commit</h4><pre><code class="language-bash">git commit -m &quot;Aggiungo il primo file&quot;</code></pre><p>Output:</p><pre><code>[main (root-commit) a1b2c3d] Aggiungo il primo file
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file.txt</code></pre><p>Il commit è una fotografia commentata dello stato del progetto in quel momento.</p><h4 id="modificare-un-file">Modificare un file</h4><p>Modifica il file e controlla cosa è cambiato:</p><pre><code class="language-bash">echo &quot;secondo contenuto&quot; &gt;&gt; file.txt
+git status</code></pre><p>Output:</p><pre><code>Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+        modified: file.txt</code></pre><p>Per vedere esattamente cosa è cambiato:</p><pre><code class="language-bash">git diff</code></pre><p>L&#x27;output mostra le righe aggiunte (<code>+</code>) e quelle rimosse (<code>-</code>).</p><p>Per vedere le differenze di ciò che è già in staging:</p><pre><code class="language-bash">git add file.txt
+git diff --staged</code></pre><p>Poi salva con un nuovo commit:</p><pre><code class="language-bash">git commit -m &quot;Aggiungo la seconda riga&quot;</code></pre><h4 id="messaggi-di-commit">Messaggi di commit</h4><p>Il messaggio di commit è la nota che accompagna ogni fotografia. Tra tre mesi, guardando la storia del progetto, è quello che ti dice perché hai fatto quella modifica — non solo cosa hai cambiato.</p><p>Un buon messaggio è breve, specifico, e scritto come un&#x27;azione:</p><ul><li><code>Aggiungo il file di input</code></li><li><code>Correggo il calcolo della media</code></li><li><code>Aggiungo la gestione degli errori nel parsing</code></li></ul><p>Evita messaggi generici come <code>modifica</code>, <code>fix</code>, <code>aggiornamento</code>, <code>lavoro del 3 giugno</code>. Quei messaggi non dicono nulla a chi legge la storia — incluso te nel futuro.</p><p>La regola pratica: il messaggio dovrebbe completare la frase _&quot;Se applico questo commit, allora...&quot;_</p><h3 id="esplorare-la-storia">Esplorare la storia</h3><p>Uno dei vantaggi principali di Git è che la storia del progetto è sempre consultabile. Puoi rispondere a domande come:</p><ul><li>_&quot;Quando ho introdotto questo bug?&quot;_ → confronti versioni con <code>git diff</code></li><li>_&quot;Com&#x27;era questo file due settimane fa?&quot;_ → recuperi con <code>git restore</code></li><li>_&quot;Cosa ho fatto ieri?&quot;_ → leggi con <code>git log</code></li></ul><p>Per vedere la lista di tutti i commit:</p><pre><code class="language-bash">git log</code></pre><p>Output tipico:</p><pre><code>commit b2c3d4e5f6... (HEAD -&gt; main)
+Author: Nomecognome &lt;indirizzo@email.com&gt;
+Date:   Mon Jun 3 10:00:00 2026 +0200
+
+    Aggiungo la seconda riga
+
+commit a1b2c3d4e5...
+Author: Nomecognome &lt;indirizzo@email.com&gt;
+Date:   Mon Jun 3 09:00:00 2026 +0200
+
+    Aggiungo il primo file</code></pre><p>Versione compatta:</p><pre><code class="language-bash">git log --oneline</code></pre><pre><code>b2c3d4e (HEAD -&gt; main) Aggiungo la seconda riga
+a1b2c3d Aggiungo il primo file</code></pre><h4 id="head-e-la-notazione">HEAD e la notazione <code>~</code></h4><p><code>HEAD</code> punta sempre al commit più recente. <code>HEAD~1</code> è il commit precedente, <code>HEAD~2</code> quello prima ancora.</p><pre><code>a1b2c3d ────► b2c3d4e ────► c3d4e5f
+    │               │             │
+ HEAD~2          HEAD~1          HEAD
+&quot;Aggiungo      &quot;Aggiungo      &quot;Correggo
+ il file&quot;       la riga&quot;       il bug&quot;</code></pre><p>Per confrontare la versione attuale con quella di due commit fa:</p><pre><code class="language-bash">git diff HEAD~2</code></pre><p>Per vedere il contenuto di un commit specifico:</p><pre><code class="language-bash">git show HEAD~1</code></pre><h4 id="recuperare-una-versione-precedente">Recuperare una versione precedente</h4><p>Per ripristinare un file a come era in un commit precedente:</p><pre><code class="language-bash">git restore --source HEAD~1 file.txt</code></pre><p>Oppure usando l&#x27;identificatore del commit:</p><pre><code class="language-bash">git restore --source a1b2c3d file.txt</code></pre><p>Il file nella cartella torna alla versione indicata. Per salvare questo cambiamento, fai un nuovo commit.</p><h3 id="ignorare-file-con-gitignore">Ignorare file con <code>.gitignore</code></h3><p>Alcuni file non devono essere tracciati da Git:</p><ul><li>file temporanei e compilati (<code>.pyc</code>, <code>__pycache__/</code>);</li><li>file di configurazione locale con dati sensibili;</li><li>file di output generati automaticamente.</li></ul><p>Crea un file <code>.gitignore</code> nella radice del repository:</p><pre><code>*.pyc
+__pycache__/
+.DS_Store
+output/</code></pre><p>Ogni riga è un pattern. Git ignorerà i file che corrispondono.</p><p>Per verificare quali file vengono ignorati:</p><pre><code class="language-bash">git status --ignored</code></pre><p>Una volta creato <code>.gitignore</code>, aggiungilo al repository:</p><pre><code class="language-bash">git add .gitignore
+git commit -m &quot;Aggiungo .gitignore&quot;</code></pre><h3 id="repository-remoti-e-github">Repository remoti e GitHub</h3><p>Finora abbiamo lavorato in locale: la storia del progetto esiste solo sul nostro computer. Questo va bene per progetti personali, ma ha limiti evidenti:</p><ul><li>se il computer si rompe, si perde tutto;</li><li>non si può lavorare comodamente da più dispositivi;</li><li>non si può collaborare con altre persone.</li></ul><p>La soluzione è un <strong>repository remoto</strong>: una copia del repository ospitata altrove, su un server raggiungibile da internet.</p><pre><code>   computer locale                   GitHub (remoto)
+┌───────────────────────┐       ┌──────────────────────┐
+│  progetto/            │       │  utente/progetto      │
+│  ├── script.py        │       │  ├── script.py        │
+│  └── .git/            │       │  └── .git/            │
+│      └── storia       │       │      └── storia       │
+└───────────────────────┘       └──────────────────────┘
+            │                               │
+            └──────── git push ────────────►│
+            │◄──────── git pull ────────────┘</code></pre><p><strong>GitHub</strong> è la piattaforma più usata per ospitare repository Git. Oltre a fare da backup remoto, GitHub offre:</p><ul><li>un&#x27;interfaccia web per navigare il codice e la storia dei commit;</li><li>strumenti per la collaborazione (pull request, code review, issue tracking);</li><li>la possibilità di rendere il progetto pubblico e contribuire a progetti open source;</li><li>un portfolio: mostrare i propri repository GitHub è ormai normale nei CV tecnici.</li></ul><p>Esistono alternative (GitLab, Bitbucket, Codeberg), ma GitHub è il più diffuso.</p><ul><li><strong>Git</strong> è il programma di controllo versione che usiamo sul computer;</li><li><strong>GitHub</strong> è il servizio online che ospita i repository.</li></ul><p>Puoi usare Git anche senza GitHub.</p><h4 id="creare-un-repository-su-github">Creare un repository su GitHub</h4><ol><li>Accedi a GitHub.</li><li>Clicca su <strong>New repository</strong>.</li><li>Dai un nome al repository.</li><li>Lascia vuoto (senza README) se vuoi collegarlo a un repository locale esistente.</li><li>Clicca su <strong>Create repository</strong>.</li></ol><h4 id="collegare-il-repository-locale-al-remoto">Collegare il repository locale al remoto</h4><p>Dopo aver creato il repository su GitHub, copia l&#x27;URL e collega il remoto:</p><pre><code class="language-bash">git remote add origin https://github.com/utente/nome-repository.git
+git push -u origin main</code></pre><ul><li><code>git remote add origin ...</code> registra il repository remoto con il nome <code>origin</code>;</li><li><code>git push</code> pubblica i commit locali sul remoto;</li><li><code>-u origin main</code> imposta il ramo remoto di default per i push futuri.</li></ul><p>Per verificare i remoti configurati:</p><pre><code class="language-bash">git remote -v</code></pre><h4 id="sincronizzare-con-il-remoto">Sincronizzare con il remoto</h4><p>Dopo aver aggiunto altri commit locali:</p><pre><code class="language-bash">git push</code></pre><p>Per scaricare aggiornamenti dal remoto (utile se hai lavorato da un altro computer):</p><pre><code class="language-bash">git pull</code></pre><h3 id="collaborare">Collaborare</h3><p>Fino a qui abbiamo sempre lavorato da soli su un repository nostro. Il vero potere di Git emerge quando più persone lavorano sullo stesso progetto.</p><p>Il meccanismo è semplice: ognuno ha una copia locale del repository, lavora sulla propria copia, e periodicamente sincronizza con il remoto. Git si occupa di unire i cambiamenti di tutti.</p><h4 id="aggiungere-un-collaboratore-su-github">Aggiungere un collaboratore su GitHub</h4><p>Il proprietario del repository deve aggiungere l&#x27;altra persona come collaboratore:</p><ol><li>Vai alla pagina del repository su GitHub.</li><li>Clicca su <strong>Settings</strong> → <strong>Collaborators</strong>.</li><li>Cerca il nome utente GitHub del collaboratore e invitalo.</li><li>Il collaboratore riceve un&#x27;email e deve accettare l&#x27;invito.</li></ol><p>Dopo l&#x27;accettazione, entrambe le persone possono fare <code>push</code> sul repository.</p><h4 id="clonare-un-repository">Clonare un repository</h4><p>Chi vuole lavorare su un repository esistente lo clona in locale:</p><pre><code class="language-bash">git clone https://github.com/utente/nome-repository.git</code></pre><p>Questo crea una copia locale completa del repository, inclusa tutta la storia. Non serve <code>git init</code>: il repository è già inizializzato.</p><h4 id="il-flusso-collaborativo">Il flusso collaborativo</h4><p>Ogni persona lavora così:</p><pre><code>pull → modifica → add → commit → push</code></pre><p>In dettaglio:</p><pre><code class="language-bash">git pull               # scarica i cambiamenti del collega
+# ... modifica i file ...
+git add lista.txt
+git commit -m &quot;Aggiungo le verdure&quot;
+git push               # pubblica i tuoi cambiamenti</code></pre><p>La regola fondamentale è: <strong>prima <code>pull</code>, poi <code>push</code></strong>.</p><p>Perché? Perché se il tuo collega ha già pubblicato dei commit, il tuo repository locale è indietro rispetto al remoto. Git rifiuterà il <code>push</code> finché non ti aggiorni. Fare <code>pull</code> prima evita questo problema — e nella maggior parte dei casi Git riesce a unire automaticamente i cambiamenti senza conflitti, purché non abbiate modificato le stesse righe degli stessi file.</p><pre><code>               GitHub (remoto)
+                    │
+         push ▲     │ ▼ pull
+                    │
+         Persona A  │  Persona B
+         (locale)       (locale)</code></pre><hr><h4 id="esercizio-la-lista-della-spesa-in-coppia">Esercizio: la lista della spesa in coppia</h4><p>Formate coppie. Una persona crea il repository, l&#x27;altra collabora.</p><p><strong>Persona A — crea il repository:</strong></p><ol><li>Crea un nuovo repository su GitHub chiamato <code>lista-spesa</code> (pubblico, senza README).</li><li>Sul proprio computer:</li></ol><pre><code class="language-bash">mkdir lista-spesa
+cd lista-spesa
+git init
+git branch -M main</code></pre><ol><li>Crea il file <code>lista.txt</code> con due o tre voci:</li></ol><pre><code>pane
+latte
+uova</code></pre><ol><li>Aggiungi, committa e collega il remoto:</li></ol><pre><code class="language-bash">git add lista.txt
+git commit -m &quot;Prima versione della lista&quot;
+git remote add origin https://github.com/personaA/lista-spesa.git
+git push -u origin main</code></pre><ol><li>Aggiungi Persona B come collaboratore (Settings → Collaborators).</li></ol><hr><p><strong>Persona B — clona e modifica:</strong></p><ol><li>Accetta l&#x27;invito via email.</li><li>Clona il repository:</li></ol><pre><code class="language-bash">git clone https://github.com/personaA/lista-spesa.git
+cd lista-spesa</code></pre><ol><li>Apri <code>lista.txt</code> e aggiungi altre voci (frutta, verdura, ecc.).</li><li>Committa e fai push:</li></ol><pre><code class="language-bash">git add lista.txt
+git commit -m &quot;Aggiungo frutta e verdura&quot;
+git push</code></pre><hr><p><strong>Persona A — aggiorna e aggiungi:</strong></p><ol><li>Scarica i cambiamenti di Persona B:</li></ol><pre><code class="language-bash">git pull
+cat lista.txt     # verifica che le voci di B siano presenti</code></pre><ol><li>Aggiungi ancora qualcosa, committa e fai push.</li></ol><hr><p><strong>Tutti e due:</strong></p><p>Leggete la storia del repository con <code>git log --oneline</code>. Vedrete i commit di entrambi nella stessa sequenza.</p><hr><p><strong>Parte 2 — Provocare e risolvere un conflitto:</strong></p><p>Ora vediamo cosa succede quando due persone modificano la stessa riga.</p><p><strong>Senza fare pull</strong>, entrambe le persone aprono <code>lista.txt</code> e modificano la <strong>prima riga</strong> della lista con due valori diversi.</p><p>Persona A scrive:</p><pre><code>pane integrale</code></pre><p>Persona B scrive:</p><pre><code>pane di segale</code></pre><p><strong>Persona A</strong> committa e fa push per prima:</p><pre><code class="language-bash">git add lista.txt
+git commit -m &quot;Cambio tipo di pane&quot;
+git push</code></pre><p><strong>Persona B</strong> committa e prova a fare push:</p><pre><code class="language-bash">git add lista.txt
+git commit -m &quot;Scelgo pane di segale&quot;
+git push</code></pre><p>Git rifiuterà il push con un messaggio del tipo:</p><pre><code> ! [rejected]  main -&gt; main (fetch first)
+hint: Updates were rejected because the remote contains work that you do not have locally.</code></pre><p>Persona B deve fare pull:</p><pre><code class="language-bash">git pull</code></pre><p>A questo punto Git segnala il conflitto nel file <code>lista.txt</code>:</p><pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+pane di segale
+=======
+pane integrale
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; a1b2c3d...</code></pre><p><strong>Persona B risolve il conflitto:</strong></p><ol><li>Apri <code>lista.txt</code> nell&#x27;editor.</li><li>Decidi quale riga tenere (o scrivi una versione condivisa, es. <code>pane</code>).</li><li>Rimuovi i marcatori <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li><li>Salva il file.</li><li>Committa la risoluzione:</li></ol><pre><code class="language-bash">git add lista.txt
+git commit -m &quot;Risolvo conflitto sul tipo di pane&quot;
+git push</code></pre><p><strong>Persona A</strong> fa pull per ricevere la risoluzione:</p><pre><code class="language-bash">git pull</code></pre><p><strong>Tutti e due:</strong></p><p>Eseguite <code>git log --oneline</code> e osservate la storia completa: vedrete il commit di A, il commit di B, e il commit di risoluzione del conflitto.</p><h3 id="conflitti">Conflitti</h3><p>Lavorando in collaborazione, prima o poi succede: due persone modificano la stessa parte dello stesso file in modo incompatibile.</p><p>Git non può decidere da solo quale versione è quella &quot;giusta&quot; — dipende dall&#x27;intenzione delle persone che hanno fatto le modifiche. Quindi segnala il conflitto e lascia la decisione a te.</p><p>I conflitti sembrano spaventosi la prima volta, ma sono un meccanismo di sicurezza: Git si rifiuta di sovrascrivere silenziosamente il lavoro di qualcuno. Preferirebbe bloccarsi e chiederti cosa fare, piuttosto che perdere delle modifiche.</p><pre><code>storia condivisa       A modifica      B modifica
+                        riga 3          riga 3
+[c1]──[c2]──[c3]        │               │
+              │          ▼               ▼
+              ├────── [cA] &quot;latte&quot;   [cB] &quot;succo&quot;
+              │
+           entrambi fanno push:
+           il secondo trova un CONFLITTO
+           perché c3 → cA e c3 → cB sono incompatibili</code></pre><h4 id="come-si-presenta-un-conflitto">Come si presenta un conflitto</h4><p>Quando <code>git pull</code> trova modifiche incompatibili, il file coinvolto contiene:</p><pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+versione tua (locale)
+=======
+versione dell&#x27;altro (remota)
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; a1b2c3d4...</code></pre><h4 id="come-risolverlo">Come risolverlo</h4><ol><li>Apri il file in un editor.</li><li>Decidi quale versione tenere (o scrivi una versione che unisce entrambe).</li><li>Rimuovi i marcatori <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li><li>Salva il file.</li><li>Esegui:</li></ol><pre><code class="language-bash">git add file.txt
+git commit -m &quot;Risolvo il conflitto&quot;</code></pre><p>Il conflitto è risolto e la storia del progetto è integra.</p>
+    
   </div>
 </section>
 
 <section class="slide">
   <div class="slide-inner">
-    <h2 id="iterazione-sui-dizionari">Iterazione sui dizionari</h2><p>Iterare sulle chiavi:</p><pre><code class="language-python">for chiave in dizionario:
-    print(chiave, dizionario[chiave])</code></pre><p>Iterare direttamente su coppie chiave-valore:</p><pre><code class="language-python">for chiave, valore in dizionario.items():
-    print(chiave, valore)</code></pre><p><code>items()</code> produce coppie del tipo <code>(chiave, valore)</code> che Python puo&#x27; spacchettare direttamente.</p><h3 id="valori-complessi">Valori complessi</h3><p>Il valore di un dizionario puo&#x27; essere anche una lista.</p><pre><code class="language-python">persona = {
-    &quot;nome&quot;: &quot;Ludovica&quot;,
-    &quot;cibi_preferiti&quot;: [&quot;pane&quot;, &quot;fiori di zucca&quot;],
-}</code></pre><p>In quel caso:</p><ul><li><code>persona[&quot;cibi_preferiti&quot;]</code> restituisce una lista;</li><li>quindi possiamo usare su quel valore i metodi delle liste, per esempio <code>append(...)</code>.</li></ul><hr><a id="mod10-frequenze"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="frequenze-e-distribuzioni">Frequenze e distribuzioni</h2><p>Schema base:</p><pre><code class="language-python">frequenze = {}
-
-for parola in testo_tokenizzato:
-    if parola in frequenze:
-        frequenze[parola] = frequenze[parola] + 1
-    else:
-        frequenze[parola] = 1</code></pre><p>Questo schema compare continuamente quando vogliamo:</p><ul><li>contare parole;</li><li>contare caratteri;</li><li>contare valori numerici;</li><li>costruire raggruppamenti e statistiche discrete.</li></ul><p>Versione che parte da un file:</p><pre><code class="language-python">frequenze = {}
-
-with open(nome_file, &quot;r&quot;, encoding=&quot;utf-8&quot;) as file_input:
-    for line in file_input:
-        for parola in line.strip().split():
-            if parola not in frequenze:
-                frequenze[parola] = 0
-            frequenze[parola] += 1</code></pre><h3 id="ordinare-le-frequenze">Ordinare le frequenze</h3><pre><code class="language-python">dizionario = {&quot;a&quot;: 5, &quot;b&quot;: 1, &quot;c&quot;: 3, &quot;d&quot;: 7}
-
-lista_ordinata = sorted(dizionario.items(), key=lambda x: x[1], reverse=True)</code></pre><p>Varianti utili:</p><pre><code class="language-python">sorted(dizionario.items(), key=lambda x: x[0])
-sorted(dizionario.items(), key=lambda x: x[1], reverse=True)</code></pre><hr><a id="mod10-set"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="set-insiemi-non-ordinati-di-elementi">Set: insiemi non ordinati di elementi</h2><p>I <code>set</code> sono insiemi non ordinati:</p><ul><li>non mantengono l&#x27;ordine;</li><li>non ammettono duplicati;</li><li>sono modificabili;</li><li>gli elementi al loro interno devono essere immutabili.</li></ul><p>Esempi:</p><pre><code class="language-python">{3, 4, 5, 6}
-{&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;}
-
-set(&quot;linguistica&quot;)
-set([&quot;elefante&quot;, &quot;cammello&quot;, &quot;pentola&quot;, &quot;elefante&quot;])</code></pre><h3 id="operazioni-fondamentali">Operazioni fondamentali</h3><table><thead><tr><th>Operazione</th><th>Sintassi</th></tr></thead><tbody><tr><td>Lunghezza</td><td><code>len(S)</code></td></tr><tr><td>Aggiunta</td><td><code>S.add(x)</code></td></tr><tr><td>Rimozione</td><td><code>S.remove(x)</code></td></tr><tr><td>Unione</td><td>`S1</td><td>S2`</td></tr><tr><td>Intersezione</td><td><code>S1 &amp; S2</code></td></tr><tr><td>Differenza</td><td><code>S1 - S2</code></td></tr></tbody></table><p><code>set(lista_di_parole)</code> e&#x27; spesso il modo piu&#x27; rapido per passare da una sequenza di token al vocabolario.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="appartenenza-e-operatore-in">Appartenenza e operatore <code>in</code></h2><p><code>in</code> e&#x27; l&#x27;operazione naturale quando la domanda e&#x27;:</p><blockquote><p>questo elemento c&#x27;e&#x27; oppure no?</p></blockquote><p>Esempio:</p><pre><code class="language-python">lista = [4, 2, 0, 2, 3, 5]
-insieme = {0, 2, 3, 4, 5}
-
-print(0 in lista)
-print(0 in insieme)</code></pre><p>Il significato logico e&#x27; lo stesso, ma il costo operativo non e&#x27; identico.</p><hr><a id="mod10-uso-strutture"></a>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="scegliere-tra-lista-dizionario-e-set">Scegliere tra lista, dizionario e set</h2><ul><li>la <code>lista</code> conserva ordine e ripetizioni;</li><li>il <code>dict</code> associa chiavi e valori;</li><li>il <code>set</code> e&#x27; molto efficiente nei controlli di appartenenza.</li></ul><p>Per esempio:</p><ul><li>vocabolario senza ripetizioni -&gt; <code>set</code></li><li>sequenza da mantenere in ordine -&gt; <code>list</code></li><li>rubrica parola -&gt; frequenza -&gt; <code>dict</code></li><li>confronto tra parole presenti in due testi -&gt; <code>set</code></li></ul><p>La scelta dipende dal problema, non dal gusto personale.</p><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="esercizi">Esercizi</h2><h3 id="dizionari-costruzione-e-accesso">Dizionari: costruzione e accesso</h3><ol><li>costruisci un dizionario con la media dei voti per ogni studente;</li><li>conta le occorrenze dei numeri in una lista casuale;</li></ol><ol><li>Dato il seguente dizionario:</li></ol><pre><code class="language-python">   traduzione = {&quot;gatto&quot;: &quot;cat&quot;, &quot;cane&quot;: &quot;dog&quot;, &quot;topo&quot;: &quot;mouse&quot;, &quot;uccello&quot;: &quot;bird&quot;}</code></pre><p>Scrivi un programma che chiede all&#x27;utente di inserire una parola italiana e stampa la traduzione in inglese. Se la parola non è nel dizionario, stampa <code>Parola non trovata</code>.</p><ol><li>Scrivi un programma <code>conta_lettere.py</code> che prende come parametro una parola e conta quante volte compare ciascuna lettera usando un dizionario. Esempio:</li></ol><pre><code>   python3 conta_lettere.py banana
-   {&#x27;b&#x27;: 1, &#x27;a&#x27;: 3, &#x27;n&#x27;: 2}</code></pre><h3 id="frequenze-e-distribuzioni">Frequenze e distribuzioni</h3><ol><li>costruisci la distribuzione di frequenza di un testo;</li><li>ordina le coppie parola-frequenza;</li><li>data una lista di parole, costruisci il vocabolario;</li></ol><ol><li>Scrivi un programma che legge un file di testo e conta la frequenza di ogni parola usando un dizionario. Stampa le parole e il loro conteggio, una per riga.</li></ol><ol><li>Scrivi un programma che legge un file di testo e stampa la parola che compare più volte. Se ci sono pareggi, basta stamparne una.</li></ol><ol><li>Scrivi un programma che legge una stringa letta dall&#x27;input (es. <code>adoro programmare in Python!</code>) e stampa la frequenza di ogni lettera.</li></ol><h3 id="dizionari-e-file">Dizionari e file</h3><ol><li>Scrivi un programma che legge un file di testo contenente una parola per riga e costruisce un dizionario dove la chiave è la parola e il valore è la sua lunghezza. Stampa il dizionario alla fine.</li></ol><h3 id="set-e-confronto-tra-collezioni">Set e confronto tra collezioni</h3><ol><li>date due liste, restituisci unione e intersezione;</li></ol><ol><li>Scrivi un programma che legge due file di testo e confronta il loro vocabolario: stampa quante parole distinte compaiono in entrambi i file, quante solo nel primo e quante solo nel secondo.</li></ol><hr>
-  </div>
-</section>
-
-<section class="slide">
-  <div class="slide-inner">
-    <h2 id="riepilogo">Riepilogo</h2><p>Questo modulo organizza il materiale su:</p><ul><li>dizionari, chiavi, valori e iterazione;</li><li>frequenze, conteggi e ordinamento di distribuzioni;</li><li>set e loro proprieta&#x27;;</li><li>appartenenza con <code>in</code>;</li><li>confronto tra lista, dizionario e set;</li><li>uso su vocabolari, lookup e confronto tra collezioni.</li></ul>
+    <h2>A fine lezione</h2>
+    <table><thead><tr><th>Tipologia</th><th>Durata</th><th>Libro</th><th>Argomento</th></tr></thead><tbody><tr><td>teoria</td><td>1h</td><td>—</td><td>[Git: repository, working tree, staging area, commit e storia del progetto](guida-lezioni/modulo-11.slides.html#mod11-git)</td></tr><tr><td>teoria</td><td>1h</td><td>—</td><td>[Git da terminale: `git init`, `git status`, `git add`, `git commit`, `git log`](guida-lezioni/modulo-11.slides.html#mod11-git)</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi: creare un repository locale, tracciare file, salvare versioni e leggere `git status`</td></tr><tr><td>teoria</td><td>0.5h</td><td>—</td><td>[GitHub: repository remoto, `clone`, `push`, `pull` e collaborazione di base](guida-lezioni/modulo-11.slides.html#mod11-github)</td></tr><tr><td>esercitazione</td><td>0.5h</td><td>—</td><td>Esercizi: clonare un repository, aggiungere modifiche e pubblicarle sul remoto</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Esercizi: leggere differenze tra file non tracciati, modificati e già staged</td></tr><tr><td>esercitazione</td><td>1h</td><td>—</td><td>Mini-laboratorio finale: usare Git per tenere traccia di uno script Python e dei file di input/output</td></tr></tbody></table>
   </div>
 </section>
 
@@ -205,7 +340,10 @@ print(0 in insieme)</code></pre><p>Il significato logico e&#x27; lo stesso, ma i
     <button type="button" id="next">Avanti</button>
   </div>
   <div class="progress"><div class="progress-bar" id="progress"></div></div>
-  <div class="counter" id="counter">1 / 11</div>
+  <div class="counter" id="counter">1 / 5</div>
+  <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="license" style="display:flex;align-items:center;opacity:0.6;">
+    <img src="https://licensebuttons.net/l/by-nc-sa/4.0/80x15.png" alt="CC BY-NC-SA 4.0" style="height:15px;border-radius:0;margin:0;">
+  </a>
 </div>
 <script>
 const slides = Array.from(document.querySelectorAll(".slide"));
